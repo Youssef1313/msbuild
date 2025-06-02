@@ -13,8 +13,6 @@ using Microsoft.Build.Experimental.BuildCheck.Infrastructure;
 using Microsoft.Build.Framework;
 using Microsoft.Build.UnitTests;
 using Shouldly;
-using Xunit;
-using Xunit.Abstractions;
 using static Microsoft.Build.Experimental.BuildCheck.Infrastructure.BuildCheckManagerProvider;
 
 namespace Microsoft.Build.BuildCheck.UnitTests;

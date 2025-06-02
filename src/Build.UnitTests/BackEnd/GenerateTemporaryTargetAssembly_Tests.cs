@@ -5,7 +5,6 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.Build.UnitTests;
 using Shouldly;
-using Xunit;
 
 #nullable disable
 

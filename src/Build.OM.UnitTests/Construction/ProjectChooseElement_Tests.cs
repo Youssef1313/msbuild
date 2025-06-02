@@ -8,7 +8,6 @@ using System.Text;
 using System.Xml;
 using Microsoft.Build.Construction;
 using Microsoft.Build.Evaluation;
-using Xunit;
 using InvalidProjectFileException = Microsoft.Build.Exceptions.InvalidProjectFileException;
 
 #nullable disable

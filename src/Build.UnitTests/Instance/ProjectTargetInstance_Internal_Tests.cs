@@ -6,7 +6,6 @@ using System.Collections.ObjectModel;
 using Microsoft.Build.BackEnd;
 using Microsoft.Build.Execution;
 using Microsoft.Build.UnitTests.BackEnd;
-using Xunit;
 using static Microsoft.Build.Engine.UnitTests.TestComparers.ProjectInstanceModelTestComparers;
 using static Microsoft.Build.Engine.UnitTests.TestData.ProjectInstanceTestObjects;
 

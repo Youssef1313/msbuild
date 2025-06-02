@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using FluentAssertions;
 using Microsoft.Build.Execution;
-using Xunit;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {

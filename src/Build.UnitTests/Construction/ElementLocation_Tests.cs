@@ -11,7 +11,6 @@ using Microsoft.Build.Exceptions;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Shared;
 using Microsoft.Build.UnitTests.BackEnd;
-using Xunit;
 
 #nullable disable
 

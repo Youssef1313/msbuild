@@ -4,7 +4,6 @@
 using Microsoft.Build.Framework;
 using Microsoft.Build.Tasks;
 using Shouldly;
-using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {

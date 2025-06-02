@@ -3,7 +3,6 @@
 
 using Microsoft.Build.BackEnd.Logging;
 using Microsoft.Build.Framework;
-using Xunit;
 
 #nullable disable
 

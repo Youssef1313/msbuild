@@ -10,7 +10,6 @@ using System.Reflection;
 using Microsoft.Build.BackEnd;
 using Microsoft.Build.Shared;
 using Shouldly;
-using Xunit;
 
 #nullable disable
 

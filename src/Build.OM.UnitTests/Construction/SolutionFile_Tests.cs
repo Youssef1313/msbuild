@@ -11,7 +11,6 @@ using Microsoft.VisualStudio.SolutionPersistence;
 using Microsoft.VisualStudio.SolutionPersistence.Model;
 using Microsoft.VisualStudio.SolutionPersistence.Serializer;
 using Shouldly;
-using Xunit;
 
 #nullable disable
 
@@ -25,7 +24,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Test that a project with the C++ project guid and an extension of vcproj is seen as invalid.
         /// </summary>
-        [TestMethod]
+        [Theory]
         [DataRow(false)]
         [DataRow(true)]
         public void ParseSolution_VC(bool isOptInSlnParsingWithNewParser)
@@ -64,7 +63,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// Test that a project with the C++ project guid and an arbitrary extension is seen as valid --
         /// we assume that all C++ projects except .vcproj are MSBuild format.
         /// </summary>
-        [TestMethod]
+        [Theory]
         [DataRow(false, false)]
         [DataRow(true, false)]
         [DataRow(false, true)]
@@ -110,7 +109,7 @@ namespace Microsoft.Build.UnitTests.Construction
         // This is somewhat malformed, but with old parser we should still behave reasonably instead of crashing.
         // The new parser throws an exception.
         /// </summary>
-        [TestMethod]
+        [Theory]
         [DataRow(false)]
         [DataRow(true)]
         public void ParseSolution_EmptyProjectName(bool isOptInSlnParsingWithNewParser)
@@ -157,7 +156,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Tests the parsing of a very basic .SLN file with three independent projects.
         /// </summary>
-        [TestMethod]
+        [Theory]
         [DataRow(false, false)]
         [DataRow(true, false)]
         [DataRow(false, true)]
@@ -233,7 +232,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// For the new parser, solution folders are not included to ProjectsInOrder or ProjectsByGuid.
         /// See the test with the same name in SolutionFile_Tests_OldParser.
         /// </summary>
-        [TestMethod]
+        [Theory]
         [DataRow(false)]
         [DataRow(true)]
         public void SolutionFolders(bool convertToSlnx)
@@ -322,7 +321,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// Verifies that hand-coded project-to-project dependencies listed in the .SLN file
         /// are correctly recognized by the solution parser.
         /// </summary>
-        [TestMethod]
+        [Theory]
         [DataRow(false, false)]
         [DataRow(true, false)]
         [DataRow(false, true)]
@@ -399,7 +398,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Make sure the solution configurations get parsed correctly for a simple mixed C#/VC solution
         /// </summary>
-        [TestMethod]
+        [Theory]
         [DataRow(false, false)]
         [DataRow(true, false)]
         [DataRow(false, true)]
@@ -477,7 +476,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Make sure the solution configurations get parsed correctly for a simple C# application
         /// </summary>
-        [TestMethod]
+        [Theory]
         [DataRow(false, false)]
         [DataRow(true, false)]
         [DataRow(false, true)]
@@ -541,7 +540,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// Make sure the project configurations in solution configurations get parsed correctly
         /// for a simple mixed C#/VC solution
         /// </summary>
-        [TestMethod]
+        [Theory]
         [DataRow(false, false)]
         [DataRow(true, false)]
         [DataRow(false, true)]
@@ -638,7 +637,7 @@ namespace Microsoft.Build.UnitTests.Construction
             Assert.True(vcProject.ProjectConfigurations["Release|Win32"].IncludeInBuild);
         }
 
-        [TestMethod]
+        [Theory]
         [DataRow(false, false)]
         [DataRow(true, false)]
         [DataRow(false, true)]

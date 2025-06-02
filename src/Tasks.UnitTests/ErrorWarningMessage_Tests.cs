@@ -4,7 +4,6 @@
 using System;
 using Microsoft.Build.Shared;
 using Microsoft.Build.Tasks;
-using Xunit;
 
 #nullable disable
 

@@ -10,7 +10,6 @@ using Microsoft.Build.Evaluation;
 using Microsoft.Build.Internal;
 using Microsoft.Build.Shared;
 using Shouldly;
-using Xunit;
 using InternalUtilities = Microsoft.Build.Internal.Utilities;
 
 #nullable disable

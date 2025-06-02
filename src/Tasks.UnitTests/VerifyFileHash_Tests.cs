@@ -6,7 +6,6 @@ using System.IO;
 using Microsoft.Build.Tasks;
 using Microsoft.Build.Tasks.UnitTests.TestResources;
 using Shouldly;
-using Xunit;
 using Xunit.Abstractions;
 
 #nullable disable

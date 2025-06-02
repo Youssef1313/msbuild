@@ -5,7 +5,6 @@ using System.Reflection;
 
 using Microsoft.Build.Framework;
 using Shouldly;
-using Xunit;
 
 #nullable disable
 

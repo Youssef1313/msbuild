@@ -8,7 +8,6 @@ using Microsoft.Build.Tasks;
 using Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAndUnification.AutoUnify;
 using Microsoft.Build.Utilities;
 using Shouldly;
-using Xunit;
 using Xunit.Abstractions;
 
 #nullable disable

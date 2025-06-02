@@ -11,7 +11,6 @@ using Microsoft.Build.Shared;
 using Microsoft.Build.Shared.FileSystem;
 using Microsoft.Build.UnitTests.BackEnd;
 using Shouldly;
-using Xunit;
 using ProjectInstanceExpander =
     Microsoft.Build.Evaluation.Expander<Microsoft.Build.Execution.ProjectPropertyInstance, Microsoft.Build.Execution.ProjectItemInstance>;
 using ProjectInstanceItemSpec =

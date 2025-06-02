@@ -8,7 +8,6 @@ using System.Reflection;
 using System.Text;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using Xunit;
 using ResGen = Microsoft.Build.Tasks.GenerateResource.ResGen;
 
 #nullable disable

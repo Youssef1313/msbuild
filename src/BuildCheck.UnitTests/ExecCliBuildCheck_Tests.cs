@@ -6,7 +6,6 @@ using System.Runtime.InteropServices;
 using Microsoft.Build.Experimental.BuildCheck;
 using Microsoft.Build.Experimental.BuildCheck.Checks;
 using Shouldly;
-using Xunit;
 
 namespace Microsoft.Build.BuildCheck.UnitTests
 {

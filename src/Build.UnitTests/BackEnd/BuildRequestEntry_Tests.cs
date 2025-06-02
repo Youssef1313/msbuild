@@ -8,7 +8,6 @@ using Microsoft.Build.BackEnd;
 using Microsoft.Build.Execution;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Unittest;
-using Xunit;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {

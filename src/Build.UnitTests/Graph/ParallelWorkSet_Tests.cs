@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Threading;
 using Microsoft.Build.UnitTests;
 using Shouldly;
-using Xunit;
 
 #nullable disable
 

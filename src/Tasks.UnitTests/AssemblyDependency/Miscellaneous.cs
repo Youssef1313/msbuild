@@ -16,8 +16,6 @@ using Microsoft.Build.Tasks.AssemblyDependency;
 using Microsoft.Build.Utilities;
 using Microsoft.Win32;
 using Shouldly;
-using Xunit;
-using Xunit.Abstractions;
 using FrameworkNameVersioning = System.Runtime.Versioning.FrameworkName;
 using SystemProcessorArchitecture = System.Reflection.ProcessorArchitecture;
 

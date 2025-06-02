@@ -12,7 +12,6 @@ using Microsoft.Build.Execution;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Unittest;
 using Shouldly;
-using Xunit;
 
 #nullable disable
 

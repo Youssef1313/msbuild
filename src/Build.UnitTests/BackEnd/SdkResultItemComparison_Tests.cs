@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using Microsoft.Build.Framework;
 using Shouldly;
-using Xunit;
 
 #nullable disable
 

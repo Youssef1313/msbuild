@@ -8,7 +8,6 @@ using Microsoft.Build.Experimental.FileAccess;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Shared;
 using Microsoft.Build.Utilities;
-using Xunit;
 using TaskHostPacketHelpers = Microsoft.Build.UnitTests.BackEnd.TaskHostConfiguration_Tests.TaskHostPacketHelpers;
 
 #nullable disable

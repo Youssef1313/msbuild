@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using Microsoft.Build.Globbing;
 using Microsoft.Build.Shared;
-using Xunit;
 
 #nullable disable
 

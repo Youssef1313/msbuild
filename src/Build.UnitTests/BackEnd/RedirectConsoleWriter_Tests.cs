@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Build.Experimental;
 using Shouldly;
-using Xunit;
 
 namespace Microsoft.Build.Engine.UnitTests.BackEnd
 {

@@ -5,7 +5,6 @@ using System;
 using System.Linq;
 using Microsoft.Build.Evaluation;
 using Microsoft.Build.Exceptions;
-using Xunit;
 
 
 

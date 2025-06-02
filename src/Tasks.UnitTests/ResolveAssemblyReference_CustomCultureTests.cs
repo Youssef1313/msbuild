@@ -6,7 +6,6 @@ using System.IO;
 using Microsoft.Build.UnitTests;
 using Microsoft.Build.UnitTests.Shared;
 using Shouldly;
-using Xunit;
 
 namespace Microsoft.Build.Tasks.UnitTests
 {

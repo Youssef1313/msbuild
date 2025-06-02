@@ -8,7 +8,6 @@ using Microsoft.Build.Tasks.ResourceHandling;
 using Microsoft.Build.Tasks.UnitTests.ResourceHandling;
 using Microsoft.Build.UnitTests;
 using Shouldly;
-using Xunit;
 using Xunit.Abstractions;
 
 #nullable disable

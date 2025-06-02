@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.Build.Shared;
 using Shouldly;
-using Xunit;
 
 #nullable disable
 

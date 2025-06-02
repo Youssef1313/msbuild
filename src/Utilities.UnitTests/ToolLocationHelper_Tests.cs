@@ -21,7 +21,6 @@ using Microsoft.Win32;
 using FrameworkNameVersioning = System.Runtime.Versioning.FrameworkName;
 using UtilitiesDotNetFrameworkArchitecture = Microsoft.Build.Utilities.DotNetFrameworkArchitecture;
 using SharedDotNetFrameworkArchitecture = Microsoft.Build.Shared.DotNetFrameworkArchitecture;
-using Xunit;
 using Xunit.Abstractions;
 
 #nullable disable

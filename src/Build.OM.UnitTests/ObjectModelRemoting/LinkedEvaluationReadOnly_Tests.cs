@@ -7,8 +7,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
 {
     using System.Linq;
     using Microsoft.Build.Evaluation;
-    using Xunit;
-
+    
     public class LinkedEvaluationReadOnly_Tests : IClassFixture<LinkedEvaluationReadOnly_Tests.ROTestCollectionGroup>
     {
         public class ROTestCollectionGroup : TestCollectionGroup

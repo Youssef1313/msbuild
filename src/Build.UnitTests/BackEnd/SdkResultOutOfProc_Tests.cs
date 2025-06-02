@@ -15,8 +15,6 @@ using Microsoft.Build.Execution;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Unittest;
 using Shouldly;
-using Xunit;
-using Xunit.Abstractions;
 using static Microsoft.Build.UnitTests.ObjectModelHelpers;
 
 #nullable disable

@@ -18,7 +18,6 @@ using Microsoft.Build.Shared;
 
 using InvalidProjectFileException = Microsoft.Build.Exceptions.InvalidProjectFileException;
 using ProjectCollection = Microsoft.Build.Evaluation.ProjectCollection;
-using Xunit;
 
 #nullable disable
 

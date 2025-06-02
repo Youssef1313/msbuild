@@ -12,7 +12,6 @@ using Microsoft.Build.Execution;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Shared;
 using Microsoft.Build.Unittest;
-using Xunit;
 using TaskItem = Microsoft.Build.Execution.ProjectItemInstance.TaskItem;
 
 #nullable disable

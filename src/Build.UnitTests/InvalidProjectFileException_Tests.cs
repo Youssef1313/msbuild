@@ -5,7 +5,6 @@ using System;
 using System.IO;
 using Microsoft.Build.Exceptions;
 
-using Xunit;
 using Xunit.Abstractions;
 
 #nullable disable

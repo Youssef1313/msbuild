@@ -4,7 +4,6 @@
 using System;
 using System.Globalization;
 using Microsoft.Build.BackEnd.Logging;
-using Xunit;
 
 #nullable disable
 

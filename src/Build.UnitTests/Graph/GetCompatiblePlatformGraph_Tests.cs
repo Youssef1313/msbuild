@@ -6,7 +6,6 @@ using System.IO;
 using Microsoft.Build.Evaluation;
 using Microsoft.Build.UnitTests;
 using Shouldly;
-using Xunit;
 using static Microsoft.Build.Graph.UnitTests.GraphTestingUtilities;
 
 #nullable disable

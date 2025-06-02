@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Microsoft.Build.Evaluation;
 using Microsoft.Build.Shared;
-using Xunit;
 
 #nullable disable
 

@@ -7,7 +7,6 @@ using Microsoft.Build.Shared;
 using Microsoft.Build.Tasks;
 using Microsoft.Build.Utilities;
 using Microsoft.Runtime.Hosting;
-using Xunit;
 
 #nullable disable
 

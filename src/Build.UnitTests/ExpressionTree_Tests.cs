@@ -11,7 +11,6 @@ using Microsoft.Build.Exceptions;
 using Microsoft.Build.Execution;
 using Microsoft.Build.Shared;
 using Microsoft.Build.Shared.FileSystem;
-using Xunit;
 
 
 

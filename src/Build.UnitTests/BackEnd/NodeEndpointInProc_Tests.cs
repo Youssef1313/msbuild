@@ -8,7 +8,6 @@ using Microsoft.Build.BackEnd;
 using Microsoft.Build.BackEnd.Logging;
 using Microsoft.Build.Execution;
 using Microsoft.Build.Framework;
-using Xunit;
 using LegacyThreadingData = Microsoft.Build.Execution.LegacyThreadingData;
 
 #nullable disable

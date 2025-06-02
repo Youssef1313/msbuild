@@ -9,7 +9,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Microsoft.Build.Shared.Debugging;
 using Shouldly;
-using Xunit;
 using CommonWriterType = System.Action<string, string, System.Collections.Generic.IEnumerable<string>>;
 
 #nullable disable

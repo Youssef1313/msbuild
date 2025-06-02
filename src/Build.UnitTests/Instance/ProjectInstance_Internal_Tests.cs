@@ -15,8 +15,6 @@ using Microsoft.Build.Internal;
 using Microsoft.Build.Shared;
 using Microsoft.Build.UnitTests.BackEnd;
 using Shouldly;
-using Xunit;
-using Xunit.Abstractions;
 using static Microsoft.Build.Engine.UnitTests.TestComparers.ProjectInstanceModelTestComparers;
 
 #nullable disable

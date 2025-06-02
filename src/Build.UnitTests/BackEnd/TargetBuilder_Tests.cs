@@ -16,7 +16,6 @@ using Microsoft.Build.Execution;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Shared;
 using Shouldly;
-using Xunit;
 using ILoggingService = Microsoft.Build.BackEnd.Logging.ILoggingService;
 using LegacyThreadingData = Microsoft.Build.Execution.LegacyThreadingData;
 using NodeLoggingContext = Microsoft.Build.BackEnd.Logging.NodeLoggingContext;

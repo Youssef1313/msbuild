@@ -6,7 +6,6 @@ using Microsoft.Build.Evaluation;
 using Microsoft.Build.Shared;
 using Microsoft.Build.UnitTests;
 using Shouldly;
-using Xunit;
 using Xunit.Abstractions;
 
 namespace Microsoft.Build.Tasks.UnitTests

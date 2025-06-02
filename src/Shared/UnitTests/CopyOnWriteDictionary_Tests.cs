@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Build.Collections;
 using Shouldly;
-using Xunit;
 
 #nullable disable
 

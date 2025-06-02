@@ -12,7 +12,6 @@ using Microsoft.Build.Execution;
 using Microsoft.Build.Internal;
 using Microsoft.Win32;
 
-using Xunit;
 using Xunit.NetCore.Extensions;
 
 using InvalidToolsetDefinitionException = Microsoft.Build.Exceptions.InvalidToolsetDefinitionException;

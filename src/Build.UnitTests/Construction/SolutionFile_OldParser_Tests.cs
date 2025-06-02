@@ -10,7 +10,6 @@ using Microsoft.Build.Construction;
 using Microsoft.Build.Exceptions;
 using Microsoft.Build.Shared;
 using Shouldly;
-using Xunit;
 using Xunit.Abstractions;
 
 #nullable disable

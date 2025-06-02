@@ -5,7 +5,6 @@ using System;
 using System.IO;
 
 using Microsoft.Build.Shared.LanguageParser;
-using Xunit;
 
 #nullable disable
 

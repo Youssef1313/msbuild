@@ -5,7 +5,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Shouldly;
-using Xunit;
 using CommunicationsUtilities = Microsoft.Build.Internal.CommunicationsUtilities;
 
 namespace Microsoft.Build.UnitTests

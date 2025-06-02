@@ -13,7 +13,6 @@ using Microsoft.Build.Evaluation;
 using Microsoft.Build.Execution;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Shared;
-using Xunit;
 using InternalUtilities = Microsoft.Build.Internal.Utilities;
 using InvalidProjectFileException = Microsoft.Build.Exceptions.InvalidProjectFileException;
 using LoggerMode = Microsoft.Build.BackEnd.Logging.LoggerMode;

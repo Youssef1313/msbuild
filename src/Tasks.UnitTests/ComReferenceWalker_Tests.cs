@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
 using Microsoft.Build.Tasks;
-using Xunit;
 using COMException = System.Runtime.InteropServices.COMException;
 
 #nullable disable

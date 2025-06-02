@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using Microsoft.Build.Framework.Telemetry;
 using Microsoft.Build.UnitTests.Shared;
 using Shouldly;
-using Xunit;
 using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests;

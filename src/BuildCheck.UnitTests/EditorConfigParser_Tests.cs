@@ -7,7 +7,6 @@ using System.Linq;
 using Microsoft.Build.Experimental.BuildCheck.Infrastructure.EditorConfig;
 using Microsoft.Build.UnitTests;
 using Shouldly;
-using Xunit;
 
 namespace Microsoft.Build.BuildCheck.UnitTests;
 

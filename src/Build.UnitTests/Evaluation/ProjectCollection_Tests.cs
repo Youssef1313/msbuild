@@ -3,7 +3,6 @@
 
 using Microsoft.Build.Evaluation;
 using Shouldly;
-using Xunit;
 
 #nullable disable
 

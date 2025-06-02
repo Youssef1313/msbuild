@@ -8,7 +8,6 @@ using System.Runtime.Versioning;
 using Microsoft.Build.BackEnd;
 using Microsoft.Build.Tasks;
 using Shouldly;
-using Xunit;
 
 #nullable disable
 

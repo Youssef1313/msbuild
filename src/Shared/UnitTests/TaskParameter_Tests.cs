@@ -10,7 +10,6 @@ using Microsoft.Build.BackEnd;
 using Microsoft.Build.Framework;
 using Microsoft.Build.UnitTests.BackEnd;
 using Microsoft.Build.Utilities;
-using Xunit;
 
 #nullable disable
 

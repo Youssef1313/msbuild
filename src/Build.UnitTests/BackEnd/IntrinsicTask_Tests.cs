@@ -14,7 +14,6 @@ using Microsoft.Build.Execution;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Shared;
 using Shouldly;
-using Xunit;
 using InvalidProjectFileException = Microsoft.Build.Exceptions.InvalidProjectFileException;
 using NodeLoggingContext = Microsoft.Build.BackEnd.Logging.NodeLoggingContext;
 

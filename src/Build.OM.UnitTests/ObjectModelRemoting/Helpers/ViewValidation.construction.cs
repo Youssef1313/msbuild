@@ -12,8 +12,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
     using Microsoft.Build.Construction;
     using Microsoft.Build.Evaluation;
     using Microsoft.Build.ObjectModelRemoting;
-    using Xunit;
-
+    
     internal class ElementLinkPair<T> : LinkPair<T>
         where T : ProjectElement
     {

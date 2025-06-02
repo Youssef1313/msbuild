@@ -4,7 +4,6 @@
 
 using System.Linq;
 using Microsoft.Build.Globbing;
-using Xunit;
 
 #nullable disable
 

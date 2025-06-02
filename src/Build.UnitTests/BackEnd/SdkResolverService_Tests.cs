@@ -15,7 +15,6 @@ using Microsoft.Build.Shared;
 using Microsoft.Build.Unittest;
 using Microsoft.Build.UnitTests;
 using Shouldly;
-using Xunit;
 using SdkResolverContextBase = Microsoft.Build.Framework.SdkResolverContext;
 using SdkResultBase = Microsoft.Build.Framework.SdkResult;
 using SdkResultFactoryBase = Microsoft.Build.Framework.SdkResultFactory;

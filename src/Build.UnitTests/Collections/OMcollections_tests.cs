@@ -12,7 +12,6 @@ using Microsoft.Build.Execution;
 using Microsoft.Build.Framework;
 using Microsoft.Build.UnitTests.BackEnd;
 using Shouldly;
-using Xunit;
 using ObjectModel = System.Collections.ObjectModel;
 
 #nullable disable

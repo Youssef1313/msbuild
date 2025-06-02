@@ -13,7 +13,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 using Shouldly;
-using Xunit;
 
 #if _TEST_BCL_IMMUTABLE_DICTIONARY
 using ImmutableDictionary = System.Collections.Immutable.ImmutableDictionary<string, string>;

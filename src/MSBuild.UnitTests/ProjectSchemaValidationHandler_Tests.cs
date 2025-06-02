@@ -11,7 +11,6 @@ using System.Xml;
 using Microsoft.Build.CommandLine;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Shared;
-using Xunit;
 
 #nullable disable
 

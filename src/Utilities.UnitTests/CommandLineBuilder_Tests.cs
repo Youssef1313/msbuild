@@ -8,7 +8,6 @@ using System.Threading;
 using Microsoft.Build.Shared;
 using Microsoft.Build.Utilities;
 using Shouldly;
-using Xunit;
 
 #nullable disable
 

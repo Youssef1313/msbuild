@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
 using Microsoft.Build.Tasks;
-using Xunit;
 using Marshal = System.Runtime.InteropServices.Marshal;
 
 #nullable disable

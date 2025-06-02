@@ -5,7 +5,6 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using Microsoft.Build.Shared;
 using Shouldly;
-using Xunit;
 
 #nullable disable
 

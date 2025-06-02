@@ -15,7 +15,6 @@ using Microsoft.Build.Execution;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Shared;
 using Shouldly;
-using Xunit;
 using InvalidProjectFileException = Microsoft.Build.Exceptions.InvalidProjectFileException;
 using MockHost = Microsoft.Build.UnitTests.BackEnd.MockHost;
 using TaskItem = Microsoft.Build.Execution.ProjectItemInstance.TaskItem;

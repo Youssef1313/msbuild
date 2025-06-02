@@ -3,7 +3,6 @@
 
 using Microsoft.Build.BackEnd;
 using Shouldly;
-using Xunit;
 
 #nullable disable
 

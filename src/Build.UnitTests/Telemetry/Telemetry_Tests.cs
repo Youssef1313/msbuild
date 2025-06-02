@@ -12,7 +12,6 @@ using Microsoft.Build.Framework.Telemetry;
 using Microsoft.Build.TelemetryInfra;
 using Microsoft.Build.UnitTests;
 using Shouldly;
-using Xunit;
 using Xunit.Abstractions;
 
 namespace Microsoft.Build.Engine.UnitTests

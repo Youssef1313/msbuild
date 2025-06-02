@@ -14,7 +14,6 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Shared;
 using Microsoft.Build.UnitTests.Shared;
 using Shouldly;
-using Xunit;
 using InvalidProjectFileException = Microsoft.Build.Exceptions.InvalidProjectFileException;
 
 #nullable disable

@@ -7,7 +7,6 @@ using System.Reflection;
 using Microsoft.Build.Shared;
 using Microsoft.Build.Tasks;
 using Shouldly;
-using Xunit;
 
 #nullable disable
 

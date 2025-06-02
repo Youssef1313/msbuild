@@ -9,7 +9,6 @@ using Microsoft.Build.Execution;
 using Microsoft.Build.Framework.Telemetry;
 using Microsoft.Build.UnitTests;
 using Shouldly;
-using Xunit;
 
 namespace Microsoft.Build.Engine.UnitTests.Telemetry
 {

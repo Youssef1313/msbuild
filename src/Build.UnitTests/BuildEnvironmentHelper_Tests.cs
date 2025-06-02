@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.IO;
 using Microsoft.Build.Shared;
 using Shouldly;
-using Xunit;
 
 #nullable disable
 

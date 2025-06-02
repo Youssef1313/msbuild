@@ -5,7 +5,6 @@ using System;
 using Microsoft.Build.Experimental.BuildCheck;
 using Microsoft.Build.Experimental.BuildCheck.Infrastructure;
 using Shouldly;
-using Xunit;
 
 namespace Microsoft.Build.BuildCheck.UnitTests;
 

@@ -9,7 +9,6 @@ using Microsoft.Build.Experimental.BuildCheck;
 using Microsoft.Build.Experimental.BuildCheck.Infrastructure;
 using Microsoft.Build.UnitTests;
 using Shouldly;
-using Xunit;
 
 namespace Microsoft.Build.BuildCheck.UnitTests;
 

@@ -18,7 +18,6 @@ using System.IO;
 using Shouldly;
 using VerifyTests;
 using VerifyXunit;
-using Xunit;
 
 using static VerifyXunit.Verifier;
 

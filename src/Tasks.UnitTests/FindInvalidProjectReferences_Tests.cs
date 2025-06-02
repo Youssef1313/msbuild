@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using Microsoft.Build.Shared;
 using Microsoft.Build.Tasks;
 using Microsoft.Build.Utilities;
-using Xunit;
 
 #nullable disable
 

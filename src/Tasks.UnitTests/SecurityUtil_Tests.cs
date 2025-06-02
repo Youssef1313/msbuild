@@ -7,7 +7,6 @@ using System.Runtime.Versioning;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Build.Tasks.Deployment.ManifestUtilities;
 using Shouldly;
-using Xunit;
 
 namespace Microsoft.Build.Tasks.UnitTests
 {

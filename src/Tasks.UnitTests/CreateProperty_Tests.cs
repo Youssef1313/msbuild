@@ -3,7 +3,6 @@
 
 using System;
 using Microsoft.Build.Evaluation;
-using Xunit;
 
 #nullable disable
 

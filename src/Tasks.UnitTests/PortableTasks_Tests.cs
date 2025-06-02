@@ -7,7 +7,6 @@ using System.Text.RegularExpressions;
 using Microsoft.Build.Shared;
 using Microsoft.Build.UnitTests.Shared;
 using Shouldly;
-using Xunit;
 using Xunit.Abstractions;
 
 #nullable disable

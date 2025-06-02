@@ -6,7 +6,6 @@ using System;
 using System.Globalization;
 using Microsoft.Build.Framework.Telemetry;
 using Shouldly;
-using Xunit;
 
 namespace Microsoft.Build.UnitTests.Telemetry;
 

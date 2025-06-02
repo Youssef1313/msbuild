@@ -7,7 +7,6 @@ using System.Linq;
 using Microsoft.Build.Evaluation;
 using Microsoft.Build.Shared;
 using Shouldly;
-using Xunit;
 
 #nullable disable
 

@@ -24,7 +24,6 @@ using Microsoft.Build.Logging;
 using Microsoft.Build.Shared;
 using Microsoft.Build.Shared.FileSystem;
 using Shouldly;
-using Xunit;
 using Xunit.Abstractions;
 
 #nullable disable

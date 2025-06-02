@@ -6,7 +6,6 @@ using System.Linq;
 using Microsoft.Build.Construction;
 using Microsoft.Build.Experimental.BuildCheck;
 using Microsoft.Build.UnitTests;
-using Xunit;
 
 namespace Microsoft.Build.BuildCheck.UnitTests;
 

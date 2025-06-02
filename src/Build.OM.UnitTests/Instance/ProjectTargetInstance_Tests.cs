@@ -6,7 +6,6 @@ using System.IO;
 using Microsoft.Build.Construction;
 using Microsoft.Build.Evaluation;
 using Microsoft.Build.Execution;
-using Xunit;
 
 #nullable disable
 

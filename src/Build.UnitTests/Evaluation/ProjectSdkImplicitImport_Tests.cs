@@ -15,7 +15,6 @@ using Microsoft.Build.Exceptions;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Unittest;
 using Shouldly;
-using Xunit;
 using SdkReferencePropertyExpansionMode = Microsoft.Build.Framework.EscapeHatches.SdkReferencePropertyExpansionMode;
 using SdkResolverContext = Microsoft.Build.Framework.SdkResolverContext;
 using SdkResult = Microsoft.Build.Framework.SdkResult;

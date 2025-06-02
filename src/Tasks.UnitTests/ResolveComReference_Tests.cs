@@ -10,7 +10,6 @@ using Microsoft.Build.Shared;
 using Microsoft.Build.Tasks;
 using Microsoft.Build.Utilities;
 using Shouldly;
-using Xunit;
 // TYPELIBATTR clashes with the one in InteropServices.
 using TYPELIBATTR = System.Runtime.InteropServices.ComTypes.TYPELIBATTR;
 

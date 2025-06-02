@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 using Microsoft.Build.Logging;
 using VerifyXunit;
-using Xunit;
 
 using static VerifyXunit.Verifier;
 

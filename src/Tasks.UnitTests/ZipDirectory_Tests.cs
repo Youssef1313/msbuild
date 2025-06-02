@@ -9,7 +9,6 @@ using System.Linq;
 using Microsoft.Build.UnitTests;
 using Microsoft.Build.Utilities;
 using Shouldly;
-using Xunit;
 
 #nullable disable
 

@@ -7,7 +7,6 @@ using Microsoft.Build.UnitTests;
 
 using Shouldly;
 
-using Xunit;
 
 namespace Microsoft.Build.Engine.UnitTests.Evaluation
 {

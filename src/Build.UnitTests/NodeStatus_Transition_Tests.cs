@@ -9,7 +9,6 @@ using Microsoft.Build.Framework.Logging;
 using Microsoft.Build.Logging;
 using Shouldly;
 using VerifyXunit;
-using Xunit;
 
 using static VerifyXunit.Verifier;
 

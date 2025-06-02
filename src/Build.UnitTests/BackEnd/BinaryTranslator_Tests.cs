@@ -13,7 +13,6 @@ using Microsoft.Build.Exceptions;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Framework.BuildException;
 using Shouldly;
-using Xunit;
 
 #nullable disable
 

@@ -9,7 +9,6 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Logging;
 using Microsoft.Build.Shared;
 using Shouldly;
-using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {

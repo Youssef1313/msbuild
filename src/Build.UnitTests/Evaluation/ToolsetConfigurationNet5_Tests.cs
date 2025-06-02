@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using Microsoft.Build.Evaluation;
 using Microsoft.Build.Execution;
 using Shouldly;
-using Xunit;
 
 #nullable disable
 

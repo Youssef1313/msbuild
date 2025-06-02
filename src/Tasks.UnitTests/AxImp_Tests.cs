@@ -3,7 +3,6 @@
 
 using Microsoft.Build.Tasks;
 
-using Xunit;
 
 #nullable disable
 

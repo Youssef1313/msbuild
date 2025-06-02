@@ -10,7 +10,6 @@ using Microsoft.Build.UnitTests;
 using Microsoft.Build.UnitTests.BackEnd;
 
 using Shouldly;
-using Xunit;
 using Xunit.Abstractions;
 
 #nullable disable

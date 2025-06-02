@@ -8,7 +8,6 @@ using System.IO;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Logging;
 using Microsoft.Build.Shared;
-using Xunit;
 using EventSourceSink = Microsoft.Build.BackEnd.Logging.EventSourceSink;
 using Project = Microsoft.Build.Evaluation.Project;
 

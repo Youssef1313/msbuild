@@ -25,7 +25,6 @@ using Microsoft.Build.Shared.FileSystem;
 using Microsoft.Build.Utilities;
 using Microsoft.Win32;
 using Shouldly;
-using Xunit;
 using InvalidProjectFileException = Microsoft.Build.Exceptions.InvalidProjectFileException;
 using ProjectHelpers = Microsoft.Build.UnitTests.BackEnd.ProjectHelpers;
 using ProjectItemInstanceFactory = Microsoft.Build.Execution.ProjectItemInstance.TaskItem.ProjectItemInstanceFactory;

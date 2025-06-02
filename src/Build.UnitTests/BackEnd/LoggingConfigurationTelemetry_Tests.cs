@@ -5,7 +5,6 @@
 using System.Linq;
 using Microsoft.Build.Framework.Telemetry;
 using Shouldly;
-using Xunit;
 
 namespace Microsoft.Build.UnitTests.Telemetry;
 

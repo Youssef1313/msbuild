@@ -12,7 +12,6 @@ using Microsoft.Build.Shared;
 using Microsoft.Build.Shared.FileSystem;
 using Microsoft.Build.UnitTests.Shared;
 using Shouldly;
-using Xunit;
 using Xunit.Abstractions;
 
 #nullable disable

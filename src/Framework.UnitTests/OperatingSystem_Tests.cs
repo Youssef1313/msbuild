@@ -3,7 +3,6 @@
 
 using Shouldly;
 
-using Xunit;
 
 namespace Microsoft.Build.Framework.UnitTests
 {

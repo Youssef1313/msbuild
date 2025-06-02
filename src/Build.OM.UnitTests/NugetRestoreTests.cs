@@ -6,8 +6,6 @@ using System.Reflection;
 using Microsoft.Build.UnitTests;
 using Microsoft.Build.UnitTests.Shared;
 using Shouldly;
-using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Build.Engine.OM.UnitTests
 {

@@ -6,7 +6,6 @@ using System.Reflection;
 using Microsoft.Build.Execution;
 using Microsoft.Build.Graph;
 using Shouldly;
-using Xunit;
 
 namespace Microsoft.Build.Engine.UnitTests.BackEnd
 {

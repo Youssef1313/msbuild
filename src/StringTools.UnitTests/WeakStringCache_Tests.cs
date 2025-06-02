@@ -11,7 +11,6 @@ using System.Runtime.CompilerServices;
 using System.Text;
 
 using Shouldly;
-using Xunit;
 
 #if NET35_UNITTEST
 using StringToolsNet35::Microsoft.NET.StringTools;

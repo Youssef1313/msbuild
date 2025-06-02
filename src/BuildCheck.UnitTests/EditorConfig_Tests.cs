@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Build.Experimental.BuildCheck.Infrastructure.EditorConfig;
-using Xunit;
 using static Microsoft.Build.Experimental.BuildCheck.Infrastructure.EditorConfig.EditorConfigGlobsMatcher;
 
 #nullable disable

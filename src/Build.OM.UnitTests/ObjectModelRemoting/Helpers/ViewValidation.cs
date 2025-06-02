@@ -10,8 +10,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
     using System.Linq;
     using Microsoft.Build.Construction;
     using Microsoft.Build.Evaluation;
-    using Xunit;
-
+    
     internal enum ObjectType
     {
         Real = 1,

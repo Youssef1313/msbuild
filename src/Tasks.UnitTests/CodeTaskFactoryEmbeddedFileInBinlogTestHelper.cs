@@ -6,7 +6,6 @@ using System.IO.Compression;
 using Microsoft.Build.Logging;
 using Microsoft.Build.UnitTests;
 using Shouldly;
-using Xunit;
 
 namespace Microsoft.Build.Tasks.UnitTests
 {

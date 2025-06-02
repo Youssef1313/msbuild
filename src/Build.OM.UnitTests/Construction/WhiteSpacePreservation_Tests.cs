@@ -8,7 +8,6 @@ using System.Text.RegularExpressions;
 using Microsoft.Build.Construction;
 using Microsoft.Build.Evaluation;
 using Microsoft.Build.Shared;
-using Xunit;
 
 
 #nullable disable

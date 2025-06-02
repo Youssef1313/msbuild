@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using Microsoft.Build.Experimental.BuildCheck;
 using Shouldly;
-using Xunit;
 
 namespace Microsoft.Build.BuildCheck.UnitTests;
 

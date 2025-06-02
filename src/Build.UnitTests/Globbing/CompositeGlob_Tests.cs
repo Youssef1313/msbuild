@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Build.Globbing;
 using Microsoft.Build.Globbing.Extensions;
-using Xunit;
 
 #nullable disable
 

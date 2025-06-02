@@ -7,7 +7,6 @@ using System.Windows.Markup;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Framework.XamlTypes;
 using Microsoft.Build.Tasks.Xaml;
-using Xunit;
 
 #nullable disable
 

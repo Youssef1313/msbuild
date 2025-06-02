@@ -8,8 +8,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
     using System;
     using System.Collections.Generic;
     using Microsoft.Build.Evaluation;
-    using Xunit;
-
+    
     public class TestCollectionGroup : IDisposable
     {
         public static string SampleProjectFile = ObjectModelHelpers.CleanupFileContents(@"

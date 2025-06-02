@@ -4,7 +4,6 @@
 using System.Globalization;
 using Microsoft.Build.Evaluation;
 using Microsoft.Build.Tasks;
-using Xunit;
 
 #nullable disable
 

@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 using Microsoft.Build.UnitTests;
 using Microsoft.Build.Utilities;
 using Shouldly;
-using Xunit;
 using Task = System.Threading.Tasks.Task;
 
 #nullable disable

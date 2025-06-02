@@ -11,7 +11,6 @@ using System.Xaml;
 using Microsoft.Build.Evaluation;
 using Microsoft.Build.Tasks.Xaml;
 using Microsoft.CSharp;
-using Xunit;
 
 #nullable disable
 

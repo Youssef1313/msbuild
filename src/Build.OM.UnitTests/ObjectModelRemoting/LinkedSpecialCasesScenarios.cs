@@ -9,8 +9,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
     using System.Linq;
     using Microsoft.Build.Construction;
     using Microsoft.Build.Evaluation;
-    using Xunit;
-
+    
     public class LinkedSpecialCasesScenarios : IClassFixture<LinkedSpecialCasesScenarios.MyTestCollectionGroup>
     {
         public class MyTestCollectionGroup : TestCollectionGroup

@@ -14,7 +14,6 @@ using Microsoft.Build.Shared;
 using Microsoft.Build.Tasks;
 using Microsoft.Build.Utilities;
 using Shouldly;
-using Xunit;
 
 #nullable disable
 

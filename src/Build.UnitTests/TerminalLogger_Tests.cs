@@ -15,7 +15,6 @@ using Microsoft.Build.UnitTests.Shared;
 using Shouldly;
 using VerifyTests;
 using VerifyXunit;
-using Xunit;
 using static VerifyXunit.Verifier;
 
 namespace Microsoft.Build.UnitTests

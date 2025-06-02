@@ -11,7 +11,6 @@ using Microsoft.Build.Internal;
 using Microsoft.Build.Shared;
 
 using Shouldly;
-using Xunit;
 
 #nullable disable
 

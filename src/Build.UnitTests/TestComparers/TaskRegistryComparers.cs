@@ -7,7 +7,6 @@ using Microsoft.Build.Evaluation;
 using Microsoft.Build.Execution;
 using Microsoft.Build.Framework;
 using Microsoft.Build.UnitTests;
-using Xunit;
 
 #nullable disable
 

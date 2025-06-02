@@ -8,7 +8,6 @@ extern alias StringToolsNet35;
 using System.Collections.Generic;
 
 using Shouldly;
-using Xunit;
 
 #if NET35_UNITTEST
 using StringToolsNet35::Microsoft.NET.StringTools;

@@ -7,8 +7,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
 {
     using System;
     using System.Linq;
-    using Xunit;
-
+    
     public class LinkedProjectCollection_Tests : IClassFixture<LinkedProjectCollection_Tests.MyTestCollectionGroup>
     {
         public class MyTestCollectionGroup : TestCollectionGroup

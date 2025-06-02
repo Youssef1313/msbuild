@@ -9,7 +9,6 @@ using Microsoft.Build.Evaluation;
 using Microsoft.Build.Exceptions;
 using Microsoft.Build.Execution;
 using Microsoft.Build.Shared;
-using Xunit;
 
 #nullable disable
 

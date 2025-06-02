@@ -9,7 +9,6 @@ using System.IO;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Shared;
 using Microsoft.Build.Tasks;
-using Xunit;
 
 #nullable disable
 
