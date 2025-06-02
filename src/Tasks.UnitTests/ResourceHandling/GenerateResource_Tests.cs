@@ -39,9 +39,9 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  ResX to Resources, no references
         /// </summary>
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void BasicResX2Resources(bool resourceReadOnly)
         {
             // This WriteLine is a hack.  On a slow machine, the Tasks unittest fails because remoting
@@ -101,7 +101,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         /// Ensure that OutputResource Metadata is populated on the Sources item
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OutputResourceMetadataPopulatedOnInputItems()
         {
             string resxFile0 = Utilities.WriteTestResX(false, null, null);
@@ -142,7 +142,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  Text to Resources
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BasicText2Resources()
         {
             GenerateResource t = Utilities.CreateTask(_output);
@@ -186,9 +186,9 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// </summary>
         /// <remarks>System dll is not locked because it forces a new app domain</remarks>
 #if RUNTIME_TYPE_NETCORE
-        [Fact(Skip = "Depends on referencing System.dll")]
+        [TestMethod(Skip = "Depends on referencing System.dll")]
 #else
-        [Fact]
+        [TestMethod]
 #endif
         public void ResX2ResourcesWithReferences()
         {
@@ -232,9 +232,9 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         ///  Resources to ResX
         /// </summary>
 #if FEATURE_RESXREADER_LIVEDESERIALIZATION
-        [Fact]
+        [TestMethod]
 #else
-        [Fact(Skip = "ResGen.exe not supported on .NET Core MSBuild")]
+        [TestMethod(Skip = "ResGen.exe not supported on .NET Core MSBuild")]
 #endif
         public void BasicResources2ResX()
         {
@@ -281,9 +281,9 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         ///  Resources to Text
         /// </summary>
 #if FEATURE_RESXREADER_LIVEDESERIALIZATION
-        [Fact]
+        [TestMethod]
 #else
-        [Fact(Skip = "ResGen.exe not supported on .NET Core MSBuild")]
+        [TestMethod(Skip = "ResGen.exe not supported on .NET Core MSBuild")]
 #endif
         public void BasicResources2Text()
         {
@@ -314,7 +314,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  Force out-of-date with ShouldRebuildResgenOutputFile on the source only
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void ForceOutOfDate()
@@ -362,7 +362,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
             Utilities.AssertLogContainsResource(t2, "GenerateResource.InputNewer", t2.Sources[0].ItemSpec, t2.OutputResources[0].ItemSpec);
         }
 
-        [Fact]
+        [TestMethod]
         public void ForceOutOfDateByDeletion()
         {
             var folder = _env.CreateFolder();
@@ -391,8 +391,8 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  Force out-of-date with ShouldRebuildResgenOutputFile on the linked file
         /// </summary>
-        [Theory]
-        [MemberData(nameof(Utilities.UsePreserializedResourceStates), MemberType = typeof(Utilities))]
+        [TestMethod]
+        [DynamicData(nameof(Utilities.UsePreserializedResourceStates), MemberType = typeof(Utilities))]
         public void ForceOutOfDateLinked(bool usePreserialized)
         {
             string bitmap = Utilities.CreateWorldsSmallestBitmap();
@@ -446,7 +446,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void QuestionOutOfDateByDeletion()
         {
             var folder = _env.CreateFolder();
@@ -499,10 +499,10 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
             Utilities.ExecuteTask(t5);
         }
 
-        [Theory]
-        [InlineData(false, false)]
-        [InlineData(false, true)]
-        [InlineData(true, false)]
+        [TestMethod]
+        [DataRow(false, false)]
+        [DataRow(false, true)]
+        [DataRow(true, false)]
         public void WritingNonString_WithoutProperyOrSystemResourcesExtensions_FailsUnlessRunningOnFullFrameworkWithoutProperty(
             bool usePreserialized,
             bool useSystemResourcesExtensions)
@@ -573,9 +573,9 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
             }
         }
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void WritingString_WithoutSystemResourcesExtensions_Succeeds(bool usePreserialized)
         {
             string resxFile = Utilities.WriteTestResX(
@@ -610,8 +610,8 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
             }
         }
 
-        [Theory]
-        [MemberData(nameof(Utilities.UsePreserializedResourceStates), MemberType = typeof(Utilities))]
+        [TestMethod]
+        [DynamicData(nameof(Utilities.UsePreserializedResourceStates), MemberType = typeof(Utilities))]
         public void ForceOutOfDateLinkedByDeletion(bool usePreserialized)
         {
             string bitmap = Utilities.CreateWorldsSmallestBitmap();
@@ -667,7 +667,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  Force partially out-of-date: should build only the out of date inputs
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ForceSomeOutOfDate()
         {
             var folder = _env.CreateFolder();
@@ -724,8 +724,8 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  Allow ShouldRebuildResgenOutputFile to return "false" since nothing's out of date, including linked file
         /// </summary>
-        [Theory]
-        [MemberData(nameof(Utilities.UsePreserializedResourceStates), MemberType = typeof(Utilities))]
+        [TestMethod]
+        [DynamicData(nameof(Utilities.UsePreserializedResourceStates), MemberType = typeof(Utilities))]
         public void AllowLinkedNoGenerate(bool usePreserialized)
         {
             string bitmap = Utilities.CreateWorldsSmallestBitmap();
@@ -779,7 +779,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  Allow the task to skip processing based on having nothing out of date
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NothingOutOfDate()
         {
             string resxFile = null;
@@ -859,9 +859,9 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// </summary>
         /// <remarks>System dll is not locked because it forces a new app domain</remarks>
 #if RUNTIME_TYPE_NETCORE
-        [Fact(Skip = "Depends on referencing System.dll")]
+        [TestMethod(Skip = "Depends on referencing System.dll")]
 #else
-        [Fact]
+        [TestMethod]
 #endif
         public void NothingOutOfDateExceptReference()
         {
@@ -945,7 +945,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         /// If an additional input is out of date, resources should be regenerated.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NothingOutOfDateExceptAdditionalInput()
         {
             string resxFile = null;
@@ -1019,9 +1019,9 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         ///  Text to ResX
         /// </summary>
 #if FEATURE_RESXREADER_LIVEDESERIALIZATION
-        [Fact]
+        [TestMethod]
 #else
-        [Fact(Skip = "Writing to XML not supported on .net core")]
+        [TestMethod(Skip = "Writing to XML not supported on .net core")]
 #endif
         public void BasicText2ResX()
         {
@@ -1053,9 +1053,9 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         ///  Round trip from resx to resources to resx with the same blobs
         /// </summary>
 #if FEATURE_RESXREADER_LIVEDESERIALIZATION
-        [Fact]
+        [TestMethod]
 #else
-        [Fact(Skip = "ResGen.exe not supported on.NET Core MSBuild")]
+        [TestMethod(Skip = "ResGen.exe not supported on.NET Core MSBuild")]
 #endif
         public void ResX2ResX()
         {
@@ -1101,9 +1101,9 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         ///  Round trip from text to resources to text with the same blobs
         /// </summary>
 #if FEATURE_RESXREADER_LIVEDESERIALIZATION
-        [Fact]
+        [TestMethod]
 #else
-        [Fact(Skip = "ResGen.exe not supported on.NET Core MSBuild")]
+        [TestMethod(Skip = "ResGen.exe not supported on.NET Core MSBuild")]
 #endif
         public void Text2Text()
         {
@@ -1149,7 +1149,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  STR without references yields proper output, message
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedResources()
         {
             GenerateResource t = Utilities.CreateTask(_output);
@@ -1210,7 +1210,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  STR without references yields proper output, message
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedResourcesUpToDate()
         {
             GenerateResource t = Utilities.CreateTask(_output);
@@ -1295,7 +1295,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         /// STR class file is out of date, but resources are up to date. Should still generate it.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedResourcesOutOfDate()
         {
             string resxFile = null;
@@ -1391,7 +1391,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         /// Verify STR generation with a specified specific filename
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedResourcesWithFilename()
         {
             string txtFile = null;
@@ -1457,7 +1457,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  STR with VB
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedResourcesVB()
         {
             GenerateResource t = Utilities.CreateTask(_output);
@@ -1517,7 +1517,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  STR namespace can be empty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedResourcesWithoutNamespaceOrClassOrFilename()
         {
             GenerateResource t = Utilities.CreateTask(_output);
@@ -1633,7 +1633,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  STR with resource namespace yields proper output, message (CS)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void STRWithResourcesNamespaceCS()
         {
             Utilities.STRNamespaceTestHelper("CSharp", "MyResourcesNamespace", null, _output);
@@ -1642,7 +1642,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  STR with resource namespace yields proper output, message (VB)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void STRWithResourcesNamespaceVB()
         {
             Utilities.STRNamespaceTestHelper("VB", "MyResourcesNamespace", null, _output);
@@ -1651,7 +1651,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  STR with resource namespace and STR namespace yields proper output, message (CS)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void STRWithResourcesNamespaceAndSTRNamespaceCS()
         {
             Utilities.STRNamespaceTestHelper("CSharp", "MyResourcesNamespace", "MySTClassNamespace", _output);
@@ -1660,7 +1660,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  STR with resource namespace and STR namespace yields proper output, message (CS)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void STRWithResourcesNamespaceAndSTRNamespaceVB()
         {
             Utilities.STRNamespaceTestHelper("VB", "MyResourcesNamespace", "MySTClassNamespace", _output);
@@ -1679,7 +1679,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  Text input failures, no name, no '=', 'strings' token, invalid token, invalid escape
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TextToResourcesBadFormat()
         {
             // This WriteLine is a hack.  On a slow machine, the Tasks unittest fails because remoting
@@ -1742,7 +1742,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  Cause failures in ResXResourceReader
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void FailedResXReader()
         {
             string resxFile1 = null;
@@ -1819,7 +1819,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  Cause failures in ResXResourceReader, different codepath
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void FailedResXReaderWithAllOutputResourcesSpecified()
         {
             string resxFile1 = null;
@@ -1902,7 +1902,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  Duplicate resource names
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DuplicateResourceNames()
         {
             GenerateResource t = Utilities.CreateTask(_output);
@@ -1927,7 +1927,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  Non-string resource with text output
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void UnsupportedTextType()
         {
             string bitmap = Utilities.CreateWorldsSmallestBitmap();
@@ -1955,7 +1955,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         /// Can't write the statefile
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidStateFile()
         {
             string resxFile = null;
@@ -1992,7 +1992,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void GenerateResourceWarnsWhenUsingBinaryFormatter()
         {
             using TestEnvironment env = TestEnvironment.Create();
@@ -2067,8 +2067,8 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         }
 
         [DotNetOnlyTheory(additionalMessage: "This error is .NET Core only.")]
-        [InlineData(".resources")]
-        [InlineData(".dll")]
+        [DataRow(".resources")]
+        [DataRow(".dll")]
         public void ResourceReaderRejectsNonCoreCompatFormats(string inputExtension)
         {
             using var env = TestEnvironment.Create(_output);
@@ -2090,7 +2090,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  Invalid STR Class name
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void FailedSTRProperty()
         {
             GenerateResource t = Utilities.CreateTask(_output);
@@ -2172,7 +2172,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  Sources attributes are copied to given OutputResources
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AttributeForwarding()
         {
             // This WriteLine is a hack.  On a slow machine, the Tasks unittest fails because remoting
@@ -2215,7 +2215,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  Sources attributes copied to computed OutputResources
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AttributeForwardingOnEmptyOutputs()
         {
             GenerateResource t = Utilities.CreateTask(_output);
@@ -2245,7 +2245,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  OutputFiles used for output, and also are synthesized if not set on input
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OutputFilesNotSpecified()
         {
             GenerateResource t = Utilities.CreateTask(_output);
@@ -2281,7 +2281,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  FilesWritten contains OutputResources + StateFile
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void FilesWrittenSet()
         {
             GenerateResource t = Utilities.CreateTask(_output);
@@ -2323,7 +2323,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  Resource transformation fails on 3rd of 4 inputs, inputs 1 & 2 & 4 are in outputs and fileswritten.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OutputFilesPartialInputs()
         {
             GenerateResource t = Utilities.CreateTask(_output);
@@ -2405,7 +2405,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  STR class name derived from output file transformation
         /// </summary>
-        [Fact]
+        [TestMethod]
 
         public void StronglyTypedClassName()
         {
@@ -2451,7 +2451,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  STR class file name derived from class name transformation
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedFileName()
         {
             GenerateResource t = Utilities.CreateTask(_output);
@@ -2507,7 +2507,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  Empty Sources yields message, success
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EmptySources()
         {
             // This WriteLine is a hack.  On a slow machine, the Tasks unittest fails because remoting
@@ -2533,7 +2533,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  References with invalid assemblies yields warning
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReferencesToBadAssemblies()
         {
             GenerateResource t = Utilities.CreateTask(_output);
@@ -2562,7 +2562,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  Source item not found
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SourceItemMissing()
         {
             string txtFile = null;
@@ -2642,7 +2642,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  Bad file extension on input
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InputFileExtension()
         {
             GenerateResource t = Utilities.CreateTask(_output);
@@ -2675,7 +2675,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  Bad file extension on output
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OutputFileExtension()
         {
             GenerateResource t = Utilities.CreateTask(_output);
@@ -2707,7 +2707,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  Sources and OutputResources different # of elements
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SourcesMatchesOutputResources()
         {
             GenerateResource t = Utilities.CreateTask(_output);
@@ -2739,7 +2739,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  Invalid StronglyTypedLanguage yields CodeDOM exception
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void UnknownStronglyTypedLanguage()
         {
             GenerateResource t = Utilities.CreateTask(_output);
@@ -2771,7 +2771,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         /// StronglyTypedLanguage, but more than one resources file
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedResourceWithMoreThanOneInputResourceFile()
         {
             string resxFile = null;
@@ -2821,7 +2821,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         ///  STR class name derived from output file transformation
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BadStronglyTypedFilename()
         {
             string txtFile = null;
@@ -2861,7 +2861,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         /// Verify that passing a STR class without a language, errors
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedResourceClassWithoutLanguage()
         {
             string txtFile = null;
@@ -2898,7 +2898,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         /// Verify that passing a STR namespace without a language, errors
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedResourceNamespaceWithoutLanguage()
         {
             string txtFile = null;
@@ -2935,7 +2935,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         /// Verify that passing a STR filename without a language, errors
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedResourceFilenameWithoutLanguage()
         {
             string txtFile = null;
@@ -2972,7 +2972,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         /// Verify that passing a STR language with more than 1 sources errors
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedResourceFileIsExistingDirectory()
         {
             string dir = null;
@@ -3394,7 +3394,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
             _output = output;
         }
 
-        [Fact]
+        [TestMethod]
         public void ResgenCommandLineLogging()
         {
             // This WriteLine is a hack.  On a slow machine, the Tasks unittest fails because remoting
@@ -3597,7 +3597,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// v3.5 path.  It is difficult to verify the tool paths in a unit test, however, so
         /// this was done by ad hoc testing and will be maintained by the dev suites.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MultiTargetingDefaultsSetCorrectly()
         {
             GenerateResource t = new GenerateResource();
@@ -3606,10 +3606,10 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         }
 
         // Regression test for https://github.com/dotnet/msbuild/issues/2206
-        [Theory]
-        [InlineData("\n")]
-        [InlineData("\r\n")]
-        [InlineData("\r")]
+        [TestMethod]
+        [DataRow("\n")]
+        [DataRow("\r\n")]
+        [DataRow("\r")]
         public void ResxValueNewlines(string newline)
         {
             string resxValue = "First line" + newline + "second line" + newline;
@@ -3659,7 +3659,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ShouldNotRegenResourcesWhenRebuildingInPresenceOfFileRefWithWindowsPath()
         {
             using (var env = TestEnvironment.Create())
@@ -3709,7 +3709,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         /// <summary>
         /// https://github.com/dotnet/msbuild/issues/9199
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NotValidSources()
         {
             GenerateResource t = new GenerateResource { BuildEngine = new MockEngine(_output) };

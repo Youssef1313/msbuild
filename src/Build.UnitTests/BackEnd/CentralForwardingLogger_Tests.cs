@@ -17,7 +17,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Tests the basic getting and setting of the logger parameters
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetandSetLoggerParameters()
         {
             CentralForwardingLogger centralLogger = new CentralForwardingLogger();
@@ -48,7 +48,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// Verify the correct exception is thrown when the logger is initialized with a null
         /// event source.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InitializeWithNullEventSourceILogger()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -61,7 +61,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// Verify the correct exception is thrown when the logger is initialized with a null
         /// event source.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InitializeWithNullEventSourceINodeLogger()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -73,7 +73,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify the shutdown method will null out the event redirector
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestShutDown()
         {
             CentralForwardingLogger centralLogger = new CentralForwardingLogger();
@@ -88,7 +88,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify that the forwarding logger correctly forwards events when passed to it.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ForwardEvents()
         {
             BuildStartedEventArgs buildStarted = new BuildStartedEventArgs("Message", "Help");
@@ -110,7 +110,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// event redirector is registered on the logger. This could happen
         /// if no central logger is registered with the system.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RaiseEventWithNoBuildEventRedirector()
         {
             BuildMessageEventArgs normalMessage = new BuildMessageEventArgs("Message2", "help", "sender", MessageImportance.Normal);

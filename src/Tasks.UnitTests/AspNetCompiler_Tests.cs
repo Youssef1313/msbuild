@@ -18,7 +18,7 @@ namespace Microsoft.Build.UnitTests
      */
     public sealed class AspNetCompilerTests
     {
-        [Fact]
+        [TestMethod]
         public void NoParameters()
         {
             AspNetCompiler t = new AspNetCompiler();
@@ -28,7 +28,7 @@ namespace Microsoft.Build.UnitTests
             Assert.False(CommandLine.CallValidateParameters(t));
         }
 
-        [Fact]
+        [TestMethod]
         public void OnlyMetabasePath()
         {
             AspNetCompiler t = new AspNetCompiler();
@@ -42,7 +42,7 @@ namespace Microsoft.Build.UnitTests
             CommandLine.ValidateEquals(t, @"-m /LM/W3SVC/1/Root/MyApp", false);
         }
 
-        [Fact]
+        [TestMethod]
         public void OnlyVirtualPath()
         {
             AspNetCompiler t = new AspNetCompiler();
@@ -57,7 +57,7 @@ namespace Microsoft.Build.UnitTests
         }
 
 
-        [Fact]
+        [TestMethod]
         public void OnlyPhysicalPath()
         {
             AspNetCompiler t = new AspNetCompiler();
@@ -69,7 +69,7 @@ namespace Microsoft.Build.UnitTests
             Assert.False(CommandLine.CallValidateParameters(t));
         }
 
-        [Fact]
+        [TestMethod]
         public void OnlyTargetPath()
         {
             AspNetCompiler t = new AspNetCompiler();
@@ -81,7 +81,7 @@ namespace Microsoft.Build.UnitTests
             Assert.False(CommandLine.CallValidateParameters(t));
         }
 
-        [Fact]
+        [TestMethod]
         public void MetabasePathAndVirtualPath()
         {
             AspNetCompiler t = new AspNetCompiler();
@@ -94,7 +94,7 @@ namespace Microsoft.Build.UnitTests
             Assert.False(CommandLine.CallValidateParameters(t));
         }
 
-        [Fact]
+        [TestMethod]
         public void MetabasePathAndPhysicalPath()
         {
             AspNetCompiler t = new AspNetCompiler();
@@ -107,7 +107,7 @@ namespace Microsoft.Build.UnitTests
             Assert.False(CommandLine.CallValidateParameters(t));
         }
 
-        [Fact]
+        [TestMethod]
         public void MetabasePathAndTargetPath()
         {
             AspNetCompiler t = new AspNetCompiler();
@@ -122,7 +122,7 @@ namespace Microsoft.Build.UnitTests
             CommandLine.ValidateEquals(t, @"-m /LM/W3SVC/1/Root/MyApp c:\MyTarget", false);
         }
 
-        [Fact]
+        [TestMethod]
         public void VirtualPathAndPhysicalPath()
         {
             AspNetCompiler t = new AspNetCompiler();
@@ -137,7 +137,7 @@ namespace Microsoft.Build.UnitTests
             CommandLine.ValidateEquals(t, @"-v /MyApp -p c:\MyApp", false);
         }
 
-        [Fact]
+        [TestMethod]
         public void VirtualPathAndTargetPath()
         {
             AspNetCompiler t = new AspNetCompiler();
@@ -152,7 +152,7 @@ namespace Microsoft.Build.UnitTests
             CommandLine.ValidateEquals(t, @"-v /MyApp c:\MyTarget", false);
         }
 
-        [Fact]
+        [TestMethod]
         public void PhysicalPathAndTargetPath()
         {
             AspNetCompiler t = new AspNetCompiler();
@@ -165,7 +165,7 @@ namespace Microsoft.Build.UnitTests
             Assert.False(CommandLine.CallValidateParameters(t));
         }
 
-        [Fact]
+        [TestMethod]
         public void AllExceptMetabasePath()
         {
             AspNetCompiler t = new AspNetCompiler();
@@ -181,7 +181,7 @@ namespace Microsoft.Build.UnitTests
             CommandLine.ValidateEquals(t, @"-v /MyApp -p c:\MyApp c:\MyTarget", false);
         }
 
-        [Fact]
+        [TestMethod]
         public void AllExceptVirtualPath()
         {
             AspNetCompiler t = new AspNetCompiler();
@@ -195,7 +195,7 @@ namespace Microsoft.Build.UnitTests
             Assert.False(CommandLine.CallValidateParameters(t));
         }
 
-        [Fact]
+        [TestMethod]
         public void AllExceptPhysicalPath()
         {
             AspNetCompiler t = new AspNetCompiler();
@@ -209,7 +209,7 @@ namespace Microsoft.Build.UnitTests
             Assert.False(CommandLine.CallValidateParameters(t));
         }
 
-        [Fact]
+        [TestMethod]
         public void AllExceptTargetPath()
         {
             AspNetCompiler t = new AspNetCompiler();
@@ -223,7 +223,7 @@ namespace Microsoft.Build.UnitTests
             Assert.False(CommandLine.CallValidateParameters(t));
         }
 
-        [Fact]
+        [TestMethod]
         public void AllParameters()
         {
             AspNetCompiler t = new AspNetCompiler();
@@ -242,7 +242,7 @@ namespace Microsoft.Build.UnitTests
         /// Make sure AspNetCompiler sends ExternalProjectStarted/Finished events properly. The tasks will fail since
         /// the project files don't exist, but we only care about the events anyway.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestExternalProjectEvents()
         {
             string projectFileContents = @"

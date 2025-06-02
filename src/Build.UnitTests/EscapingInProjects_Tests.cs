@@ -85,7 +85,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// Make sure I can define a property with escaped characters and pass it into
         /// a string parameter of a task, in this case the Message task.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SemicolonInPropertyPassedIntoStringParam()
         {
             MockLogger logger = Helpers.BuildProjectWithNewOMExpectSuccess(@"
@@ -106,7 +106,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// Make sure I can define a property with escaped characters and pass it into
         /// a string parameter of a task, in this case the Message task.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SemicolonInPropertyPassedIntoStringParam_UsingTaskHost()
         {
             MockLogger logger = Helpers.BuildProjectWithNewOMExpectSuccess(@"
@@ -129,7 +129,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// Make sure I can define a property with escaped characters and pass it into
         /// an ITaskItem[] task parameter.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SemicolonInPropertyPassedIntoITaskItemParam()
         {
             MockLogger logger = Helpers.BuildProjectWithNewOMExpectSuccess(@$"
@@ -158,7 +158,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// Make sure I can define a property with escaped characters and pass it into
         /// an ITaskItem[] task parameter.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SemicolonInPropertyPassedIntoITaskItemParam_UsingTaskHost()
         {
             MockLogger logger = Helpers.BuildProjectWithNewOMExpectSuccess(String.Format(@"
@@ -189,7 +189,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// in it, then we shouldn't try to match it up against any existing wildcards.  This is a really
         /// bizarre scenario ... the caller probably meant to escape the semicolon.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddNewItemWithSemicolon()
         {
             // ************************************
@@ -227,7 +227,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// contains an unescaped semicolon in it, then we shouldn't try to match it up against any existing
         /// wildcards.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddNewItemWithPropertyContainingSemicolon()
         {
             // ************************************
@@ -272,7 +272,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// in it, then we shouldn't try to match it up against any existing wildcards.  This is a really
         /// bizarre scenario ... the caller probably meant to escape the semicolon.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ModifyItemIncludeSemicolon()
         {
             // ************************************
@@ -325,7 +325,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// If I try to modify an item in a project, and my new item's Include has an escaped semicolon
         /// in it, and it matches the existing wildcard, then we shouldn't need to modify the project file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ModifyItemIncludeEscapedSemicolon()
         {
             // ************************************
@@ -382,7 +382,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// contains an unescaped semicolon in it, then we shouldn't try to match it up against any existing
         /// wildcards.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ModifyItemAddPropertyContainingSemicolon()
         {
             // ************************************
@@ -443,7 +443,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// Make sure that character escaping works as expected when adding a new item that matches
         /// an existing wildcarded item in the project file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddNewItemThatMatchesWildcard1()
         {
             // ************************************
@@ -485,7 +485,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// Make sure that character escaping works as expected when adding a new item that matches
         /// an existing wildcarded item in the project file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddNewItemThatMatchesWildcard2()
         {
             // ************************************
@@ -528,7 +528,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// executing the task) are left escaped when they become real items in the engine, and
         /// they only get unescaped when fed into a subsequent task.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InferEscapedOutputsFromTask()
         {
             string inputFile = null;
@@ -578,7 +578,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// Do an item transform, where the transform expression contains an unescaped semicolon as well
         /// as an escaped percent sign.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ItemTransformContainingSemicolon()
         {
             MockLogger logger = Helpers.BuildProjectWithNewOMExpectSuccess(@"
@@ -603,7 +603,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// Do an item transform, where the transform expression contains an unescaped semicolon as well
         /// as an escaped percent sign.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ItemTransformContainingSemicolon_InTaskHost()
         {
             MockLogger logger = Helpers.BuildProjectWithNewOMExpectSuccess(@"
@@ -630,7 +630,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// Tests that when we add an item and are in a directory with characters in need of escaping, and the
         /// item's FullPath metadata is retrieved, that a properly un-escaped version of the path is returned
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void FullPathMetadataOnItemUnescaped()
         {
             string projectName = "foo.proj";
@@ -672,7 +672,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// Test that we can pass in global properties containing escaped characters and they
         /// won't be unescaped.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GlobalPropertyWithEscapedCharacters()
         {
             MockLogger logger = new MockLogger();
@@ -696,7 +696,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// If %2A (escaped '*') or %3F (escaped '?') is in an item's Include, it should be treated
         /// literally, not as a wildcard
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EscapedWildcardsShouldNotBeExpanded()
         {
             MockLogger logger = new MockLogger();
@@ -730,7 +730,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// If %2A (escaped '*') or %3F (escaped '?') is in an item's Include, it should be treated
         /// literally, not as a wildcard
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EscapedWildcardsShouldNotBeExpanded_InTaskHost()
         {
             MockLogger logger = new();
@@ -766,7 +766,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// one the escaped version of the other, the second will override the first as though they had the
         /// same name.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TargetNamesAlwaysUnescaped()
         {
             bool exceptionCaught = false;
@@ -794,7 +794,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// one the escaped version of the other, the second will override the first as though they had the
         /// same name.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TargetNamesAlwaysUnescaped_Override()
         {
             Project project = ObjectModelHelpers.CreateInMemoryProject(@"
@@ -817,7 +817,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// <summary>
         /// Tests that when we set metadata through the evaluation model, we do the right thing
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SpecialCharactersInMetadataValueConstruction()
         {
             string projectString = @"
@@ -839,7 +839,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// <summary>
         /// Tests that when we set metadata through the evaluation model, we do the right thing
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SpecialCharactersInMetadataValueEvaluation()
         {
             Project project = new Project();
@@ -860,7 +860,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// We want to make sure that we do the right thing (assuming that the user escaped the information
         /// correctly coming in) and don't mess up their set of items
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CanGetCorrectListOfItemsWithSemicolonsInThem()
         {
             string projectString = @"
@@ -892,7 +892,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// We want to make sure that we do the right thing (assuming that the user escaped the information
         /// correctly coming in) and don't mess up their set of items
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CanGetCorrectListOfItemsWithSemicolonsInThem2()
         {
             string projectString = @"
@@ -958,7 +958,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// <summary>
         ///     ESCAPING: Escaping in conditionals is broken.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SemicolonInConfiguration()
         {
             ObjectModelHelpers.DeleteTempProjectDirectory();
@@ -1018,7 +1018,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// <summary>
         ///     ESCAPING: Escaping in conditionals is broken.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SemicolonInConfiguration_UsingTaskHost()
         {
             string originalOverrideTaskHostVariable = Environment.GetEnvironmentVariable("MSBUILDFORCEALLTASKSOUTOFPROC");
@@ -1088,7 +1088,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// <summary>
         ///     ESCAPING: CopyBuildTarget target fails if the output assembly name contains a semicolon or single-quote
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SemicolonInAssemblyName()
         {
             ObjectModelHelpers.DeleteTempProjectDirectory();
@@ -1143,7 +1143,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// <summary>
         ///     ESCAPING: CopyBuildTarget target fails if the output assembly name contains a semicolon or single-quote
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SemicolonInAssemblyName_UsingTaskHost()
         {
             string originalOverrideTaskHostVariable = Environment.GetEnvironmentVariable("MSBUILDFORCEALLTASKSOUTOFPROC");
@@ -1208,7 +1208,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// <summary>
         ///     ESCAPING: Conversion Issue: Properties with $(xxx) as literals are not being converted correctly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DollarSignInAssemblyName()
         {
             ObjectModelHelpers.DeleteTempProjectDirectory();
@@ -1263,7 +1263,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// <summary>
         ///     ESCAPING: Conversion Issue: Properties with $(xxx) as literals are not being converted correctly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DollarSignInAssemblyName_UsingTaskHost()
         {
             string originalOverrideTaskHostVariable = Environment.GetEnvironmentVariable("MSBUILDFORCEALLTASKSOUTOFPROC");
@@ -1328,7 +1328,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// <summary>
         /// This is the case when one of the source code files in the project has a filename containing a semicolon.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SemicolonInSourceCodeFilename()
         {
             ObjectModelHelpers.DeleteTempProjectDirectory();
@@ -1383,7 +1383,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// <summary>
         /// This is the case when one of the source code files in the project has a filename containing a semicolon.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SemicolonInSourceCodeFilename_UsingTaskHost()
         {
             string originalOverrideTaskHostVariable = Environment.GetEnvironmentVariable("MSBUILDFORCEALLTASKSOUTOFPROC");
@@ -1450,7 +1450,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// have all sorts of different characters in their name. There
         /// is even a P2P reference between the two projects in the .SLN.
         /// </summary>
-        [Fact(Skip = "This is a known issue in Roslyn. This test should be enabled if Roslyn is updated for this scenario.")]
+        [TestMethod(Skip = "This is a known issue in Roslyn. This test should be enabled if Roslyn is updated for this scenario.")]
         public void SolutionWithLotsaDifferentCharacters()
         {
             ObjectModelHelpers.DeleteTempProjectDirectory();
@@ -1616,7 +1616,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// have all sorts of different characters in their name. There
         /// is even a P2P reference between the two projects in the .SLN.
         /// </summary>
-        [Fact(Skip = "This is a known issue in Roslyn. This test should be enabled if Roslyn is updated for this scenario.")]
+        [TestMethod(Skip = "This is a known issue in Roslyn. This test should be enabled if Roslyn is updated for this scenario.")]
         public void SolutionWithLotsaDifferentCharacters_UsingTaskHost()
         {
             string originalOverrideTaskHostVariable = Environment.GetEnvironmentVariable("MSBUILDFORCEALLTASKSOUTOFPROC");

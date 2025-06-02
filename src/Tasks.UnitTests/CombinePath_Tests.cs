@@ -17,7 +17,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Base path is relative.  Paths are relative.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RelativeRelative1()
         {
             CombinePath t = new CombinePath();
@@ -37,7 +37,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Base path is relative.  Paths are absolute.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RelativeAbsolute1()
         {
             CombinePath t = new CombinePath();
@@ -67,7 +67,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Base path is absolute.  Paths are relative.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AbsoluteRelative1()
         {
             CombinePath t = new CombinePath();
@@ -87,7 +87,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Base path is absolute.  Paths are absolute.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AbsoluteAbsolute1()
         {
             CombinePath t = new CombinePath();
@@ -116,7 +116,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// All item metadata from the paths should be preserved when producing the output items.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MetadataPreserved()
         {
             CombinePath t = new CombinePath();
@@ -149,7 +149,7 @@ namespace Microsoft.Build.UnitTests
         /// No base path passed in should be treated as a blank base path, which means that
         /// the original paths are returned untouched.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NoBasePath()
         {
             CombinePath t = new CombinePath();
@@ -167,7 +167,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Passing in an array of zero paths.  Task should succeed and return zero paths.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NoPaths()
         {
             CombinePath t = new CombinePath();
@@ -184,7 +184,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Passing in a (blank) path.  Task should simply return the base path.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BlankPath()
         {
             CombinePath t = new CombinePath();

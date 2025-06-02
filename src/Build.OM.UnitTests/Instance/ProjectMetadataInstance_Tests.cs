@@ -17,7 +17,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Get name and value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Accessors()
         {
             ProjectMetadataInstance metadata = GetMetadataInstance();

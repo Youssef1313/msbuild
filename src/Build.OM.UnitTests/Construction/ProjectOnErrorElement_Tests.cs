@@ -20,7 +20,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read a target containing only OnError
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadTargetOnlyContainingOnError()
         {
             ProjectOnErrorElement onError = GetOnError();
@@ -32,7 +32,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read a target with two onerrors, and some tasks
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadTargetTwoOnErrors()
         {
             string content = @"
@@ -64,7 +64,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <remarks>
         /// This was accidentally allowed in 2.0/3.5 but it should be an error now.
         /// </remarks>
-        [Fact]
+        [TestMethod]
         public void ReadMissingExecuteTargets()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -90,7 +90,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <remarks>
         /// This was accidentally allowed in 2.0/3.5 but it should be an error now.
         /// </remarks>
-        [Fact]
+        [TestMethod]
         public void ReadEmptyExecuteTargets()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -113,7 +113,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read onerror with invalid attribute
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidUnexpectedAttribute()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -132,7 +132,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read onerror with invalid child element
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidUnexpectedChild()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -153,7 +153,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read onerror before task
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidBeforeTask()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -173,7 +173,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read onerror before task
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidBeforePropertyGroup()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -193,7 +193,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read onerror before task
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidBeforeItemGroup()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -213,7 +213,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set ExecuteTargets
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetExecuteTargetsValid()
         {
             ProjectOnErrorElement onError = GetOnError();
@@ -226,7 +226,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set ExecuteTargets to null
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetInvalidExecuteTargetsNull()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -239,7 +239,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set ExecuteTargets to empty string
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetInvalidExecuteTargetsEmpty()
         {
             Assert.Throws<ArgumentException>(() =>
@@ -252,7 +252,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set on error condition
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetCondition()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -270,7 +270,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set on error executetargets value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetExecuteTargets()
         {
             ProjectRootElement project = ProjectRootElement.Create();

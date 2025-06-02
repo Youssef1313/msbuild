@@ -35,7 +35,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Trivially exercise getHashCode.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestGetHashCode()
         {
             s_baseGenericEvent.GetHashCode();
@@ -44,7 +44,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Trivially exercise event args default ctors to boost Frameworks code coverage
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EventArgsCtors()
         {
             GenericBuildEventArgs genericEventTest = new GenericBuildEventArgs();
@@ -54,7 +54,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify the BuildEventContext is exercised
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExerciseBuildEventContext()
         {
             BuildEventContext parentBuildEventContext = new BuildEventContext(0, 0, 0, 0, 0, 0, 0);

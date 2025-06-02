@@ -41,7 +41,7 @@ namespace Microsoft.Build.Tasks.UnitTests
         /// Rationale:
         /// - The only goal for <see cref="GenerateBindingRedirects"/> task is to add specified redirects to the output app.config.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TargetAppConfigShouldContainsBindingRedirects()
         {
             // Arrange
@@ -66,7 +66,7 @@ namespace Microsoft.Build.Tasks.UnitTests
         /// Rationale:
         /// - The only goal for <see cref="GenerateBindingRedirects"/> task is to add specified redirects to the output app.config.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TargetAppConfigShouldContainsBindingRedirectsFromAppConfig()
         {
             // Arrange
@@ -100,7 +100,7 @@ namespace Microsoft.Build.Tasks.UnitTests
         /// - assemblyBinding could have more than one dependentAssembly elements and <see cref="GenerateBindingRedirects"/>
         ///   should respect that.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GenerateBindingRedirectsFromTwoDependentAssemblySections()
         {
             // Arrange
@@ -159,7 +159,7 @@ namespace Microsoft.Build.Tasks.UnitTests
         /// - In initial implementation such app.config was considered invalid and MSB3835 was issued.
         ///   But due to MSDN documentation, dependentAssembly could have only probing element without any other elements inside.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AppConfigWithProbingPathAndWithoutDependentAssemblyShouldNotProduceWarningsBug1161241()
         {
             // Arrange
@@ -186,7 +186,7 @@ namespace Microsoft.Build.Tasks.UnitTests
         /// - In initial implementation such app.config was considered invalid and MSB3835 was issued.
         ///   But due to MSDN documentation, dependentAssembly could have only probing element without any other elements inside.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AppConfigWithEmptyAssemblyBindingShouldNotProduceWarnings()
         {
             // Arrange
@@ -211,7 +211,7 @@ namespace Microsoft.Build.Tasks.UnitTests
         /// Rationale:
         /// - Due to app.config xsd schema this is a valid configuration.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DependentAssemblySectionWithoutBindingRedirectShouldNotProduceWarnings()
         {
             // Arrange
@@ -241,7 +241,7 @@ namespace Microsoft.Build.Tasks.UnitTests
         /// Rationale:
         /// - Due to MSDN documentation, assemblyBinding element should always have a dependentAssembly subsection.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AppConfigInvalidIfDependentAssemblyNodeIsEmpty()
         {
             // Construct the app.config.
@@ -259,7 +259,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             redirectResults.Engine.AssertLogContains("MSB3835");
         }
 
-        [Fact]
+        [TestMethod]
         public void AppConfigWhenFilePlacedInLocationWithGB18030Characters()
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -275,7 +275,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void AppConfigFileNotSavedWhenIdentical()
         {
             string appConfigFile = WriteAppConfigRuntimeSection(string.Empty);

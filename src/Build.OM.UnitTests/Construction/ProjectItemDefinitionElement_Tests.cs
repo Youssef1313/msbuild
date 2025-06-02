@@ -15,12 +15,13 @@ namespace Microsoft.Build.UnitTests.OM.Construction
     /// <summary>
     /// Tests for the ProjectItemDefinitionElement class
     /// </summary>
+    [TestClass]
     public class ProjectItemDefinitionElement_Tests
     {
         /// <summary>
         /// Read item definition with no children
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadNoChildren()
         {
             string content = @"
@@ -42,7 +43,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read an item definition with a child
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadBasic()
         {
             string content = @"
@@ -73,7 +74,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// Orcas inadvertently did not check for reserved item types (like "Choose") in item definitions,
         /// as we do for item types in item groups. So we do not fail here.
         /// </remarks>
-        [Fact]
+        [TestMethod]
         public void ReadBuiltInElementName()
         {
             string content = @"
@@ -90,7 +91,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read an item definition with several metadata
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadMetadata()
         {
             string content = @"
@@ -125,64 +126,64 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// Reads metadata as attributes that wouldn't be
         /// metadata on items
         /// </summary>
-        [Theory]
-        [InlineData(@"
+        [TestMethod]
+        [DataRow(@"
                     <Project>
                         <ItemDefinitionGroup>
                             <i Include='inc' />
                         </ItemDefinitionGroup>
                     </Project>
                 ")]
-        [InlineData(@"
+        [DataRow(@"
                     <Project>
                         <ItemDefinitionGroup>
                             <i Update='upd' />
                         </ItemDefinitionGroup>
                     </Project>
                 ")]
-        [InlineData(@"
+        [DataRow(@"
                     <Project>
                         <ItemDefinitionGroup>
                             <i Remove='rem' />
                         </ItemDefinitionGroup>
                     </Project>
                 ")]
-        [InlineData(@"
+        [DataRow(@"
                     <Project>
                         <ItemDefinitionGroup>
                             <i Exclude='excl' />
                         </ItemDefinitionGroup>
                     </Project>
                 ")]
-        [InlineData(@"
+        [DataRow(@"
                     <Project>
                         <ItemDefinitionGroup>
                             <i KeepMetadata='true' />
                         </ItemDefinitionGroup>
                     </Project>
                 ")]
-        [InlineData(@"
+        [DataRow(@"
                     <Project>
                         <ItemDefinitionGroup>
                             <i RemoveMetadata='true' />
                         </ItemDefinitionGroup>
                     </Project>
                 ")]
-        [InlineData(@"
+        [DataRow(@"
                     <Project>
                         <ItemDefinitionGroup>
                             <i KeepDuplicates='true' />
                         </ItemDefinitionGroup>
                     </Project>
                 ")]
-        [InlineData(@"
+        [DataRow(@"
                     <Project>
                         <ItemDefinitionGroup>
                             <i cOndiTion='true' />
                         </ItemDefinitionGroup>
                     </Project>
                 ")]
-        [InlineData(@"
+        [DataRow(@"
                     <Project>
                         <ItemDefinitionGroup>
                             <i LabeL='text' />
@@ -200,7 +201,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set the condition value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetCondition()
         {
             ProjectRootElement project = ProjectRootElement.Create();

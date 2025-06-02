@@ -21,7 +21,7 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Make sure the CopyFrom actually does a clone.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CopyFromClonesMetadata()
         {
             ProjectItem item1 = GetOneItemFromFragment(@"<i Include='i1'><m>m1</m></i>");

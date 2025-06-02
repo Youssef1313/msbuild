@@ -120,7 +120,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void Regress_Mutation_UserSuppliedToolPathIsLogged()
         {
             using (MyTool t = new MyTool())
@@ -136,7 +136,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void Regress_Mutation_MissingExecutableIsLogged()
         {
             using (MyTool t = new MyTool())
@@ -152,7 +152,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void Regress_Mutation_WarnIfCommandLineTooLong()
         {
             using (MyTool t = new MyTool())
@@ -178,7 +178,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Exercise the code in ToolTask's default implementation of HandleExecutionErrors.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void HandleExecutionErrorsWhenToolDoesntLogError()
         {
             using (MyTool t = new MyTool())
@@ -201,7 +201,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Exercise the code in ToolTask's default implementation of HandleExecutionErrors.
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void HandleExecutionErrorsWhenToolLogsError()
@@ -230,7 +230,7 @@ namespace Microsoft.Build.UnitTests
         /// ToolTask should never run String.Format on strings that are
         /// not meant to be formatted.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DoNotFormatTaskCommandOrMessage()
         {
             using MyTool t = new MyTool();
@@ -249,9 +249,9 @@ namespace Microsoft.Build.UnitTests
         /// Process notification encoding should be consistent with console code page.
         /// not meant to be formatted.
         /// </summary>
-        [InlineData(0, "")]
-        [InlineData(-1, "1>&2")]
-        [Theory]
+        [DataRow(0, "")]
+        [DataRow(-1, "1>&2")]
+        [TestMethod]
         public void ProcessNotificationEncodingConsistentWithConsoleCodePage(int exitCode, string errorPart)
         {
             using MyTool t = new MyTool();
@@ -279,7 +279,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// When a message is logged to the standard error stream do not error is LogStandardErrorAsError is not true or set.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DoNotErrorWhenTextSentToStandardError()
         {
             using (MyTool t = new MyTool())
@@ -302,7 +302,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// When a message is logged to the standard output stream do not error is LogStandardErrorAsError is  true
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DoNotErrorWhenTextSentToStandardOutput()
         {
             using (MyTool t = new MyTool())
@@ -326,7 +326,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// When a message is logged to the standard error stream error if LogStandardErrorAsError is true
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ErrorWhenTextSentToStandardError()
         {
             using (MyTool t = new MyTool())
@@ -351,7 +351,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// When ToolExe is set, it is used instead of ToolName
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ToolExeWinsOverToolName()
         {
             using (MyTool t = new MyTool())
@@ -370,7 +370,7 @@ namespace Microsoft.Build.UnitTests
         /// When ToolExe is set, it is appended to ToolPath instead
         /// of the regular tool name
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ToolExeIsFoundOnToolPath()
         {
             string shellName = NativeMethodsShared.IsWindows ? "cmd.exe" : "sh";
@@ -399,7 +399,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Task is not found on path - regress #499196
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TaskNotFoundOnPath()
         {
             using (MyTool t = new MyTool())
@@ -419,7 +419,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Task is found on path.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TaskFoundOnPath()
         {
             using (MyTool t = new MyTool())
@@ -442,7 +442,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// StandardOutputImportance set to Low should not show up in our log
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OverrideStdOutImportanceToLow()
         {
             string tempFile = FileUtilities.GetTemporaryFileName();
@@ -470,7 +470,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// StandardOutputImportance set to High should show up in our log
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OverrideStdOutImportanceToHigh()
         {
             string tempFile = FileUtilities.GetTemporaryFileName();
@@ -501,7 +501,7 @@ namespace Microsoft.Build.UnitTests
         /// himself.  This is so that in case the tool doesn't log its errors in canonical
         /// format, the task can still opt to do something reasonable with it.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ToolTaskCanChangeCanonicalErrorFormat()
         {
             string tempFile = FileUtilities.GetTemporaryFileName();
@@ -538,7 +538,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Passing env vars through the tooltask public property
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EnvironmentVariablesToToolTask()
         {
             using MyTool task = new MyTool();
@@ -569,7 +569,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Equals sign in value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EnvironmentVariablesToToolTaskEqualsSign()
         {
             using MyTool task = new MyTool();
@@ -584,7 +584,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// No value provided
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EnvironmentVariablesToToolTaskInvalid1()
         {
             using MyTool task = new MyTool();
@@ -599,7 +599,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Empty string provided
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EnvironmentVariablesToToolTaskInvalid2()
         {
             using MyTool task = new MyTool();
@@ -614,7 +614,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Empty name part provided
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EnvironmentVariablesToToolTaskInvalid3()
         {
             using MyTool task = new MyTool();
@@ -629,7 +629,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Not set should not wipe out other env vars
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EnvironmentVariablesToToolTaskNotSet()
         {
             using MyTool task = new MyTool();
@@ -646,7 +646,7 @@ namespace Microsoft.Build.UnitTests
         /// Verifies that if a directory with the same name of the tool exists that the tool task correctly
         /// ignores the directory.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ToolPathIsFoundWhenDirectoryExistsWithNameOfTool()
         {
             string toolName = NativeMethodsShared.IsWindows ? "cmd" : "sh";
@@ -684,7 +684,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Confirms we can find a file on the PATH.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void FindOnPathSucceeds()
         {
             string[] expectedCmdPath;
@@ -709,7 +709,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Equals sign in value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetProcessStartInfoCanOverrideEnvironmentVariables()
         {
             using MyTool task = new MyTool();
@@ -723,7 +723,7 @@ namespace Microsoft.Build.UnitTests
             task.StartInfo.Environment.ContainsKey("a").ShouldBe(false);
         }
 
-        [Fact]
+        [TestMethod]
         public void VisualBasicLikeEscapedQuotesInCommandAreNotMadeForwardSlashes()
         {
             using MyTool t = new MyTool();
@@ -755,7 +755,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void UsesCustomProcess()
         {
             using (MyToolWithCustomProcess t = new MyToolWithCustomProcess())
@@ -777,10 +777,10 @@ namespace Microsoft.Build.UnitTests
         /// Verifies that a ToolTask running under the command processor on Windows has autorun
         /// disabled or enabled depending on an escape hatch.
         /// </summary>
-        [Theory]
-        [InlineData("MSBUILDUSERAUTORUNINCMD", null, true)]
-        [InlineData("MSBUILDUSERAUTORUNINCMD", "0", true)]
-        [InlineData("MSBUILDUSERAUTORUNINCMD", "1", false)]
+        [TestMethod]
+        [DataRow("MSBUILDUSERAUTORUNINCMD", null, true)]
+        [DataRow("MSBUILDUSERAUTORUNINCMD", "0", true)]
+        [DataRow("MSBUILDUSERAUTORUNINCMD", "1", false)]
         [Trait("Category", "nonosxtests")]
         [Trait("Category", "nonlinuxtests")]
         public void ExecTaskDisablesAutoRun(string environmentVariableName, string environmentVariableValue, bool autoRunShouldBeDisabled)
@@ -835,10 +835,10 @@ namespace Microsoft.Build.UnitTests
             public string ResponseFileCommands { get; private set; }
         }
 
-        [Theory]
-        [InlineData("MSBUILDAVOIDUNICODE", null, false)]
-        [InlineData("MSBUILDAVOIDUNICODE", "0", false)]
-        [InlineData("MSBUILDAVOIDUNICODE", "1", true)]
+        [TestMethod]
+        [DataRow("MSBUILDAVOIDUNICODE", null, false)]
+        [DataRow("MSBUILDAVOIDUNICODE", "0", false)]
+        [DataRow("MSBUILDAVOIDUNICODE", "1", true)]
         public void ToolTaskCanUseUnicode(string environmentVariableName, string environmentVariableValue, bool expectNormalizationToANSI)
         {
             using TestEnvironment testEnvironment = TestEnvironment.Create(_output);
@@ -899,14 +899,14 @@ namespace Microsoft.Build.UnitTests
         /// </summary>
         /// <param name="timeout">New value for <see cref="ToolTask.TaskProcessTerminationTimeout" />.</param>
         /// <param name="isInvalidValid">Is a task expected to be valid or not.</param>
-        [Theory]
-        [InlineData(int.MaxValue, false)]
-        [InlineData(97, false)]
-        [InlineData(0, false)]
-        [InlineData(-1, false)]
-        [InlineData(-2, true)]
-        [InlineData(-101, true)]
-        [InlineData(int.MinValue, true)]
+        [TestMethod]
+        [DataRow(int.MaxValue, false)]
+        [DataRow(97, false)]
+        [DataRow(0, false)]
+        [DataRow(-1, false)]
+        [DataRow(-2, true)]
+        [DataRow(-101, true)]
+        [DataRow(int.MinValue, true)]
         public void SetsTerminationTimeoutCorrectly(int timeout, bool isInvalidValid)
         {
             using var env = TestEnvironment.Create(_output);
@@ -934,10 +934,10 @@ namespace Microsoft.Build.UnitTests
         /// predefined amount of time. The first execution may time out, but all following ones won't. It is expected
         /// that all following executions return success.
         /// </remarks>
-        [Theory]
-        [InlineData(1, 1, 1, -1)] // Normal case, no repeat.
-        [InlineData(3, 1, 1, -1)] // Repeat without timeout.
-        [InlineData(3, 10000, 1, 1000)] // Repeat with timeout.
+        [TestMethod]
+        [DataRow(1, 1, 1, -1)] // Normal case, no repeat.
+        [DataRow(3, 1, 1, -1)] // Repeat without timeout.
+        [DataRow(3, 10000, 1, 1000)] // Repeat with timeout.
         public void ToolTaskThatTimeoutAndRetry(int repeats, int initialDelay, int followupDelay, int timeout)
         {
             using var env = TestEnvironment.Create(_output);

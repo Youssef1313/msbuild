@@ -88,8 +88,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
             }
         }
 
-        [Theory]
-        [MemberData(nameof(CacheSerializationTestData))]
+        [TestMethod]
+        [DynamicData(nameof(CacheSerializationTestData))]
         public void ConfigCacheShouldBeTranslatable(object obj)
         {
             var initial = (ConfigCache)obj;
@@ -118,15 +118,15 @@ namespace Microsoft.Build.UnitTests.BackEnd
             }
         }
 
-        [Theory]
-        [MemberData(nameof(CacheSerializationTestDataNoConfigs))]
+        [TestMethod]
+        [DynamicData(nameof(CacheSerializationTestDataNoConfigs))]
         public void GetSmallestConfigIdThrows(object obj)
         {
             Assert.Throws<InternalErrorException>(() => ((ConfigCache)obj).GetSmallestConfigId());
         }
 
-        [Theory]
-        [MemberData(nameof(CacheSerializationTestDataMultipleConfigs))]
+        [TestMethod]
+        [DynamicData(nameof(CacheSerializationTestDataMultipleConfigs))]
         public void HappyGetSmallestConfigId(object obj)
         {
             Assert.Equal(1, ((ConfigCache)obj).GetSmallestConfigId());

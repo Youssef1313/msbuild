@@ -21,7 +21,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Write one line, read one line.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Basic()
         {
             // Start with a missing file.
@@ -68,7 +68,7 @@ namespace Microsoft.Build.UnitTests
         /// The file should contain the *unescaped* lines, but no escaping information should be
         /// lost when read.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Escaping()
         {
             // Start with a missing file.
@@ -113,7 +113,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Write a line that contains an ANSI character that is not ASCII.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ANSINonASCII()
         {
             // Start with a missing file.
@@ -147,7 +147,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Reading lines from an missing file should result in the empty list.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadMissing()
         {
             var file = FileUtilities.GetTemporaryFileName();
@@ -165,7 +165,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Reading blank lines from a file should be ignored.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IgnoreBlankLines()
         {
             // Start with a missing file.
@@ -210,7 +210,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Reading lines from a file that you have no access to.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadNoAccess()
         {
             if (NativeMethodsShared.IsUnixLike)

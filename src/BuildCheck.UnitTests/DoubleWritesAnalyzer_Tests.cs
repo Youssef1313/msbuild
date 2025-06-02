@@ -35,7 +35,7 @@ namespace Microsoft.Build.BuildCheck.UnitTests
                 parameters);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestCopyTask()
         {
             _registrationContext.TriggerTaskInvocationAction(MakeTaskInvocationData("Copy", new Dictionary<string, TaskInvocationCheckData.TaskParameter>
@@ -53,10 +53,10 @@ namespace Microsoft.Build.BuildCheck.UnitTests
             _registrationContext.Results[0].CheckRule.Id.ShouldBe("BC0102");
         }
 
-        [Theory]
-        [InlineData("Csc")]
-        [InlineData("Vbc")]
-        [InlineData("Fsc")]
+        [TestMethod]
+        [DataRow("Csc")]
+        [DataRow("Vbc")]
+        [DataRow("Fsc")]
         public void TestCompilerTask(string taskName)
         {
             for (int i = 0; i < 2; i++)

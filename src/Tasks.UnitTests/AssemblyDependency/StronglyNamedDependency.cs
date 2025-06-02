@@ -43,7 +43,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// Rationale:
         /// We automatically unify FX dependencies.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Exists()
         {
             // This WriteLine is a hack.  On a slow machine, the Tasks unittest fails because remoting
@@ -98,7 +98,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// feeding it the wrong version, and the drawback is that builds would be different from
         /// machine-to-machine.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void HighVersionDoesntExist()
         {
             // Create the engine.
@@ -124,7 +124,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
                     String.Format(AssemblyResources.GetString("ResolveAssemblyReference.UnificationByFrameworkRetarget"), "1.0.5000.0", Path.Combine(s_myApp_V10Path, "DependsOnEverettSystem.dll")));
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyAssemblyPulledOutOfFrameworkDoesntGetFrameworkFileAttribute()
         {
             MockEngine e = new MockEngine(_output);

@@ -12,7 +12,7 @@ namespace Microsoft.Build.UnitTests
     {
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Unescape()
         {
             Assert.Equal("", EscapingUtilities.UnescapeAll(""));
@@ -34,7 +34,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Escape()
         {
             Assert.Equal("%2a", EscapingUtilities.Escape("*"));
@@ -45,7 +45,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void UnescapeEscape()
         {
             string text = "*";
@@ -60,7 +60,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EscapeUnescape()
         {
             string text = "%2a";
@@ -73,7 +73,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(text, EscapingUtilities.Escape(EscapingUtilities.UnescapeAll(text)));
         }
 
-        [Fact]
+        [TestMethod]
         public void ContainsEscapedWildcards()
         {
             Assert.False(EscapingUtilities.ContainsEscapedWildcards("NoStarOrQMark"));

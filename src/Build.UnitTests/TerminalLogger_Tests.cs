@@ -65,15 +65,15 @@ namespace Microsoft.Build.UnitTests
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
         }
 
-        [Theory]
-        [InlineData(null, false, false, "", typeof(ConsoleLogger))]
-        [InlineData(null, true, false, "", typeof(ConsoleLogger))]
-        [InlineData(null, false, true, "", typeof(ConsoleLogger))]
-        [InlineData(null, true, true, "off", typeof(ConsoleLogger))]
-        [InlineData(null, true, true, "false", typeof(ConsoleLogger))]
-        [InlineData("--tl:off", true, true, "", typeof(ConsoleLogger))]
-        [InlineData(null, true, true, "", typeof(TerminalLogger))]
-        [InlineData("-tl:on", true, true, "off", typeof(TerminalLogger))]
+        [TestMethod]
+        [DataRow(null, false, false, "", typeof(ConsoleLogger))]
+        [DataRow(null, true, false, "", typeof(ConsoleLogger))]
+        [DataRow(null, false, true, "", typeof(ConsoleLogger))]
+        [DataRow(null, true, true, "off", typeof(ConsoleLogger))]
+        [DataRow(null, true, true, "false", typeof(ConsoleLogger))]
+        [DataRow("--tl:off", true, true, "", typeof(ConsoleLogger))]
+        [DataRow(null, true, true, "", typeof(TerminalLogger))]
+        [DataRow("-tl:on", true, true, "off", typeof(TerminalLogger))]
         public void CreateTerminalOrConsoleLogger_CreatesCorrectLoggerInstance(string? argsString, bool supportsAnsi, bool outputIsScreen, string evnVariableValue, Type expectedType)
         {
             using TestEnvironment testEnvironment = TestEnvironment.Create();
@@ -86,12 +86,12 @@ namespace Microsoft.Build.UnitTests
             logger.GetType().ShouldBe(expectedType);
         }
 
-        [Theory]
-        [InlineData("-v:q", LoggerVerbosity.Quiet)]
-        [InlineData("-verbosity:minimal", LoggerVerbosity.Minimal)]
-        [InlineData("--v:d", LoggerVerbosity.Detailed)]
-        [InlineData("/verbosity:diag", LoggerVerbosity.Diagnostic)]
-        [InlineData(null, LoggerVerbosity.Normal)]
+        [TestMethod]
+        [DataRow("-v:q", LoggerVerbosity.Quiet)]
+        [DataRow("-verbosity:minimal", LoggerVerbosity.Minimal)]
+        [DataRow("--v:d", LoggerVerbosity.Detailed)]
+        [DataRow("/verbosity:diag", LoggerVerbosity.Diagnostic)]
+        [DataRow(null, LoggerVerbosity.Normal)]
         public void CreateTerminalOrConsoleLogger_ParsesVerbosity(string? argsString, LoggerVerbosity expectedVerbosity)
         {
             string[]? args = argsString?.Split(' ');
@@ -329,7 +329,7 @@ namespace Microsoft.Build.UnitTests
             BuildFinished?.Invoke(_eventSender, MakeBuildFinishedEventArgs(succeeded));
         }
 
-        [Fact]
+        [TestMethod]
         public Task PrintsBuildSummary_Succeeded()
         {
             InvokeLoggerCallbacksForSimpleProject(succeeded: true, () => { });
@@ -337,7 +337,7 @@ namespace Microsoft.Build.UnitTests
             return Verify(_outputWriter.ToString(), _settings).UniqueForOSPlatform();
         }
 
-        [Fact]
+        [TestMethod]
         public Task PrintBuildSummary_SucceededWithWarnings()
         {
             InvokeLoggerCallbacksForSimpleProject(succeeded: true, () =>
@@ -348,7 +348,7 @@ namespace Microsoft.Build.UnitTests
             return Verify(_outputWriter.ToString(), _settings).UniqueForOSPlatform();
         }
 
-        [Fact]
+        [TestMethod]
         public Task PrintImmediateWarningMessage_Succeeded()
         {
             InvokeLoggerCallbacksForSimpleProject(succeeded: true, () =>
@@ -364,7 +364,7 @@ namespace Microsoft.Build.UnitTests
             return Verify(_outputWriter.ToString(), _settings).UniqueForOSPlatform();
         }
 
-        [Fact]
+        [TestMethod]
         public Task PrintCopyTaskRetryWarningAsImmediateMessage_Failed()
         {
             InvokeLoggerCallbacksForSimpleProject(succeeded: false, () =>
@@ -377,7 +377,7 @@ namespace Microsoft.Build.UnitTests
             return Verify(_outputWriter.ToString(), _settings).UniqueForOSPlatform();
         }
 
-        [Fact]
+        [TestMethod]
         public Task PrintImmediateMessage_Success()
         {
             InvokeLoggerCallbacksForSimpleProject(succeeded: true, () =>
@@ -388,7 +388,7 @@ namespace Microsoft.Build.UnitTests
             return Verify(_outputWriter.ToString(), _settings).UniqueForOSPlatform();
         }
 
-        [Fact]
+        [TestMethod]
         public Task PrintImmediateMessage_Skipped()
         {
             InvokeLoggerCallbacksForSimpleProject(succeeded: true, () =>
@@ -399,7 +399,7 @@ namespace Microsoft.Build.UnitTests
             return Verify(_outputWriter.ToString(), _settings).UniqueForOSPlatform();
         }
 
-        [Fact]
+        [TestMethod]
         public Task PrintRestore_Failed()
         {
             BuildStarted?.Invoke(_eventSender, MakeBuildStartedEventArgs());
@@ -413,7 +413,7 @@ namespace Microsoft.Build.UnitTests
             return Verify(_outputWriter.ToString(), _settings).UniqueForOSPlatform();
         }
 
-        [Fact]
+        [TestMethod]
         public Task PrintRestore_SuccessWithWarnings()
         {
             BuildStarted?.Invoke(_eventSender, MakeBuildStartedEventArgs());
@@ -427,14 +427,14 @@ namespace Microsoft.Build.UnitTests
             return Verify(_outputWriter.ToString(), _settings).UniqueForOSPlatform();
         }
 
-        [Fact]
+        [TestMethod]
         public Task PrintBuildSummary_Failed()
         {
             InvokeLoggerCallbacksForSimpleProject(succeeded: false, () => { });
             return Verify(_outputWriter.ToString(), _settings).UniqueForOSPlatform();
         }
 
-        [Fact]
+        [TestMethod]
         public Task PrintBuildSummary_FailedWithErrors()
         {
             InvokeLoggerCallbacksForSimpleProject(succeeded: false, () =>
@@ -445,7 +445,7 @@ namespace Microsoft.Build.UnitTests
             return Verify(_outputWriter.ToString(), _settings).UniqueForOSPlatform();
         }
 
-        [Fact]
+        [TestMethod]
         public Task PrintDetailedBuildSummary_FailedWithErrorAndWarning()
         {
             string? originalParameters = _terminallogger.Parameters;
@@ -465,7 +465,7 @@ namespace Microsoft.Build.UnitTests
             return Verify(_outputWriter.ToString(), _settings).UniqueForOSPlatform();
         }
 
-        [Fact]
+        [TestMethod]
         public Task PrintBuildSummary_FailedWithErrorsAndWarnings()
         {
             InvokeLoggerCallbacksForSimpleProject(succeeded: false, () =>
@@ -480,7 +480,7 @@ namespace Microsoft.Build.UnitTests
         }
 
 
-        [Fact]
+        [TestMethod]
         public Task PrintBuildSummary_2Projects_FailedWithErrorsAndWarnings()
         {
             InvokeLoggerCallbacksForTwoProjects(
@@ -503,7 +503,7 @@ namespace Microsoft.Build.UnitTests
             return Verify(_outputWriter.ToString(), _settings).UniqueForOSPlatform();
         }
 
-        [Fact]
+        [TestMethod]
         public Task PrintProjectOutputDirectoryLink()
         {
             // Send message in order to set project output path
@@ -552,7 +552,7 @@ namespace Microsoft.Build.UnitTests
                 new Dictionary<string, string?>() { { "total", "10" }, { "passed", "7" }, { "skipped", "2" }, { "failed", "1" } }));
         }
 
-        [Fact]
+        [TestMethod]
         public Task PrintBuildSummaryQuietVerbosity_FailedWithErrors()
         {
             _terminallogger.Verbosity = LoggerVerbosity.Quiet;
@@ -562,7 +562,7 @@ namespace Microsoft.Build.UnitTests
         }
 
 
-        [Fact]
+        [TestMethod]
         public Task PrintBuildSummaryMinimalVerbosity_FailedWithErrors()
         {
             _terminallogger.Verbosity = LoggerVerbosity.Minimal;
@@ -571,7 +571,7 @@ namespace Microsoft.Build.UnitTests
             return Verify(_outputWriter.ToString(), _settings).UniqueForOSPlatform();
         }
 
-        [Fact]
+        [TestMethod]
         public Task PrintBuildSummaryNormalVerbosity_FailedWithErrors()
         {
             _terminallogger.Verbosity = LoggerVerbosity.Normal;
@@ -580,7 +580,7 @@ namespace Microsoft.Build.UnitTests
             return Verify(_outputWriter.ToString(), _settings).UniqueForOSPlatform();
         }
 
-        [Fact]
+        [TestMethod]
         public Task PrintBuildSummaryDetailedVerbosity_FailedWithErrors()
         {
             _terminallogger.Verbosity = LoggerVerbosity.Detailed;
@@ -590,7 +590,7 @@ namespace Microsoft.Build.UnitTests
         }
 
 
-        [Fact]
+        [TestMethod]
         public Task PrintBuildSummaryDiagnosticVerbosity_FailedWithErrors()
         {
             _terminallogger.Verbosity = LoggerVerbosity.Diagnostic;
@@ -599,7 +599,7 @@ namespace Microsoft.Build.UnitTests
             return Verify(_outputWriter.ToString(), _settings).UniqueForOSPlatform();
         }
 
-        [Fact]
+        [TestMethod]
         public Task PrintTestSummaryNormalVerbosity_Succeeded()
         {
             _terminallogger.Verbosity = LoggerVerbosity.Normal;
@@ -608,7 +608,7 @@ namespace Microsoft.Build.UnitTests
             return Verify(_outputWriter.ToString(), _settings).UniqueForOSPlatform();
         }
 
-        [Fact]
+        [TestMethod]
         public Task PrintTestSummaryQuietVerbosity_Succeeded()
         {
             _terminallogger.Verbosity = LoggerVerbosity.Quiet;
@@ -617,7 +617,7 @@ namespace Microsoft.Build.UnitTests
             return Verify(_outputWriter.ToString(), _settings).UniqueForOSPlatform();
         }
 
-        [Fact]
+        [TestMethod]
         public Task PrintSummaryWithOverwrittenVerbosity_FailedWithErrors()
         {
             _terminallogger.Verbosity = LoggerVerbosity.Minimal;
@@ -629,7 +629,7 @@ namespace Microsoft.Build.UnitTests
             return Verify(_outputWriter.ToString(), _settings).UniqueForOSPlatform();
         }
 
-        [Fact]
+        [TestMethod]
         public Task PrintSummaryWithTaskCommandLineEventArgs_Succeeded()
         {
             _terminallogger.Verbosity = LoggerVerbosity.Detailed;
@@ -644,7 +644,7 @@ namespace Microsoft.Build.UnitTests
             return Verify(_outputWriter.ToString(), _settings).UniqueForOSPlatform();
         }
 
-        [Fact]
+        [TestMethod]
         public Task PrintSummaryWithoutTaskCommandLineEventArgs_Succeeded()
         {
             _terminallogger.Verbosity = LoggerVerbosity.Detailed;
@@ -659,7 +659,7 @@ namespace Microsoft.Build.UnitTests
             return Verify(_outputWriter.ToString(), _settings).UniqueForOSPlatform();
         }
 
-        [Fact]
+        [TestMethod]
         public void DisplayNodesShowsCurrent()
         {
             InvokeLoggerCallbacksForSimpleProject(succeeded: false, async () =>
@@ -670,7 +670,7 @@ namespace Microsoft.Build.UnitTests
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void DisplayNodesOverwritesTime()
         {
             List<MockStopwatch> stopwatches = new();
@@ -707,7 +707,7 @@ namespace Microsoft.Build.UnitTests
         }
 
 
-        [Fact]
+        [TestMethod]
         public async Task DisplayNodesOverwritesWithNewTargetFramework()
         {
             BuildStarted?.Invoke(_eventSender, MakeBuildStartedEventArgs());
@@ -736,7 +736,7 @@ namespace Microsoft.Build.UnitTests
             await Verify(_outputWriter.ToString(), _settings).UniqueForOSPlatform();
         }
 
-        [Fact]
+        [TestMethod]
         public void TestTerminalLoggerTogetherWithOtherLoggers()
         {
             using (TestEnvironment env = TestEnvironment.Create())

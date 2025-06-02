@@ -24,7 +24,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify that we do not find the winmd file even if it on the search path if the sdkname does not match something passed into the ResolvedSDKs property.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SDkNameNotInResolvedSDKListButOnSearchPath()
         {
             // Create the engine.
@@ -52,7 +52,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify when we are trying to match a name which is the reference assembly directory
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SDkNameMatchInRADirectory()
         {
             ResolveSDKFromRefereneAssemblyLocation("DebugX86SDKWinMD", @"C:\FakeSDK\References\Debug\X86\DebugX86SDKWinMD.Winmd", _output);

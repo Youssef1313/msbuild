@@ -35,7 +35,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Tests constructor specifying only file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConstructorTest1()
         {
             IElementLocation location = ElementLocation.Create("file", 65536, 0);
@@ -48,7 +48,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Tests constructor specifying only file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConstructorTest2()
         {
             IElementLocation location = ElementLocation.Create("file", 0, 65536);
@@ -61,7 +61,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Tests constructor specifying only file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConstructorTest3()
         {
             IElementLocation location = ElementLocation.Create("file", 65536, 65537);
@@ -74,7 +74,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Test equality
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Equality()
         {
             IElementLocation location1 = ElementLocation.Create("file", 65536, 65537);
@@ -95,7 +95,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// Check it will use large element location when it should.
         /// Using file as BIZARRELY XmlTextReader+StringReader crops or trims.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestLargeElementLocationUsedLargeColumn()
         {
             string file = null;
@@ -123,7 +123,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// Check it will use large element location when it should.
         /// Using file as BIZARRELY XmlTextReader+StringReader crops or trims.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestLargeElementLocationUsedLargeLine()
         {
             string file = null;
@@ -157,7 +157,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Tests serialization.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SerializationTest()
         {
             IElementLocation location = ElementLocation.Create("file", 65536, 65537);
@@ -175,7 +175,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Tests serialization of empty location.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SerializationTestForEmptyLocation()
         {
             IElementLocation location = ElementLocation.EmptyLocation;
@@ -193,7 +193,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Tests constructor specifying file, line and column.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConstructorWithIndicesTest_SmallElementLocation()
         {
             IElementLocation location = ElementLocation.Create("file", 65535, 65534);
@@ -206,7 +206,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Tests constructor specifying file, negative line, column
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConstructorWithNegativeIndicesTest1()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -217,7 +217,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Tests constructor specifying file, line, negative column
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConstructorWithNegativeIndicesTest2n()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -228,7 +228,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Tests constructor with invalid null file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConstructorTestNullFile()
         {
             IElementLocation location = ElementLocation.Create(null);
@@ -238,7 +238,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Tests constructor specifying only file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConstructorTest1_SmallElementLocation()
         {
             IElementLocation location = ElementLocation.Create("file", 65535, 0);
@@ -251,7 +251,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Tests constructor specifying only file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConstructorTest2_SmallElementLocation()
         {
             IElementLocation location = ElementLocation.Create("file", 0, 65535);
@@ -264,7 +264,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Tests constructor specifying only file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConstructorTest3_SmallElementLocation()
         {
             IElementLocation location = ElementLocation.Create("file", 65535, 65534);
@@ -277,7 +277,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Tests serialization.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SerializationTest_SmallElementLocation()
         {
             IElementLocation location = ElementLocation.Create("file", 65535, 2);
@@ -295,7 +295,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Test many of the getters
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void LocationStringsMedleyReadOnlyLoad()
@@ -344,7 +344,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Save read only fails
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SaveReadOnly1()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -359,7 +359,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Save read only fails
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void SaveReadOnly2()
@@ -376,7 +376,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Save read only fails
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void SaveReadOnly3()
@@ -393,7 +393,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Save read only fails
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void SaveReadOnly4()

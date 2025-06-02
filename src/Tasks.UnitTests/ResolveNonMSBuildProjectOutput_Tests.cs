@@ -72,7 +72,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestVerifyReferenceAttributes()
         {
             // a correct reference
@@ -124,7 +124,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestResolve()
         {
             // empty pre-generated string
@@ -207,7 +207,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestManagedCheck()
         {
             Hashtable unresolvedOutputs = null;
@@ -236,7 +236,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verifies that the UnresolvedProjectReferences output parameter is populated correctly.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestUnresolvedReferences()
         {
             ArrayList projectRefs = new ArrayList();
@@ -330,7 +330,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(unresolvedOutputs["MCDep2.vcproj"], projectRefs[1]);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestVerifyProjectReferenceItem()
         {
             ResolveNonMSBuildProjectOutput rvpo = new ResolveNonMSBuildProjectOutput();

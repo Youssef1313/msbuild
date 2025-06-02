@@ -90,8 +90,8 @@ namespace Microsoft.Build.Engine.UnitTests.Globbing
             }
         }
 
-        [Theory]
-        [MemberData(nameof(CompositeMatchingTestData))]
+        [TestMethod]
+        [DynamicData(nameof(CompositeMatchingTestData))]
         public void CompositeMatching(CompositeGlob compositeGlob, string stringToMatch, bool shouldMatch)
         {
             if (shouldMatch)
@@ -104,7 +104,7 @@ namespace Microsoft.Build.Engine.UnitTests.Globbing
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void MSBuildGlobVisitorShouldFindAllLeaves()
         {
             var g1 = MSBuildGlob.Parse("1*");
@@ -138,7 +138,7 @@ namespace Microsoft.Build.Engine.UnitTests.Globbing
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void CreateShouldHandleZeroChildren()
         {
             IMSBuildGlob composite = CompositeGlob.Create(Enumerable.Empty<IMSBuildGlob>());
@@ -146,7 +146,7 @@ namespace Microsoft.Build.Engine.UnitTests.Globbing
             Assert.False(composite.IsMatch(""));
         }
 
-        [Fact]
+        [TestMethod]
         public void CreateShouldReturnSingleChildUnchanged()
         {
             var glob = MSBuildGlob.Parse("");
@@ -156,7 +156,7 @@ namespace Microsoft.Build.Engine.UnitTests.Globbing
             Assert.Same(glob, composite);
         }
 
-        [Fact]
+        [TestMethod]
         public void CreateShouldReturnNewCompositeWhenMultipleProvided()
         {
             var glob1 = MSBuildGlob.Parse("");

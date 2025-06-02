@@ -10,7 +10,7 @@ namespace Microsoft.Build.Framework.UnitTests
 {
     public class AssemblyLoadBuildEventArgs_Tests
     {
-        [Fact]
+        [TestMethod]
         public void SerializationDeserializationTest()
         {
             string assemblyName = Guid.NewGuid().ToString();

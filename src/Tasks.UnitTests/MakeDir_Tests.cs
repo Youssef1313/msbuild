@@ -18,7 +18,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Make sure that attributes set on input items are forwarded to output items.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AttributeForwarding()
         {
             string temp = Path.GetTempPath();
@@ -122,7 +122,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Creating a directory that already exists should not log anything.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CreateNewDirectory()
         {
             string temp = Path.GetTempPath();
@@ -168,7 +168,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Question Create Directory when a directory is needed to be created should return false.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void QuestionCreateNewDirectory()
         {
             string temp = Path.GetTempPath();
@@ -227,7 +227,7 @@ namespace Microsoft.Build.UnitTests
         *
         * Make sure that nice message is logged if a file already exists with that name.
         */
-        [Fact]
+        [TestMethod]
         public void FileAlreadyExists()
         {
             string temp = Path.GetTempPath();

@@ -22,7 +22,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Project getter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ProjectGetter()
         {
             Project project = new Project();
@@ -35,7 +35,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Set a new metadata value via the evaluated ProjectMetadata object
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetUnevaluatedValue()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -82,7 +82,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// If the value doesn't change then the project shouldn't dirty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetUnchangedValue()
         {
             Project project = new Project();
@@ -102,7 +102,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Properties should be expanded
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetValueWithPropertyExpression()
         {
             Project project = new Project();
@@ -120,7 +120,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Items should be expanded
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetValueWithItemExpression()
         {
             Project project = new Project();
@@ -139,7 +139,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Set a new metadata value with a qualified metadata expression.
         /// Per 3.5, this expands to nothing.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetValueWithQualifiedMetadataExpressionOtherItemType()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -168,7 +168,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Set a new metadata value with a qualified metadata expression of the same item type
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetValueWithQualifiedMetadataExpressionSameItemType()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -195,7 +195,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Set a new metadata value with a qualified metadata expression of the same item type
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetValueWithQualifiedMetadataExpressionSameMetadata()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -221,7 +221,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Set a new metadata value with an unqualified metadata expression
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetValueWithUnqualifiedMetadataExpression()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -249,7 +249,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Set a new metadata value with an unqualified metadata expression
         /// Value from an item definition
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetValueWithUnqualifiedMetadataExpressionFromItemDefinition()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -281,7 +281,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Set a new metadata value with a qualified metadata expression
         /// Value from an item definition
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetValueWithQualifiedMetadataExpressionFromItemDefinition()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -314,7 +314,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// of the wrong item type.
         /// Per 3.5, this evaluates to nothing.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetValueWithQualifiedMetadataExpressionWrongItemType()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -344,7 +344,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Set a new metadata value on an item definition with an unqualified metadata expression
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetValueOnItemDefinitionWithUnqualifiedMetadataExpression()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -377,7 +377,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Set a new metadata value on an item definition with an qualified metadata expression
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetValueOnItemDefinitionWithQualifiedMetadataExpression()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -408,7 +408,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// of the wrong item type.
         /// Per 3.5, this evaluates to empty string.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetValueOnItemDefinitionWithQualifiedMetadataExpressionWrongItemType()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -440,7 +440,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// IsImported = false
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IsImportedFalse()
         {
             Project project = new Project();
@@ -452,7 +452,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Attempt to set metadata on imported item should fail
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetMetadataImported()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -477,7 +477,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Escaping in metadata values
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SpecialCharactersInMetadataValueConstruction()
         {
             string projectString = ObjectModelHelpers.CleanupFileContents(@"<Project DefaultTargets=""Build"" ToolsVersion=""msbuilddefaulttoolsversion"" xmlns=""msbuildnamespace"">
@@ -498,7 +498,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Escaping in metadata values
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SpecialCharactersInMetadataValueEvaluation()
         {
             Microsoft.Build.Evaluation.Project project = new Microsoft.Build.Evaluation.Project();

@@ -15,6 +15,7 @@ namespace Microsoft.Build.UnitTests.Construction
     /// <summary>
     /// Tests for the ElementLocation class
     /// </summary>
+    [TestClass]
     public class ElementLocationPublic_Tests
     {
         /// <summary>
@@ -23,7 +24,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// loaded from disk, or has been edited since.
         /// This is really a test of our XmlDocumentWithLocation.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ShouldHaveFilePathLocationEvenIfNotLoadedNorSavedYet()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -40,7 +41,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// Element location should reflect rename.
         /// This is really a test of our XmlXXXXWithLocation.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void XmlLocationReflectsRename()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -61,7 +62,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// We should cache ElementLocation objects for perf.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void XmlLocationsAreCached()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -80,7 +81,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Test many of the getters
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LocationStringsMedley()
         {
             string content = @"

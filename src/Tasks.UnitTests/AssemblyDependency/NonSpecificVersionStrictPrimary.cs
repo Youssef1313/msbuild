@@ -44,7 +44,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         ///     dependencies anyway to make things work consistently. This would be a significant
         ///     perf hit when loading large solutions.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Exists()
         {
             // Create the engine.
@@ -97,7 +97,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// One entry in the app.config file should not be able to impact the mapping of an assembly
         /// with a different name.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExistsDifferentName()
         {
             // Create the engine.
@@ -150,7 +150,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         ///     dependencies anyway to make things work consistently. This would be a significant
         ///     perf hit when loading large solutions.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExistsOldVersionRange()
         {
             // Create the engine.
@@ -202,7 +202,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         ///     dependencies anyway to make things work consistently. This would be a significant
         ///     perf hit when loading large solutions.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void HighVersionDoesntExist()
         {
             // Create the engine.
@@ -254,7 +254,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         ///     dependencies anyway to make things work consistently. This would be a significant
         ///     perf hit when loading large solutions.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LowVersionDoesntExist()
         {
             // Create the engine.

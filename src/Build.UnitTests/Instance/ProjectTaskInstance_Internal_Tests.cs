@@ -61,8 +61,8 @@ namespace Microsoft.Build.Engine.UnitTests.Instance
             }
         }
 
-        [Theory]
-        [MemberData(nameof(TestData))]
+        [TestMethod]
+        [DynamicData(nameof(TestData))]
         public void ProjectTaskInstanceCanSerializeViaTranslator(
             IDictionary<string, (string, MockElementLocation)> parameters,
             List<ProjectTaskInstanceChild> outputs)

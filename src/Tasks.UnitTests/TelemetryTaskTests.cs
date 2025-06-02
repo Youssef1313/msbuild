@@ -10,7 +10,7 @@ namespace Microsoft.Build.Tasks.UnitTests
 {
     public sealed class TelemetryTaskTests
     {
-        [Fact]
+        [TestMethod]
         public void TelemetryTaskSendsEvents()
         {
             MockEngine engine = new MockEngine();
@@ -28,7 +28,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             Assert.Contains(telemetryTask.EventName, engine.Log);
         }
 
-        [Fact]
+        [TestMethod]
         public void TelemetryTaskSendsEventsWithProperties()
         {
             const string propertyName = "9B7DA92A89914E2CA1D88DCEB9DAAD72";
@@ -52,7 +52,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             Assert.Contains(propertyValue, engine.Log);
         }
 
-        [Fact]
+        [TestMethod]
         public void TelemetryTaskInvalidEventData()
         {
             MockEngine engine = new MockEngine();
@@ -73,7 +73,7 @@ namespace Microsoft.Build.Tasks.UnitTests
         /// <summary>
         /// Verifies that when there are duplicate property names specified that the last one wins.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TelemetryTaskDuplicateEventDataProperty()
         {
             MockEngine engine = new MockEngine();

@@ -58,10 +58,10 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Test that if a before.{sln}>.targets or after.{sln}.targets file has one of the default targets (Build, Clean, etc.) that it includes only the user-defined target.
         /// </summary>
-        [Theory]
-        [InlineData("before.MySln.sln.targets")]
-        [InlineData("after.MySln.sln.targets")]
-        [InlineData("name.that.does.Not.Affect.The.Build.targets")]
+        [TestMethod]
+        [DataRow("before.MySln.sln.targets")]
+        [DataRow("after.MySln.sln.targets")]
+        [DataRow("name.that.does.Not.Affect.The.Build.targets")]
         public void SolutionProjectIgnoresDuplicateDefaultTargets(string name)
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -86,11 +86,11 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Test that targets in before.{sln}.targets and after.{sln}.targets files are included in the project.
         /// </summary>
-        [Theory]
-        [InlineData("before.MySln.sln.targets", false)]
-        [InlineData("before.MySln.sln.targets", true)]
-        [InlineData("after.MySln.sln.targets", false)]
-        [InlineData("after.MySln.sln.targets", true)]
+        [TestMethod]
+        [DataRow("before.MySln.sln.targets", false)]
+        [DataRow("before.MySln.sln.targets", true)]
+        [DataRow("after.MySln.sln.targets", false)]
+        [DataRow("after.MySln.sln.targets", true)]
         public void SolutionProjectIncludesBeforeAndAfterTargets(string name, bool convertToSlnx)
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -113,7 +113,7 @@ namespace Microsoft.Build.UnitTests.Construction
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void BuildProjectAsTarget()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -158,7 +158,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Build Solution with Multiple Targets (ex. Clean;Build;Custom).
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuildProjectWithMultipleTargets()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -233,7 +233,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Build Solution with Multiple Targets (ex. Clean;Build;Custom).
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuildProjectWithMultipleTargetsInParallel()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -316,7 +316,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Verify the AddNewErrorWarningMessageElement method
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddNewErrorWarningMessageElement()
         {
             MockLogger logger = new MockLogger(output);
@@ -370,9 +370,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// Test to make sure we properly set the ToolsVersion attribute on the in-memory project based
         /// on the Solution File Format Version.
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void EmitToolsVersionAttributeToInMemoryProject9(bool useNewParser)
@@ -411,9 +411,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// Test to make sure we properly set the ToolsVersion attribute on the in-memory project based
         /// on the Solution File Format Version.
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void EmitToolsVersionAttributeToInMemoryProject10(bool useNewParser)
@@ -452,7 +452,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// Test to make sure that if the solution file version doesn't map to a sub-toolset version, we won't try
         /// to force it to be used.
         /// </summary>
-        [Fact(Skip = "Needs investigation")]
+        [TestMethod(Skip = "Needs investigation")]
         public void DefaultSubToolsetIfSolutionVersionSubToolsetDoesntExist()
         {
             Environment.SetEnvironmentVariable("VisualStudioVersion", null);
@@ -494,9 +494,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// Test to make sure that if the solution version corresponds to an existing sub-toolset version,
         /// barring other factors that might override, the sub-toolset will be based on the solution version.
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         public void SubToolsetSetBySolutionVersion(bool useNewParser)
         {
             Environment.SetEnvironmentVariable("VisualStudioVersion", null);
@@ -535,9 +535,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Test to make sure that even if the solution version corresponds to an existing sub-toolset version,
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         public void SolutionBasedSubToolsetVersionOverriddenByEnvironment(bool useNewParser)
         {
             Environment.SetEnvironmentVariable("VisualStudioVersion", "ABC");
@@ -571,7 +571,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Test to make sure that even if the solution version corresponds to an existing sub-toolset version
         /// </summary>
-        [Fact(Skip = "Needs investigation")]
+        [TestMethod(Skip = "Needs investigation")]
         public void SolutionPassesSubToolsetToChildProjects2()
         {
             string classLibraryContentsToolsV4 = ObjectModelHelpers.CleanupFileContents(
@@ -716,7 +716,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// Test to make sure that, when we're not TV 4.0 -- which even for Dev11 solutions we are not by default -- that we
         /// do not pass VisualStudioVersion down to the child projects.
         /// </summary>
-        [Fact(Skip = "Needs investigation")]
+        [TestMethod(Skip = "Needs investigation")]
         public void SolutionDoesntPassSubToolsetToChildProjects()
         {
             try
@@ -783,7 +783,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// on a project that doesn't exist.
         /// </summary>
         /// <remarks>This test would only work for the old parser. In the new parser the dependency is not added if it was not in the solution file.</remarks>
-        [Fact]
+        [TestMethod]
         public void SolutionWithMissingDependencies()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -828,9 +828,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// Blob should contain dependency info
         /// Here B depends on C
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         public void SolutionConfigurationWithDependencies(bool useNewParser)
         {
             string solutionFileContents =
@@ -920,7 +920,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// This test forces a metaproj to be generated as part of the build. Since metaproj files are not written to disk, it will fail if its cached form does not align
         /// with the version that is being built as when a property is part of the version added to the cache, but that version is not passed to the BuildManager.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SolutionGeneratingMetaproj()
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -954,7 +954,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <seealso href="https://github.com/dotnet/msbuild/issues/69">
         /// MSBuild should generate metaprojects that relay the outputs of the individual MSBuild invocations
         /// </seealso>
-        [Fact]
+        [TestMethod]
         public void SolutionConfigurationWithDependenciesRelaysItsOutputs()
         {
             #region Large strings representing solution & projects
@@ -1110,9 +1110,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Test the SolutionProjectGenerator.AddPropertyGroupForSolutionConfiguration method
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         public void TestAddPropertyGroupForSolutionConfiguration(bool useNewParser)
         {
             string solutionFileContents =
@@ -1185,9 +1185,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Make sure that BuildProjectInSolution is set to true of the Build.0 entry is in the solution configuration.
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         public void TestAddPropertyGroupForSolutionConfigurationBuildProjectInSolutionSet(bool useNewParser)
         {
             string solutionFileContents =
@@ -1231,9 +1231,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Make sure that BuildProjectInSolution is set to false of the Build.0 entry is in the solution configuration.
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         public void TestAddPropertyGroupForSolutionConfigurationBuildProjectInSolutionNotSet(bool useNewParser)
         {
             string solutionFileContents =
@@ -1277,9 +1277,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// In this bug, SkipNonexistentProjects was always set to 'Build'. It should be 'Build' for metaprojects and 'True' for everything else.
         /// The repro below has one of each case. WebProjects can't build so they are set as SkipNonexistentProjects='Build'
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void Regress751742_SkipNonexistentProjects(bool useNewParser)
@@ -1357,9 +1357,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// if set when building a solution, will be specified as the ToolsVersion on the MSBuild task when
         /// building the projects contained within the solution.
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         public void ToolsVersionOverrideShouldBeSpecifiedOnMSBuildTaskInvocations(bool useNewParser)
         {
             string solutionFileContents =
@@ -1429,9 +1429,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Make sure that whatever the solution ToolsVersion is, it gets mapped to all its metaprojs, too.
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         public void SolutionWithDependenciesHasCorrectToolsVersionInMetaprojs(bool useNewParser)
         {
             string solutionFileContents =
@@ -1504,9 +1504,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Test the SolutionProjectGenerator.Generate method has its toolset redirected correctly.
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         public void ToolsVersionOverrideCausesToolsetRedirect(bool useNewParser)
         {
             string solutionFileContents =
@@ -1553,9 +1553,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Test the SolutionProjectGenerator.AddPropertyGroupForSolutionConfiguration method
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         public void TestDisambiguateProjectTargetName(bool useNewParser)
         {
             string solutionFileContents =
@@ -1641,7 +1641,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// </summary>
         /// <remarks>This test would only work for the old parser. In the new parser SolutionConfigurations are not available,
         /// and constructed from projects configurations.</remarks>
-        [Fact]
+        [TestMethod]
         public void TestConfigurationPlatformDefaults1()
         {
             string solutionFileContents =
@@ -1681,7 +1681,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// </summary>
         /// <remarks>This test would only work for the old parser. In the new parser SolutionConfigurations are not available,
         /// and constructed from projects configurations.</remarks>
-        [Fact]
+        [TestMethod]
         public void TestConfigurationPlatformDefaults2()
         {
             string solutionFileContents =
@@ -1711,9 +1711,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Tests the algorithm for choosing default Venus configuration values for solutions
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void TestVenusConfigurationDefaults(bool useNewParser)
@@ -1743,9 +1743,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Tests that the correct value for TargetFrameworkVersion gets set when creating Venus solutions
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void VenusSolutionDefaultTargetFrameworkVersion(bool useNewParser)
@@ -1784,9 +1784,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Tests the algorithm for choosing target framework paths for ResolveAssemblyReferences for Venus
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void TestTargetFrameworkPaths0(bool useNewParser)
@@ -1811,9 +1811,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Tests the algorithm for choosing target framework paths for ResolveAssemblyReferences for Venus
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void TestTargetFrameworkPaths1(bool useNewParser)
@@ -1839,9 +1839,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Tests the algorithm for choosing target framework paths for ResolveAssemblyReferences for Venus
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void TestTargetFrameworkPaths2(bool useNewParser)
@@ -1892,7 +1892,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// </summary>
         /// <remarks>This test would only work for the old parser.
         /// In the new parser SolutionConfigurations are not available, and constructed from projects configurations.</remarks>
-        [Fact]
+        [TestMethod]
         public void TestPredictSolutionConfigurationName()
         {
             string solutionFileContents =
@@ -1927,9 +1927,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Verifies that the SolutionProjectGenerator will correctly escape project file paths
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         public void SolutionGeneratorEscapingProjectFilePaths(bool useNewParser)
         {
             string solutionFileContents =
@@ -1976,9 +1976,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Verifies that the SolutionProjectGenerator will emit a solution file.
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         public void SolutionGeneratorCanEmitSolutions(bool useNewParser)
         {
             string oldValueForMSBuildEmitSolution = Environment.GetEnvironmentVariable("MSBuildEmitSolution");
@@ -2052,9 +2052,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// Make sure that we output a warning and don't build anything when we're given an invalid
         /// solution configuration and SkipInvalidConfigurations is set to true.
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void TestSkipInvalidConfigurationsCase(bool useNewParser)
@@ -2137,7 +2137,7 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// When we have a bad framework moniker we expect the build to fail.
         /// </summary>
-        [Fact(Skip = "https://github.com/dotnet/msbuild/issues/515")]
+        [TestMethod(Skip = "https://github.com/dotnet/msbuild/issues/515")]
         public void BadFrameworkMonkierExpectBuildToFail()
         {
             string tmpFileName = FileUtilities.GetTemporaryFileName();
@@ -2225,7 +2225,7 @@ EndGlobal
         /// When we have a bad framework moniker we expect the build to fail. In this case we are passing a poorly formatted framework moniker.
         /// This will test the exception path where the framework name is invalid rather than just not .netFramework
         /// </summary>
-        [Fact(Skip = "https://github.com/dotnet/msbuild/issues/515")]
+        [TestMethod(Skip = "https://github.com/dotnet/msbuild/issues/515")]
         public void BadFrameworkMonkierExpectBuildToFail2()
         {
             string tmpFileName = FileUtilities.GetTemporaryFileName();
@@ -2313,9 +2313,9 @@ EndGlobal
         /// Bug indicated that when a target framework version greater than 4.0 was used then the solution project generator would crash.
         /// this test is to make sure the fix is not regressed.
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         public void TestTargetFrameworkVersionGreaterThan4(bool useNewParser)
         {
             string tmpFileName = FileUtilities.GetTemporaryFileName();
@@ -2403,9 +2403,9 @@ EndGlobal
         /// <summary>
         /// Verifies that when target names are specified they end up in the metaproj.
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         public void CustomTargetNamesAreInInMetaproj(bool useNewParser)
         {
             string solutionFileContents =
@@ -2459,9 +2459,9 @@ EndGlobal
         /// <summary>
         /// Verifies that disambiguated target names are used when a project name matches a standard solution entry point.
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         public void DisambiguatedTargetNamesAreInMetaproj(bool useNewParser)
         {
             foreach (string projectName in ProjectInSolution.projectNamesToDisambiguate)
@@ -2511,11 +2511,11 @@ EndGlobal
         /// <summary>
         /// Verifies that illegal user target names (the ones already used internally) don't crash the SolutionProjectGenerator
         /// </summary>
-        [Theory]
-        [InlineData(false, false)]
-        [InlineData(true, false)]
-        [InlineData(false, true)]
-        [InlineData(true, true)]
+        [TestMethod]
+        [DataRow(false, false)]
+        [DataRow(true, false)]
+        [DataRow(false, true)]
+        [DataRow(true, true)]
         public void IllegalUserTargetNamesDoNotThrow(bool forceCaseDifference, bool useNewParser)
         {
             string solutionFileContents =
@@ -2592,7 +2592,7 @@ EndGlobal
         /// <summary>
         /// Verifies that when a user has an after.solution.sln.targets that the targets are not overridden by the solution project generator.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AfterTargetsComeFromImport()
         {
             string baseDirectory = Guid.NewGuid().ToString("N");
@@ -2651,7 +2651,7 @@ EndGlobal
         /// <summary>
         /// Verifies that a target in an after.solution.sln.targets can AfterTargets/BeforeTargets a dynamically-created target.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BeforeTargetsFromImportCanHookDynamicTarget()
         {
             string baseDirectory = Guid.NewGuid().ToString("N");
@@ -2721,13 +2721,13 @@ EndGlobal
         /// </summary>
         /// <param name="projectName">The name of the project to create.</param>
         /// <param name="enable"><code>true</code> to have the functionality enabled, otherwise <code>false</code>.</param>
-        [Theory]
-        [InlineData("Directory.Solution.props", true)]
-        [InlineData("Directory.Solution.props", false)]
-        [InlineData("Directory.Solution.targets", true)]
-        [InlineData("Directory.Solution.targets", false)]
-        [InlineData("Custom.Directory.Solution.props", true)]
-        [InlineData("Custom.Directory.Solution.targets", true)]
+        [TestMethod]
+        [DataRow("Directory.Solution.props", true)]
+        [DataRow("Directory.Solution.props", false)]
+        [DataRow("Directory.Solution.targets", true)]
+        [DataRow("Directory.Solution.targets", false)]
+        [DataRow("Custom.Directory.Solution.props", true)]
+        [DataRow("Custom.Directory.Solution.targets", true)]
         public void DirectorySolutionPropsTest(string projectName, bool enable)
         {
             const string expectedPropertyValue = "ValueA";
@@ -2823,11 +2823,11 @@ EndGlobal
         /// <summary>
         /// Regression test for https://github.com/dotnet/msbuild/issues/6236
         /// </summary>
-        [Theory]
-        [InlineData("http://localhost:8080", false)]
-        [InlineData("http://localhost:8080", true)]
-        [InlineData(_longLineString, false)]
-        [InlineData(_longLineString, true)]
+        [TestMethod]
+        [DataRow("http://localhost:8080", false)]
+        [DataRow("http://localhost:8080", true)]
+        [DataRow(_longLineString, false)]
+        [DataRow(_longLineString, true)]
         public void AbsolutePathWorksForUnsupportedPaths(string relativePath, bool useNewParser)
         {
             string solutionFileContents =

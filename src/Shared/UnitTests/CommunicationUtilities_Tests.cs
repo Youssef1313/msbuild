@@ -15,7 +15,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify our custom way of getting env vars gives the same results as the BCL.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetEnvVars()
         {
             IDictionary<string, string> envVars = CommunicationsUtilities.GetEnvironmentVariables();
@@ -33,7 +33,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify that we correctly restore environment variables.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RestoreEnvVars()
         {
             string testName1 = "_MSBUILD_TEST_ENV_VAR1";

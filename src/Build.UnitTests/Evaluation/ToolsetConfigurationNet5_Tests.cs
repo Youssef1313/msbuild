@@ -20,7 +20,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
     /// </summary>
     public class ToolsetConfigurationNet5Test
     {
-        [Fact]
+        [TestMethod]
         // The default ToolsetDefintionLocations is None, which results in only the local which results in only the several included
         // paths such as SDK path and RoslynTargetPath and nothing else. This behavior is expected and the exact same as before.
         public void ToolsetDefinitionLocationsIsDefault()
@@ -47,7 +47,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             toolsetProperties.ShouldNotContainKey("MSBuildExtensionsPath");
         }
 
-        [Fact]
+        [TestMethod]
         // With ToolsetDefintionLocations set to ConfigurationFile (Which would only happen in net5.0 if the user decides to set it).
         // Most toolsets are available and the MsBuildTools and SDK paths are all in the net5.0 runtime.
         public void ToolsetDefinitionLocationsIsConfiguration()

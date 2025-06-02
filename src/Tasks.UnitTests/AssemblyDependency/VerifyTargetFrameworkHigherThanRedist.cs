@@ -26,7 +26,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// Verify there are no warnings when the assembly being resolved is not in the redist list and only has dependencies to references in the redist list with the same
         /// version as is described in the redist list.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TargetCurrentTargetFramework()
         {
             MockEngine e = new MockEngine(_output);
@@ -54,7 +54,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// allows upward unification this would result in a warning. Therefore we need to remap mscorlib 9 to 4.0
         ///
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemapAssemblyBasic()
         {
             MockEngine e = new MockEngine(_output);
@@ -99,7 +99,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// Verify an error is emitted when the reference itself is in the redist list but is a higher version that is described in the redist list.
         /// In this case ReferenceVersion9 is version=9.0.0.0 but in the redist we show its highest version as 4.0.0.0.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void HigherThanHighestInRedistList()
         {
             MockEngine e = new MockEngine(_output);
@@ -127,7 +127,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// Verify that if the reference that is higher than the highest version in the redist list is an MSBuild assembly, we do
         /// not warn -- this is a hack until we figure out how to properly deal with .NET assemblies being removed from the framework.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void HigherThanHighestInRedistListForMSBuildAssembly()
         {
             MockEngine e = new MockEngine(_output);
@@ -177,7 +177,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Expect no warning from a 3rd party redist list since they are not considered for multi targeting warnings.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void HigherThanHighestInRedistList3rdPartyRedist()
         {
             MockEngine e = new MockEngine(_output);
@@ -203,7 +203,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Test the same case as above except for add the specific version metadata to ignore the warning.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void HigherThanHighestInRedistListWithSpecificVersionMetadata()
         {
             MockEngine e = new MockEngine(_output);
@@ -234,7 +234,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// Verify the case where the assembly itself is not in the redist list but it depends on an assembly which is in the redist list and is a higher version that what is listed in the redist list.
         /// In this case the assembly DependsOn9 depends on System 9.0.0.0 while the redist list only goes up to 4.0.0.0.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DependenciesHigherThanHighestInRedistList()
         {
             MockEngine e = new MockEngine(_output);
@@ -263,7 +263,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// Verify that if the reference that is higher than the highest version in the redist list is an MSBuild assembly, we do
         /// not warn -- this is a hack until we figure out how to properly deal with .NET assemblies being removed from the framework.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DependenciesHigherThanHighestInRedistListForMSBuildAssembly()
         {
             MockEngine e = new MockEngine(_output);
@@ -315,7 +315,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Make sure when specific version is set to true and the dependencies of the reference are a higher version than what is in the redist list do not warn, do not unresolve
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DependenciesHigherThanHighestInRedistListSpecificVersionMetadata()
         {
             MockEngine e = new MockEngine(_output);
@@ -348,7 +348,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// DependsOn9 and DependsOn9Also both depend on System, Version=9.0.0.0 one of the items has the SpecificVersion metadata set. In this case
         /// we expect to only see a warning from one of the assemblies.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TwoDependenciesHigherThanHighestInRedistListIgnoreOnOne()
         {
             MockEngine e = new MockEngine(_output);
@@ -382,7 +382,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// DependsOn9 and DependsOn9Also both depend on System, Version=9.0.0.0. Both of the items has the specificVersion metadata set. In this case
         /// we expect to only see no warnings from the assemblies.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TwoDependenciesHigherThanHighestInRedistListIgnoreOnBoth()
         {
             MockEngine e = new MockEngine(_output);
@@ -415,7 +415,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// Test the case where two assemblies with different versions but the same name depend on an assembly which is in the redist list but has a higher version than
         /// what is described in the redist list. We expect two warnings because both assemblies are going to be resolved even though one of them will not be copy local.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TwoDependenciesSameNameDependOnHigherVersion()
         {
             MockEngine e = new MockEngine(_output);
@@ -447,7 +447,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         ///
         /// Make sure that if specific version is set on the lightup assembly that we do not unresolve it, and we also should not unify its dependencies.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MixedDependenciesSpecificVersionOnHigherVersionMetadataSet()
         {
             MockEngine e = new MockEngine(_output);
@@ -488,7 +488,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// Verify that if specific version is set on the other reference that we get the expected behavior:
         /// Un resolve the light up assembly.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MixedDependenciesSpecificVersionOnLowerVersionMetadataSet()
         {
             MockEngine e = new MockEngine(_output);

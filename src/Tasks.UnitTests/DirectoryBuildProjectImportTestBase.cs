@@ -67,7 +67,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Ensures that if a directory build project does not exist, it won't be imported and the project can be successfully evaluated.
         /// </summary>
-        [Fact(Skip = "Tests always have Directory.Build files in the output directory to prevent them from picking up the Directory.Build files in the root of the repo")]
+        [TestMethod(Skip = "Tests always have Directory.Build files in the output directory to prevent them from picking up the Directory.Build files in the root of the repo")]
         public void DoesNotImportDirectoryBuildProjectIfNotExist()
         {
             // ---------------------
@@ -91,7 +91,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Ensures that when the user disables the import by setting the corresponding property to "false", then all of the functionality is disabled.
         /// </summary>
-        [Fact(Skip = "Tests always have Directory.Build files in the output directory to prevent them from picking up the Directory.Build files in the root of the repo")]
+        [TestMethod(Skip = "Tests always have Directory.Build files in the output directory to prevent them from picking up the Directory.Build files in the root of the repo")]
         public void DoesNotImportDirectoryBuildProjectWhenDisabled()
         {
             // ---------------------
@@ -125,7 +125,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Ensures that when the user specifies a custom directory build props file that it is imported correctly.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImportsDirectoryBuildProjectCustomFile()
         {
             string customFilePath = ObjectModelHelpers.CreateFileInTempProjectDirectory(CustomBuildProjectFile, BasicDirectoryBuildProjectContents);
@@ -153,7 +153,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Ensures that if a directory build project exists, it will be imported.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImportsDirectoryBuildProjectIfExists()
         {
             ObjectModelHelpers.CreateFileInTempProjectDirectory(DirectoryBuildProjectFile, BasicDirectoryBuildProjectContents);

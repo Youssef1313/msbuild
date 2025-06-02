@@ -30,9 +30,9 @@ namespace Microsoft.Build.Graph.UnitTests
             _env = TestEnvironment.Create(output);
         }
 
-        [Theory]
-        [InlineData("1.sln", "2.sln")]
-        [InlineData("1.sln", "2.proj")]
+        [TestMethod]
+        [DataRow("1.sln", "2.sln")]
+        [DataRow("1.sln", "2.proj")]
         public void ASolutionShouldBeTheSingleEntryPoint(params string[] files)
         {
             for (var i = 0; i < files.Length; i++)
@@ -49,7 +49,7 @@ namespace Microsoft.Build.Graph.UnitTests
             exception.Message.ShouldContain("MSB4261");
         }
 
-        [Fact]
+        [TestMethod]
         public void GraphConstructionFailsOnNonExistentSolution()
         {
             var exception = Should.Throw<InvalidProjectFileException>(
@@ -62,7 +62,7 @@ namespace Microsoft.Build.Graph.UnitTests
             exception.Message.ShouldContain("Could not find file");
         }
 
-        [Fact]
+        [TestMethod]
         public void StaticGraphShouldNotSupportNestedSolutions()
         {
             var solutionFile = _env.CreateFile("solutionReference.sln", string.Empty).Path;
@@ -189,8 +189,8 @@ namespace Microsoft.Build.Graph.UnitTests
             }
         }
 
-        [Theory(Skip = "hangs in CI, can't repro locally: https://github.com/dotnet/msbuild/issues/5453")]
-        [MemberData(nameof(GraphsWithUniformSolutionConfigurations))]
+        [TestMethod(Skip = "hangs in CI, can't repro locally: https://github.com/dotnet/msbuild/issues/5453")]
+        [DynamicData(nameof(GraphsWithUniformSolutionConfigurations))]
         public void GraphConstructionCanLoadEntryPointsFromSolution(
             Dictionary<int, int[]> edges,
             SolutionConfigurationInSolution currentSolutionConfiguration,
@@ -199,8 +199,8 @@ namespace Microsoft.Build.Graph.UnitTests
             AssertSolutionBasedGraph(edges, currentSolutionConfiguration, solutionConfigurations);
         }
 
-        [Theory(Skip = "hangs in CI, can't repro locally: https://github.com/dotnet/msbuild/issues/5453")]
-        [MemberData(nameof(GraphsWithUniformSolutionConfigurations))]
+        [TestMethod(Skip = "hangs in CI, can't repro locally: https://github.com/dotnet/msbuild/issues/5453")]
+        [DynamicData(nameof(GraphsWithUniformSolutionConfigurations))]
         public void SolutionBasedGraphCanMatchProjectSpecificConfigurations(
             Dictionary<int, int[]> edges,
             SolutionConfigurationInSolution currentSolutionConfiguration,
@@ -220,7 +220,7 @@ namespace Microsoft.Build.Graph.UnitTests
             AssertSolutionBasedGraph(edges, currentSolutionConfiguration, solutionConfigurations, projectSpecificConfigurations);
         }
 
-        [Fact]
+        [TestMethod]
         public void SolutionParserIgnoresProjectConfigurationsThatDoNotFullyMatchAnySolutionConfiguration()
         {
             var solutionContents = new SolutionFileBuilder
@@ -475,8 +475,8 @@ namespace Microsoft.Build.Graph.UnitTests
             }
         }
 
-        [Theory]
-        [MemberData(nameof(SolutionOnlyDependenciesData))]
+        [TestMethod]
+        [DynamicData(nameof(SolutionOnlyDependenciesData))]
         public void SolutionsCanInjectEdgesIntoTheProjectGraph(Dictionary<int, int[]> edges, (int, int)[] solutionDependencies, bool hasCycle, bool solutionEdgesOverlapGraphEdges)
         {
             // Use the same global properties as the solution would use so all ConfigurationMetadata objects would match on global properties.
@@ -582,7 +582,7 @@ namespace Microsoft.Build.Graph.UnitTests
             solutionOnlyEdges.ShouldBeEmpty();
         }
 
-        [Fact]
+        [TestMethod]
         public void SolutionEdgesShouldNotOverwriteProjectReferenceEdges()
         {
             var solutionContents = SolutionFileBuilder.FromGraphEdges(
@@ -601,7 +601,7 @@ namespace Microsoft.Build.Graph.UnitTests
             edges.First().Value.ItemType.ShouldBe(ItemTypeNames.ProjectReference);
         }
 
-        [Fact]
+        [TestMethod]
         public void SolutionEdgesShouldNotOverwriteMultitargetingEdges()
         {
             var solutionContents = new SolutionFileBuilder

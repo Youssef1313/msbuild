@@ -27,6 +27,7 @@
   <ItemGroup Condition="'$(IsTestProject)' == 'true'">
     <!-- Include Common.Test.globalconfig for Test projects-->
     <EditorConfigFiles Include="$(MSBuildThisFileDirectory)eng/Common.Test.globalconfig" />
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
 
   <Import Project="Sdk.targets" Sdk="Microsoft.DotNet.Arcade.Sdk" />

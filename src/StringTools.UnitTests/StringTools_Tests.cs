@@ -23,11 +23,11 @@ namespace Microsoft.NET.StringTools.Tests
 {
     public class StringTools_Tests
     {
-        [Theory]
-        [InlineData("")]
-        [InlineData("A")]
-        [InlineData("Hello")]
-        [InlineData("HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello")]
+        [TestMethod]
+        [DataRow("")]
+        [DataRow("A")]
+        [DataRow("Hello")]
+        [DataRow("HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello")]
         public void InternsStrings(string str)
         {
             string internedString1 = Strings.WeakIntern(str);
@@ -46,7 +46,7 @@ namespace Microsoft.NET.StringTools.Tests
 #endif
         }
 
-        [Fact]
+        [TestMethod]
         public void CreatesDiagnosticReport()
         {
             string statisticsNotEnabledString = "EnableStatisticsGathering() has not been called";

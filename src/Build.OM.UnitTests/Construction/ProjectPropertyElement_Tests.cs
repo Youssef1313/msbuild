@@ -20,7 +20,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read simple property
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadProperty()
         {
             ProjectPropertyElement property = GetPropertyXml();
@@ -33,7 +33,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read property with children - they are merely part of its value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadPropertyWithChildren()
         {
             string content = @"
@@ -56,7 +56,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read property with invalid name (but legal xml)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidName()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -75,7 +75,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read property with invalid reserved name
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidReservedName()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -94,7 +94,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read property with invalid built in name
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidBuiltInName()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -113,7 +113,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read property with invalid attribute
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidAttribute()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -132,7 +132,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read property with child element
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidChildElement()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -153,7 +153,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set property value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetValue()
         {
             ProjectPropertyElement property = GetPropertyXml();
@@ -168,7 +168,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// Set property value to the same value it was before.
         /// This should not dirty the project.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetSameValue()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -183,7 +183,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Rename
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetName()
         {
             ProjectPropertyElement property = GetPropertyXml();
@@ -196,7 +196,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Rename to same value should not mark dirty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetNameSame()
         {
             ProjectPropertyElement property = GetPropertyXml();
@@ -210,7 +210,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Rename to illegal name
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetNameIllegal()
         {
             Assert.Throws<ArgumentException>(() =>
@@ -223,7 +223,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set property value to empty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetEmptyValue()
         {
             ProjectPropertyElement property = GetPropertyXml();
@@ -237,7 +237,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set property value to null
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetInvalidNullValue()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -250,7 +250,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set condition
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetCondition()
         {
             ProjectRootElement project = ProjectRootElement.Create();

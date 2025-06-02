@@ -22,7 +22,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests a constructor with no items.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestConstructorNoItems()
         {
             TargetResult result = new TargetResult(Array.Empty<TaskItem>(), BuildResultUtilities.GetStopWithErrorResult());
@@ -34,7 +34,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests a constructor with items.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestConstructorWithItems()
         {
             TaskItem item = new TaskItem("foo", "bar.proj");
@@ -47,7 +47,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests a constructor with a null item array passed.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestConstructorNullItems()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -58,7 +58,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests a constructor with an exception passed.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestConstructorWithException()
         {
             TaskItem item = new TaskItem("foo", "bar.proj");
@@ -72,7 +72,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests a constructor with a null exception passed.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestConstructorWithExceptionNull()
         {
             TaskItem item = new TaskItem("foo", "bar.proj");
@@ -85,7 +85,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serialization with no exception in the result.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestTranslationNoException()
         {
             TaskItem item = new TaskItem("foo", "bar.proj");
@@ -109,7 +109,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serialization with an exception in the result.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestTranslationWithException()
         {
             TaskItem item = new TaskItem("foo", "bar.proj");
@@ -128,7 +128,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test GetCacheDirectory is resilient to paths with strings that would normally make string.format to throw a FormatException
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestGetCacheDirectory()
         {
             string oldTmp = Environment.GetEnvironmentVariable("TMP");

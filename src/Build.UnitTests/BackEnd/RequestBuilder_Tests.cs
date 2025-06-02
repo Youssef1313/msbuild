@@ -74,7 +74,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Directory.SetCurrentDirectory(_originalWorkingDirectory);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestSimpleBuildRequest()
         {
             BuildRequestConfiguration configuration = CreateTestProject(1);
@@ -104,7 +104,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestSimpleBuildRequestCancelled()
         {
             BuildRequestConfiguration configuration = CreateTestProject(1);
@@ -137,7 +137,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestRequestWithReference()
         {
             BuildRequestConfiguration configuration = CreateTestProject(1);
@@ -176,7 +176,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestRequestWithReferenceCancelled()
         {
             BuildRequestConfiguration configuration = CreateTestProject(1);
@@ -218,7 +218,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestMissingProjectFile()
         {
             TestTargetBuilder targetBuilder = (TestTargetBuilder)_host.GetComponent(BuildComponentType.TargetBuilder);

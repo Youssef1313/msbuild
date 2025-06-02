@@ -13,7 +13,7 @@ namespace Microsoft.Build.Tasks.UnitTests
 {
     public class Hash_Tests
     {
-        [Fact]
+        [TestMethod]
         public void HashTaskTest()
         {
             // This hash was pre-computed. If the implementation changes it may need to be adjusted.
@@ -33,7 +33,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             Assert.Equal(expectedHash, actualHash2);
         }
 
-        [Fact]
+        [TestMethod]
         public void HashTaskEmptyInputTest()
         {
             // Hash should be valid for empty item
@@ -49,7 +49,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             Assert.Null(zeroLengthItemsHash);
         }
 
-        [Fact]
+        [TestMethod]
         public void HashTaskLargeInputCountTest()
         {
             // This hash was pre-computed. If the implementation changes it may need to be adjusted.
@@ -65,7 +65,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             Assert.Equal(expectedHash, actualHash);
         }
 
-        [Fact]
+        [TestMethod]
         public void HashTaskLargeInputSizeTest()
         {
             // This hash was pre-computed. If the implementation changes it may need to be adjusted.
@@ -84,7 +84,7 @@ namespace Microsoft.Build.Tasks.UnitTests
 
         // This test verifies that hash computes correctly for various numbers of characters.
         // We would like to process edge of the buffer use cases regardless on the size of the buffer.
-        [Fact]
+        [TestMethod]
         public void HashTaskDifferentInputSizesTest()
         {
             int maxInputSize = 2000;
@@ -113,7 +113,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void HashTaskIgnoreCaseTest()
         {
             var uppercaseHash =

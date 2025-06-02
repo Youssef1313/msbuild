@@ -26,7 +26,7 @@ namespace Microsoft.Build.Engine.UnitTests.BackEnd
             _output = testOutputHelper;
         }
 
-        [Fact]
+        [TestMethod]
         public void TaskNodesDieAfterBuild()
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -60,7 +60,7 @@ namespace Microsoft.Build.Engine.UnitTests.BackEnd
             }
         }
 
-        [Fact]
+        [TestMethod]
         private void VariousParameterTypesCanBeTransmittedToAndReceivedFromTaskHost()
         {
             using TestEnvironment env = TestEnvironment.Create(_output);

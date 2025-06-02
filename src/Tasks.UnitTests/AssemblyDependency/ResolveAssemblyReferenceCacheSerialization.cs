@@ -48,7 +48,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             _ => throw new ArgumentException(),
         };
 
-        [Fact]
+        [TestMethod]
         public void RoundTripEmptyState()
         {
             SystemState systemState = new();
@@ -60,7 +60,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             deserialized.ShouldNotBeNull();
         }
 
-        [Fact]
+        [TestMethod]
         public void CorrectFileVersion()
         {
             SystemState systemState = new();
@@ -78,7 +78,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             deserialized.ShouldNotBeNull();
         }
 
-        [Fact]
+        [TestMethod]
         public void WrongFileVersion()
         {
             SystemState systemState = new();
@@ -96,7 +96,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             deserialized.ShouldBeNull();
         }
 
-        [Fact]
+        [TestMethod]
         public void ValidateSerializationAndDeserialization()
         {
             Dictionary<string, SystemState.FileState> cache = new() {
@@ -139,7 +139,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             dll2.scatterFiles[1].ShouldBe(dll.scatterFiles[1]);
         }
 
-        [Fact]
+        [TestMethod]
         public void OutgoingCacheIsSmallerThanIncomingCache()
         {
             Dictionary<string, SystemState.FileState> cache = new() {
@@ -168,7 +168,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             cache2.ShouldContainKey("path1");
         }
 
-        [Fact]
+        [TestMethod]
         public void OutgoingCacheIsEmpty()
         {
             Dictionary<string, SystemState.FileState> cache = new() {

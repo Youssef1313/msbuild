@@ -22,7 +22,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// The URL to format is null.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NullTest()
         {
             var t = new FormatUrl();
@@ -36,7 +36,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// The URL to format is empty.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EmptyTest()
         {
             var t = new FormatUrl();
@@ -50,7 +50,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// No InputUrl value is provided. InputUrl is not a required parameter for the task.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NoInputTest()
         {
             var t = new FormatUrl();
@@ -93,7 +93,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// The URL to format is a UNC.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void UncPathTest()
         {
             var t = new FormatUrl();
@@ -108,7 +108,7 @@ namespace Microsoft.Build.UnitTests
         /// The URL to format is a local absolute file path.
         /// This test uses Environment.CurrentDirectory to have a file path value appropriate to the current OS/filesystem.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LocalAbsolutePathTest()
         {
             var t = new FormatUrl();
@@ -123,7 +123,7 @@ namespace Microsoft.Build.UnitTests
         /// The URL to format is a local relative file path.
         /// This test uses Environment.CurrentDirectory to have a file path value appropriate to the current OS/filesystem.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LocalRelativePathTest()
         {
             var t = new FormatUrl();
@@ -165,7 +165,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// The URL to format is a URL using localhost.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void UrlLocalHostTest()
         {
             var t = new FormatUrl();
@@ -179,7 +179,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// The URL to format is a URL.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void UrlTest()
         {
             var t = new FormatUrl();
@@ -193,7 +193,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// The URL to format is a URL with a 'parent' element (..) in the path.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void UrlParentPathTest()
         {
             var t = new FormatUrl();

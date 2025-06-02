@@ -12,7 +12,7 @@ namespace Microsoft.Build.Engine.UnitTests.Globbing
 {
     public class MSBuildGlobWithGaps_Tests
     {
-        [Fact]
+        [TestMethod]
         public void GlobWithGapsShouldWorkWithNoGaps()
         {
             var glob = new MSBuildGlobWithGaps(MSBuildGlob.Parse("a*"), Enumerable.Empty<IMSBuildGlob>());
@@ -20,7 +20,7 @@ namespace Microsoft.Build.Engine.UnitTests.Globbing
             Assert.True(glob.IsMatch("ab"));
         }
 
-        [Fact]
+        [TestMethod]
         public void GlobWithGapsShouldMatchIfNoGapsMatch()
         {
             var glob = new MSBuildGlobWithGaps(MSBuildGlob.Parse("a*"), MSBuildGlob.Parse("b*"));
@@ -28,7 +28,7 @@ namespace Microsoft.Build.Engine.UnitTests.Globbing
             Assert.True(glob.IsMatch("ab"));
         }
 
-        [Fact]
+        [TestMethod]
         public void GlobWithGapsShouldNotMatchIfGapsMatch()
         {
             var glob = new MSBuildGlobWithGaps(MSBuildGlob.Parse("a*"), MSBuildGlob.Parse("*b"));

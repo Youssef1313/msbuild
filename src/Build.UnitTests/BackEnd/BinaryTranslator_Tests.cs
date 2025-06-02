@@ -32,7 +32,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests the SerializationMode property
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializationMode()
         {
             MemoryStream stream = new MemoryStream();
@@ -46,7 +46,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serializing bools.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeBool()
         {
             HelperTestSimpleType(false, true);
@@ -56,7 +56,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serializing bytes.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeByte()
         {
             byte val = 0x55;
@@ -67,7 +67,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serializing shorts.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeShort()
         {
             short val = 0x55AA;
@@ -78,7 +78,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serializing longs.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeLong()
         {
             long val = 0x55AABBCCDDEE;
@@ -89,7 +89,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serializing doubles.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeDouble()
         {
             double val = 3.1416;
@@ -100,7 +100,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serializing TimeSpan.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeTimeSpan()
         {
             TimeSpan val = TimeSpan.FromMilliseconds(123);
@@ -111,7 +111,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serializing ints.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeInt()
         {
             int val = 0x55AA55AA;
@@ -122,7 +122,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serializing strings.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeString()
         {
             HelperTestSimpleType("foo", null);
@@ -133,7 +133,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serializing string arrays.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeStringArray()
         {
             HelperTestArray(Array.Empty<string>(), StringComparer.Ordinal);
@@ -144,7 +144,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serializing string arrays.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeStringList()
         {
             HelperTestList(new List<string>(), StringComparer.Ordinal);
@@ -158,7 +158,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serializing DateTimes.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeDateTime()
         {
             HelperTestSimpleType(new DateTime(), DateTime.Now);
@@ -168,7 +168,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serializing enums.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeEnum()
         {
             TranslationDirection value = TranslationDirection.ReadFromStream;
@@ -180,7 +180,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(value, deserializedValue);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestSerializeException()
         {
             Exception value = new ArgumentNullException("The argument was null");
@@ -192,7 +192,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.True(TranslationHelpers.CompareExceptions(value, deserializedValue, out string diffReason), diffReason);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestSerializeException_NestedWithStack()
         {
             Exception value = null;
@@ -214,7 +214,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.True(TranslationHelpers.CompareExceptions(value, deserializedValue, out string diffReason), diffReason);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestSerializeBuildException_NestedWithStack()
         {
             Exception value = null;
@@ -253,8 +253,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 .Where(BuildExceptionSerializationHelper.IsSupportedExceptionType)
                 .Select(t => new object[] { t });
 
-        [Theory]
-        [MemberData(nameof(GetBuildExceptionsAsTestData))]
+        [TestMethod]
+        [DynamicData(nameof(GetBuildExceptionsAsTestData))]
         public void TestSerializationOfBuildExceptions(Type exceptionType)
         {
             Exception e = (Exception)Activator.CreateInstance(
@@ -282,7 +282,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.True(TranslationHelpers.CompareExceptions(remote, deserializedValue, out string diffReason, true), $"Exception type {exceptionType.FullName} not properly de/serialized: {diffReason}");
         }
 
-        [Fact]
+        [TestMethod]
         public void TestInvalidProjectFileException_NestedWithStack()
         {
             Exception value = null;
@@ -306,7 +306,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serializing an object with a default constructor.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeINodePacketSerializable()
         {
             DerivedClass value = new DerivedClass(1, 2);
@@ -322,7 +322,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serializing an object with a default constructor passed as null.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeINodePacketSerializableNull()
         {
             DerivedClass value = null;
@@ -337,7 +337,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serializing an object requiring a factory to construct.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeWithFactory()
         {
             BaseClass value = new BaseClass(1);
@@ -352,7 +352,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serializing an object requiring a factory to construct, passing null for the value.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeWithFactoryNull()
         {
             BaseClass value = null;
@@ -367,7 +367,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serializing an array of objects with default constructors.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeArray()
         {
             DerivedClass[] value = new DerivedClass[] { new DerivedClass(1, 2), new DerivedClass(3, 4) };
@@ -382,7 +382,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serializing an array of objects with default constructors, passing null for the array.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeArrayNull()
         {
             DerivedClass[] value = null;
@@ -397,7 +397,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serializing an array of objects requiring factories to construct.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeArrayWithFactory()
         {
             BaseClass[] value = new BaseClass[] { new BaseClass(1), new BaseClass(2) };
@@ -412,7 +412,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serializing an array of objects requiring factories to construct, passing null for the array.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeArrayWithFactoryNull()
         {
             BaseClass[] value = null;
@@ -432,12 +432,12 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// than asserting the underlying buffer contents. Although the intended use is to deduplicate many strings of the
         /// same casing, this is harder to validate this high level, so we focus on testing behavior here.
         /// </remarks>
-        [Theory]
-        [InlineData("foo", true)]
-        [InlineData("", true)]
-        [InlineData(null, true)]
-        [InlineData("foo", false)]
-        [InlineData("", false)]
+        [TestMethod]
+        [DataRow("foo", true)]
+        [DataRow("", true)]
+        [DataRow(null, true)]
+        [DataRow("foo", false)]
+        [DataRow("", false)]
         public void TestInternWithInterning(string value, bool nullable)
         {
             // Create a case mismatch to test if the string is deduplicated.
@@ -465,13 +465,13 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Tests interning strings outside of an intern scope.
         /// All calls should be forwarded to the regular translate method.
         /// </summary>
-        [Theory]
-        [InlineData("foo", true)]
-        [InlineData("", true)]
-        [InlineData(null, true)]
-        [InlineData("foo", false)]
-        [InlineData("", false)]
-        [InlineData(null, false)]
+        [TestMethod]
+        [DataRow("foo", true)]
+        [DataRow("", true)]
+        [DataRow(null, true)]
+        [DataRow("foo", false)]
+        [DataRow("", false)]
+        [DataRow(null, false)]
         public void TestInternNoInterning(string value, bool nullable)
         {
             TranslationHelpers.GetWriteTranslator().Intern(ref value, nullable);
@@ -486,14 +486,14 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests interning path-like strings within an intern scope.
         /// </summary>
-        [Theory]
-        [InlineData(@"C:/src/msbuild/artifacts/bin/SomeProject.Namespace/Debug/net472/SomeProject.NameSpace.dll", true)]
-        [InlineData("foo", true)]
-        [InlineData("", true)]
-        [InlineData(null, true)]
-        [InlineData(@"C:/src/msbuild/artifacts/bin/SomeProject.Namespace/Debug/net472/SomeProject.NameSpace.dll", false)]
-        [InlineData("foo", false)]
-        [InlineData("", false)]
+        [TestMethod]
+        [DataRow(@"C:/src/msbuild/artifacts/bin/SomeProject.Namespace/Debug/net472/SomeProject.NameSpace.dll", true)]
+        [DataRow("foo", true)]
+        [DataRow("", true)]
+        [DataRow(null, true)]
+        [DataRow(@"C:/src/msbuild/artifacts/bin/SomeProject.Namespace/Debug/net472/SomeProject.NameSpace.dll", false)]
+        [DataRow("foo", false)]
+        [DataRow("", false)]
         public void TestInternPathWithInterning(string value, bool nullable)
         {
             // Create a case mismatch to test if the path parts are deduplicated.
@@ -520,7 +520,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests interning components in path-like strings.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestInternPathWithComponentsFirst()
         {
             // Create a case mismatch to test if the path parts are deduplicated.
@@ -554,7 +554,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests interning components in path-like strings.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestInternPathWithFullPathFirst()
         {
             // Create a case mismatch to test if the path parts are deduplicated.
@@ -587,7 +587,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serializing string arrays within an intern scope.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestInternStringArrayWithInterning()
         {
             // Create a case mismatch to test if the string is deduplicated.
@@ -618,7 +618,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Tests serializing string arrays outside of an intern scope.
         /// All calls should be forwarded to the regular translate method.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestInternStringArrayNoInterning()
         {
             string[] value1 = ["foo", "FOO"];
@@ -642,7 +642,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// End-to-end test using a mixture of interned and non-interned operations to ensure that we don't hit
         /// invalid states, as this will be the most common use case.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestWithInterningMixedUsage()
         {
             string value1 = "Foobar";
@@ -708,15 +708,15 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Tests interning path-like strings outside of an intern scope.
         /// All calls should be forwarded to the regular translate method.
         /// </summary>
-        [Theory]
-        [InlineData(@"C:/src/msbuild/artifacts/bin/SomeProject.Namespace/Debug/net472/SomeProject.NameSpace.dll", true)]
-        [InlineData("foo", true)]
-        [InlineData("", true)]
-        [InlineData(null, true)]
-        [InlineData("foo", false)]
-        [InlineData(@"C:/src/msbuild/artifacts/bin/SomeProject.Namespace/Debug/net472/SomeProject.NameSpace.dll", false)]
-        [InlineData("", false)]
-        [InlineData(null, false)]
+        [TestMethod]
+        [DataRow(@"C:/src/msbuild/artifacts/bin/SomeProject.Namespace/Debug/net472/SomeProject.NameSpace.dll", true)]
+        [DataRow("foo", true)]
+        [DataRow("", true)]
+        [DataRow(null, true)]
+        [DataRow("foo", false)]
+        [DataRow(@"C:/src/msbuild/artifacts/bin/SomeProject.Namespace/Debug/net472/SomeProject.NameSpace.dll", false)]
+        [DataRow("", false)]
+        [DataRow(null, false)]
         public void TestInternPathNoInterning(string value, bool nullable)
         {
             TranslationHelpers.GetWriteTranslator().InternPath(ref value, nullable);
@@ -732,7 +732,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Tests no-op when nothing is written to the interner. E.g. a packet opens an intern scope, but none of its
         /// translatable child objects write anything.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestWithInterningNoWritesDoesNotThrow()
         {
             TranslationHelpers.GetWriteTranslator().WithInterning(StringComparer.OrdinalIgnoreCase, initialCapacity: 128, translator =>
@@ -747,7 +747,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Tests reusing a translator with different interning comparers.
         /// This is important if the translator is reused for multiple packet types with different case sensitivity.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestWithInterningResetsComparerBetweenScopes()
         {
             string mixedCaseValue = "StringWithSomeCasing";
@@ -804,7 +804,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests throwing an exception on nested intern scopes, which is unsupported.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestWithInterningThrowsOnNestedScopes()
         {
             _ = Assert.Throws<InvalidOperationException>(() =>
@@ -838,7 +838,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serializing a dictionary of { string, string }
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeDictionaryStringString()
         {
             Dictionary<string, string> value = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
@@ -859,7 +859,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serializing a dictionary of { string, string }, passing null.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeDictionaryStringStringNull()
         {
             Dictionary<string, string> value = null;
@@ -876,7 +876,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Tests serializing a dictionary of { string, T } where T requires a factory to construct and the dictionary
         /// requires a KeyComparer initializer.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeDictionaryStringT()
         {
             Dictionary<string, BaseClass> value = new Dictionary<string, BaseClass>(StringComparer.OrdinalIgnoreCase);
@@ -898,7 +898,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Tests serializing a dictionary of { string, T } where T requires a factory to construct and the dictionary
         /// requires a KeyComparer initializer, passing null for the dictionary.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeDictionaryStringTNull()
         {
             Dictionary<string, BaseClass> value = null;
@@ -915,7 +915,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Tests serializing a dictionary of { string, T } where T requires a factory to construct and the dictionary
         /// has a default constructor.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeDictionaryStringTNoComparer()
         {
             Dictionary<string, BaseClass> value = new Dictionary<string, BaseClass>();
@@ -937,7 +937,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Tests serializing a dictionary of { string, T } where T requires a factory to construct and the dictionary
         /// has a default constructor, passing null for the dictionary.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSerializeDictionaryStringTNoComparerNull()
         {
             Dictionary<string, BaseClass> value = null;
@@ -953,7 +953,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests interning dictionaries of { string, string } within an intern scope.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestInternDictionaryStringString()
         {
             Dictionary<string, string> value = new(StringComparer.OrdinalIgnoreCase)
@@ -996,7 +996,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests interning a dictionary of { string, T } within an intern scope.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestInternDictionaryStringT()
         {
             // Since we don't have string values, mismatch the key comparer to verify that interning works.
@@ -1037,7 +1037,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests interning dictionaries of { string, string } with path-like values within an intern scope.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestInternPathDictionaryStringString()
         {
             Dictionary<string, string> value = new(StringComparer.OrdinalIgnoreCase)
@@ -1080,7 +1080,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests interning a dictionary of { string, T } with path-like keys within an intern scope.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestInternPathDictionaryStringT()
         {
             const string PathA = @"C:/src/msbuild/artifacts/bin/ProjectA.Namespace/Debug/net472/ProjectA.NameSpace.dll";
@@ -1122,12 +1122,12 @@ namespace Microsoft.Build.UnitTests.BackEnd
         }
 
 
-        [Theory]
-        [InlineData("en")]
-        [InlineData("en-US")]
-        [InlineData("en-CA")]
-        [InlineData("zh-HK")]
-        [InlineData("sr-Cyrl-CS")]
+        [TestMethod]
+        [DataRow("en")]
+        [DataRow("en-US")]
+        [DataRow("en-CA")]
+        [DataRow("zh-HK")]
+        [DataRow("sr-Cyrl-CS")]
         public void CultureInfo(string name)
         {
             CultureInfo value = new CultureInfo(name);
@@ -1139,7 +1139,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             deserializedValue.ShouldBe(value);
         }
 
-        [Fact]
+        [TestMethod]
         public void CultureInfoAsNull()
         {
             CultureInfo value = null;
@@ -1151,10 +1151,10 @@ namespace Microsoft.Build.UnitTests.BackEnd
             deserializedValue.ShouldBeNull();
         }
 
-        [Theory]
-        [InlineData("1.2")]
-        [InlineData("1.2.3")]
-        [InlineData("1.2.3.4")]
+        [TestMethod]
+        [DataRow("1.2")]
+        [DataRow("1.2.3")]
+        [DataRow("1.2.3.4")]
         public void Version(string version)
         {
             Version value = new Version(version);
@@ -1166,7 +1166,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             deserializedValue.ShouldBe(value);
         }
 
-        [Fact]
+        [TestMethod]
         public void VersionAsNull()
         {
             Version value = null;
@@ -1178,7 +1178,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             deserializedValue.ShouldBeNull();
         }
 
-        [Fact]
+        [TestMethod]
         public void HashSetOfT()
         {
             HashSet<BaseClass> values = new()
@@ -1195,7 +1195,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             deserializedValues.ShouldBe(values, ignoreOrder: true);
         }
 
-        [Fact]
+        [TestMethod]
         public void HashSetOfTAsNull()
         {
             HashSet<BaseClass> value = null;
@@ -1207,7 +1207,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             deserializedValue.ShouldBeNull();
         }
 
-        [Fact]
+        [TestMethod]
         public void AssemblyNameAsNull()
         {
             AssemblyName value = null;
@@ -1219,7 +1219,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             deserializedValue.ShouldBeNull();
         }
 
-        [Fact]
+        [TestMethod]
         public void AssemblyNameWithAllFields()
         {
             AssemblyName value = new()
@@ -1246,7 +1246,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             HelperAssertAssemblyNameEqual(value, deserializedValue);
         }
 
-        [Fact]
+        [TestMethod]
         public void AssemblyNameWithMinimalFields()
         {
             AssemblyName value = new();

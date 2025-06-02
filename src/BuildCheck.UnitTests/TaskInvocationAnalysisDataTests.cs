@@ -109,7 +109,7 @@ namespace Microsoft.Build.BuildCheck.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ReportsSimpleTaskParameters()
         {
             BuildProject("<Message Text='Hello'/>");
@@ -122,9 +122,9 @@ namespace Microsoft.Build.BuildCheck.UnitTests
             data.Parameters["Text"].Value.ShouldBe("Hello");
         }
 
-        [Theory]
-        [InlineData("<Output TaskParameter='CombinedPaths' ItemName='OutputDirectories' />")]
-        [InlineData("<Output TaskParameter='CombinedPaths' PropertyName='OutputDirectories' />")]
+        [TestMethod]
+        [DataRow("<Output TaskParameter='CombinedPaths' ItemName='OutputDirectories' />")]
+        [DataRow("<Output TaskParameter='CombinedPaths' PropertyName='OutputDirectories' />")]
         public void ReportsComplexTaskParameters(string outputElement)
         {
             BuildProject($"""
@@ -153,7 +153,7 @@ namespace Microsoft.Build.BuildCheck.UnitTests
             data.Parameters["CombinedPaths"].Value.ShouldNotBeNull();
         }
 
-        [Fact]
+        [TestMethod]
         public void TaskParameterEnumeratesValues()
         {
             var parameter1 = MakeParameter("string");

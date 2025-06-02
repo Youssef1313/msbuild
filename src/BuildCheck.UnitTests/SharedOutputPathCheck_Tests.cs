@@ -34,7 +34,7 @@ namespace Microsoft.Build.BuildCheck.UnitTests
                 new Dictionary<string, string>());
         }
 
-        [Fact]
+        [TestMethod]
         public void TestTwoProjectsWithSameRelativeOutputPath()
         {
             // Full output and intermediate paths are different: "C:/fake1/bin/Debug" and "C:/fake1/obj/Debug".
@@ -61,7 +61,7 @@ namespace Microsoft.Build.BuildCheck.UnitTests
             _registrationContext.Results.Count.ShouldBe(0);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestProjectsWithDifferentPathsSeparators()
         {
             // Paths separators are messed up.
@@ -102,7 +102,7 @@ namespace Microsoft.Build.BuildCheck.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestThreeProjectsWithSameOutputPath()
         {
             string projectFolder = Framework.NativeMethods.IsWindows ? "C:\\fake\\" : "/fake/";

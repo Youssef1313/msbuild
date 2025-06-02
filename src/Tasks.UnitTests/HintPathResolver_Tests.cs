@@ -27,7 +27,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             _env.Dispose();
         }
 
-        [Fact]
+        [TestMethod]
         public void CanResolveHintPath()
         {
             var tempFile = _env.CreateFile("FakeSystem.Net.Http.dll", "");
@@ -47,7 +47,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             result.ShouldBe(true);
         }
 
-        [Fact]
+        [TestMethod]
         public void CanNotResolveHintPathWithNewLine()
         {
             var tempFile = _env.CreateFile("FakeSystem.Net.Http.dll", "");
@@ -56,7 +56,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             result.ShouldBe(false);
         }
 
-        [Fact]
+        [TestMethod]
         public void CanNotResolveHintPathWithSpace()
         {
             var tempFile = _env.CreateFile("FakeSystem.Net.Http.dll", "");

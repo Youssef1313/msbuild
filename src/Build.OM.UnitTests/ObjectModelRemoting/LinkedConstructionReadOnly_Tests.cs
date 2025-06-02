@@ -63,7 +63,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
         }
 
 
-        [Fact]
+        [TestMethod]
         public void ProjectRootElemetReadOnly()
         {
             var preReal = this.StdGroup.RealXml;
@@ -72,7 +72,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(preView, preReal);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectChooseElementReadOnly()
         {
             var preReal = this.StdGroup.RealXml;
@@ -83,7 +83,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(preView.ChooseElements, preReal.ChooseElements, ViewValidation.Verify);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectExtensionsElementReadOnly()
         {
             var preReal = this.StdGroup.RealXml;
@@ -105,7 +105,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             Assert.Equal("y", viewXml["b"]);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectImportElementReadOnly()
         {
             var preReal = this.StdGroup.RealXml;
@@ -118,7 +118,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(viewImports, realImports, ViewValidation.Verify);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectImportGroupElementReadOnly()
         {
             var preReal = this.StdGroup.RealXml;
@@ -131,7 +131,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(viewImportGroups, realImportGroups, ViewValidation.Verify);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectItemDefinitionElementReadOnly()
         {
             var preReal = this.StdGroup.RealXml;
@@ -144,7 +144,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(viewlItemDefinitions, realItemDefinitions);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectItemDefinitionGroupElementReadOnly()
         {
             var preReal = this.StdGroup.RealXml;
@@ -157,7 +157,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(viewlItemDefinitionGroups, realItemDefinitionGroups, ViewValidation.Verify);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectItemElementReadOnly()
         {
             var preReal = this.StdGroup.RealXml;
@@ -170,7 +170,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(viewlItems, realItems, ViewValidation.Verify);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectItemGroupElementReadOnly()
         {
             var preReal = this.StdGroup.RealXml;
@@ -183,7 +183,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(viewItemGroups, realItemGroups, ViewValidation.Verify);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectPropertyElementReadOnly()
         {
             var preReal = this.StdGroup.RealXml;
@@ -196,7 +196,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(viewProperties, realProperties, ViewValidation.Verify);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectPropertyGroupElementReadOnly()
         {
             var preReal = this.StdGroup.RealXml;
@@ -209,7 +209,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(viewPropertieGroups, realPropertieGroups, ViewValidation.Verify);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectOtherwiseElementReadOnly()
         {
             var preReal = this.StdGroup.RealXml;
@@ -222,7 +222,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(viewCollection, realCollection, ViewValidation.Verify);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectProjectWhenElementReadOnly()
         {
             var preReal = this.StdGroup.RealXml;
@@ -235,7 +235,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(viewCollection, realCollection, ViewValidation.Verify);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectProjectSdkElementReadOnly()
         {
             var preReal = this.StdGroup.RealXml;
@@ -248,7 +248,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(viewCollection, realCollection, ViewValidation.Verify);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectTargetElementReadOnly()
         {
             var preReal = this.StdGroup.RealXml;
@@ -261,7 +261,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(viewCollection, realCollection, ViewValidation.Verify);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectTaskElementReadOnly()
         {
             var preReal = this.StdGroup.RealXml;
@@ -275,7 +275,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
         }
 
         // Also validates:
-        [Fact]
+        [TestMethod]
         public void ProjectUsingTaskElementReadOnly()
         {
             var preReal = this.StdGroup.RealXml;
@@ -288,7 +288,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(viewCollection, realCollection, ViewValidation.Verify);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectUsingTaskBodyElementReadOnly()
         {
             var preReal = this.StdGroup.RealXml;
@@ -301,7 +301,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(viewCollection, realCollection, ViewValidation.Verify);
         }
 
-        [Fact]
+        [TestMethod]
         public void UsingTaskParameterGroupElementReadOnly()
         {
             var preReal = this.StdGroup.RealXml;
@@ -314,7 +314,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(viewCollection, realCollection, ViewValidation.Verify);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectUsingTaskParameterElementReadOnly()
         {
             var preReal = this.StdGroup.RealXml;
@@ -327,7 +327,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(viewCollection, realCollection, ViewValidation.Verify);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectOnErrorElementReadOnly()
         {
             var preReal = this.StdGroup.RealXml;
@@ -340,7 +340,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(viewCollection, realCollection, ViewValidation.Verify);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectOutputElementReadOnly()
         {
             var preReal = this.StdGroup.RealXml;

@@ -11,7 +11,7 @@ namespace Microsoft.Build.UnitTests
 {
     public sealed class PropertyParser_Tests
     {
-        [Fact]
+        [TestMethod]
         public void GetTable1()
         {
             Assert.True(PropertyParser.GetTable(null, "Properties", null, out Dictionary<string, string> propertiesTable));
@@ -22,7 +22,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetPropertiesTable3()
         {
             Assert.True(PropertyParser.GetTable(null, "Properties",
@@ -39,7 +39,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetPropertiesTable4()
         {
             Assert.True(PropertyParser.GetTable(null, "Properties",
@@ -60,7 +60,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetPropertiesTable5()
         {
             Assert.True(PropertyParser.GetTable(null, "Properties",
@@ -79,7 +79,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetPropertiesTable6()
         {
             Assert.True(PropertyParser.GetTable(null, "Properties",
@@ -98,7 +98,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetPropertiesTable7()
         {
             // This is a failure case.
@@ -107,7 +107,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetPropertiesTable8()
         {
             // This is a failure case.  (Second property "x86" doesn't have a value.)
@@ -117,7 +117,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetPropertiesTable9()
         {
             Assert.True(PropertyParser.GetTable(null, "Properties",
@@ -134,7 +134,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetPropertiesTable10()
         {
             Assert.True(PropertyParser.GetTable(null, "Properties",
@@ -149,7 +149,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal("CleanBuild", propertiesTable["Depends On"]);
         }
 
-        [Fact]
+        [TestMethod]
         public void GetPropertiesTableWithEscaping1()
         {
             Assert.True(PropertyParser.GetTableWithEscaping(null, "Properties", "Properties",
@@ -166,7 +166,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal("Any CPU", propertiesTable["Platform"]);
         }
 
-        [Fact]
+        [TestMethod]
         public void GetPropertiesTableWithEscaping2()
         {
             Assert.True(PropertyParser.GetTableWithEscaping(null, "Properties", "Properties",
@@ -183,7 +183,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal("Debug", propertiesTable["Configuration"]);
         }
 
-        [Fact]
+        [TestMethod]
         public void GetPropertiesTableWithEscaping3()
         {
             Assert.True(PropertyParser.GetTableWithEscaping(null, "Properties", "Properties",

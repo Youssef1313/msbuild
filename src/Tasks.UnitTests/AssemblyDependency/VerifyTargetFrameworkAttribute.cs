@@ -24,7 +24,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify there are no warnings if the target framework identifier passed to rar and the target framework identifier in the dll do not match.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void FrameworksDoNotMatch()
         {
             MockEngine e = new MockEngine(_output);
@@ -51,7 +51,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify there are no warnings if it is the same framework but we are a lower version. With a primary reference in the project.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LowerVersionSameFrameworkDirect()
         {
             MockEngine e = new MockEngine(_output);
@@ -78,7 +78,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify there are no warnings if it is the same framework and the same version and a direct reference
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SameVersionSameFrameworkDirect()
         {
             MockEngine e = new MockEngine(_output);
@@ -105,7 +105,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify there are no warnings if the reference was built for a higher framework but specific version is true
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void HigherVersionButSpecificVersionDirect()
         {
             MockEngine e = new MockEngine(_output);
@@ -135,7 +135,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify there are no warnings if it is the same framework but we are a lower version.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LowerVersionSameFrameworkInDirect()
         {
             MockEngine e = new MockEngine(_output);
@@ -164,7 +164,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify there are no warnings if it is the same framework and the same version.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SameVersionSameFrameworkInDirect()
         {
             MockEngine e = new MockEngine(_output);
@@ -193,7 +193,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify there are no warnings if it is the same framework and a higher version but specific version is true.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void HigherVersionButSpecificVersionInDirect()
         {
             MockEngine e = new MockEngine(_output);
@@ -225,7 +225,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify there are warnings if there is an indirect reference to a dll that is higher that what the current target framework is.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void HigherVersionInDirect()
         {
             MockEngine e = new MockEngine(_output);
@@ -255,7 +255,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify there are no warnings if there is an indirect reference to a dll that is higher that what the current target framework is but IgnoreFrameworkAttributeVersionMismatch is true.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void HigherVersionInDirectIgnoreMismatch()
         {
             MockEngine e = new MockEngine(_output);
@@ -287,7 +287,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify there are no warnings if there is a direct reference to a dll that is higher that what the current target framework is but the property IgnoreFrameworkAttributeVersionMismatch is true.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void HigherVersionDirectIgnoreMismatch()
         {
             MockEngine e = new MockEngine(_output);
@@ -319,7 +319,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify there are warnings if there is a direct reference to a dll that is higher that what the current target framework is.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void HigherVersionDirect()
         {
             MockEngine e = new MockEngine(_output);
@@ -351,7 +351,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// find dependencies is false. This is because we do not want to add an extra read for this attribute during the project load phase.
         /// which has dependencies set to false.  A regular build or design time build has this set to true so we do the correct check.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void HigherVersionDirectDependenciesFalse()
         {
             MockEngine e = new MockEngine(_output);

@@ -56,13 +56,13 @@ namespace Microsoft.Build.UnitTests
             _targetFinished.BuildEventContext = context;
         }
 
-        [InlineData(null)]
-        [InlineData(LoggerVerbosity.Quiet)]
-        [InlineData(LoggerVerbosity.Minimal)]
-        [InlineData(LoggerVerbosity.Normal)]
-        [InlineData(LoggerVerbosity.Detailed)]
-        [InlineData(LoggerVerbosity.Diagnostic)]
-        [Theory]
+        [DataRow(null)]
+        [DataRow(LoggerVerbosity.Quiet)]
+        [DataRow(LoggerVerbosity.Minimal)]
+        [DataRow(LoggerVerbosity.Normal)]
+        [DataRow(LoggerVerbosity.Detailed)]
+        [DataRow(LoggerVerbosity.Diagnostic)]
+        [TestMethod]
         public void ForwardingLoggingEventsBasedOnVerbosity(LoggerVerbosity? loggerVerbosity)
         {
             EventSourceSink source = new EventSourceSink();
@@ -168,7 +168,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ForwardingLoggingPerformanceSummary()
         {
             EventSourceSink source = new EventSourceSink();
@@ -199,7 +199,7 @@ namespace Microsoft.Build.UnitTests
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void ForwardingLoggingNoSummary()
         {
             EventSourceSink source = new EventSourceSink();
@@ -230,7 +230,7 @@ namespace Microsoft.Build.UnitTests
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void ForwardingLoggingShowCommandLine()
         {
             EventSourceSink source = new EventSourceSink();

@@ -21,13 +21,13 @@ namespace Microsoft.Build.Tasks.UnitTests
             "CustomCulture");
 
         [WindowsOnlyTheory]
-        [InlineData(true, "", true, true)]
-        [InlineData(false)]
-        [InlineData(true, "yue", false, true)]
-        [InlineData(false, "yue", false, true)]
-        [InlineData(true, "euy", true)]
-        [InlineData(true, "yue;euy")]
-        [InlineData(true, "euy;yue")]
+        [DataRow(true, "", true, true)]
+        [DataRow(false)]
+        [DataRow(true, "yue", false, true)]
+        [DataRow(false, "yue", false, true)]
+        [DataRow(true, "euy", true)]
+        [DataRow(true, "yue;euy")]
+        [DataRow(true, "euy;yue")]
         public void E2EScenarioTests(bool enableCustomCulture, string customCultureExclusions = "", bool isYueCultureExpected = false, bool isEuyCultureExpected = false)
         {
             using (TestEnvironment env = TestEnvironment.Create())

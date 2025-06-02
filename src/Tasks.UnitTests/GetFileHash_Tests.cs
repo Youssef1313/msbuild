@@ -23,7 +23,7 @@ namespace Microsoft.Build.UnitTests
             _mockEngine = new MockEngine(output);
         }
 
-        [Fact]
+        [TestMethod]
         public void GetFileHash_FailsForUnknownAlgorithmName()
         {
             GetFileHash task = new GetFileHash
@@ -36,7 +36,7 @@ namespace Microsoft.Build.UnitTests
             _mockEngine.Log.ShouldContain("MSB3953");
         }
 
-        [Fact]
+        [TestMethod]
         public void GetFileHash_FailsForUnknownHashEncoding()
         {
             GetFileHash task = new GetFileHash
@@ -49,7 +49,7 @@ namespace Microsoft.Build.UnitTests
             _mockEngine.Log.ShouldContain("MSB3951");
         }
 
-        [Fact]
+        [TestMethod]
         public void GetFileHash_FailsForMissingFile()
         {
             GetFileHash task = new GetFileHash
@@ -61,8 +61,8 @@ namespace Microsoft.Build.UnitTests
             _mockEngine.Log.ShouldContain("MSB3954");
         }
 
-        [Theory]
-        [MemberData(nameof(TestBinary.GetLorem), MemberType = typeof(TestBinary))]
+        [TestMethod]
+        [DynamicData(nameof(TestBinary.GetLorem), MemberType = typeof(TestBinary))]
         public void GetFileHash_ComputesCorrectChecksumForOneFile(TestBinary testBinary)
         {
             GetFileHash task = new GetFileHash
@@ -76,8 +76,8 @@ namespace Microsoft.Build.UnitTests
             task.Hash.ShouldBe(testBinary.FileHash);
         }
 
-        [Theory]
-        [MemberData(nameof(TestBinary.GetLorem), MemberType = typeof(TestBinary))]
+        [TestMethod]
+        [DynamicData(nameof(TestBinary.GetLorem), MemberType = typeof(TestBinary))]
         public void GetFileHash_ComputesCorrectChecksumForManyFiles(TestBinary testBinary)
         {
             GetFileHash task = new GetFileHash

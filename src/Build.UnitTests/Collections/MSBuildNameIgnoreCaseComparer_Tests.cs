@@ -19,7 +19,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Verify default comparer works on the whole string
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DefaultEquals()
         {
             Assert.True(MSBuildNameIgnoreCaseComparer.Default.Equals("FOO", "foo"));
@@ -37,7 +37,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Compare real expressions
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MatchProperty()
         {
             MSBuildNameIgnoreCaseComparer comparer = MSBuildNameIgnoreCaseComparer.Default;
@@ -58,7 +58,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Null
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Null1()
         {
             Assert.False(MSBuildNameIgnoreCaseComparer.Default.Equals("x", null));
@@ -67,7 +67,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Null
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Null2()
         {
             Assert.False(MSBuildNameIgnoreCaseComparer.Default.Equals(null, "x"));
@@ -76,7 +76,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Invalid start
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidValue2()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -87,7 +87,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Invalid small end
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidValue4()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -98,7 +98,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Invalid large end
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidValue5()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -109,7 +109,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// End past the end of other string
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EqualsEndPastEnd1()
         {
             Assert.True(MSBuildNameIgnoreCaseComparer.Default.Equals("bbb", "abbbaaa", 1, 3));
@@ -118,7 +118,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Same values means one char
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EqualsSameStartEnd1()
         {
             Assert.True(MSBuildNameIgnoreCaseComparer.Default.Equals("A", "babbbb", 1, 1));
@@ -127,7 +127,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Same values means one char
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EqualsSameStartEnd2()
         {
             Assert.True(MSBuildNameIgnoreCaseComparer.Default.Equals("b", "aabaa", 2, 1));
@@ -136,7 +136,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Same values means one char
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EqualsSameStartEnd3()
         {
             Assert.True(MSBuildNameIgnoreCaseComparer.Default.Equals("a", "ab", 0, 1));
@@ -145,7 +145,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Start at 0
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EqualsStartZero()
         {
             Assert.True(MSBuildNameIgnoreCaseComparer.Default.Equals("aab", "aabaa", 0, 3));
@@ -154,7 +154,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Default get hash code
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DefaultGetHashcode()
         {
             Assert.True(0 == MSBuildNameIgnoreCaseComparer.Default.GetHashCode((string)null));
@@ -166,7 +166,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Indexed get hashcode
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IndexedGetHashcode1()
         {
             MSBuildNameIgnoreCaseComparer comparer = MSBuildNameIgnoreCaseComparer.Default;
@@ -181,7 +181,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Indexed get hashcode
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IndexedGetHashcode2()
         {
             MSBuildNameIgnoreCaseComparer comparer = MSBuildNameIgnoreCaseComparer.Default;
@@ -192,7 +192,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Indexed get hashcode
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IndexedGetHashcode3()
         {
             MSBuildNameIgnoreCaseComparer comparer = MSBuildNameIgnoreCaseComparer.Default;

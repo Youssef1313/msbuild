@@ -17,7 +17,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify we can create a synchronous LoggingService
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestCreateSynchronousLogger()
         {
             LoggingServiceFactory factory = new LoggingServiceFactory(LoggerMode.Synchronous, 1);
@@ -28,7 +28,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify we can create a Asynchronous LoggingService
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestCreateAsynchronousLogger()
         {
             LoggingServiceFactory factory = new LoggingServiceFactory(LoggerMode.Asynchronous, 1);

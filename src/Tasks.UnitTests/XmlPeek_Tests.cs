@@ -58,7 +58,7 @@ namespace Microsoft.Build.UnitTests
 </Root>
 ";
 
-        [Fact]
+        [TestMethod]
         public void PeekWithNamespaceAttribute()
         {
             MockEngine engine = new MockEngine(true);
@@ -81,7 +81,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void PeekWithNamespaceNode()
         {
             MockEngine engine = new MockEngine(true);
@@ -110,7 +110,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void PeekWithNamespaceText()
         {
             MockEngine engine = new MockEngine(true);
@@ -139,7 +139,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void PeekNoNamespace()
         {
             MockEngine engine = new MockEngine(true);
@@ -161,7 +161,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void PeekNoNSXmlContent()
         {
             MockEngine engine = new MockEngine(true);
@@ -181,7 +181,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void PeekNoNSXmlContentAndXmlInputError1()
         {
             MockEngine engine = new MockEngine(true);
@@ -204,7 +204,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Contains("MSB3741", engine.Log); // "Error message MSB3741 should fire"
         }
 
-        [Fact]
+        [TestMethod]
         public void PeekNoNSXmlContentAndXmlInputError2()
         {
             MockEngine engine = new MockEngine(true);
@@ -221,7 +221,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Contains("MSB3741", engine.Log); // "Error message MSB3741 should fire"
         }
 
-        [Fact]
+        [TestMethod]
         public void PeekNoNSWPrefixedQueryError()
         {
             MockEngine engine = new MockEngine(true);
@@ -238,7 +238,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Contains("MSB3743", engine.Log); // "Engine log should contain error code MSB3743"
         }
 
-        [Fact]
+        [TestMethod]
         public void PeekDtdWhenDtdProhibitedError()
         {
             MockEngine engine = new MockEngine(true);
@@ -256,7 +256,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Contains("MSB3733", engine.Log); // "Engine log should contain error code MSB3733"
         }
 
-        [Fact]
+        [TestMethod]
         public void ErrorInNamespaceDecl()
         {
             MockEngine engine = new MockEngine(true);
@@ -274,7 +274,7 @@ namespace Microsoft.Build.UnitTests
             Assert.False(executeResult); // "Execution should've failed"
         }
 
-        [Fact]
+        [TestMethod]
         public void MissingNamespaceParameters()
         {
             MockEngine engine = new MockEngine(true);
@@ -312,7 +312,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void PeekWithoutUsingTask()
         {
             string projectContents = @"
@@ -329,7 +329,7 @@ namespace Microsoft.Build.UnitTests
             logger.AssertLogDoesntContain("MSB4036");
         }
 
-        [Fact]
+        [TestMethod]
         public void PeekWithNoParameters()
         {
             MockLogger log = new();
@@ -340,7 +340,7 @@ namespace Microsoft.Build.UnitTests
             log.AssertLogContains("\"Query\"");
         }
 
-        [Fact]
+        [TestMethod]
         public void PeekEscapesCorrectly()
         {
             MockEngine engine = new MockEngine(true);

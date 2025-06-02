@@ -18,7 +18,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
     {
         private MemoryStream _serializationStream;
 
-        [Fact]
+        [TestMethod]
         public void NullFrameworkName()
         {
             FrameworkName value = null;
@@ -29,8 +29,8 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             value.ShouldBeNull();
         }
 
-        [Theory]
-        [MemberData(nameof(SampleFrameworkNames))]
+        [TestMethod]
+        [DynamicData(nameof(SampleFrameworkNames))]
         public void ValidFrameworkName(FrameworkName value)
         {
             FrameworkName deserialized = null;

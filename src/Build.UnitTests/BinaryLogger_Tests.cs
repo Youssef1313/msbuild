@@ -93,13 +93,13 @@ namespace Microsoft.Build.UnitTests
             RawEvents
         }
 
-        [Theory]
-        [InlineData(s_testProject, BinlogRoundtripTestReplayMode.NoReplay)]
-        [InlineData(s_testProject, BinlogRoundtripTestReplayMode.Structured)]
-        [InlineData(s_testProject, BinlogRoundtripTestReplayMode.RawEvents)]
-        [InlineData(s_testProject2, BinlogRoundtripTestReplayMode.NoReplay)]
-        [InlineData(s_testProject2, BinlogRoundtripTestReplayMode.Structured)]
-        [InlineData(s_testProject2, BinlogRoundtripTestReplayMode.RawEvents)]
+        [TestMethod]
+        [DataRow(s_testProject, BinlogRoundtripTestReplayMode.NoReplay)]
+        [DataRow(s_testProject, BinlogRoundtripTestReplayMode.Structured)]
+        [DataRow(s_testProject, BinlogRoundtripTestReplayMode.RawEvents)]
+        [DataRow(s_testProject2, BinlogRoundtripTestReplayMode.NoReplay)]
+        [DataRow(s_testProject2, BinlogRoundtripTestReplayMode.Structured)]
+        [DataRow(s_testProject2, BinlogRoundtripTestReplayMode.RawEvents)]
         public void TestBinaryLoggerRoundtrip(string projectText, BinlogRoundtripTestReplayMode replayMode)
         {
             var binaryLogger = new BinaryLogger();
@@ -202,11 +202,11 @@ namespace Microsoft.Build.UnitTests
         /// </summary>
         /// <param name="projectText"></param>
         /// <param name="replayMode"></param>
-        [Theory]
-        [InlineData(s_testProject, BinlogRoundtripTestReplayMode.Structured)]
-        [InlineData(s_testProject, BinlogRoundtripTestReplayMode.RawEvents)]
-        [InlineData(s_testProject2, BinlogRoundtripTestReplayMode.Structured)]
-        [InlineData(s_testProject2, BinlogRoundtripTestReplayMode.RawEvents)]
+        [TestMethod]
+        [DataRow(s_testProject, BinlogRoundtripTestReplayMode.Structured)]
+        [DataRow(s_testProject, BinlogRoundtripTestReplayMode.RawEvents)]
+        [DataRow(s_testProject2, BinlogRoundtripTestReplayMode.Structured)]
+        [DataRow(s_testProject2, BinlogRoundtripTestReplayMode.RawEvents)]
         public void TestBinaryLoggerRoundtripEquality(string projectText, BinlogRoundtripTestReplayMode replayMode)
         {
             var binaryLogger = new BinaryLogger();
@@ -319,7 +319,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void BinaryLoggerShouldSupportFilePathExplicitParameter()
         {
             var binaryLogger = new BinaryLogger();
@@ -328,7 +328,7 @@ namespace Microsoft.Build.UnitTests
             ObjectModelHelpers.BuildProjectExpectSuccess(s_testProject, binaryLogger);
         }
 
-        [Fact]
+        [TestMethod]
         public void UnusedEnvironmentVariablesDoNotAppearInBinaryLog()
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -436,7 +436,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void BinaryLoggerShouldEmbedFilesViaTaskOutput()
         {
             using var buildManager = new BuildManager();
@@ -531,7 +531,7 @@ namespace Microsoft.Build.UnitTests
                 customMessage: $"Embedded files: {string.Join(",", zipArchive.Entries)}");
         }
 
-        [Fact]
+        [TestMethod]
         public void BinaryLoggerShouldNotThrowWhenMetadataCannotBeExpanded()
         {
             var binaryLogger = new BinaryLogger
@@ -562,7 +562,7 @@ namespace Microsoft.Build.UnitTests
         /// This isn't strictly a binlog test, but it fits here because
         /// all log event types will be used when the binlog is attached.
         /// </remarks>
-        [Fact]
+        [TestMethod]
         public void MessagesCanBeLoggedWhenProjectsAreCached()
         {
             using var env = TestEnvironment.Create();
@@ -606,7 +606,7 @@ namespace Microsoft.Build.UnitTests
         /// 1. When binary log and verbosity=diagnostic are both set, the equivalent command line is printed.
         /// 2. When binary log and non-diag verbosity are set, the equivalent command line is NOT printed.
         /// </remarks>
-        [Fact]
+        [TestMethod]
         public void SuppressCommandOutputForNonDiagVerbosity()
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -638,18 +638,18 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Theory]
+        [TestMethod]
         // Wildcard - new scenario
-        [InlineData("mylog-{}-foo", "mylog-xxxxx-foo.binlog")]
-        [InlineData("mylog-{}-foo-{}", "mylog-xxxxx-foo-xxxxx.binlog")]
-        [InlineData("\"mylog-{}-foo\"", "mylog-xxxxx-foo.binlog")]
-        [InlineData("foo\\bar\\mylog-{}-foo.binlog", "foo\\bar\\mylog-xxxxx-foo.binlog")]
-        [InlineData("ProjectImports=None;LogFile=mylog-{}-foo", "mylog-xxxxx-foo.binlog")]
+        [DataRow("mylog-{}-foo", "mylog-xxxxx-foo.binlog")]
+        [DataRow("mylog-{}-foo-{}", "mylog-xxxxx-foo-xxxxx.binlog")]
+        [DataRow("\"mylog-{}-foo\"", "mylog-xxxxx-foo.binlog")]
+        [DataRow("foo\\bar\\mylog-{}-foo.binlog", "foo\\bar\\mylog-xxxxx-foo.binlog")]
+        [DataRow("ProjectImports=None;LogFile=mylog-{}-foo", "mylog-xxxxx-foo.binlog")]
         // No wildcard - pre-existing scenarios
-        [InlineData("mylog-foo.binlog", "mylog-foo.binlog")]
-        [InlineData("\"mylog-foo.binlog\"", "mylog-foo.binlog")]
-        [InlineData("foo\\bar\\mylog-foo.binlog", "foo\\bar\\mylog-foo.binlog")]
-        [InlineData("ProjectImports=None;LogFile=mylog-foo.binlog", "mylog-foo.binlog")]
+        [DataRow("mylog-foo.binlog", "mylog-foo.binlog")]
+        [DataRow("\"mylog-foo.binlog\"", "mylog-foo.binlog")]
+        [DataRow("foo\\bar\\mylog-foo.binlog", "foo\\bar\\mylog-foo.binlog")]
+        [DataRow("ProjectImports=None;LogFile=mylog-foo.binlog", "mylog-foo.binlog")]
         public void BinlogFileNameParameterParsing(string parameters, string expectedBinlogFile)
         {
             var binaryLogger = new BinaryLogger
@@ -672,7 +672,7 @@ namespace Microsoft.Build.UnitTests
             File.Create(_logFile).Dispose();
         }
 
-        [Fact]
+        [TestMethod]
         public void BinlogFileNameWildcardGeneration()
         {
             var binaryLogger = new BinaryLogger

@@ -83,7 +83,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Runs the constructor.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestConstructor()
         {
             TargetBuilder builder = new TargetBuilder();
@@ -92,7 +92,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Runs a "simple" build with no dependencies and no outputs.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSimpleBuild()
         {
             ProjectInstance project = CreateTestProject();
@@ -112,7 +112,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Runs a build with a target which depends on one other target.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestDependencyBuild()
         {
             ProjectInstance project = CreateTestProject();
@@ -139,7 +139,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests a project with a dependency which will be skipped because its up-to-date.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestDependencyBuildWithSkip()
         {
             ProjectInstance project = CreateTestProject();
@@ -162,7 +162,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// This test is currently ignored because the error tasks aren't implemented yet (due to needing the task builder.)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestDependencyBuildWithError()
         {
             ProjectInstance project = CreateTestProject();
@@ -203,7 +203,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(TargetResultCode.Success, resultsCache.GetResultForRequest(entry.Request)["Baz"].ResultCode);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestLoggingForSkippedTargetInputsAndOutputs()
         {
             string projectContents = @"
@@ -240,7 +240,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestErrorForSkippedTargetInputsAndOutputs()
         {
             string projectContents = @"
@@ -278,7 +278,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Ensure that skipped targets only infer outputs once
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SkippedTargetsShouldOnlyInferOutputsOnce()
         {
             MockLogger logger = new MockLogger();
@@ -336,7 +336,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test empty before targets
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestLegacyCallTarget()
         {
             string projectBody = @"
@@ -371,7 +371,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// BeforeTargets specifies a missing target. Should not warn or error.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBeforeTargetsMissing()
         {
             string content = @"
@@ -394,7 +394,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// BeforeTargets specifies a missing target. Should not warn or error.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBeforeTargetsMissingRunsOthers()
         {
             string content = @"
@@ -426,7 +426,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// AfterTargets specifies a missing target. Should not warn or error.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestAfterTargetsMissing()
         {
             string content = @"
@@ -449,7 +449,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// AfterTargets specifies a missing target. Should not warn or error.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestAfterTargetsMissingRunsOthers()
         {
             string content = @"
@@ -485,7 +485,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test empty before targets
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBeforeTargetsEmpty()
         {
             string projectBody = @"
@@ -511,7 +511,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test single before targets
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBeforeTargetsSingle()
         {
             string projectBody = @"
@@ -537,7 +537,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test single before targets on an escaped target
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBeforeTargetsEscaped()
         {
             string projectBody = @"
@@ -563,7 +563,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test single before targets
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBeforeTargetsSingleWithError()
         {
             string projectBody = @"
@@ -593,7 +593,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test single before targets
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBeforeTargetsSingleWithErrorAndParent()
         {
             string projectBody = @"
@@ -628,7 +628,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test multiple before targets
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBeforeTargetsWithTwoReferringToOne()
         {
             string projectBody = @"
@@ -660,7 +660,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test multiple before targets
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBeforeTargetsWithOneReferringToTwo()
         {
             string projectBody = @"
@@ -691,7 +691,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test before target on a skipped target
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBeforeTargetsSkip()
         {
             string projectBody = @"
@@ -717,7 +717,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test before target on a skipped target
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBeforeTargetsDependencyOrdering()
         {
             string projectBody = @"
@@ -753,7 +753,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test after target on a skipped target
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestAfterTargetsEmpty()
         {
             string projectBody = @"
@@ -780,7 +780,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test after target on a skipped target
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestAfterTargetsSkip()
         {
             string projectBody = @"
@@ -807,7 +807,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test single before targets
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestAfterTargetsSingleWithError()
         {
             string projectBody = @"
@@ -837,7 +837,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test single before targets
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestAfterTargetsSingleWithErrorAndParent()
         {
             string projectBody = @"
@@ -881,7 +881,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test after target on a normal target
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestAfterTargetsSingle()
         {
             string projectBody = @"
@@ -908,7 +908,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test after target on a target name which needs escaping
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestAfterTargetsEscaped()
         {
             string projectBody = @"
@@ -935,7 +935,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test after target on a skipped target
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestAfterTargetsWithTwoReferringToOne()
         {
             string projectBody = @"
@@ -967,7 +967,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test a failing after target
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestAfterTargetsWithFailure()
         {
             string projectBody = @"
@@ -988,7 +988,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test a transitively failing after target
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestAfterTargetsWithTransitiveFailure()
         {
             string projectBody = @"
@@ -1013,7 +1013,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test a project that has a cycle in AfterTargets
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestAfterTargetsWithCycleDoesNotHang()
         {
             string projectBody = @"
@@ -1033,7 +1033,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test after target on a skipped target
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestAfterTargetsWithOneReferringToTwo()
         {
             string projectBody = @"
@@ -1064,7 +1064,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test after target on a skipped target
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestAfterTargetsWithDependencyOrdering()
         {
             string projectBody = @"
@@ -1099,7 +1099,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test a complex ordering with depends, before and after targets
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestComplexOrdering()
         {
             string projectBody = @"
@@ -1150,7 +1150,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test a complex ordering with depends, before and after targets
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestComplexOrdering2()
         {
             string projectBody = @"
@@ -1210,7 +1210,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test a complex ordering with depends, before and after targets
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBeforeAndAfterWithErrorTargets()
         {
             string projectBody = @"
@@ -1253,7 +1253,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test after target on a skipped target
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBeforeAndAfterOverrides()
         {
             string projectBody = @"
@@ -1298,7 +1298,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Test that if before and after targets skip, the main target still runs (bug 476908)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSkippingBeforeAndAfterTargets()
         {
             string projectBody = @"
@@ -1329,7 +1329,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Tests that a circular dependency within a CallTarget call correctly propagates the failure.  Bug 502570.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestCircularDependencyInCallTarget()
         {
             string projectContents = @"
@@ -1352,7 +1352,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Tests a circular dependency target.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestCircularDependencyTarget()
         {
             string projectContents = @"
@@ -1380,7 +1380,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         /// <summary>
         /// Tests that cancel with no entries after building does not fail.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestCancelWithNoEntriesAfterBuild()
         {
             string projectBody = @"
@@ -1405,7 +1405,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void SkippedTargetWithFailedDependenciesStopsBuild()
         {
             string projectContents = @"
@@ -1442,7 +1442,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
             Assert.Equal(TargetResultCode.Failure, resultsCache.GetResultForRequest(entry.Request)["_Error1"].ResultCode);
         }
 
-        [Fact]
+        [TestMethod]
         public void SkipNonexistentTargetsDoesNotExecuteOrCacheTargetResult()
         {
             string projectContents = @"<Target Name=""Build"" />";

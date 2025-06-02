@@ -24,9 +24,9 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         {
         }
 
-        [Theory]
-        [InlineData(RARSimulationMode.LoadProject, 1)]
-        [InlineData(RARSimulationMode.BuildProject, 2)]
+        [TestMethod]
+        [DataRow(RARSimulationMode.LoadProject, 1)]
+        [DataRow(RARSimulationMode.BuildProject, 2)]
         public void AutoUnifyUsesMinimumIO(RARSimulationMode rarSimulationMode, int ioThreshold)
         {
             // This WriteLine is a hack.  On a slow machine, the Tasks unittest fails because remoting
@@ -48,7 +48,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void DependeeDirectoryIsProbedForDependency()
         {
             // This WriteLine is a hack.  On a slow machine, the Tasks unittest fails because remoting
@@ -89,7 +89,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void DependeeDirectoryShouldNotBeProbedForDependencyWhenDependencyResolvedExternally()
         {
             // This WriteLine is a hack.  On a slow machine, the Tasks unittest fails because remoting

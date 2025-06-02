@@ -20,7 +20,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read simple task body
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadBody()
         {
             ProjectUsingTaskBodyElement body = GetBodyXml();
@@ -32,7 +32,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read task body with an invalid attribute
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidAttribute()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -52,7 +52,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Create a task body outside of a using task
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CreateBodyOutsideUsingTask()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -71,7 +71,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set body value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetValue()
         {
             ProjectUsingTaskBodyElement body = GetBodyXml();
@@ -85,7 +85,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set body value to empty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetEmptyValue()
         {
             ProjectUsingTaskBodyElement body = GetBodyXml();
@@ -99,7 +99,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set body value to null
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetInvalidNullValue()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -112,7 +112,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Verify setting the value of evaluate to null will wipe out the element and then the property will return true by default.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetEvaluateAttributeToNull()
         {
             ProjectUsingTaskBodyElement body = GetBodyXml();

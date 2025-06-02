@@ -18,7 +18,7 @@ namespace Microsoft.Build.UnitTests.AxTlbImp_Tests
         /// <summary>
         /// Tests the /delaysign switch
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DelaySign()
         {
             AxTlbBaseTask t = new ResolveComReference.AxImp();
@@ -99,7 +99,7 @@ namespace Microsoft.Build.UnitTests.AxTlbImp_Tests
         /// <summary>
         /// Tests the /keycontainer: switch with a space in the name
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void KeyContainerWithSpaces()
         {
             AxTlbBaseTask t = new ResolveComReference.AxImp();
@@ -122,7 +122,7 @@ namespace Microsoft.Build.UnitTests.AxTlbImp_Tests
         /// <summary>
         /// Tests the /keyfile: switch
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void KeyFile()
         {
             var t = new ResolveComReference.AxImp();
@@ -170,7 +170,7 @@ namespace Microsoft.Build.UnitTests.AxTlbImp_Tests
         /// <summary>
         /// Tests the /keyfile: switch with a space in the filename
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void KeyFileWithSpaces()
         {
             AxTlbBaseTask t = new ResolveComReference.TlbImp();
@@ -193,7 +193,7 @@ namespace Microsoft.Build.UnitTests.AxTlbImp_Tests
         /// <summary>
         /// Tests the SdkToolsPath property:  Should log an error if it's null or a bad path.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SdkToolsPath()
         {
             var t = new ResolveComReference.TlbImp();
@@ -227,7 +227,7 @@ namespace Microsoft.Build.UnitTests.AxTlbImp_Tests
         /// <summary>
         /// Tests the ToolPath property:  Should log an error if it's null or a bad path.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ToolPath()
         {
             var t = new ResolveComReference.AxImp();

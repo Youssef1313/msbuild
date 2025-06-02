@@ -30,7 +30,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Verify that a null config throws an ArgumentNullException.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestConstructorNullConfiguration()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -42,7 +42,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Verify that a null project thrown an ArgumentNullException
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestConstructorNullProject()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -54,7 +54,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Verify that we get the project path and tools version from the configuration
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestValidConfiguration()
         {
             BuildRequestData data = new BuildRequestData("file", new Dictionary<string, string>(), "toolsVersion", Array.Empty<string>(), null);
@@ -67,7 +67,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Verify that we get the project path and tools version from the project.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestValidProject()
         {
             Project project = CreateProject();
@@ -80,7 +80,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Verify that we get the same hash code from equivalent metadatas even if they come from different sources.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestGetHashCode()
         {
             BuildRequestData data = new BuildRequestData("file", new Dictionary<string, string>(), ObjectModelHelpers.MSBuildDefaultToolsVersion, Array.Empty<string>(), null);
@@ -96,7 +96,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Verify that the Equals method works correctly.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestEquals()
         {
             BuildRequestData data = new BuildRequestData("file", new Dictionary<string, string>(), ObjectModelHelpers.MSBuildDefaultToolsVersion, Array.Empty<string>(), null);
@@ -119,7 +119,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.False(metadata1.Equals(metadata4));
         }
 
-        [Fact]
+        [TestMethod]
         public void TestTranslation()
         {
             var globalProperties = new PropertyDictionary<ProjectPropertyInstance>();

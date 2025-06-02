@@ -26,7 +26,7 @@ namespace Microsoft.Build.UnitTests
             this.loadAsReadOnly = false;
         }
 
-        [Fact]
+        [TestMethod]
         public void GetTextFromTextNodeWithXmlComment5()
         {
             string xmlText = "<MyXmlElement>&lt;<!-- bar; baz; --><x/><!-- bar --></MyXmlElement>";
@@ -35,7 +35,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal("&lt;<!-- bar; baz; --><x /><!-- bar -->", xmlContents);
         }
 
-        [Fact]
+        [TestMethod]
         public void GetTextFromTextNodeWithXmlComment6()
         {
             string xmlText = "<MyXmlElement><x/><!-- bar; baz; --><!-- bar --></MyXmlElement>";
@@ -44,7 +44,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal("<x /><!-- bar; baz; --><!-- bar -->", xmlContents);
         }
 
-        [Fact]
+        [TestMethod]
         public void GetTextFromTextNodeWithXmlComment7()
         {
             string xmlText = "<MyXmlElement><!-- bar; baz; --><!-- bar --><x/></MyXmlElement>";
@@ -66,7 +66,7 @@ namespace Microsoft.Build.UnitTests
         /// This is really testing msbuild.exe but it's here because it needs to
         /// call the internal reset method on the engine
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CommentsInPreprocessing()
         {
             using TestEnvironment env = TestEnvironment.Create();
@@ -106,7 +106,7 @@ namespace Microsoft.Build.UnitTests
             foundDoNotModify.ShouldBeTrue();
         }
 
-        [Fact]
+        [TestMethod]
         public void GetTextFromTextNodeWithXmlComment5()
         {
             string xmlText = "<MyXmlElement>&lt;<!-- bar; baz; --><x/><!-- bar --></MyXmlElement>";
@@ -115,7 +115,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal("&lt;<!----><x /><!---->", xmlContents);
         }
 
-        [Fact]
+        [TestMethod]
         public void GetTextFromTextNodeWithXmlComment6()
         {
             string xmlText = "<MyXmlElement><x/><!-- bar; baz; --><!-- bar --></MyXmlElement>";
@@ -124,7 +124,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal("<x /><!----><!---->", xmlContents);
         }
 
-        [Fact]
+        [TestMethod]
         public void GetTextFromTextNodeWithXmlComment7()
         {
             string xmlText = "<MyXmlElement><!-- bar; baz; --><!-- bar --><x/></MyXmlElement>";
@@ -141,7 +141,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify Condition is illegal on ProjectExtensions tag
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IllegalConditionOnProjectExtensions()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -158,7 +158,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify ProjectExtensions cannot exist twice
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RepeatedProjectExtensions()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -175,7 +175,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests that we can correctly pass a CDATA tag containing less-than signs into a property value.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetCDATAWithLessThanSignFromXmlNode()
         {
             string xmlText = "<MyXmlElement><![CDATA[<invalid<xml&&<]]></MyXmlElement>";
@@ -186,7 +186,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests that we can correctly pass an Xml element named "CDATA" into a property value.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetLiteralCDATAWithLessThanSignFromXmlNode()
         {
             string xmlText = "<MyXmlElement>This is not a real <CDATA/>, just trying to fool the reader.</MyXmlElement>";
@@ -199,7 +199,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests that we can correctly pass a simple CDATA tag into a property value.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetCDATAFromXmlNode()
         {
             string xmlText = "<MyXmlElement><![CDATA[whatever]]></MyXmlElement>";
@@ -210,7 +210,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests that we can correctly pass a literal string called "CDATA" into a property value.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetLiteralCDATAFromXmlNode()
         {
             string xmlText = "<MyXmlElement>This is not a real CDATA, just trying to fool the reader.</MyXmlElement>";
@@ -221,7 +221,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests that we can correctly parse a property that is Xml containing a CDATA tag.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetCDATAOccurringDeeperWithMoreXml()
         {
             string xmlText = "<MyXmlElement><RootOfPropValue><![CDATA[foo]]></RootOfPropValue></MyXmlElement>";
@@ -232,7 +232,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests that we can correctly pass CDATA where the CDATA tag itself is surrounded by whitespace
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetCDATAWithSurroundingWhitespace()
         {
             string xmlText = "<MyXmlElement>    <![CDATA[foo]]>    </MyXmlElement>";
@@ -243,7 +243,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests that we can correctly parse a property that is some text concatenated with some XML.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetTextContainingLessThanSignFromXmlNode()
         {
             string xmlText = "<MyXmlElement>This is some text contain a node <xml a='&lt;'/>, &amp; an escaped character.</MyXmlElement>";
@@ -257,7 +257,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests that we can correctly parse a property containing text with an escaped character.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetTextFromXmlNode()
         {
             string xmlText = "<MyXmlElement>This is some text &amp; an escaped character.</MyXmlElement>";
@@ -269,7 +269,7 @@ namespace Microsoft.Build.UnitTests
         /// Tests that comments are removed if there is no other XML in the value.
         /// In other words, .InnerText is used even if there are comments (as long as nothing else looks like XML in the string)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetTextFromTextNodeWithXmlComment()
         {
             string xmlText = "<MyXmlElement>foo; <!-- bar; baz; -->biz; &amp; boz</MyXmlElement>";
@@ -277,7 +277,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal("foo; biz; & boz", xmlContents);
         }
 
-        [Fact]
+        [TestMethod]
         public void GetTextFromTextNodeWithXmlComment2()
         {
             string xmlText = "<MyXmlElement><!-- bar; baz; -->xyz<!-- bar --></MyXmlElement>";
@@ -285,7 +285,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal("xyz", xmlContents);
         }
 
-        [Fact]
+        [TestMethod]
         public void GetTextFromTextNodeWithXmlComment3()
         {
             string xmlText = "<MyXmlElement><!----></MyXmlElement>";
@@ -293,7 +293,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal("", xmlContents);
         }
 
-        [Fact]
+        [TestMethod]
         public void GetTextFromTextNodeWithXmlComment4()
         {
             string xmlText = "<MyXmlElement>--></MyXmlElement>";
@@ -304,7 +304,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Check creating the tools version list for an error message
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CreateToolsVersionString()
         {
             List<Toolset> toolsets = new List<Toolset>();

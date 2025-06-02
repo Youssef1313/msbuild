@@ -23,7 +23,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read project with no imports
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadNone()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -34,7 +34,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read import with no project attribute
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidMissingProject()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -51,7 +51,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read import with empty project attribute
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidEmptyProject()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -68,7 +68,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read import with unexpected attribute
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidAttribute()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -85,7 +85,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read basic valid imports
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadBasic()
         {
             string content = @"
@@ -109,7 +109,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set valid project on import
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetProjectValid()
         {
             string content = @"
@@ -130,7 +130,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set invalid empty project value on import
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetProjectInvalidEmpty()
         {
             Assert.Throws<ArgumentException>(() =>
@@ -151,7 +151,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Setting the project attribute should dirty the project
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SettingProjectDirties()
         {
             string file1 = null;
@@ -196,7 +196,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Setting the condition should dirty the project
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SettingConditionDirties()
         {
             string file = null;
@@ -234,7 +234,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Importing a project which has a relative path
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImportWithRelativePath()
         {
             string tempPath = Path.GetTempPath();

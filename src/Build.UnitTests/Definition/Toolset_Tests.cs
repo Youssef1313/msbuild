@@ -18,7 +18,7 @@ namespace Microsoft.Build.UnitTests.Definition
 {
     public class Toolset_Tests
     {
-        [Fact]
+        [TestMethod]
         public void ToolsetCtorErrors1()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -27,7 +27,7 @@ namespace Microsoft.Build.UnitTests.Definition
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void ToolsetCtorErrors2()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -36,7 +36,7 @@ namespace Microsoft.Build.UnitTests.Definition
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void ToolsetCtorErrors3()
         {
             Assert.Throws<ArgumentException>(() =>
@@ -45,7 +45,7 @@ namespace Microsoft.Build.UnitTests.Definition
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void Regress27993_TrailingSlashTrimmedFromMSBuildToolsPath()
         {
             Toolset t;
@@ -85,7 +85,7 @@ namespace Microsoft.Build.UnitTests.Definition
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ValidateToolsetTranslation()
         {
             PropertyDictionary<ProjectPropertyInstance> buildProperties = new PropertyDictionary<ProjectPropertyInstance>();
@@ -154,7 +154,7 @@ namespace Microsoft.Build.UnitTests.Definition
             Assert.Equal(@"c:\foo", t2.ImportPropertySearchPathsTable["MSBuildExtensionsPath"].SearchPaths[0]);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestDefaultSubToolset()
         {
             Toolset t = GetFakeToolset(null /* no global properties */);
@@ -184,7 +184,7 @@ namespace Microsoft.Build.UnitTests.Definition
             }
         }
 
-        [Fact(Skip = "https://github.com/dotnet/msbuild/issues/4363")]
+        [TestMethod(Skip = "https://github.com/dotnet/msbuild/issues/4363")]
         public void TestDefaultWhenNoSubToolset()
         {
             string originalVisualStudioVersion = Environment.GetEnvironmentVariable("VisualStudioVersion");
@@ -213,7 +213,7 @@ namespace Microsoft.Build.UnitTests.Definition
             }
         }
 
-        [Fact(Skip = "https://github.com/dotnet/msbuild/issues/4363")]
+        [TestMethod(Skip = "https://github.com/dotnet/msbuild/issues/4363")]
         public void TestGenerateSubToolsetVersionWhenNoSubToolset()
         {
             if (NativeMethodsShared.IsUnixLike)
@@ -249,7 +249,7 @@ namespace Microsoft.Build.UnitTests.Definition
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestNoSubToolset_GlobalPropertyOverrides()
         {
             string originalVisualStudioVersion = Environment.GetEnvironmentVariable("VisualStudioVersion");
@@ -274,7 +274,7 @@ namespace Microsoft.Build.UnitTests.Definition
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestNoSubToolset_EnvironmentOverrides()
         {
             string originalVisualStudioVersion = Environment.GetEnvironmentVariable("VisualStudioVersion");
@@ -296,7 +296,7 @@ namespace Microsoft.Build.UnitTests.Definition
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestNoSubToolset_ExplicitlyPassedGlobalPropertyOverrides()
         {
             string originalVisualStudioVersion = Environment.GetEnvironmentVariable("VisualStudioVersion");
@@ -321,7 +321,7 @@ namespace Microsoft.Build.UnitTests.Definition
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestNoSubToolset_ExplicitlyPassedGlobalPropertyWins()
         {
             string originalVisualStudioVersion = Environment.GetEnvironmentVariable("VisualStudioVersion");
@@ -349,7 +349,7 @@ namespace Microsoft.Build.UnitTests.Definition
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestGenerateSubToolsetVersion_GlobalPropertyOverrides()
         {
             string originalVisualStudioVersion = Environment.GetEnvironmentVariable("VisualStudioVersion");
@@ -371,7 +371,7 @@ namespace Microsoft.Build.UnitTests.Definition
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestGenerateSubToolsetVersion_EnvironmentOverrides()
         {
             string originalVisualStudioVersion = Environment.GetEnvironmentVariable("VisualStudioVersion");
@@ -390,7 +390,7 @@ namespace Microsoft.Build.UnitTests.Definition
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestGenerateSubToolsetVersion_ExplicitlyPassedGlobalPropertyOverrides()
         {
             string originalVisualStudioVersion = Environment.GetEnvironmentVariable("VisualStudioVersion");
@@ -412,7 +412,7 @@ namespace Microsoft.Build.UnitTests.Definition
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestGenerateSubToolsetVersion_SolutionVersionOverrides()
         {
             string originalVisualStudioVersion = Environment.GetEnvironmentVariable("VisualStudioVersion");
@@ -437,7 +437,7 @@ namespace Microsoft.Build.UnitTests.Definition
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestGenerateSubToolsetVersion_ExplicitlyPassedGlobalPropertyWins()
         {
             string originalVisualStudioVersion = Environment.GetEnvironmentVariable("VisualStudioVersion");
@@ -465,7 +465,7 @@ namespace Microsoft.Build.UnitTests.Definition
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestGetPropertyFromSubToolset()
         {
             Toolset t = GetFakeToolset(null);

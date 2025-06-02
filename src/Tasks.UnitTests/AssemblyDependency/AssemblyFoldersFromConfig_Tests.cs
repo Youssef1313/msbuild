@@ -32,7 +32,7 @@ namespace Microsoft.Build.Tasks.UnitTests.AssemblyDependency
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void AssemblyFoldersFromConfigTest()
         {
             var assemblyConfig = Path.GetTempFileName();
@@ -61,7 +61,7 @@ namespace Microsoft.Build.Tasks.UnitTests.AssemblyDependency
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void AssemblyFoldersFromConfigPlatformSpecificAssemblyFirstTest()
         {
             var assemblyConfig = Path.GetTempFileName();
@@ -91,7 +91,7 @@ namespace Microsoft.Build.Tasks.UnitTests.AssemblyDependency
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void AssemblyFoldersFromConfigNormalizeNetFrameworkVersion()
         {
             var assemblyConfig = Path.GetTempFileName();
@@ -136,7 +136,7 @@ namespace Microsoft.Build.Tasks.UnitTests.AssemblyDependency
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void AssemblyFoldersFromConfigFileNotFoundTest()
         {
             var assemblyConfig = Path.GetTempFileName();
@@ -162,7 +162,7 @@ namespace Microsoft.Build.Tasks.UnitTests.AssemblyDependency
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void AssemblyFoldersFromConfigFileMalformed()
         {
             var assemblyConfig = Path.GetTempFileName();

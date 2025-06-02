@@ -25,7 +25,7 @@ namespace Microsoft.Build.Engine.UnitTests
             _output = output;
         }
 
-        [Fact]
+        [TestMethod]
         public void TreatAllWarningsAsErrors()
         {
             MockLogger logger = ObjectModelHelpers.BuildProjectExpectFailure(GetTestProject(treatAllWarningsAsErrors: true));
@@ -38,7 +38,7 @@ namespace Microsoft.Build.Engine.UnitTests
         /// <summary>
         /// https://github.com/dotnet/msbuild/issues/2667
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TreatWarningsAsErrorsWhenBuildingSameProjectMultipleTimes()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create(_output))
@@ -69,7 +69,7 @@ namespace Microsoft.Build.Engine.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TreatWarningsAsErrorsWhenSpecified()
         {
             MockLogger logger = ObjectModelHelpers.BuildProjectExpectFailure(GetTestProject(warningsAsErrors: ExpectedEventCode));
@@ -77,7 +77,7 @@ namespace Microsoft.Build.Engine.UnitTests
             VerifyBuildErrorEvent(logger);
         }
 
-        [Fact]
+        [TestMethod]
         public void TreatWarningsAsErrorsWhenSpecifiedIndirectly()
         {
             MockLogger logger = ObjectModelHelpers.BuildProjectExpectFailure(
@@ -91,7 +91,7 @@ namespace Microsoft.Build.Engine.UnitTests
             VerifyBuildErrorEvent(logger);
         }
 
-        [Fact]
+        [TestMethod]
         public void TreatWarningsAsErrorsWhenSpecifiedThroughAdditiveProperty()
         {
             MockLogger logger = ObjectModelHelpers.BuildProjectExpectFailure(
@@ -107,7 +107,7 @@ namespace Microsoft.Build.Engine.UnitTests
             VerifyBuildErrorEvent(logger);
         }
 
-        [Fact]
+        [TestMethod]
         public void NotTreatWarningsAsErrorsWhenCodeNotSpecified()
         {
             MockLogger logger = ObjectModelHelpers.BuildProjectExpectSuccess(
@@ -121,7 +121,7 @@ namespace Microsoft.Build.Engine.UnitTests
             VerifyBuildWarningEvent(logger);
         }
 
-        [Fact]
+        [TestMethod]
         public void TreatWarningsAsMessagesWhenSpecified()
         {
             MockLogger logger = ObjectModelHelpers.BuildProjectExpectSuccess(GetTestProject(warningsAsMessages: ExpectedEventCode));
@@ -132,7 +132,7 @@ namespace Microsoft.Build.Engine.UnitTests
         /// <summary>
         /// https://github.com/dotnet/msbuild/issues/2667
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TreatWarningsAsMessagesWhenBuildingSameProjectMultipleTimes()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create(_output))
@@ -163,7 +163,7 @@ namespace Microsoft.Build.Engine.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TreatWarningsAsMessagesWhenSpecifiedIndirectly()
         {
             MockLogger logger = ObjectModelHelpers.BuildProjectExpectSuccess(
@@ -177,7 +177,7 @@ namespace Microsoft.Build.Engine.UnitTests
             VerifyBuildMessageEvent(logger);
         }
 
-        [Fact]
+        [TestMethod]
         public void TreatWarningsAsMessagesWhenSpecifiedThroughAdditiveProperty()
         {
             MockLogger logger = ObjectModelHelpers.BuildProjectExpectSuccess(
@@ -193,7 +193,7 @@ namespace Microsoft.Build.Engine.UnitTests
             VerifyBuildMessageEvent(logger);
         }
 
-        [Fact]
+        [TestMethod]
         public void NotTreatWarningsAsMessagesWhenCodeNotSpecified()
         {
             MockLogger logger = ObjectModelHelpers.BuildProjectExpectSuccess(
@@ -207,7 +207,7 @@ namespace Microsoft.Build.Engine.UnitTests
             VerifyBuildWarningEvent(logger);
         }
 
-        [Fact]
+        [TestMethod]
         public void TreatWarningAsMessageOverridesTreatingItAsError()
         {
             MockLogger logger = ObjectModelHelpers.BuildProjectExpectSuccess(
@@ -273,11 +273,11 @@ namespace Microsoft.Build.Engine.UnitTests
             </Project>";
         }
 
-        [Theory]
+        [TestMethod]
 
-        [InlineData("MSB1235", "MSB1234", "MSB1234", "MSB1234", false)] // Log MSB1234, treat as error via MSBuildWarningsAsErrors
-        [InlineData("MSB1235", "", "MSB1234", "MSB1234", true)] // Log MSB1234, expect MSB1234 as error via MSBuildTreatWarningsAsErrors
-        [InlineData("MSB1234", "MSB1234", "MSB1234", "MSB4181", true)]// Log MSB1234, MSBuildWarningsAsMessages takes priority
+        [DataRow("MSB1235", "MSB1234", "MSB1234", "MSB1234", false)] // Log MSB1234, treat as error via MSBuildWarningsAsErrors
+        [DataRow("MSB1235", "", "MSB1234", "MSB1234", true)] // Log MSB1234, expect MSB1234 as error via MSBuildTreatWarningsAsErrors
+        [DataRow("MSB1234", "MSB1234", "MSB1234", "MSB4181", true)]// Log MSB1234, MSBuildWarningsAsMessages takes priority
         public void WarningsAsErrorsAndMessages_Tests(string WarningsAsMessages,
                                                       string WarningsAsErrors,
                                                       string WarningToLog,
@@ -313,7 +313,7 @@ namespace Microsoft.Build.Engine.UnitTests
         /// <summary>
         /// Item1 and Item2 log warnings and continue, item 3 logs a warn-> error and prevents item 4 from running in the batched build.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TaskLogsWarningAsError_BatchedBuild()
         {
             using (TestEnvironment env = TestEnvironment.Create(_output))
@@ -368,9 +368,9 @@ namespace Microsoft.Build.Engine.UnitTests
         /// Test behavior with MSBuildWarningsAsErrors & MSBuildTreatWarningsAsErrors
         /// Both builds should continue despite logging errors.
         /// </summary>
-        [Theory]
-        [InlineData("MSB1234", false, 1, 1)]
-        [InlineData("MSB0000", true, 0, 2)]
+        [TestMethod]
+        [DataRow("MSB1234", false, 1, 1)]
+        [DataRow("MSB0000", true, 0, 2)]
         public void TaskReturnsTrue_Tests(string warningsAsErrors, bool treatAllWarningsAsErrors, int warningCountShouldBe, int errorCountShouldBe)
         {
             using (TestEnvironment env = TestEnvironment.Create(_output))
@@ -399,7 +399,7 @@ namespace Microsoft.Build.Engine.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TaskReturnsFailureButDoesNotLogError_ShouldCauseBuildFailure()
         {
             using (TestEnvironment env = TestEnvironment.Create(_output))
@@ -421,7 +421,7 @@ namespace Microsoft.Build.Engine.UnitTests
         /// <summary>
         /// Test that a task that returns false without logging anything reports MSB4181 as a warning.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TaskReturnsFailureButDoesNotLogError_ContinueOnError_WarnAndContinue()
         {
             using (TestEnvironment env = TestEnvironment.Create(_output))
@@ -446,7 +446,7 @@ namespace Microsoft.Build.Engine.UnitTests
         /// <summary>
         /// Test that a task that returns false after logging an error->warning does NOT also log MSB4181
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TaskReturnsFailureAndLogsError_ContinueOnError_WarnAndContinue()
         {
             using (TestEnvironment env = TestEnvironment.Create(_output))
@@ -468,7 +468,7 @@ namespace Microsoft.Build.Engine.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TaskReturnsFailureButDoesNotLogError_ContinueOnError_True()
         {
             using (TestEnvironment env = TestEnvironment.Create(_output))
@@ -488,7 +488,7 @@ namespace Microsoft.Build.Engine.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TaskReturnsFailureButDoesNotLogError_ContinueOnError_ErrorAndStop()
         {
             using (TestEnvironment env = TestEnvironment.Create(_output))
@@ -508,7 +508,7 @@ namespace Microsoft.Build.Engine.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TaskReturnsFailureButDoesNotLogError_ContinueOnError_False()
         {
             using (TestEnvironment env = TestEnvironment.Create(_output))
@@ -531,7 +531,7 @@ namespace Microsoft.Build.Engine.UnitTests
         /// <summary>
         /// MSBuildWarningsAsMessages should allow comma separation.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MSBuildWarningsAsMessagesWithCommaSeparation()
         {
             using (TestEnvironment env = TestEnvironment.Create(_output))

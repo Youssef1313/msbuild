@@ -50,7 +50,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             GC.Collect();
         }
 
-        [Fact]
+        [TestMethod]
         public void EnsureProjectEvaluationFinishedIsLogged()
         {
             using TestEnvironment env = TestEnvironment.Create();
@@ -67,8 +67,8 @@ namespace Microsoft.Build.UnitTests.Evaluation
             logger.EvaluationFinishedEvents.ShouldNotBeEmpty();
         }
 
-        [Theory]
-        [MemberData(nameof(ImportLoadingScenarioTestData))]
+        [TestMethod]
+        [DynamicData(nameof(ImportLoadingScenarioTestData))]
         public void VerifyLoadingImportScenarios(string importParameter, bool shouldSucceed)
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -96,10 +96,10 @@ namespace Microsoft.Build.UnitTests.Evaluation
             }
         }
 
-        [Theory]
-        [InlineData("(test")]
-        [InlineData("@@@test")]
-        [InlineData(@")(!!test")]
+        [TestMethod]
+        [DataRow("(test")]
+        [DataRow("@@@test")]
+        [DataRow(@")(!!test")]
         public void VerifyItemsUpdateIsHandledForAnyProjectPath(string projectPathCandidate)
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -168,7 +168,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Verify Exist condition used in Import or ImportGroup elements will succeed when in-memory project is available inside projectCollection.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyExistsInMemoryProjects()
         {
             string fooPath = NativeMethodsShared.IsWindows ? @"c:\temp\foo.import" : "/temp/foo.import";
@@ -251,7 +251,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// test.tx, file to check for existence
         /// subdir\test.proj
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void VerifyConditionsInsideOutsideTargets()
@@ -382,7 +382,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// test.tx, file to check for existence
         /// subdir\test.proj
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyConditionsInsideOutsideTargets_ProjectInstance()
         {
             string testtargets = @"
@@ -504,7 +504,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// When properties are consumed and set in imports make sure that we get the correct warnings.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyUsedUnInitializedPropertyInImports()
         {
             string targetA = ObjectModelHelpers.CleanupFileContents(@"
@@ -564,7 +564,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// If a property is set to an empty value and then set to a non empty value we do not expect a warning.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EmptyPropertyIsThenSet()
         {
             string testtargets = ObjectModelHelpers.CleanupFileContents(@"
@@ -607,7 +607,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// If a property is set to an empty value and the environment variable is not set then we do not expect an error
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EmptyPropertyIsThenSetEnvironmentVariableNotSet()
         {
             string testtargets = ObjectModelHelpers.CleanupFileContents(@"
@@ -653,7 +653,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// If a property has not been set yet and we consume the property we are setting in order to set it, do not warn
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetPropertyToItself()
         {
             string testtargets = ObjectModelHelpers.CleanupFileContents(@"
@@ -696,7 +696,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// If we consume a property which has not been initialized in a property we do not expect a warning because we are explicitly ignoring conditions.
         /// This is done because it is a very common scenario to use uninitialized properties in conditions to set default values.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void UsePropertyInCondition()
         {
             string testtargets = ObjectModelHelpers.CleanupFileContents(@"
@@ -741,7 +741,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// If a property is consumed before it is initialized for the first time log a warning.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void UsePropertyBeforeSet()
         {
             string testtargets = ObjectModelHelpers.CleanupFileContents(@"
@@ -786,7 +786,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// If we use a property twice make sure we warn and don't crash due to the dictionary which is holding the used but uninitialized variables..
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void UsePropertyBeforeSetDuplicates()
         {
             string testtargets = ObjectModelHelpers.CleanupFileContents(@"
@@ -835,7 +835,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// If it is imported twice, subtle problems will occur: because typically the 2nd import will
         /// have no effect, but occasionally it won't.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImportsOnlyIncludedOnce()
         {
             string importPath = null;
@@ -896,7 +896,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Imports should only be included once. However we should be able to see them in the ImportsIncludingDuplicates property
         /// A second import should give a warning, and still not be added to the Imports property.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MultipleImportsVerifyImportsIncludingDuplicates()
         {
             string importPath = null;
@@ -999,7 +999,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// RecordDuplicateButNotCircularImports should not record circular imports (which do come under the category of "duplicate imports".
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RecordDuplicateButNotCircularImportsWithCircularImports()
         {
             string importPath1 = null;
@@ -1059,7 +1059,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// RecordDuplicateButNotCircularImports should not record circular imports (which do come under the category of "duplicate imports".
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RejectCircularImportsWithCircularImports()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -1115,7 +1115,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// MSBuildDefaultTargets was not getting cleared out between reevaluations.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MSBuildDefaultTargets()
         {
             Project project = new Project();
@@ -1142,7 +1142,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Something like a $ in an import's path should work.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EscapableCharactersInImportPath()
         {
             string importPath1 = null;
@@ -1205,7 +1205,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ImportListOfItems()
         {
             string[] importPaths = {
@@ -1252,7 +1252,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             logger.AssertLogDoesntContain("01CB8D8A6E454918B17496468B3D74AA");
         }
 
-        [Fact]
+        [TestMethod]
         public void ImportListOfItemsWithWildcards()
         {
             string filename1 = Guid.NewGuid().ToString("N");
@@ -1314,7 +1314,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             logger.AssertLogContains("43FEAE1F861742549766443A31C581F9;14F2D19468E24EEE86F7DD6D6E81BB20;DCBE5C70A6EC41288AEA2259F0BFEEB4;74960FBBB84C46F5B7CAAF9113F955FC;67EFAD6EF5584EC2BD651119E6489424");
         }
 
-        [Fact]
+        [TestMethod]
         public void ImportListOfItemsOneFileDoesNotExist()
         {
             string[] importPaths = {
@@ -1357,7 +1357,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// We also want MSBuildFileXXXX properties that are similar but have special behavior:
         /// their values vary according to the file they are evaluated in.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MSBuildThisFileProperties()
         {
             string targets1FileName = NativeMethodsShared.IsWindows ? @"c:\a\t1.targets" : "/a/t1.targets";
@@ -1447,7 +1447,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Per Orcas/Whidbey, if there are several task parameters that only differ
         /// by case, we just silently take the last one.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RepeatedTaskParameters()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -1467,7 +1467,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Simple override
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void PropertyPredecessors()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -1495,7 +1495,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Predecessors and imports
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void PropertyPredecessorsAndImports()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -1520,7 +1520,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// New properties get a null predecessor until reevaluation
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void PropertyPredecessorsSetProperty()
         {
             // Need an existing property with the same name in an import
@@ -1541,7 +1541,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Predecessor of item definition is item definition
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ItemDefinitionPredecessorToItemDefinition()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -1572,7 +1572,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Newly added item's metadata always has null predecessor until reevaluation
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NewItemPredecessor()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -1596,7 +1596,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Predecessor of item is item definition
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ItemDefinitionPredecessorToItem()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -1636,7 +1636,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Predecessor of item is on the same item.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void PredecessorOnSameItem()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -1671,7 +1671,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Predecessor of item is item
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ItemPredecessorToItem()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -1700,7 +1700,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Null(metadatum.Predecessor.Predecessor);
         }
 
-        [Fact]
+        [TestMethod]
         public void ItemPredecessorToItemWithCaseChange()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -1736,7 +1736,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Should be removed when escape hatch for #1751 is removed
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ItemPredecessorToItemWithCaseChangeAndEscapeHatch()
         {
             using (var env = TestEnvironment.Create())
@@ -1768,7 +1768,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Predecessor of item is item via transform
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ItemPredecessorToItemViaTransform()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -1792,7 +1792,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Equal("1", metadatum.Predecessor.EvaluatedValue);
         }
 
-        [Fact]
+        [TestMethod]
         public void ItemPredecessorToItemViaTransformWithCaseChange()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -1820,7 +1820,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Should be removed when escape hatch for #1751 is removed
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ItemPredecessorToItemViaTransformWithCaseChangeWithEscapeHatch()
         {
             using (var env = TestEnvironment.Create())
@@ -1849,7 +1849,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Item predecessors and imports
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ItemPredecessorsAndImports()
         {
             string file = null;
@@ -1894,7 +1894,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Cases where there are no predecessors at all
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NoPredecessors()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -1927,7 +1927,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Simple override
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AllEvaluatedProperties()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -2000,7 +2000,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// All evaluated items
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AllEvaluatedItems()
         {
             string file = null;
@@ -2086,7 +2086,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Evaluated properties list and imports
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AllEvaluatedPropertiesAndImports()
         {
             string file = null;
@@ -2161,7 +2161,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// New properties do not appear in the evaluated properties list until reevaluation
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AllEvaluatedPropertiesSetProperty()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -2186,7 +2186,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Two item definitions
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AllEvaluatedItemDefinitionMetadata()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -2221,7 +2221,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Item's metadata does not appear in AllEvaluatedItemDefinitionMetadata
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AllEvaluatedItemDefinitionItem()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -2242,7 +2242,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Cases where there are no AllEvaluated* at all
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AllEvaluatedListsExceptPropertiesAreEmpty()
         {
             Project project = new Project();
@@ -2266,7 +2266,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Test imports with wildcards and a relative path.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImportWildcardsRelative()
         {
             string directory = Path.Combine(Path.GetTempPath(), "ImportWildcardsRelative");
@@ -2278,7 +2278,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Test imports with wildcards and a relative path.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImportWildcardsRelative2()
         {
             string directory = Path.Combine(Path.GetTempPath(), "ImportWildcardsRelative2");
@@ -2293,7 +2293,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Test imports with wildcards and a relative path.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImportWildcardsRelative3()
         {
             string directory = Path.Combine(Path.GetTempPath(), "ImportWildcardsRelative3");
@@ -2315,7 +2315,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Test imports with wildcards and a full path
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImportWildcardsFullPath()
         {
             string directory = Path.Combine(Path.GetTempPath(), "ImportWildcardsFullPath");
@@ -2332,7 +2332,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Don't crash on a particular bad conditional.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BadConditional()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -2357,7 +2357,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Default targets with empty entries doesn't break
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DefaultTargetsWithBlanks()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -2380,7 +2380,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Initial targets with empty entries doesn't break
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InitialTargetsWithBlanks()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -2406,7 +2406,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Test that the default value for $(MSBuildExtensionsPath) points to "c:\program files\msbuild" in a 64-bit process
         /// or on a 32-bit machine and "c:\program files (x86)\msbuild" in a 32-bit process on a 64-bit machine.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MSBuildExtensionsPathDefault_Legacy()
         {
             string specialPropertyName = "MSBuildExtensionsPath";
@@ -2450,7 +2450,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Test that the default value for $(MSBuildExtensionsPath) points to the 32-bit Program Files always
         /// (ie. it should have the same value as MSBuildExtensionsPath32).
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MSBuildExtensionsPathDefault()
         {
             string specialPropertyName = "MSBuildExtensionsPath";
@@ -2494,7 +2494,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Test that if I set an environment variable called "MSBuildExtensionPath", that my env var
         /// should win over whatever MSBuild thinks the default is.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MSBuildExtensionsPathWithEnvironmentOverride()
         {
             // Save the old copy of the MSBuildExtensionsPath, so we can restore it when the unit test is done.
@@ -2522,7 +2522,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Test that if I set a global property called "MSBuildExtensionPath", that my global property
         /// should win over whatever MSBuild thinks the default is.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MSBuildExtensionsPathWithGlobalOverride()
         {
             using var collection = new ProjectCollection();
@@ -2541,7 +2541,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// The default value for $(MSBuildExtensionsPath32) should point to "c:\program files (x86)\msbuild" on a 64 bit machine.
         /// We can't test that unless we are on a 64 bit box, but this test will work on either
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MSBuildExtensionsPath32Default()
         {
             // On a 64 bit machine we always want to use the program files x86.  If we are running as a 64 bit process then this variable will be set correctly
@@ -2575,7 +2575,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Set an env var called MSBuildExtensionsPath32 to some value, for the purpose
         /// of seeing whether our value wins.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MSBuildExtensionsPath32WithEnvironmentOverride()
         {
             string originalMSBuildExtensionsPath32Value = Environment.GetEnvironmentVariable("MSBuildExtensionsPath32");
@@ -2599,7 +2599,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Set a global property called MSBuildExtensionsPath32 to some value, for the purpose
         /// of seeing whether our value wins.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MSBuildExtensionsPath32WithGlobalOverride()
         {
             using var collection = new ProjectCollection();
@@ -2616,7 +2616,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// and should be empty on a 32-bit machine.
         /// We can't test that unless we are on a 64 bit box, but this test will work on either
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MSBuildExtensionsPath64Default()
         {
             string expected = string.Empty;
@@ -2650,7 +2650,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Set an env var called MSBuildExtensionsPath64 to some value, for the purpose
         /// of seeing whether our value wins.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MSBuildExtensionsPath64WithEnvironmentOverride()
         {
             string originalMSBuildExtensionsPath64Value = Environment.GetEnvironmentVariable("MSBuildExtensionsPath64");
@@ -2674,7 +2674,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Set a global property called MSBuildExtensionsPath64 to some value, for the purpose
         /// of seeing whether our value wins.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MSBuildExtensionsPath64WithGlobalOverride()
         {
             using var collection = new ProjectCollection();
@@ -2689,7 +2689,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Verify whether LocalAppData property is set by default in msbuild
         /// with the path of the OS special LocalApplicationData or ApplicationData folders.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LocalAppDataDefault()
         {
             string expected = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
@@ -2707,7 +2707,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Set an env var called LocalAppData to some value, for the purpose
         /// of seeing whether our value wins.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LocalAppDataWithEnvironmentOverride()
         {
             string originalLocalAppDataValue = Environment.GetEnvironmentVariable("LocalAppData");
@@ -2731,7 +2731,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Set a global property called LocalAppData to some value, for the purpose
         /// of seeing whether our value wins.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LocalAppDataWithGlobalOverride()
         {
             using var collection = new ProjectCollection();
@@ -2742,7 +2742,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Equal(@"c:\AppData\Local", localAppDataValue);
         }
 
-        [Fact]
+        [TestMethod]
         public void MSBuildAssemblyVersion()
         {
             ProjectRootElement xml = ProjectRootElement.Create();
@@ -2759,7 +2759,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             assemblyVersionAsVersion.Revision.ShouldBe(-1);
         }
 
-        [Fact]
+        [TestMethod]
         public void MSBuildVersion()
         {
             ProjectRootElement xml = ProjectRootElement.Create();
@@ -2791,7 +2791,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Test standard reserved properties
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void ReservedProjectProperties()
@@ -2812,7 +2812,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Test standard reserved properties
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReservedProjectPropertiesAtRoot()
         {
             string file = NativeMethodsShared.IsWindows ? @"c:\bar.csproj" : "/bar.csproj";
@@ -2868,7 +2868,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Verify when a node count is passed through on the project collection that the correct number is used to evaluate the msbuildNodeCount
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyMsBuildNodeCountReservedProperty()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -2905,7 +2905,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Verify when no node count is passed that we evaluate MsBuildNodeCount to 1
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyMsBuildNodeCountReservedPropertyDefault()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -2931,7 +2931,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Verify that the programfiles32 property points to the correct location
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyMsbuildProgramFiles32ReservedProperty()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -2956,7 +2956,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Basic verification -- adding the tag to the ProjectRootElement on its own does nothing.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyTreatAsLocalPropertyTagDoesNothingIfNoGlobalProperty()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -2982,7 +2982,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Basic verification -- with no TreatAsLocalProperty, but with a global property specified, the global property
         /// overrides the local property.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyGlobalPropertyOverridesIfNoTreatAsLocalProperty()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -3012,7 +3012,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Basic verification -- with TreatAsLocalProperty, and with a global property specified, the local property
         /// overrides the global property.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyLocalPropertyOverridesIfTreatAsLocalPropertySet()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -3042,7 +3042,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Basic verification -- with TreatAsLocalProperty set, but to a different property than is being passed as a global, the
         /// global property overrides the local property.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyGlobalPropertyOverridesNonSpecifiedLocalProperty()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -3072,7 +3072,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Basic verification -- with TreatAsLocalProperty set, but to a different property than is being passed as a global, the
         /// global property overrides the local property.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyLocalPropertyInheritsFromOverriddenGlobalProperty()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -3102,7 +3102,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Basic verification -- with TreatAsLocalProperty set, but to a different property than is being passed as a global, the
         /// global property overrides the local property.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyTreatAsLocalPropertySpecificationWorksIfSpecificationIsItselfAProperty()
         {
             string oldEnvironmentValue = Environment.GetEnvironmentVariable("EnvironmentProperty");
@@ -3152,7 +3152,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Basic verification -- setting an invalid TreatAsLocalProperty should be an evaluation error.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyInvalidTreatAsLocalProperty()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -3183,7 +3183,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Basic verification -- whitespace in the TreatAsLocalProperty definition should be trimmed.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyTreatAsLocalPropertyTrimmed()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -3219,7 +3219,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Basic verification -- if there are empty entries in the split of the properties for TreatAsLocalProperty,
         /// they should be ignored.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyTreatAsLocalPropertyEmptySplits()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -3254,7 +3254,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// value returns the mutable version, looking explicitly at the global properties dictionary still returns
         /// the original global property value.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyGlobalPropertyRetainsOriginalValue()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -3282,7 +3282,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Basic verification -- if TreatAsLocalProperty is modified on the project XML and then the project is
         /// re-evaluated, it should be re-evaluated in the context of that modified value.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyModificationsToTreatAsLocalPropertyRespected()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -3324,7 +3324,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Basic verification -- if TreatAsLocalProperty is modified on the project XML and then the project is
         /// re-evaluated, it should be re-evaluated in the context of that modified value.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyModificationsToGlobalPropertiesRespected()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -3361,7 +3361,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Basic verification -- with TreatAsLocalProperty set to multiple global properties, and with multiple global properties
         /// passed in, only the ones that are marked TALP are overridable.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyOnlySpecifiedPropertiesOverridden()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -3399,7 +3399,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// If TreatAsLocalProperty is set in a parent project, that property is still treated as overridable
         /// when defined in an imported project.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyPropertySetInImportStillOverrides()
         {
             string projectContents = ObjectModelHelpers.CleanupFileContents(@"
@@ -3459,7 +3459,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// If TreatAsLocalProperty is set in an imported project, any instances of that property in the parent
         /// project before the import are ignored and the global property value is used instead.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyTreatAsLocalPropertyInImportDoesntAffectParentProjectAboveIt()
         {
             string projectContents = ObjectModelHelpers.CleanupFileContents(@"
@@ -3520,7 +3520,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// If TreatAsLocalProperty is set in an imported project, any instances of that property in the parent
         /// project after the import recognize the TreatAsLocalProperty flag and override the global property value.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyTreatAsLocalPropertyInImportAffectsParentProjectBelowIt()
         {
             string projectContents = ObjectModelHelpers.CleanupFileContents(@"
@@ -3582,7 +3582,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// override a property until you reach the import that mentions it in its TreatAsLocalProperty
         /// parameter.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyTreatAsLocalPropertyUnionBetweenImports()
         {
             string projectContents = ObjectModelHelpers.CleanupFileContents(@"
@@ -3656,7 +3656,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// If a property is set to TreatAsLocalProperty in both the parent project and the import, this is
         /// silently acknowledged.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyDuplicateTreatAsLocalProperty()
         {
             string projectContents = ObjectModelHelpers.CleanupFileContents(@"
@@ -3729,7 +3729,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// If TreatAsLocalProperty is set in a parent project, a project that is P2P'ed to will
         /// still receive the original value of the global property.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyGlobalPropertyPassedToP2P()
         {
             string projectContents = ObjectModelHelpers.CleanupFileContents(@"
@@ -3791,7 +3791,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// passed the property, will get the mutable local value rather than the original value of the
         /// global property.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyLocalPropertyPropagatesIfExplicitlyPassedToP2P()
         {
             string projectContents = ObjectModelHelpers.CleanupFileContents(@"
@@ -3853,7 +3853,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// based on the default sub-toolset version -- base toolset if Dev10 is installed, or lowest (numerically
         /// sorted) toolset if it's not.
         /// </summary>
-        [Fact(Skip = "https://github.com/dotnet/msbuild/issues/4363")]
+        [TestMethod(Skip = "https://github.com/dotnet/msbuild/issues/4363")]
         public void VerifyDefaultSubToolsetPropertiesAreEvaluated()
         {
             if (NativeMethodsShared.IsUnixLike)
@@ -3924,7 +3924,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Verify that when we specify an invalid sub-toolset version, we just get the properties from the base
         /// toolset ... but that invalid version is still reflected as a project property.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyNoSubToolsetPropertiesAreEvaluatedWithInvalidSubToolset()
         {
             string originalVisualStudioVersion = Environment.GetEnvironmentVariable("VisualStudioVerson");
@@ -3976,7 +3976,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Verify that if a sub-toolset is explicitly specified, its properties are evaluated into the project properly.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyExplicitSubToolsetPropertiesAreEvaluated()
         {
             string originalVisualStudioVersion = Environment.GetEnvironmentVariable("VisualStudioVerson");
@@ -4028,7 +4028,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Verify that if a non-existent sub-toolset is specified, we simply ignore it and just use the base toolset properties.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyExplicitNonExistentSubToolsetPropertiesAreEvaluated()
         {
             string originalVisualStudioVersion = Environment.GetEnvironmentVariable("VisualStudioVerson");
@@ -4080,7 +4080,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Verify that if there is a conflict between sub-toolset and environment properties, the sub-toolset properties win.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifySubToolsetPropertiesOverrideEnvironment()
         {
             string originalVisualStudioVersion = Environment.GetEnvironmentVariable("VisualStudioVerson");
@@ -4142,7 +4142,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Verify that if there is a conflict between sub-toolset and global properties, the global properties win.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyGlobalPropertiesOverrideSubToolset()
         {
             string originalVisualStudioVersion = Environment.GetEnvironmentVariable("VisualStudioVerson");
@@ -4203,7 +4203,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Verify that even if the sub-toolset was set by a global property, it can be overridden from within the project
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifySubToolsetVersionSetByGlobalPropertyStillOverridable()
         {
             string originalVisualStudioVersion = Environment.GetEnvironmentVariable("VisualStudioVerson");
@@ -4261,7 +4261,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Verify that if the sub-toolset was set by a global property, it cannot be overridden from within the project
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifySubToolsetVersionSetByConstructorOverridable_OverridesGlobalProperty()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -4308,7 +4308,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Verify that if the sub-toolset was set by a global property, it cannot be overridden from within the project
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifySubToolsetVersionSetByConstructorOverridable()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -4352,7 +4352,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Verifies that if no VisualStudioVersion is set that the toolset with set a value.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyVisualStudioVersionSetByToolset()
         {
             string originalVisualStudioVersion = Environment.GetEnvironmentVariable("VisualStudioVerson");
@@ -4383,7 +4383,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// We add some invalid DTD code to a MSBuild project, if such code is ever parsed a XmlException will be thrown
         /// If DTD parsing is disabled (desired behavior), no XmlException should be caught
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyDTDProcessingIsDisabled()
         {
             string projectContents = ObjectModelHelpers.CleanupFileContents(
@@ -4433,7 +4433,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// This test emulates a scenario where some malicious DTD code could upload user data to a malicious website
         /// If DTD processing is disabled, the server should not receive any connection request.
         /// </summary>
-        [Fact]
+        [TestMethod]
         [ActiveIssue("https://github.com/dotnet/msbuild/issues/7623")]
         public async Task VerifyDTDProcessingIsDisabled2()
         {
@@ -4490,7 +4490,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Verify that Condition Evaluator does reset the cached state when the evaluation throws an exception.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyConditionEvaluatorResetStateOnFailure()
         {
             PropertyDictionary<ProjectPropertyInstance> propertyBag = new PropertyDictionary<ProjectPropertyInstance>();
@@ -4533,7 +4533,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Test regression reported at https://github.com/dotnet/msbuild/issues/2228
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ThrownInvalidProjectExceptionProperlyHandled()
         {
             string projectContents = ObjectModelHelpers.CleanupFileContents(@"
@@ -4595,10 +4595,10 @@ namespace Microsoft.Build.UnitTests.Evaluation
         ///
         /// https://github.com/dotnet/msbuild/issues/2259
         /// </summary>
-        [Theory]
-        [InlineData("<Target Name=\"Build\" /><Import Project=\"$(NonExistentProperty)\" Condition=\"\'true\' == \'false\' And \'$([MSBuild]::GetDirectoryNameOfFileAbove($(NonExistentProperty), init.props))\' != \'\'\" />")]
-        [InlineData("<Target Name=\"Build\" Condition=\"\'true\' == \'false\' And \'$([MSBuild]::GetDirectoryNameOfFileAbove($(NonExistentProperty), init.props))\' != \'\'\" />")]
-        [InlineData("<Target Name=\"Build\"><Message Text=\"Build executed\" Condition=\"\'true\' == \'false\' And \'$([MSBuild]::GetDirectoryNameOfFileAbove($(NonExistentProperty), init.props))\' != \'\'\" /></Target>")]
+        [TestMethod]
+        [DataRow("<Target Name=\"Build\" /><Import Project=\"$(NonExistentProperty)\" Condition=\"\'true\' == \'false\' And \'$([MSBuild]::GetDirectoryNameOfFileAbove($(NonExistentProperty), init.props))\' != \'\'\" />")]
+        [DataRow("<Target Name=\"Build\" Condition=\"\'true\' == \'false\' And \'$([MSBuild]::GetDirectoryNameOfFileAbove($(NonExistentProperty), init.props))\' != \'\'\" />")]
+        [DataRow("<Target Name=\"Build\"><Message Text=\"Build executed\" Condition=\"\'true\' == \'false\' And \'$([MSBuild]::GetDirectoryNameOfFileAbove($(NonExistentProperty), init.props))\' != \'\'\" /></Target>")]
         public void ConditionWithShortCircuitAndErrorDoesNotFailBuild(string projectInnerXml)
         {
             string content = ObjectModelHelpers.CleanupFileContents($@"
@@ -4620,22 +4620,22 @@ namespace Microsoft.Build.UnitTests.Evaluation
             }
         }
 
-        [Theory]
-        [InlineData("$(Hello)", 0, 8, "Hello")]
-        [InlineData("$(Hello)|$(World)", 9, 8, "World")]
-        [InlineData("$(He()o)", 0, 8, null)]
-        [InlineData("$)Hello(", 0, 8, null)]
-        [InlineData("$(Helloo", 0, 8, null)]
-        [InlineData("$Heello)", 0, 8, null)]
-        [InlineData("$(He$$o)", 0, 8, null)]
-        [InlineData(" $(Helo)", 0, 8, null)]
-        [InlineData("$(Helo) ", 0, 8, null)]
-        [InlineData("$()", 0, 3, "")]
-        [InlineData("$( Hello )", 0, 10, " Hello ")]
-        [InlineData("$(He-ll-o)", 0, 10, "He-ll-o")]
-        [InlineData("$(He ll o)", 0, 10, "He ll o")]
-        [InlineData("aaa$(Hello)", 3, 8, "Hello")]
-        [InlineData("aaa$(Hello)bbb", 3, 8, "Hello")]
+        [TestMethod]
+        [DataRow("$(Hello)", 0, 8, "Hello")]
+        [DataRow("$(Hello)|$(World)", 9, 8, "World")]
+        [DataRow("$(He()o)", 0, 8, null)]
+        [DataRow("$)Hello(", 0, 8, null)]
+        [DataRow("$(Helloo", 0, 8, null)]
+        [DataRow("$Heello)", 0, 8, null)]
+        [DataRow("$(He$$o)", 0, 8, null)]
+        [DataRow(" $(Helo)", 0, 8, null)]
+        [DataRow("$(Helo) ", 0, 8, null)]
+        [DataRow("$()", 0, 3, "")]
+        [DataRow("$( Hello )", 0, 10, " Hello ")]
+        [DataRow("$(He-ll-o)", 0, 10, "He-ll-o")]
+        [DataRow("$(He ll o)", 0, 10, "He ll o")]
+        [DataRow("aaa$(Hello)", 3, 8, "Hello")]
+        [DataRow("aaa$(Hello)bbb", 3, 8, "Hello")]
         public void TryGetSingleProperty(string input, int start, int length, string expected)
         {
             bool result = ConditionEvaluator.TryGetSingleProperty(input.AsSpan(), start, length, out ReadOnlySpan<char> actual);
@@ -4652,7 +4652,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyMSBuildLastModifiedProjectForImport()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -4681,7 +4681,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyMSBuildLastModifiedProjectIsProject()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -4706,7 +4706,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyMSBuildLogsAMessageWhenLocalPropertyCannotOverrideValueOfGlobalProperty()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -4737,7 +4737,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 ResourceUtilities.FormatResourceStringStripCodeAndKeyword("OM_GlobalProperty", "Foo"));
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyPropertyTrackingLoggingDefault()
         {
             // Having just environment variables defined should default to nothing being logged except one environment variable read.
@@ -4770,7 +4770,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 });
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyPropertyTrackingLoggingPropertyReassignment()
         {
             VerifyPropertyTrackingLoggingScenario(
@@ -4801,7 +4801,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 });
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyPropertyTrackingLoggingNone()
         {
             this.VerifyPropertyTrackingLoggingScenario(
@@ -4833,7 +4833,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 });
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyPropertyTrackingLoggingPropertyInitialValue()
         {
             this.VerifyPropertyTrackingLoggingScenario(
@@ -4885,7 +4885,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 });
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyPropertyTrackingLoggingEnvironmentVariableRead()
         {
             this.VerifyPropertyTrackingLoggingScenario(
@@ -4919,7 +4919,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 });
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyPropertyTrackingLoggingUninitializedPropertyRead()
         {
             this.VerifyPropertyTrackingLoggingScenario(
@@ -4950,7 +4950,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 });
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyPropertyTrackingLoggingAll()
         {
             this.VerifyPropertyTrackingLoggingScenario(
@@ -5005,7 +5005,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 });
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyGetTypeEvaluationBlocked()
         {
             string projectContents = ObjectModelHelpers.CleanupFileContents(@"
@@ -5068,7 +5068,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// <summary>
         /// Log when a property is being assigned a new value.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyLogPropertyReassignment()
         {
             string propertyName = "Prop";

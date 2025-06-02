@@ -24,7 +24,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify that we ignore the version information on the assembly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IgnoreVersionBasic()
         {
             MockEngine e = new MockEngine(_output);
@@ -78,7 +78,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify that we ignore the version information on the assembly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IgnoreVersionBasicTestMetadata()
         {
             MockEngine e = new MockEngine(_output);
@@ -131,7 +131,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify that we ignore the version information on the assembly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IgnoreVersionDisableIfSpecificVersionTrue()
         {
             MockEngine e = new MockEngine(_output);
@@ -161,7 +161,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify that we ignore the version information on the assembly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IgnoreVersionDisableIfHintPath()
         {
             MockEngine e = new MockEngine(_output);

@@ -260,7 +260,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                             "@(_OutputPathItem->'%(FullPath)', ';');$(MSBuildAllProjects);"
         };
 
-        [Fact]
+        [TestMethod]
         public void Medley()
         {
             foreach (string test in _medleyTests)
@@ -269,121 +269,121 @@ namespace Microsoft.Build.UnitTests.Evaluation
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void NoOpSplit()
         {
             VerifySplitSemiColonSeparatedList("a", "a");
         }
 
-        [Fact]
+        [TestMethod]
         public void BasicSplit()
         {
             VerifySplitSemiColonSeparatedList("a;b", "a", "b");
         }
 
-        [Fact]
+        [TestMethod]
         public void Empty()
         {
             VerifySplitSemiColonSeparatedList("", null);
         }
 
-        [Fact]
+        [TestMethod]
         public void SemicolonOnly()
         {
             VerifySplitSemiColonSeparatedList(";", null);
         }
 
-        [Fact]
+        [TestMethod]
         public void TwoSemicolons()
         {
             VerifySplitSemiColonSeparatedList(";;", null);
         }
 
-        [Fact]
+        [TestMethod]
         public void TwoSemicolonsAndOneEntryAtStart()
         {
             VerifySplitSemiColonSeparatedList("a;;", "a");
         }
 
-        [Fact]
+        [TestMethod]
         public void TwoSemicolonsAndOneEntryAtEnd()
         {
             VerifySplitSemiColonSeparatedList(";;a", "a");
         }
 
-        [Fact]
+        [TestMethod]
         public void AtSignAtEnd()
         {
             VerifySplitSemiColonSeparatedList("@", "@");
         }
 
-        [Fact]
+        [TestMethod]
         public void AtSignParenAtEnd()
         {
             VerifySplitSemiColonSeparatedList("foo@(", "foo@(");
         }
 
-        [Fact]
+        [TestMethod]
         public void EmptyEntriesRemoved()
         {
             VerifySplitSemiColonSeparatedList(";a;bbb;;c;;", "a", "bbb", "c");
         }
 
-        [Fact]
+        [TestMethod]
         public void EntriesTrimmed()
         {
             VerifySplitSemiColonSeparatedList("  ;  a   ;b   ;   ;c\n;  \r;  ", "a", "b", "c");
         }
 
-        [Fact]
+        [TestMethod]
         public void NoSplittingOnMacros()
         {
             VerifySplitSemiColonSeparatedList("@(foo->';')", "@(foo->';')");
         }
 
-        [Fact]
+        [TestMethod]
         public void NoSplittingOnSeparators()
         {
             VerifySplitSemiColonSeparatedList("@(foo, ';')", "@(foo, ';')");
         }
 
-        [Fact]
+        [TestMethod]
         public void NoSplittingOnSeparatorsAndMacros()
         {
             VerifySplitSemiColonSeparatedList("@(foo->'abc;def', 'ghi;jkl')", "@(foo->'abc;def', 'ghi;jkl')");
         }
 
-        [Fact]
+        [TestMethod]
         public void CloseParensInMacro()
         {
             VerifySplitSemiColonSeparatedList("@(foo->');')", "@(foo->');')");
         }
 
-        [Fact]
+        [TestMethod]
         public void CloseParensInSeparator()
         {
             VerifySplitSemiColonSeparatedList("a;@(foo,');');b", "a", "@(foo,');')", "b");
         }
 
-        [Fact]
+        [TestMethod]
         public void CloseParensInMacroAndSeparator()
         {
             VerifySplitSemiColonSeparatedList("@(foo->';);', ';);')", "@(foo->';);', ';);')");
         }
 
-        [Fact]
+        [TestMethod]
         public void EmptyQuotesInMacroAndSeparator()
         {
             VerifySplitSemiColonSeparatedList(" @(foo->'', '')", "@(foo->'', '')");
         }
 
-        [Fact]
+        [TestMethod]
         public void MoreParensAndAtSigns()
         {
             VerifySplitSemiColonSeparatedList("@(foo->';());', ';@();')", "@(foo->';());', ';@();')");
         }
 
-        [Fact]
+        [TestMethod]
         public void SplittingExceptForMacros()
         {
             VerifySplitSemiColonSeparatedList("@(foo->';');def;@ghi;", "@(foo->';')", "def", "@ghi");
@@ -391,7 +391,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
         // Invalid item expressions shouldn't cause an error in the splitting function.
         // The caller will emit an error later when it tries to parse the results.
-        [Fact]
+        [TestMethod]
         public void InvalidItemExpressions()
         {
             VerifySplitSemiColonSeparatedList("@(x", "@(x");
@@ -408,7 +408,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             VerifySplitSemiColonSeparatedList("@(x''';", "@(x''';");
         }
 
-        [Fact]
+        [TestMethod]
         public void RealisticExample()
         {
             VerifySplitSemiColonSeparatedList("@(_OutputPathItem->'%(FullPath)', ';');$(MSBuildAllProjects);\n                @(Compile);\n                @(ManifestResourceWithNoCulture);\n                $(ApplicationIcon);\n                $(AssemblyOriginatorKeyFile);\n                @(ManifestNonResxWithNoCultureOnDisk);\n                @(ReferencePath);\n                @(CompiledLicenseFile);\n                @(EmbeddedDocumentation);                \n                @(CustomAdditionalCompileInputs)",
@@ -424,7 +424,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         // We need to support any item expressions that satisfy this expression.
         //
         // Try spaces everywhere that regex allows spaces:
-        [Fact]
+        [TestMethod]
         public void SpacingInItemListExpression()
         {
             VerifySplitSemiColonSeparatedList("@(   foo  \n ->  \t  ';abc;def;'   , \t  'ghi;jkl'   )", "@(   foo  \n ->  \t  ';abc;def;'   , \t  'ghi;jkl'   )");
@@ -567,7 +567,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Empty(messages);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorTransform1()
         {
             string expression = "@(i->'%(Meta0)'->'%(Filename)'->Substring($(Val)))";
@@ -588,7 +588,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// NOTE: The medley of tests needs to be parsable by the old regex. This is a regression test against that
         /// regex. New expression types should be added in other tests
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ItemExpressionMedleyRegressionTestAgainstOldRegex()
         {
             List<ExpressionShredder.ItemExpressionCapture> expressions;
@@ -631,7 +631,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorExpressionsSingleExpressionInvalid1()
         {
             string expression;
@@ -642,7 +642,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Null(expressions);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorExpressionsSingleExpression1()
         {
             string expression;
@@ -659,7 +659,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Null(capture.Captures);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorExpressionsSingleExpression2()
         {
             string expression;
@@ -676,7 +676,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Null(capture.Captures);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorExpressionsSingleExpression3()
         {
             string expression;
@@ -694,7 +694,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Equal("%(Fullpath)", capture.Captures[0].Value);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorExpressionsSingleExpression4()
         {
             string expression;
@@ -712,7 +712,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Equal("%(Fullpath)", capture.Captures[0].Value);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorExpressionsSingleExpression5()
         {
             string expression;
@@ -732,7 +732,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Equal("a,b", capture.Captures[0].FunctionArguments);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorExpressionsSingleExpression6()
         {
             string expression;
@@ -752,7 +752,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Equal("a,b", capture.Captures[0].FunctionArguments);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorExpressionsSingleExpression7()
         {
             string expression;
@@ -774,7 +774,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Null(capture.Captures[1].FunctionArguments);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorExpressionsSingleExpression8()
         {
             string expression;
@@ -796,7 +796,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Null(capture.Captures[1].FunctionArguments);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorExpressionsSingleExpression9()
         {
             string expression;
@@ -818,7 +818,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Null(capture.Captures[1].FunctionArguments);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorExpressionsSingleExpression10()
         {
             string expression;
@@ -840,7 +840,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Null(capture.Captures[1].FunctionArguments);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorExpressionsSingleExpression11()
         {
             string expression;
@@ -859,7 +859,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Null(capture.Captures[0].FunctionArguments);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorExpressionsSingleExpression12()
         {
             string expression;
@@ -881,7 +881,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Equal("$(Val), $(Boo)", capture.Captures[1].FunctionArguments);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorExpressionsSingleExpression13()
         {
             string expression;
@@ -903,7 +903,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Equal("\"AA\", 'BB', `cc`", capture.Captures[1].FunctionArguments);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorExpressionsSingleExpression14()
         {
             string expression;
@@ -925,7 +925,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Equal("'()', $(Boo), ')('", capture.Captures[1].FunctionArguments);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorExpressionsSingleExpression15()
         {
             string expression;
@@ -947,7 +947,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Equal("`()`, $(Boo), \"AA\"", capture.Captures[1].FunctionArguments);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorExpressionsSingleExpression16()
         {
             string expression;
@@ -969,7 +969,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Equal("`()`, $(Boo), \")(\"", capture.Captures[1].FunctionArguments);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorExpressionsSingleExpression17()
         {
             string expression;
@@ -991,7 +991,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Equal("\"()\", $(Boo), `)(`", capture.Captures[1].FunctionArguments);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorExpressionsMultipleExpression1()
         {
             string expression;
@@ -1015,7 +1015,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Equal("\"()\", $(Boo), `)(`", capture.Captures[1].FunctionArguments);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorExpressionsMultipleExpression2()
         {
             string expression;
@@ -1039,7 +1039,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Equal("\"()\", $(Boo), `)(`", capture.Captures[1].FunctionArguments);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorExpressionsMultipleExpression3()
         {
             string expression;
@@ -1063,7 +1063,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Equal("\"()\", $(Boo), `)(`", capture.Captures[1].FunctionArguments);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorExpressionsMultipleExpression4()
         {
             string expression;
@@ -1087,7 +1087,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Equal("\"()\", $(Boo), `)(\"`", capture.Captures[1].FunctionArguments);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtractItemVectorExpressionsMultipleExpression5()
         {
             string expression;

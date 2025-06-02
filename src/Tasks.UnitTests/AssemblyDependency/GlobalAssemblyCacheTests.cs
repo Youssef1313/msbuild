@@ -50,7 +50,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         ///
         /// This test two aspects. First that we get the correct runtime, second that we get the highest version for that assembly in the runtime.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifySimpleNamev2057020()
         {
             // We want to pass a very generic name to get the correct gac entries.
@@ -75,7 +75,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// Verify that by setting the wants specific version to true that we will return the highest version when only the simple name is used.
         /// Essentially specific version for the gac resolver means do not filter by runtime.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifySimpleNamev2057020SpecificVersion()
         {
             // We want to pass a very generic name to get the correct gac entries.
@@ -98,7 +98,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// Verify that by setting the wants specific version to true that we will return the highest version when only the simple name is used.
         /// Essentially specific version for the gac resolver means do not filter by runtime.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyFusionNamev2057020SpecificVersion()
         {
             // We want to pass a very generic name to get the correct gac entries.
@@ -121,7 +121,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         ///
         /// This test two aspects. First that we get the correct runtime, second that we get the highest version for that assembly in the runtime.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifySimpleNamev40()
         {
             // We want to pass a very generic name to get the correct gac entries.
@@ -145,7 +145,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// Verify that by setting the wants specific version to true that we will return the highest version when only the simple name is used.
         /// Essentially specific version for the gac resolver means do not filter by runtime.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifySimpleNamev40SpecificVersion()
         {
             // We want to pass a very generic name to get the correct gac entries.
@@ -166,7 +166,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// Verify that by setting the wants specific version to true that we will return the highest version when only the simple name is used.
         /// Essentially specific version for the gac resolver means do not filter by runtime.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyFusionNamev40SpecificVersion()
         {
             // We want to pass a very generic name to get the correct gac entries.
@@ -181,7 +181,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify when a assembly name is passed in which has the public key explicitly set to null that we return null as the assembly cannot be in the gac.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyEmptyPublicKeyspecificVersion()
         {
             Assert.Throws<FileLoadException>(() =>
@@ -194,7 +194,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify when a assembly name is passed in which has the public key explicitly set to null that we return null as the assembly cannot be in the gac.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyNullPublicKey()
         {
             AssemblyNameExtension fusionName = new AssemblyNameExtension("System, PublicKeyToken=null");
@@ -205,7 +205,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify when a assembly name is passed in which has the public key explicitly set to null that we return null as the assembly cannot be in the gac.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyNullPublicKeyspecificVersion()
         {
             AssemblyNameExtension fusionName = new AssemblyNameExtension("System, PublicKeyToken=null");
@@ -218,7 +218,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// When a processor architecture is on the end of a fusion name we were appending another processor architecture onto the end causing an invalid fusion name
         /// this was causing the GAC (api's) to crash.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyProcessorArchitectureDoesNotCrash()
         {
             AssemblyNameExtension fusionName = new AssemblyNameExtension("System, PublicKeyToken=b77a5c561934e089, ProcessorArchitecture=MSIL");
@@ -230,7 +230,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// When a processor architecture is on the end of a fusion name we were appending another processor architecture onto the end causing an invalid fusion name
         /// this was causing the GAC (api's) to crash.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyProcessorArchitectureDoesNotCrashSpecificVersion()
         {
             AssemblyNameExtension fusionName = new AssemblyNameExtension("System, PublicKeyToken=b77a5c561934e089, ProcessorArchitecture=MSIL");
@@ -242,7 +242,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// See bug 648678,  when a processor architecture is on the end of a fusion name we were appending another processor architecture onto the end causing an invalid fusion name
         /// this was causing the GAC (api's) to crash.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyProcessorArchitectureDoesNotCrashFullFusionName()
         {
             AssemblyNameExtension fusionName = new AssemblyNameExtension("System, PublicKeyToken=b77a5c561934e089, ProcessorArchitecture=MSIL");
@@ -254,7 +254,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// When a processor architecture is on the end of a fusion name we were appending another processor architecture onto the end causing an invalid fusion name
         /// this was causing the GAC (api's) to crash.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyProcessorArchitectureDoesNotCrashFullFusionNameSpecificVersion()
         {
             AssemblyNameExtension fusionName = new AssemblyNameExtension("System, PublicKeyToken=b77a5c561934e089, ProcessorArchitecture=MSIL");
@@ -266,7 +266,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         // System.Runtime dependency calculation tests
 
         // No dependency
-        [Fact]
+        [TestMethod]
         public void SystemRuntimeDepends_No_Build()
         {
             ResolveAssemblyReference t = new ResolveAssemblyReference();
@@ -335,7 +335,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
 
         // Direct dependency
-        [Fact]
+        [TestMethod]
         public void SystemRuntimeDepends_Yes()
         {
             ResolveAssemblyReference t = new ResolveAssemblyReference();
@@ -402,7 +402,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         }
 
         // Indirect dependency
-        [Fact]
+        [TestMethod]
         public void SystemRuntimeDepends_Yes_Indirect()
         {
             ResolveAssemblyReference t = new ResolveAssemblyReference();
@@ -468,7 +468,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             Assert.Equal("true", t.DependsOnSystemRuntime, true); // "Expected System.Runtime dependency found during intellibuild."
         }
 
-        [Fact]
+        [TestMethod]
         public void SystemRuntimeDepends_Yes_Indirect_ExternallyResolved()
         {
             ResolveAssemblyReference t = new ResolveAssemblyReference();
@@ -532,7 +532,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             Assert.Equal("true", t.DependsOnSystemRuntime, true); // "Expected System.Runtime dependency found during intellibuild."
         }
 
-        [Fact]
+        [TestMethod]
         public void NETStandardDepends_Yes()
         {
             ResolveAssemblyReference t = new ResolveAssemblyReference();
@@ -596,7 +596,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             Assert.Equal("true", t.DependsOnNETStandard, true); // "Expected System.Runtime dependency found during intellibuild."
         }
 
-        [Fact]
+        [TestMethod]
         public void NETStandardDepends_Yes_Indirect()
         {
             ResolveAssemblyReference t = new ResolveAssemblyReference();
@@ -661,7 +661,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         }
 
 
-        [Fact]
+        [TestMethod]
         public void NETStandardDepends_Yes_Indirect_ExternallyResolved()
         {
             ResolveAssemblyReference t = new ResolveAssemblyReference();
@@ -726,7 +726,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             Assert.Equal("true", t.DependsOnNETStandard, true); // "Expected netstandard dependency found during intellibuild."
         }
 
-        [Fact]
+        [TestMethod]
         public void DependsOn_NETStandard_and_SystemRuntime()
         {
             ResolveAssemblyReference t = new ResolveAssemblyReference();
@@ -794,7 +794,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             Assert.Equal("true", t.DependsOnNETStandard, true); //                   "Expected netstandard dependency found during intellibuild."
         }
 
-        [Fact]
+        [TestMethod]
         public void DependsOn_NETStandard_and_SystemRuntime_ExternallyResolved()
         {
             ResolveAssemblyReference t = new ResolveAssemblyReference();

@@ -30,7 +30,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read simple metadatum
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadMetadata()
         {
             ProjectMetadataElement metadatum = GetMetadataXml();
@@ -43,7 +43,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read metadatum with invalid attribute
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidAttribute()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -64,7 +64,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read metadatum with invalid name characters (but legal xml)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidName()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -83,15 +83,15 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             });
         }
 
-        [Theory]
-        [InlineData(@"
+        [TestMethod]
+        [DataRow(@"
                     <Project>
                         <ItemGroup>
                             <i Include='i1' " + "\u03A3" + @"='v1' />
                         </ItemGroup>
                     </Project>
                 ")]
-        [InlineData(@"
+        [DataRow(@"
                     <Project>
                         <ItemDefinitionGroup>
                             <i " + "\u03A3" + @"='v1' />
@@ -109,7 +109,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read metadatum with invalid built-in metadata name
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidBuiltInName()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -128,15 +128,15 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             });
         }
 
-        [Theory]
-        [InlineData(@"
+        [TestMethod]
+        [DataRow(@"
                     <Project>
                         <ItemGroup>
                             <i Include='i1' Filename='v1'/>
                         </ItemGroup>
                     </Project>
                 ")]
-        [InlineData(@"
+        [DataRow(@"
                     <Project>
                         <ItemDefinitionGroup>
                             <i Filename='v1'/>
@@ -154,7 +154,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read metadatum with invalid built-in element name
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidBuiltInElementName()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -176,15 +176,15 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read metadatum with invalid built-in element name
         /// </summary>
-        [Theory]
-        [InlineData(@"
+        [TestMethod]
+        [DataRow(@"
                     <Project>
                         <ItemGroup>
                             <i Include='i1' PropertyGroup='v1' />
                         </ItemGroup>
                     </Project>
                 ")]
-        [InlineData(@"
+        [DataRow(@"
                     <Project>
                         <ItemDefinitionGroup>
                             <i PropertyGroup='v1' />
@@ -202,7 +202,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set metadatum value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetValue()
         {
             ProjectMetadataElement metadatum = GetMetadataXml();
@@ -214,7 +214,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Rename
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetName()
         {
             ProjectMetadataElement metadatum = GetMetadataXml();
@@ -227,7 +227,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Rename to same value should not mark dirty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetNameSame()
         {
             ProjectMetadataElement metadatum = GetMetadataXml();
@@ -241,7 +241,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Rename to illegal name
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetNameIllegal()
         {
             Assert.Throws<ArgumentException>(() =>
@@ -252,7 +252,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void SetNameIllegalAsAttribute()
         {
             ProjectMetadataElement metadatum = GetMetadataXml();
@@ -265,7 +265,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         }
 
 
-        [Fact]
+        [TestMethod]
         public void SetExpressedAsAttributeIllegalName()
         {
             ProjectMetadataElement metadatum = GetMetadataXml();
@@ -277,15 +277,15 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             });
         }
 
-        [Theory]
-        [InlineData(@"
+        [TestMethod]
+        [DataRow(@"
                     <Project>
                         <ItemGroup>
                             <i1 Include='i' />
                         </ItemGroup>
                     </Project>
                 ")]
-        [InlineData(@"
+        [DataRow(@"
                     <Project>
                         <Target Name='t'>
                             <ItemGroup>
@@ -312,7 +312,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void AddMetadataAsAttributeToItemDefinitionIllegalName()
         {
             string project = @"
@@ -342,7 +342,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set metadatum value to empty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetEmptyValue()
         {
             ProjectMetadataElement metadatum = GetMetadataXml();
@@ -354,7 +354,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set metadatum value to null
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetInvalidNullValue()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -367,7 +367,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read a metadatum containing an expression like @(..) but whose parent is an ItemDefinitionGroup
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidItemExpressionInMetadata()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -388,7 +388,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read a metadatum containing an expression like @(..) but whose parent is NOT an ItemDefinitionGroup
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadValidItemExpressionInMetadata()
         {
             string content = @"
@@ -405,15 +405,15 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             using ProjectRootElementFromString projectRootElementFromString = new(content);
         }
 
-        [Theory]
-        [InlineData(@"
+        [TestMethod]
+        [DataRow(@"
                     <Project>
                         <ItemGroup>
                             <i1 Include='i' m1='v1' />
                         </ItemGroup>
                     </Project>
                 ")]
-        [InlineData(@"
+        [DataRow(@"
                     <Project>
                         <Target Name='t'>
                             <ItemGroup>
@@ -439,7 +439,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Assert.True(metadata.ExpressedAsAttribute);
         }
 
-        [Fact]
+        [TestMethod]
         public void ReadMetadataAsAttributeOnItemDefinition()
         {
             string project = @"
@@ -464,15 +464,15 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Assert.True(metadata.ExpressedAsAttribute);
         }
 
-        [Theory]
-        [InlineData(@"
+        [TestMethod]
+        [DataRow(@"
                     <Project>
                         <ItemGroup>
                             <i1 Include='i' m1='&lt;&amp;>""' />
                         </ItemGroup>
                     </Project>
                 ")]
-        [InlineData(@"
+        [DataRow(@"
                     <Project>
                         <Target Name='t'>
                             <ItemGroup>
@@ -498,7 +498,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Assert.True(metadata.ExpressedAsAttribute);
         }
 
-        [Fact]
+        [TestMethod]
         public void ReadMetadataAsAttributeOnItemDefinitionWithSpecialCharacters()
         {
             var project = @"
@@ -523,8 +523,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Assert.True(metadata.ExpressedAsAttribute);
         }
 
-        [Theory]
-        [InlineData(@"
+        [TestMethod]
+        [DataRow(@"
                     <Project>
                         <ItemGroup>
                             <i1 Include=`i` m1=`v1` />
@@ -536,7 +536,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
                             <i1 Include=`i` m1=`v2` />
                         </ItemGroup>
                     </Project>")]
-        [InlineData(@"
+        [DataRow(@"
                     <Project>
                         <Target Name='t'>
                             <ItemGroup>
@@ -589,7 +589,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             VerifyAssertLineByLine(expected, actual);
         }
 
-        [Fact]
+        [TestMethod]
         public void UpdateMetadataValueAsAttributeOnItemDefinition()
         {
             var projectContents = @"
@@ -641,8 +641,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         //      &lt;&amp;>"
         //  instead of:
         //      &lt;&amp;&gt;&quot;
-        [Theory]
-        [InlineData(@"
+        [TestMethod]
+        [DataRow(@"
                     <Project>
                         <ItemGroup>
                             <i1 Include=`i` m1=`v1` />
@@ -654,7 +654,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
                             <i1 Include=`i` m1=`&lt;&amp;&gt;&quot;` />
                         </ItemGroup>
                     </Project>")]
-        [InlineData(@"
+        [DataRow(@"
                     <Project>
                         <Target Name='t'>
                             <ItemGroup>
@@ -706,7 +706,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             VerifyAssertLineByLine(expected, actual);
         }
 
-        [Fact]
+        [TestMethod]
         public void UpdateMetadataValueAsAttributeOnItemDefinitionWithSpecialCharacters()
         {
             var projectContents = @"
@@ -754,8 +754,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             VerifyAssertLineByLine(expected, actual);
         }
 
-        [Theory]
-        [InlineData(@"
+        [TestMethod]
+        [DataRow(@"
                     <Project>
                         <ItemGroup>
                             <i1 Include='i'>
@@ -769,7 +769,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
                             <i1 Include=`i` m1=`v1` />
                         </ItemGroup>
                     </Project>")]
-        [InlineData(@"
+        [DataRow(@"
                     <Project>
                         <ItemGroup>
                             <i1 Include='i'><m1>v1</m1></i1>
@@ -781,7 +781,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
                             <i1 Include=`i` m1=`v1` />
                         </ItemGroup>
                     </Project>")]
-        [InlineData(@"
+        [DataRow(@"
                     <Project>
                         <Target Name='t'>
                             <ItemGroup>
@@ -835,8 +835,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             VerifyAssertLineByLine(expected, actual);
         }
 
-        [Theory]
-        [InlineData(@"
+        [TestMethod]
+        [DataRow(@"
                     <Project>
                         <ItemDefinitionGroup>
                             <i1>
@@ -850,7 +850,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
                             <i1 m1=`v1` />
                         </ItemDefinitionGroup>
                     </Project>")]
-        [InlineData(@"
+        [DataRow(@"
                     <Project>
                         <ItemDefinitionGroup>
                             <i1><m1>v1</m1></i1>
@@ -898,8 +898,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             VerifyAssertLineByLine(expected, actual);
         }
 
-        [Theory]
-        [InlineData(@"
+        [TestMethod]
+        [DataRow(@"
                     <Project>
                         <ItemGroup>
                             <i1 Include='i' m1='v1' />
@@ -913,7 +913,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
                             </i1>
                         </ItemGroup>
                     </Project>")]
-        [InlineData(@"
+        [DataRow(@"
                     <Project>
                         <Target Name='t'>
                             <ItemGroup>
@@ -967,7 +967,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             VerifyAssertLineByLine(expected, actual);
         }
 
-        [Fact]
+        [TestMethod]
         public void ChangeAttributeToMetadataOnItemDefinition()
         {
             var projectContents = @"
@@ -1017,8 +1017,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             VerifyAssertLineByLine(expected, actual);
         }
 
-        [Theory]
-        [InlineData(@"
+        [TestMethod]
+        [DataRow(@"
                     <Project>
                         <ItemGroup>
                             <i1 Include='i' />
@@ -1030,7 +1030,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
                             <i1 Include=`i` m1=`v1` />
                         </ItemGroup>
                     </Project>")]
-        [InlineData(@"
+        [DataRow(@"
                     <Project>
                         <Target Name='t'>
                             <ItemGroup>
@@ -1079,7 +1079,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             VerifyAssertLineByLine(expected, actual);
         }
 
-        [Fact]
+        [TestMethod]
         public void AddMetadataAsAttributeToItemDefinition()
         {
             var projectContents = @"
@@ -1124,8 +1124,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             VerifyAssertLineByLine(expected, actual);
         }
 
-        [Theory]
-        [InlineData(@"
+        [TestMethod]
+        [DataRow(@"
                     <Project>
                         <ItemGroup>
                             <i1 Include='i' />
@@ -1139,7 +1139,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
                             </i1>
                         </ItemGroup>
                     </Project>")]
-        [InlineData(@"
+        [DataRow(@"
                     <Project>
                         <Target Name='t'>
                             <ItemGroup>
@@ -1197,7 +1197,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             VerifyAssertLineByLine(expected, actual);
         }
 
-        [Fact]
+        [TestMethod]
         public void AddMetadataToItemDefinitionAsAttributeAndAsElement()
         {
             var projectContents = @"

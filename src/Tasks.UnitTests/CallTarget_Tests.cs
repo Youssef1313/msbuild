@@ -29,7 +29,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Simple test of the CallTarget task.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Simple()
         {
             MockLogger logger = ObjectModelHelpers.BuildProjectExpectSuccess(@"
@@ -50,7 +50,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Simple test of the CallTarget task, where one of the middle targets invoked fails.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void FailedTargets()
         {
             MockLogger logger = ObjectModelHelpers.BuildProjectExpectFailure(@"
@@ -82,7 +82,7 @@ namespace Microsoft.Build.UnitTests
         /// Test the CallTarget task, where one of the middle targets invoked fails, but we
         /// specified RunEachTargetSeparately, so all the targets should have been run anyway.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void FailedTargetsRunSeparately()
         {
             MockLogger logger = ObjectModelHelpers.BuildProjectExpectFailure(@"
@@ -109,7 +109,7 @@ namespace Microsoft.Build.UnitTests
             logger.AssertLogContains("Inside C");
         }
 
-        [Fact]
+        [TestMethod]
         public void FailsWithOnlyTargetErrors()
         {
             MockLogger logger = ObjectModelHelpers.BuildProjectExpectFailure(@"
@@ -130,7 +130,7 @@ namespace Microsoft.Build.UnitTests
         /// to succeed, so that callers of the task don't have to add a Condition to ensure
         /// that the list of targets is non-empty.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NoTargets()
         {
             ObjectModelHelpers.BuildProjectExpectSuccess(@"
@@ -146,7 +146,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Test the CallTarget task and capture the outputs of the invoked targets.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CaptureTargetOutputs()
         {
             Project project = ObjectModelHelpers.CreateInMemoryProject(@"
@@ -195,7 +195,7 @@ namespace Microsoft.Build.UnitTests
                 targetOutputsTaskItems.ToArray(), false /* ignore the order */);
         }
 
-        [Fact]
+        [TestMethod]
         public void CaptureTargetOutputsRunningEachTargetSeparately()
         {
             MockLogger logger = ObjectModelHelpers.BuildProjectExpectSuccess(@"

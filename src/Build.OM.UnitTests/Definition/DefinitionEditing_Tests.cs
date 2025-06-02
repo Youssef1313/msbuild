@@ -142,7 +142,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Add an item to an empty project
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItem()
         {
             Project project = new Project();
@@ -169,7 +169,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Add an item to an empty project, where the include is escaped
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItem_EscapedItemInclude()
         {
             Project project = new Project();
@@ -196,7 +196,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Add an item with metadata
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItem_WithMetadata()
         {
             Project project = new Project();
@@ -222,7 +222,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Add an item with empty include.
         /// Should throw.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItem_InvalidEmptyInclude()
         {
             Assert.Throws<ArgumentException>(() =>
@@ -236,7 +236,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Add an item with null metadata parameter.
         /// Should just add no metadata.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItem_NullMetadata()
         {
             Project project = new Project();
@@ -257,7 +257,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Add an item whose include has a property expression. As a convenience, we attempt to expand the
         /// expression to create the evaluated include.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItem_IncludeContainsPropertyExpression()
         {
             Project project = new Project();
@@ -274,7 +274,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Add an item whose include has a wildcard. We attempt to expand the wildcard using the
         /// file system. In this case, we have one entry in the project and two evaluated items.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItem_IncludeContainsWildcard()
         {
             string[] paths = null;
@@ -304,7 +304,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// This value will not be reliable until the project is reevaluated --
         /// for example, it assumes any items referenced are defined above this one.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItem_IncludeContainsItemExpression()
         {
             Project project = new Project();
@@ -320,7 +320,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Add an item whose include contains a wildcard but doesn't match anything.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItem_ContainingWildcardNoMatches()
         {
             Project project = new Project();
@@ -337,7 +337,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Add an item whose include contains a wildcard.
         /// In this case we don't try to reuse an existing wildcard expression.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItem_ContainingWildcardExistingWildcard()
         {
             Project project = new Project();
@@ -361,7 +361,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Add an item whose include contains a semicolon.
         /// In this case we don't try to reuse an existing wildcard expression.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItem_ContainingSemicolonExistingWildcard()
         {
             Project project = new Project();
@@ -386,7 +386,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// wildcarded item, but the wildcard won't pick up the new file, then we
         /// of course have to add the new item.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItem_DoesntMatchWildcard()
         {
             Project project = new Project();
@@ -411,7 +411,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// on it, we don't try to match with it when a user tries to add a new
         /// item to the project.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItem_MatchesWildcardWithCondition()
         {
             Project project = new Project();
@@ -437,7 +437,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// on it, we don't try to match with it when a user tries to add a new
         /// item to the project.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItem_MatchesWildcardWithExclude()
         {
             Project project = new Project();
@@ -462,7 +462,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// There's a wildcard in the project already, and the user tries to add an item
         /// that matches that wildcard.  In this case, we don't touch the project at all.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItem_MatchesWildcard()
         {
             Project project = new Project();
@@ -487,7 +487,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// that matches that wildcard, except that its item type is different.
         /// In this case, we ignore the existing wildcard.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItem_MatchesWildcardButNotItemType()
         {
             Project project = new Project();
@@ -513,7 +513,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// There's a complicated recursive wildcard in the project already, and the user tries to add an item
         /// that matches that wildcard.  In this case, we don't touch the project at all.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItem_MatchesComplicatedWildcard()
         {
             Project project = new Project();
@@ -549,7 +549,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// There's a complicated recursive wildcard in the project already, and the user tries to add an item
         /// that doesn't match that wildcard.  In this case, we don't touch the project at all.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItem_DoesntMatchComplicatedWildcard()
         {
             Project project = new Project();
@@ -577,7 +577,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// In contrast Orcas/Whidbey assumed that the user wants
         /// that metadata on the new item, too.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItem_DoesNotMatchWildcardWithMetadata()
         {
             Project project = new Project();
@@ -605,7 +605,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// with metadata.  In this case, we add a new item, because the old
         /// one wasn't equivalent.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemWithMetadata_DoesNotMatchWildcardWithNoMetadata()
         {
             Project project = new Project();
@@ -633,7 +633,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// list of items.  Now the user tries to add an item that matches that wildcard.
         /// In this case, we don't touch the project at all.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItem_MatchesWildcardInSemicolonList()
         {
             Project project = new Project();
@@ -656,7 +656,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Modify an item originating in a wildcard by adding a new piece of metadata.
         /// We should blow up the item in the project file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetMetadata_ItemOriginatingWithWildcard()
         {
             string[] paths = null;
@@ -702,7 +702,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Set a piece of metadata on an item originating from an item list expression.
         /// We should blow up the expression and set the metadata on one of the resulting items.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetMetadata_ItemOriginatingWithItemList()
         {
             var content = ObjectModelHelpers.CleanupFileContents(
@@ -741,7 +741,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Change the value on a piece of metadata on an item originating from an item list expression.
         /// The ProjectMetadata object is shared by all the items here, so the edit does not cause any expansion.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetMetadataUnevaluatedValue_ItemOriginatingWithItemList()
         {
             var content = ObjectModelHelpers.CleanupFileContents(
@@ -777,7 +777,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Modify an item originating in a wildcard by removing a piece of metadata.
         /// We should blow up the item in the project file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveMetadata_ItemOriginatingWithWildcard()
         {
             string[] paths = null;
@@ -821,7 +821,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// list of items, and it uses a property reference.  Now the user tries to add a new
         /// item that matches that wildcard.  In this case, we don't touch the project at all.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItem_MatchesWildcardWithPropertyReference()
         {
             Project project = new Project();
@@ -848,7 +848,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// There's a wildcard in the project already, and the user renames an item such that it
         /// now matches that wildcard. We don't try to do any thing clever like reuse that wildcard.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RenameItem_MatchesWildcard()
         {
             Project project = new Project();
@@ -875,7 +875,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Because the rename did not cause more items to appear, it is possible
         /// to update the EvaluatedInclude of this one.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RenameItem_NewNameContainsPropertyExpression()
         {
             Project project = new Project();
@@ -902,7 +902,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Because the rename did not cause more items to appear, it is possible
         /// to update the EvaluatedInclude of this one.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RenameItem_NewNameContainsItemExpression()
         {
             Project project = new Project();
@@ -930,7 +930,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Because the new name expands to more than one item, we don't attempt to
         /// update the evaluated include.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RenameItem_NewNameContainsItemExpressionExpandingToTwoItems()
         {
             Project project = new Project();
@@ -962,7 +962,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// it wouldn't expand to blank. That's why I'm being cautious and supporting
         /// the most common scenario only. Many hosts will do a ReevaluateIfNecessary before reading anyway (including CPS)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RenameItem_NewNameContainsItemExpressionExpandingToZeroItems()
         {
             Project project = new Project();
@@ -981,7 +981,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Rename an item that originated in an expression like "@(h)"
         /// We should blow up the expression and rename the correct part.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RenameItem_OriginatingWithItemList()
         {
             var content = ObjectModelHelpers.CleanupFileContents(
@@ -1022,7 +1022,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Rename an item that originated in an expression like "a.cs;b.cs"
         /// We should blow up the expression and rename the correct part.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RenameItem_OriginatingWithSemicolon()
         {
             Project project = new Project();
@@ -1050,7 +1050,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// We should blow up the expression and rename the correct part,
         /// and because a split had to occur, we should not expand the expression.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RenameItem_OriginatingWithSemicolonToExpandableExpression()
         {
             Project project = new Project();
@@ -1082,7 +1082,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// An item originates from a wildcard, and we rename it to something
         /// that no longer matches the wildcard. This should cause the wildcard to be expanded.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RenameItem_NoLongerMatchesWildcard()
         {
             string[] paths = null;
@@ -1122,7 +1122,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// An item originates from a wildcard, and we rename it to something
         /// that still matches the wildcard. This should not modify the project.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RenameItem_StillMatchesWildcard()
         {
             string[] paths = null;
@@ -1150,9 +1150,9 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             }
         }
 
-        [Theory]
-        [MemberData(nameof(ItemElementsThatRequireSplitting))]
-        [MemberData(nameof(ItemElementsWithGlobsThatRequireSplitting))]
+        [TestMethod]
+        [DynamicData(nameof(ItemElementsThatRequireSplitting))]
+        [DynamicData(nameof(ItemElementsWithGlobsThatRequireSplitting))]
         public void RenameThrowsWhenItemElementSplittingIsDisabled(string projectContents, int itemIndex, SetupProject setupProject)
         {
             AssertDisabledItemSplitting(projectContents, itemIndex, setupProject, (p, i) => { i.Rename("foo"); });
@@ -1161,7 +1161,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Change an item type.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ChangeItemType()
         {
             Project project = new Project();
@@ -1201,7 +1201,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Change an item type; metadata should stay in place
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ChangeItemTypeOnItemWithMetadata()
         {
             Project project = new Project();
@@ -1257,7 +1257,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Change an item type where the item needs blowing up first.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ChangeItemTypeOnItemNeedingSplitting()
         {
             Project project = new Project();
@@ -1283,9 +1283,9 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             Assert.True(object.ReferenceEquals(itemGroupElement, Helpers.GetFirst(project.GetItems("i")).Xml.Parent));
         }
 
-        [Theory]
-        [MemberData(nameof(ItemElementsThatRequireSplitting))]
-        [MemberData(nameof(ItemElementsWithGlobsThatRequireSplitting))]
+        [TestMethod]
+        [DynamicData(nameof(ItemElementsThatRequireSplitting))]
+        [DynamicData(nameof(ItemElementsWithGlobsThatRequireSplitting))]
         public void ChangeItemTypeThrowsWhenItemElementSplittingIsDisabled(string projectContents, int itemIndex, SetupProject setupProject)
         {
             AssertDisabledItemSplitting(projectContents, itemIndex, setupProject, (p, i) => { i.ItemType = "foo"; });
@@ -1294,7 +1294,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Remove an item, clearing up the empty item group as well
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveItem()
         {
             Project project = new Project();
@@ -1316,7 +1316,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// We should expand the expression to the remaining items, if any.
         /// Metadata should be preserved.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveItem_OriginatingWithItemList()
         {
             var content = ObjectModelHelpers.CleanupFileContents(
@@ -1353,7 +1353,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Remove an item that originated in an expression like "a.cs;b.cs"
         /// We should keep the part of the expression that still applies.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveItem_OriginatingWithSemicolon()
         {
             Project project = new Project();
@@ -1377,7 +1377,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// This should cause the wildcard to be expanded to the remaining items, if any.
         /// Expanding the wildcard should preserve the metadata on it.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveItem_OriginatingWithWildcard()
         {
             string[] paths = null;
@@ -1419,7 +1419,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Items in certain locations are stored by the project despite having a false condition -- eg for populating the solution explorer.
         /// Removing an item should remove it from this list too.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveItem_IncludingFromIgnoringConditionList()
         {
             var content = ObjectModelHelpers.CleanupFileContents(
@@ -1445,17 +1445,17 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             Assert.Empty(itemsIgnoringCondition);
         }
 
-        [Theory]
-        [MemberData(nameof(ItemElementsThatRequireSplitting))]
-        [MemberData(nameof(ItemElementsWithGlobsThatRequireSplitting))]
+        [TestMethod]
+        [DynamicData(nameof(ItemElementsThatRequireSplitting))]
+        [DynamicData(nameof(ItemElementsWithGlobsThatRequireSplitting))]
         public void RemoveItemThrowsWhenItemElementSplittingIsDisabled(string projectContents, int itemIndex, SetupProject setupProject)
         {
             AssertDisabledItemSplitting(projectContents, itemIndex, setupProject, (p, i) => { p.RemoveItem(i); });
         }
 
-        [Theory]
-        [MemberData(nameof(ItemElementsThatRequireSplitting))]
-        [MemberData(nameof(ItemElementsWithGlobsThatRequireSplitting))]
+        [TestMethod]
+        [DynamicData(nameof(ItemElementsThatRequireSplitting))]
+        [DynamicData(nameof(ItemElementsWithGlobsThatRequireSplitting))]
         public void RemoveItemsThrowsWhenItemElementSplittingIsDisabled(string projectContents, int itemIndex, SetupProject setupProject)
         {
             AssertDisabledItemSplitting(projectContents, itemIndex, setupProject, (p, i) => { p.RemoveItems(new[] { i }); });
@@ -1464,7 +1464,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Test simple property set with name and value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetProperty()
         {
             Project project = new Project();
@@ -1489,7 +1489,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Test simple property set with name and value, where the value is escaped
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetProperty_EscapedValue()
         {
             Project project = new Project();
@@ -1515,7 +1515,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Setting a property that originates in an import should not try to edit the property there.
         /// It should set it in the main project file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetPropertyOriginatingInImport()
         {
             ProjectRootElement xml = ProjectRootElement.Create();
@@ -1534,7 +1534,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Verify properties are expanded in new property values
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetPropertyWithPropertyExpression()
         {
             Project project = new Project();
@@ -1550,7 +1550,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// when you output them, item expansion happens after property expansion, and
         /// they may evaluate to blank then. (Unless items do exist at that point.)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetPropertyWithItemExpression()
         {
             Project project = new Project();
@@ -1565,7 +1565,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// should not dirty the project.
         /// (VS seems to do this a lot.)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetPropertyWithNoChangesShouldNotDirty()
         {
             Project project = new Project();
@@ -1581,7 +1581,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Setting an evaluated property after its XML has been removed should
         /// fail.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetPropertyAfterRemoved()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -1596,7 +1596,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Setting an evaluated property after its XML's parent has been removed should
         /// fail.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetPropertyAfterRemoved2()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -1611,7 +1611,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Setting an evaluated metadatum after its XML has been removed should
         /// fail.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetMetadatumAfterRemoved()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -1626,7 +1626,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Changing an item's type after its XML has been removed should
         /// fail.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetItemTypeAfterRemoved()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -1641,7 +1641,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Changing an item's type after its XML has been removed should
         /// fail.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveMetadataAfterItemRemoved()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -1653,16 +1653,16 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             });
         }
 
-        [Theory]
-        [MemberData(nameof(ItemElementsThatRequireSplitting))]
+        [TestMethod]
+        [DynamicData(nameof(ItemElementsThatRequireSplitting))]
         public void RemoveMetadataThrowsWhenItemElementSplittingIsDisabled(string projectContents, int itemIndex, SetupProject setupProject)
         {
             AssertDisabledItemSplitting(projectContents, itemIndex, setupProject, (p, i) => { i.RemoveMetadata("bar"); }, "bar");
         }
 
-        [Theory]
+        [TestMethod]
         // explode on item coming from glob that expands to one item
-        [InlineData(
+        [DataRow(
             @"<Project ToolsVersion=""msbuilddefaulttoolsversion"" xmlns=""msbuildnamespace"">
                 <ItemGroup>
                     <a Include=""*.foo"">
@@ -1676,7 +1676,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
                 "a.foo"
             })]
         // explode on item coming from glob that expands to multiple items
-        [InlineData(
+        [DataRow(
             @"<Project ToolsVersion=""msbuilddefaulttoolsversion"" xmlns=""msbuildnamespace"">
                 <ItemGroup>
                     <a Include=""*.foo"">
@@ -1715,7 +1715,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Setting an evaluated metadatum after its XML's parent has been removed should
         /// fail.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetMetadatumAfterRemoved2()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -1730,7 +1730,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Setting an evaluated metadatum after its XML's parent's parent has been removed should
         /// fail.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetMetadatumAfterRemoved3()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -1742,9 +1742,9 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             });
         }
 
-        [Theory]
-        [MemberData(nameof(ItemElementsThatRequireSplitting))]
-        [MemberData(nameof(ItemElementsWithGlobsThatRequireSplitting))]
+        [TestMethod]
+        [DynamicData(nameof(ItemElementsThatRequireSplitting))]
+        [DynamicData(nameof(ItemElementsWithGlobsThatRequireSplitting))]
         public void SetMetadataThrowsWhenItemElementSplittingIsDisabled(string projectContents, int itemIndex, SetupProject setupProject)
         {
             AssertDisabledItemSplitting(projectContents, itemIndex, setupProject, (p, i) => { i.SetMetadataValue("foo", "bar"); });
@@ -1754,7 +1754,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// After removing an appropriate item group's XML without reevaluation an item is added;
         /// it should go in a new one
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemAfterAppropriateItemGroupRemoved()
         {
             Project project = new Project();
@@ -1773,7 +1773,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Setting a property after an equivalent's XML has been removed without reevaluation, should
         /// still work.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetNewPropertyAfterEquivalentRemoved()
         {
             Project project = new Project();
@@ -1792,7 +1792,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Setting a property after an equivalent's XML's parent has been removed without reevaluation, should
         /// still work.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetNewPropertyAfterEquivalentsParentRemoved()
         {
             Project project = new Project();
@@ -1810,7 +1810,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Test removing a property. Parent empty group should also be removed.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveProperty()
         {
             Project project = new Project();
@@ -1834,7 +1834,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Test removing a property. Other property should not be disturbed.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemovePropertyWithSibling()
         {
             Project project = new Project();
@@ -1857,7 +1857,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Add metadata to an existing item
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddMetadata()
         {
             Project project = new Project();
@@ -1885,7 +1885,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Add metadata to an existing item
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddMetadata_EscapedValue()
         {
             Project project = new Project();
@@ -1914,7 +1914,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Add metadata to an existing item that has existing metadata with that name.
         /// Should replace it.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddMetadata_Existing()
         {
             Project project = new Project();
@@ -1944,7 +1944,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Add an item whose include expands to several items.
         /// Even without reevaluation, we should get two items.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItem_ExpandsToSeveral()
         {
             Project project = new Project();
@@ -1961,7 +1961,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Add an item expanding to several, with metadata
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItem_ExpandsToSeveralWithMetadata()
         {
             Project project = new Project();
@@ -1990,7 +1990,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Add metadata that would be modified by evaluation.
         /// Should be evaluated on a best-effort basis.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddMetadata_Reevaluation()
         {
             var content = ObjectModelHelpers.CleanupFileContents(
@@ -2037,7 +2037,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Add a new piece of item definition metadatum and update an existing one.
         /// The new piece has to go in an entirely new item definition.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddMetadatumToItemDefinition()
         {
             ProjectRootElement xml = ProjectRootElement.Create();
@@ -2066,7 +2066,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Add an item to an empty project
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemFast()
         {
             Project project = new Project();
@@ -2093,7 +2093,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Add an item to an empty project, where the include is escaped
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemFast_EscapedItemInclude()
         {
             Project project = new Project();
@@ -2120,7 +2120,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Add an item with metadata
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemFast_WithMetadata()
         {
             Project project = new Project();
@@ -2146,7 +2146,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Add an item with empty include.
         /// Should throw.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemFast_InvalidEmptyInclude()
         {
             Assert.Throws<ArgumentException>(() =>
@@ -2160,7 +2160,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Add an item with null metadata parameter.
         /// Should just add no metadata.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemFast_NullMetadata()
         {
             Project project = new Project();
@@ -2181,7 +2181,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Add an item whose include has a property expression. As a convenience, we attempt to expand the
         /// expression to create the evaluated include.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemFast_IncludeContainsPropertyExpression()
         {
             Project project = new Project();
@@ -2198,7 +2198,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Add an item whose include has a wildcard. We attempt to expand the wildcard using the
         /// file system. In this case, we have one entry in the project and two evaluated items.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemFast_IncludeContainsWildcard()
         {
             string[] paths = null;
@@ -2228,7 +2228,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// This value will not be reliable until the project is reevaluated --
         /// for example, it assumes any items referenced are defined above this one.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemFast_IncludeContainsItemExpression()
         {
             Project project = new Project();
@@ -2244,7 +2244,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Add an item whose include contains a wildcard but doesn't match anything.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemFast_ContainingWildcardNoMatches()
         {
             Project project = new Project();
@@ -2258,7 +2258,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Add an item whose include contains a wildcard.
         /// In this case we don't try to reuse an existing wildcard expression.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemFast_ContainingWildcardExistingWildcard()
         {
             Project project = new Project();
@@ -2282,7 +2282,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Add an item whose include contains a semicolon.
         /// In this case we don't try to reuse an existing wildcard expression.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemFast_ContainingSemicolonExistingWildcard()
         {
             Project project = new Project();
@@ -2307,7 +2307,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// wildcarded item, but the wildcard won't pick up the new file, then we
         /// of course have to add the new item.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemFast_DoesntMatchWildcard()
         {
             Project project = new Project();
@@ -2332,7 +2332,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// on it, we don't try to match with it when a user tries to add a new
         /// item to the project.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemFast_MatchesWildcardWithCondition()
         {
             Project project = new Project();
@@ -2358,7 +2358,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// on it, we don't try to match with it when a user tries to add a new
         /// item to the project.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemFast_MatchesWildcardWithExclude()
         {
             Project project = new Project();
@@ -2383,7 +2383,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// There's a wildcard in the project already, and the user tries to add an item
         /// that matches that wildcard.  In this case, we don't touch the project at all.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemFast_MatchesWildcard()
         {
             Project project = new Project();
@@ -2408,7 +2408,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// that matches that wildcard, except that its item type is different.
         /// In this case, we ignore the existing wildcard.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemFast_MatchesWildcardButNotItemType()
         {
             Project project = new Project();
@@ -2434,7 +2434,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// There's a complicated recursive wildcard in the project already, and the user tries to add an item
         /// that matches that wildcard.  In this case, we don't touch the project at all.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemFast_MatchesComplicatedWildcard()
         {
             Project project = new Project();
@@ -2466,7 +2466,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// There's a complicated recursive wildcard in the project already, and the user tries to add an item
         /// that doesn't match that wildcard.  In this case, we don't touch the project at all.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemFast_DoesntMatchComplicatedWildcard()
         {
             Project project = new Project();
@@ -2494,7 +2494,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// In contrast Orcas/Whidbey assumed that the user wants
         /// that metadata on the new item, too.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemFast_DoesNotMatchWildcardWithMetadata()
         {
             Project project = new Project();
@@ -2522,7 +2522,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// with metadata.  In this case, we add a new item, because the old
         /// one wasn't equivalent.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemFastWithMetadata_DoesNotMatchWildcardWithNoMetadata()
         {
             Project project = new Project();
@@ -2550,7 +2550,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// list of items.  Now the user tries to add an item that matches that wildcard.
         /// In this case, we don't touch the project at all.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemFast_MatchesWildcardInSemicolonList()
         {
             Project project = new Project();

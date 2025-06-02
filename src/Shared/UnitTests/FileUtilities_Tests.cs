@@ -19,7 +19,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Exercises FileUtilities.ItemSpecModifiers.GetItemSpecModifier
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void GetItemSpecModifier()
@@ -83,7 +83,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(@"goo", modifier);
         }
 
-        [Fact]
+        [TestMethod]
         public void MakeRelativeTests()
         {
             if (NativeMethodsShared.IsWindows)
@@ -184,7 +184,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void GetFileInfoNoThrowBasic()
         {
             string file = null;
@@ -203,7 +203,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void GetFileInfoNoThrowNonexistent()
         {
             FileInfo info = FileUtilities.GetFileInfoNoThrow("this_file_is_nonexistent");
@@ -213,7 +213,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Exercises FileUtilities.EndsWithSlash
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void EndsWithSlash()
@@ -237,7 +237,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Exercises FileUtilities.GetDirectory
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void GetDirectoryWithTrailingSlash()
@@ -258,10 +258,10 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(String.Empty, FileUtilities.GetDirectory("foo"));
         }
 
-        [Theory]
-        [InlineData("foo.txt", new[] { ".txt" })]
-        [InlineData("foo.txt", new[] { ".TXT" })]
-        [InlineData("foo.txt", new[] { ".EXE", ".TXT" })]
+        [TestMethod]
+        [DataRow("foo.txt", new[] { ".txt" })]
+        [DataRow("foo.txt", new[] { ".TXT" })]
+        [DataRow("foo.txt", new[] { ".EXE", ".TXT" })]
         public void HasExtension_WhenFileNameHasExtension_ReturnsTrue(string fileName, string[] allowedExtensions)
         {
             var result = FileUtilities.HasExtension(fileName, allowedExtensions);
@@ -272,14 +272,14 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Theory]
-        [InlineData("foo.txt", new[] { ".DLL" })]
-        [InlineData("foo.txt", new[] { ".EXE", ".DLL" })]
-        [InlineData("foo.exec", new[] { ".exe", })]
-        [InlineData("foo.exe", new[] { ".exec", })]
-        [InlineData("foo", new[] { ".exe", })]
-        [InlineData("", new[] { ".exe" })]
-        [InlineData(null, new[] { ".exe" })]
+        [TestMethod]
+        [DataRow("foo.txt", new[] { ".DLL" })]
+        [DataRow("foo.txt", new[] { ".EXE", ".DLL" })]
+        [DataRow("foo.exec", new[] { ".exe", })]
+        [DataRow("foo.exe", new[] { ".exec", })]
+        [DataRow("foo", new[] { ".exe", })]
+        [DataRow("", new[] { ".exe" })]
+        [DataRow(null, new[] { ".exe" })]
         public void HasExtension_WhenFileNameDoesNotHaveExtension_ReturnsFalse(string fileName, string[] allowedExtensions)
         {
             var result = FileUtilities.HasExtension(fileName, allowedExtensions);
@@ -296,7 +296,7 @@ namespace Microsoft.Build.UnitTests
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void HasExtension_UsesOrdinalIgnoreCase()
         {
             var currentCulture = Thread.CurrentThread.CurrentCulture;
@@ -317,7 +317,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Exercises FileUtilities.EnsureTrailingSlash
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EnsureTrailingSlash()
         {
             // Doesn't have a trailing slash to start with.
@@ -334,7 +334,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Exercises FileUtilities.ItemSpecModifiers.IsItemSpecModifier
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IsItemSpecModifier()
         {
             // Positive matches using exact case.
@@ -400,7 +400,7 @@ namespace Microsoft.Build.UnitTests
             Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier(null)); // "test 67"
         }
 
-        [Fact]
+        [TestMethod]
         public void CheckDerivableItemSpecModifiers()
         {
             Assert.True(FileUtilities.ItemSpecModifiers.IsDerivableItemSpecModifier("Filename"));
@@ -443,7 +443,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(@"c:\", FileUtilities.ItemSpecModifiers.GetItemSpecModifier(currentDirectory, fullPath, String.Empty, FileUtilities.ItemSpecModifiers.RootDir, ref cache));
         }
 
-        [Fact]
+        [TestMethod]
         public void NormalizePathNull()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -452,7 +452,7 @@ namespace Microsoft.Build.UnitTests
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void NormalizePathEmpty()
         {
             Assert.Throws<ArgumentException>(() =>
@@ -543,7 +543,7 @@ namespace Microsoft.Build.UnitTests
 #endif
         }
 
-        [Fact]
+        [TestMethod]
         public void FileOrDirectoryExistsNoThrow()
         {
             var isWindows = NativeMethodsShared.IsWindows;
@@ -611,7 +611,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void DirectoryExistsNoThrowTooLongWithDots()
         {
             string path = Path.Combine(Environment.SystemDirectory, "..", "..", "..") + Path.DirectorySeparatorChar;
@@ -715,7 +715,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void GetFileInfoNoThrowTooLongWithDots()
         {
             int length = (Environment.SystemDirectory + @"\" + @"\..\..\..\" + Environment.SystemDirectory.Substring(3) + @"\..\explorer.exe").Length;
@@ -730,7 +730,7 @@ namespace Microsoft.Build.UnitTests
             Assert.False(FileUtilities.GetFileInfoNoThrow(inputPath.Replace('\\', 'X')) != null);
         }
 
-        [Fact]
+        [TestMethod]
         public void GetFileInfoNoThrowTooLongWithDotsRelative()
         {
             int length = (Environment.SystemDirectory + @"\" + @"\..\..\..\" + Environment.SystemDirectory.Substring(3) + @"\..\explorer.exe").Length;
@@ -761,7 +761,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Simple test, neither the base file nor retry files exist
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GenerateTempFileNameSimple()
         {
             string path = null;
@@ -783,7 +783,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Choose an extension
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GenerateTempFileNameWithExtension()
         {
             string path = null;
@@ -805,7 +805,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Choose a (missing) directory and extension
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GenerateTempFileNameWithDirectoryAndExtension()
         {
             string path = null;
@@ -829,7 +829,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Extension without a period
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GenerateTempFileNameWithExtensionNoPeriod()
         {
             string path = null;
@@ -851,7 +851,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Extension is invalid
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void GenerateTempBatchFileWithBadExtension()
@@ -865,7 +865,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Directory is invalid
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void GenerateTempBatchFileWithBadDirectory()
@@ -958,7 +958,7 @@ namespace Microsoft.Build.UnitTests
         private static string SystemSpecificAbsolutePath => FileUtilities.ExecutingAssemblyPath;
 
 
-        [Fact]
+        [TestMethod]
         public void GetFolderAboveTest()
         {
             string root = NativeMethodsShared.IsWindows ? @"c:\" : "/";
@@ -975,7 +975,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(root, FileUtilities.GetFolderAbove(root, 99));
         }
 
-        [Fact]
+        [TestMethod]
         public void CombinePathsTest()
         {
             // These tests run in .NET 4+, so we can cheat
@@ -990,42 +990,42 @@ namespace Microsoft.Build.UnitTests
                 FileUtilities.CombinePaths(root, "path1", "path2", "file.txt"));
         }
 
-        [Theory]
-        [InlineData(@"c:\a\.\b", true)]
-        [InlineData(@"c:\a\..\b", true)]
-        [InlineData(@"c:\a\..", true)]
-        [InlineData(@"c:\a\.", true)]
-        [InlineData(@".\a", true)]
-        [InlineData(@"..\b", true)]
-        [InlineData(@"..", true)]
-        [InlineData(@".", true)]
-        [InlineData(@"..\", true)]
-        [InlineData(@".\", true)]
-        [InlineData(@"\..", true)]
-        [InlineData(@"\.", true)]
-        [InlineData(@"..\..\a", true)]
-        [InlineData(@"..\..\..\a", true)]
-        [InlineData(@"b..\", false)]
-        [InlineData(@"b.\", false)]
-        [InlineData(@"\b..", false)]
-        [InlineData(@"\b.", false)]
-        [InlineData(@"\b..\", false)]
-        [InlineData(@"\b.\", false)]
-        [InlineData(@"...", false)]
-        [InlineData(@"....", false)]
+        [TestMethod]
+        [DataRow(@"c:\a\.\b", true)]
+        [DataRow(@"c:\a\..\b", true)]
+        [DataRow(@"c:\a\..", true)]
+        [DataRow(@"c:\a\.", true)]
+        [DataRow(@".\a", true)]
+        [DataRow(@"..\b", true)]
+        [DataRow(@"..", true)]
+        [DataRow(@".", true)]
+        [DataRow(@"..\", true)]
+        [DataRow(@".\", true)]
+        [DataRow(@"\..", true)]
+        [DataRow(@"\.", true)]
+        [DataRow(@"..\..\a", true)]
+        [DataRow(@"..\..\..\a", true)]
+        [DataRow(@"b..\", false)]
+        [DataRow(@"b.\", false)]
+        [DataRow(@"\b..", false)]
+        [DataRow(@"\b.", false)]
+        [DataRow(@"\b..\", false)]
+        [DataRow(@"\b.\", false)]
+        [DataRow(@"...", false)]
+        [DataRow(@"....", false)]
         public void ContainsRelativeSegmentsTest(string path, bool expectedResult)
         {
             FileUtilities.ContainsRelativePathSegments(path).ShouldBe(expectedResult);
         }
 
-        [Theory]
-        [InlineData("a/b/c/d", 0, "")]
-        [InlineData("a/b/c/d", 1, "d")]
-        [InlineData("a/b/c/d", 2, "c/d")]
-        [InlineData("a/b/c/d", 3, "b/c/d")]
-        [InlineData("a/b/c/d", 4, "a/b/c/d")]
-        [InlineData("a/b/c/d", 5, "a/b/c/d")]
-        [InlineData(@"a\/\/\//b/\/\/\//c//\/\/\/d/\//\/\/", 2, "c/d")]
+        [TestMethod]
+        [DataRow("a/b/c/d", 0, "")]
+        [DataRow("a/b/c/d", 1, "d")]
+        [DataRow("a/b/c/d", 2, "c/d")]
+        [DataRow("a/b/c/d", 3, "b/c/d")]
+        [DataRow("a/b/c/d", 4, "a/b/c/d")]
+        [DataRow("a/b/c/d", 5, "a/b/c/d")]
+        [DataRow(@"a\/\/\//b/\/\/\//c//\/\/\/d/\//\/\/", 2, "c/d")]
         public static void TestTruncatePathToTrailingSegments(string path, int trailingSegments, string expectedTruncatedPath)
         {
             expectedTruncatedPath = expectedTruncatedPath.Replace('/', Path.DirectorySeparatorChar);
@@ -1036,18 +1036,18 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Exercises FileUtilities.EnsureSingleQuotes
         /// </summary>
-        [Theory]
-        [InlineData(null, null)] // Null test
-        [InlineData("", "")] // Empty string test
-        [InlineData(@" ", @"' '")] // One character which is a space
-        [InlineData(@"'", @"'''")] // One character which is a single quote
-        [InlineData(@"""", @"'""'")] // One character which is a double quote
-        [InlineData(@"example", @"'example'")] // Unquoted string
-        [InlineData(@"'example'", @"'example'")] // Single quoted string
-        [InlineData(@"""example""", @"'example'")] // Double quoted string
-        [InlineData(@"'example""", @"''example""'")] // Mixed Quotes - Leading Single
-        [InlineData(@"""example'", @"'""example''")] // Mixed Quotes - Leading Double
-        [InlineData(@"ex""am'ple", @"'ex""am'ple'")] // Interior Quotes
+        [TestMethod]
+        [DataRow(null, null)] // Null test
+        [DataRow("", "")] // Empty string test
+        [DataRow(@" ", @"' '")] // One character which is a space
+        [DataRow(@"'", @"'''")] // One character which is a single quote
+        [DataRow(@"""", @"'""'")] // One character which is a double quote
+        [DataRow(@"example", @"'example'")] // Unquoted string
+        [DataRow(@"'example'", @"'example'")] // Single quoted string
+        [DataRow(@"""example""", @"'example'")] // Double quoted string
+        [DataRow(@"'example""", @"''example""'")] // Mixed Quotes - Leading Single
+        [DataRow(@"""example'", @"'""example''")] // Mixed Quotes - Leading Double
+        [DataRow(@"ex""am'ple", @"'ex""am'ple'")] // Interior Quotes
         public void EnsureSingleQuotesTest(string path, string expectedResult)
         {
             FileUtilities.EnsureSingleQuotes(path).ShouldBe(expectedResult);
@@ -1056,18 +1056,18 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Exercises FileUtilities.EnsureDoubleQuotes
         /// </summary>
-        [Theory]
-        [InlineData(null, null)] // Null test
-        [InlineData("", "")] // Empty string test
-        [InlineData(@" ", @""" """)] // One character which is a space
-        [InlineData(@"'", @"""'""")] // One character which is a single quote
-        [InlineData(@"""", @"""""""")] // One character which is a double quote
-        [InlineData(@"example", @"""example""")] // Unquoted string
-        [InlineData(@"'example'", @"""example""")] // Single quoted string
-        [InlineData(@"""example""", @"""example""")] // Double quoted string
-        [InlineData(@"'example""", @"""'example""""")] // Mixed Quotes - Leading Single
-        [InlineData(@"""example'", @"""""example'""")] // Mixed Quotes - Leading Double
-        [InlineData(@"ex""am'ple", @"""ex""am'ple""")] // Interior Quotes
+        [TestMethod]
+        [DataRow(null, null)] // Null test
+        [DataRow("", "")] // Empty string test
+        [DataRow(@" ", @""" """)] // One character which is a space
+        [DataRow(@"'", @"""'""")] // One character which is a single quote
+        [DataRow(@"""", @"""""""")] // One character which is a double quote
+        [DataRow(@"example", @"""example""")] // Unquoted string
+        [DataRow(@"'example'", @"""example""")] // Single quoted string
+        [DataRow(@"""example""", @"""example""")] // Double quoted string
+        [DataRow(@"'example""", @"""'example""""")] // Mixed Quotes - Leading Single
+        [DataRow(@"""example'", @"""""example'""")] // Mixed Quotes - Leading Double
+        [DataRow(@"ex""am'ple", @"""ex""am'ple""")] // Interior Quotes
         public void EnsureDoubleQuotesTest(string path, string expectedResult)
         {
             FileUtilities.EnsureDoubleQuotes(path).ShouldBe(expectedResult);

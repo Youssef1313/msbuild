@@ -28,7 +28,7 @@ public class NodeStatus_SizeChange_Tests : IDisposable
         UseProjectRelativeDirectory("Snapshots");
     }
 
-    [Fact]
+    [TestMethod]
     public async Task EverythingFits()
     {
         TerminalNodesFrame frame = new([_status], width: 80, height: 5);
@@ -36,7 +36,7 @@ public class NodeStatus_SizeChange_Tests : IDisposable
         await Verify(frame.RenderNodeStatus(0).ToString());
     }
 
-    [Fact]
+    [TestMethod]
     public async Task TargetIsTruncatedFirst()
     {
         TerminalNodesFrame frame = new([_status], width: 45, height: 5);
@@ -44,7 +44,7 @@ public class NodeStatus_SizeChange_Tests : IDisposable
         await Verify(frame.RenderNodeStatus(0).ToString());
     }
 
-    [Fact]
+    [TestMethod]
     public async Task NamespaceIsTruncatedNext()
     {
         TerminalNodesFrame frame = new([_status], width: 40, height: 5);
@@ -52,7 +52,7 @@ public class NodeStatus_SizeChange_Tests : IDisposable
         await Verify(frame.RenderNodeStatus(0).ToString());
     }
 
-    [Fact]
+    [TestMethod]
     public async Task GoesToProject()
     {
         TerminalNodesFrame frame = new([_status], width: 10, height: 5);

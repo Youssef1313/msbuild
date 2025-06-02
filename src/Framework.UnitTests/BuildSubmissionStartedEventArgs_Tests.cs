@@ -11,7 +11,7 @@ namespace Microsoft.Build.Framework.UnitTests
 {
     public class BuildSubmissionStartedEventArgs_Tests
     {
-        [Fact]
+        [TestMethod]
         public void SerializationDeserializationTest()
         {
             var globalVariables = new Dictionary<string, string?>

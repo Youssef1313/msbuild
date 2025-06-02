@@ -28,7 +28,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Test the basic functionality.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Basic()
         {
             string result =
@@ -54,7 +54,7 @@ End Namespace
         /// <summary>
         /// Test a dependent with a relative path
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RelativeDependentUpon()
         {
             string result =
@@ -80,7 +80,7 @@ End Namespace
         /// <summary>
         /// Test a dependent with a relative path
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AbsoluteDependentUpon()
         {
             string result =
@@ -106,7 +106,7 @@ End Namespace
         /// <summary>
         /// A dependent class plus there is a culture.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DependentWithCulture()
         {
             string result =
@@ -133,7 +133,7 @@ End Namespace
         /// A dependent class plus there is a culture that was expressed in the metadata of the
         /// item rather than the filename.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DependentWithCultureMetadata()
         {
             string result =
@@ -159,7 +159,7 @@ End Namespace
         /// <summary>
         /// A dependent class plus there is a culture and a root namespace.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DependentWithCultureAndRootNamespace()
         {
             string result =
@@ -185,7 +185,7 @@ End Namespace
         /// <summary>
         /// A dependent class plus there is a culture embedded in the .RESX filename.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DependentWithEmbeddedCulture()
         {
             string result =
@@ -212,7 +212,7 @@ End Namespace
         /// No dependent class, but there is a root namespace place.  Also, the .resx
         /// extension contains some upper-case characters.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RootnamespaceWithCulture()
         {
             string result =
@@ -235,7 +235,7 @@ End Namespace
             Assert.Equal("RootNamespace.MyForm.en-GB", result);
         }
 
-        [Fact]
+        [TestMethod]
         public void RootnamespaceWithCulture_RetainCultureInFileName()
         {
             string result =
@@ -258,7 +258,7 @@ End Namespace
         /// <summary>
         /// If there is a link file name then it is preferred over the main file name.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Regress222308()
         {
             string result =
@@ -278,7 +278,7 @@ End Namespace
         /// <summary>
         /// A non-resx file in a subfolder, with a root namespace.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BitmapWithRootNamespace()
         {
             string result =
@@ -298,7 +298,7 @@ End Namespace
         /// <summary>
         /// A culture-specific non-resx file in a subfolder, with a root namespace.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CulturedBitmapWithRootNamespace()
         {
             string result =
@@ -318,7 +318,7 @@ End Namespace
         /// <summary>
         /// A culture-specific non-resx file in a subfolder, with a root namespace, but no culture directory prefix
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CulturedBitmapWithRootNamespaceNoDirectoryPrefix()
         {
             string result =
@@ -339,7 +339,7 @@ End Namespace
         /// If the filename passed in as the "DependentUpon" file doesn't end in .cs then
         /// we want to fall back to the RootNamespace+FileName logic.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Regress188319()
         {
             CreateVisualBasicManifestResourceName t = new CreateVisualBasicManifestResourceName();
@@ -366,7 +366,7 @@ End Namespace
         /// <summary>
         /// If we have a resource file that has a culture within it's name (resourceFile.de.cs), find it by convention.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CulturedResourceFileFindByConvention()
         {
             using (var env = TestEnvironment.Create(_testOutput))
@@ -441,7 +441,7 @@ End Namespace
         ///
         /// we continue to treat "ro" as the culture.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Regress419591()
         {
             string result =
@@ -467,7 +467,7 @@ End Namespace
         /// we need to warn because we do not try to resolve the correct manifest name depending
         /// on conditional compilation of code.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Regress459265()
         {
             MockEngine m = new MockEngine();
@@ -508,7 +508,7 @@ End Namespace
         /// Tests to ensure that the ResourceFilesWithManifestResourceNames contains everything that
         /// the ResourceFiles property on the task contains, but with additional metadata called ManifestResourceName
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ResourceFilesWithManifestResourceNamesContainsAdditionalMetadata()
         {
             CreateVisualBasicManifestResourceName t = new CreateVisualBasicManifestResourceName();
@@ -533,7 +533,7 @@ End Namespace
         /// Ensure that if no LogicalName is specified, that the same ManifestResourceName metadata
         /// gets applied as LogicalName
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddLogicalNameForNonResx()
         {
             CreateVisualBasicManifestResourceName t = new CreateVisualBasicManifestResourceName();
@@ -558,7 +558,7 @@ End Namespace
         /// <summary>
         /// Ensure that a LogicalName that is already present is preserved during manifest name generation
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void PreserveLogicalNameForNonResx()
         {
             CreateVisualBasicManifestResourceName t = new CreateVisualBasicManifestResourceName();
@@ -584,7 +584,7 @@ End Namespace
         /// <summary>
         /// Resx resources should not get ManifestResourceName metadata copied to the LogicalName value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NoLogicalNameAddedForResx()
         {
             CreateVisualBasicManifestResourceName t = new CreateVisualBasicManifestResourceName();
@@ -609,7 +609,7 @@ End Namespace
         /// <summary>
         /// A culture-specific resources file in a subfolder, with a root namespace
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CulturedResourcesFileWithRootNamespaceWithinSubfolder()
         {
             string result =
@@ -629,7 +629,7 @@ End Namespace
         /// <summary>
         /// A culture-specific resources file with a root namespace
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CulturedResourcesFileWithRootNamespace()
         {
             string result =
@@ -649,7 +649,7 @@ End Namespace
         /// <summary>
         /// A non-culture-specific resources file with a root namespace
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ResourcesFileWithRootNamespace()
         {
             string result =

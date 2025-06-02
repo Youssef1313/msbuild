@@ -39,7 +39,7 @@ namespace Microsoft.Build.Engine.UnitTests.BackEnd
             loggingService.RegisterLogger(_logger);
         }
 
-        [Fact]
+        [TestMethod]
         public void AssertDefaultLoaderReturnsDefaultResolvers()
         {
             var loader = new SdkResolverLoader();
@@ -52,7 +52,7 @@ namespace Microsoft.Build.Engine.UnitTests.BackEnd
             _logger.WarningCount.ShouldBe(0);
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifySdkResolverLoaderFileDiscoveryPattern()
         {
             var root = FileUtilities.GetTemporaryDirectory();
@@ -86,7 +86,7 @@ namespace Microsoft.Build.Engine.UnitTests.BackEnd
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void SdkResolverLoaderPrefersManifestFile()
         {
             var root = FileUtilities.GetTemporaryDirectory();
@@ -121,7 +121,7 @@ namespace Microsoft.Build.Engine.UnitTests.BackEnd
         /// <summary>
         /// Verifies that if an SDK resolver throws while creating an instance that a warning is logged.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyThrowsWhenResolverFailsToLoad()
         {
             SdkResolverLoader sdkResolverLoader = new MockSdkResolverLoader
@@ -153,7 +153,7 @@ namespace Microsoft.Build.Engine.UnitTests.BackEnd
         /// Verifies that when we attempt to create an instance of a resolver with no public constructor that a warning
         /// is logged with the appropriate message.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyThrowsWhenResolverHasNoPublicConstructor()
         {
             SdkResolverLoader sdkResolverLoader = new MockSdkResolverLoader
@@ -182,7 +182,7 @@ namespace Microsoft.Build.Engine.UnitTests.BackEnd
         /// <summary>
         /// Verifies that when a resolver assembly cannot be loaded, that a warning is logged and other resolvers are still loaded.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyWarningLoggedWhenResolverAssemblyCannotBeLoaded()
         {
             const string assemblyPath = @"C:\foo\bar\myresolver.dll";
@@ -212,7 +212,7 @@ namespace Microsoft.Build.Engine.UnitTests.BackEnd
             _logger.ErrorCount.ShouldBe(0);
         }
 
-        [Fact]
+        [TestMethod]
         public void SdkResolverLoaderReadsManifestFile()
         {
             using (var env = TestEnvironment.Create(_output))
@@ -237,7 +237,7 @@ namespace Microsoft.Build.Engine.UnitTests.BackEnd
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void SdkResolverLoaderReadsManifestFileWithResolvableSdkPattern()
         {
             using (var env = TestEnvironment.Create(_output))
@@ -264,7 +264,7 @@ namespace Microsoft.Build.Engine.UnitTests.BackEnd
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void SdkResolverLoaderErrorsWithInvalidManifestFile()
         {
             using (var env = TestEnvironment.Create(_output))
@@ -288,7 +288,7 @@ namespace Microsoft.Build.Engine.UnitTests.BackEnd
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void SdkResolverLoaderErrorsWhenNoDllOrAssemblyFound()
         {
             using (var env = TestEnvironment.Create(_output))
@@ -304,7 +304,7 @@ namespace Microsoft.Build.Engine.UnitTests.BackEnd
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void SdkResolverLoaderErrorsWhenManifestTargetMissing()
         {
             using (var env = TestEnvironment.Create(_output))
@@ -328,7 +328,7 @@ namespace Microsoft.Build.Engine.UnitTests.BackEnd
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void SdkResolverLoaderHonorsIncludeDefaultEnvVar()
         {
             using (var env = TestEnvironment.Create(_output))
@@ -356,7 +356,7 @@ namespace Microsoft.Build.Engine.UnitTests.BackEnd
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void SdkResolverLoaderHonorsAdditionalResolversFolder()
         {
             using (var env = TestEnvironment.Create(_output))

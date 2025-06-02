@@ -28,7 +28,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
 
 
 
-        [Fact]
+        [TestMethod]
         public void ProjectModifyRenameAndSafeAs()
         {
             var pcLocal = this.StdGroup.Local;
@@ -102,7 +102,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(viewProj, realProj);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectItemModify()
         {
             var pcLocal = this.StdGroup.Local;
@@ -298,7 +298,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(pair);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectGlobalPropertyModify()
         {
             var pcLocal = this.StdGroup.Local;
@@ -334,7 +334,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             pair.ValidatePropertyValue("gpt1", "FooGP1V");
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectPropertyModify()
         {
             var pcLocal = this.StdGroup.Local;

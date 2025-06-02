@@ -15,7 +15,7 @@ namespace Microsoft.Build.UnitTests
         *
         * Test the basic functionality.
         */
-        [Fact]
+        [TestMethod]
         public void Basic()
         {
             Culture.ItemCultureInfo info = Culture.GetItemCultureInfo("MyResource.fr.resx", null);
@@ -28,7 +28,7 @@ namespace Microsoft.Build.UnitTests
         *
         * The item doesn't have a culture, and there isn't one embedded in the file name.
         */
-        [Fact]
+        [TestMethod]
         public void NonCultureFile()
         {
             Culture.ItemCultureInfo info = Culture.GetItemCultureInfo("MyResource.resx", null);
@@ -42,7 +42,7 @@ namespace Microsoft.Build.UnitTests
         *
         * The item has something that looks like an embedded culture, but isn't.
         */
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void BogusEmbeddedCulture()

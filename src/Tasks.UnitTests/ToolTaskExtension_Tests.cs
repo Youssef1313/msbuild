@@ -19,7 +19,7 @@ namespace Microsoft.Build.UnitTests
         /// With moving ToolTask into Utilities, tasks inheriting from it now have to deal with 3 (THREE!) resource streams,
         /// which has a lot of potential for breaking. Make sure that tasks can access all of them using the correct logger helpers.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestResourceAccess()
         {
             MyToolTaskExtension t = new MyToolTaskExtension();
@@ -52,7 +52,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify that the above method actually tests something, that is make sure that non-existent resources throw
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ResourceAccessSanityCheck()
         {
             Assert.Throws<ArgumentException>(() =>
@@ -67,7 +67,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Retrieve a non-existent value but ask for a default.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetNonExistentBoolWithDefault()
         {
             MyToolTaskExtension t = new MyToolTaskExtension();
@@ -78,7 +78,7 @@ namespace Microsoft.Build.UnitTests
         /// Retrieve a value that exists, but ask for a default. We expect the
         /// real value to win.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetBoolWithDefault()
         {
             MyToolTaskExtension t = new MyToolTaskExtension();
@@ -91,7 +91,7 @@ namespace Microsoft.Build.UnitTests
         /// Retrieve a value that exists, but ask for a default. We expect the
         /// real value to win.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetIntWithDefault()
         {
             MyToolTaskExtension t = new MyToolTaskExtension();
@@ -100,7 +100,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(5, t.GetIntParameterWithDefault("Key", 9));
         }
 
-        [Fact]
+        [TestMethod]
         public void UseNewLineSeparatorseInResponseFile()
         {
             Action<CommandLineBuilderExtension> addResponseFileCommands = (commandLineBuilder) =>

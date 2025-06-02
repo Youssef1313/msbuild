@@ -19,7 +19,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify the properties on BuildEventArgTransportSink properly work
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void PropertyTests()
         {
             BuildEventArgTransportSink sink = new BuildEventArgTransportSink(PacketProcessor);
@@ -33,7 +33,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Make sure we throw an exception if the transport delegate is null
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestConstructorNullSendDataDelegate()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -44,7 +44,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify consume throws the correct exception when a null build event is passed in
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestConsumeNullBuildEvent()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -57,7 +57,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// Verify consume properly packages up the message event into a packet and send it to the
         /// transport delegate
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestConsumeMessageBuildEvent()
         {
             bool wentInHandler = false;
@@ -80,7 +80,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify consume ignores BuildStarted events
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestConsumeBuildStartedEvent()
         {
             bool wentInHandler = false;
@@ -101,7 +101,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify consume ignores BuildFinished events
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestConsumeBuildFinishedEvent()
         {
             bool wentInHandler = false;

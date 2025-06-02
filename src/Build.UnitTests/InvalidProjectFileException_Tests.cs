@@ -24,7 +24,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify that nesting an IPFE copies the error code
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ErrorCodeShouldAppearForCircularDependency()
         {
             string file = Path.GetTempPath() + Guid.NewGuid().ToString("N");
@@ -56,7 +56,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Regression test for https://github.com/dotnet/msbuild/issues/1286
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LogErrorShouldHavePathAndLocation()
         {
             string file = Path.GetTempPath() + Guid.NewGuid().ToString("N");

@@ -55,14 +55,14 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             this.StdGroup.ResetBeforeTests();
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectReadOnly_Tests()
         {
             // this is actually very elaborate and caught quite a few issues.
             ViewValidation.Verify(this.StdGroup.View, this.StdGroup.Real);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectItemReadOnly_Tests()
         {
             var viewItems = this.StdGroup.View.AllEvaluatedItems;
@@ -72,7 +72,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(viewItems, realItems);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectItemDefinitionReadOnly_Tests()
         {
             var viewItemDefinitions = this.StdGroup.View.ItemDefinitions;
@@ -82,7 +82,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(viewItemDefinitions, realItemDefinitions, ViewValidation.Verify);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectPropertiesReadOnly_Tests()
         {
             var viewProperties = this.StdGroup.View.Properties;
@@ -92,7 +92,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.Verify(viewProperties, realProperties);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectMetadataReadOnly_Tests()
         {
             var viewMetadata = this.StdGroup.View.AllEvaluatedItemDefinitionMetadata;

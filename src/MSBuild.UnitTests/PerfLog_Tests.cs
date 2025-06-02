@@ -20,7 +20,7 @@ namespace Microsoft.Build.UnitTests
             _output = output;
         }
 
-        [Fact]
+        [TestMethod]
         public void TestPerfLogEnabledProducedLogFile()
         {
             using (TestEnvironment testEnv = TestEnvironment.Create(_output))
@@ -55,7 +55,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestPerfLogDirectoryGetsCreated()
         {
             using (TestEnvironment testEnv = TestEnvironment.Create(_output))

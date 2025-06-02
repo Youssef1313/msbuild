@@ -18,7 +18,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read task with no parameters
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadNoParameters()
         {
             string content = @"
@@ -40,7 +40,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read task with continue on error
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadContinueOnError()
         {
             string content = @"
@@ -59,7 +59,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read task with condition
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadCondition()
         {
             string content = @"
@@ -78,7 +78,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read task with invalid child
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidChild()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -101,7 +101,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// Although MSBuild does not set these on tasks, they
         /// are visible in the XML objects for editing purposes.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadEmptyParameter()
         {
             string content = @"
@@ -122,7 +122,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read task with parameters
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadParameters()
         {
             string content = @"
@@ -148,7 +148,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Change a parameter value on the task
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetParameterValue()
         {
             ProjectTaskElement task = GetBasicTask();
@@ -164,7 +164,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set a parameter to null
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetInvalidNullParameterValue()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -177,7 +177,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set a parameter with the reserved name 'continueonerror'
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetInvalidParameterNameContinueOnError()
         {
             Assert.Throws<ArgumentException>(() =>
@@ -190,7 +190,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set a parameter with the reserved name 'condition'
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetInvalidParameterNameCondition()
         {
             Assert.Throws<ArgumentException>(() =>
@@ -203,7 +203,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set a parameter using a null name
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetInvalidNullParameterName()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -216,7 +216,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Add a parameter to the task
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetNotExistingParameter()
         {
             ProjectTaskElement task = GetBasicTask();
@@ -232,7 +232,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Remove a parameter from the task
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveExistingParameter()
         {
             ProjectTaskElement task = GetBasicTask();
@@ -251,7 +251,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <remarks>
         /// This should not throw.
         /// </remarks>
-        [Fact]
+        [TestMethod]
         public void RemoveNonExistingParameter()
         {
             ProjectTaskElement task = GetBasicTask();
@@ -265,7 +265,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set continue on error
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetContinueOnError()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -280,7 +280,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set condition
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetCondition()
         {
             ProjectRootElement project = ProjectRootElement.Create();

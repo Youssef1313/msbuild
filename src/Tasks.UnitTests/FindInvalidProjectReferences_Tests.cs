@@ -16,7 +16,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify FindInvalidProjectReferences for several target platform monikers
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyFindInvalidProjectReferences()
         {
             // Create the engine.

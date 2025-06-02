@@ -24,7 +24,7 @@ public class NodeStatus_Transition_Tests
         UseProjectRelativeDirectory("Snapshots");
     }
 
-    [Fact]
+    [TestMethod]
     public void NodeStatusTargetThrowsForInputWithAnsi()
     {
 #if DEBUG
@@ -34,7 +34,7 @@ public class NodeStatus_Transition_Tests
 #endif
     }
 
-    [Fact]
+    [TestMethod]
     public async Task NodeTargetChanges()
     {
         var rendered = Animate(
@@ -48,7 +48,7 @@ public class NodeStatus_Transition_Tests
         await VerifyReplay(rendered);
     }
 
-    [Fact]
+    [TestMethod]
     public async Task NodeTargetUpdatesTime()
     {
         // This test look like there is no change between the frames, but we ask the stopwatch for time they will increase the number.
@@ -66,7 +66,7 @@ public class NodeStatus_Transition_Tests
         await VerifyReplay(rendered);
     }
 
-    [Fact]
+    [TestMethod]
     public async Task NodeTargetChangesToColoredTarget()
     {
         var rendered = Animate(
@@ -80,7 +80,7 @@ public class NodeStatus_Transition_Tests
         await VerifyReplay(rendered);
     }
 
-    [Fact]
+    [TestMethod]
     public async Task NodeWithColoredTargetUpdatesTime()
     {
         // This test look like there is no change between the frames, but we ask the stopwatch for time they will increase the number.

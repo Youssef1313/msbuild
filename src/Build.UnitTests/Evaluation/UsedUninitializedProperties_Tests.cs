@@ -12,7 +12,7 @@ namespace Microsoft.Build.Evaluation;
 
 public sealed class UsedUninitializedProperties_Tests
 {
-    [Fact]
+    [TestMethod]
     public void Basics()
     {
         PropertiesUseTracker props = new(TestLoggingContext.CreateTestContext(new BuildEventContext(1, 2, 3, 4)));

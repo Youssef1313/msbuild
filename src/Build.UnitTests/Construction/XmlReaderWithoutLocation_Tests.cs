@@ -152,7 +152,7 @@ namespace Microsoft.Build.UnitTests.Construction
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void CreateProjectWithoutLineInfo()
         {
             XmlReader reader = XmlReader.Create(new StringReader(

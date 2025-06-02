@@ -14,7 +14,7 @@ namespace Microsoft.Build.Tasks.UnitTests
 {
     public class ResourceManagement_Tests
     {
-        [Fact]
+        [TestMethod]
         public void SingleCoreRequest()
         {
             var messages = AssertBuildSucceededAndGetMessages(@"
@@ -29,7 +29,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             GetTrailingIntegerFromMessage(filteredMessages[0]).ShouldBeGreaterThan(0);
         }
 
-        [Fact]
+        [TestMethod]
         public void SingleCoreRequestWithNoRelease()
         {
             var messages = AssertBuildSucceededAndGetMessages(@"
@@ -50,7 +50,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             grantedCores2.ShouldBe(grantedCores1);
         }
 
-        [Fact]
+        [TestMethod]
         public void SingleCoreRequestWithReacquire()
         {
             var messages = AssertBuildSucceededAndGetMessages(@"
@@ -77,7 +77,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             grantedCores2.ShouldBe(grantedCores1);
         }
 
-        [Fact]
+        [TestMethod]
         public void MultipleCoreRequests()
         {
             // Exercise concurrent RequestCores() and ReleaseCores() calls.

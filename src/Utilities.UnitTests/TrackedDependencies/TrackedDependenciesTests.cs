@@ -79,7 +79,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
         /// thing as FileTracker.FormatRootingMarker, except with some extra initial normalization to get rid of
         /// pesky PIDs and TIDs in the tlog names.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void FormatNormalizedRootingMarkerTests()
         {
             var tests = new Dictionary<ITaskItem[], string>
@@ -274,7 +274,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.True(exceptionCaught); // "Should have failed to format a rooting marker from a malformed UNC path"
         }
 
-        [Fact]
+        [TestMethod]
         public void CreateTrackedDependencies()
         {
             Console.WriteLine("Test: CreateTrackedDependencies");
@@ -291,7 +291,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.NotNull(d);
         }
 
-        [Fact]
+        [TestMethod]
         public void SingleCanonicalCL()
         {
             Console.WriteLine("Test: SingleCanonicalCL");
@@ -325,7 +325,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Equal("TestFiles\\one.cpp", outofdate[0].ItemSpec);
         }
 
-        [Fact]
+        [TestMethod]
         public void NonExistentTlog()
         {
             Console.WriteLine("Test: NonExistentTlog");
@@ -352,7 +352,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Equal(outofdate[0].ItemSpec, Path.Combine("TestFiles", "one.cpp"));
         }
 
-        [Fact]
+        [TestMethod]
         public void EmptyTLog()
         {
             Console.WriteLine("Test: EmptyTLog");
@@ -378,7 +378,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Equal(outofdate[0].ItemSpec, Path.Combine("TestFiles", "one.cpp"));
         }
 
-        [Fact]
+        [TestMethod]
         public void InvalidReadTLogName()
         {
             Console.WriteLine("Test: InvalidReadTLogName");
@@ -406,7 +406,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Empty(d.DependencyTable); // "DependencyTable should be empty."
         }
 
-        [Fact]
+        [TestMethod]
         public void ReadTLogWithInitialEmptyLine()
         {
             Console.WriteLine("Test: ReadTLogWithInitialEmptyLine");
@@ -432,7 +432,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Empty(d.DependencyTable); // "DependencyTable should be empty."
         }
 
-        [Fact]
+        [TestMethod]
         public void ReadTLogWithEmptyLineImmediatelyAfterRoot()
         {
             Console.WriteLine("Test: ReadTLogWithEmptyLineImmediatelyAfterRoot");
@@ -458,7 +458,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Empty(d.DependencyTable); // "DependencyTable should be empty."
         }
 
-        [Fact]
+        [TestMethod]
         public void ReadTLogWithEmptyLineBetweenRoots()
         {
             Console.WriteLine("Test: ReadTLogWithEmptyLineImmediatelyAfterRoot");
@@ -484,7 +484,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Empty(d.DependencyTable); // "DependencyTable should be empty."
         }
 
-        [Fact]
+        [TestMethod]
         public void ReadTLogWithEmptyRoot()
         {
             Console.WriteLine("Test: ReadTLogWithEmptyRoot");
@@ -510,7 +510,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Empty(d.DependencyTable); // "DependencyTable should be empty."
         }
 
-        [Fact]
+        [TestMethod]
         public void ReadTLogWithDuplicateInRoot()
         {
             Console.WriteLine("Test: ReadTLogWithDuplicateInRoot");
@@ -537,7 +537,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.NotEmpty(d.DependencyTable); // "Dependency Table should not be empty."
         }
 
-        [Fact]
+        [TestMethod]
         public void InvalidWriteTLogName()
         {
             Console.WriteLine("Test: InvalidWriteTLogName");
@@ -552,7 +552,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Empty(d.DependencyTable); // "DependencyTable should be empty."
         }
 
-        [Fact]
+        [TestMethod]
         public void WriteTLogWithInitialEmptyLine()
         {
             Console.WriteLine("Test: WriteTLogWithInitialEmptyLine");
@@ -569,7 +569,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Empty(d.DependencyTable); // "DependencyTable should be empty."
         }
 
-        [Fact]
+        [TestMethod]
         public void WriteTLogWithEmptyLineImmediatelyAfterRoot()
         {
             Console.WriteLine("Test: ReadTLogWithEmptyLineImmediatelyAfterRoot");
@@ -586,7 +586,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Empty(d.DependencyTable); // "DependencyTable should be empty."
         }
 
-        [Fact]
+        [TestMethod]
         public void WriteTLogWithEmptyLineBetweenRoots()
         {
             Console.WriteLine("Test: WriteTLogWithEmptyLineImmediatelyAfterRoot");
@@ -603,7 +603,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Empty(d.DependencyTable); // "DependencyTable should be empty."
         }
 
-        [Fact]
+        [TestMethod]
         public void WriteTLogWithEmptyRoot()
         {
             Console.WriteLine("Test: WriteTLogWithEmptyRoot");
@@ -620,7 +620,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Empty(d.DependencyTable); // "DependencyTable should be empty."
         }
 
-        [Fact]
+        [TestMethod]
         public void PrimarySourceNotInTlog()
         {
             Console.WriteLine("Test: PrimarySourceNotInTlog");
@@ -657,7 +657,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Equal(outofdate[0].ItemSpec, Path.Combine("TestFiles", "one.cpp"));
         }
 
-        [Fact]
+        [TestMethod]
         public void MultipleCanonicalCL()
         {
             Console.WriteLine("Test: MultipleCanonicalCL");
@@ -695,7 +695,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Equal(outofdate[0].ItemSpec, Path.Combine("TestFiles", "one.cpp"));
         }
 
-        [Fact]
+        [TestMethod]
         public void MultipleCanonicalCLCompactMissingOnSuccess()
         {
             Console.WriteLine("Test: MultipleCanonicalCLCompactMissingOnSuccess");
@@ -755,7 +755,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Empty(outofdate);
         }
 
-        [Fact]
+        [TestMethod]
         public void MultipleCanonicalCLCompactMissingOnSuccessMultiEntry()
         {
             Console.WriteLine("Test: MultipleCanonicalCLCompactMissingOnSuccessMultiEntry");
@@ -822,7 +822,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Equal(3, writtenInputs.DependencyTable[Path.GetFullPath(Path.Combine("TestFiles", "two.cpp"))].Count);
         }
 
-        [Fact]
+        [TestMethod]
         public void RemoveDependencyFromEntry()
         {
             Console.WriteLine("Test: RemoveDependencyFromEntry");
@@ -890,7 +890,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.False(writtenInputs.DependencyTable[Path.GetFullPath(Path.Combine("TestFiles", "one.cpp"))].ContainsKey(Path.GetFullPath(Path.Combine("TestFiles", "one3.obj"))));
         }
 
-        [Fact]
+        [TestMethod]
         public void RemoveDependencyFromEntries()
         {
             Console.WriteLine("Test: RemoveDependencyFromEntry");
@@ -961,7 +961,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.False(writtenInputs.DependencyTable[rootingMarker].ContainsKey(Path.GetFullPath(Path.Combine("TestFiles", "one3.obj"))));
         }
 
-        [Fact]
+        [TestMethod]
         public void RemoveRootsWithSharedOutputs()
         {
             Console.WriteLine("Test: RemoveRootsWithSharedOutputs");
@@ -1007,7 +1007,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.False(outputs.DependencyTable.ContainsKey(rootingMarker3));
         }
 
-        [Fact]
+        [TestMethod]
         public void RemoveRootsWithSharedOutputs_CurrentRootNotInTable()
         {
             Console.WriteLine("Test: RemoveRootsWithSharedOutputs");
@@ -1053,7 +1053,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.True(outputs.DependencyTable.ContainsKey(rootingMarker3));
         }
 
-        [Fact]
+        [TestMethod]
         public void MultipleCanonicalCLMissingDependency()
         {
             Console.WriteLine("Test: MultipleCanonicalCLMissingDependency");
@@ -1116,7 +1116,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.False(d.DependencyTable.ContainsKey(Path.GetFullPath(Path.Combine("TestFiles", "one.cpp"))));
         }
 
-        [Fact]
+        [TestMethod]
         public void MultipleCanonicalCLMissingOutputDependencyRemoved()
         {
             Console.WriteLine("Test: MultipleCanonicalCLMissingOutputDependencyRemoved");
@@ -1179,7 +1179,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Empty(outofDate);
         }
 
-        [Fact]
+        [TestMethod]
         public void MultipleCanonicalCLMissingInputDependencyRemoved()
         {
             Console.WriteLine("Test: MultipleCanonicalCLMissingInputDependencyRemoved");
@@ -1241,7 +1241,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Empty(outofdate);
         }
 
-        [Fact]
+        [TestMethod]
         public void MultiplePrimaryCanonicalCL()
         {
             Console.WriteLine("Test: MultiplePrimaryCanonicalCL");
@@ -1299,7 +1299,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
                              (outofdate[1].ItemSpec == Path.Combine("TestFiles", "one.cpp") && outofdate[0].ItemSpec == Path.Combine("TestFiles", "two.cpp")));
         }
 
-        [Fact]
+        [TestMethod]
         public void MultiplePrimaryCanonicalCLUnderTemp()
         {
             string currentDirectory = Directory.GetCurrentDirectory();
@@ -1369,7 +1369,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void MultiplePrimaryCanonicalCLSharedDependency()
         {
             Console.WriteLine("Test: MultiplePrimaryCanonicalCL");
@@ -1424,7 +1424,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
                              (outofdate[1].ItemSpec == Path.Combine("TestFiles", "one.cpp") && outofdate[0].ItemSpec == Path.Combine("TestFiles", "two.cpp")));
         }
 
-        [Fact]
+        [TestMethod]
         public void MultipleCanonicalCLAcrossCommand1()
         {
             Console.WriteLine("Test: MultipleCanonicalCLAcrossCommand1");
@@ -1464,7 +1464,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.True(outofdate[0].ItemSpec == Path.Combine("TestFiles", "one.cpp"));
         }
 
-        [Fact]
+        [TestMethod]
         public void MultipleCanonicalCLAcrossCommand2()
         {
             Console.WriteLine("Test: MultipleCanonicalCLAcrossCommand2");
@@ -1504,7 +1504,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.True(outofdate[0].ItemSpec == Path.Combine("TestFiles", "one.cpp"));
         }
 
-        [Fact]
+        [TestMethod]
         public void MultipleCanonicalCLAcrossCommandNonDependency()
         {
             Console.WriteLine("Test: MultipleCanonicalCLAcrossCommandNonDependency");
@@ -1547,7 +1547,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Empty(outofdate);
         }
 
-        [Fact]
+        [TestMethod]
         public void MultipleCanonicalCLAcrossTlogs1()
         {
             Console.WriteLine("Test: MultipleCanonicalCLAcrossTlogs1");
@@ -1595,7 +1595,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.True(outofdate[0].ItemSpec == Path.Combine("TestFiles", "one.cpp"));
         }
 
-        [Fact]
+        [TestMethod]
         public void MultipleCanonicalCLAcrossTlogs2()
         {
             Console.WriteLine("Test: MultipleCanonicalCLAcrossTlogs2");
@@ -1643,7 +1643,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.True(outofdate[0].ItemSpec == Path.Combine("TestFiles", "one.cpp"));
         }
 
-        [Fact]
+        [TestMethod]
         public void SingleRootedCL()
         {
             Console.WriteLine("Test: SingleRootedCL");
@@ -1677,7 +1677,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.True(outofdate[0].ItemSpec == Path.Combine("TestFiles", "one.cpp"));
         }
 
-        [Fact]
+        [TestMethod]
         public void MultipleRootedCLAcrossTlogs1()
         {
             Console.WriteLine("Test: MultipleRootedCLAcrossTlogs1");
@@ -1725,7 +1725,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.True(outofdate[0].ItemSpec == Path.Combine("TestFiles", "one.cpp"));
         }
 
-        [Fact]
+        [TestMethod]
         public void MultipleRootedCL()
         {
             Console.WriteLine("Test: MultipleRootedCL");
@@ -1775,7 +1775,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.True(outofdate[0].ItemSpec == Path.Combine("TestFiles", "two.cpp"));
         }
 
-        [Fact]
+        [TestMethod]
         public void MultipleRootedCLNonDependency()
         {
             Console.WriteLine("Test: MultipleRootedCLNonDependency");
@@ -1823,7 +1823,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Empty(outofdate);
         }
 
-        [Fact]
+        [TestMethod]
         public void MultipleRootedCLAcrossTlogs2()
         {
             Console.WriteLine("Test: MultipleRootedCLAcrossTlogs2");
@@ -1871,7 +1871,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.True(outofdate[0].ItemSpec == Path.Combine("TestFiles", "one.cpp"));
         }
 
-        [Fact]
+        [TestMethod]
         public void OutputSingleCanonicalCL()
         {
             Console.WriteLine("Test: OutputSingleCanonicalCL");
@@ -1892,7 +1892,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.True(outputs[0].ItemSpec == Path.GetFullPath(Path.Combine("TestFiles", "oNe.obj")));
         }
 
-        [Fact]
+        [TestMethod]
         public void OutputSingleCanonicalCLAcrossTlogs()
         {
             Console.WriteLine("Test: OutputSingleCanonicalCLAcrossTlogs");
@@ -1925,7 +1925,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.True(outputs[1].ItemSpec == Path.GetFullPath(Path.Combine("TestFiles", "one.pch")));
         }
 
-        [Fact]
+        [TestMethod]
         public void OutputNonExistentTlog()
         {
             Console.WriteLine("Test: NonExistentTlog");
@@ -1941,7 +1941,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Null(outputs);
         }
 
-        [Fact]
+        [TestMethod]
         public void OutputMultipleCanonicalCL()
         {
             Console.WriteLine("Test: OutputMultipleCanonicalCL");
@@ -1972,7 +1972,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.True(outputs[2].ItemSpec == Path.GetFullPath(Path.Combine("TestFiles", "three.obj")));
         }
 
-        [Fact]
+        [TestMethod]
         public void OutputMultipleCanonicalCLSubrootMatch()
         {
             Console.WriteLine("Test: OutputMultipleCanonicalCLSubrootMatch");
@@ -2050,7 +2050,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.True(outputs4[2].ItemSpec == Path.GetFullPath(Path.Combine("TestFiles", "three.obj")));
         }
 
-        [Fact]
+        [TestMethod]
         public void OutputMultipleCanonicalCLSubrootMisMatch()
         {
             Console.WriteLine("Test: OutputMultipleCanonicalCLSubrootMisMatch");
@@ -2127,7 +2127,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Empty(outputs4);
         }
 
-        [Fact]
+        [TestMethod]
         public void OutputMultipleCanonicalCLLongTempPath()
         {
             Console.WriteLine("Test: OutputMultipleCanonicalCLLongTempPath");
@@ -2171,7 +2171,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.True(outputs[2].ItemSpec == Path.GetFullPath(Path.Combine("TestFiles", "three.obj")));
         }
 
-        [Fact]
+        [TestMethod]
         public void OutputMultipleCanonicalCLAcrossTLogs()
         {
             Console.WriteLine("Test: OutputMultipleCanonicalCLAcrossTLogs");
@@ -2212,7 +2212,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.True(outputs[2].ItemSpec == Path.GetFullPath(Path.Combine("TestFiles", "three.obj")));
         }
 
-        [Fact]
+        [TestMethod]
         public void OutputMultipleSingleSubRootCanonicalCL()
         {
             Console.WriteLine("Test: OutputMultipleSingleSubRootCanonicalCL");
@@ -2243,7 +2243,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.True(outputs[2].ItemSpec == Path.GetFullPath(Path.Combine("TestFiles", "three.obj")));
         }
 
-        [Fact]
+        [TestMethod]
         public void OutputMultipleUnrecognisedRootCanonicalCL()
         {
             Console.WriteLine("Test: OutputMultipleUnrecognisedRootCanonicalCL");
@@ -2266,7 +2266,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Empty(outputs);
         }
 
-        [Fact]
+        [TestMethod]
         public void OutputCLMinimalRebuildOptimization()
         {
             Console.WriteLine("Test: OutputCLMinimalRebuildOptimization");
@@ -2364,7 +2364,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.True(outofdate[0].ItemSpec == Path.Combine("TestFiles", "two.cpp"));
         }
 
-        [Fact]
+        [TestMethod]
         public void OutputCLMinimalRebuildOptimizationComputed()
         {
             Console.WriteLine("Test: OutputCLMinimalRebuildOptimizationComputed");
@@ -2459,7 +2459,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.True(outofdate[0].ItemSpec == Path.Combine("TestFiles", "two.cpp"));
         }
 
-        [Fact]
+        [TestMethod]
         public void ReplaceOutputForSource()
         {
             Console.WriteLine("Test: ReplaceOutputForSource");
@@ -2555,7 +2555,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Single(outofdate);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExcludeSpecificDirectory()
         {
             Console.WriteLine("Test: ExcludeSpecificDirectory");
@@ -2631,7 +2631,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Empty(outofdate);
         }
 
-        [Fact]
+        [TestMethod]
         public void SaveCompactedReadTlog()
         {
             Console.WriteLine("Test: SaveCompactedReadTlog");
@@ -2752,7 +2752,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.False(d3.DependencyTable.ContainsKey(Path.GetFullPath(Path.Combine("TestFiles", "one.cpp"))));
         }
 
-        [Fact]
+        [TestMethod]
         public void SaveCompactedWriteTlog()
         {
             Console.WriteLine("Test: SaveCompactedWriteTlog");
@@ -2854,7 +2854,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
         /// markers are kept, as in the case where there is a many-to-one relationship between inputs and
         /// outputs (ie. Lib, Link)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SaveCompactedReadTlog_MaintainCompositeRootingMarkers()
         {
             Console.WriteLine("Test: SaveCompactedReadTlog_MaintainCompositeRootingMarkers");
@@ -2970,7 +2970,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.True(d2.DependencyTable[Path.GetFullPath(Path.Combine("TestFiles", "three.cpp")) + "|" + Path.GetFullPath(Path.Combine("TestFiles", "two.cpp"))].Values.Count == 4);
         }
 
-        [Fact]
+        [TestMethod]
         public void InvalidFlatTrackingTLogName()
         {
             Console.WriteLine("Test: InvalidFlatTrackingTLogName");
@@ -2991,7 +2991,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Empty(data.DependencyTable); // "DependencyTable should be empty."
         }
 
-        [Fact]
+        [TestMethod]
         public void FlatTrackingTLogWithInitialEmptyLine()
         {
             Console.WriteLine("Test: FlatTrackingTLogWithInitialEmptyLine");
@@ -3008,7 +3008,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Empty(data.DependencyTable); // "DependencyTable should be empty."
         }
 
-        [Fact]
+        [TestMethod]
         public void FlatTrackingTLogWithEmptyLineImmediatelyAfterRoot()
         {
             Console.WriteLine("Test: FlatTrackingTLogWithEmptyLineImmediatelyAfterRoot");
@@ -3025,7 +3025,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Empty(data.DependencyTable); // "DependencyTable should be empty."
         }
 
-        [Fact]
+        [TestMethod]
         public void FlatTrackingTLogWithEmptyLineBetweenRoots()
         {
             Console.WriteLine("Test: FlatTrackingTLogWithEmptyLineBetweenRoots");
@@ -3042,7 +3042,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Empty(data.DependencyTable); // "DependencyTable should be empty."
         }
 
-        [Fact]
+        [TestMethod]
         public void FlatTrackingTLogWithEmptyRoot()
         {
             Console.WriteLine("Test: FlatTrackingTLogWithEmptyRoot");
@@ -3059,7 +3059,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Single(data.DependencyTable); // "DependencyTable should only contain one entry."
         }
 
-        [Fact]
+        [TestMethod]
         public void FlatTrackingDataMissingInputsAndOutputs()
         {
             Console.WriteLine("Test: FlatTrackingDataMissingInputsAndOutputs");
@@ -3100,7 +3100,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Equal(3, outputs.MissingFiles.Count);
         }
 
-        [Fact]
+        [TestMethod]
         public void FlatTrackingDataMissingInputs()
         {
             Console.WriteLine("Test: FlatTrackingDataMissingInputs");
@@ -3140,7 +3140,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Empty(outputs.MissingFiles);
         }
 
-        [Fact]
+        [TestMethod]
         public void FlatTrackingDataMissingOutputs()
         {
             Console.WriteLine("Test: FlatTrackingDataMissingOutputs");
@@ -3180,7 +3180,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Equal(2, outputs.MissingFiles.Count);
         }
 
-        [Fact]
+        [TestMethod]
         public void FlatTrackingDataEmptyInputTLogs()
         {
             Console.WriteLine("Test: FlatTrackingDataEmptyInputTLogs");
@@ -3197,7 +3197,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.False(FlatTrackingData.IsUpToDate(DependencyTestHelper.MockTask.Log, UpToDateCheckType.InputOrOutputNewerThanTracking, inputs, outputs));
         }
 
-        [Fact]
+        [TestMethod]
         public void FlatTrackingDataEmptyOutputTLogs()
         {
             Console.WriteLine("Test: FlatTrackingDataEmptyOutputTLogs");
@@ -3228,7 +3228,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.True(FlatTrackingData.IsUpToDate(DependencyTestHelper.MockTask.Log, UpToDateCheckType.InputOrOutputNewerThanTracking, inputs, outputs));
         }
 
-        [Fact]
+        [TestMethod]
         public void FlatTrackingDataInputNewerThanTracking()
         {
             Console.WriteLine("Test: FlatTrackingDataInputNewerThanTracking");
@@ -3279,7 +3279,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.True(FlatTrackingData.IsUpToDate(DependencyTestHelper.MockTask.Log, UpToDateCheckType.InputNewerThanTracking, inputs, outputs));
         }
 
-        [Fact]
+        [TestMethod]
         public void FlatTrackingDataInputNewerThanTrackingNoOutput()
         {
             Console.WriteLine("Test: FlatTrackingDataInputNewerThanTrackingNoOutput");
@@ -3313,7 +3313,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.True(FlatTrackingData.IsUpToDate(DependencyTestHelper.MockTask.Log, UpToDateCheckType.InputNewerThanTracking, inputs, outputs));
         }
 
-        [Fact]
+        [TestMethod]
         public void FlatTrackingDataInputNewerThanOutput()
         {
             Console.WriteLine("Test: FlatTrackingDataInputOrOutputNewerThanTracking");
@@ -3369,7 +3369,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.False(FlatTrackingData.IsUpToDate(DependencyTestHelper.MockTask.Log, UpToDateCheckType.InputNewerThanOutput, inputs, outputs), "#4");
         }
 
-        [Fact]
+        [TestMethod]
         public void FlatTrackingDataInputOrOutputNewerThanTracking()
         {
             Console.WriteLine("Test: FlatTrackingDataInputOrOutputNewerThanTracking");
@@ -3426,7 +3426,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.False(FlatTrackingData.IsUpToDate(DependencyTestHelper.MockTask.Log, UpToDateCheckType.InputNewerThanOutput, inputs, outputs));
         }
 
-        [Fact]
+        [TestMethod]
         public void FlatTrackingExcludeDirectories()
         {
             Console.WriteLine("Test: FlatTrackingExcludeDirectories");
@@ -3485,7 +3485,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.Equal(originalNewest, data.NewestFileTimeUtc); // "Timestamp changed when no tracked files changed."
         }
 
-        [Fact]
+        [TestMethod]
         public void TrackingDataCacheResetOnTlogChange()
         {
             Console.WriteLine("Test: FlatTrackingDataCacheResetOnTlogChange");
@@ -3519,7 +3519,7 @@ namespace Microsoft.Build.UnitTests.TrackedDependencies
             Assert.NotEqual(outputs.DependencyTable, outputs2.DependencyTable);
         }
 
-        [Fact]
+        [TestMethod]
         public void RootContainsSubRoots()
         {
             Console.WriteLine("Test: RootContainsSubRoots");

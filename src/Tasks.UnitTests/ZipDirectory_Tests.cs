@@ -19,7 +19,7 @@ namespace Microsoft.Build.Tasks.UnitTests
     {
         private readonly MockEngine _mockEngine = new MockEngine();
 
-        [Fact]
+        [TestMethod]
         public void CanZipDirectory()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -60,7 +60,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void CanOvewriteExistingFile()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -102,7 +102,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void LogsErrorIfDestinationExists()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -124,7 +124,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void LogsErrorIfDirectoryDoesNotExist()
         {
             ZipDirectory zipDirectory = new ZipDirectory

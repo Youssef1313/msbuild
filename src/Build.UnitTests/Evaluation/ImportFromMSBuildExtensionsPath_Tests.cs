@@ -33,13 +33,13 @@ namespace Microsoft.Build.UnitTests.Evaluation
             ToolsetConfigurationReaderTestHelper.CleanUp();
         }
 
-        [Fact]
+        [TestMethod]
         public void ImportFromExtensionsPathFound()
         {
             CreateAndBuildProjectForImportFromExtensionsPath("MSBuildExtensionsPath", (p, l) => Assert.True(p.Build()));
         }
 
-        [Fact]
+        [TestMethod]
         public void ImportFromExtensionsPathNotFound()
         {
             string extnDir1 = null;
@@ -73,7 +73,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ConditionalImportFromExtensionsPathNotFound()
         {
             string extnTargetsFileContentWithCondition = @"
@@ -103,7 +103,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                                                             });
         }
 
-        [Fact]
+        [TestMethod]
         public void ImportFromExtensionsPathCircularImportError()
         {
             string extnTargetsFileContent1 = @"
@@ -135,7 +135,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                                                         (p, l) => l.AssertLogContains("MSB4210"));
         }
 
-        [Fact]
+        [TestMethod]
         public void ExtensionPathFallbackIsCaseInsensitive()
         {
             string mainTargetsFileContent = @"
@@ -172,7 +172,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 });
         }
 
-        [Fact]
+        [TestMethod]
         public void ImportFromExtensionsPathWithWildCard()
         {
             string mainTargetsFileContent = @"
@@ -215,7 +215,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 });
         }
 
-        [Fact]
+        [TestMethod]
         public void ImportFromExtensionsPathWithWildCardAndSelfImport()
         {
             string mainTargetsFileContent = @"
@@ -268,7 +268,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 });
         }
 
-        [Fact]
+        [TestMethod]
         public void ImportFromExtensionsPathWithWildCardNothingFound()
         {
             string extnTargetsFileContent = @"
@@ -287,7 +287,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                                                     null, (p, l) => Assert.True(p.Build()));
         }
 
-        [Fact]
+        [TestMethod]
         public void ImportFromExtensionsPathInvalidFile()
         {
             string extnTargetsFileContent = @"<Project>";
@@ -322,7 +322,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ImportFromExtensionsPathSearchOrder()
         {
             string extnTargetsFileContent1 = @"
@@ -367,7 +367,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                                                             });
         }
 
-        [Fact]
+        [TestMethod]
         public void ImportFromExtensionsPathSearchOrder2()
         {
             string extnTargetsFileContent1 = @"
@@ -433,20 +433,20 @@ namespace Microsoft.Build.UnitTests.Evaluation
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ImportOrderFromExtensionsPath32()
         {
             CreateAndBuildProjectForImportFromExtensionsPath("MSBuildExtensionsPath32", (p, l) => Assert.True(p.Build()));
         }
 
-        [Fact]
+        [TestMethod]
         public void ImportOrderFromExtensionsPath64()
         {
             CreateAndBuildProjectForImportFromExtensionsPath("MSBuildExtensionsPath64", (p, l) => Assert.True(p.Build()));
         }
 
         // Use MSBuildExtensionsPath, MSBuildExtensionsPath32 and MSBuildExtensionsPath64 in the build
-        [Fact]
+        [TestMethod]
         public void ImportFromExtensionsPathAnd32And64()
         {
             string extnTargetsFileContentTemplate = @"
@@ -529,7 +529,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         }
 
         // Fall-back path that has a property in it: $(FallbackExpandDir1)
-        [Fact]
+        [TestMethod]
         public void ExpandExtensionsPathFallback()
         {
             string extnTargetsFileContentTemplate = @"
@@ -590,7 +590,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         }
 
         // Fall-back path that has a property in it: $(FallbackExpandDir1)
-        [Fact]
+        [TestMethod]
         public void ExpandExtensionsPathFallbackInErrorMessage()
         {
             string extnTargetsFileContentTemplate = @"
@@ -652,7 +652,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         }
 
         // Fall-back search path with custom variable
-        [Fact]
+        [TestMethod]
         public void FallbackImportWithIndirectReference()
         {
             string mainTargetsFileContent = @"
@@ -721,7 +721,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         }
 
         // Fall-back search path on a property that is not defined.
-        [Fact]
+        [TestMethod]
         public void FallbackImportWithUndefinedProperty()
         {
             string mainTargetsFileContent = @"
@@ -785,7 +785,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void FallbackImportWithFileNotFoundWhenPropertyNotDefined()
         {
             // Import something from $(UndefinedProperty)
@@ -847,9 +847,9 @@ namespace Microsoft.Build.UnitTests.Evaluation
         /// Fall-back search path on a property that is not valid. https://github.com/dotnet/msbuild/issues/8762
         /// </summary>
         /// <param name="projectValue">imported project value expression</param>
-        [Theory]
-        [InlineData("")]
-        [InlineData("|")]
+        [TestMethod]
+        [DataRow("")]
+        [DataRow("|")]
         public void FallbackImportWithInvalidProjectValue(string projectValue)
         {
             string mainTargetsFileContent = $"""

@@ -181,7 +181,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Fail("Unexpected set last write time: " + path);
         }
 
-        [Fact]
+        [TestMethod]
         public void TouchExisting()
         {
             Touch t = new Touch();
@@ -204,7 +204,7 @@ namespace Microsoft.Build.UnitTests
                 engine.Log);
         }
 
-        [Fact]
+        [TestMethod]
         public void TouchNonExisting()
         {
             Touch t = new Touch();
@@ -226,7 +226,7 @@ namespace Microsoft.Build.UnitTests
                 engine.Log);
         }
 
-        [Fact]
+        [TestMethod]
         public void TouchNonExistingAlwaysCreate()
         {
             Touch t = new Touch();
@@ -249,7 +249,7 @@ namespace Microsoft.Build.UnitTests
                 engine.Log);
         }
 
-        [Fact]
+        [TestMethod]
         public void TouchNonExistingAlwaysCreateAndBadlyFormedTimestamp()
         {
             Touch t = new Touch();
@@ -272,7 +272,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Contains("MSB3376", engine.Log);
         }
 
-        [Fact]
+        [TestMethod]
         public void TouchReadonly()
         {
             Touch t = new Touch();
@@ -294,7 +294,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Contains(myreadonly_txt, engine.Log);
         }
 
-        [Fact]
+        [TestMethod]
         public void TouchReadonlyForce()
         {
             Touch t = new Touch();
@@ -311,7 +311,7 @@ namespace Microsoft.Build.UnitTests
             Execute(t);
         }
 
-        [Fact]
+        [TestMethod]
         public void TouchNonExistingDirectoryDoesntExist()
         {
             Touch t = new Touch();
@@ -336,7 +336,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Question touch on non-existing file should return false.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void QuestionTouchNonExisting()
         {
             Touch t = new Touch();
@@ -362,7 +362,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Question touch on a non-existing file with AlwaysCreate property should return false.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void QuestionTouchNonExistingAlwaysCreate()
         {
             Touch t = new Touch();
@@ -387,7 +387,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Question touch should return true and the file is not touched.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void QuestionTouchExisting()
         {
             Touch t = new Touch();

@@ -17,7 +17,7 @@ namespace Microsoft.Build.UnitTests
 {
     public sealed class FindUnderPath_Tests
     {
-        [Fact]
+        [TestMethod]
         public void BasicFilter()
         {
             FindUnderPath t = new FindUnderPath();
@@ -90,7 +90,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void VerifyFullPath()
@@ -112,7 +112,7 @@ namespace Microsoft.Build.UnitTests
                 t.OutOfPath[0].ItemSpec);
         }
 
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void VerifyFullPathNegative()

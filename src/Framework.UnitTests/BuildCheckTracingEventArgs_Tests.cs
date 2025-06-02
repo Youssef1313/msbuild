@@ -12,7 +12,7 @@ namespace Microsoft.Build.Framework.UnitTests
 {
     public class BuildCheckTracingEventArgs_Tests
     {
-        [Fact]
+        [TestMethod]
         public void SerializationDeserializationTest()
         {
             string key1 = "AA";

@@ -24,7 +24,7 @@ namespace Microsoft.Build.Tasks.UnitTests
     {
         private readonly MockEngine _mockEngine = new MockEngine();
 
-        [Fact]
+        [TestMethod]
         public void CanBeCanceled()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -53,7 +53,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void CanDownloadToFolder()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -84,7 +84,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void CanGetFileNameFromResponseHeader()
         {
             const string filename = "C6DDD10A99E149F78FA11F133127BF38.txt";
@@ -129,7 +129,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void CanSpecifyFileName()
         {
             const string filename = "4FD96E4A322842ACB70C40FC16E69A55.txt";
@@ -163,7 +163,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void InvalidUrlLogsError()
         {
             DownloadFile downloadFile = new DownloadFile()
@@ -177,7 +177,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             _mockEngine.Log.ShouldContain("MSB3921");
         }
 
-        [Fact]
+        [TestMethod]
         public void NotFoundLogsError()
         {
             DownloadFile downloadFile = new DownloadFile()
@@ -192,7 +192,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             _mockEngine.Log.ShouldContain("Response status code does not indicate success: 404 (Not Found).");
         }
 
-        [Fact]
+        [TestMethod]
         public void RetryOnDownloadError()
         {
             const string content = "Foo";
@@ -232,7 +232,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void RetryOnResponseError()
         {
             DownloadFile downloadFile = new DownloadFile()
@@ -249,7 +249,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             _mockEngine.Log.ShouldContain("MSB3924", customMessage: _mockEngine.Log);
         }
 
-        [Fact]
+        [TestMethod]
         public void AbortOnTimeout()
         {
             using CancellationTokenSource timeout = new CancellationTokenSource();
@@ -272,7 +272,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             _mockEngine.Log.ShouldContain("MSB3923", customMessage: _mockEngine.Log);
         }
 
-        [Fact]
+        [TestMethod]
         public async Task NoRunawayLoop()
         {
             DownloadFile downloadFile = null;
@@ -309,7 +309,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             result.ShouldBeFalse(_mockEngine.Log);
         }
 
-        [Fact]
+        [TestMethod]
         public void SkipUnchangedFiles()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -343,7 +343,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void UnknownFileNameLogsError()
         {
             DownloadFile downloadFile = new DownloadFile()

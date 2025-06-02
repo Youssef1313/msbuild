@@ -92,7 +92,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Verify when pulling target outputs out that we do not get the lives ones which are in the cache.
         /// This is to prevent changes to the target outputs from being reflected in the cache if the changes are made in the task which calls the msbuild callback.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestLiveTargetOutputs()
         {
             IDictionary targetOutputs = new Hashtable();
@@ -118,7 +118,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// words, the engine should not try to read data out of the event args and construct
         /// its own.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CustomBuildErrorEventIsPreserved()
         {
             // Create a custom build event args that derives from MSBuild's BuildErrorEventArgs.
@@ -144,7 +144,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// words, the engine should not try to read data out of the event args and construct
         /// its own.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CustomBuildWarningEventIsPreserved()
         {
             // Create a custom build event args that derives from MSBuild's BuildWarningEventArgs.
@@ -169,7 +169,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// words, the engine should not try to read data out of the event args and construct
         /// its own.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CustomBuildMessageEventIsPreserved()
         {
             // Create a custom build event args that derives from MSBuild's BuildMessageEventArgs.
@@ -190,7 +190,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test that error events are correctly logged and take into account continue on error
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestLogErrorEventWithContinueOnError()
         {
             _taskHost.ContinueOnError = false;
@@ -230,7 +230,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test that a null error event will cause an exception
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestLogErrorEventNull()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -241,7 +241,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test that a null warning event will cause an exception
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestLogWarningEventNull()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -252,7 +252,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test that a null message event will cause an exception
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestLogMessageEventNull()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -263,7 +263,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test that a null custom event will cause an exception
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestLogCustomEventNull()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -274,7 +274,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test that errors are logged properly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestLogErrorEvent()
         {
             // Log the custom event args.  (Pretend that the task actually did this.)
@@ -288,7 +288,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test that warnings are logged properly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestLogWarningEvent()
         {
             // Log the custom event args.  (Pretend that the task actually did this.)
@@ -302,7 +302,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test that messages are logged properly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestLogMessageEvent()
         {
             // Log the custom event args.  (Pretend that the task actually did this.)
@@ -316,7 +316,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test that custom events are logged properly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestLogCustomEvent()
         {
             // Log the custom event args.  (Pretend that the task actually did this.)
@@ -332,7 +332,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test that errors are logged properly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestLogErrorEventNotSerializableSP()
         {
             // Log the custom event args.  (Pretend that the task actually did this.)
@@ -346,7 +346,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test that warnings are logged properly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestLogWarningEventNotSerializableSP()
         {
             // Log the custom event args.  (Pretend that the task actually did this.)
@@ -360,7 +360,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test that messages are logged properly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestLogMessageEventNotSerializableSP()
         {
             // Log the custom event args.  (Pretend that the task actually did this.)
@@ -374,7 +374,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test that custom events are logged properly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestLogCustomEventNotSerializableSP()
         {
             // Log the custom event args.  (Pretend that the task actually did this.)
@@ -388,7 +388,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test that extended custom events are logged properly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestLogExtendedCustomEventNotSerializableMP()
         {
             _mockHost.BuildParameters.MaxNodeCount = 4;
@@ -401,7 +401,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal("ext message", _customLogger.LastCustom.Message);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestLogExtendedCustomErrorNotSerializableMP()
         {
             _mockHost.BuildParameters.MaxNodeCount = 4;
@@ -414,7 +414,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal("ext err message", _customLogger.LastError.Message);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestLogExtendedCustomWarningNotSerializableMP()
         {
             _mockHost.BuildParameters.MaxNodeCount = 4;
@@ -427,7 +427,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal("ext warn message", _customLogger.LastWarning.Message);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestLogExtendedCustomMessageNotSerializableMP()
         {
             _mockHost.BuildParameters.MaxNodeCount = 4;
@@ -443,7 +443,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test that errors are logged properly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestLogErrorEventNotSerializableMP()
         {
             MyCustomBuildErrorEventArgsNotSerializable e = new MyCustomBuildErrorEventArgsNotSerializable("SubCategory");
@@ -464,7 +464,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test that warnings are logged properly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestLogWarningEventNotSerializableMP()
         {
             MyCustomBuildWarningEventArgsNotSerializable e = new MyCustomBuildWarningEventArgsNotSerializable("SubCategory");
@@ -483,7 +483,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test that messages are logged properly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestLogMessageEventNotSerializableMP()
         {
             MyCustomMessageEventNotSerializable e = new MyCustomMessageEventNotSerializable("Message");
@@ -503,7 +503,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test that custom events are logged properly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestLogCustomEventNotSerializableMP()
         {
             MyCustomBuildEventArgsNotSerializable e = new MyCustomBuildEventArgsNotSerializable("testCustomBuildEvent");
@@ -524,7 +524,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Verify IsRunningMultipleNodes
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IsRunningMultipleNodes1Node()
         {
             _mockHost.BuildParameters.MaxNodeCount = 1;
@@ -534,7 +534,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Verify IsRunningMultipleNodes
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IsRunningMultipleNodes4Nodes()
         {
             _mockHost.BuildParameters.MaxNodeCount = 4;
@@ -545,7 +545,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Task logging after it's done should not crash us.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LogCustomAfterTaskIsDone()
         {
             string projectFileContents = @"
@@ -581,7 +581,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Task logging after it's done should not crash us.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LogCommentAfterTaskIsDone()
         {
             string projectFileContents = @"
@@ -617,7 +617,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Task logging after it's done should not crash us.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LogWarningAfterTaskIsDone()
         {
             string projectFileContents = @"
@@ -653,7 +653,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Task logging after it's done should not crash us.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LogErrorAfterTaskIsDone()
         {
             string projectFileContents = @"
@@ -690,7 +690,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Verifies that tasks can get global properties.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TasksCanGetGlobalProperties()
         {
             string projectFileContents = @"
@@ -735,7 +735,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Verifies that if the user specifies no global properties, tasks get back an empty collection.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TasksGetNoGlobalPropertiesIfNoneSpecified()
         {
             string projectFileContents = @"
@@ -759,7 +759,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             mockLogger.AssertLogContains("Global property count: 0");
         }
 
-        [Fact]
+        [TestMethod]
         public void RequestCoresThrowsOnInvalidInput()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
@@ -773,7 +773,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void RequestCoresUsesImplicitCore()
         {
             // If the request callback has no cores to grant, we still get 1 for the implicit core.
@@ -783,7 +783,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             _mockRequestCallback.LastWaitForCores.ShouldBeFalse();
         }
 
-        [Fact]
+        [TestMethod]
         public void RequestCoresUsesCoresFromRequestCallback()
         {
             // The request callback has 1 core to grant, we should see it returned from RequestCores.
@@ -799,7 +799,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             _mockRequestCallback.LastWaitForCores.ShouldBeTrue();
         }
 
-        [Fact]
+        [TestMethod]
         public void ReleaseCoresThrowsOnInvalidInput()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
@@ -813,7 +813,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void ReleaseCoresReturnsCoresToRequestCallback()
         {
             _mockRequestCallback.CoresToGrant = 1;
@@ -828,7 +828,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             _mockRequestCallback.LastWaitForCores.ShouldBeTrue();
         }
 
-        [Fact]
+        [TestMethod]
         public void ReleaseCoresReturnsImplicitCore()
         {
             _mockRequestCallback.CoresToGrant = 1;

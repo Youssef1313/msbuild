@@ -24,7 +24,7 @@ namespace Microsoft.Build.UnitTests.OM.Evaluation
 {
     public class ItemSpec_Tests
     {
-        [Fact]
+        [TestMethod]
         public void EachFragmentTypeShouldContributeToItemSpecGlob()
         {
             var itemSpec = CreateItemSpecFrom("a;b*;c*;@(foo)", CreateExpander(new Dictionary<string, string[]> { { "foo", new[] { "d", "e" } } }));
@@ -38,7 +38,7 @@ namespace Microsoft.Build.UnitTests.OM.Evaluation
             Assert.True(itemSpecGlob.IsMatch("e"));
         }
 
-        [Fact]
+        [TestMethod]
         public void AbsolutePathsShouldMatch()
         {
             var absoluteRootPath = NativeMethodsShared.IsWindows
@@ -58,7 +58,7 @@ namespace Microsoft.Build.UnitTests.OM.Evaluation
             itemSpecFromAbsolute.ToMSBuildGlob().IsMatch(absoluteSpec).ShouldBeTrue();
         }
 
-        [Fact]
+        [TestMethod]
         public void FragmentGlobsWorkAfterStateIsPartiallyInitializedByOtherOperations()
         {
             var itemSpec = CreateItemSpecFrom("a;b*;c*;@(foo)", CreateExpander(new Dictionary<string, string[]> { { "foo", new[] { "d", "e" } } }));

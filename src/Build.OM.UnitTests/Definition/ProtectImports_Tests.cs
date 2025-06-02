@@ -125,7 +125,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests against edits into imported properties through the property itself.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void PropertySetViaProperty()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -142,7 +142,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Instead of editing the existing property, because it originated
         /// in an imported file, it should create a new one in the main project.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void PropertySetViaProject()
         {
             Project project = GetProject();
@@ -156,7 +156,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests against edits into imported properties through the property itself.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void PropertyRemove()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -175,7 +175,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests imported item type change.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ItemImportedChangeType()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -190,7 +190,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests imported item renaming.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ItemImportedRename()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -205,7 +205,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests imported item SetUnevaluatedValue.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ItemImportedSetUnevaluatedValue()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -220,7 +220,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests imported item removal.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ItemImportedRemove()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -235,7 +235,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests project item type change.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ItemProjectChangeType()
         {
             Project project = GetProject();
@@ -249,7 +249,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests project item renaming.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ItemProjectRename()
         {
             Project project = GetProject();
@@ -263,7 +263,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests project item SetUnevaluatedValue.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ItemProjectSetUnevaluatedValue()
         {
             Project project = GetProject();
@@ -277,7 +277,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests project item removal.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ItemProjectRemove()
         {
             Project project = GetProject();
@@ -295,7 +295,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests setting existing metadata in import.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MetadataImportSetViaProject()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -310,7 +310,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests setting new metadata in import.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MetadataImportAdd()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -325,7 +325,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests setting new metadata in import.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MetadataImportSetViaMetadata()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -340,7 +340,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests removing metadata in import.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MetadataImportRemove()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -355,7 +355,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests setting existing metadata in import.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MetadataProjectSetViaItem()
         {
             Project project = GetProject();
@@ -369,7 +369,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests setting new metadata in import.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MetadataProjectAdd()
         {
             Project project = GetProject();
@@ -384,7 +384,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests setting new metadata in import.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MetadataProjectSetViaMetadata()
         {
             Project project = GetProject();
@@ -400,7 +400,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests removing metadata in import.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MetadataProjectRemove()
         {
             Project project = GetProject();
@@ -418,7 +418,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests setting new metadata in import.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DefinitionMetadataImportSetViaMetadata()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -433,7 +433,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests removing metadata in imported item definition.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DefinitionMetadataImportRemove()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -448,7 +448,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests setting existing metadata in import.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DefinitionMetadataProjectSetViaProject()
         {
             Project project = GetProject();
@@ -462,7 +462,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests setting new metadata in import.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DefinitionMetadataProjectSetViaMetadata()
         {
             Project project = GetProject();
@@ -476,7 +476,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests removing metadata in import.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DefinitionMetadataProjectRemove()
         {
             Project project = GetProject();

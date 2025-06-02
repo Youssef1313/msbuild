@@ -12,7 +12,7 @@ namespace Microsoft.Build.Engine.UnitTests.Telemetry
 {
     public class ActivityExtensionsTests
     {
-        [Fact]
+        [TestMethod]
         public void WithTag_ShouldSetUnhashedValue()
         {
             var activity = new Activity("TestActivity");
@@ -32,7 +32,7 @@ namespace Microsoft.Build.Engine.UnitTests.Telemetry
             activity.Dispose();
         }
 
-        [Fact]
+        [TestMethod]
         public void WithTag_ShouldSetHashedValue()
         {
             var activity = new Activity("TestActivity");
@@ -49,7 +49,7 @@ namespace Microsoft.Build.Engine.UnitTests.Telemetry
             activity.Dispose();
         }
 
-        [Fact]
+        [TestMethod]
         public void WithTags_ShouldSetMultipleTags()
         {
             var activity = new Activity("TestActivity");
@@ -73,7 +73,7 @@ namespace Microsoft.Build.Engine.UnitTests.Telemetry
             activity.Dispose();
         }
 
-        [Fact]
+        [TestMethod]
         public void WithTags_DataHolderShouldSetMultipleTags()
         {
             var activity = new Activity("TestActivity");
@@ -92,7 +92,7 @@ namespace Microsoft.Build.Engine.UnitTests.Telemetry
             activity.Dispose();
         }
 
-        [Fact]
+        [TestMethod]
         public void WithStartTime_ShouldSetActivityStartTime()
         {
             var activity = new Activity("TestActivity");
@@ -104,7 +104,7 @@ namespace Microsoft.Build.Engine.UnitTests.Telemetry
             activity.Dispose();
         }
 
-        [Fact]
+        [TestMethod]
         public void WithStartTime_NullDateTime_ShouldNotSetStartTime()
         {
             var activity = new Activity("TestActivity");
@@ -137,7 +137,7 @@ namespace Microsoft.Build.Engine.UnitTests.Telemetry
 
     public class MSBuildActivitySourceTests
     {
-        [Fact]
+        [TestMethod]
         public void StartActivity_ShouldPrefixNameCorrectly_WhenNoRemoteParent()
         {
             var source = new MSBuildActivitySource(TelemetryConstants.DefaultActivitySourceNamespace, 1.0);
@@ -157,7 +157,7 @@ namespace Microsoft.Build.Engine.UnitTests.Telemetry
             activity?.Dispose();
         }
 
-        [Fact]
+        [TestMethod]
         public void StartActivity_ShouldUseParentId_WhenRemoteParentExists()
         {
             // Arrange

@@ -104,7 +104,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// General base name comparison validator.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CompareBaseName()
         {
             // For each pair of assembly strings...
@@ -139,7 +139,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// General compareTo validator
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CompareTo()
         {
             // For each pair of assembly strings...
@@ -199,7 +199,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ExerciseMiscMethods()
         {
             AssemblyNameExtension a1 = s_producers[0](s_assemblyStrings[0]);
@@ -211,7 +211,7 @@ namespace Microsoft.Build.UnitTests
             Assert.NotNull(a1.ToString());
         }
 
-        [Fact]
+        [TestMethod]
         public void EscapeDisplayNameCharacters()
         {
             // /// Those characters are Equals(=), Comma(,), Quote("), Apostrophe('), Backslash(\).
@@ -223,7 +223,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// General equals comparison validator.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AreEquals()
         {
             // For each pair of assembly strings...
@@ -264,7 +264,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// General equals comparison validator when we are ignoring the version numbers in the name.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EqualsIgnoreVersion()
         {
             // For each pair of assembly strings...
@@ -304,7 +304,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// This repros a bug that was found while coding AssemblyNameExtension.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CompareBaseNameRealCase1()
         {
             AssemblyNameExtension a1 = ProduceAsBoth("System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
@@ -320,7 +320,7 @@ namespace Microsoft.Build.UnitTests
         /// Verify an exception is thrown when the simple name is not in the itemspec.
         ///
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CreateAssemblyNameExtensionWithNoSimpleName()
         {
             Assert.Throws<FileLoadException>(() =>
@@ -332,7 +332,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify an exception is thrown when the simple name is not in the itemspec.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CreateAssemblyNameExtensionWithNoSimpleName2()
         {
             Assert.Throws<FileLoadException>(() =>
@@ -347,7 +347,7 @@ namespace Microsoft.Build.UnitTests
         /// Create an assembly name extension providing the name, version, culture, and public key. Also test cases
         /// where the public key is the only item specified
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CreateAssemblyNameWithNameAndVersionCulturePublicKey()
         {
             AssemblyNameExtension extension = new AssemblyNameExtension("A, Version=2.0.0.0, Culture=en, PublicKeyToken=b03f5f7f11d50a3a");
@@ -383,7 +383,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Make sure processor architecture is seen when it is in the string.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CreateAssemblyNameWithNameAndProcessorArchitecture()
         {
             AssemblyNameExtension extension = new AssemblyNameExtension("A, Version=2.0.0.0, Culture=en, PublicKeyToken=b03f5f7f11d50a3a, ProcessorArchitecture=MSIL");
@@ -406,7 +406,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify partial matching on the simple name works
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestAssemblyPatialMatchSimpleName()
         {
             AssemblyNameExtension assemblyNameToMatch = new AssemblyNameExtension("System.Xml");
@@ -426,7 +426,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify partial matching on the simple name and version
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestAssemblyPatialMatchSimpleNameVersion()
         {
             AssemblyNameExtension assemblyNameToMatchVersion = new AssemblyNameExtension("System.Xml, Version=10.0.0.0");
@@ -470,7 +470,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify partial matching on the simple name and culture
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestAssemblyPatialMatchSimpleNameCulture()
         {
             AssemblyNameExtension assemblyNameToMatchCulture = new AssemblyNameExtension("System.Xml, Culture=en");
@@ -514,7 +514,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify partial matching on the simple name and PublicKeyToken
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestAssemblyPatialMatchSimpleNamePublicKeyToken()
         {
             AssemblyNameExtension assemblyNameToMatchPublicToken = new AssemblyNameExtension("System.Xml, PublicKeyToken=b03f5f7f11d50a3a");
@@ -558,7 +558,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify partial matching on the simple name and retargetable
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestAssemblyPartialMatchSimpleNameRetargetable()
         {
             AssemblyNameExtension assemblyNameToMatchRetargetable = new AssemblyNameExtension("System.Xml, Version=10.0.0.0, Culture=en, PublicKeyToken=b03f5f7f11d50a3a, Retargetable=Yes");
@@ -609,7 +609,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Make sure that our assemblyNameComparers correctly work.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyAssemblyNameComparers()
         {
             AssemblyNameExtension a = new AssemblyNameExtension("System.Xml, Version=10.0.0.0, Culture=en, PublicKeyToken=b03f5f7f11d50a3a, Retargetable=Yes");
@@ -641,7 +641,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Make sure the reverse version comparer will compare the version in a way that would sort them in reverse order.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyReverseVersionComparer()
         {
             AssemblyNameExtension x = new AssemblyNameExtension("System, Version=2.0.0.0");
@@ -670,12 +670,12 @@ namespace Microsoft.Build.UnitTests
             Assert.True(assemblies[2].Equals(y));
         }
 
-        [Theory]
-        [InlineData("System.Xml")]
-        [InlineData("System.XML, Version=2.0.0.0")]
-        [InlineData("System.Xml, Culture=de-DE")]
-        [InlineData("System.Xml, Version=10.0.0.0, Culture=en, PublicKeyToken=b03f5f7f11d50a3a, Retargetable=Yes")]
-        [InlineData("System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+        [TestMethod]
+        [DataRow("System.Xml")]
+        [DataRow("System.XML, Version=2.0.0.0")]
+        [DataRow("System.Xml, Culture=de-DE")]
+        [DataRow("System.Xml, Version=10.0.0.0, Culture=en, PublicKeyToken=b03f5f7f11d50a3a, Retargetable=Yes")]
+        [DataRow("System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
         public void VerifyAssemblyNameExSerializationByTranslator(string assemblyName)
         {
             AssemblyNameExtension assemblyNameOriginal = new AssemblyNameExtension(assemblyName);
@@ -694,7 +694,7 @@ namespace Microsoft.Build.UnitTests
             assemblyNameDeserialized.ShouldBe(assemblyNameOriginal);
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyAssemblyNameExSerializationWithRemappedFromByTranslator()
         {
             AssemblyNameExtension assemblyNameOriginal = new AssemblyNameExtension("System.Xml, Version=10.0.0.0, Culture=en, PublicKeyToken=b03f5f7f11d50a3a");

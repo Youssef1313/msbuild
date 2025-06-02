@@ -13,7 +13,7 @@ namespace Microsoft.Build.UnitTests
 {
     public class LoggerDescription_Tests
     {
-        [Fact]
+        [TestMethod]
         public void LoggerDescriptionCustomSerialization()
         {
             const string className = "Class";

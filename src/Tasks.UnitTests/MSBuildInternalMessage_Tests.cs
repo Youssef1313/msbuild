@@ -17,9 +17,9 @@ namespace Microsoft.Build.Tasks.UnitTests
 
         public MSBuildInternalMessage_Tests(ITestOutputHelper testOutput) => _testOutput = testOutput;
 
-        [Theory]
-        [InlineData(true, true, "CommonSdk.Prefer32BitAndPreferNativeArm64Enabled", false)]
-        [InlineData(false, false, "CommonSdk.PlatformIsAnyCPUAndPreferNativeArm64Enabled", true, new[] { "Release" })]
+        [TestMethod]
+        [DataRow(true, true, "CommonSdk.Prefer32BitAndPreferNativeArm64Enabled", false)]
+        [DataRow(false, false, "CommonSdk.PlatformIsAnyCPUAndPreferNativeArm64Enabled", true, new[] { "Release" })]
         public void E2EScenarioTests(bool prefer32, bool isPlatformAnyCpu, string expectedResourceName, bool isNetWarningExpected, string[]? formatArgs = null)
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -61,9 +61,9 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Theory]
-        [InlineData(true, "CommonSdk.BaseIntermediateOutputPathMismatchWarning")]
-        [InlineData(false, "CommonSdk.MSBuildProjectExtensionsPathModifiedAfterUse")]
+        [TestMethod]
+        [DataRow(true, "CommonSdk.BaseIntermediateOutputPathMismatchWarning")]
+        [DataRow(false, "CommonSdk.MSBuildProjectExtensionsPathModifiedAfterUse")]
 
         public void BaseIntermediateOutputPathMisMatchWarning(bool isInitialMSBuildProjectExtensionsPathEmpty, string expectedResourceName)
         {
@@ -103,14 +103,14 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Theory]
-        [InlineData("SetGenerateManifests", "CommonSdk.GenerateManifestsOnlyForExe", false)]
-        [InlineData("SetGenerateManifests", "CommonSdk.SigningKeyRequired", true)]
-        [InlineData("_DeploymentUnpublishable", "CommonSdk.DeploymentUnpublishable")]
-        [InlineData("Run", "CommonSdk.RunTargetDependsOnMessage")]
-        [InlineData("GetTargetFrameworks", "CommonSdk.CrossTargetingGetTargetFrameworks")]
-        [InlineData("ResolveProjectReferences", "CommonSdk.NonExistentProjectReference")]
-        [InlineData("ResolveProjectReferences", "CommonSdk.NonExistentProjectReference", true, false)]
+        [TestMethod]
+        [DataRow("SetGenerateManifests", "CommonSdk.GenerateManifestsOnlyForExe", false)]
+        [DataRow("SetGenerateManifests", "CommonSdk.SigningKeyRequired", true)]
+        [DataRow("_DeploymentUnpublishable", "CommonSdk.DeploymentUnpublishable")]
+        [DataRow("Run", "CommonSdk.RunTargetDependsOnMessage")]
+        [DataRow("GetTargetFrameworks", "CommonSdk.CrossTargetingGetTargetFrameworks")]
+        [DataRow("ResolveProjectReferences", "CommonSdk.NonExistentProjectReference")]
+        [DataRow("ResolveProjectReferences", "CommonSdk.NonExistentProjectReference", true, false)]
         public void RunTargetExtError(string targetName, string expectedResourceName, bool outputTypeIsExe = true, bool errorOnMissingProjectReference = true)
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -184,11 +184,11 @@ namespace Microsoft.Build.Tasks.UnitTests
         /// <param name="expectedResourceName"></param>
         /// <param name="skipInvalidConfigurations"></param>
         /// <param name="buildingInsideVisualStudio"></param>
-        [Theory]
-        [InlineData("CommonSdk.InvalidConfigurationTextWhenBuildingInsideVisualStudio", false, true)]
-        [InlineData("CommonSdk.InvalidConfigurationTextWhenBuildingOutsideVisualStudio", true, false)]
-        [InlineData("CommonSdk.InvalidConfigurationTextWhenBuildingOutsideVisualStudio", false, false)]
-        [InlineData("CommonSdk.InvalidConfigurationTextWhenBuildingInsideVisualStudio", true, true)]
+        [TestMethod]
+        [DataRow("CommonSdk.InvalidConfigurationTextWhenBuildingInsideVisualStudio", false, true)]
+        [DataRow("CommonSdk.InvalidConfigurationTextWhenBuildingOutsideVisualStudio", true, false)]
+        [DataRow("CommonSdk.InvalidConfigurationTextWhenBuildingOutsideVisualStudio", false, false)]
+        [DataRow("CommonSdk.InvalidConfigurationTextWhenBuildingInsideVisualStudio", true, true)]
         public void CheckForInvalidConfigurationAndPlatformTargetMessage(string expectedResourceName, bool skipInvalidConfigurations, bool buildingInsideVisualStudio)
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -234,15 +234,15 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Theory]
-        [InlineData("MSB9000", "ResxWithNoCulture", "SplitResourcesByCulture", "CommonSdk.SplitResourcesByCultureEmbeddedResourceMessage"),]
-        [InlineData("MSB9001", "ResxWithCulture", "SplitResourcesByCulture", "CommonSdk.SplitResourcesByCultureEmbeddedResourceMessage")]
-        [InlineData("MSB9002", "NonResxWithCulture", "SplitResourcesByCulture", "CommonSdk.SplitResourcesByCultureEmbeddedResourceMessage")]
-        [InlineData("MSB9003", "NonResxWithNoCulture", "SplitResourcesByCulture", "CommonSdk.SplitResourcesByCultureEmbeddedResourceMessage")]
-        [InlineData("MSB9004", "ManifestResourceWithNoCulture", "_GenerateCompileInputs", "CommonSdk.ManifestResourceWithNoCultureWarning")]
-        [InlineData("MSB9005", "ManifestNonResxWithNoCultureOnDisk", "_GenerateCompileInputs", "CommonSdk.ManifestResourceWithNoCultureWarning")]
-        [InlineData("MSB9006", "ManifestResourceWithCulture", "_GenerateSatelliteAssemblyInputs", "CommonSdk.ManifestResourceWithNoCultureWarning")]
-        [InlineData("MSB9007", "ManifestNonResxWithCultureOnDisk", "_GenerateSatelliteAssemblyInputs", "CommonSdk.ManifestResourceWithNoCultureWarning")]
+        [TestMethod]
+        [DataRow("MSB9000", "ResxWithNoCulture", "SplitResourcesByCulture", "CommonSdk.SplitResourcesByCultureEmbeddedResourceMessage"),]
+        [DataRow("MSB9001", "ResxWithCulture", "SplitResourcesByCulture", "CommonSdk.SplitResourcesByCultureEmbeddedResourceMessage")]
+        [DataRow("MSB9002", "NonResxWithCulture", "SplitResourcesByCulture", "CommonSdk.SplitResourcesByCultureEmbeddedResourceMessage")]
+        [DataRow("MSB9003", "NonResxWithNoCulture", "SplitResourcesByCulture", "CommonSdk.SplitResourcesByCultureEmbeddedResourceMessage")]
+        [DataRow("MSB9004", "ManifestResourceWithNoCulture", "_GenerateCompileInputs", "CommonSdk.ManifestResourceWithNoCultureWarning")]
+        [DataRow("MSB9005", "ManifestNonResxWithNoCultureOnDisk", "_GenerateCompileInputs", "CommonSdk.ManifestResourceWithNoCultureWarning")]
+        [DataRow("MSB9006", "ManifestResourceWithCulture", "_GenerateSatelliteAssemblyInputs", "CommonSdk.ManifestResourceWithNoCultureWarning")]
+        [DataRow("MSB9007", "ManifestNonResxWithCultureOnDisk", "_GenerateSatelliteAssemblyInputs", "CommonSdk.ManifestResourceWithNoCultureWarning")]
         public void ResourcesByCultureWarningMessage(string warningNumber, string itemName, string targetName, string resourceName)
         {
             using (TestEnvironment env = TestEnvironment.Create())

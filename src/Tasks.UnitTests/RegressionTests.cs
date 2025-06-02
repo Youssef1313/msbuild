@@ -26,7 +26,7 @@ namespace Microsoft.Build.Tasks.UnitTests
         /// Verifies that when a user overrides the BaseIntermediateOutputPath that the build still works.
         /// </summary>
         /// <remarks>This was written because of regression https://github.com/dotnet/msbuild/issues/1509. </remarks>
-        [Fact]
+        [TestMethod]
         public void OverrideBaseIntermediateOutputPathSucceeds()
         {
             Project project = ObjectModelHelpers.CreateInMemoryProject($@"
@@ -83,7 +83,7 @@ namespace Microsoft.Build.Tasks.UnitTests
         /// <summary>
         /// Test for https://github.com/dotnet/msbuild/issues/8153
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IsWellKnownAttributeValuePreserved()
         {
             ObjectModelHelpers.DeleteTempProjectDirectory();

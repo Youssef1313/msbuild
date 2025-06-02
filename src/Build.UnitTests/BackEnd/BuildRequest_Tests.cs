@@ -23,7 +23,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             _nodeRequestId = 1;
         }
 
-        [Fact]
+        [TestMethod]
         public void TestConstructorBad()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -31,13 +31,13 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 CreateNewBuildRequest(0, null);
             });
         }
-        [Fact]
+        [TestMethod]
         public void TestConstructorGood()
         {
             CreateNewBuildRequest(0, Array.Empty<string>());
         }
 
-        [Fact]
+        [TestMethod]
         public void TestConfigurationId()
         {
             BuildRequest request = CreateNewBuildRequest(0, Array.Empty<string>());
@@ -50,7 +50,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(-1, request3.ConfigurationId);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestConfigurationResolved()
         {
             BuildRequest request = CreateNewBuildRequest(0, Array.Empty<string>());
@@ -63,7 +63,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.False(request3.IsConfigurationResolved);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestTargets()
         {
             BuildRequest request = CreateNewBuildRequest(0, Array.Empty<string>());
@@ -76,14 +76,14 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal("a", request2.Targets[0]);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestPacketType()
         {
             BuildRequest request = CreateNewBuildRequest(0, Array.Empty<string>());
             Assert.Equal(NodePacketType.BuildRequest, request.Type);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestResolveConfigurationGood()
         {
             BuildRequest request = CreateNewBuildRequest(0, Array.Empty<string>());
@@ -92,7 +92,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(1, request.ConfigurationId);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestResolveConfigurationBad()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -102,7 +102,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void TestResolveConfigurationBad2()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -111,7 +111,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 request.ResolveConfiguration(-1);
             });
         }
-        [Fact]
+        [TestMethod]
         public void TestTranslation()
         {
             BuildRequest request = CreateNewBuildRequest(1, new string[] { "alpha", "omega" });
@@ -178,7 +178,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestTranslationHostObjectsWhenEmpty()
         {
             var hostServices = new HostServices();

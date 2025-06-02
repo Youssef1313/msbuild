@@ -19,7 +19,7 @@ namespace Microsoft.Build.Tasks.UnitTests
     {
         private readonly MockEngine _mockEngine = new MockEngine();
 
-        [Fact]
+        [TestMethod]
         public void CanOverwriteReadOnlyFile()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -47,7 +47,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void CanUnzip()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -101,7 +101,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void CanUnzip_ExplicitDirectoryEntries()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -200,7 +200,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void LogsErrorIfSourceFileCannotBeOpened()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -222,7 +222,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void LogsErrorIfSourceFileDoesNotExist()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -242,7 +242,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void CanUnzip_WithIncludeFilter()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -271,7 +271,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void CanUnzip_WithExcludeFilter()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -300,7 +300,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void CanUnzip_WithIncludeAndExcludeFilter()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -337,7 +337,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void LogsErrorIfIncludeContainsInvalidPathCharacters()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -365,7 +365,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void LogsErrorIfIncludeContainsPropertyReferences()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -393,7 +393,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void LogsErrorIfExcludeContainsInvalidPathCharacters()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -421,7 +421,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void LogsErrorIfExcludeContainsPropertyReferences()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())

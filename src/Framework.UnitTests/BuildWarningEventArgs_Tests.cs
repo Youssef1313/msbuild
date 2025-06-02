@@ -23,7 +23,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Trivially exercise event args default ctors to boost Frameworks code coverage
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EventArgsCtors()
         {
             BuildWarningEventArgs buildWarningEvent = new BuildWarningEventArgs2();
@@ -40,7 +40,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Trivially exercise getHashCode.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestGetHashCode()
         {
             _baseWarningEvent.GetHashCode();

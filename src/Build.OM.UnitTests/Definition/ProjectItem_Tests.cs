@@ -71,7 +71,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Project getter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ProjectGetter()
         {
             Project project = new Project();
@@ -83,7 +83,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// No metadata, simple case
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SingleItemWithNoMetadata()
         {
             string content = @"
@@ -106,7 +106,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Read off metadata
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadMetadata()
         {
             string content = @"
@@ -136,7 +136,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Get metadata inherited from item definitions
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetMetadataObjectsFromDefinition()
         {
             string content = @"
@@ -174,7 +174,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Get metadata values inherited from item definitions
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetMetadataValuesFromDefinition()
         {
             string content = @"
@@ -204,7 +204,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Getting nonexistent metadata should return null
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetNonexistentMetadata()
         {
             ProjectItem item = GetOneItemFromFragment(@"<i Include='i0'/>");
@@ -215,7 +215,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Getting value of nonexistent metadata should return String.Empty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetNonexistentMetadataValue()
         {
             ProjectItem item = GetOneItemFromFragment(@"<i Include='i0'/>");
@@ -226,7 +226,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Attempting to set metadata with an invalid XML name should fail
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetInvalidXmlNameMetadata()
         {
             Assert.Throws<ArgumentException>(() =>
@@ -239,7 +239,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Attempting to set built-in metadata should fail
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetInvalidBuiltInMetadata()
         {
             Assert.Throws<ArgumentException>(() =>
@@ -252,7 +252,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Attempting to set reserved metadata should fail
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetInvalidReservedMetadata()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -265,7 +265,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Metadata enumerator should only return custom metadata
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MetadataEnumeratorExcludesBuiltInMetadata()
         {
             ProjectItem item = GetOneItemFromFragment(@"<i Include='c:\foo\bar.baz'/>");
@@ -276,7 +276,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Read off built-in metadata
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuiltInMetadata()
         {
             ProjectItem item =
@@ -311,7 +311,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Check file-timestamp related metadata
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuiltInMetadataTimes()
         {
             string path = null;
@@ -338,7 +338,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Test RecursiveDir metadata
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RecursiveDirMetadata()
         {
             string directory = null;
@@ -385,7 +385,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// (This is what requires that the original include fragment [before wildcard
         /// expansion] is stored in the item.)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RecursiveDirWithSemicolonSeparatedInclude()
         {
             string directory = null;
@@ -426,22 +426,22 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             }
         }
 
-        [Theory]
-        [InlineData(@"<i Condition='false' Include='\**\*.cs'/>")]
-        [InlineData(@"<i Condition='false' Include='/**/*.cs'/>")]
-        [InlineData(@"<i Condition='false' Include='/**\*.cs'/>")]
-        [InlineData(@"<i Condition='false' Include='\**/*.cs'/>")]
+        [TestMethod]
+        [DataRow(@"<i Condition='false' Include='\**\*.cs'/>")]
+        [DataRow(@"<i Condition='false' Include='/**/*.cs'/>")]
+        [DataRow(@"<i Condition='false' Include='/**\*.cs'/>")]
+        [DataRow(@"<i Condition='false' Include='\**/*.cs'/>")]
         public void FullFileSystemScanGlobWithFalseCondition(string itemDefinition)
         {
             IList<ProjectItem> items = ObjectModelHelpers.GetItemsFromFragment(itemDefinition, allItems: false, ignoreCondition: true);
             items.ShouldBeEmpty();
         }
 
-        [Theory]
-        [InlineData(@"<i Condition='false' Include='somedir\**\*.cs'/>")]
-        [InlineData(@"<i Condition='false' Include='somedir/**/*.cs'/>")]
-        [InlineData(@"<i Condition='false' Include='somedir/**\*.cs'/>")]
-        [InlineData(@"<i Condition='false' Include='somedir\**/*.cs'/>")]
+        [TestMethod]
+        [DataRow(@"<i Condition='false' Include='somedir\**\*.cs'/>")]
+        [DataRow(@"<i Condition='false' Include='somedir/**/*.cs'/>")]
+        [DataRow(@"<i Condition='false' Include='somedir/**\*.cs'/>")]
+        [DataRow(@"<i Condition='false' Include='somedir\**/*.cs'/>")]
         public void PartialFileSystemScanGlobWithFalseCondition(string itemDefinition)
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -457,7 +457,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Basic exclude case
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Exclude()
         {
             IList<ProjectItem> items = ObjectModelHelpers.GetItemsFromFragment("<i Include='a;b' Exclude='b;c'/>");
@@ -469,7 +469,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Exclude against an include with item vectors in it
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExcludeWithIncludeVector()
         {
             string content = @"
@@ -496,7 +496,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Exclude with item vectors against an include with item vectors in it
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExcludeVectorWithIncludeVector()
         {
             string content = @"
@@ -521,58 +521,58 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ObjectModelHelpers.AssertItems(new[] { "a", "b", "c", "z", "a", "c", "u" }, items);
         }
 
-        [Theory]
+        [TestMethod]
         // items as strings: escaped includes appear as unescaped
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             "%61;%62",
             "b",
             new string[0],
             new[] { "a" })]
         // items as strings: escaped include matches non-escaped exclude
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             "%61",
             "a",
             new string[0],
             new string[0])]
         // items as strings: non-escaped include matches escaped exclude
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             "a",
             "%61",
             new string[0],
             new string[0])]
         // items as files: non-escaped wildcard include matches escaped non-wildcard character
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             "a?b",
             "a%40b",
             new[] { "acb", "a@b" },
             new[] { "acb" })]
         // items as files: non-escaped non-wildcard include matches escaped non-wildcard character
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
            "acb;a@b",
            "a%40b",
            new string[0],
            new[] { "acb" })]
         // items as files: escaped wildcard include matches escaped non-wildcard exclude
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             "a%40*b",
             "a%40bb",
             new[] { "a@b", "a@ab", "a@bb" },
             new[] { "a@ab", "a@b" })]
         // items as files: escaped wildcard include matches escaped wildcard exclude
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             "a%40*b",
             "a%40?b",
             new[] { "a@b", "a@ab", "a@bb" },
             new[] { "a@b" })]
         // items as files: non-escaped recursive wildcard include matches escaped recursive wildcard exclude
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
            @"**\a*b",
            @"**\a*%78b",
            new[] { "aab", "aaxb", @"dir\abb", @"dir\abxb" },
            new[] { "aab", @"dir\abb" })]
         // items as files: include with non-escaped glob does not match exclude with escaped wildcard character.
         // The exclude is treated as a literal, not a glob, and therefore should not match the input files
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             @"**\a*b",
             @"**\a%2Axb",
             new[] { "aab", "aaxb", @"dir\abb", @"dir\abxb" },
@@ -582,22 +582,22 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             TestIncludeExcludeWithDifferentSlashes(projectContents, includeString, excludeString, inputFiles, expectedInclude);
         }
 
-        [Theory]
+        [TestMethod]
         // items as strings: include with both escaped and unescaped glob should be treated as literal and therefore not match against files as a glob
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             @"**\a%2Axb",
             @"foo",
             new[] { "aab", "aaxb", @"dir\abb", @"dir\abxb" },
             new[] { @"**\a*xb" })]
         // Include with both escaped and unescaped glob does not match exclude with escaped wildcard character which has a different slash orientation
         // The presence of the escaped and unescaped glob should make things behave as strings-which-are-not-paths and not as strings-which-are-paths
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             @"**\a%2Axb",
             @"**/a%2Axb",
             new string[0],
             new[] { @"**\a*xb" })]
         // Slashes are not normalized when contents is not a path
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             @"a/b/foo::||bar;a/b/foo::||bar/;a/b/foo::||bar\;a/b\foo::||bar",
             @"a/b/foo::||bar",
             new string[0],
@@ -609,15 +609,15 @@ namespace Microsoft.Build.UnitTests.OM.Definition
 
         public static IEnumerable<object[]> IncludesAndExcludesWithWildcardsTestData => GlobbingTestData.IncludesAndExcludesWithWildcardsTestData;
 
-        [Theory]
-        [MemberData(nameof(IncludesAndExcludesWithWildcardsTestData))]
+        [TestMethod]
+        [DynamicData(nameof(IncludesAndExcludesWithWildcardsTestData))]
         public void ExcludeVectorWithWildCards(string includeString, string excludeString, string[] inputFiles, string[] expectedInclude, bool makeExpectedIncludeAbsolute)
         {
             TestIncludeExcludeWithDifferentSlashes(ItemWithIncludeAndExclude, includeString, excludeString, inputFiles, expectedInclude, makeExpectedIncludeAbsolute);
         }
 
-        [Theory]
-        [InlineData(ItemWithIncludeAndExclude,
+        [TestMethod]
+        [DataRow(ItemWithIncludeAndExclude,
             @"**\*",
             @"excludes\**.*",
             new[]
@@ -633,7 +633,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
                 @"excludes\b.cs",
                 @"excludes\subdir\c.cs",
             })]
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             @"**\*",
             @"excludes\**..\*",
             new[]
@@ -649,7 +649,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
                 @"excludes\b.cs",
                 @"excludes\subdir\c.cs",
             })]
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             @"**\*",
             @"**.*",
             new[]
@@ -665,7 +665,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
                 @"excludes\b.cs",
                 @"excludes\subdir\c.cs",
             })]
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             "*;**a",
             "**a",
             new[]
@@ -677,7 +677,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
                 "a",
                 "build.proj"
             })]
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             @"**1;**2",
             @"**1",
             new[]
@@ -693,7 +693,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             {
                 "**2"
             })]
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             @":||;||:",
             @"||:",
             new string[0],
@@ -707,7 +707,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         }
 
         [WindowsOnlyTheory]
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             @"src/**/*.cs",
             new[]
             {
@@ -719,7 +719,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
                 @"src/a.cs",
                 @"src/a/b/b.cs",
             })]
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             @"src/test/**/*.cs",
             new[]
             {
@@ -731,7 +731,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
                 @"src/test/a.cs",
                 @"src/test/a/b/c.cs",
             })]
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             @"src/test/**/a/b/**/*.cs",
             new[]
             {
@@ -766,11 +766,11 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Project getter that renames an item to a drive enumerating wildcard that results in an exception.
         /// </summary>
-        [Theory]
-        [InlineData(@"\**\*.log")]
-        [InlineData(@"$(empty)\**\*.log")]
-        [InlineData(@"\$(empty)**\*.log")]
-        [InlineData(@"\*$(empty)*\*.log")]
+        [TestMethod]
+        [DataRow(@"\**\*.log")]
+        [DataRow(@"$(empty)\**\*.log")]
+        [DataRow(@"\$(empty)**\*.log")]
+        [DataRow(@"\*$(empty)*\*.log")]
         public void ProjectGetterResultsInDriveEnumerationException(string unevaluatedInclude)
         {
             using (var env = TestEnvironment.Create())
@@ -795,12 +795,12 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Project getter that renames an item to a drive enumerating wildcard that results in a logged warning.
         /// </summary>
         [WindowsOnlyTheory]
-        [InlineData(@"%DRIVE%:\**\*.log")]
-        [InlineData(@"%DRIVE%:$(empty)\**\*.log")]
-        [InlineData(@"%DRIVE%:\**")]
-        [InlineData(@"%DRIVE%:\\**")]
-        [InlineData(@"%DRIVE%:\\\\\\\\**")]
-        [InlineData(@"%DRIVE%:\**\*.cs")]
+        [DataRow(@"%DRIVE%:\**\*.log")]
+        [DataRow(@"%DRIVE%:$(empty)\**\*.log")]
+        [DataRow(@"%DRIVE%:\**")]
+        [DataRow(@"%DRIVE%:\\**")]
+        [DataRow(@"%DRIVE%:\\\\\\\\**")]
+        [DataRow(@"%DRIVE%:\**\*.cs")]
         public void ProjectGetterResultsInWindowsDriveEnumerationWarning(string unevaluatedInclude)
         {
             unevaluatedInclude = DummyMappedDriveUtils.UpdatePathToMappedDrive(unevaluatedInclude, _mappedDrive.Value.MappedDriveLetter);
@@ -809,10 +809,10 @@ namespace Microsoft.Build.UnitTests.OM.Definition
 
         [UnixOnlyTheory]
         [ActiveIssue("https://github.com/dotnet/msbuild/issues/8373")]
-        [InlineData(@"/**/*.log")]
-        [InlineData(@"$(empty)/**/*.log")]
-        [InlineData(@"/$(empty)**/*.log")]
-        [InlineData(@"/*$(empty)*/*.log")]
+        [DataRow(@"/**/*.log")]
+        [DataRow(@"$(empty)/**/*.log")]
+        [DataRow(@"/$(empty)**/*.log")]
+        [DataRow(@"/*$(empty)*/*.log")]
         public void ProjectGetterResultsInUnixDriveEnumerationWarning(string unevaluatedInclude)
         {
             ProjectGetterResultsInDriveEnumerationWarning(unevaluatedInclude);
@@ -851,20 +851,20 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Project instance created from a file that contains a drive enumerating wildcard results in a thrown exception.
         /// </summary>
-        [Theory]
-        [InlineData(
+        [TestMethod]
+        [DataRow(
             ImportProjectElement,
             @"$(Microsoft_WindowsAzure_EngSys)\**\*",
             null)]
 
         // LazyItem.IncludeOperation
-        [InlineData(
+        [DataRow(
             ItemWithIncludeAndExclude,
             @"$(Microsoft_WindowsAzure_EngSys)\**\*",
             @"$(Microsoft_WindowsAzure_EngSys)\*.pdb;$(Microsoft_WindowsAzure_EngSys)\Microsoft.WindowsAzure.Storage.dll;$(Microsoft_WindowsAzure_EngSys)\Certificates\**\*")]
 
         // LazyItem.IncludeOperation for Exclude
-        [InlineData(
+        [DataRow(
             ItemWithIncludeAndExclude,
             @"$(EmptyProperty)\*.cs",
             @"$(Microsoft_WindowsAzure_EngSys)\**")]
@@ -878,19 +878,19 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Project instance created from a file that contains a drive enumerating wildcard results in a logged warning on the Windows platform.
         /// </summary>
         [WindowsOnlyTheory]
-        [InlineData(
+        [DataRow(
             ImportProjectElement,
             @"%DRIVE%:\**\*.targets",
             null)]
 
         // LazyItem.IncludeOperation
-        [InlineData(
+        [DataRow(
             ItemWithIncludeAndExclude,
             @"%DRIVE%:$(Microsoft_WindowsAzure_EngSys)\**\*",
             @"$(Microsoft_WindowsAzure_EngSys)\*.pdb;$(Microsoft_WindowsAzure_EngSys)\Microsoft.WindowsAzure.Storage.dll;$(Microsoft_WindowsAzure_EngSys)\Certificates\**\*")]
 
         // LazyItem.IncludeOperation for Exclude
-        [InlineData(
+        [DataRow(
             ItemWithIncludeAndExclude,
             @"$(EmptyProperty)\*.cs",
             @"%DRIVE%:\$(Microsoft_WindowsAzure_EngSys)**")]
@@ -904,19 +904,19 @@ namespace Microsoft.Build.UnitTests.OM.Definition
 
         [UnixOnlyTheory]
         [ActiveIssue("https://github.com/dotnet/msbuild/issues/8373")]
-        [InlineData(
+        [DataRow(
             ImportProjectElement,
             @"\**\*.targets",
             null)]
 
         // LazyItem.IncludeOperation
-        [InlineData(
+        [DataRow(
             ItemWithIncludeAndExclude,
             @"$(Microsoft_WindowsAzure_EngSys)\**\*",
             @"$(Microsoft_WindowsAzure_EngSys)\*.pdb;$(Microsoft_WindowsAzure_EngSys)\Microsoft.WindowsAzure.Storage.dll;$(Microsoft_WindowsAzure_EngSys)\Certificates\**\*")]
 
         // LazyItem.IncludeOperation for Exclude
-        [InlineData(
+        [DataRow(
             ItemWithIncludeAndExclude,
             @"$(EmptyProperty)\*.cs",
             @"$(Microsoft_WindowsAzure_EngSys)\**")]
@@ -997,9 +997,9 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ObjectModelHelpers.AssertItemEvaluationFromProject(formattedProjectContents, inputFiles, expectedInclude, expectedMetadataPerItem: null, normalizeSlashes: normalizeSlashes, makeExpectedIncludeAbsolute: makeExpectedIncludeAbsolute);
         }
 
-        [Theory]
+        [TestMethod]
         // exclude matches include; file is next to project file
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             @"a", // include item
             @"", // path relative from projectFile. Empty string if current directory
 
@@ -1013,7 +1013,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             false) // whether the include survives the exclude (true) or not (false)
             ]
         // exclude matches include; file is below the project file
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             @"a",
             @"dir",
 
@@ -1026,7 +1026,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             },
             false)]
         // exclude matches include; file is above the project file
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             @"a",
             @"..",
 
@@ -1039,7 +1039,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             },
             false)]
         // exclude does not match include; file is next to project file; exclude points above the project file
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             "a",
             "",
 
@@ -1052,7 +1052,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             },
             true)]
         // exclude does not match include; file is below the project file; exclude points next to the project file
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             "a",
             "dir",
 
@@ -1065,7 +1065,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             },
             true)]
         // exclude does not match include; file is above the project file; exclude points next to the project file
-        [InlineData(ItemWithIncludeAndExclude,
+        [DataRow(ItemWithIncludeAndExclude,
             "a",
             "..",
 
@@ -1119,9 +1119,9 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             runTest(true, true);
         }
 
-        [Theory]
+        [TestMethod]
         // exclude globbing cone at project level;
-        [InlineData(
+        [DataRow(
             "../a.cs;b.cs", // include string
             "**/*.cs", // exclude string
             new[] { "a.cs", "ProjectDir/b.cs" }, // files to create relative to the test root dir
@@ -1129,14 +1129,14 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             new[] { "../a.cs" }) // expected items
             ]
         // exclude globbing cone below project level;
-        [InlineData(
+        [DataRow(
             "a.cs;a/b.cs",
             "a/**/*.cs",
             new[] { "a.cs", "a/b.cs" },
             "",
             new[] { "a.cs" })]
         // exclude globbing above project level;
-        [InlineData(
+        [DataRow(
             "a.cs;../b.cs;../../c.cs",
             "../**/*.cs",
             new[] { "a/ProjectDir/a.cs", "a/b.cs", "c.cs" },
@@ -1154,8 +1154,8 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             }
         }
 
-        [Theory(Skip = "https://github.com/dotnet/msbuild/issues/1576")]
-        [InlineData(
+        [TestMethod(Skip = "https://github.com/dotnet/msbuild/issues/1576")]
+        [DataRow(
             "../**/*.cs", // include string
             "a.cs", // exclude string
             new[] { "ProjectDir/a.cs", "b.cs" }, // files to create relative to the test root dir
@@ -1177,7 +1177,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Expression like @(x) should clone metadata, but metadata should still point at the original XML objects
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CopyFromWithItemListExpressionClonesMetadata()
         {
             string content = @"
@@ -1215,7 +1215,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// the changes, by design.
         /// Just to make sure we don't change that behavior, we test it here.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CopyFromWithItemListExpressionDoesNotCloneDefinitionMetadata()
         {
             string content = @"
@@ -1267,7 +1267,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Expression like @(x) should not clone metadata, for perf. See comment on test above.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CopyFromWithItemListExpressionClonesDefinitionMetadata_Variation()
         {
             string content = @"
@@ -1318,7 +1318,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// 3) item definition on the next item, and so on until
         /// 4) item definition metadata on the destination item itself
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CopyWithItemDefinition()
         {
             string content = @"
@@ -1416,7 +1416,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// 3) item definition on the next item, and so on until
         /// 4) item definition metadata on the destination item itself
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CopyWithItemDefinition2()
         {
             string content = @"
@@ -1510,7 +1510,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Metadata on items can refer to metadata above
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MetadataReferringToMetadataAbove()
         {
             string content = @"
@@ -1536,7 +1536,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// NOTE: To work properly, this should batch. This is a temporary "patch" to make it work for now.
         /// It will only give correct results if there is exactly one item in the Include. Otherwise Batching would be needed.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuiltInMetadataExpression()
         {
             string content = @"
@@ -1557,7 +1557,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Qualified built in metadata should work
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuiltInQualifiedMetadataExpression()
         {
             string content = @"
@@ -1578,7 +1578,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Mis-qualified built in metadata should not work
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuiltInMisqualifiedMetadataExpression()
         {
             string content = @"
@@ -1599,7 +1599,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Metadata condition should work correctly with built-in metadata
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuiltInMetadataInMetadataCondition()
         {
             string content = @"
@@ -1622,7 +1622,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Metadata on item condition not allowed (currently)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuiltInMetadataInItemCondition()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -1641,7 +1641,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Two items should each get their own values for built-in metadata
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuiltInMetadataTwoItems()
         {
             string content = @"
@@ -1663,7 +1663,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Items from another list, but with different metadata
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DifferentMetadataItemsFromOtherList()
         {
             string content = @"
@@ -1690,7 +1690,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Items from another list, but with different metadata
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DifferentBuiltInMetadataItemsFromOtherList()
         {
             string content = @"
@@ -1715,7 +1715,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Two items coming from a transform
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuiltInMetadataTransformInInclude()
         {
             string content = @"
@@ -1740,7 +1740,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Transform in the metadata value; no bare metadata involved
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuiltInMetadataTransformInMetadataValue()
         {
             string content = @"
@@ -1765,7 +1765,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Transform in the metadata value; bare metadata involved
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuiltInMetadataTransformInMetadataValueBareMetadataPresent()
         {
             string content = @"
@@ -1790,7 +1790,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Metadata on items can refer to item lists
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MetadataValueReferringToItems()
         {
             string content = @"
@@ -1813,7 +1813,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Metadata on items' conditions can refer to item lists
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MetadataConditionReferringToItems()
         {
             string content = @"
@@ -1838,7 +1838,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Metadata on items' conditions can refer to other metadata
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MetadataConditionReferringToMetadataOnSameItem()
         {
             string content = @"
@@ -1863,7 +1863,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Remove a metadatum
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveMetadata()
         {
             Project project = new Project();
@@ -1883,7 +1883,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Attempt to remove a metadatum originating from an item definition.
         /// Should fail if it was not overridden.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveItemDefinitionMetadataMasked()
         {
             ProjectRootElement xml = ProjectRootElement.Create();
@@ -1905,7 +1905,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Attempt to remove a metadatum originating from an item definition.
         /// Should fail if it was not overridden.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveItemDefinitionMetadataNotMasked()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -1922,7 +1922,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Remove a nonexistent metadatum
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveNonexistentMetadata()
         {
             Project project = new Project();
@@ -1938,7 +1938,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Tests removing built-in metadata.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveBuiltInMetadata()
         {
             Assert.Throws<ArgumentException>(() =>
@@ -1955,7 +1955,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Simple rename
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Rename()
         {
             Project project = new Project();
@@ -1977,7 +1977,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Verifies that renaming a ProjectItem whose xml backing is a wildcard doesn't corrupt
         /// the MSBuild evaluation data.
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void RenameItemInProjectWithWildcards()
@@ -2013,7 +2013,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Change item type
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ChangeItemType()
         {
             Project project = new Project();
@@ -2029,7 +2029,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Change item type to invalid value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ChangeItemTypeInvalid()
         {
             Assert.Throws<ArgumentException>(() =>
@@ -2044,7 +2044,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Attempt to rename imported item should fail
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RenameImported()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -2075,7 +2075,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Attempt to set metadata on imported item should fail
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetMetadataImported()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -2106,7 +2106,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Attempt to remove metadata on imported item should fail
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveMetadataImported()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -2136,7 +2136,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void SetDirectMetadataShouldEvaluateMetadataValue()
         {
             var projectContents =
@@ -2161,7 +2161,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void SetDirectMetadataWhenSameMetadataComesFromDefinitionGroupShouldAddDirectMetadata()
         {
             var projectContents =
@@ -2194,7 +2194,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void SetDirectMetadataShouldAffectAllSiblingItems()
         {
             var projectContents =
@@ -2254,7 +2254,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void SetDirectMetadataShouldUpdateAlreadyExistingDirectMetadata()
         {
             var projectContents =
@@ -2307,7 +2307,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         }
 
         // TODO: Should remove tests go in project item tests, project item instance tests, or both?
-        [Fact]
+        [TestMethod]
         public void Remove()
         {
             IList<ProjectItem> items = ObjectModelHelpers.GetItemsFromFragment(
@@ -2318,7 +2318,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             Assert.Equal("a", items[0].EvaluatedInclude);
         }
 
-        [Fact]
+        [TestMethod]
         public void RemoveAllMatchingItems()
         {
             IList<ProjectItem> items = ObjectModelHelpers.GetItemsFromFragment(
@@ -2330,7 +2330,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             Assert.Equal(@"a;a", string.Join(";", items.Select(i => i.EvaluatedInclude)));
         }
 
-        [Fact]
+        [TestMethod]
         public void RemoveGlob()
         {
             IList<ProjectItem> items = ObjectModelHelpers.GetItemsFromFragment(
@@ -2341,7 +2341,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             Assert.Equal(@"a.txt;b.cs", string.Join(";", items.Select(i => i.EvaluatedInclude)));
         }
 
-        [Fact]
+        [TestMethod]
         public void RemoveItemReference()
         {
             IList<ProjectItem> items = ObjectModelHelpers.GetItemsFromFragment(
@@ -2353,9 +2353,9 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             Assert.Equal(@"a;c", string.Join(";", items.Select(i => i.EvaluatedInclude)));
         }
 
-        [Theory]
-        [InlineData(@"1.foo;.\2.foo;.\.\3.foo", @"1.foo;.\2.foo;.\.\3.foo")]
-        [InlineData(@"1.foo;.\2.foo;.\.\3.foo", @".\1.foo;.\.\2.foo;.\.\.\3.foo")]
+        [TestMethod]
+        [DataRow(@"1.foo;.\2.foo;.\.\3.foo", @"1.foo;.\2.foo;.\.\3.foo")]
+        [DataRow(@"1.foo;.\2.foo;.\.\3.foo", @".\1.foo;.\.\2.foo;.\.\.\3.foo")]
         public void RemoveShouldMatchNonCanonicPaths(string include, string remove)
         {
             var content = @"
@@ -2370,7 +2370,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             Assert.Empty(items);
         }
 
-        [Fact]
+        [TestMethod]
         public void RemoveShouldRespectCondition()
         {
             var projectContents = ObjectModelHelpers.FormatProjectContentsWithItemGroupFragment(
@@ -2386,7 +2386,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// See comment for details: https://github.com/dotnet/msbuild/issues/1475#issuecomment-275520394
         /// </summary>
-        [Fact(Skip = "https://github.com/dotnet/msbuild/issues/1616")]
+        [TestMethod(Skip = "https://github.com/dotnet/msbuild/issues/1616")]
         public void RemoveWithConditionShouldNotApplyOnItemsIgnoringCondition()
         {
             var projectContents = ObjectModelHelpers.FormatProjectContentsWithItemGroupFragment(
@@ -2400,7 +2400,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             Assert.Equal(@"a;b;c", string.Join(";", project.ItemsIgnoringCondition.Select(i => i.EvaluatedInclude)));
         }
 
-        [Fact]
+        [TestMethod]
         public void RemoveWithItemReferenceOnMatchingMetadata()
         {
             string content = ObjectModelHelpers.FormatProjectContentsWithItemGroupFragment(
@@ -2427,7 +2427,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             items.ElementAt(1).GetMetadataValue("M2").ShouldBe("d");
         }
 
-        [Fact]
+        [TestMethod]
         public void RemoveWithItemReferenceOnCaseInsensitiveMatchingMetadata()
         {
             string content = ObjectModelHelpers.FormatProjectContentsWithItemGroupFragment(
@@ -2454,7 +2454,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             items.ElementAt(1).GetMetadataValue("M2").ShouldBe("d");
         }
 
-        [Fact]
+        [TestMethod]
         public void RemoveWithItemReferenceOnFilePathMatchingMetadata()
         {
             string content = ObjectModelHelpers.FormatProjectContentsWithItemGroupFragment(
@@ -2504,7 +2504,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void RemoveWithItemReferenceOnIntrinsicMatchingMetadata()
         {
             string content = ObjectModelHelpers.FormatProjectContentsWithItemGroupFragment(
@@ -2526,7 +2526,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             items.Select(i => i.EvaluatedInclude).ShouldBe(new[] { "../foo.txt", "/foo/bar.txt" });
         }
 
-        [Fact]
+        [TestMethod]
         public void RemoveWithPropertyReferenceInMatchOnMetadata()
         {
             string content =
@@ -2564,7 +2564,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void RemoveWithItemReferenceInMatchOnMetadata()
         {
             string content =
@@ -2603,7 +2603,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void KeepWithItemReferenceOnNonmatchingMetadata()
         {
             string content = ObjectModelHelpers.FormatProjectContentsWithItemGroupFragment(
@@ -2634,7 +2634,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             items.ElementAt(3).GetMetadataValue("d").ShouldBe("d");
         }
 
-        [Fact]
+        [TestMethod]
         public void RemoveMatchingMultipleMetadata()
         {
             string content = ObjectModelHelpers.FormatProjectContentsWithItemGroupFragment(
@@ -2658,7 +2658,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             items.ElementAt(2).EvaluatedInclude.ShouldBe("d2");
         }
 
-        [Fact]
+        [TestMethod]
         public void RemoveMultipleItemReferenceOnMatchingMetadata()
         {
             string content = ObjectModelHelpers.FormatProjectContentsWithItemGroupFragment(
@@ -2684,7 +2684,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             items.ShouldBeEmpty();
         }
 
-        [Fact]
+        [TestMethod]
         public void FailWithMetadataItemReferenceOnMatchingMetadata()
         {
             string content = ObjectModelHelpers.FormatProjectContentsWithItemGroupFragment(
@@ -2703,7 +2703,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
                 .HelpKeyword.ShouldBe("MSBuild.OM_MatchOnMetadataIsRestrictedToReferencedItems");
         }
 
-        [Fact]
+        [TestMethod]
         public void UpdateMetadataShouldAddOrReplace()
         {
             string content = @"<i Include='a;b'>
@@ -2739,7 +2739,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
                 , items[1]);
         }
 
-        [Fact]
+        [TestMethod]
         public void UpdateShouldRespectCondition()
         {
             string projectContents = @"<i Include='a;b;c'>
@@ -2778,7 +2778,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// See comment for details: https://github.com/dotnet/msbuild/issues/1475#issuecomment-275520394
         /// Conditions on metadata on appear to be respected even for items ignoring condition (don't know why, but that's what the code does).
         /// </summary>
-        [Fact(Skip = "https://github.com/dotnet/msbuild/issues/1616")]
+        [TestMethod(Skip = "https://github.com/dotnet/msbuild/issues/1616")]
         public void UpdateWithConditionShouldNotApplyOnItemsIgnoringCondition()
         {
             string projectContents = @"<i Include='a;b;c;d'>
@@ -2817,7 +2817,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ObjectModelHelpers.AssertItemHasMetadata(expectedUpdateFromUnconditionedElement, itemsIgnoringCondition[3]);
         }
 
-        [Fact]
+        [TestMethod]
         public void LastUpdateWins()
         {
             string content = @"<i Include='a'>
@@ -2840,14 +2840,14 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ObjectModelHelpers.AssertItemHasMetadata(expectedUpdate, items[0]);
         }
 
-        [Theory]
-        [InlineData("abc", "def", "abc")]
-        [InlineData("abc", "de*", "abc")]
-        [InlineData("a*c", "def", "abc")]
-        [InlineData("abc", "def", "*bc")]
-        [InlineData("abc", "d*f", "*bc")]
-        [InlineData("*c", "d*f", "*bc")]
-        [InlineData("a*", "d*", "abc")]
+        [TestMethod]
+        [DataRow("abc", "def", "abc")]
+        [DataRow("abc", "de*", "abc")]
+        [DataRow("a*c", "def", "abc")]
+        [DataRow("abc", "def", "*bc")]
+        [DataRow("abc", "d*f", "*bc")]
+        [DataRow("*c", "d*f", "*bc")]
+        [DataRow("a*", "d*", "abc")]
         public void UpdatesProceedInOrder(string first, string second, string third)
         {
             string contents = $@"
@@ -2881,7 +2881,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ObjectModelHelpers.AssertItemHasMetadata(expectedUpdatej, items[1]);
         }
 
-        [Fact]
+        [TestMethod]
         public void UpdatingIndividualItemsProceedsInOrder()
         {
             string contents = @"
@@ -2926,7 +2926,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ObjectModelHelpers.AssertItemHasMetadata("m1", "eighth", items[14]);
         }
 
-        [Fact]
+        [TestMethod]
         public void UpdateWithNoMetadataShouldNotAffectItems()
         {
             string content = @"<i Include='a;b'>
@@ -2952,7 +2952,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ObjectModelHelpers.AssertItemHasMetadata(expectedMetadata, items[1]);
         }
 
-        [Fact]
+        [TestMethod]
         public void UpdateOnNonExistingItemShouldDoNothing()
         {
             string content = @"<i Include='a;b'>
@@ -2979,7 +2979,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ObjectModelHelpers.AssertItemHasMetadata(expectedMetadata, items[1]);
         }
 
-        [Fact]
+        [TestMethod]
         public void UpdateOnEmptyStringShouldThrow()
         {
             string content = @"<i Include='a;b'>
@@ -3001,7 +3001,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         }
 
         // Complex metadata: metadata references from the same item; item transforms; correct binding of metadata with same name but different item qualifiers
-        [Fact]
+        [TestMethod]
         public void UpdateShouldSupportComplexMetadata()
         {
             string content = @"
@@ -3047,7 +3047,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ObjectModelHelpers.AssertItemHasMetadata(expectedMetadataB, items[2]);
         }
 
-        [Fact]
+        [TestMethod]
         public void UpdateShouldImportMetadataFromReferencedItem()
         {
             string content = @"
@@ -3096,7 +3096,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ObjectModelHelpers.AssertItemHasMetadata(expectedMetadataC, items[4]);
         }
 
-        [Fact]
+        [TestMethod]
         public void OptimizedRemoveOperationRespectsCondition()
         {
             string content = @"<TheItem Include=""InitialValue"" />
@@ -3107,9 +3107,9 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             items[0].EvaluatedInclude.ShouldBe("InitialValue");
         }
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void EscapeHatchTurnsOffQualifiedMetadataExpansionInUpdateOperation(bool doNotExpandQualifiedMetadataInUpdateOperation)
         {
             using var env = TestEnvironment.Create();
@@ -3149,7 +3149,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ObjectModelHelpers.AssertItemHasMetadata(expectedMetadataA, items[1]);
         }
 
-        [Fact]
+        [TestMethod]
         public void UpdateFromReferencedItemShouldBeCaseInsensitive()
         {
             string content = @"
@@ -3172,7 +3172,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ObjectModelHelpers.AssertItemHasMetadata(expectedMetadataA, items[1]);
         }
 
-        [Fact]
+        [TestMethod]
         public void UpdateMetadataWithoutItemReferenceShouldBeCaseInsensitive()
         {
             string content = @"
@@ -3191,7 +3191,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ObjectModelHelpers.AssertItemHasMetadata(expectedMetadataA, items[0]);
         }
 
-        [Fact]
+        [TestMethod]
         public void UndeclaredQualifiedMetadataReferencesInUpdateShouldResolveToEmptyStrings()
         {
             string content = @"
@@ -3219,7 +3219,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ObjectModelHelpers.AssertItemHasMetadata(expectedMetadataA, items[2]);
         }
 
-        [Fact]
+        [TestMethod]
         public void UpdateShouldImportMetadataFromMultipleReferencedItems()
         {
             string content = @"
@@ -3309,7 +3309,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ObjectModelHelpers.AssertItemHasMetadata(expectedMetadataY, items[11]);
         }
 
-        [Fact]
+        [TestMethod]
         public void UpdateFromReferencedItemsWithDuplicatesShouldUseLastItemFromEachItemType()
         {
             using var env = TestEnvironment.Create();
@@ -3366,7 +3366,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void UpdateFromReferenceItemAndNoMetadataNOOPS()
         {
             string content = @"
@@ -3388,7 +3388,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void UpdateShouldBeAbleToContainGlobs()
         {
             var content = @"<i Include='*.foo'>
@@ -3424,7 +3424,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ObjectModelHelpers.AssertItemHasMetadata(expectedUpdatedMetadata, items[3]);
         }
 
-        [Fact]
+        [TestMethod]
         public void UpdateShouldBeAbleToContainItemReferences()
         {
             var content = @"<i1 Include='x;y'>
@@ -3471,7 +3471,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ObjectModelHelpers.AssertItemHasMetadata(expected_i2_y, items[3]);
         }
 
-        [Fact]
+        [TestMethod]
         public void UpdateShouldBeAbleToContainProperties()
         {
             var content = @"
@@ -3513,7 +3513,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ObjectModelHelpers.AssertItemHasMetadata(expectedInitial, items[2]);
         }
 
-        [Fact]
+        [TestMethod]
         public void UpdateAndRemoveShouldUseCaseInsensitiveMatching()
         {
             var content = @"
@@ -3624,15 +3624,15 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             }
         }
 
-        [Theory]
-        [MemberData(nameof(UpdateAndRemoveShouldWorkWithEscapedCharactersTestData))]
+        [TestMethod]
+        [DynamicData(nameof(UpdateAndRemoveShouldWorkWithEscapedCharactersTestData))]
         public void UpdateAndRemoveShouldWorkWithEscapedCharacters(string projectContents, string include, string update, string remove, string[] expectedInclude, Dictionary<string, string>[] expectedMetadata)
         {
             var formattedProjectContents = string.Format(projectContents, include, update, remove);
             ObjectModelHelpers.AssertItemEvaluationFromProject(formattedProjectContents, Array.Empty<string>(), expectedInclude, expectedMetadata);
         }
 
-        [Fact]
+        [TestMethod]
         public void UpdateAndRemoveShouldNotUseGlobMatchingOnEscapedGlobsFromReferencedItems()
         {
             var project = @"
@@ -3667,9 +3667,9 @@ namespace Microsoft.Build.UnitTests.OM.Definition
                 expectedMetadataPerItem: null);
         }
 
-        [Theory]
-        [InlineData(@"1.foo;.\2.foo;.\.\3.foo", @"1.foo;.\2.foo;.\.\3.foo")]
-        [InlineData(@"1.foo;.\2.foo;.\.\3.foo", @".\1.foo;.\.\2.foo;.\.\.\3.foo")]
+        [TestMethod]
+        [DataRow(@"1.foo;.\2.foo;.\.\3.foo", @"1.foo;.\2.foo;.\.\3.foo")]
+        [DataRow(@"1.foo;.\2.foo;.\.\3.foo", @".\1.foo;.\.\2.foo;.\.\.\3.foo")]
         public void UpdateShouldMatchNonCanonicPaths(string include, string update)
         {
             var content = @"
@@ -3738,7 +3738,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Item metadata "Filename" should not depends on platform specific slashes.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void FileNameMetadataEvaluationShouldNotDependsFromPlatformSpecificSlashes()
         {
             using (var env = TestEnvironment.Create())

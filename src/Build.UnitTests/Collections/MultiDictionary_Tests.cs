@@ -18,7 +18,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Empty dictionary
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Empty()
         {
             MultiDictionary<string, string> dictionary = new MultiDictionary<string, string>(StringComparer.OrdinalIgnoreCase);
@@ -37,7 +37,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Remove stuff that is there
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Remove()
         {
             MultiDictionary<string, string> dictionary = new MultiDictionary<string, string>(StringComparer.OrdinalIgnoreCase);
@@ -73,7 +73,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Remove stuff that isn't there
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveNonExistent()
         {
             MultiDictionary<string, string> dictionary = new MultiDictionary<string, string>(StringComparer.OrdinalIgnoreCase);
@@ -93,7 +93,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Enumerate over all values for a key
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Enumerate()
         {
             MultiDictionary<string, string> dictionary = new MultiDictionary<string, string>(StringComparer.OrdinalIgnoreCase);
@@ -122,7 +122,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Mixture of adds and removes
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MixedAddRemove()
         {
             MultiDictionary<string, string> dictionary = new MultiDictionary<string, string>(StringComparer.OrdinalIgnoreCase);
@@ -149,7 +149,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Clearing out
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Clear()
         {
             MultiDictionary<string, string> dictionary = new MultiDictionary<string, string>(StringComparer.OrdinalIgnoreCase);

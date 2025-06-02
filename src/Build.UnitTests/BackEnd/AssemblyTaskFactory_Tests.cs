@@ -50,7 +50,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Make sure we get an invalid project file exception when a null load info is passed to the factory
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NullLoadInfo()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -62,7 +62,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Make sure we get an invalid project file exception when a null task name is passed to the factory
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NullTaskName()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -74,7 +74,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Make sure we get an invalid project file exception when an empty task name is passed to the factory
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EmptyTaskName()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -86,7 +86,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Make sure we get an invalid project file exception when the task is not in the info
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GoodTaskNameButNotInInfo()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -100,7 +100,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// This is done because we cannot properly initialize the task factory using the public interface and keep
         /// backwards compatibility with orcas and whidbey.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CallPublicInitializeFactory()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -114,7 +114,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// This is done because we cannot properly initialize the task factory using the public interface and keep
         /// backwards compatibility with orcas and whidbey.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CallPublicInitializeFactory2()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -128,7 +128,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Verify that we can ask the factory if a given task is in the factory and get the correct result back
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CreatableByTaskFactoryGoodName()
         {
             Assert.True(_taskFactory.TaskNameCreatableByFactory("TaskToTestFactories", null, String.Empty, null, ElementLocation.Create(".", 1, 1)));
@@ -137,7 +137,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Expect a false answer when we ask for a task which is not in the factory.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CreatableByTaskFactoryNotInAssembly()
         {
             Assert.False(_taskFactory.TaskNameCreatableByFactory("NotInAssembly", null, String.Empty, null, ElementLocation.Create(".", 1, 1)));
@@ -146,7 +146,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Expect a false answer when we ask for a task which is not in the factory.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CreatableByTaskFactoryNotInAssemblyEmptyTaskName()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -157,7 +157,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Expect a false answer when we ask for a task which is not in the factory.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CreatableByTaskFactoryNullTaskName()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -169,7 +169,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Make sure that when an explicitly matching identity is specified (e.g. the identity is non-empty),
         /// it still counts as correct.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CreatableByTaskFactoryMatchingIdentity()
         {
             IDictionary<string, string> factoryIdentityParameters = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
@@ -189,7 +189,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Verify that if the task identity parameters don't match the factory identity, TaskNameCreatableByFactory
         /// returns false.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CreatableByTaskFactoryMismatchedIdentity()
         {
             IDictionary<string, string> factoryIdentityParameters = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
@@ -208,7 +208,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Make sure the number of properties retrieved from the task factory are the same number retrieved from the type directly.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyGetTaskParameters()
         {
             TaskPropertyInfo[] propertyInfos = _taskFactory.GetTaskParameters();
@@ -239,7 +239,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Verify a good task can be created.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyGoodTaskInstantiation()
         {
             ITask createdTask = null;
@@ -266,7 +266,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Verify a good task that does not use the task host can be created when passed "don't care"
         /// for the task invocation task host parameters.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyMatchingTaskParametersDontLaunchTaskHost1()
         {
             ITask createdTask = null;
@@ -297,7 +297,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Verify a good task that does not use the task host can be created when passed task host
         /// parameters that explicitly match the current process.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyMatchingTaskParametersDontLaunchTaskHost2()
         {
             ITask createdTask = null;
@@ -328,7 +328,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Verify a good task that does not use the task host can be created when passed "don't care"
         /// for the task invocation task host parameters.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyMatchingUsingTaskParametersDontLaunchTaskHost1()
         {
             ITask createdTask = null;
@@ -361,7 +361,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Verify a good task that does not use the task host can be created when passed task host
         /// parameters that explicitly match the current process.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyMatchingUsingTaskParametersDontLaunchTaskHost2()
         {
             ITask createdTask = null;
@@ -394,7 +394,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Verify a good task that uses the task host can be created when passed task host
         /// parameters that explicitly do not match the current process.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyMatchingParametersDontLaunchTaskHost()
         {
             ITask createdTask = null;
@@ -429,7 +429,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Verify a good task that uses the task host can be created when passed task host
         /// parameters that explicitly do not match the current process.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyNonmatchingUsingTaskParametersLaunchTaskHost()
         {
             ITask createdTask = null;
@@ -462,7 +462,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Verify a good task that uses the task host can be created when passed task host
         /// parameters that explicitly do not match the current process.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyNonmatchingTaskParametersLaunchTaskHost()
         {
             ITask createdTask = null;
@@ -493,7 +493,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Verify a good task that uses the task host can be created when passed task host
         /// parameters that explicitly do not match the current process.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyNonmatchingParametersLaunchTaskHost()
         {
             ITask createdTask = null;
@@ -528,7 +528,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Verify a good task that uses the task host can be created when the task factory is
         /// explicitly instructed to launch the task host.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyExplicitlyLaunchTaskHost()
         {
             ITask createdTask = null;
@@ -557,7 +557,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Verify a good task that uses the task host can be created when the task factory is
         /// explicitly instructed to launch the task host.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyExplicitlyLaunchTaskHostEvenIfParametersMatch1()
         {
             ITask createdTask = null;
@@ -590,7 +590,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Verify a good task that uses the task host can be created when the task factory is
         /// explicitly instructed to launch the task host.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyExplicitlyLaunchTaskHostEvenIfParametersMatch2()
         {
             ITask createdTask = null;
@@ -623,7 +623,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Verify a good task that uses the task host can be created when the task factory is
         /// explicitly instructed to launch the task host.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifySameFactoryCanGenerateDifferentTaskInstances()
         {
             ITask createdTask = null;

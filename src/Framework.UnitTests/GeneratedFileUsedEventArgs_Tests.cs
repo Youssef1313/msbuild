@@ -10,7 +10,7 @@ namespace Microsoft.Build.Framework.UnitTests
 {
     public class GeneratedFileUsedEventArgs_Tests
     {
-        [Fact]
+        [TestMethod]
         public void SerializationDeserializationTest()
         {
             string filePath = "path";

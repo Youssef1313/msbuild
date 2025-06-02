@@ -50,7 +50,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             return new ProjectPair(newView, newReal);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectRootElementModify()
         {
             var pair = GetNewInMemoryProject("temp.prj");
@@ -137,7 +137,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
         }
 
 
-        [Fact]
+        [TestMethod]
         public void ProjectTargetElementModify()
         {
             var pair = GetNewInMemoryProject("temp.prj");
@@ -211,7 +211,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             newTarget1.Verify();
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectTaskElementModify()
         {
             var pair = GetNewInMemoryProject("temp.prj");
@@ -310,7 +310,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             newTask.Verify();
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectOutputElementModify()
         {
             var pair = GetNewInMemoryProject("temp.prj");
@@ -342,7 +342,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             Assert.ThrowsAny<InvalidOperationException>(() => newOutputItem.View.PropertyName = "foo");
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectMetadataElementModify()
         {
             var pair = GetNewInMemoryProject("temp.prj");
@@ -360,7 +360,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             xmlPair.Verify(); // this will compare all up to including the XML content of entire project
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectChooseElementModify()
         {
             var pair = GetNewInMemoryProject("temp.prj");
@@ -404,7 +404,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
         }
 
 
-        [Fact]
+        [TestMethod]
         public void ProjectWhenElementModify()
         {
             var pair = GetNewInMemoryProject("temp.prj");
@@ -443,7 +443,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
         }
 
 
-        [Fact]
+        [TestMethod]
         public void ProjectOtherwiseElementModify()
         {
             var pair = GetNewInMemoryProject("temp.prj");
@@ -480,7 +480,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             otherwise.Verify();
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectUsingTaskElementModify()
         {
             var pair = GetNewInMemoryProject("temp.prj");
@@ -514,7 +514,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             Assert.ThrowsAny<InvalidOperationException>(() => usingTaskName.View.AssemblyFile = "xxx");
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectUsingTaskBodyElementModify()
         {
             var pair = GetNewInMemoryProject("temp.prj");
@@ -529,7 +529,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             taskBody.VerifySetter("newEval", (tb) => tb.Evaluate, (tb, v) => tb.Evaluate = v);
         }
 
-        [Fact]
+        [TestMethod]
         public void UsingTaskParameterGroupElementModify()
         {
             var pair = GetNewInMemoryProject("temp.prj");
@@ -550,7 +550,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
         }
 
 
-        [Fact]
+        [TestMethod]
         public void ProjectUsingTaskParameterElementModify()
         {
             var pair = GetNewInMemoryProject("temp.prj");
@@ -566,7 +566,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             paraElement.VerifySetter("newRequired", (pe) => pe.Required, (pe, v) => pe.Required = v);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectExtensionsElementModify()
         {
             var pair = GetNewInMemoryProject("temp.prj");
@@ -576,7 +576,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             extensionXml.VerifySetter("bla bla bla", (e) => e.Content, (e, v) => e.Content = v);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectImportElementModify()
         {
             var pair = GetNewInMemoryProject("temp.prj");
@@ -590,7 +590,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
         }
 
 
-        [Fact]
+        [TestMethod]
         public void ProjectImportGroupElementModify()
         {
             var pair = GetNewInMemoryProject("temp.prj");
@@ -603,7 +603,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             Assert.Equal(2, importGroup.View.Imports.Count);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectItemDefinitionElementModify()
         {
             var pair = GetNewInMemoryProject("temp.prj");
@@ -622,7 +622,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             Assert.Equal(6, itemDef.View.Metadata.Count);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectItemDefinitionGroupElementModify()
         {
             var pair = GetNewInMemoryProject("temp.prj");
@@ -634,7 +634,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             Assert.Equal(2, itemDefGrp.View.ItemDefinitions.Count);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectItemElementModify()
         {
             var pair = GetNewInMemoryProject("temp.prj");
@@ -686,7 +686,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             Assert.ThrowsAny<InvalidOperationException>(() => itemInTargt.View.KeepMetadata = "xx"); // RemoveMetadata/KeepDuplicate exclusive
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectItemGroupElementModify()
         {
             var pair = GetNewInMemoryProject("temp.prj");
@@ -708,7 +708,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.VerifyMetadata(itemMetadata, (k) => itemWithMetadata2.View.Metadata.Where((md) => md.Name == k).FirstOrDefault().Value);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectPropertyElementModify()
         {
             var pair = GetNewInMemoryProject("temp.prj");
@@ -721,7 +721,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             xmlPair.Verify(); // after rename
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectPropertyGroupElementModify()
         {
             var pair = GetNewInMemoryProject("temp.prj");
@@ -752,7 +752,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             setNewProp2_2.VerifySame(setNewProp2);
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectSdkElementModify()
         {
             var pair = GetNewInMemoryProject("temp.prj");
@@ -769,7 +769,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             var curiousOfHowToSpecifySdk2 = xmlPair.View.RawXml;
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectOnErrorElementModify()
         {
             var pair = GetNewInMemoryProject("temp.prj");

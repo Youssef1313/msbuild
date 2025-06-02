@@ -21,7 +21,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the AlgorithmId parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AlgorithmId()
         {
             AL t = new AL();
@@ -37,7 +37,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the BaseAddress parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BaseAddress()
         {
             AL t = new AL();
@@ -53,7 +53,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the CompanyName parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CompanyName()
         {
             AL t = new AL();
@@ -69,7 +69,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the Configuration parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Configuration()
         {
             AL t = new AL();
@@ -85,7 +85,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the Copyright parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Copyright()
         {
             AL t = new AL();
@@ -101,7 +101,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the Culture parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Culture()
         {
             AL t = new AL();
@@ -117,7 +117,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the DelaySign parameter.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DelaySign()
         {
             AL t = new AL();
@@ -133,7 +133,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the Description parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Description()
         {
             AL t = new AL();
@@ -149,7 +149,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the EmbedResources parameter with an item that has metadata LogicalName and Access=private
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EmbedResourcesWithPrivateAccess()
         {
             AL t = new AL();
@@ -174,7 +174,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the EvidenceFile parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EvidenceFile()
         {
             AL t = new AL();
@@ -190,7 +190,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the FileVersion parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void FileVersion()
         {
             AL t = new AL();
@@ -206,7 +206,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the Flags parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Flags()
         {
             AL t = new AL();
@@ -222,7 +222,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the GenerateFullPaths parameter.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GenerateFullPaths()
         {
             AL t = new AL();
@@ -238,7 +238,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the KeyFile parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void KeyFile()
         {
             AL t = new AL();
@@ -254,7 +254,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the KeyContainer parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void KeyContainer()
         {
             AL t = new AL();
@@ -270,7 +270,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the LinkResources parameter with an item that has metadata LogicalName, Target, and Access=private
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LinkResourcesWithPrivateAccessAndTargetFile()
         {
             AL t = new AL();
@@ -296,7 +296,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the LinkResources parameter with two items with differing metadata.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LinkResourcesWithTwoItems()
         {
             AL t = new AL();
@@ -329,7 +329,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the MainEntryPoint parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MainEntryPoint()
         {
             AL t = new AL();
@@ -345,7 +345,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the OutputAssembly parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OutputAssembly()
         {
             AL t = new AL();
@@ -361,7 +361,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the Platform parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Platform()
         {
             AL t = new AL();
@@ -376,7 +376,7 @@ namespace Microsoft.Build.UnitTests
 
         // Tests the "Platform" and "Prefer32Bit" parameter combinations on the AL task,
         // and confirms that it sets the /platform switch on the command-line correctly.
-        [Fact]
+        [TestMethod]
         public void PlatformAndPrefer32Bit()
         {
             // Implicit "anycpu"
@@ -423,7 +423,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the ProductName parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ProductName()
         {
             AL t = new AL();
@@ -439,7 +439,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the ProductVersion parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ProductVersion()
         {
             AL t = new AL();
@@ -455,7 +455,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the ResponseFiles parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ResponseFiles()
         {
             AL t = new AL();
@@ -472,7 +472,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the SourceModules parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SourceModules()
         {
             AL t = new AL();
@@ -497,7 +497,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the TargetType parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TargetType()
         {
             AL t = new AL();
@@ -513,7 +513,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the TemplateFile parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TemplateFile()
         {
             AL t = new AL();
@@ -531,7 +531,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the Title parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Title()
         {
             AL t = new AL();
@@ -547,7 +547,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the Trademark parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Trademark()
         {
             AL t = new AL();
@@ -563,7 +563,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the Version parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Version()
         {
             AL t = new AL();
@@ -581,7 +581,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the Win32Icon parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Win32Icon()
         {
             AL t = new AL();
@@ -597,7 +597,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the Win32Resource parameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Win32Resource()
         {
             AL t = new AL();

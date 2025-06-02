@@ -46,7 +46,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read simple task body
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadParameterWithAllAttributes()
         {
             ProjectUsingTaskParameterElement parameter = GetParameterXml(s_contentAllAttributesSet);
@@ -60,7 +60,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read simple task body
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadParameterWithNOAttributes()
         {
             ProjectUsingTaskParameterElement parameter = GetParameterXml(s_contentNoAttributesSet);
@@ -74,7 +74,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read parameter with an invalid attribute
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidAttribute()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -96,7 +96,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set type value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetType()
         {
             ProjectUsingTaskParameterElement parameter = GetParameterXml(s_contentAllAttributesSet);
@@ -110,7 +110,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set output value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetOutput()
         {
             ProjectUsingTaskParameterElement parameter = GetParameterXml(s_contentAllAttributesSet);
@@ -124,7 +124,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set required value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetRequired()
         {
             ProjectUsingTaskParameterElement parameter = GetParameterXml(s_contentAllAttributesSet);
@@ -138,7 +138,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set type to empty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetEmptyType()
         {
             ProjectUsingTaskParameterElement parameter = GetParameterXml(s_contentAllAttributesSet);
@@ -152,7 +152,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set type output to empty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetEmptyOutput()
         {
             ProjectUsingTaskParameterElement parameter = GetParameterXml(s_contentAllAttributesSet);
@@ -166,7 +166,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set type required to empty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetEmptyRequired()
         {
             ProjectUsingTaskParameterElement parameter = GetParameterXml(s_contentAllAttributesSet);
@@ -180,7 +180,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set type to null
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetNullType()
         {
             ProjectUsingTaskParameterElement parameter = GetParameterXml(s_contentAllAttributesSet);
@@ -194,7 +194,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set type output to null
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetNullOutput()
         {
             ProjectUsingTaskParameterElement parameter = GetParameterXml(s_contentAllAttributesSet);
@@ -208,7 +208,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set type required to null
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetNullRequired()
         {
             ProjectUsingTaskParameterElement parameter = GetParameterXml(s_contentAllAttributesSet);

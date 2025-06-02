@@ -13,7 +13,7 @@ namespace Microsoft.Build.UnitTests
 {
     public class FindAppConfigFile_Tests
     {
-        [Fact]
+        [TestMethod]
         public void FoundInFirstInProjectDirectory()
         {
             FindAppConfigFile f = new FindAppConfigFile();
@@ -26,7 +26,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal("targetpath", f.AppConfigFile.GetMetadata("TargetPath"));
         }
 
-        [Fact]
+        [TestMethod]
         public void FoundInSecondInProjectDirectory()
         {
             FindAppConfigFile f = new FindAppConfigFile();
@@ -39,7 +39,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal("targetpath", f.AppConfigFile.GetMetadata("TargetPath"));
         }
 
-        [Fact]
+        [TestMethod]
         public void FoundInSecondBelowProjectDirectory()
         {
             FindAppConfigFile f = new FindAppConfigFile();
@@ -52,7 +52,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal("targetpath", f.AppConfigFile.GetMetadata("TargetPath"));
         }
 
-        [Fact]
+        [TestMethod]
         public void NotFound()
         {
             FindAppConfigFile f = new FindAppConfigFile();
@@ -64,7 +64,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Null(f.AppConfigFile);
         }
 
-        [Fact]
+        [TestMethod]
         public void MatchFileNameOnlyWithAnInvalidPath()
         {
             FindAppConfigFile f = new FindAppConfigFile();
@@ -78,7 +78,7 @@ namespace Microsoft.Build.UnitTests
         }
 
         // For historical reasons, we should return the last one in the list
-        [Fact]
+        [TestMethod]
         public void ReturnsLastOne()
         {
             FindAppConfigFile f = new FindAppConfigFile();

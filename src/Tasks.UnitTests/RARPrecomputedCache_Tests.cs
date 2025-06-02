@@ -16,7 +16,7 @@ namespace Microsoft.Build.Tasks.UnitTests
 {
     public class RARPrecomputedCache_Tests
     {
-        [Fact]
+        [TestMethod]
         public void TestPrecomputedCacheOutput()
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -51,7 +51,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void StandardCacheTakesPrecedence()
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -103,7 +103,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestPreComputedCacheInputMatchesOutput()
         {
             using (TestEnvironment env = TestEnvironment.Create())

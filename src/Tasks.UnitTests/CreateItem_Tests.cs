@@ -45,7 +45,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// CreateIteming identical lists results in empty list.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OneFromOneIsZero()
         {
             CreateItem t = new CreateItem();
@@ -63,7 +63,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// CreateIteming completely different lists results in left list.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OneFromOneMismatchIsOne()
         {
             CreateItem t = new CreateItem();
@@ -82,7 +82,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// If 'Exclude' is unspecified, then 'Include' is the result.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void UnspecifiedFromOneIsOne()
         {
             CreateItem t = new CreateItem();
@@ -101,7 +101,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// If 'Include' is unspecified, then empty is the result.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OneFromUnspecifiedIsEmpty()
         {
             CreateItem t = new CreateItem();
@@ -118,7 +118,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// If 'Include' and 'Exclude' are unspecified, then empty is the result.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void UnspecifiedFromUnspecifiedIsEmpty()
         {
             CreateItem t = new CreateItem();
@@ -134,7 +134,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// CreateItem is case insensitive.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CaseDoesntMatter()
         {
             CreateItem t = new CreateItem();
@@ -153,7 +153,7 @@ namespace Microsoft.Build.UnitTests
         /// Using the CreateItem task to expand wildcards, and then try accessing the RecursiveDir
         /// metadata to force batching.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void WildcardsWithRecursiveDir()
         {
             ObjectModelHelpers.DeleteTempProjectDirectory();
@@ -183,7 +183,7 @@ namespace Microsoft.Build.UnitTests
         /// Using the CreateItem task to expand wildcards and verifying that the RecursiveDir metadatum is successfully
         /// serialized/deserialized cross process.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RecursiveDirOutOfProc()
         {
             using var env = TestEnvironment.Create(_testOutput);
@@ -217,7 +217,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// CreateItem should add additional metadata when instructed
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AdditionalMetaData()
         {
             CreateItem t = new CreateItem();
@@ -235,7 +235,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// We should be able to preserve the existing metadata on items
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AdditionalMetaDataPreserveExisting()
         {
             CreateItem t = new CreateItem();
@@ -258,7 +258,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// The default is to overwrite existing metadata on items
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AdditionalMetaDataOverwriteExisting()
         {
             CreateItem t = new CreateItem();
@@ -283,10 +283,10 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Logs error when encountering wildcard drive enumeration during task item creation.
         /// </summary>
-        [Theory]
-        [InlineData(@"/**")]
-        [InlineData(@"/**/*.cs")]
-        [InlineData(@"/**/*/*.cs")]
+        [TestMethod]
+        [DataRow(@"/**")]
+        [DataRow(@"/**/*.cs")]
+        [DataRow(@"/**/*/*.cs")]
         public void WildcardDriveEnumerationTaskItemLogsError(string itemSpec)
         {
             using (var env = TestEnvironment.Create())
@@ -318,9 +318,9 @@ namespace Microsoft.Build.UnitTests
         /// Logs warning when encountering wildcard drive enumeration during task item creation on Windows platform.
         /// </summary>
         [WindowsOnlyTheory]
-        [InlineData(@"%DRIVE%:\**")]
-        [InlineData(@"%DRIVE%:\**\*.log")]
-        [InlineData(@"%DRIVE%:\\\\**\*.log")]
+        [DataRow(@"%DRIVE%:\**")]
+        [DataRow(@"%DRIVE%:\**\*.log")]
+        [DataRow(@"%DRIVE%:\\\\**\*.log")]
         public void LogWindowsWarningUponCreateItemExecution(string itemSpec)
         {
             itemSpec = DummyMappedDriveUtils.UpdatePathToMappedDrive(itemSpec, _mappedDrive.Value.MappedDriveLetter);
@@ -332,8 +332,8 @@ namespace Microsoft.Build.UnitTests
         /// </summary>
         [ActiveIssue("https://github.com/dotnet/msbuild/issues/8373")]
         [UnixOnlyTheory]
-        [InlineData(@"\**")]
-        [InlineData(@"\**\*.log")]
+        [DataRow(@"\**")]
+        [DataRow(@"\**\*.log")]
         public void LogUnixWarningUponCreateItemExecution(string itemSpec)
         {
             VerifyDriveEnumerationWarningLoggedUponCreateItemExecution(itemSpec);
@@ -369,16 +369,16 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Throws exception when encountering wildcard drive enumeration during CreateItem task execution.
         /// </summary>
-        [Theory]
-        [InlineData(
+        [TestMethod]
+        [DataRow(
             CreateItemWithInclude,
             @"\**")]
 
-        [InlineData(
+        [DataRow(
             CreateItemWithInclude,
             @"\**\*.txt")]
 
-        [InlineData(
+        [DataRow(
             CreateItemWithInclude,
             @"$(empty)\**\*.cs")]
         public void ThrowExceptionUponItemCreationWithDriveEnumeration(string content, string include)
@@ -396,15 +396,15 @@ namespace Microsoft.Build.UnitTests
         /// Logs warning when encountering wildcard drive enumeration during CreateItem task execution on Windows platform.
         /// </summary>
         [WindowsOnlyTheory]
-        [InlineData(
+        [DataRow(
             CreateItemWithInclude,
             @"%DRIVE%:\**")]
 
-        [InlineData(
+        [DataRow(
             CreateItemWithInclude,
             @"%DRIVE%:\**\*.txt")]
 
-        [InlineData(
+        [DataRow(
             CreateItemWithInclude,
             @"%DRIVE%:$(empty)\**\*.cs")]
         public void LogWindowsWarningUponItemCreationWithDriveEnumeration(string content, string include)
@@ -424,15 +424,15 @@ namespace Microsoft.Build.UnitTests
         /// </summary>
         [ActiveIssue("https://github.com/dotnet/msbuild/issues/8373")]
         [UnixOnlyTheory]
-        [InlineData(
+        [DataRow(
             CreateItemWithInclude,
             @"\**")]
 
-        [InlineData(
+        [DataRow(
             CreateItemWithInclude,
             @"\**\*.txt")]
 
-        [InlineData(
+        [DataRow(
             CreateItemWithInclude,
             @"$(empty)\**\*.cs")]
         public void LogUnixWarningUponItemCreationWithDriveEnumeration(string content, string include)

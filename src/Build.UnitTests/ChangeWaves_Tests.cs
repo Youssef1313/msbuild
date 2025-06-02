@@ -75,7 +75,7 @@ namespace Microsoft.Build.Engine.UnitTests
             ChangeWaves.ResetStateForTests();
         }
 
-        [Fact]
+        [TestMethod]
         public void EnableAllFeaturesBehindChangeWavesEnablesAllFeaturesBehindChangeWaves()
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -92,11 +92,11 @@ namespace Microsoft.Build.Engine.UnitTests
             }
         }
 
-        [Theory]
-        [InlineData("16.8")]
-        [InlineData("16.10")]
-        [InlineData("17.0")]
-        [InlineData("27.3")]
+        [TestMethod]
+        [DataRow("16.8")]
+        [DataRow("16.10")]
+        [DataRow("17.0")]
+        [DataRow("27.3")]
         public void NoChangeWaveSetMeansAllChangeWavesAreEnabled(string featureVersion)
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -113,11 +113,11 @@ namespace Microsoft.Build.Engine.UnitTests
             }
         }
 
-        [Theory]
-        [InlineData("test")]
-        [InlineData("16_8")]
-        [InlineData("16x8")]
-        [InlineData("garbage")]
+        [TestMethod]
+        [DataRow("test")]
+        [DataRow("16_8")]
+        [DataRow("16x8")]
+        [DataRow("garbage")]
         public void InvalidFormatThrowsWarningAndLeavesFeaturesEnabled(string disableFeaturesFromVersion)
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -131,10 +131,10 @@ namespace Microsoft.Build.Engine.UnitTests
             }
         }
 
-        [Theory]
-        [InlineData("0.8")]
-        [InlineData("4.5")]
-        [InlineData("10.0")]
+        [TestMethod]
+        [DataRow("0.8")]
+        [DataRow("4.5")]
+        [DataRow("10.0")]
         public void VersionTooLowClampsToLowestVersionInRotation(string disableFeaturesFromVersion)
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -152,9 +152,9 @@ namespace Microsoft.Build.Engine.UnitTests
             }
         }
 
-        [Theory]
-        [InlineData("100.10")]
-        [InlineData("203.45")]
+        [TestMethod]
+        [DataRow("100.10")]
+        [DataRow("203.45")]
         public void VersionTooHighClampsToHighestVersionInRotation(string disableFeaturesFromVersion)
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -178,7 +178,7 @@ namespace Microsoft.Build.Engine.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void VersionSetToValidValueButInvalidVersionSetsNextVersion()
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -192,7 +192,7 @@ namespace Microsoft.Build.Engine.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void CorrectlyDetermineEnabledFeatures()
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -215,7 +215,7 @@ namespace Microsoft.Build.Engine.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void CorrectlyDetermineDisabledFeatures()
         {
             using (TestEnvironment env = TestEnvironment.Create())

@@ -33,7 +33,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Ensures that if a NuGet.props exists, it will be imported.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImportNuGetPropsWhenExists()
         {
             var projectRelativePath = Path.Combine("src", "foo1", "foo1.csproj");
@@ -59,7 +59,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Ensures that if the NuGet.props does not exists no exception will be produced.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImportNuGetPropsWhenDoesNotExists()
         {
             var projectRelativePath = Path.Combine("src", "foo1", "foo1.csproj");

@@ -19,7 +19,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests that we give a useful error position (not 0 for example)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ErrorPosition()
         {
             string[,] tests = {
@@ -77,7 +77,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the special error for "=".
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SingleEquals()
         {
             Scanner lexer = new Scanner("a=b", ParserOptions.AllowProperties);
@@ -89,7 +89,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the special errors for "$(" and "$x" and similar cases
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IllFormedProperty()
         {
             Scanner lexer = new Scanner("$(", ParserOptions.AllowProperties);
@@ -104,11 +104,11 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the space errors case
         /// </summary>
-        [Theory]
-        [InlineData("$(x )")]
-        [InlineData("$( x)")]
-        [InlineData("$([MSBuild]::DoSomething($(space ))")]
-        [InlineData("$([MSBuild]::DoSomething($(_space ))")]
+        [TestMethod]
+        [DataRow("$(x )")]
+        [DataRow("$( x)")]
+        [DataRow("$([MSBuild]::DoSomething($(space ))")]
+        [DataRow("$([MSBuild]::DoSomething($(_space ))")]
         public void SpaceProperty(string pattern)
         {
             Scanner lexer = new Scanner(pattern, ParserOptions.AllowProperties);
@@ -119,12 +119,12 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the space not next to end so no errors case
         /// </summary>
-        [Theory]
-        [InlineData("$(x.StartsWith( 'y' ))")]
-        [InlineData("$(x.StartsWith ('y'))")]
-        [InlineData("$( x.StartsWith( $(SpacelessProperty) ) )")]
-        [InlineData("$( x.StartsWith( $(_SpacelessProperty) ) )")]
-        [InlineData("$(x.StartsWith('Foo', StringComparison.InvariantCultureIgnoreCase))")]
+        [TestMethod]
+        [DataRow("$(x.StartsWith( 'y' ))")]
+        [DataRow("$(x.StartsWith ('y'))")]
+        [DataRow("$( x.StartsWith( $(SpacelessProperty) ) )")]
+        [DataRow("$( x.StartsWith( $(_SpacelessProperty) ) )")]
+        [DataRow("$(x.StartsWith('Foo', StringComparison.InvariantCultureIgnoreCase))")]
         public void SpaceInMiddleOfProperty(string pattern)
         {
             Scanner lexer = new Scanner(pattern, ParserOptions.AllowProperties);
@@ -135,7 +135,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the special errors for "@(" and "@x" and similar cases.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IllFormedItemList()
         {
             Scanner lexer = new Scanner("@(", ParserOptions.AllowAll);
@@ -173,7 +173,7 @@ namespace Microsoft.Build.UnitTests
         /// Tests the special error for unterminated quotes.
         /// Note, scanner only understands single quotes.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IllFormedQuotedString()
         {
             Scanner lexer = new Scanner("false or 'abc", ParserOptions.AllowAll);
@@ -189,7 +189,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NumericSingleTokenTests()
         {
             Scanner lexer = new Scanner("1234", ParserOptions.AllowAll);
@@ -237,7 +237,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void PropsStringsAndBooleanSingleTokenTests()
         {
             Scanner lexer = new Scanner("$(foo)", ParserOptions.AllowAll);
@@ -276,7 +276,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SimpleSingleTokenTests()
         {
             Scanner lexer = new Scanner("(", ParserOptions.AllowAll);
@@ -314,7 +314,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StringEdgeTests()
         {
             Scanner lexer = new Scanner("@(Foo, ' ')", ParserOptions.AllowAll);
@@ -338,7 +338,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void FunctionTests()
         {
             Scanner lexer = new Scanner("Foo()", ParserOptions.AllowAll);
@@ -420,7 +420,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ComplexTests1()
         {
             Scanner lexer = new Scanner("'String with a $(Property) inside'", ParserOptions.AllowAll);
@@ -446,7 +446,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ComplexTests2()
         {
             Scanner lexer = new Scanner("1234", ParserOptions.AllowAll);
@@ -486,7 +486,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests all tokens with no whitespace and whitespace.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void WhitespaceTests()
         {
             Scanner lexer;
@@ -536,7 +536,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the parsing of item lists.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ItemListTests()
         {
             Scanner lexer = new Scanner("@(foo)", ParserOptions.AllowProperties);
@@ -556,7 +556,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests that shouldn't work.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NegativeTests()
         {
             Scanner lexer = new Scanner("'$(DEBUG) == true", ParserOptions.AllowAll);

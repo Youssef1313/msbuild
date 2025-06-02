@@ -56,7 +56,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// Verify the CreateLogger method create a LoggingService in both Synchronous mode
         /// and Asynchronous mode.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CreateLogger()
         {
             // Generic host which has some default properties set inside of it
@@ -84,7 +84,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Test the IBuildComponent method InitializeComponent, make sure the component gets the parameters it expects
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InitializeComponent()
         {
             IBuildComponent logServiceComponent = (IBuildComponent)LoggingService.CreateLoggingService(LoggerMode.Synchronous, 1);
@@ -110,7 +110,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify the correct exception is thrown when a null Component host is passed in
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InitializeComponentNullHost()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -122,7 +122,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify an exception is thrown if in initialized is called after the service has been shutdown
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InitializeComponentAfterShutdown()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -135,7 +135,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// Verify the correct exceptions are thrown if the loggers crash
         /// when they are shutdown
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ShutDownComponentExceptionsInForwardingLogger()
         {
             // Cause a logger exception in the shutdown of the logger
@@ -163,7 +163,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// Verify the correct exceptions are thrown when ILoggers
         /// throw exceptions during shutdown
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ShutDownComponentExceptionsInLogger()
         {
             LoggerThrowException logger = new LoggerThrowException(true, false, new LoggerException("Hello"));
@@ -182,7 +182,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// Make sure an exception is thrown if shutdown is called
         /// more than once
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DoubleShutdown()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -197,7 +197,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify we get an exception when a null logger is passed in
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NullLogger()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -209,7 +209,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// Verify we get an exception when we try and register a logger
         /// and the system has already shutdown
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RegisterLoggerServiceShutdown()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -223,7 +223,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// Verify a logger exception when initializing a logger is rethrown
         /// as a logger exception
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LoggerExceptionInInitialize()
         {
             Assert.Throws<LoggerException>(() =>
@@ -236,7 +236,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// Verify a general exception when initializing a logger is wrapped
         /// as a InternalLogger exception
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GeneralExceptionInInitialize()
         {
             Assert.Throws<InternalLoggerException>(() =>
@@ -249,7 +249,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify a critical exception is not wrapped
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ILoggerExceptionInInitialize()
         {
             Assert.Throws<StackOverflowException>(() =>
@@ -262,7 +262,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Register an good Logger and verify it was registered.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RegisterILoggerAndINodeLoggerGood()
         {
             ConsoleLogger consoleLogger = new ConsoleLogger();
@@ -285,7 +285,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Try and register the same logger multiple times
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RegisterDuplicateLogger()
         {
             ConsoleLogger consoleLogger = new ConsoleLogger();
@@ -312,7 +312,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify we get an exception when a null logger forwarding logger is passed in
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NullForwardingLogger()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -324,7 +324,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// Verify we get an exception when we try and register a distributed logger
         /// and the system has already shutdown
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RegisterDistributedLoggerServiceShutdown()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -342,7 +342,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Register both a good central logger and a good forwarding logger
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RegisterGoodDistributedAndCentralLogger()
         {
             string configurableClassName = "Microsoft.Build.Logging.ConfigurableForwardingLogger";
@@ -378,7 +378,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// Have a one forwarding logger which forwards build started and finished and have one which does not and a regular logger. Expect the central loggers to all get
         /// one build started and one build finished event only.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RegisterGoodDistributedAndCentralLoggerTestBuildStartedFinished()
         {
             string configurableClassNameA = "Microsoft.Build.Logging.ConfigurableForwardingLogger";
@@ -426,7 +426,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Try and register a duplicate central logger
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RegisterDuplicateCentralLogger()
         {
             string className = "Microsoft.Build.Logging.ConfigurableForwardingLogger";
@@ -454,7 +454,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Try and register a duplicate Forwarding logger
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RegisterDuplicateForwardingLoggerLogger()
         {
             string className = "Microsoft.Build.Logging.ConfigurableForwardingLogger";
@@ -495,7 +495,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify we get an exception when a null description collection is passed in
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NullDescriptionCollection()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -506,7 +506,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify we get an exception when an empty description collection is passed in
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EmptyDescriptionCollection()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -517,7 +517,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify we get an exception when we try and register a description and the component has already shutdown
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NullForwardingLoggerSink()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -537,7 +537,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Register both a good central logger and a good forwarding logger
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RegisterGoodDiscriptions()
         {
             string configurableClassName = "Microsoft.Build.Logging.ConfigurableForwardingLogger";
@@ -604,7 +604,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Try and register a duplicate central logger
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RegisterDuplicateDistributedCentralLogger()
         {
             string className = "Microsoft.Build.Logging.ConfigurableForwardingLogger";
@@ -634,7 +634,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify the getters and setters for the properties work.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Properties()
         {
             // Test OnlyLogCriticalEvents
@@ -666,7 +666,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify how a null packet is handled. There should be an InternalErrorException thrown
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NullPacketReceived()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -679,7 +679,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// Verify when a non logging packet is received.
         /// An invalid operation should be thrown
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NonLoggingPacketPacketReceived()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -694,7 +694,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// properly passed to ProcessLoggingEvent
         /// An invalid operation should be thrown
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LoggingPacketReceived()
         {
             LoggingServicesLogMethod_Tests.ProcessBuildEventHelper loggingService = (LoggingServicesLogMethod_Tests.ProcessBuildEventHelper)LoggingServicesLogMethod_Tests.ProcessBuildEventHelper.CreateLoggingService(LoggerMode.Synchronous, 1);
@@ -716,11 +716,11 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verifies that a warning is logged as an error when it's warning code specified.
         /// </summary>
-        [Theory]
-        [InlineData(0, 1)]
-        [InlineData(0, 2)]
-        [InlineData(1, 1)]
-        [InlineData(1, 2)]
+        [TestMethod]
+        [DataRow(0, 1)]
+        [DataRow(0, 2)]
+        [DataRow(1, 1)]
+        [DataRow(1, 2)]
         public void TreatWarningsAsErrorWhenSpecified(int loggerMode, int nodeId)
         {
             HashSet<string> warningsAsErrors = new HashSet<string>
@@ -752,7 +752,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verifies that a warning is not treated as an error when other warning codes are specified.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NotTreatWarningsAsErrorWhenNotSpecified()
         {
             HashSet<string> warningsAsErrors = new HashSet<string>
@@ -771,11 +771,11 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verifies that a warning is not treated as an error when other warning codes are specified.
         /// </summary>
-        [Theory]
-        [InlineData(0, 1)]
-        [InlineData(0, 2)]
-        [InlineData(1, 1)]
-        [InlineData(1, 2)]
+        [TestMethod]
+        [DataRow(0, 1)]
+        [DataRow(0, 2)]
+        [DataRow(1, 1)]
+        [DataRow(1, 2)]
         public void TreatWarningsAsErrorWhenAllSpecified(int loggerMode, int nodeId)
         {
             HashSet<string> warningsAsErrors = new HashSet<string>();
@@ -785,7 +785,7 @@ namespace Microsoft.Build.UnitTests.Logging
             logger.Errors.ShouldHaveSingleItem();
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyWarningsPromotedToErrorsAreCounted()
         {
             ILoggingService ls = LoggingService.CreateLoggingService(LoggerMode.Synchronous, 1);
@@ -800,11 +800,11 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verifies that a warning is logged as a low importance message when it's warning code is specified.
         /// </summary>
-        [Theory]
-        [InlineData(0, 1)]
-        [InlineData(0, 2)]
-        [InlineData(1, 1)]
-        [InlineData(1, 2)]
+        [TestMethod]
+        [DataRow(0, 1)]
+        [DataRow(0, 2)]
+        [DataRow(1, 1)]
+        [DataRow(1, 2)]
         public void TreatWarningsAsMessagesWhenSpecified(int loggerMode, int nodeId)
         {
             HashSet<string> warningsAsMessages = new HashSet<string>
@@ -837,7 +837,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verifies that a warning is not treated as a low importance message when other warning codes are specified.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NotTreatWarningsAsMessagesWhenNotSpecified()
         {
             HashSet<string> warningsAsMessages = new HashSet<string>
@@ -854,11 +854,11 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verifies that warnings are treated as an error for a particular project when codes are specified.
         /// </summary>
-        [Theory]
-        [InlineData(0, 1)]
-        [InlineData(0, 2)]
-        [InlineData(1, 1)]
-        [InlineData(1, 2)]
+        [TestMethod]
+        [DataRow(0, 1)]
+        [DataRow(0, 2)]
+        [DataRow(1, 1)]
+        [DataRow(1, 2)]
         public void TreatWarningsAsErrorByProjectWhenSpecified(int loggerMode, int nodeId)
         {
             HashSet<string> warningsAsErrorsForProject = new HashSet<string>
@@ -890,11 +890,11 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verifies that all warnings are treated as errors for a particular project.
         /// </summary>
-        [Theory]
-        [InlineData(0, 1)]
-        [InlineData(0, 2)]
-        [InlineData(1, 1)]
-        [InlineData(1, 2)]
+        [TestMethod]
+        [DataRow(0, 1)]
+        [DataRow(0, 2)]
+        [DataRow(1, 1)]
+        [DataRow(1, 2)]
         public void TreatWarningsAsErrorByProjectWhenAllSpecified(int loggerMode, int nodeId)
         {
             HashSet<string> warningsAsErrorsForProject = new HashSet<string>();
@@ -907,11 +907,11 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verifies that warnings are treated as messages for a particular project.
         /// </summary>
-        [Theory]
-        [InlineData(0, 1)]
-        [InlineData(0, 2)]
-        [InlineData(1, 1)]
-        [InlineData(1, 2)]
+        [TestMethod]
+        [DataRow(0, 1)]
+        [DataRow(0, 2)]
+        [DataRow(1, 1)]
+        [DataRow(1, 2)]
         public void TreatWarningsAsMessagesByProjectWhenSpecified(int loggerMode, int nodeId)
         {
             HashSet<string> warningsAsMessagesForProject = new HashSet<string>
@@ -1009,7 +1009,7 @@ namespace Microsoft.Build.UnitTests.Logging
 
         #region MinimumRequiredMessageImportance Tests
 
-        [Fact]
+        [TestMethod]
         public void ImportanceReflectsConsoleLoggerVerbosity()
         {
             _initializedService.RegisterLogger(new ConsoleLogger(LoggerVerbosity.Quiet));
@@ -1024,7 +1024,7 @@ namespace Microsoft.Build.UnitTests.Logging
             _initializedService.MinimumRequiredMessageImportance.ShouldBe(MessageImportance.Low);
         }
 
-        [Fact]
+        [TestMethod]
         public void ImportanceReflectsConfigurableForwardingLoggerVerbosity()
         {
             _initializedService.RegisterLogger(CreateConfigurableForwardingLogger(LoggerVerbosity.Quiet));
@@ -1039,7 +1039,7 @@ namespace Microsoft.Build.UnitTests.Logging
             _initializedService.MinimumRequiredMessageImportance.ShouldBe(MessageImportance.Low);
         }
 
-        [Fact]
+        [TestMethod]
         public void ImportanceReflectsCentralForwardingLoggerVerbosity()
         {
             MockHost mockHost = new MockHost();
@@ -1063,7 +1063,7 @@ namespace Microsoft.Build.UnitTests.Logging
             node2LoggingService.MinimumRequiredMessageImportance.ShouldBe(MessageImportance.Low);
         }
 
-        [Fact]
+        [TestMethod]
         public void ImportanceReflectsUnknownLoggerVerbosity()
         {
             // Minimum message importance is Low (i.e. we're logging everything) even when all registered loggers have

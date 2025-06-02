@@ -22,7 +22,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SimpleParseTest()
         {
             Console.WriteLine("SimpleParseTest()");
@@ -71,7 +71,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ComplexParseTest()
         {
             Console.WriteLine("ComplexParseTest()");
@@ -99,7 +99,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NotParseTest()
         {
             Console.WriteLine("NegationParseTest()");
@@ -116,7 +116,7 @@ namespace Microsoft.Build.UnitTests
         }
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void FunctionCallParseTest()
         {
             Console.WriteLine("FunctionCallParseTest()");
@@ -130,7 +130,7 @@ namespace Microsoft.Build.UnitTests
             tree = p.Parse("SimpleFunctionCall( $(property), 1234, abcd, 'abcd efgh' )", ParserOptions.AllowAll, _elementLocation);
         }
 
-        [Fact]
+        [TestMethod]
         public void ItemListParseTest()
         {
             Console.WriteLine("FunctionCallParseTest()");
@@ -209,7 +209,7 @@ namespace Microsoft.Build.UnitTests
             Assert.True(fExceptionCaught);
         }
 
-        [Fact]
+        [TestMethod]
         public void ItemFuncParseTest()
         {
             Console.WriteLine("ItemFuncParseTest()");
@@ -229,7 +229,7 @@ namespace Microsoft.Build.UnitTests
             Assert.IsType<AndExpressionNode>(tree);
         }
 
-        [Fact]
+        [TestMethod]
         public void MetadataParseTest()
         {
             Console.WriteLine("FunctionCallParseTest()");
@@ -310,7 +310,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NegativeTests()
         {
             Console.WriteLine("NegativeTests()");
@@ -437,7 +437,7 @@ namespace Microsoft.Build.UnitTests
         /// This test verifies that we trigger warnings for expressions that
         /// could be incorrectly evaluated
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyWarningForOrder()
         {
             // Create a project file that has an expression
@@ -479,7 +479,7 @@ namespace Microsoft.Build.UnitTests
         /// This test verifies that we don't trigger warnings for expressions that
         /// couldn't be incorrectly evaluated
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyNoWarningForOrder()
         {
             // Create a project file that has an expression
@@ -529,9 +529,9 @@ namespace Microsoft.Build.UnitTests
         }
 
         // see https://github.com/dotnet/msbuild/issues/5436
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void SupportItemDefinationGroupInWhenOtherwise(bool context)
         {
             var projectContent = $@"

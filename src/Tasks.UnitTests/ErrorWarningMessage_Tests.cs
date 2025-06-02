@@ -15,7 +15,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Simple case
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Message()
         {
             MockEngine e = new MockEngine();
@@ -37,7 +37,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Multiple lines
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MultilineMessage()
         {
             MockEngine e = new MockEngine();
@@ -59,7 +59,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Empty message should not log an event
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EmptyMessage()
         {
             MockEngine e = new MockEngine();
@@ -81,7 +81,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Simple case
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Warning()
         {
             MockEngine e = new MockEngine(true);
@@ -105,7 +105,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Empty warning SHOULD log an event
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EmptyWarning()
         {
             MockEngine e = new MockEngine();
@@ -129,7 +129,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Empty warning message but a code specified should still be logged
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EmptyWarningMessageButCodeSpecified()
         {
             MockEngine e = new MockEngine();
@@ -154,7 +154,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Empty error SHOULD log an event
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EmptyError()
         {
             MockEngine e = new MockEngine();
@@ -180,7 +180,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Empty error message but a code specified should still be logged
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EmptyErrorMessageButCodeSpecified()
         {
             MockEngine e = new MockEngine();
@@ -206,7 +206,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Simple case
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Error()
         {
             MockEngine e = new MockEngine(true);
@@ -230,7 +230,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Simple case for error message coming from a resource string
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ErrorFromResources()
         {
             MockEngine e = new MockEngine(true);
@@ -256,7 +256,7 @@ namespace Microsoft.Build.UnitTests
         /// If a "Code" is passed to the task, use it to override the code
         /// (if any) defined in the error message.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ErrorFromResourcesWithOverriddenCode()
         {
             MockEngine e = new MockEngine(true);
@@ -284,7 +284,7 @@ namespace Microsoft.Build.UnitTests
         /// Simple case of logging a resource-based error that takes
         /// arguments
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ErrorFromResourcesWithArguments()
         {
             MockEngine e = new MockEngine(true);
@@ -311,7 +311,7 @@ namespace Microsoft.Build.UnitTests
         /// If invalid arguments are passed to the task, it should still
         /// log an error informing the user of that.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ErrorFromResourcesWithInvalidArguments()
         {
             MockEngine e = new MockEngine(true);
@@ -338,7 +338,7 @@ namespace Microsoft.Build.UnitTests
         /// If no resource string is passed to ErrorFromResources, we should error
         /// because a required parameter is missing.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ErrorFromResourcesNoResources()
         {
             string projectContents = @"

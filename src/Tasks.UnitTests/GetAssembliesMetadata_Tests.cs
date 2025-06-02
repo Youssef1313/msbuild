@@ -29,7 +29,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             _testOutput = testOutput;
         }
 
-        [Fact]
+        [TestMethod]
         public void CheckPresenceOfCustomCOMAssemblyAttributes()
         {
             string testSolutionPath = Path.Combine(TestAssembliesPaths, "Custom_COM");
@@ -58,7 +58,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             t.AssembliesMetadata[0].GetMetadata("PublicHexKey").ShouldBeEmpty();
         }
 
-        [Fact]
+        [TestMethod]
         public void CheckPresenceOfCOMAssemblyAttributes()
         {
             string pathToWinFolder = Environment.GetFolderPath(Environment.SpecialFolder.Windows);

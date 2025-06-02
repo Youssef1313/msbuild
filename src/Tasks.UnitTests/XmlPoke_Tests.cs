@@ -41,7 +41,7 @@ namespace Microsoft.Build.UnitTests
   <method AccessModifier='public static' Name='GetVal' />
 </class>";
 
-        [Fact]
+        [TestMethod]
         public void PokeWithNamespace()
         {
             const string query = "//s:variable/@Name";
@@ -63,7 +63,7 @@ namespace Microsoft.Build.UnitTests
             nodes.ShouldAllBe(i => i.Value.Equals("Mert"), $"All <variable /> elements should have Name=\"Mert\" {Environment.NewLine}{xmlDocument.OuterXml}");
         }
 
-        [Fact]
+        [TestMethod]
         public void PokeNoNamespace()
         {
             const string query = "//variable/@Name";
@@ -80,7 +80,7 @@ namespace Microsoft.Build.UnitTests
             nodes.ShouldAllBe(i => i.Value.Equals(value), $"All <variable /> elements should have Name=\"{value}\" {Environment.NewLine}{xmlDocument.OuterXml}");
         }
 
-        [Fact]
+        [TestMethod]
         public void PokeAttribute()
         {
             const string query = "//class[1]/@AccessModifier";
@@ -97,7 +97,7 @@ namespace Microsoft.Build.UnitTests
             nodes[0].Value.ShouldBe(value);
         }
 
-        [Fact]
+        [TestMethod]
         public void PokeChildren()
         {
             const string query = "//class/.";
@@ -120,7 +120,7 @@ namespace Microsoft.Build.UnitTests
             testNodes[0].InnerText.ShouldBe("Testing");
         }
 
-        [Fact]
+        [TestMethod]
         public void PokeAttributeWithCondition()
         {
             const string original = "b";
@@ -138,7 +138,7 @@ namespace Microsoft.Build.UnitTests
             nodes[0].Value.ShouldBe(value);
         }
 
-        [Fact]
+        [TestMethod]
         public void PokeWithNoParameters()
         {
             MockLogger log = new();
@@ -148,7 +148,7 @@ namespace Microsoft.Build.UnitTests
             log.AssertLogContains("MSB4044");
         }
 
-        [Fact]
+        [TestMethod]
         public void PokeWithMissingRequiredQuery()
         {
             const string projectContent = @"<Project><Target Name=""Test""><XmlPoke XmlInputPath=""nonesuch"" /></Target></Project>";
@@ -161,7 +161,7 @@ namespace Microsoft.Build.UnitTests
             log.AssertLogContains("\"Query\"");
         }
 
-        [Fact]
+        [TestMethod]
         public void PokeWithMissingRequiredXmlInputPath()
         {
             const string projectContent = @"<Project><Target Name=""Test""><XmlPoke Query=""nonesuch"" /></Target></Project>";
@@ -174,7 +174,7 @@ namespace Microsoft.Build.UnitTests
             log.AssertLogContains("\"XmlInputPath\"");
         }
 
-        [Fact]
+        [TestMethod]
         public void PokeWithRequiredParameters()
         {
             MockEngine engine = new(true);
@@ -190,7 +190,7 @@ namespace Microsoft.Build.UnitTests
             task.Execute().ShouldBeTrue();
         }
 
-        [Fact]
+        [TestMethod]
         // https://github.com/dotnet/msbuild/issues/5814
         public void XmlPokeWithEmptyValue()
         {
@@ -217,7 +217,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ErrorInNamespaceDecl()
         {
             MockEngine engine = new MockEngine(true);
@@ -236,7 +236,7 @@ namespace Microsoft.Build.UnitTests
             engine.AssertLogContains("MSB3731");
         }
 
-        [Fact]
+        [TestMethod]
         public void PokeNoNSWPrefixedQueryError()
         {
             MockEngine engine = new MockEngine(true);
@@ -253,7 +253,7 @@ namespace Microsoft.Build.UnitTests
             engine.AssertLogContains("MSB3732");
         }
 
-        [Fact]
+        [TestMethod]
         public void MissingNamespaceParameters()
         {
             MockEngine engine = new MockEngine(true);
@@ -291,7 +291,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void PokeElement()
         {
             const string query = "//variable/.";
@@ -311,7 +311,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void PokeWithoutUsingTask()
         {
             string projectContents = @"

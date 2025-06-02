@@ -30,9 +30,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// Tests to see that all the data/properties are correctly parsed out of a Venus
         /// project in a .SLN. This can be checked only here because of AspNetConfigurations protection level.
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         public void ProjectWithWebsiteProperties(bool convertToSlnx)
         {
             string solutionFileContents =

@@ -30,7 +30,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Verify a null build event throws an exception
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LogMessageConstructorNullBuildEvent()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -43,7 +43,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Verify when creating a LogMessagePacket
         /// that the correct Event Type is set.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyEventType()
         {
             BuildFinishedEventArgs buildFinished = new BuildFinishedEventArgs("Message", "Keyword", true);
@@ -244,7 +244,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests serialization of LogMessagePacket with each kind of event type.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestTranslation()
         {
             // need to touch the type so that the static constructor runs

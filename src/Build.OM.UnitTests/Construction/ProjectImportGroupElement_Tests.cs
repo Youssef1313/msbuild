@@ -22,7 +22,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// Tests that an import is added at the end of the file
         /// when no import group exists
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddImportWhenNoImportGroupExists()
         {
             string content = @"
@@ -50,7 +50,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// Tests that an import is added to (the last) (non-conditioned)
         /// import group if one exists
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddImportToLastImportGroupWithNoCondition()
         {
             string content = @"
@@ -102,7 +102,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// Tests that an import is added at the end of the file
         /// when no import group exists
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddImportOnlyConditionedImportGroupsExist()
         {
             string content = @"
@@ -141,7 +141,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read project with no imports
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadNone()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -152,7 +152,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// An empty import group does nothing, but also shouldn't error
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadNoChild()
         {
             string content = @"
@@ -173,7 +173,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read import group with a contained import that has no project attribute
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidChildMissingProject()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -193,7 +193,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// Checks that an InvalidProjectFileException is thrown when an invalid
         /// child type is placed inside an ImportGroup.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidChildType()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -213,7 +213,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// Checks that an InvalidProjectFileException is thrown when an ImportGroup is placed
         /// inside an invalid parent.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidParentType()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -232,7 +232,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read import group with unexpected attribute
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidAttribute()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -249,7 +249,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read basic valid import group
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadBasic()
         {
             string content = @"
@@ -278,7 +278,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Multiple import groups should all show up in the project's imports
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadMultipleImportGroups()
         {
             string content = @"
@@ -314,7 +314,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set valid project on import
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetProjectValid()
         {
             string content = @"
@@ -340,7 +340,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set invalid empty project value on import
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetProjectInvalidEmpty()
         {
             Assert.Throws<ArgumentException>(() =>
@@ -365,7 +365,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set the condition value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetCondition()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -382,7 +382,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set the label value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetLabel()
         {
             ProjectRootElement project = ProjectRootElement.Create();

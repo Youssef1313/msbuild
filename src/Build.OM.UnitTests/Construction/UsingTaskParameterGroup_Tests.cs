@@ -59,7 +59,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read simple parameterGroup body
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadEmptyParameterGroup()
         {
             UsingTaskParameterGroupElement parameterGroup = GetParameterGroupXml(s_contentEmptyParameterGroup);
@@ -71,7 +71,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read simple parameterGroup body
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadMutipleParameters()
         {
             UsingTaskParameterGroupElement parameterGroup = GetParameterGroupXml(s_contentMultipleParameters);
@@ -101,7 +101,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read simple parameterGroup body
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadDuplicateChildParameters()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -113,7 +113,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read parameterGroup with a attribute
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidAttribute()
         {
             Assert.Throws<InvalidProjectFileException>(() =>

@@ -12,7 +12,7 @@ namespace Microsoft.Build.Engine.UnitTests.BackEnd
 {
     public class SdkResultItemComparison_Tests
     {
-        [Fact]
+        [TestMethod]
         public void SdkResultItem_Equal_WithDefaultCtor()
         {
             var sdkResultItem1 = new SdkResultItem();
@@ -27,7 +27,7 @@ namespace Microsoft.Build.Engine.UnitTests.BackEnd
             sdkResultItem1.ShouldBe(sdkResultItem2);
         }
 
-        [Fact]
+        [TestMethod]
         public void SdkResultItem_Equal_CtorParam_MetadataNull()
         {
             var sdkResultItem1 = new SdkResultItem("anyspec", new Dictionary<string, string>());
@@ -37,7 +37,7 @@ namespace Microsoft.Build.Engine.UnitTests.BackEnd
             sdkResultItem1.ShouldNotBe(sdkResultItem2);
         }
 
-        [Fact]
+        [TestMethod]
         public void SdkResultItem_GetHashCode_Compare_MetadataIgnoreKeyOrder()
         {
             var sdkResultItem1 = new SdkResultItem();

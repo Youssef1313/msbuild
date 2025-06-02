@@ -21,7 +21,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify the properties on EventSourceSink properly work
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void PropertyTests()
         {
             EventSourceSink sink = new EventSourceSink();
@@ -34,7 +34,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Test out events
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConsumeEventsGoodEvents()
         {
             EventSourceSink sink = new EventSourceSink();
@@ -60,7 +60,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Test out events when no event handlers are registered
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConsumeEventsGoodEventsNoHandlers()
         {
             EventSourceSink sink = new EventSourceSink();
@@ -88,7 +88,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify when exceptions are thrown in the event handler, they are properly handled
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LoggerExceptionInEventHandler()
         {
             List<Exception> exceptionList = new List<Exception>();
@@ -119,7 +119,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify raising a generic event derived from BuildEventArgs rather than CustomBuildEventArgs causes an internalErrorException
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RaiseGenericBuildEventArgs()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -132,7 +132,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify that shutdown unregisters all of the event handlers
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyShutdown()
         {
             EventSourceSink sink = new EventSourceSink();
@@ -164,7 +164,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify aggregate exceptions are caught as critical if they contain critical exceptions
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyAggregateExceptionHandling()
         {
             try

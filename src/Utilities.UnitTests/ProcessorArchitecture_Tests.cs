@@ -31,7 +31,7 @@ namespace Microsoft.Build.UnitTests
             };
         }
 
-        [Fact]
+        [TestMethod]
         public void ValidateProcessorArchitectureStrings()
         {
             // Make sure changes to BuildUtilities.ProcessorArchitecture.cs source don't accidentally get mangle ProcessorArchitecture
@@ -48,13 +48,13 @@ namespace Microsoft.Build.UnitTests
             ProcessorArchitecture.PPC64LE.ShouldBe("PPC64LE"); // "PPC64LE ProcessorArchitecture isn't correct"
         }
 
-        [Fact]
+        [TestMethod]
         public void ValidateCurrentProcessorArchitectureCall()
         {
             ProcessorArchitecture.CurrentProcessArchitecture.ShouldBe(ProcessorArchitectureIntToString()); // "BuildUtilities.ProcessorArchitecture.CurrentProcessArchitecture returned an invalid match"
         }
 
-        [Fact]
+        [TestMethod]
         public void ValidateConvertDotNetFrameworkArchitectureToProcessorArchitecture()
         {
             Console.WriteLine("BuildUtilities.ProcessorArchitecture.CurrentProcessArchitecture is: {0}", ProcessorArchitecture.CurrentProcessArchitecture);

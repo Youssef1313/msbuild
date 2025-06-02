@@ -21,7 +21,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Project getter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ProjectGetter()
         {
             Project project = new Project();
@@ -33,7 +33,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Property with nothing to expand
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NoExpansion()
         {
             string content = @"
@@ -55,7 +55,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Embedded property
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExpandProperty()
         {
             string content = @"
@@ -78,7 +78,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Set the value of a property
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetValue()
         {
             Project project = new Project();
@@ -95,7 +95,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Set the value of a property
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetValue_Escaped()
         {
             Project project = new Project();
@@ -113,7 +113,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Set the value of a property to the same value.
         /// This should not dirty the project.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetValueSameValue()
         {
             Project project = new Project();
@@ -128,7 +128,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Attempt to set the value of a built-in property
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidSetValueBuiltInProperty()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -144,7 +144,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Should work even though there is no XML behind it.
         /// Also, should persist.
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void SetValueEnvironmentProperty()
@@ -167,7 +167,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Test IsEnvironmentVariable
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void IsEnvironmentVariable()
@@ -184,7 +184,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Test IsGlobalProperty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IsGlobalProperty()
         {
             Dictionary<string, string> globalProperties = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
@@ -200,7 +200,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Test IsReservedProperty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IsReservedProperty()
         {
             Project project = new Project();
@@ -216,7 +216,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Verify properties are expanded in new property values
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetPropertyWithPropertyExpression()
         {
             Project project = new Project();
@@ -235,7 +235,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// when you output them, item expansion happens after property expansion, and
         /// they may evaluate to blank then. (Unless items do exist at that point.)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetPropertyWithItemAndMetadataExpression()
         {
             Project project = new Project();
@@ -251,7 +251,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Attempt to set value on imported property should fail
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetPropertyImported()
         {
             Assert.Throws<InvalidOperationException>(() =>

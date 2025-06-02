@@ -15,7 +15,7 @@ namespace Microsoft.Build.UnitTests
 {
     public class BuildEventArgsDataEnumeration
     {
-        [Fact]
+        [TestMethod]
         public void SamplePropertiesEnumeration()
         {
             var projectFile = @"C:\foo\bar.proj";
@@ -42,7 +42,7 @@ namespace Microsoft.Build.UnitTests
             results[2].ShouldBe(new("foo", "bar"));
         }
 
-        [Fact]
+        [TestMethod]
         public void SampleItemsEnumeration()
         {
             string projectFile = @"C:\foo\bar.proj";
@@ -80,7 +80,7 @@ namespace Microsoft.Build.UnitTests
             metadata[1].Value.ShouldBe("val2");
         }
 
-        [Fact]
+        [TestMethod]
         public void SampleFilteredItemsEnumeration()
         {
             string projectFile = @"C:\foo\bar.proj";

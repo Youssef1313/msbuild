@@ -11,7 +11,7 @@ namespace Microsoft.Build.UnitTests
 {
     public sealed class AssemblyRegistrationCache_Tests
     {
-        [Fact]
+        [TestMethod]
         public void ExerciseCache()
         {
             AssemblyRegistrationCache arc = new AssemblyRegistrationCache();
@@ -30,7 +30,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal("bar", tlb);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExerciseCacheSerialization()
         {
             AssemblyRegistrationCache arc = new();

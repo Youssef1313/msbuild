@@ -64,7 +64,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestResolve()
         {
             // empty pre-generated string
@@ -117,7 +117,7 @@ namespace Microsoft.Build.UnitTests
         /// 1) The xml element does not have the BuildProjectInSolution attribute set
         ///     Expect none of the metadata to be set
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestReferenceWithNoMetadataBadBuildInProjectAttribute()
         {
             // Test the case where the metadata is missing and we are not supposed to build the reference
@@ -138,7 +138,7 @@ namespace Microsoft.Build.UnitTests
         /// 1) The xml element does not have the BuildProjectInSolution attribute set
         ///     Expect none of the metadata to be set
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestReferenceWithNoMetadataNoBuildInProjectAttribute()
         {
             // Test the case where the metadata is missing and we are not supposed to build the reference
@@ -157,7 +157,7 @@ namespace Microsoft.Build.UnitTests
         /// 1) The xml element has BuildProjectInSolution set to true
         ///     Expect none of the metadata to be set
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestReferenceWithNoMetadataBuildInProjectAttributeTrue()
         {
             // Test the case where the metadata is missing and we are not supposed to build the reference
@@ -180,7 +180,7 @@ namespace Microsoft.Build.UnitTests
         /// 1) The xml element has BuildProjectInSolution set to false
         ///     Expect no pieces of metadata to be set on the reference item
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestReferenceWithNoMetadataBuildInProjectAttributeFalseReferenceAndBuildProjectsDisabledInProjectConfiguration()
         {
             // Test the case where the metadata is missing and we are not supposed to build the reference
@@ -200,7 +200,7 @@ namespace Microsoft.Build.UnitTests
         /// 1) The xml element has BuildProjectInSolution set to false
         ///     Expect two pieces of metadata to be put on the item and be set to false (BuildReference, and ReferenceOutputAssembly)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestReferenceWithNoMetadataBuildInProjectAttributeFalse()
         {
             // Test the case where the metadata is missing and we are not supposed to build the reference
@@ -221,7 +221,7 @@ namespace Microsoft.Build.UnitTests
         /// 1) The xml element has BuildProjectInSolution set to false
         ///     Expect two pieces of metadata to be put on the item and be set to true since they were already set (BuildReference, and ReferenceOutputAssembly)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestReferenceWithMetadataAlreadySetBuildInProjectAttributeFalse()
         {
             // Test the case where the metadata is missing and we are not supposed to build the reference
@@ -289,7 +289,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verifies that the UnresolvedProjectReferences output parameter is populated correctly.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestUnresolvedReferences()
         {
             ArrayList projectRefs = new ArrayList();
@@ -347,7 +347,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify if no values are passed in for certain properties that their default values are used.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyDefaultValueDefaultToVcxPlatformMappings()
         {
             string expectedDefaultToVcxPlatformMapping = "AnyCPU=Win32;X86=Win32;X64=X64;Itanium=Itanium";
@@ -370,7 +370,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify if no values are passed in for certain properties that their default values are used.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyDefaultValuesVcxToDefaultPlatformMappingNoOutput()
         {
             string expectedVcxToDefaultPlatformMappingNoOutput = "Win32=X86;X64=X64;Itanium=Itanium";
@@ -392,7 +392,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify if no values are passed in for certain properties that their default values are used.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyDefaultValuesVcxToDefaultPlatformMappingLibraryOutput()
         {
             string expectedVcxToDefaultPlatformMappingLibraryOutput = "Win32=AnyCPU;X64=X64;Itanium=Itanium";

@@ -68,8 +68,8 @@ namespace Microsoft.Build.Engine.UnitTests.Instance
             }
         }
 
-        [Theory]
-        [MemberData(nameof(TargetChildrenTestData))]
+        [TestMethod]
+        [DynamicData(nameof(TargetChildrenTestData))]
         public void ProjectTargetInstanceCanSerializeViaTranslator(
             ReadOnlyCollection<ProjectTargetInstanceChild> children,
             ReadOnlyCollection<ProjectOnErrorInstance> errorChildren)

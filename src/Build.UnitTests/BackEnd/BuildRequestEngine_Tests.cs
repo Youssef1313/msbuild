@@ -324,7 +324,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// This test verifies that the engine properly shuts down even if there is an active build request.
         /// This should cause that request to cancel and fail.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestEngineShutdownWhileActive()
         {
             BuildRequestData data = new BuildRequestData("TestFile", new Dictionary<string, string>(), "TestToolsVersion", Array.Empty<string>(), null);
@@ -355,7 +355,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// This test verifies that issuing a simple request results in a successful completion.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestSimpleBuildScenario()
         {
             BuildRequestData data = new BuildRequestData("TestFile", new Dictionary<string, string>(), "TestToolsVersion", Array.Empty<string>(), null);
@@ -383,7 +383,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// This test verifies that a project which has project dependencies can issue and consume them through the
         /// engine interface.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBuildWithChildren()
         {
             BuildRequestData data = new BuildRequestData("TestFile", new Dictionary<string, string>(), "TestToolsVersion", Array.Empty<string>(), null);
@@ -436,7 +436,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// This test verifies that a project can issue a build request with an unresolved configuration and that if we resolve it,
         /// the build will continue and complete successfully.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBuildWithNewConfiguration()
         {
             BuildRequestData data = new BuildRequestData(Path.GetFullPath("TestFile"), new Dictionary<string, string>(), "TestToolsVersion", Array.Empty<string>(), null);
@@ -496,7 +496,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             VerifyEngineStatus(BuildRequestEngineStatus.Idle);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestShutdown()
         {
         }

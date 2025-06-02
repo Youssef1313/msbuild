@@ -17,7 +17,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Validate the constructor takes any combination of arguments.  It is not the purpose of this class to enforce
         /// rules on configuration IDs.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestConstructor()
         {
             BuildRequestConfigurationResponse response = new BuildRequestConfigurationResponse(0, 0, 0);
@@ -43,7 +43,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test the NodeConfigurationId property
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestNodeConfigurationId()
         {
             BuildRequestConfigurationResponse response = new BuildRequestConfigurationResponse(1, 0, 0);
@@ -53,7 +53,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test the GlobalConfigurationId property
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestGlobalConfigurationId()
         {
             BuildRequestConfigurationResponse response = new BuildRequestConfigurationResponse(0, 1, 0);
@@ -63,7 +63,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test the ResultsNodeId property
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestResultsNodeId()
         {
             BuildRequestConfigurationResponse response = new BuildRequestConfigurationResponse(0, 1, 2);
@@ -73,7 +73,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test the Serialize method
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestTranslation()
         {
             BuildRequestConfigurationResponse response = new BuildRequestConfigurationResponse(1, 2, 3);

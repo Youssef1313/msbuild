@@ -17,8 +17,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 {
     public class WhitespacePreservation_Tests
     {
-        [Theory]
-        [InlineData(
+        [TestMethod]
+        [DataRow(
 @"<Project xmlns=`msbuildnamespace`>
 </Project>",
 
@@ -26,7 +26,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
   <ItemGroup />
 </Project>")]
 
-        [InlineData(
+        [DataRow(
 @"<Project xmlns=`msbuildnamespace`>
 
 
@@ -45,8 +45,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             });
         }
 
-        [Theory]
-        [InlineData(
+        [TestMethod]
+        [DataRow(
 @"<Project xmlns=`msbuildnamespace`>
 
   <ItemGroup>
@@ -66,7 +66,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
   </ItemGroup>
 
 </Project>")]
-        [InlineData(
+        [DataRow(
 @"<Project xmlns=`msbuildnamespace`>
 
 
@@ -107,10 +107,10 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             });
         }
 
-        [Theory]
+        [TestMethod]
 
         // no new lines are added
-        [InlineData(
+        [DataRow(
 @"<Project xmlns=`msbuildnamespace`>
   <ItemGroup>
     <i Include=`a` />
@@ -129,7 +129,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 </Project>")]
 
         // new lines between parents are preserved
-        [InlineData(
+        [DataRow(
 @"<Project xmlns=`msbuildnamespace`>
 
 
@@ -158,7 +158,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 </Project>")]
 
         // parent has no indentation but has leading whitespace. Indentation is the whitespace after the last new line in the parent's entire leading whitespace
-        [InlineData(
+        [DataRow(
 @"<Project xmlns=`msbuildnamespace`>
 
   <ItemGroup>
@@ -179,7 +179,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 </Project>")]
 
         // parent has no leading whitespace
-        [InlineData(
+        [DataRow(
 @"<Project xmlns=`msbuildnamespace`>
 
   <ItemGroup>
@@ -200,7 +200,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 </Project>")]
 
         // empty parent has no whitespace in it; append new line and the parent's indentation
-        [InlineData(
+        [DataRow(
 @"<Project xmlns=`msbuildnamespace`>
 
   <ItemGroup>
@@ -224,7 +224,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 </Project>")]
 
         // the initial whitespace in the empty parent gets replaced with newline + parent_indentation
-        [InlineData(
+        [DataRow(
 @"<Project xmlns=`msbuildnamespace`>
 
   <ItemGroup>
@@ -257,8 +257,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
                 (pe, p) => { pe.ItemGroups.ElementAt(1).AddItem("i2", "b"); });
         }
 
-        [Theory]
-        [InlineData(
+        [TestMethod]
+        [DataRow(
 @"<Project xmlns=`msbuildnamespace`>
   <ItemGroup>
     <i Include=`a` />
@@ -272,7 +272,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
   </ItemGroup>
 </Project>")]
 
-        [InlineData(
+        [DataRow(
 @"<Project xmlns=`msbuildnamespace`>
   <ItemGroup>
     <i Include=`a` />
@@ -288,7 +288,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
   </ItemGroup>
 </Project>")]
 
-        [InlineData(
+        [DataRow(
 @"<Project xmlns=`msbuildnamespace`>
   <ItemGroup>
 
@@ -305,7 +305,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
   </ItemGroup>
 </Project>")]
 
-        [InlineData(
+        [DataRow(
 @"<Project xmlns=`msbuildnamespace`>
   <ItemGroup>
 
@@ -330,8 +330,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
                 (pe, p) => { pe.ItemGroups.First().AddItem("i2", "b"); });
         }
 
-        [Theory]
-        [InlineData(
+        [TestMethod]
+        [DataRow(
 @"<Project xmlns=`msbuildnamespace`>
   <ItemGroup>
     <i Include=`a` />
@@ -345,7 +345,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
   </ItemGroup>
 </Project>")]
 
-        [InlineData(
+        [DataRow(
 @"<Project xmlns=`msbuildnamespace`>
   <ItemGroup>
     <i Include=`a` />
@@ -361,7 +361,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
   </ItemGroup>
 </Project>")]
 
-        [InlineData(
+        [DataRow(
 @"<Project xmlns=`msbuildnamespace`>
   <ItemGroup>
 
@@ -378,7 +378,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
   </ItemGroup>
 </Project>")]
 
-        [InlineData(
+        [DataRow(
 @"<Project xmlns=`msbuildnamespace`>
   <ItemGroup>
 
@@ -409,7 +409,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
                 });
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifySaveProjectContainsCorrectLineEndings()
         {
             var project = @"<Project xmlns=`msbuildnamespace`>

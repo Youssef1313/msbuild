@@ -96,7 +96,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Empty project content
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EmptyProject()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -111,7 +111,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set default targets
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetDefaultTargets()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -124,7 +124,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set initialtargets
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetInitialTargets()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -137,7 +137,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set toolsversion
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetToolsVersion()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -150,7 +150,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Setting full path should accept and update relative path
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetFullPath()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -165,7 +165,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// A ProjectRootElement is notionally a "memory mapped" view of a file, and we assume there is only
         /// one per file path, so we must reject attempts to make another.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConstructOverSameFileReturnsSame()
         {
             ProjectRootElement projectXml1 = ProjectRootElement.Create();
@@ -180,7 +180,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// Attempting to load a second ProjectRootElement over the same file path simply
         /// returns the first one. This should work even if one of the paths is not a full path.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConstructOverSameFileReturnsSameEvenWithOneBeingRelativePath()
         {
             ProjectRootElement projectXml1 = ProjectRootElement.Create();
@@ -196,7 +196,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// Attempting to load a second ProjectRootElement over the same file path simply
         /// returns the first one. This should work even if one of the paths is not a full path.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConstructOverSameFileReturnsSameEvenWithOneBeingRelativePath2()
         {
             ProjectRootElement projectXml1 = ProjectRootElement.Create();
@@ -211,7 +211,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Using TextReader
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConstructOverSameFileReturnsSameEvenWithOneBeingRelativePath3()
         {
             string content = "<Project ToolsVersion=\"4.0\">\r\n</Project>";
@@ -230,7 +230,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Using TextReader
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConstructOverSameFileReturnsSameEvenWithOneBeingRelativePath4()
         {
             string content = "<Project ToolsVersion=\"4.0\">\r\n</Project>";
@@ -249,7 +249,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Two ProjectRootElement's over the same file path does not throw (although you shouldn't do it)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetFullPathProjectXmlAlreadyLoaded()
         {
             ProjectRootElement projectXml1 = ProjectRootElement.Create();
@@ -262,7 +262,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Invalid XML
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidXml()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -274,7 +274,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Valid Xml, invalid namespace on the root
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidNamespace()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -287,7 +287,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Invalid root tag
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidRootTag()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -302,7 +302,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Valid Xml, invalid syntax below the root
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidChildBelowRoot()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -319,7 +319,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Root indicates upgrade needed
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NeedsUpgrade()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -334,7 +334,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Valid Xml, invalid namespace below the root
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidNamespaceBelowRoot()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -351,7 +351,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Tests that the namespace error reports are correct
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidNamespaceErrorReport()
         {
             string content = @"
@@ -386,7 +386,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Valid Xml, invalid syntax thrown by child element parsing
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ValidXmlInvalidSyntaxInChildElement()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -406,7 +406,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// Valid Xml, invalid syntax, should not get added to the Xml cache and
         /// thus returned on the second request!
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ValidXmlInvalidSyntaxOpenFromDiskTwice()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -446,7 +446,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Verify that opening project using XmlTextReader does not add it to the Xml cache
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void ValidXmlXmlTextReaderNotCache()
@@ -483,7 +483,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Verify that opening project using the same path adds it to the Xml cache
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ValidXmlXmlReaderCache()
         {
             string content = @"<Project />";
@@ -517,7 +517,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// A simple "system" test: load microsoft.*.targets and verify we don't throw
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LoadCommonTargets()
         {
             using ProjectCollection projectCollection = new ProjectCollection();
@@ -547,7 +547,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Save project loaded from TextReader, without setting FullPath.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidSaveWithoutFullPath()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -562,7 +562,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// Save content with transforms.
         /// The ">" should not turn into "&lt;"
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SaveWithTransforms()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -589,7 +589,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// Save content with transforms to a file.
         /// The ">" should not turn into "&lt;"
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SaveWithTransformsToFile()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -623,7 +623,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Save should create a directory if it is missing
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SaveToNonexistentDirectory()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -650,7 +650,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Save should create a directory if it is missing
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SaveToNonexistentDirectoryRelativePath()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -684,7 +684,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Saving an unnamed project without a path specified should give a nice exception
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SaveUnnamedProject()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -697,7 +697,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// Verifies that the ProjectRootElement.Encoding property getter returns values
         /// that are based on the XML declaration in the file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EncodingGetterBasedOnXmlDeclaration()
         {
             using ProjectRootElementFromString projectRootElementFromStringUTF16 = new(ObjectModelHelpers.CleanupFileContents(@"<?xml version=""1.0"" encoding=""utf-16""?>
@@ -723,7 +723,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// Verifies that ProjectRootElement.Encoding returns the correct value
         /// after reading a file off disk, even if no xml declaration is present.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EncodingGetterBasedOnActualEncodingWhenXmlDeclarationIsAbsent()
         {
             string projectFullPath = FileUtilities.GetTemporaryFileName();
@@ -748,7 +748,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// Verifies that the Save method saves an otherwise unmodified project
         /// with a specified file encoding.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SaveUnmodifiedWithNewEncoding()
         {
             using ProjectRootElementFromString projectRootElementFromString = new(ObjectModelHelpers.CleanupFileContents(@"
@@ -778,7 +778,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// Enumerate over all properties from the project directly.
         /// It should traverse into Choose's.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void PropertiesEnumerator()
         {
             string content = ObjectModelHelpers.CleanupFileContents(
@@ -836,7 +836,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// Enumerate over all items from the project directly.
         /// It should traverse into Choose's.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ItemsEnumerator()
         {
             string content = ObjectModelHelpers.CleanupFileContents(
@@ -981,7 +981,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Build a corrupt solution
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SolutionCorrupt()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -1086,7 +1086,7 @@ Project(""{";
         /// <summary>
         /// Open lots of projects concurrently to try to trigger problems
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConcurrentProjectOpenAndCloseThroughProjectRootElement()
         {
             int iterations = 500;
@@ -1152,7 +1152,7 @@ Project(""{";
         /// <summary>
         /// Tests DeepClone and CopyFrom for ProjectRootElements.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DeepClone()
         {
             var pre = ProjectRootElement.Create();
@@ -1200,7 +1200,7 @@ Project(""{";
         /// <summary>
         /// Tests DeepClone and CopyFrom for ProjectRootElement that contain ProjectExtensions with text inside.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DeepCloneWithProjectExtensionsElementOfText()
         {
             var pre = ProjectRootElement.Create();
@@ -1215,7 +1215,7 @@ Project(""{";
         /// <summary>
         /// Tests DeepClone and CopyFrom for ProjectRootElement that contain ProjectExtensions with xml inside.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DeepCloneWithProjectExtensionsElementOfXml()
         {
             var pre = ProjectRootElement.Create();
@@ -1230,7 +1230,7 @@ Project(""{";
         /// <summary>
         /// Tests DeepClone and CopyFrom when there is metadata expressed as attributes
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DeepCloneWithMetadataAsAttributes()
         {
             var project =
@@ -1275,7 +1275,7 @@ Project(""{";
         /// <summary>
         /// Tests TryOpen when preserveFormatting is the same and different than the cached project.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TryOpenWithPreserveFormatting()
         {
             string project =
@@ -1313,13 +1313,13 @@ Project(""{";
             }
         }
 
-        [Theory]
-        [InlineData(true, false, false)]
-        [InlineData(true, true, true)]
-        [InlineData(false, false, false)]
-        [InlineData(false, true, true)]
-        [InlineData(true, null, true)]
-        [InlineData(false, null, false)]
+        [TestMethod]
+        [DataRow(true, false, false)]
+        [DataRow(true, true, true)]
+        [DataRow(false, false, false)]
+        [DataRow(false, true, true)]
+        [DataRow(true, null, true)]
+        [DataRow(false, null, false)]
         public void ReloadCanSpecifyPreserveFormatting(bool initialPreserveFormatting, bool? reloadShouldPreserveFormatting, bool expectedFormattingAfterReload)
         {
             using (var env = TestEnvironment.Create())
@@ -1351,16 +1351,16 @@ Project(""{";
             }
         }
 
-        [Theory]
+        [TestMethod]
 
         // same content should still dirty the project
-        [InlineData(
+        [DataRow(
 SimpleProject,
 SimpleProject,
 true, false, false)]
 
         // new comment
-        [InlineData(
+        [DataRow(
 @"<Project xmlns=`msbuildnamespace`>
 
   <PropertyGroup>
@@ -1393,7 +1393,7 @@ true, false, false)]
 true, false, true)]
 
         // changed comment
-        [InlineData(
+        [DataRow(
 @"
 <!-- new comment -->
 <Project xmlns=`msbuildnamespace`>
@@ -1429,7 +1429,7 @@ true, false, true)]
 true, false, true)]
 
         // deleted comment
-        [InlineData(
+        [DataRow(
 @"
 <!-- new comment -->
 <Project xmlns=`msbuildnamespace`>
@@ -1462,7 +1462,7 @@ true, false, true)]
 true, false, true)]
 
         // new comments and changed code
-        [InlineData(
+        [DataRow(
 @"<Project xmlns=`msbuildnamespace`>
 
   <PropertyGroup>
@@ -1488,7 +1488,7 @@ true, false, true)]
 true, true, true)]
 
         // commented out code
-        [InlineData(
+        [DataRow(
 @"<Project xmlns=`msbuildnamespace`>
 
   <PropertyGroup>
@@ -1528,7 +1528,7 @@ true, true, true)]
             AssertReload(initialProjectContents, changedProjectContents, versionChanged, msbuildChildrenChanged, xmlChanged, act);
         }
 
-        [Fact]
+        [TestMethod]
         public void ReloadedStateIsResilientToChangesAndDiskRoundtrip()
         {
             var initialProjectContents = ObjectModelHelpers.CleanupFileContents(
@@ -1612,7 +1612,7 @@ true, true, true)]
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ReloadThrowsOnInvalidXmlSyntax()
         {
             var missingClosingTag =
@@ -1647,7 +1647,7 @@ true, true, true)]
             AssertReload(SimpleProject, missingClosingTag, false, false, false, act);
         }
 
-        [Fact]
+        [TestMethod]
         public void ReloadThrowsForInMemoryProjectsWithoutAPath()
         {
             Action<ProjectRootElement, string> act = (p, c) =>
@@ -1664,7 +1664,7 @@ true, true, true)]
             AssertReload(SimpleProject, ComplexProject, false, false, false, act);
         }
 
-        [Fact]
+        [TestMethod]
         public void ReloadFromAPathThrowsOnMissingPath()
         {
             Action<ProjectRootElement, string> act = (p, c) =>
@@ -1683,7 +1683,7 @@ true, true, true)]
             AssertReload(SimpleProject, ComplexProject, false, false, false, act);
         }
 
-        [Fact]
+        [TestMethod]
         public void ReloadFromMemoryWhenProjectIsInMemoryKeepsProjectFileEmpty()
         {
             AssertProjectFileAfterReload(
@@ -1692,7 +1692,7 @@ true, true, true)]
                 (initial, reload, actualFile) => { Assert.Equal(String.Empty, actualFile); });
         }
 
-        [Fact]
+        [TestMethod]
         public void ReloadFromMemoryWhenProjectIsInFileKeepsProjectFile()
         {
             AssertProjectFileAfterReload(
@@ -1701,7 +1701,7 @@ true, true, true)]
                 (initial, reload, actualFile) => { Assert.Equal(initial, actualFile); });
         }
 
-        [Fact]
+        [TestMethod]
         public void ReloadFromFileWhenProjectIsInMemorySetsProjectFile()
         {
             AssertProjectFileAfterReload(
@@ -1710,7 +1710,7 @@ true, true, true)]
                 (initial, reload, actualFile) => { Assert.Equal(reload, actualFile); });
         }
 
-        [Fact]
+        [TestMethod]
         public void ReloadFromFileWhenProjectIsInFileUpdatesProjectFile()
         {
             AssertProjectFileAfterReload(
@@ -1779,7 +1779,7 @@ true, true, true)]
 
         private static string EmptyIfNull(string aString) => aString ?? string.Empty;
 
-        [Fact]
+        [TestMethod]
         public void ReloadThrowsOnInvalidMsBuildSyntax()
         {
             var unknownAttribute =
@@ -1814,7 +1814,7 @@ true, true, true)]
             AssertReload(SimpleProject, unknownAttribute, false, false, false, act);
         }
 
-        [Fact]
+        [TestMethod]
         public void ReloadThrowsByDefaultIfThereAreUnsavedChanges()
         {
             Action<ProjectRootElement, string> act = (p, c) =>
@@ -1833,7 +1833,7 @@ true, true, true)]
             AssertReload(SimpleProject, ComplexProject, false, false, false, act);
         }
 
-        [Fact]
+        [TestMethod]
         public void ReloadCanOverwriteUnsavedChanges()
         {
             Action<ProjectRootElement, string> act = (p, c) =>

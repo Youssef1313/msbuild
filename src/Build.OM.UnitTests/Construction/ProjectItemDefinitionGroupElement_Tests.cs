@@ -19,7 +19,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read project with no item definition groups
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadNone()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -30,7 +30,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read itemdefinitiongroup with unexpected attribute
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidAttribute()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -47,7 +47,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read itemdefinitiongroup with no children
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadNoChildren()
         {
             string content = @"
@@ -66,7 +66,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read basic valid set of itemdefinitiongroups
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadBasic()
         {
             string content = @"
@@ -95,7 +95,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set the condition value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetCondition()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -112,7 +112,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set the Label value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetLabel()
         {
             ProjectRootElement project = ProjectRootElement.Create();

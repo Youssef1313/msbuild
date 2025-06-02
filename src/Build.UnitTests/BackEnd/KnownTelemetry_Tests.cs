@@ -12,7 +12,7 @@ namespace Microsoft.Build.UnitTests.Telemetry;
 
 public class KnownTelemetry_Tests
 {
-    [Fact]
+    [TestMethod]
     public void BuildTelemetryCanBeSetToNull()
     {
         KnownTelemetry.PartialBuildTelemetry = new BuildTelemetry();
@@ -21,7 +21,7 @@ public class KnownTelemetry_Tests
         KnownTelemetry.PartialBuildTelemetry.ShouldBeNull();
     }
 
-    [Fact]
+    [TestMethod]
     public void BuildTelemetryCanBeSet()
     {
         BuildTelemetry buildTelemetry = new BuildTelemetry();
@@ -30,7 +30,7 @@ public class KnownTelemetry_Tests
         KnownTelemetry.PartialBuildTelemetry.ShouldBeSameAs(buildTelemetry);
     }
 
-    [Fact]
+    [TestMethod]
     public void BuildTelemetryConstructedHasNoProperties()
     {
         BuildTelemetry buildTelemetry = new BuildTelemetry();
@@ -52,7 +52,7 @@ public class KnownTelemetry_Tests
         buildTelemetry.GetProperties().ShouldBeEmpty();
     }
 
-    [Fact]
+    [TestMethod]
     public void BuildTelemetryCreateProperProperties()
     {
         BuildTelemetry buildTelemetry = new BuildTelemetry();
@@ -93,7 +93,7 @@ public class KnownTelemetry_Tests
         properties["InnerBuildDurationInMilliseconds"] = (finishedAt - innerStartAt).TotalMilliseconds.ToString(CultureInfo.InvariantCulture);
     }
 
-    [Fact]
+    [TestMethod]
     public void BuildTelemetryHandleNullsInRecordedTimes()
     {
         BuildTelemetry buildTelemetry = new BuildTelemetry();

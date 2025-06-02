@@ -47,9 +47,9 @@ public class TerminalLoggerConfiguration_Tests : IDisposable
         _env.Dispose();
     }
 
-    [Theory]
-    [InlineData("on")]
-    [InlineData("true")]
+    [TestMethod]
+    [DataRow("on")]
+    [DataRow("true")]
     public void TerminalLoggerOn(string tlValue)
     {
         string output = RunnerUtilities.ExecMSBuild($"{_cmd} -tl:{tlValue}", out bool success);
@@ -75,9 +75,9 @@ public class TerminalLoggerConfiguration_Tests : IDisposable
         ShouldBeTerminalLog(output);
     }
 
-    [Theory]
-    [InlineData("")]
-    [InlineData("auto")]
+    [TestMethod]
+    [DataRow("")]
+    [DataRow("auto")]
     public void TerminalLoggerWithTlAutoIsOff(string tlValue)
     {
         string output = RunnerUtilities.ExecMSBuild($"{_cmd} -tl:{tlValue}", out bool success);
@@ -105,7 +105,7 @@ public class TerminalLoggerConfiguration_Tests : IDisposable
         ShouldNotBeTerminalLog(output);
     }
 
-    [Fact]
+    [TestMethod]
     public void TerminalLoggerDefaultByEnv()
     {
         _env.SetEnvironmentVariable("DOTNET_CLI_CONFIGURE_MSBUILD_TERMINAL_LOGGER", bool.TrueString);
@@ -132,9 +132,9 @@ public class TerminalLoggerConfiguration_Tests : IDisposable
         ShouldBeTerminalLog(output);
     }
 
-    [Theory]
-    [InlineData("MSBUILDLIVELOGGER")]
-    [InlineData("MSBUILDTERMINALLOGGER")]
+    [TestMethod]
+    [DataRow("MSBUILDLIVELOGGER")]
+    [DataRow("MSBUILDTERMINALLOGGER")]
     public void TerminalLoggerOnByEnv(string envVarSource)
     {
         _env.SetEnvironmentVariable(envVarSource, bool.TrueString);
@@ -161,9 +161,9 @@ public class TerminalLoggerConfiguration_Tests : IDisposable
         ShouldBeTerminalLog(output);
     }
 
-    [Theory]
-    [InlineData("on")]
-    [InlineData("true")]
+    [TestMethod]
+    [DataRow("on")]
+    [DataRow("true")]
     public void TerminalLoggerDefaultOn(string defaultValue)
     {
         string output = RunnerUtilities.ExecMSBuild($"{_cmd} -tlp:default={defaultValue}", out bool success);
@@ -189,9 +189,9 @@ public class TerminalLoggerConfiguration_Tests : IDisposable
         ShouldBeTerminalLog(output);
     }
 
-    [Theory]
-    [InlineData("off")]
-    [InlineData("false")]
+    [TestMethod]
+    [DataRow("off")]
+    [DataRow("false")]
     public void TerminalLoggerDefaultOff(string defaultValue)
     {
         string output = RunnerUtilities.ExecMSBuild($"{_cmd} -tlp:default={defaultValue} -v:m", out bool success);
@@ -219,9 +219,9 @@ public class TerminalLoggerConfiguration_Tests : IDisposable
         ShouldNotBeTerminalLog(output);
     }
 
-    [Theory]
-    [InlineData("1")]
-    [InlineData("0")]
+    [TestMethod]
+    [DataRow("1")]
+    [DataRow("0")]
     public void TerminalLoggerOnInvalidProjectBuild(string msbuildinprocnodeState)
     {
         _ = _env.SetEnvironmentVariable("MSBUILDNOINPROCNODE", msbuildinprocnodeState);

@@ -16,7 +16,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests the basic functionality.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Basic()
         {
             AssignCulture t = new AssignCulture();
@@ -35,7 +35,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Any pre-existing Culture attribute on the item is to be ignored
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CultureAttributePrecedence()
         {
             AssignCulture t = new AssignCulture();
@@ -57,7 +57,7 @@ namespace Microsoft.Build.UnitTests
         /// If the incoming item has a 'Culture' attribute already, but that culture is invalid,
         /// we still overwrite that culture.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CultureAttributePrecedenceWithBogusCulture()
         {
             AssignCulture t = new AssignCulture();
@@ -78,7 +78,7 @@ namespace Microsoft.Build.UnitTests
         /// Make sure that attributes set on input items are forwarded to output items.
         /// This applies to every attribute except for the one pointed to by CultureAttribute.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AttributeForwarding()
         {
             AssignCulture t = new AssignCulture();
@@ -101,7 +101,7 @@ namespace Microsoft.Build.UnitTests
         /// Test the case where an item has no embedded culture. For example:
         /// "MyResource.resx"
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NoCulture()
         {
             AssignCulture t = new AssignCulture();
@@ -120,7 +120,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Test the case where an item has no extension. For example "MyResource".
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NoExtension()
         {
             AssignCulture t = new AssignCulture();
@@ -140,7 +140,7 @@ namespace Microsoft.Build.UnitTests
         ///  Test the case where an item has two dots embedded, but otherwise looks
         /// like a well-formed item.For example "MyResource..resx".
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DoubleDot()
         {
             AssignCulture t = new AssignCulture();
@@ -161,7 +161,7 @@ namespace Microsoft.Build.UnitTests
         /// is a resource and form that happen to have an embedded culture. That is, don't assign a
         /// culture to these.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Regress283991()
         {
             AssignCulture t = new AssignCulture();
@@ -182,11 +182,11 @@ namespace Microsoft.Build.UnitTests
         /// https://docs.microsoft.com/en-gb/windows/desktop/Intl/pseudo-locales
         /// </summary>
         /// <param name="culture"></param>
-        [Theory]
-        [InlineData("qps-ploc")]
-        [InlineData("qps-plocm")]
-        [InlineData("qps-ploca")]
-        [InlineData("qps-Latn-x-sh")] // Windows 10+
+        [TestMethod]
+        [DataRow("qps-ploc")]
+        [DataRow("qps-plocm")]
+        [DataRow("qps-ploca")]
+        [DataRow("qps-Latn-x-sh")] // Windows 10+
         public void PseudoLocalization(string culture)
         {
             AssignCulture t = new AssignCulture();
@@ -206,9 +206,9 @@ namespace Microsoft.Build.UnitTests
         /// Testing that certain aliases are considered valid cultures. Regression test for https://github.com/dotnet/msbuild/issues/3897.
         /// </summary>
         /// <param name="culture"></param>
-        [Theory]
-        [InlineData("zh-TW")]
-        [InlineData("zh-MO")]
+        [TestMethod]
+        [DataRow("zh-TW")]
+        [DataRow("zh-MO")]
         public void SupportAliasedCultures(string culture)
         {
             AssignCulture t = new AssignCulture();
@@ -225,8 +225,8 @@ namespace Microsoft.Build.UnitTests
         }
 
         [DotNetOnlyTheory(additionalMessage: "These cultures are not returned via Culture api on net472.")]
-        [InlineData("sh-BA")]
-        [InlineData("shi-MA")]
+        [DataRow("sh-BA")]
+        [DataRow("shi-MA")]
         public void AliasedCultures_SupportedOnNetCore(string culture)
         {
             AssignCulture t = new AssignCulture();
@@ -263,7 +263,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Any pre-existing Culture attribute on the item is to be respected
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CultureMetaDataShouldBeRespected()
         {
             AssignCulture t = new AssignCulture();
@@ -284,7 +284,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Any pre-existing Culture attribute on the item is not to be respected, because culture is not set
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CultureMetaDataShouldNotBeRespected()
         {
             AssignCulture t = new AssignCulture();

@@ -79,22 +79,22 @@ namespace Microsoft.Build.Engine.UnitTests
         /// <summary>
         /// Verifies that a given element name shows up in a profiled MSBuild project
         /// </summary>
-        [InlineData("Target", "<Target Name='test'/>")]
-        [InlineData("Message",
+        [DataRow("Target", "<Target Name='test'/>")]
+        [DataRow("Message",
 @"<Target Name='echo'>
     <Message text='echo!'/>
 </Target>")]
-        [InlineData("appname",
+        [DataRow("appname",
 @"<Target Name='test'/>
 <PropertyGroup>
     <appname>Hello</appname>
 </PropertyGroup>")]
-        [InlineData("CSFile",
+        [DataRow("CSFile",
 @"<Target Name='test'/>
 <ItemGroup>
     <CSFile Include='file.cs'/>
 </ItemGroup>")]
-        [Theory]
+        [TestMethod]
         public void VerifySimpleProfiledData(string elementName, string body)
         {
             string contents = $@"
@@ -111,22 +111,22 @@ namespace Microsoft.Build.Engine.UnitTests
         /// <summary>
         /// Verifies that a given element name shows up in a profiled MSBuild project
         /// </summary>
-        [InlineData("Target", "<Target Name='test'/>")]
-        [InlineData("Message",
+        [DataRow("Target", "<Target Name='test'/>")]
+        [DataRow("Message",
             @"<Target Name='echo'>
     <Message text='echo!'/>
 </Target>")]
-        [InlineData("appname",
+        [DataRow("appname",
             @"<Target Name='test'/>
 <PropertyGroup>
     <appname>Hello</appname>
 </PropertyGroup>")]
-        [InlineData("CSFile",
+        [DataRow("CSFile",
             @"<Target Name='test'/>
 <ItemGroup>
     <CSFile Include='file.cs'/>
 </ItemGroup>")]
-        [Theory]
+        [TestMethod]
         public void VerifySimpleProfiledDataWithoutProjectLoadSetting(string elementName, string body)
         {
             string contents = $@"
@@ -140,7 +140,7 @@ namespace Microsoft.Build.Engine.UnitTests
             Assert.Contains(profiledElements, location => location.ElementName == elementName);
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyProfiledData()
         {
             var result = BuildAndGetProfilerResult(SpecData);
@@ -173,7 +173,7 @@ namespace Microsoft.Build.Engine.UnitTests
             Assert.Single(profiledElements.Where(location => location.ElementName == "Target"));
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyProfiledGlobData()
         {
             string contents = @"
@@ -203,7 +203,7 @@ namespace Microsoft.Build.Engine.UnitTests
             Assert.Equal(2, totalGlobLocation.NumberOfHits);
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyParentIdData()
         {
             string contents = @"
@@ -243,7 +243,7 @@ namespace Microsoft.Build.Engine.UnitTests
             Assert.Equal(target.Id, messageTarget.ParentId);
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyIdsSanity()
         {
             var result = BuildAndGetProfilerResult(SpecData);

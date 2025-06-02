@@ -120,7 +120,7 @@ namespace Microsoft.NET.StringTools.Tests
         /// 2. The string is no longer retrievable after all strong GC refs are gone.
         /// 3. The cache completely removes the handle after calling Scavenge on it.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RetainsStringUntilCollected()
         {
             // Add a string to the cache using a non-inlinable method to make sure it's not reachable from a GC root.
@@ -157,7 +157,7 @@ namespace Microsoft.NET.StringTools.Tests
         /// <summary>
         /// Same as RetainsStringUntilCollected but with multiple strings sharing the same hash code.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RetainsLastStringWithGivenHashCode()
         {
             // Add 3 strings with the same hash code.

@@ -23,7 +23,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Test the simple case where we have a string parameter and we want to log that.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuildTaskSimpleCodeFactory()
         {
             string projectFileContents = @"
@@ -53,7 +53,7 @@ namespace Microsoft.Build.UnitTests
         /// Microsoft.Build.Tasks.v4.0.dll is expected to NOT be in MSBuildToolsPath, that
         /// we will redirect under the covers to use the current tasks instead.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuildTaskSimpleCodeFactory_RedirectFrom4()
         {
             string projectFileContents = @"
@@ -84,7 +84,7 @@ namespace Microsoft.Build.UnitTests
         /// Microsoft.Build.Tasks.v12.0.dll is expected to NOT be in MSBuildToolsPath, that
         /// we will redirect under the covers to use the current tasks instead.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuildTaskSimpleCodeFactory_RedirectFrom12()
         {
             string projectFileContents = @"
@@ -116,7 +116,7 @@ namespace Microsoft.Build.UnitTests
         /// being in MSBuildToolsPath anymore, that this does NOT affect full fusion AssemblyNames --
         /// it's picked up from the GAC, where it is anyway, so there's no need to redirect.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuildTaskSimpleCodeFactory_NoAssemblyNameRedirect()
         {
             string projectFileContents = @"
@@ -144,7 +144,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Test the simple case where we have a string parameter and we want to log that.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyRequiredAttribute()
         {
             string projectFileContents = @"
@@ -171,7 +171,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify we get an error if a runtime exception is logged
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RuntimeException()
         {
             string projectFileContents = @"
@@ -199,7 +199,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify we get an error if a the languages attribute is set but it is empty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EmptyLanguage()
         {
             string projectFileContents = @"
@@ -227,7 +227,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify we get an error if a the Type attribute is set but it is empty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EmptyType()
         {
             string projectFileContents = @"
@@ -255,7 +255,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify we get an error if a the source attribute is set but it is empty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EmptySource()
         {
             string projectFileContents = @"
@@ -283,10 +283,10 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify we get an error if a reference is missing an include attribute is set but it is empty
         /// </summary>
-        [Theory]
-        [InlineData("")]
-        [InlineData("Include=\"\"")]
-        [InlineData("Include=\" \"")]
+        [TestMethod]
+        [DataRow("")]
+        [DataRow("Include=\"\"")]
+        [DataRow("Include=\" \"")]
         public void EmptyReferenceInclude(string includeSetting)
         {
             string taskName = "CustomTaskFromCodeFactory_EmptyReferenceInclude";
@@ -316,7 +316,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify we get an error if a Using statement is missing an namespace attribute is set but it is empty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EmptyUsingNamespace()
         {
             string projectFileContents = @"
@@ -345,7 +345,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify we get pass even if the reference is not a full path
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReferenceNotPath()
         {
             string projectFileContents = @"
@@ -373,7 +373,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify we get an error a reference has strange chars
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReferenceInvalidChars()
         {
             string projectFileContents = @"
@@ -402,7 +402,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify we get an error if a using has invalid chars
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void UsingInvalidChars()
         {
             string projectFileContents = @"
@@ -430,7 +430,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify we get an error if the sources points to an invalid file
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SourcesInvalidFile()
         {
             string tempFileName = "Moose_" + Guid.NewGuid().ToString() + ".cs";
@@ -459,7 +459,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify we get an error if a the code element is missing
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MissingCodeElement()
         {
             string projectFileContents = @"
@@ -483,7 +483,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Test the case where we have adding a using statement
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuildTaskSimpleCodeFactoryTestExtraUsing()
         {
             string projectFileContents = @"
@@ -513,7 +513,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify setting the output tag on the parameter causes it to be an output from the perspective of the targets
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuildTaskDateCodeFactory()
         {
             string projectFileContents = @"
@@ -544,7 +544,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify that the vb language works and that creating the execute method also works
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MethodImplmentationVB()
         {
             string projectFileContents = @"
@@ -576,7 +576,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify that System does not need to be passed in as a extra reference when targeting vb
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuildTaskSimpleCodeFactoryTestSystemVB()
         {
             string projectFileContents = @"
@@ -605,7 +605,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify that System does not need to be passed in as a extra reference when targeting c#
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuildTaskSimpleCodeFactoryTestSystemCS()
         {
             string projectFileContents = @"
@@ -634,7 +634,7 @@ namespace Microsoft.Build.UnitTests
         /// Make sure we can pass in extra references than the automatic ones. For example the c# compiler does not pass in
         /// system.dll. So lets test that case
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuildTaskSimpleCodeFactoryTestExtraReferenceCS()
         {
             string netFrameworkDirectory = ToolLocationHelper.GetPathToDotNetFrameworkReferenceAssemblies(TargetDotNetFrameworkVersion.Version45);
@@ -679,7 +679,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// jscript .net works
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MethodImplementationJScriptNet()
         {
             if (!CodeDomProvider.IsDefinedLanguage("js"))
@@ -718,7 +718,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify we can set a code type of Method which expects us to override the execute method entirely.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MethodImplementation()
         {
             string projectFileContents = @"
@@ -751,7 +751,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify we can set the type to Class and this expects an entire class to be entered into the code tag
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ClassImplementationTest()
         {
             string projectFileContents = @"
@@ -817,7 +817,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify we can set the type to Class and this expects an entire class to be entered into the code tag
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ClassImplementationTestDoesNotInheritFromITask()
         {
             string projectFileContents = @"
@@ -874,7 +874,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify we get an error if a the Type attribute is set but it is empty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MultipleCodeElements()
         {
             string projectFileContents = @"
@@ -905,7 +905,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify we get an error if a the Type attribute is set but it is empty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReferenceNestedInCode()
         {
             string projectFileContents = @"
@@ -938,7 +938,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify we get an error if there is an unknown element in the task tag
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void UnknownElementInTask()
         {
             string projectFileContents = @"
@@ -967,7 +967,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify we can set a source file location and this will be read in and used.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ClassSourcesTest()
         {
             string sourceFileContent = @"
@@ -1049,7 +1049,7 @@ namespace Microsoft.Build.UnitTests
         /// Code factory test where the TMP directory does not exist.
         /// See https://github.com/dotnet/msbuild/issues/328 for details.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuildTaskSimpleCodeFactoryTempDirectoryDoesntExist()
         {
             string projectFileContents = @"
@@ -1099,7 +1099,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Test the simple case where we have a string parameter and we want to log that.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RedundantMSBuildReferences()
         {
             string projectFileContents = @"
@@ -1126,7 +1126,7 @@ namespace Microsoft.Build.UnitTests
             mockLogger.AssertLogContains("Hello, World!");
         }
 
-        [Fact]
+        [TestMethod]
         public void EmbedsGeneratedFromSourceFileInBinlog()
         {
             string taskName = "HelloTask";
@@ -1151,7 +1151,7 @@ namespace Microsoft.Build.UnitTests
                 FactoryType.CodeTaskFactory, taskName, sourceContent, true);
         }
 
-        [Fact]
+        [TestMethod]
         public void EmbedsGeneratedFromSourceFileInBinlogWhenFailsToCompile()
         {
             string taskName = "HelloTask";
@@ -1169,7 +1169,7 @@ namespace Microsoft.Build.UnitTests
                 FactoryType.CodeTaskFactory, taskName, sourceContent, false);
         }
 
-        [Fact]
+        [TestMethod]
         public void EmbedsGeneratedFileInBinlog()
         {
             string taskXml = @"
@@ -1185,7 +1185,7 @@ namespace Microsoft.Build.UnitTests
                 FactoryType.CodeTaskFactory, "HelloTask", taskXml, true);
         }
 
-        [Fact]
+        [TestMethod]
         public void EmbedsGeneratedFileInBinlogWhenFailsToCompile()
         {
             string taskXml = @"
@@ -1204,7 +1204,7 @@ namespace Microsoft.Build.UnitTests
 #else
     public sealed class CodeTaskFactoryTests
     {
-        [Fact]
+        [TestMethod]
         public void CodeTaskFactoryNotSupported()
         {
             string projectFileContents = @"

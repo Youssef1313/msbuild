@@ -31,7 +31,7 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         ///  msbuildToolsets element is empty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MSBuildToolsetsTest_EmptyElement()
         {
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
@@ -55,7 +55,7 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         ///  tests if ToolsetConfigurationReaderTests is successfully initialized from the config file
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MSBuildToolsetsTest_Basic()
         {
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
@@ -91,7 +91,7 @@ namespace Microsoft.Build.UnitTests.Definition
         ///  Tests if ToolsetConfigurationReaderTests is successfully initialized from the config file when msbuildOVerrideTasksPath is set.
         ///  Also verify the msbuildOverrideTasksPath is properly read in.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MSBuildToolsetsTest_Basic2()
         {
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
@@ -117,7 +117,7 @@ namespace Microsoft.Build.UnitTests.Definition
         ///  Tests if ToolsetConfigurationReaderTests is successfully initialized from the config file and that msbuildOVerrideTasksPath
         ///  is correctly read in when the value is empty.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MSBuildToolsetsTest_Basic3()
         {
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
@@ -142,7 +142,7 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         ///  tests if ToolsetConfigurationReaderTests is successfully initialized from the config file
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MSBuildToolsetsTest_BasicWithOtherConfigEntries()
         {
             // NOTE: for some reason, <configSections> MUST be the first element under <configuration>
@@ -195,7 +195,7 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// name attribute is missing from toolset element
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ToolsVersionTest_NameNotSpecified()
         {
             Assert.Throws<ConfigurationErrorsException>(() =>
@@ -223,7 +223,7 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         ///  More than 1 toolset element with the same name
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ToolsVersionTest_MultipleElementsWithSameName()
         {
             Assert.Throws<ConfigurationErrorsException>(() =>
@@ -251,7 +251,7 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// empty toolset element
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ToolsVersionTest_EmptyElement()
         {
             Assert.Throws<ConfigurationErrorsException>(() =>
@@ -281,7 +281,7 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// only 1 toolset is specified
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ToolsVersionTest_SingleElement()
         {
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
@@ -318,7 +318,7 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         ///  name attribute is missing
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void PropertyTest_NameNotSpecified()
         {
             Assert.Throws<ConfigurationErrorsException>(() =>
@@ -343,7 +343,7 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// value attribute is missing
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void PropertyTest_ValueNotSpecified()
         {
             Assert.Throws<ConfigurationErrorsException>(() =>
@@ -368,7 +368,7 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// more than 1 property element with the same name
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void PropertyTest_MultipleElementsWithSameName()
         {
             Assert.Throws<ConfigurationErrorsException>(() =>
@@ -394,7 +394,7 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         ///  property element is an empty element
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void PropertyTest_EmptyElement()
         {
             Assert.Throws<ConfigurationErrorsException>(() =>
@@ -424,7 +424,7 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// more than 1 property element specified
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void PropertyTest_MultipleElement()
         {
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
@@ -459,7 +459,7 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// tests GetElement(string name) function in propertycollection class
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void PropertyTest_GetValueByName()
         {
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
@@ -496,7 +496,7 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         ///  Tests multiple extensions paths from the config file, specified for multiple OSes
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExtensionPathsTest_Basic1()
         {
             // NOTE: for some reason, <configSections> MUST be the first element under <configuration>
@@ -594,7 +594,7 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// more than 1 searchPaths elements with the same OS
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExtensionsPathsTest_MultipleElementsWithSameOS()
         {
             Assert.Throws<ConfigurationErrorsException>(() =>
@@ -629,7 +629,7 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// more than value is element found for a the same extensions path property name+os
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExtensionsPathsTest_MultipleElementsWithSamePropertyNameForSameOS()
         {
             Assert.Throws<ConfigurationErrorsException>(() =>

@@ -158,9 +158,9 @@ BuildEngine5.BuildProjectFilesInParallel(
             _env.Dispose();
         }
 
-        [Theory]
-        [InlineData(BuildResultCode.Success, new string[] { })]
-        [InlineData(BuildResultCode.Success, new[] { "BuildSelf" })]
+        [TestMethod]
+        [DataRow(BuildResultCode.Success, new string[] { })]
+        [DataRow(BuildResultCode.Success, new[] { "BuildSelf" })]
         public void CacheAndUndeclaredReferenceEnforcementShouldAcceptSelfReferences(BuildResultCode expectedBuildResult, string[] targets)
         {
             AssertBuild(targets,
@@ -172,7 +172,7 @@ BuildEngine5.BuildProjectFilesInParallel(
                 });
         }
 
-        [Fact]
+        [TestMethod]
         public void CacheAndUndeclaredReferenceEnforcementShouldAcceptCallTarget()
         {
             AssertBuild(new[] { "CallTarget" },
@@ -184,13 +184,13 @@ BuildEngine5.BuildProjectFilesInParallel(
                 });
         }
 
-        [Fact(Skip = "https://github.com/dotnet/msbuild/issues/3876")]
+        [TestMethod(Skip = "https://github.com/dotnet/msbuild/issues/3876")]
         public void CacheEnforcementShouldFailWhenReferenceWasNotPreviouslyBuiltAndOnContinueOnError()
         {
             CacheEnforcementImpl(addContinueOnError: true);
         }
 
-        [Fact]
+        [TestMethod]
         public void CacheEnforcementShouldFailWhenReferenceWasNotPreviouslyBuiltWithoutContinueOnError()
         {
             CacheEnforcementImpl(addContinueOnError: false);
@@ -220,7 +220,7 @@ BuildEngine5.BuildProjectFilesInParallel(
                 addContinueOnError: addContinueOnError);
         }
 
-        [Fact]
+        [TestMethod]
         public void IsolationRelatedMessagesShouldNotBePresentInNonIsolatedBuilds()
         {
             AssertBuild(
@@ -242,7 +242,7 @@ BuildEngine5.BuildProjectFilesInParallel(
                 isolateProjects: ProjectIsolationMode.False);
         }
 
-        [Fact]
+        [TestMethod]
         public void IsolationRelatedMessageShouldBePresentInIsolatedBuildsWithMessaging()
         {
             AssertBuild(
@@ -263,7 +263,7 @@ BuildEngine5.BuildProjectFilesInParallel(
                 isolateProjects: ProjectIsolationMode.MessageUponIsolationViolation);
         }
 
-        [Fact]
+        [TestMethod]
         public void UndeclaredReferenceBuildResultNotPresentInOutputCache()
         {
             // Create the graph 1 -> 2 -> 3, where 2 is a declared project reference
@@ -365,11 +365,11 @@ BuildEngine5.BuildProjectFilesInParallel(
             rootBuildResults[0]["BuildDeclaredReference"].Items.Length.ShouldBe(0);
         }
 
-        [Theory]
-        [InlineData("BuildDeclaredReference")]
-        [InlineData("BuildDeclaredReferenceViaTask")]
-        [InlineData("BuildUndeclaredReference")]
-        [InlineData("BuildUndeclaredReferenceViaTask")]
+        [TestMethod]
+        [DataRow("BuildDeclaredReference")]
+        [DataRow("BuildDeclaredReferenceViaTask")]
+        [DataRow("BuildUndeclaredReference")]
+        [DataRow("BuildUndeclaredReferenceViaTask")]
         public void EnforcementsCanBeSkipped(string targetName)
         {
             AssertBuild(
@@ -390,9 +390,9 @@ BuildEngine5.BuildProjectFilesInParallel(
                 excludeReferencesFromConstraints: true);
         }
 
-        [Theory]
-        [InlineData("BuildDeclaredReference")]
-        [InlineData("BuildDeclaredReferenceViaTask")]
+        [TestMethod]
+        [DataRow("BuildDeclaredReference")]
+        [DataRow("BuildDeclaredReferenceViaTask")]
         public void CacheEnforcementShouldAcceptPreviouslyBuiltReferences(string targetName)
         {
             AssertBuild(new[] { targetName },
@@ -405,11 +405,11 @@ BuildEngine5.BuildProjectFilesInParallel(
                 buildDeclaredReference: true);
         }
 
-        [Theory]
-        [InlineData(false, "BuildUndeclaredReference")]
-        // [InlineData(false, "BuildUndeclaredReferenceViaTask")] https://github.com/dotnet/msbuild/issues/4385
-        [InlineData(true, "BuildUndeclaredReference")]
-        // [InlineData(true, "BuildUndeclaredReferenceViaTask")] https://github.com/dotnet/msbuild/issues/4385
+        [TestMethod]
+        [DataRow(false, "BuildUndeclaredReference")]
+        // [DataRow(false, "BuildUndeclaredReferenceViaTask")] https://github.com/dotnet/msbuild/issues/4385
+        [DataRow(true, "BuildUndeclaredReference")]
+        // [DataRow(true, "BuildUndeclaredReferenceViaTask")] https://github.com/dotnet/msbuild/issues/4385
         public void UndeclaredReferenceEnforcementShouldFailOnUndeclaredReference(bool addContinueOnError, string targetName)
         {
             AssertBuild(new[] { targetName },
@@ -424,9 +424,9 @@ BuildEngine5.BuildProjectFilesInParallel(
                 addContinueOnError: addContinueOnError);
         }
 
-        [Theory]
-        [InlineData("BuildUndeclaredReference")]
-        // [InlineData("BuildUndeclaredReferenceViaTask")] https://github.com/dotnet/msbuild/issues/4385
+        [TestMethod]
+        [DataRow("BuildUndeclaredReference")]
+        // [DataRow("BuildUndeclaredReferenceViaTask")] https://github.com/dotnet/msbuild/issues/4385
         public void UndeclaredReferenceEnforcementShouldFailOnPreviouslyBuiltButUndeclaredReferences(string targetName)
         {
             AssertBuild(new[] { targetName },
@@ -483,8 +483,8 @@ BuildEngine5.BuildProjectFilesInParallel(
             }
         }
 
-        [Theory]
-        [MemberData(nameof(UndeclaredReferenceEnforcementShouldNormalizeFilePathsTestData))]
+        [TestMethod]
+        [DynamicData(nameof(UndeclaredReferenceEnforcementShouldNormalizeFilePathsTestData))]
         public void UndeclaredReferenceEnforcementShouldNormalizeFilePaths(Func<string, string> projectReferenceModifier, Func<string, string> msbuildProjectModifier, string targetName)
         {
             AssertBuild(new[] { targetName },
@@ -561,7 +561,7 @@ BuildEngine5.BuildProjectFilesInParallel(
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void SkippedTargetsShouldNotTriggerCacheMissEnforcement()
         {
             var referenceFile = _env.CreateFile(

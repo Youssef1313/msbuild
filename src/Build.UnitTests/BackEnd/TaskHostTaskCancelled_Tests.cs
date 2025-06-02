@@ -17,7 +17,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Basic test of the constructor.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestConstructor()
         {
             TaskHostTaskCancelled cancelled = new TaskHostTaskCancelled();
@@ -26,7 +26,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Basic test of serialization / deserialization.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestTranslation()
         {
             TaskHostTaskCancelled cancelled = new TaskHostTaskCancelled();

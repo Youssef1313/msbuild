@@ -27,7 +27,7 @@ namespace Microsoft.Build.UnitTests
          *
          * Make sure that attributes set on input items are forwarded to output items.
          */
-        [Fact]
+        [TestMethod]
         public void AttributeForwarding()
         {
             RemoveDir t = new RemoveDir();
@@ -44,7 +44,7 @@ namespace Microsoft.Build.UnitTests
             Directory.Exists(t.RemovedDirectories[0].ItemSpec).ShouldBeFalse();
         }
 
-        [Fact]
+        [TestMethod]
         public void SimpleDelete()
         {
             using (TestEnvironment env = TestEnvironment.Create(_output))
@@ -92,7 +92,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Regression test: https://github.com/dotnet/msbuild/issues/7563
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DeleteEmptyDirectory_WarnsAndContinues()
         {
 

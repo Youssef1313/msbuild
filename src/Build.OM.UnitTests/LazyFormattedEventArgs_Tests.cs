@@ -11,13 +11,14 @@ namespace Microsoft.Build.UnitTests.Framework
     /// <summary>
     /// Tests for LazyFormattedEventArgs
     /// </summary>
+    [TestClass]
     public class LazyFormattedEventArgs_Tests
     {
 #if FEATURE_CODETASKFACTORY
         /// <summary>
         /// Don't crash when task logs with too few format markers
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DoNotCrashOnInvalidFormatExpression()
         {
             string content = @"

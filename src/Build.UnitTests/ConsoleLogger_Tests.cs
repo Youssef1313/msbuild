@@ -138,7 +138,7 @@ namespace Microsoft.Build.UnitTests
         /// project name for project started event and the target started event.
         /// Test for BUG 579935
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestEmptyProjectNameForTargetStarted()
         {
             Microsoft.Build.Evaluation.Project project = new Microsoft.Build.Evaluation.Project();
@@ -172,7 +172,7 @@ namespace Microsoft.Build.UnitTests
         /// Make sure the first message after a project started event prints out the target name. This was annoying a lot of people when there were messages right after the project
         /// started event but there was no target printed out.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestTargetAfterProjectStarted()
         {
             SimulatedConsole sc = new SimulatedConsole();
@@ -183,7 +183,7 @@ namespace Microsoft.Build.UnitTests
             sc.ToString().ShouldContain("XXX:");
         }
 
-        [Fact]
+        [TestMethod]
         public void WarningMessage()
         {
             using var env = TestEnvironment.Create(_output);
@@ -223,7 +223,7 @@ namespace Microsoft.Build.UnitTests
             sc.ToString().ShouldContain("source_of_warning : warning : Hello from project 2 [" + project.ProjectFile + "::Number=2]");
         }
 
-        [Fact]
+        [TestMethod]
         public void ErrorMessage()
         {
             using var env = TestEnvironment.Create(_output);
@@ -264,9 +264,9 @@ namespace Microsoft.Build.UnitTests
             sc.ToString().ShouldContain("source_of_error : error : Hello from project 2 [" + project.ProjectFile + "::Number=2]");
         }
 
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         public void ErrorMessageWithMultiplePropertiesInMessage(bool includeEvaluationPropertiesAndItems)
         {
             using var env = TestEnvironment.Create(_output);
@@ -342,7 +342,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify that on minimal verbosity the console logger does not log the target names.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestNoTargetNameOnMinimal()
         {
             SimulatedConsole sc = new SimulatedConsole();
@@ -359,7 +359,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Make sure if a target has no messages logged that its started and finished events show up on detailed but not normal.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EmptyTargetsOnDetailedButNotNormal()
         {
             SimulatedConsole sc = new SimulatedConsole();
@@ -403,7 +403,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Test a number of cases where difference values from showcommandline are used with normal verbosity
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ShowCommandLineWithNormalVerbosity()
         {
             string command = "echo a";
@@ -447,7 +447,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// We should not crash when given a null message, etc.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NullEventFields()
         {
             EventSourceSink es = new EventSourceSink();
@@ -476,7 +476,7 @@ namespace Microsoft.Build.UnitTests
             // No exception raised
         }
 
-        [Fact]
+        [TestMethod]
         public void NullEventFieldsParallel()
         {
             EventSourceSink es = new EventSourceSink();
@@ -532,36 +532,36 @@ namespace Microsoft.Build.UnitTests
             // No exception raised
         }
 
-        [InlineData(LoggerVerbosity.Quiet, LoggerVerbosity.Quiet, true)]
-        [InlineData(LoggerVerbosity.Quiet, LoggerVerbosity.Minimal, false)]
-        [InlineData(LoggerVerbosity.Quiet, LoggerVerbosity.Normal, false)]
-        [InlineData(LoggerVerbosity.Quiet, LoggerVerbosity.Detailed, false)]
-        [InlineData(LoggerVerbosity.Quiet, LoggerVerbosity.Diagnostic, false)]
+        [DataRow(LoggerVerbosity.Quiet, LoggerVerbosity.Quiet, true)]
+        [DataRow(LoggerVerbosity.Quiet, LoggerVerbosity.Minimal, false)]
+        [DataRow(LoggerVerbosity.Quiet, LoggerVerbosity.Normal, false)]
+        [DataRow(LoggerVerbosity.Quiet, LoggerVerbosity.Detailed, false)]
+        [DataRow(LoggerVerbosity.Quiet, LoggerVerbosity.Diagnostic, false)]
         // Minimal should return true for Quiet and Minimal
-        [InlineData(LoggerVerbosity.Minimal, LoggerVerbosity.Quiet, true)]
-        [InlineData(LoggerVerbosity.Minimal, LoggerVerbosity.Minimal, true)]
-        [InlineData(LoggerVerbosity.Minimal, LoggerVerbosity.Normal, false)]
-        [InlineData(LoggerVerbosity.Minimal, LoggerVerbosity.Detailed, false)]
-        [InlineData(LoggerVerbosity.Minimal, LoggerVerbosity.Diagnostic, false)]
+        [DataRow(LoggerVerbosity.Minimal, LoggerVerbosity.Quiet, true)]
+        [DataRow(LoggerVerbosity.Minimal, LoggerVerbosity.Minimal, true)]
+        [DataRow(LoggerVerbosity.Minimal, LoggerVerbosity.Normal, false)]
+        [DataRow(LoggerVerbosity.Minimal, LoggerVerbosity.Detailed, false)]
+        [DataRow(LoggerVerbosity.Minimal, LoggerVerbosity.Diagnostic, false)]
         // Normal should return true for Quiet, Minimal, and Normal
-        [InlineData(LoggerVerbosity.Normal, LoggerVerbosity.Quiet, true)]
-        [InlineData(LoggerVerbosity.Normal, LoggerVerbosity.Minimal, true)]
-        [InlineData(LoggerVerbosity.Normal, LoggerVerbosity.Normal, true)]
-        [InlineData(LoggerVerbosity.Normal, LoggerVerbosity.Detailed, false)]
-        [InlineData(LoggerVerbosity.Normal, LoggerVerbosity.Diagnostic, false)]
+        [DataRow(LoggerVerbosity.Normal, LoggerVerbosity.Quiet, true)]
+        [DataRow(LoggerVerbosity.Normal, LoggerVerbosity.Minimal, true)]
+        [DataRow(LoggerVerbosity.Normal, LoggerVerbosity.Normal, true)]
+        [DataRow(LoggerVerbosity.Normal, LoggerVerbosity.Detailed, false)]
+        [DataRow(LoggerVerbosity.Normal, LoggerVerbosity.Diagnostic, false)]
         // Detailed should return true for Quiet, Minimal, Normal, and Detailed
-        [InlineData(LoggerVerbosity.Detailed, LoggerVerbosity.Quiet, true)]
-        [InlineData(LoggerVerbosity.Detailed, LoggerVerbosity.Minimal, true)]
-        [InlineData(LoggerVerbosity.Detailed, LoggerVerbosity.Normal, true)]
-        [InlineData(LoggerVerbosity.Detailed, LoggerVerbosity.Detailed, true)]
-        [InlineData(LoggerVerbosity.Detailed, LoggerVerbosity.Diagnostic, false)]
+        [DataRow(LoggerVerbosity.Detailed, LoggerVerbosity.Quiet, true)]
+        [DataRow(LoggerVerbosity.Detailed, LoggerVerbosity.Minimal, true)]
+        [DataRow(LoggerVerbosity.Detailed, LoggerVerbosity.Normal, true)]
+        [DataRow(LoggerVerbosity.Detailed, LoggerVerbosity.Detailed, true)]
+        [DataRow(LoggerVerbosity.Detailed, LoggerVerbosity.Diagnostic, false)]
         // Diagnostic should return true for Quiet, Minimal, Normal, Detailed, and Diagnostic
-        [InlineData(LoggerVerbosity.Diagnostic, LoggerVerbosity.Quiet, true)]
-        [InlineData(LoggerVerbosity.Diagnostic, LoggerVerbosity.Minimal, true)]
-        [InlineData(LoggerVerbosity.Diagnostic, LoggerVerbosity.Normal, true)]
-        [InlineData(LoggerVerbosity.Diagnostic, LoggerVerbosity.Detailed, true)]
-        [InlineData(LoggerVerbosity.Diagnostic, LoggerVerbosity.Diagnostic, true)]
-        [Theory]
+        [DataRow(LoggerVerbosity.Diagnostic, LoggerVerbosity.Quiet, true)]
+        [DataRow(LoggerVerbosity.Diagnostic, LoggerVerbosity.Minimal, true)]
+        [DataRow(LoggerVerbosity.Diagnostic, LoggerVerbosity.Normal, true)]
+        [DataRow(LoggerVerbosity.Diagnostic, LoggerVerbosity.Detailed, true)]
+        [DataRow(LoggerVerbosity.Diagnostic, LoggerVerbosity.Diagnostic, true)]
+        [TestMethod]
         public void TestVerbosityLessThan(LoggerVerbosity loggerVerbosity, LoggerVerbosity checkVerbosity, bool expectedResult)
         {
             new SerialConsoleLogger(loggerVerbosity).IsVerbosityAtLeast(checkVerbosity).ShouldBe(expectedResult);
@@ -572,26 +572,26 @@ namespace Microsoft.Build.UnitTests
         /// Test of single message printing
         /// </summary>
         // Quiet should show nothing
-        [InlineData(LoggerVerbosity.Quiet, MessageImportance.Low, false)]
-        [InlineData(LoggerVerbosity.Quiet, MessageImportance.Normal, false)]
-        [InlineData(LoggerVerbosity.Quiet, MessageImportance.High, false)]
+        [DataRow(LoggerVerbosity.Quiet, MessageImportance.Low, false)]
+        [DataRow(LoggerVerbosity.Quiet, MessageImportance.Normal, false)]
+        [DataRow(LoggerVerbosity.Quiet, MessageImportance.High, false)]
         // Minimal should show Low
-        [InlineData(LoggerVerbosity.Minimal, MessageImportance.Low, false)]
-        [InlineData(LoggerVerbosity.Minimal, MessageImportance.Normal, false)]
-        [InlineData(LoggerVerbosity.Minimal, MessageImportance.High, true)]
+        [DataRow(LoggerVerbosity.Minimal, MessageImportance.Low, false)]
+        [DataRow(LoggerVerbosity.Minimal, MessageImportance.Normal, false)]
+        [DataRow(LoggerVerbosity.Minimal, MessageImportance.High, true)]
         // Normal should show Low and Normal
-        [InlineData(LoggerVerbosity.Normal, MessageImportance.Low, false)]
-        [InlineData(LoggerVerbosity.Normal, MessageImportance.Normal, true)]
-        [InlineData(LoggerVerbosity.Normal, MessageImportance.High, true)]
+        [DataRow(LoggerVerbosity.Normal, MessageImportance.Low, false)]
+        [DataRow(LoggerVerbosity.Normal, MessageImportance.Normal, true)]
+        [DataRow(LoggerVerbosity.Normal, MessageImportance.High, true)]
         // Detailed should show Low, Normal, and High
-        [InlineData(LoggerVerbosity.Detailed, MessageImportance.Low, true)]
-        [InlineData(LoggerVerbosity.Detailed, MessageImportance.Normal, true)]
-        [InlineData(LoggerVerbosity.Detailed, MessageImportance.High, true)]
+        [DataRow(LoggerVerbosity.Detailed, MessageImportance.Low, true)]
+        [DataRow(LoggerVerbosity.Detailed, MessageImportance.Normal, true)]
+        [DataRow(LoggerVerbosity.Detailed, MessageImportance.High, true)]
         // Diagnostic should show everything
-        [InlineData(LoggerVerbosity.Diagnostic, MessageImportance.Low, true)]
-        [InlineData(LoggerVerbosity.Diagnostic, MessageImportance.Normal, true)]
-        [InlineData(LoggerVerbosity.Diagnostic, MessageImportance.High, true)]
-        [Theory]
+        [DataRow(LoggerVerbosity.Diagnostic, MessageImportance.Low, true)]
+        [DataRow(LoggerVerbosity.Diagnostic, MessageImportance.Normal, true)]
+        [DataRow(LoggerVerbosity.Diagnostic, MessageImportance.High, true)]
+        [TestMethod]
         public void SingleMessageTest(LoggerVerbosity loggerVerbosity, MessageImportance messageImportance, bool shouldPrint)
         {
             for (int i = 1; i <= 2; i++)
@@ -636,13 +636,13 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [InlineData("error", "red", false)]
-        [InlineData("error", "red", true)]
-        [InlineData("warning", "yellow", false)]
-        [InlineData("warning", "yellow", true)]
-        [InlineData("message", "darkgray", false)]
-        [InlineData("message", "darkgray", true)]
-        [Theory]
+        [DataRow("error", "red", false)]
+        [DataRow("error", "red", true)]
+        [DataRow("warning", "yellow", false)]
+        [DataRow("warning", "yellow", true)]
+        [DataRow("message", "darkgray", false)]
+        [DataRow("message", "darkgray", true)]
+        [TestMethod]
         public void ColorTest(string expectedMessageType, string expectedColor, bool parallel)
         {
             const string subcategory = "VBC";
@@ -704,7 +704,7 @@ namespace Microsoft.Build.UnitTests
         }
 
 
-        [Fact]
+        [TestMethod]
         public void TestQuietWithHighMessage()
         {
             for (int i = 1; i <= 2; i++)
@@ -758,7 +758,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestQuietWithError()
         {
             for (int i = 1; i <= 2; i++)
@@ -834,7 +834,7 @@ namespace Microsoft.Build.UnitTests
         /// Quiet build with a warning; project finished should appear
         /// but not target finished
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestQuietWithWarning()
         {
             for (int i = 1; i <= 2; i++)
@@ -910,7 +910,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Minimal with no errors or warnings should emit nothing.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestMinimalWithNormalMessage()
         {
             for (int i = 1; i <= 2; i++)
@@ -967,7 +967,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Minimal with error should emit project started, the error, and project finished
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestMinimalWithError()
         {
             for (int i = 1; i <= 2; i++)
@@ -1042,7 +1042,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Minimal with warning should emit project started, the warning, and project finished
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestMinimalWithWarning()
         {
             for (int i = 1; i <= 2; i++)
@@ -1118,7 +1118,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Minimal with warning should emit project started, the warning, and project finished
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestDirectEventHandlers()
         {
             for (int i = 1; i <= 2; i++)
@@ -1191,7 +1191,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void SingleLineFormatNoop()
         {
             string s = "foo";
@@ -1203,7 +1203,7 @@ namespace Microsoft.Build.UnitTests
             ss.ShouldBe($"foo{Environment.NewLine}");
         }
 
-        [Fact]
+        [TestMethod]
         public void MultilineFormatWindowsLineEndings()
         {
             string newline = "\r\n";
@@ -1217,7 +1217,7 @@ namespace Microsoft.Build.UnitTests
             ss.ShouldBe($"    foo{Environment.NewLine}    bar{Environment.NewLine}    baz{Environment.NewLine}    {Environment.NewLine}");
         }
 
-        [Fact]
+        [TestMethod]
         public void MultilineFormatUnixLineEndings()
         {
             string s = "foo\nbar\nbaz\n";
@@ -1229,7 +1229,7 @@ namespace Microsoft.Build.UnitTests
             ss.ShouldBe($"foo{Environment.NewLine}bar{Environment.NewLine}baz{Environment.NewLine}{Environment.NewLine}");
         }
 
-        [Fact]
+        [TestMethod]
         public void MultilineFormatMixedLineEndings()
         {
             string s = "\n" + "foo" + "\r\n\r\n" + "bar" + "\n" + "baz" + "\n\r\n\n" +
@@ -1243,7 +1243,7 @@ namespace Microsoft.Build.UnitTests
             ss.ShouldBe($"{Environment.NewLine}foo{Environment.NewLine}{Environment.NewLine}bar{Environment.NewLine}baz{Environment.NewLine}{Environment.NewLine}{Environment.NewLine}jazz{Environment.NewLine}razz{Environment.NewLine}{Environment.NewLine}matazz{Environment.NewLine}end{Environment.NewLine}");
         }
 
-        [Fact]
+        [TestMethod]
         public void NestedProjectMinimal()
         {
             EventSourceSink es = new EventSourceSink();
@@ -1283,7 +1283,7 @@ namespace Microsoft.Build.UnitTests
                                                       Environment.NewLine + "<reset color>");
         }
 
-        [Fact]
+        [TestMethod]
         public void NestedProjectNormal()
         {
             EventSourceSink es = new EventSourceSink();
@@ -1360,7 +1360,7 @@ namespace Microsoft.Build.UnitTests
             sc.Clear();
         }
 
-        [Fact]
+        [TestMethod]
         public void CustomDisplayedAtDetailed()
         {
             EventSourceSink es = new EventSourceSink();
@@ -1377,7 +1377,7 @@ namespace Microsoft.Build.UnitTests
             sc.ToString().ShouldBe($"msg{Environment.NewLine}");
         }
 
-        [Fact]
+        [TestMethod]
         public void CustomDisplayedAtDiagnosticMP()
         {
             EventSourceSink es = new EventSourceSink();
@@ -1394,7 +1394,7 @@ namespace Microsoft.Build.UnitTests
             sc.ToString().ShouldContain("msg");
         }
 
-        [Fact]
+        [TestMethod]
         public void CustomNotDisplayedAtNormal()
         {
             EventSourceSink es = new EventSourceSink();
@@ -1464,7 +1464,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Basic test of properties list display
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DisplayPropertiesList()
         {
             SimulatedConsole sc = new SimulatedConsole();
@@ -1483,7 +1483,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Basic test of properties list not being displayed except in Diagnostic
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DoNotDisplayPropertiesListInDetailed()
         {
             SimulatedConsole sc = new SimulatedConsole();
@@ -1501,7 +1501,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Basic test of environment list not being displayed except in Diagnostic or if the showenvironment flag is set
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DoNotDisplayEnvironmentInDetailed()
         {
             SimulatedConsole sc = new SimulatedConsole();
@@ -1520,7 +1520,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Basic test of environment list not being displayed except in Diagnostic or if the showenvironment flag is set
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DisplayEnvironmentInDetailed()
         {
             SimulatedConsole sc = new SimulatedConsole();
@@ -1542,7 +1542,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Basic test of environment list not being displayed except in Diagnostic or if the showenvironment flag is set
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DisplayEnvironmentInDiagnostic()
         {
             SimulatedConsole sc = new SimulatedConsole();
@@ -1559,7 +1559,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Basic test of environment list not being displayed except in Diagnostic or if the showenvironment flag is set
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DoNotDisplayEnvironmentInMinimal()
         {
             SimulatedConsole sc = new SimulatedConsole();
@@ -1578,7 +1578,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Basic test of environment list not being displayed except in Diagnostic or if the showenvironment flag is set
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DisplayEnvironmentInMinimal()
         {
             SimulatedConsole sc = new SimulatedConsole();
@@ -1600,7 +1600,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Basic test of properties list not being displayed when disabled
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DoNotDisplayPropertiesListIfDisabled()
         {
             SimulatedConsole sc = new SimulatedConsole();
@@ -1744,7 +1744,7 @@ namespace Microsoft.Build.UnitTests
         /// Verify passing in an empty item list does not print anything out
         /// </summary>
         /// <returns></returns>
-        [Fact]
+        [TestMethod]
         public void WriteItemsEmptyList()
         {
             Hashtable items = new Hashtable();
@@ -1786,7 +1786,7 @@ namespace Microsoft.Build.UnitTests
         /// Verify passing in an empty item list does not print anything out
         /// </summary>
         /// <returns></returns>
-        [Fact]
+        [TestMethod]
         public void WritePropertiesEmptyList()
         {
             Hashtable properties = new Hashtable();
@@ -1819,7 +1819,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Basic test of item list display
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DisplayItemsList()
         {
             SimulatedConsole sc = new SimulatedConsole();
@@ -1838,7 +1838,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Basic test of item list not being displayed except in Diagnostic
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DoNotDisplayItemListInDetailed()
         {
             SimulatedConsole sc = new SimulatedConsole();
@@ -1855,7 +1855,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Basic test of item list not being displayed when disabled
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DoNotDisplayItemListIfDisabled()
         {
             SimulatedConsole sc = new SimulatedConsole();
@@ -1873,7 +1873,7 @@ namespace Microsoft.Build.UnitTests
             WriteAndValidateItems(cl2, sc, false);
         }
 
-        [Fact]
+        [TestMethod]
         public void ParametersEmptyTests()
         {
             SimulatedConsole sc = new SimulatedConsole();
@@ -1895,7 +1895,7 @@ namespace Microsoft.Build.UnitTests
             WriteAndValidateItems(cl2, sc, false);
         }
 
-        [Fact]
+        [TestMethod]
         public void ParametersParsingTests()
         {
             SimulatedConsole sc = new SimulatedConsole();
@@ -1928,7 +1928,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// ResetConsoleLoggerState should reset the state of the console logger
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ResetConsoleLoggerStateTestBasic()
         {
             // Create an event source
@@ -2018,7 +2018,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// ConsoleLogger::Initialize() should reset the state of the console logger
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ResetConsoleLoggerState_Initialize()
         {
             // Create an event source
@@ -2107,7 +2107,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// ResetConsoleLoggerState should reset PerformanceCounters
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ResetConsoleLoggerState_PerformanceCounters()
         {
             for (int i = 1; i <= 2; i++)
@@ -2234,7 +2234,7 @@ namespace Microsoft.Build.UnitTests
         }
 
 
-        [Fact]
+        [TestMethod]
         public void DeferredMessages()
         {
             EventSourceSink es = new EventSourceSink();
@@ -2284,7 +2284,7 @@ namespace Microsoft.Build.UnitTests
             actualLog.ShouldContain("Message");
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyMPLoggerSwitch()
         {
             for (int i = 0; i < 2; i++)
@@ -2325,7 +2325,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestPrintTargetNamePerMessage()
         {
             EventSourceSink es = new EventSourceSink();
@@ -2373,7 +2373,7 @@ namespace Microsoft.Build.UnitTests
         /// nunit is showing up as an unknown output type, this causes us to not print the newline because we think it may be to a
         /// text file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestNewLineAfterProjectFinished()
         {
             bool runningWithCharDevice = NativeMethodsShared.IsWindows ? IsRunningWithCharacterFileType() : false;

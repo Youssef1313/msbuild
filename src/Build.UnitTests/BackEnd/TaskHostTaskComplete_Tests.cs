@@ -23,7 +23,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests various valid ways to construct this packet.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestConstructors()
         {
 #if FEATURE_REPORTFILEACCESSES
@@ -94,7 +94,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test invalid constructor permutations.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestInvalidConstructors()
         {
             AssertInvalidConstructorThrows(typeof(InternalErrorException), TaskCompleteType.CrashedDuringExecution, null, "ExceptionlessErrorMessage", null, null, null);
@@ -106,7 +106,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test serialization / deserialization when the parameter dictionary is null
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestTranslationWithNullDictionary()
         {
             TaskHostTaskComplete complete = new(
@@ -129,7 +129,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test serialization / deserialization when the parameter dictionary is empty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestTranslationWithEmptyDictionary()
         {
             TaskHostTaskComplete complete = new(
@@ -152,7 +152,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test serialization / deserialization when the parameter dictionary contains only value types
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestTranslationWithValueTypesInDictionary()
         {
             IDictionary<string, object> parameters = new Dictionary<string, object>();
@@ -180,7 +180,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test serialization / deserialization when the parameter dictionary contains an ITaskItem.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestTranslationWithITaskItemInDictionary()
         {
             IDictionary<string, object> parameters = new Dictionary<string, object>();
@@ -206,7 +206,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test serialization / deserialization when the parameter dictionary contains an ITaskItem array.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestTranslationWithITaskItemArrayInDictionary()
         {
             IDictionary<string, object> parameters = new Dictionary<string, object>();

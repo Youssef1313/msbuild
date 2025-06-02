@@ -17,7 +17,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Tests the basic getting and setting of the logger parameters
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestConstructorNegativeLoggerId()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -30,7 +30,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// Verify the correct exception is thrown when the logger is initialized with a null
         /// event source.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestConstructorNullSink()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -41,7 +41,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify an valid inputs work and do not produce an exception
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestConstructorValidInputs()
         {
             EventSourceSink testSink = new EventSourceSink();
@@ -53,7 +53,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// Verify when an event is forwarded, the event that was put in is the same event that was received on the event source
         /// also make sure the sinkId has been updated by the event redirector.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestForwardingNotNullEvent()
         {
             EventSourceSink testSink = new EventSourceSink();
@@ -75,7 +75,7 @@ namespace Microsoft.Build.UnitTests.Logging
         /// <summary>
         /// Verify when a null event is forwarded we get a null argument exception
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestForwardingNullEvent()
         {
             Assert.Throws<InternalErrorException>(() =>

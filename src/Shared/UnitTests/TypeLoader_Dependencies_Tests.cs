@@ -19,7 +19,7 @@ namespace Microsoft.Build.UnitTests
         private const string TaskDllFileName = "TaskWithDependency.dll";
         private const string DependencyDllFileName = "Dependency.dll";
 
-        [Fact]
+        [TestMethod]
         public void LoadAssemblyAndDependency_InsideProjectFolder()
         {
             using (var dir = new FileUtilities.TempWorkingDirectory(ProjectFileFolder))
@@ -37,7 +37,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void LoadAssemblyAndDependency_OutsideProjectFolder()
         {
             using (var dir = new FileUtilities.TempWorkingDirectory(ProjectFileFolder))

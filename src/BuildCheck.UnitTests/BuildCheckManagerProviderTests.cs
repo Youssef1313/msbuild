@@ -33,9 +33,9 @@ public class BuildCheckManagerTests
         _testedInstance = new BuildCheckManager();
     }
 
-    [Theory]
-    [InlineData(true, new[] { "Custom check rule: 'Rule1' has been registered successfully.", "Custom check rule: 'Rule2' has been registered successfully." })]
-    [InlineData(false, new[] { "Failed to register the custom check: 'DummyPath'." })]
+    [TestMethod]
+    [DataRow(true, new[] { "Custom check rule: 'Rule1' has been registered successfully.", "Custom check rule: 'Rule2' has been registered successfully." })]
+    [DataRow(false, new[] { "Failed to register the custom check: 'DummyPath'." })]
     public void ProcessCheckAcquisitionTest(bool isCheckRuleExist, string[] expectedMessages)
     {
         MockConfigurationProvider();

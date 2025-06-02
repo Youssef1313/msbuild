@@ -20,7 +20,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             _output = output;
         }
 
-        [Fact]
+        [TestMethod]
         public void ResolvesViaPlatformLookupTable()
         {
             // PlatformLookupTable always takes priority. It is typically user-defined.
@@ -41,7 +41,7 @@ namespace Microsoft.Build.Tasks.UnitTests
         }
 
 
-        [Fact]
+        [TestMethod]
         public void ResolvesViaOverride()
         {
             // OverridePlatformNegotiationValue always takes priority over everything. It is typically user-defined.
@@ -63,7 +63,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             task.AssignedProjectsWithPlatform[0].GetMetadata("NearestPlatform").ShouldBe("");
         }
 
-        [Fact]
+        [TestMethod]
         public void ResolvesViaProjectReferencesPlatformLookupTable()
         {
             // A ProjectReference's PlatformLookupTable takes priority over the current project's table.
@@ -87,7 +87,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             task.AssignedProjectsWithPlatform[0].GetMetadata("NearestPlatform").ShouldBe("x86");
         }
 
-        [Fact]
+        [TestMethod]
         public void ResolvesViaAnyCPUDefault()
         {
             // No valid mapping via the lookup table, should default to AnyCPU when the current project
@@ -108,7 +108,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             task.AssignedProjectsWithPlatform[0].GetMetadata("NearestPlatform").ShouldBe("AnyCPU");
         }
 
-        [Fact]
+        [TestMethod]
         public void ResolvesViaAnyCPUDefaultWithDefaultPlatformEnabled()
         {
             // No valid mapping via the lookup table, should default to AnyCPU when the current project
@@ -130,7 +130,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             task.AssignedProjectsWithPlatform[0].GetMetadata("NearestPlatform").ShouldBe(string.Empty);
         }
 
-        [Fact]
+        [TestMethod]
         public void ResolvesViaSamePlatform()
         {
             // No valid mapping via the lookup table. If the ProjectReference's platform
@@ -152,7 +152,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             task.AssignedProjectsWithPlatform[0].GetMetadata("NearestPlatform").ShouldBe("x86");
         }
 
-        [Fact]
+        [TestMethod]
         public void FailsToResolve()
         {
             // No valid mapping via the lookup table, ProjectReference can't default to AnyCPU,
@@ -174,7 +174,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             ((MockEngine)task.BuildEngine).AssertLogContains("MSB3981");
         }
 
-        [Fact]
+        [TestMethod]
         public void WarnsWhenProjectReferenceHasNoPlatformOptions()
         {
             // Task should log a warning when a ProjectReference has no options to build as.
@@ -200,7 +200,7 @@ namespace Microsoft.Build.Tasks.UnitTests
         /// <summary>
         /// Invalid format on PlatformLookupTable results in an exception being thrown.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void WarnsOnInvalidFormatLookupTable()
         {
             TaskItem projectReference = new TaskItem("foo.bar");
@@ -225,7 +225,7 @@ namespace Microsoft.Build.Tasks.UnitTests
         /// <summary>
         /// Invalid format on PlatformLookupTable from the projectreference results in an exception being thrown.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void WarnsOnInvalidFormatProjectReferenceLookupTable()
         {
             TaskItem projectReference = new TaskItem("foo.bar");
@@ -250,9 +250,9 @@ namespace Microsoft.Build.Tasks.UnitTests
 
         // When `Platform` is retrieved in "GetTargetFrameworks" and that platform matches what's currently
         // being built, build that project _without_ a global property for Platform.
-        [Theory]
-        [InlineData("x86;AnyCPU", "x64", "x64")] // Referenced platform matches current platform, build w/o global property
-        [InlineData("x64;x86;AnyCPU", "x64", "x64")] // Referenced platform overrides 'Platforms' being an option
+        [TestMethod]
+        [DataRow("x86;AnyCPU", "x64", "x64")] // Referenced platform matches current platform, build w/o global property
+        [DataRow("x64;x86;AnyCPU", "x64", "x64")] // Referenced platform overrides 'Platforms' being an option
         public void PlatformIsChosenAsDefault(string referencedPlatforms, string referencedPlatform, string currentPlatform)
         {
             TaskItem projectReference = new TaskItem("foo.bar");
@@ -274,7 +274,7 @@ namespace Microsoft.Build.Tasks.UnitTests
 
         // When `Platform` is retrieved in "GetTargetFrameworks" and that platform matches what the task has decided the project should be built as
         // through negotiation. build that project _without_ a global property for Platform.
-        [Fact]
+        [TestMethod]
         public void ChosenPlatformMatchesDefault()
         {
             TaskItem projectReference = new TaskItem("foo.bar");

@@ -18,7 +18,7 @@ namespace Microsoft.Build.UnitTests
         * Tests the mainline: a medium length duration
         * Note the ToString overload used in FormatTimeSpan is culture insensitive.
         */
-        [Fact]
+        [TestMethod]
         public void TimeSpanMediumDuration()
         {
             TimeSpan t = new TimeSpan(1254544900);
@@ -33,7 +33,7 @@ namespace Microsoft.Build.UnitTests
         * Format a TimeSpan where the duration is zero.
         * Note the ToString overload used in FormatTimeSpan is culture insensitive.
         */
-        [Fact]
+        [TestMethod]
         public void TimeSpanZeroDuration()
         {
             TimeSpan t = new TimeSpan(0);
@@ -41,7 +41,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal("00:00:00", result);
         }
 
-        [Fact]
+        [TestMethod]
         public void FormatDateTime()
         {
             DateTime testTime = new DateTime(2007 /*Year*/, 08 /*Month*/, 20 /*Day*/, 10 /*Hour*/, 42 /*Minutes*/, 44 /*Seconds*/, 12 /*Milliseconds*/);

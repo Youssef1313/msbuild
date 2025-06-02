@@ -21,7 +21,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Basic test of the file logger.  Writes to a log file in the temp directory.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Basic()
         {
             FileLogger fileLogger = new FileLogger();
@@ -50,7 +50,7 @@ namespace Microsoft.Build.UnitTests
         /// Basic case of logging a message to a file
         /// Verify it logs and encoding is ANSI
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BasicNoExistingFile()
         {
             string log = null;
@@ -76,7 +76,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Invalid file should error nicely
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void InvalidFile()
@@ -101,7 +101,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Specific verbosity overrides global verbosity
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SpecificVerbosity()
         {
             string log = null;
@@ -132,7 +132,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Test the short hand verbosity settings for the file logger
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ValidVerbosities()
         {
             string[] verbositySettings = new string[] { "Q", "quiet", "m", "minimal", "N", "normal", "d", "detailed", "diag", "DIAGNOSTIC" };
@@ -166,7 +166,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Invalid verbosity setting
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidVerbosity()
         {
             Assert.Throws<LoggerException>(() =>
@@ -180,7 +180,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Invalid encoding setting
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidEncoding()
         {
             Assert.Throws<LoggerException>(() =>
@@ -208,7 +208,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Valid encoding setting
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ValidEncoding()
         {
             string log = null;
@@ -235,7 +235,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Valid encoding setting
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ValidEncoding2()
         {
             string log = null;
@@ -284,7 +284,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Logging a message to a file that already exists should overwrite it
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BasicExistingFileNoAppend()
         {
             string log = null;
@@ -308,7 +308,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Logging to a file that already exists, with "append" set, should append
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BasicExistingFileAppend()
         {
             string log = null;
@@ -332,7 +332,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Logging to a file in a directory that doesn't exists
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BasicNoExistingDirectory()
         {
             string directory = Path.Combine(ObjectModelHelpers.TempProjectDir, Guid.NewGuid().ToString("N"));
@@ -351,10 +351,10 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Theory]
-        [InlineData("warningsonly")]
-        [InlineData("errorsonly")]
-        [InlineData("errorsonly;warningsonly")]
+        [TestMethod]
+        [DataRow("warningsonly")]
+        [DataRow("errorsonly")]
+        [DataRow("errorsonly;warningsonly")]
         public void EmptyErrorLogUsingWarningsErrorsOnly(string loggerOption)
         {
             using (var env = TestEnvironment.Create())
@@ -385,12 +385,12 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// File logger is writting the verbosity level as soon the build starts.
         /// </summary>
-        [Theory]
-        [InlineData(LoggerVerbosity.Quiet, false)]
-        [InlineData(LoggerVerbosity.Minimal, false)]
-        [InlineData(LoggerVerbosity.Normal, true)]
-        [InlineData(LoggerVerbosity.Detailed, true)]
-        [InlineData(LoggerVerbosity.Diagnostic, true)]
+        [TestMethod]
+        [DataRow(LoggerVerbosity.Quiet, false)]
+        [DataRow(LoggerVerbosity.Minimal, false)]
+        [DataRow(LoggerVerbosity.Normal, true)]
+        [DataRow(LoggerVerbosity.Detailed, true)]
+        [DataRow(LoggerVerbosity.Diagnostic, true)]
         public void LogVerbosityMessage(LoggerVerbosity loggerVerbosity, bool shouldContain)
         {
             using (var testEnvironment = TestEnvironment.Create())
@@ -482,7 +482,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Check the ability of the distributed logger to correctly tell its internal file logger where to log the file
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DistributedFileLoggerParameters()
         {
             DistributedFileLogger fileLogger = new DistributedFileLogger();
@@ -525,7 +525,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void DistributedLoggerNullEmpty()
         {
             Assert.Throws<LoggerException>(() =>

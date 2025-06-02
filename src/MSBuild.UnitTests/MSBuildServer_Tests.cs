@@ -88,7 +88,7 @@ namespace Microsoft.Build.Engine.UnitTests
 
         public void Dispose() => _env.Dispose();
 
-        [Fact]
+        [TestMethod]
         public void MSBuildServerTest()
         {
             TransientTestFile project = _env.CreateFile("testProject.proj", printPidContents);
@@ -137,7 +137,7 @@ namespace Microsoft.Build.Engine.UnitTests
             pidOfServerProcess.ShouldNotBe(newServerProcessId, "Node used by both the first and second build should not be the same.");
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyMixedLegacyBehavior()
         {
             TransientTestFile project = _env.CreateFile("testProject.proj", printPidContents);
@@ -173,7 +173,7 @@ namespace Microsoft.Build.Engine.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void BuildsWhileBuildIsRunningOnServer()
         {
             _env.SetEnvironmentVariable("MSBUILDUSESERVER", "1");
@@ -230,9 +230,9 @@ namespace Microsoft.Build.Engine.UnitTests
             t.Wait();
         }
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void CanShutdownServerProcess(bool byBuildManager)
         {
             _env.SetEnvironmentVariable("MSBUILDUSESERVER", "1");
@@ -264,14 +264,14 @@ namespace Microsoft.Build.Engine.UnitTests
             serverProcess.HasExited.ShouldBeTrue();
         }
 
-        [Fact]
+        [TestMethod]
         public void CanShutdownServerProcessWhenNotRunning()
         {
             bool serverIsDown = MSBuildClient.ShutdownServer(CancellationToken.None);
             serverIsDown.ShouldBeTrue();
         }
 
-        [Fact]
+        [TestMethod]
         public void ServerShouldNotRunWhenNodeReuseEqualsFalse()
         {
             TransientTestFile project = _env.CreateFile("testProject.proj", printPidContents);
@@ -284,7 +284,7 @@ namespace Microsoft.Build.Engine.UnitTests
             pidOfInitialProcess.ShouldBe(pidOfServerProcess, "We started a server node even when nodereuse is false.");
         }
 
-        [Fact]
+        [TestMethod]
         public void ServerShouldNotStartWhenBuildIsInteractive()
         {
             TransientTestFile project = _env.CreateFile("testProject.proj", printPidContents);
@@ -298,7 +298,7 @@ namespace Microsoft.Build.Engine.UnitTests
             pidOfInitialProcess.ShouldBe(pidOfServerProcess, "We started a server node even when build is interactive.");
         }
 
-        [Fact]
+        [TestMethod]
         public void PropertyMSBuildStartupDirectoryOnServer()
         {
             // This test seems to be flaky, lets enable better logging to investigate it next time

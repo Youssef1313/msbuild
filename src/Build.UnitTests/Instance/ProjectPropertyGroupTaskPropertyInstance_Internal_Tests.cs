@@ -15,7 +15,7 @@ namespace Microsoft.Build.Engine.UnitTests.Instance
 {
     public class ProjectPropertyGroupTaskPropertyInstance_Internal_Tests
     {
-        [Fact]
+        [TestMethod]
         public void ProjectPropertyGroupTaskPropertyInstanceCanSerializeViaTranslator()
         {
             var original = CreateTargetProperty();

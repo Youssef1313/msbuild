@@ -47,7 +47,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Ensures that when the MSBuildProjectExtensionsPath does not exist that nothing is imported.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DoesNotImportProjectIfNotExist()
         {
             // ---------------------
@@ -70,7 +70,7 @@ namespace Microsoft.Build.UnitTests
             project.GetPropertyValue(PropertyNameToSignalImportSucceeded).ShouldBeEmpty();
         }
 
-        [Fact]
+        [TestMethod]
         public void DoesNotImportProjectIfRestoring()
         {
             ObjectModelHelpers.CreateFileInTempProjectDirectory(ImportProjectPath, BasicProjectImportContents);
@@ -95,7 +95,7 @@ namespace Microsoft.Build.UnitTests
             project.GetPropertyValue(PropertyNameToSignalImportSucceeded).ShouldBeEmpty();
         }
 
-        [Fact]
+        [TestMethod]
         public void ImportsProjectIfRestoringAndExplicitlySet()
         {
             ObjectModelHelpers.CreateFileInTempProjectDirectory(ImportProjectPath, BasicProjectImportContents);
@@ -124,7 +124,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Ensures that even if the MSBuildProjectExtensionsPath exists, the extensions are not imported if the functionality is disabled via the <see cref="PropertyNameToEnableImport"/>.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DoesNotImportProjectWhenDisabled()
         {
             // ---------------------
@@ -159,7 +159,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Ensures that if the user set a custom MSBuildProjectExtensionsPath that the import will still succeed.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImportsProjectIfCustomPath()
         {
             ObjectModelHelpers.CreateFileInTempProjectDirectory(CustomImportProjectPath, BasicProjectImportContents);
@@ -186,7 +186,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Ensures that if the default MSBuildProjectExtensions directory is used, that the projects will be imported.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImportsProjectIfExists()
         {
             ObjectModelHelpers.CreateFileInTempProjectDirectory(ImportProjectPath, BasicProjectImportContents);
@@ -210,7 +210,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Ensures that an error is logged if MSBuildProjectExtensionsPath is modified after it was set by Microsoft.Common.props.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ErrorIfChangedInBodyOfProject()
         {
             Project project = ObjectModelHelpers.LoadProjectFileInTempProjectDirectory(ObjectModelHelpers.CreateFileInTempProjectDirectory(_projectRelativePath, """
@@ -236,7 +236,7 @@ namespace Microsoft.Build.UnitTests
         /// Ensures that an error is logged if BaseIntermediateOutputPath is modified after it was set by Microsoft.Common.props and
         /// EnableBaseIntermediateOutputPathMismatchWarning is 'true'.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void WarningIfBaseIntermediateOutputPathIsChangedInBodyOfProject()
         {
             Project project = ObjectModelHelpers.LoadProjectFileInTempProjectDirectory(ObjectModelHelpers.CreateFileInTempProjectDirectory(_projectRelativePath, """

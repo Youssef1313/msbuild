@@ -35,7 +35,7 @@ namespace Microsoft.Build.UnitTests
             RunMSBuildOnProjectWithPortableTaskAndAssertOutput(true);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestNonDesktopMSBuildShouldRunPortableTask()
         {
             RunMSBuildOnProjectWithPortableTaskAndAssertOutput(false);

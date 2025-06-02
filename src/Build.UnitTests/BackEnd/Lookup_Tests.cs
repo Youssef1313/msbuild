@@ -20,7 +20,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Primary group contains an item for a type and secondary does;
         /// primary item should be returned instead of the secondary item.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SecondaryItemShadowedByPrimaryItem()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -42,7 +42,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Primary group does not contain an item for a type but secondary does;
         /// secondary item should be returned.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SecondaryItemNotShadowedByPrimaryItem()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -61,7 +61,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// No items of that type: should return empty group rather than null
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void UnknownItemType()
         {
             Lookup lookup = LookupHelpers.CreateEmptyLookup();
@@ -74,7 +74,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Adds accumulate as we lookup in the tables
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddsAreCombinedWithPopulates()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -144,7 +144,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Adds when duplicate removal is enabled removes only duplicates.  Tests only item specs, not metadata differences
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddsWithDuplicateRemovalItemSpecsOnly()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -194,7 +194,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Adds when duplicate removal is enabled removes only duplicates.  Tests only item specs, not metadata differences
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddsWithDuplicateRemovalWithMetadata()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -245,7 +245,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Single(group.Where(item => item.EvaluatedInclude == "a2"));
         }
 
-        [Fact]
+        [TestMethod]
         public void Removes()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -296,7 +296,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Empty(table1["i1"]);
         }
 
-        [Fact]
+        [TestMethod]
         public void RemoveItemPopulatedInLowerScope()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -351,7 +351,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Empty(lookup2.GetItems("i1"));
         }
 
-        [Fact]
+        [TestMethod]
         public void RemoveItemAddedInLowerScope()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -393,7 +393,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Ensure that once keepOnlySpecified is set to true, it remains in effect.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void KeepMetadataOnlySpecifiedPropagate1()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -457,7 +457,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Ensure that if keepOnlySpecified is specified after some metadata have been set in a higher scope that it will
         /// eliminate that metadata are the current scope and beyond.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void KeepMetadataOnlySpecifiedPropagate2()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -517,7 +517,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Ensure that once keepOnlySpecified is set to true, it remains in effect, but that metadata explicitly added at subsequent levels is still retained.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void KeepMetadataOnlySpecifiedPropagate3()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -588,7 +588,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Ensure that once keepOnlySpecified is set to true, it remains in effect, and that if a metadata modification is declared as 'keep value' that
         /// the value as lower scopes is retained.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void KeepMetadataOnlySpecifiedPropagate4()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -655,7 +655,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Ensure that when keepOnlySpecified is true, we will clear all metadata unless it is retained using the 'NoChange' modification type.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void KeepMetadataOnlySpecified()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -710,7 +710,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(String.Empty, group.First().GetMetadataValue("m2"));
         }
 
-        [Fact]
+        [TestMethod]
         public void KeepMetadataOnlySpecifiedNoneSpecified()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -758,7 +758,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(String.Empty, group.First().GetMetadataValue("m2"));
         }
 
-        [Fact]
+        [TestMethod]
         public void ModifyItem()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -814,7 +814,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Modifications should be merged
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ModifyItemModifiedInPreviousScope()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -855,7 +855,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Modifications should be merged
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ModifyItemTwiceInSameScope1()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -890,7 +890,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Modifications should be merged
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ModifyItemTwiceInSameScope2()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -961,7 +961,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         }
 
 
-        [Fact]
+        [TestMethod]
         public void ModifyItemThatWasAddedInSameScope()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -1005,7 +1005,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Modifying an item in the outside scope is prohibited-
         /// purely because we don't need to do it in our code
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ModifyItemInOutsideScope()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -1018,7 +1018,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// After modification, should be able to GetItem and then modify it again
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ModifyItemPreviouslyModifiedAndGottenThroughGetItem()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -1069,7 +1069,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// After modification, should be able to GetItem and then modify it again
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ModifyItemInProjectPreviouslyModifiedAndGottenThroughGetItem()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -1122,7 +1122,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// After modification, should be able to GetItem and then remove it
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveItemPreviouslyModifiedAndGottenThroughGetItem()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -1159,7 +1159,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// After modification, should be able to GetItem and then remove it
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveItemFromProjectPreviouslyModifiedAndGottenThroughGetItem()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -1203,7 +1203,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// If the property isn't modified, the initial property
         /// should be returned
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void UnmodifiedProperty()
         {
             PropertyDictionary<ProjectPropertyInstance> group = new PropertyDictionary<ProjectPropertyInstance>();
@@ -1221,7 +1221,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// If the property isn't found, should return null
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NonexistentProperty()
         {
             PropertyDictionary<ProjectPropertyInstance> group = new PropertyDictionary<ProjectPropertyInstance>();
@@ -1238,7 +1238,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// If the property is modified, the updated value should be returned,
         /// both before and after leaving scope.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ModifiedProperty()
         {
             PropertyDictionary<ProjectPropertyInstance> group = new PropertyDictionary<ProjectPropertyInstance>();

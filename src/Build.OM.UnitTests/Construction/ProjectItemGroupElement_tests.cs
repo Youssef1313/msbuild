@@ -16,7 +16,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read item groups in an empty project
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadNoItemGroup()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -27,7 +27,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read an empty item group
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadEmptyItemGroup()
         {
             string content = @"
@@ -46,7 +46,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read an item group with two item children
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadItemGroupTwoItems()
         {
             string content = @"
@@ -72,7 +72,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set the condition value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetCondition()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -89,7 +89,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set the Label value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetLabel()
         {
             ProjectRootElement project = ProjectRootElement.Create();

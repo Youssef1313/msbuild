@@ -20,7 +20,7 @@ namespace Microsoft.Build.UnitTests
          *
          * Make sure that attributes set on input items are forwarded to output items.
          */
-        [Fact]
+        [TestMethod]
         public void AttributeForwarding()
         {
             Delete t = new Delete();

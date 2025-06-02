@@ -13,7 +13,7 @@ namespace Microsoft.Build.Engine.UnitTests.BackEnd
 {
     public sealed class GenerateTemporaryTargetAssembly_Tests
     {
-        [Fact]
+        [TestMethod]
         public void FailsWithOnlyTargetErrors()
         {
             using (TestEnvironment testenv = TestEnvironment.Create())

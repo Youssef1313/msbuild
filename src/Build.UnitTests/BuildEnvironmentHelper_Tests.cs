@@ -20,7 +20,7 @@ namespace Microsoft.Build.Engine.UnitTests
         private const string MSBuildExeName = "MSBuild.exe";
 #endif
 
-        [Fact]
+        [TestMethod]
         public void GetExecutablePath()
         {
             var msbuildPath = Path.GetDirectoryName(FileUtilities.ExecutingAssemblyPath);
@@ -36,7 +36,7 @@ namespace Microsoft.Build.Engine.UnitTests
             BuildEnvironmentHelper.Instance.Mode.ShouldBe(BuildEnvironmentMode.Standalone);
         }
 
-        [Fact]
+        [TestMethod]
         public void FindBuildEnvironmentByEnvironmentVariable()
         {
             using (var env = new EmptyStandaloneEnviroment(MSBuildExeName))
@@ -104,7 +104,7 @@ namespace Microsoft.Build.Engine.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void FindBuildEnvironmentFromCommandLineStandalone()
         {
             // Path will not be under a Visual Studio install like path.
@@ -137,7 +137,7 @@ namespace Microsoft.Build.Engine.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void FindBuildEnvironmentFromRunningProcessStandalone()
         {
             // Path will not be under a Visual Studio install like path.
@@ -154,7 +154,7 @@ namespace Microsoft.Build.Engine.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void FindBuildEnvironmentFromExecutingAssemblyAsDll()
         {
             // Ensure the correct file is found (.dll not .exe)
@@ -171,7 +171,7 @@ namespace Microsoft.Build.Engine.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void FindBuildEnvironmentFromAppContextDirectory()
         {
             using (var env = new EmptyStandaloneEnviroment(MSBuildExeName))
@@ -208,8 +208,8 @@ namespace Microsoft.Build.Engine.UnitTests
         }
 
         [WindowsFullFrameworkOnlyTheory(additionalMessage: "No Visual Studio installed for .NET.")]
-        [InlineData(MSBuildConstants.CurrentVisualStudioVersion, true)]
-        [InlineData("15.0", false)]
+        [DataRow(MSBuildConstants.CurrentVisualStudioVersion, true)]
+        [DataRow("15.0", false)]
         public void BuildEnvironmentDetectsVisualStudioByEnvironment(string visualStudioVersion, bool shouldBeValid)
         {
             using (var env = new EmptyVSEnviroment())
@@ -259,10 +259,10 @@ namespace Microsoft.Build.Engine.UnitTests
         }
 
         [WindowsFullFrameworkOnlyTheory(additionalMessage: "No Visual Studio installed for .NET.")]
-        [InlineData("18.0", true)]
-        [InlineData("17.0", false)]
-        [InlineData("17.3", false)]
-        [InlineData("16.0", false)]
+        [DataRow("18.0", true)]
+        [DataRow("17.0", false)]
+        [DataRow("17.3", false)]
+        [DataRow("16.0", false)]
         public void BuildEnvironmentDetectsVisualStudioFromSetupInstance(string visualStudioVersion, bool shouldBeValid)
         {
             using (var env = new EmptyVSEnviroment())
@@ -287,7 +287,7 @@ namespace Microsoft.Build.Engine.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void BuildEnvironmentVisualStudioNotFoundWhenVersionMismatch()
         {
             using (var env = new EmptyVSEnviroment())
@@ -303,7 +303,7 @@ namespace Microsoft.Build.Engine.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void BuildEnvironmentDetectsRunningTests()
         {
             BuildEnvironmentHelper.Instance.RunningTests.ShouldBeTrue();
@@ -397,7 +397,7 @@ namespace Microsoft.Build.Engine.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void BuildEnvironmentNoneWhenNotAvailable()
         {
             using (var env = new EmptyStandaloneEnviroment(MSBuildExeName))

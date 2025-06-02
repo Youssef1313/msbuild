@@ -29,7 +29,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify a null file path passed in return the fact the file is not a winmd file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IsWinMDFileNullFilePath()
         {
             string imageRuntime;
@@ -41,7 +41,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify if a empty file path is passed in that the file is not a winmd file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IsWinMDFileEmptyFilePath()
         {
             string imageRuntime;
@@ -53,7 +53,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// If the file does not exist then we should report this is not a winmd file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IsWinMDFileFileDoesNotExistFilePath()
         {
             string imageRuntime;
@@ -65,7 +65,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// The file exists and has the correct windowsruntime metadata, we should report this is a winmd file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IsWinMDFileGoodFile()
         {
             string imageRuntime;
@@ -77,7 +77,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// This file is a mixed file with CLR and windowsruntime metadata we should report this is a winmd file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IsWinMDFileMixedFile()
         {
             string imageRuntime;
@@ -89,7 +89,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// The file has only CLR metadata we should report this is not a winmd file
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IsWinMDFileCLROnlyFile()
         {
             string imageRuntime;
@@ -101,7 +101,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// The windows runtime string is not correctly formatted, report this is not a winmd file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IsWinMDFileBadWindowsRuntimeFile()
         {
             string imageRuntime;
@@ -113,7 +113,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// We should report that a regular net assembly is not a winmd file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IsWinMDFileRegularNetAssemblyFile()
         {
             string imageRuntime;
@@ -126,9 +126,9 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// When a project to project reference is passed in we want to verify that
         /// the winmd references get the correct metadata applied to them
         /// </summary>
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void VerifyP2PHaveCorrectMetadataWinMD(bool setImplementationMetadata)
         {
             // Create the engine.
@@ -190,7 +190,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             Assert.Equal("WindowsRuntime 1.0", t.ResolvedFiles[0].GetMetadata(ItemMetadataNames.imageRuntime));
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyP2PHaveCorrectMetadataWinMDStaticLib()
         {
             // Create the engine.
@@ -237,7 +237,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// When a project to project reference is passed in we want to verify that
         /// the winmd references get the correct metadata applied to them
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyP2PHaveCorrectMetadataWinMDManaged()
         {
             // Create the engine.
@@ -275,7 +275,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// When a project to project reference is passed in we want to verify that
         /// the winmd references get the correct metadata applied to them
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyP2PHaveCorrectMetadataNonWinMD()
         {
             // Create the engine.
@@ -306,7 +306,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify when we reference a winmd file as a reference item make sure we ignore the mscorlib.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IgnoreReferenceToMscorlib()
         {
             // Create the engine.
@@ -337,7 +337,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify when we reference a mixed winmd file that we do resolve the reference to the mscorlib
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MixedWinMDGoodReferenceToMscorlib()
         {
             // Create the engine.
@@ -368,7 +368,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify when a winmd file depends on another winmd file that we do resolve the dependency
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void WinMdFileDependsOnAnotherWinMDFile()
         {
             // Create the engine.
@@ -408,7 +408,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// We have two dlls which depend on a winmd, the first dll does not have the winmd beside it, the second one does
         /// we want to make sure that the winmd file is resolved beside the second dll.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ResolveWinmdBesideDll()
         {
             // Create the engine.
@@ -440,7 +440,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// We have a winmd file and a dll depend on a winmd, there are copies of the winmd beside each of the files.
         /// we want to make sure that the winmd file is resolved beside the winmd since that is the first file resolved.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ResolveWinmdBesideDll2()
         {
             // Create the engine.
@@ -472,7 +472,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// Verify when a winmd file depends on another winmd file that itself has framework dependencies that we do not resolve any of the
         /// dependencies due to the winmd to winmd reference
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void WinMdFileDependsOnAnotherWinMDFileWithFrameworkDependencies()
         {
             // Create the engine.
@@ -509,7 +509,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// we get the winmd file resolved. Also make sure that if there is Implementation, ImageRuntime, or IsWinMD set on the dll that
         /// it does not get propagated to the winmd file dependency.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DotNetAssemblyDependsOnAWinMDFile()
         {
             // Create the engine.
@@ -554,7 +554,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// Resolve a winmd file which depends on a native implementation dll that has an invalid pe header.
         /// This will always result in an error since the dll is malformed
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ResolveWinmdWithInvalidPENativeDependency()
         {
             // Create the engine.
@@ -586,7 +586,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Resolve a winmd file which depends a native dll that matches the targeted architecture
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ResolveWinmdWithArchitectureDependencyMatchingArchitecturesX86()
         {
             // Create the engine.
@@ -618,7 +618,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Resolve a winmd file which depends a native dll that matches the targeted architecture
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ResolveWinmdWithArchitectureDependencyAnyCPUNative()
         {
             // Create the engine.
@@ -653,7 +653,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// Resolve a winmd file which depends on a native implementation dll that has an invalid pe header.
         /// A warning or error is expected in the log depending on the WarnOrErrorOnTargetArchitecture property value.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ResolveWinmdWithArchitectureDependency()
         {
             VerifyImplementationArchitecture("DependsOnX86", "MSIL", "X86", "Error");
@@ -751,7 +751,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Verify when a winmd file depends on another winmd file that we resolve both and that the metadata is correct.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DotNetAssemblyDependsOnAWinMDFileWithVersion255()
         {
             // Create the engine.

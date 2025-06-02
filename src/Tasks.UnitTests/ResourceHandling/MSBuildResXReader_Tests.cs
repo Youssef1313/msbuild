@@ -24,7 +24,7 @@ namespace Microsoft.Build.Tasks.UnitTests.GenerateResource
             _output = output;
         }
 
-        [Fact]
+        [TestMethod]
         public void ParsesSingleStringAsString()
         {
             var resxWithSingleString = MSBuildResXReader.GetResourcesFromString(
@@ -37,7 +37,7 @@ namespace Microsoft.Build.Tasks.UnitTests.GenerateResource
             AssertSingleStringResource(resxWithSingleString, "StringResource", "StringValue");
         }
 
-        [Fact]
+        [TestMethod]
         public void ParsesSingleStringWithoutPreserveAsString()
         {
             var resxWithSingleString = MSBuildResXReader.GetResourcesFromString(
@@ -50,7 +50,7 @@ namespace Microsoft.Build.Tasks.UnitTests.GenerateResource
             AssertSingleStringResource(resxWithSingleString, "StringResource", " StringValue ");
         }
 
-        [Fact]
+        [TestMethod]
         public void ParsesSingleWhitespaceStringAsString()
         {
             var resxWithSingleString = MSBuildResXReader.GetResourcesFromString(
@@ -63,7 +63,7 @@ namespace Microsoft.Build.Tasks.UnitTests.GenerateResource
             AssertSingleStringResource(resxWithSingleString, "StringResource", " ");
         }
 
-        [Fact]
+        [TestMethod]
         public void ParsesSingleWhitespaceStringWithNoPreserveAsEmptyString()
         {
             var resxWithSingleString = MSBuildResXReader.GetResourcesFromString(
@@ -76,7 +76,7 @@ namespace Microsoft.Build.Tasks.UnitTests.GenerateResource
             AssertSingleStringResource(resxWithSingleString, "StringResource", "");
         }
 
-        [Fact]
+        [TestMethod]
         public void ParsesSingleStringWithPartialTypeName()
         {
             var resxWithSingleString = MSBuildResXReader.GetResourcesFromString(
@@ -89,7 +89,7 @@ namespace Microsoft.Build.Tasks.UnitTests.GenerateResource
         }
 
 
-        [Fact]
+        [TestMethod]
         public void LoadsMultipleStringsPreservingOrder()
         {
             var resxWithTwoStrings = MSBuildResXReader.GetResourcesFromString(
@@ -113,7 +113,7 @@ namespace Microsoft.Build.Tasks.UnitTests.GenerateResource
                 .Value.ShouldBe("2StringValue2");
         }
 
-        [Fact]
+        [TestMethod]
         public void ResXNullRefProducesNullLiveObject()
         {
             var resxWithNullRef = MSBuildResXReader.GetResourcesFromString(
@@ -131,9 +131,9 @@ namespace Microsoft.Build.Tasks.UnitTests.GenerateResource
                 .Value.ShouldBeNull();
         }
 
-        [Theory]
-        [InlineData("System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
-        [InlineData("System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+        [TestMethod]
+        [DataRow("System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+        [DataRow("System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
         public void LoadsStringFromFileRefAsString(string stringType)
         {
             File.Exists(Path.Combine("ResourceHandling", "TextFile1.txt")).ShouldBeTrue("Test deployment is missing None files");
@@ -148,7 +148,7 @@ $@"  <assembly alias=""System.Windows.Forms"" name=""System.Windows.Forms, Versi
             AssertSingleStringResource(resxWithLinkedString, "TextFile1", "Contents of TextFile1");
         }
 
-        [Fact]
+        [TestMethod]
         public void LoadsStringFromFileRefAsStringWithShiftJISEncoding()
         {
             using (var env = TestEnvironment.Create(_output))
@@ -193,7 +193,7 @@ $@"  <assembly alias=""System.Windows.Forms"" name=""System.Windows.Forms, Versi
                 .Value.ShouldBe(value);
         }
 
-        [Fact]
+        [TestMethod]
         public void PassesThroughBitmapInResx()
         {
             var resxWithEmbeddedBitmap = MSBuildResXReader.GetResourcesFromString(
@@ -221,7 +221,7 @@ $@"  <assembly alias=""System.Windows.Forms"" name=""System.Windows.Forms, Versi
             resource.TypeAssemblyQualifiedName.ShouldBe("System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
         }
 
-        [Fact]
+        [TestMethod]
         public void TypeConverterStringWellFormatted()
         {
             var resxWithEmbeddedBitmap = MSBuildResXReader.GetResourcesFromString(
@@ -247,7 +247,7 @@ $@"  <assembly alias=""System.Windows.Forms"" name=""System.Windows.Forms, Versi
         /// <remarks>
         /// https://github.com/dotnet/winforms/blob/195f89af79d550c2da1711c45c379efd63519ac1/src/System.Windows.Forms/src/System/Resources/ResXResourceWriter.cs#L141
         /// </remarks>
-        [Fact]
+        [TestMethod]
         public void TypeConverterStringDirectValue()
         {
             var resxWithEmbeddedBitmap = MSBuildResXReader.GetResourcesFromString(
@@ -264,7 +264,7 @@ $@"  <assembly alias=""System.Windows.Forms"" name=""System.Windows.Forms, Versi
             resource.StringRepresentation.ShouldBe("Blue");
         }
 
-        [Fact]
+        [TestMethod]
         public void ResXFileRefToBitmap()
         {
             string bitmapPath = Build.UnitTests.GenerateResource_Tests.Utilities.CreateWorldsSmallestBitmap();
@@ -283,9 +283,9 @@ $@"  <data name='Image1' type='System.Resources.ResXFileRef, System.Windows.Form
             resource.TypeAssemblyQualifiedName.ShouldBe("System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
         }
 
-        [Theory]
-        [InlineData("System.IO.MemoryStream, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
-        [InlineData("System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+        [TestMethod]
+        [DataRow("System.IO.MemoryStream, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+        [DataRow("System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
         public void ResXFileRefToMemoryStream(string typeNameInResx)
         {
             using var env = TestEnvironment.Create(_output);
@@ -316,7 +316,7 @@ $@"  <data name='Image1' type='System.Resources.ResXFileRef, System.Windows.Form
             bytes.ShouldBe(new byte[] { 84, 101, 115, 116 }, "Expected the bytes of 'Test' to start the stream");
         }
 
-        [Fact]
+        [TestMethod]
         public void AssemblyElementWithNoAliasInfersSimpleName()
         {
             var resxWithEmbeddedBitmap = MSBuildResXReader.GetResourcesFromString(

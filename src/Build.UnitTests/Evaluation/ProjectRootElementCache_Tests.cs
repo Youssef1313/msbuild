@@ -43,7 +43,7 @@ namespace Microsoft.Build.UnitTests.OM.Evaluation
         /// <summary>
         /// Verifies that a null entry fails
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddNull()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -54,7 +54,7 @@ namespace Microsoft.Build.UnitTests.OM.Evaluation
         /// <summary>
         /// Verifies that the delegate cannot return a project with a different path
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddUnsavedProject()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -65,7 +65,7 @@ namespace Microsoft.Build.UnitTests.OM.Evaluation
         /// <summary>
         /// Tests that an entry added to the cache can be retrieved.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddEntry()
         {
             string rootedPath = NativeMethodsShared.IsUnixLike ? "/foo" : "c:\\foo";
@@ -102,7 +102,7 @@ namespace Microsoft.Build.UnitTests.OM.Evaluation
         /// Cache should not return a ProjectRootElement if the file it was loaded from has since changed -
         /// if the cache was configured to auto-reload.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetProjectRootElementChangedOnDisk1()
         {
             string path = null;
@@ -136,7 +136,7 @@ namespace Microsoft.Build.UnitTests.OM.Evaluation
         /// Cache should return a ProjectRootElement directly even if the file it was loaded from has since changed -
         /// if the cache was configured to NOT auto-reload.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetProjectRootElementChangedOnDisk2()
         {
             string path = null;

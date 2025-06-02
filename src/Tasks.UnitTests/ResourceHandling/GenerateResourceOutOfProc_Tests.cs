@@ -28,7 +28,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  ResX to Resources, no references
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BasicResX2Resources()
         {
             // This WriteLine is a hack.  On a slow machine, the Tasks unittest fails because remoting
@@ -71,7 +71,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         /// Ensure that OutputResource Metadata is populated on the Sources item
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OutputResourceMetadataPopulatedOnInputItems()
         {
             string resxFile0 = Utilities.WriteTestResX(false, null, null);
@@ -112,7 +112,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Text to Resources
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BasicText2Resources()
         {
             GenerateResource t = Utilities.CreateTaskOutOfProc(_output);
@@ -151,7 +151,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         ///  ResX to Resources with references that are used in the resx
         /// </summary>
         /// <remarks>System dll is not locked because it forces a new app domain</remarks>
-        [Fact]
+        [TestMethod]
         public void ResX2ResourcesWithReferences()
         {
             string systemDll = Utilities.GetPathToCopiedSystemDLL();
@@ -190,7 +190,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Resources to ResX
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BasicResources2ResX()
         {
             string resourcesFile = Utilities.CreateBasicResourcesFile(false, _output);
@@ -233,7 +233,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Resources to Text
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BasicResources2Text()
         {
             string resourcesFile = Utilities.CreateBasicResourcesFile(false, _output);
@@ -261,7 +261,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Force out-of-date with ShouldRebuildResgenOutputFile on the source only
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ForceOutOfDate()
         {
             string resxFile = Utilities.WriteTestResX(false, null, null);
@@ -309,7 +309,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Force out-of-date with ShouldRebuildResgenOutputFile on the linked file
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ForceOutOfDateLinked()
         {
             string bitmap = Utilities.CreateWorldsSmallestBitmap();
@@ -360,7 +360,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Force partially out-of-date: should build only the out of date inputs
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ForceSomeOutOfDate()
         {
             string firstResx = null;
@@ -437,7 +437,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Allow ShouldRebuildResgenOutputFile to return "false" since nothing's out of date, including linked file
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AllowLinkedNoGenerate()
         {
             string bitmap = Utilities.CreateWorldsSmallestBitmap();
@@ -487,7 +487,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Allow the task to skip processing based on having nothing out of date
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NothingOutOfDate()
         {
             string resxFile = null;
@@ -566,7 +566,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// otherwise up to date
         /// </summary>
         /// <remarks>System dll is not locked because it forces a new app domain</remarks>
-        [Fact]
+        [TestMethod]
         public void NothingOutOfDateExceptReference()
         {
             string resxFile = null;
@@ -640,7 +640,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         /// If an additional input is out of date, resources should be regenerated.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NothingOutOfDateExceptAdditionalInput()
         {
             string resxFile = null;
@@ -706,7 +706,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Text to ResX
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BasicText2ResX()
         {
             GenerateResource t = Utilities.CreateTaskOutOfProc(_output);
@@ -733,7 +733,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Round trip from resx to resources to resx with the same blobs
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ResX2ResX()
         {
             try
@@ -784,7 +784,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Round trip from text to resources to text with the same blobs
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Text2Text()
         {
             string textFile = Utilities.WriteTestText(null, null);
@@ -829,7 +829,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  STR without references yields proper output, message
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedResources()
         {
             GenerateResource t = Utilities.CreateTaskOutOfProc(_output);
@@ -887,7 +887,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  STR without references yields proper output, message
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedResourcesUpToDate()
         {
             GenerateResource t = Utilities.CreateTaskOutOfProc(_output);
@@ -966,7 +966,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         /// STR class file is out of date, but resources are up to date. Should still generate it.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedResourcesOutOfDate()
         {
             string resxFile = null;
@@ -1068,7 +1068,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         /// Verify STR generation with a specified specific filename
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedResourcesWithFilename()
         {
             string txtFile = null;
@@ -1131,7 +1131,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  STR with VB
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedResourcesVB()
         {
             GenerateResource t = Utilities.CreateTaskOutOfProc(_output);
@@ -1187,7 +1187,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  STR namespace can be empty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedResourcesWithoutNamespaceOrClassOrFilename()
         {
             GenerateResource t = Utilities.CreateTaskOutOfProc(_output);
@@ -1237,7 +1237,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  STR with resource namespace yields proper output, message (CS)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void STRWithResourcesNamespaceCS()
         {
             Utilities.STRNamespaceTestHelper("CSharp", "MyResourcesNamespace", null, _output);
@@ -1246,7 +1246,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  STR with resource namespace yields proper output, message (VB)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void STRWithResourcesNamespaceVB()
         {
             Utilities.STRNamespaceTestHelper("VB", "MyResourcesNamespace", null, _output);
@@ -1255,7 +1255,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  STR with resource namespace and STR namespace yields proper output, message (CS)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void STRWithResourcesNamespaceAndSTRNamespaceCS()
         {
             Utilities.STRNamespaceTestHelper("CSharp", "MyResourcesNamespace", "MySTClassNamespace", _output);
@@ -1264,7 +1264,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  STR with resource namespace and STR namespace yields proper output, message (CS)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void STRWithResourcesNamespaceAndSTRNamespaceVB()
         {
             Utilities.STRNamespaceTestHelper("VB", "MyResourcesNamespace", "MySTClassNamespace", _output);
@@ -1283,7 +1283,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Text input failures, no name, no '=', 'strings' token, invalid token, invalid escape
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TextToResourcesBadFormat()
         {
             // This WriteLine is a hack.  On a slow machine, the Tasks unittest fails because remoting
@@ -1348,7 +1348,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Cause failures in ResXResourceReader
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void FailedResXReader()
         {
             string resxFile1 = null;
@@ -1414,7 +1414,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Cause failures in ResXResourceReader, different codepath
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void FailedResXReaderWithAllOutputResourcesSpecified()
         {
             string resxFile1 = null;
@@ -1487,7 +1487,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Duplicate resource names
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DuplicateResourceNames()
         {
             GenerateResource t = Utilities.CreateTaskOutOfProc(_output);
@@ -1512,7 +1512,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Non-string resource with text output
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void UnsupportedTextType()
         {
             string bitmap = Utilities.CreateWorldsSmallestBitmap();
@@ -1542,7 +1542,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         /// Can't write the statefile
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidStateFile()
         {
             string resxFile = null;
@@ -1579,7 +1579,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Cause failures in ResourceReader
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void FailedResourceReader()
         {
             GenerateResource t = Utilities.CreateTaskOutOfProc(_output);
@@ -1612,7 +1612,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Invalid STR Class name
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void FailedSTRProperty()
         {
             GenerateResource t = Utilities.CreateTaskOutOfProc(_output);
@@ -1644,7 +1644,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         /// Reference passed in that can't be loaded should error
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidReference()
         {
             string txtFile = null;
@@ -1690,7 +1690,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Sources attributes are copied to given OutputResources
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AttributeForwarding()
         {
             // This WriteLine is a hack.  On a slow machine, the Tasks unittest fails because remoting
@@ -1733,7 +1733,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Sources attributes copied to computed OutputResources
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AttributeForwardingOnEmptyOutputs()
         {
             GenerateResource t = Utilities.CreateTaskOutOfProc(_output);
@@ -1763,7 +1763,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  OutputFiles used for output, and also are synthesized if not set on input
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OutputFilesNotSpecified()
         {
             GenerateResource t = Utilities.CreateTaskOutOfProc(_output);
@@ -1799,7 +1799,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  FilesWritten contains OutputResources + StateFile
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void FilesWrittenSet()
         {
             GenerateResource t = Utilities.CreateTaskOutOfProc(_output);
@@ -1839,7 +1839,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Resource transformation fails on 3rd of 4 inputs, inputs 1 & 2 & 4 are in outputs and fileswritten.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OutputFilesPartialInputs()
         {
             GenerateResource t = Utilities.CreateTaskOutOfProc(_output);
@@ -1905,7 +1905,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  STR class name derived from output file transformation
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedClassName()
         {
             GenerateResource t = Utilities.CreateTaskOutOfProc(_output);
@@ -1946,7 +1946,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  STR class file name derived from class name transformation
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedFileName()
         {
             GenerateResource t = Utilities.CreateTaskOutOfProc(_output);
@@ -1997,7 +1997,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Empty Sources yields message, success
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EmptySources()
         {
             // This WriteLine is a hack.  On a slow machine, the Tasks unittest fails because remoting
@@ -2023,7 +2023,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  References with invalid assemblies yields warning
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReferencesToBadAssemblies()
         {
             GenerateResource t = Utilities.CreateTaskOutOfProc(_output);
@@ -2054,7 +2054,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Source item not found
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SourceItemMissing()
         {
             string txtFile = null;
@@ -2135,7 +2135,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Bad file extension on input
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InputFileExtension()
         {
             GenerateResource t = Utilities.CreateTaskOutOfProc(_output);
@@ -2168,7 +2168,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Bad file extension on output
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OutputFileExtension()
         {
             GenerateResource t = Utilities.CreateTaskOutOfProc(_output);
@@ -2201,7 +2201,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Sources and OutputResources different # of elements
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SourcesMatchesOutputResources()
         {
             GenerateResource t = Utilities.CreateTaskOutOfProc(_output);
@@ -2233,7 +2233,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  Invalid StronglyTypedLanguage yields CodeDOM exception
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void UnknownStronglyTypedLanguage()
         {
             GenerateResource t = Utilities.CreateTaskOutOfProc(_output);
@@ -2266,7 +2266,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         /// StronglyTypedLanguage, but more than one resources file
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedResourceWithMoreThanOneInputResourceFile()
         {
             string resxFile = null;
@@ -2316,7 +2316,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         ///  STR class name derived from output file transformation
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BadStronglyTypedFilename()
         {
             string txtFile = null;
@@ -2360,7 +2360,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         /// Verify that passing a STR class without a language, errors
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedResourceClassWithoutLanguage()
         {
             string txtFile = null;
@@ -2397,7 +2397,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         /// Verify that passing a STR namespace without a language, errors
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedResourceNamespaceWithoutLanguage()
         {
             string txtFile = null;
@@ -2434,7 +2434,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         /// Verify that passing a STR filename without a language, errors
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedResourceFilenameWithoutLanguage()
         {
             string txtFile = null;
@@ -2471,7 +2471,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         /// Verify that passing a STR language with more than 1 sources errors
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StronglyTypedResourceFileIsExistingDirectory()
         {
             string dir = null;
@@ -2525,7 +2525,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void Regress25163_OutputResourcesContainsInvalidPathCharacters()
         {
             string resourcesFile = null;
@@ -2564,7 +2564,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
             _output = output;
         }
 
-        [Fact]
+        [TestMethod]
         public void DontLockP2PReferenceWhenResolvingSystemTypes()
         {
             // This WriteLine is a hack.  On a slow machine, the Tasks unittest fails because remoting
@@ -2739,7 +2739,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// Assembly.LoadFile on that relative path, which fails (LoadFile requires an
         /// absolute path).  The fix was to use Assembly.LoadFrom instead.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReferencedAssemblySpecifiedUsingRelativePath()
         {
             // This WriteLine is a hack.  On a slow machine, the Tasks unittest fails because remoting
@@ -2896,7 +2896,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
             _output = output;
         }
 
-        [Fact]
+        [TestMethod]
         public void ResgenCommandLineLogging()
         {
             // This WriteLine is a hack.  On a slow machine, the Tasks unittest fails because remoting
@@ -3053,7 +3053,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// <summary>
         /// Validate that when using ResGen 3.5, a command line command where the last parameter takes us past the 28,000 character limit is handled appropriately
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ResgenCommandLineExceedsAllowedLength()
         {
             string sdkToolsPath;
@@ -3197,7 +3197,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         /// v3.5 path.  It is difficult to verify the tool paths in a unit test, however, so
         /// this was done by ad hoc testing and will be maintained by the dev suites.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MultiTargetingDefaultsSetCorrectly()
         {
             GenerateResource t = new GenerateResource();

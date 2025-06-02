@@ -40,7 +40,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             GC.Collect();
         }
 
-        [Fact]
+        [TestMethod]
         public void IncludeShouldPreserveIntermediaryReferences()
         {
             var content = @"
@@ -80,9 +80,9 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 new[] { mI2_1, mI2_1, mI2_1, mI2_2, mI2_2, mI2_2, mI2_2, mI2_2, mI2_2 });
         }
 
-        [Theory]
+        [TestMethod]
         // remove the items by referencing each one
-        [InlineData(
+        [DataRow(
             @"
             <i2 Include='a;b;c'>
                 <m1>m1_contents</m1>
@@ -93,7 +93,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             <i2 Remove='a;b;c'/>")]
         // remove the items via a glob
-        [InlineData(
+        [DataRow(
             @"
             <i2 Include='a;b;c'>
                 <m1>m1_contents</m1>
@@ -120,7 +120,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             ObjectModelHelpers.AssertItems(Array.Empty<string>(), itemsForI2);
         }
 
-        [Fact]
+        [TestMethod]
         public void RemoveRespectsItemTransform()
         {
             var content = @"
@@ -134,7 +134,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             ObjectModelHelpers.AssertItems(new[] { "a", "c" }, items);
         }
 
-        [Fact]
+        [TestMethod]
         public void UpdateRespectsItemTransform()
         {
             var content = @"
@@ -157,7 +157,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 });
         }
 
-        [Fact]
+        [TestMethod]
         public void UpdateShouldPreserveIntermediaryReferences()
         {
             var content = @"
@@ -359,8 +359,8 @@ namespace Microsoft.Build.UnitTests.Evaluation
             }
         }
 
-        [Theory]
-        [MemberData(nameof(IndirectItemReferencesTestData))]
+        [TestMethod]
+        [DynamicData(nameof(IndirectItemReferencesTestData))]
         public void ItemOperationsShouldExpandIndirectItemReferences(string projectContent, string[] expectedItemValues, Dictionary<string, string> expectedItemMetadata)
         {
             var items = ObjectModelHelpers.GetItems(projectContent);
@@ -368,7 +368,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             ObjectModelHelpers.AssertItems(expectedItemValues, items, expectedItemMetadata);
         }
 
-        [Fact]
+        [TestMethod]
         public void OnlyPropertyReferencesGetExpandedInPropertyFunctionArgumentsInsideIncludeAttributes()
         {
             var projectContent =
@@ -389,7 +389,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             ObjectModelHelpers.AssertItems(new[] { "1", "@(A)", "@(A)" }, items);
         }
 
-        [Fact]
+        [TestMethod]
         public void MetadataAndPropertyReferencesGetExpandedInPropertyFunctionArgumentsInsideMetadataElements()
         {
             var projectContent =
@@ -440,7 +440,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             ObjectModelHelpers.AssertItems(new[] { "1", "B", "C", "D" }, items, expectedMetadata);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExcludeSeesIntermediaryState()
         {
             var projectContent =
@@ -461,7 +461,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             ObjectModelHelpers.AssertItems(new[] { "2" }, items);
         }
 
-        [Fact]
+        [TestMethod]
         public void MultipleInterItemDependenciesOnSameItemOperation()
         {
             var content = @"
@@ -526,7 +526,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             ObjectModelHelpers.AssertItems(new[] { "i1 has 4 items" }, i_condItems);
         }
 
-        [Fact]
+        [TestMethod]
         public void LongIncludeChain()
         {
             const int INCLUDE_COUNT = 10000;
@@ -546,7 +546,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         }
 
         // see https://github.com/dotnet/msbuild/issues/2069
-        [Fact]
+        [TestMethod]
         public void ImmutableListBuilderBug()
         {
             var content = @"<i Include=""0;x1;x2;x3;x4;x5;6;7;8;9""/>
@@ -557,7 +557,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Assert.Equal("0;6;7;8;9", String.Join(";", items.Select(i => i.EvaluatedInclude)));
         }
 
-        [Fact]
+        [TestMethod]
         public void LazyWildcardExpansionDoesNotEvaluateWildCardsIfNotReferenced()
         {
             var content = @"
@@ -626,7 +626,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void DoesNotCrashWhenUnEvaluatedWildCardLooksLikeUNC()
         {
             var content = """
@@ -661,9 +661,9 @@ namespace Microsoft.Build.UnitTests.Evaluation
             project.GetConcatenatedItemsOfType("None").ShouldContain("csc.*");
         }
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void DifferentExcludesOnSameWildcardProduceDifferentResults(bool cacheFileEnumerations)
         {
             var projectContents = @"
@@ -698,7 +698,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         }
 
         // see https://github.com/dotnet/msbuild/issues/3460
-        [Fact]
+        [TestMethod]
         public void MetadataPropertyFunctionBug()
         {
             const string prefix = "SomeLongPrefix-"; // Needs to be longer than "%(FileName)"

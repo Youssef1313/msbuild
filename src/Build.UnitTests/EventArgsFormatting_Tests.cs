@@ -19,7 +19,7 @@ namespace Microsoft.Build.UnitTests
     /// </summary>
     public class EventArgsFormattingTests
     {
-        [Fact]
+        [TestMethod]
         public void NoLineInfoFormatEventMessage()
         {
             // Testing the method in Shared.EventArgsFormatting directly
@@ -31,7 +31,7 @@ namespace Microsoft.Build.UnitTests
 
         // Valid forms for line/col number patterns:
         // (line) or (line-line) or (line,col) or (line,col-col) or (line,col,line,col)
-        [Fact]
+        [TestMethod]
         public void LineNumberRange()
         {
             string s = EventArgsFormatting.FormatEventMessage("error", "CS",
@@ -40,7 +40,7 @@ namespace Microsoft.Build.UnitTests
                       "source.cs(1-2): CS error 312: Missing ;", s);
         }
 
-        [Fact]
+        [TestMethod]
         public void ColumnNumberRange()
         {
             string s = EventArgsFormatting.FormatEventMessage("error", "CS",
@@ -49,7 +49,7 @@ namespace Microsoft.Build.UnitTests
                       "source.cs : CS error 312: Missing ;", s);
         }
 
-        [Fact]
+        [TestMethod]
         public void LineAndColumnNumberRange()
         {
             string s = EventArgsFormatting.FormatEventMessage("error", "CS",
@@ -58,7 +58,7 @@ namespace Microsoft.Build.UnitTests
                       "source.cs(1,3,2,4): CS error 312: Missing ;", s);
         }
 
-        [Fact]
+        [TestMethod]
         public void LineAndColumnNumberRange2()
         {
             string s = EventArgsFormatting.FormatEventMessage("error", "CS",
@@ -67,7 +67,7 @@ namespace Microsoft.Build.UnitTests
                       "source.cs(1,3-4): CS error 312: Missing ;", s);
         }
 
-        [Fact]
+        [TestMethod]
         public void LineAndColumnNumberRange3()
         {
             string s = EventArgsFormatting.FormatEventMessage("error", "CS",
@@ -76,7 +76,7 @@ namespace Microsoft.Build.UnitTests
                       "source.cs(1-2,3): CS error 312: Missing ;", s);
         }
 
-        [Fact]
+        [TestMethod]
         public void LineAndColumnNumberRange4()
         {
             string s = EventArgsFormatting.FormatEventMessage("error", "CS",
@@ -85,7 +85,7 @@ namespace Microsoft.Build.UnitTests
                       "source.cs(1-2): CS error 312: Missing ;", s);
         }
 
-        [Fact]
+        [TestMethod]
         public void LineAndColumnNumberRange5()
         {
             string s = EventArgsFormatting.FormatEventMessage("error", "CS",
@@ -94,7 +94,7 @@ namespace Microsoft.Build.UnitTests
                       "source.cs(1,2): CS error 312: Missing ;", s);
         }
 
-        [Fact]
+        [TestMethod]
         public void BasicFormatEventMessage()
         {
             // Testing the method in Shared.EventArgsFormatting directly
@@ -104,7 +104,7 @@ namespace Microsoft.Build.UnitTests
                       "source.cs(42): CS error 312: Missing ;", s);
         }
 
-        [Fact]
+        [TestMethod]
         public void CarriageReturnInMessageIsUnchanged()
         {
             BuildErrorEventArgs error = new BuildErrorEventArgs("CS", "312", "source.cs", 42, 0, 0, 0, "message\r Hello", "help", "sender");
@@ -118,7 +118,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal("source.cs(42): CS warning 312: message\r Hello", warningString);
         }
 
-        [Fact]
+        [TestMethod]
         public void ExactLocationFormatEventMessage()
         {
             // Testing the method in Shared.EventArgsFormatting directly
@@ -128,7 +128,7 @@ namespace Microsoft.Build.UnitTests
                     "source.cs(233,4,236,8): CS error 312: Missing ;", s);
         }
 
-        [Fact]
+        [TestMethod]
         public void NullMessage()
         {
             // Testing the method in Shared.EventArgsFormatting directly

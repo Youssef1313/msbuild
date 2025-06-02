@@ -11,7 +11,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 {
     public class ProjectCollection_Tests
     {
-        [Fact]
+        [TestMethod]
         public void ProjectRootElementCache_IsDeterminedByEnvironmentVariable()
         {
             using var collectionWithDefaultCache = new ProjectCollection();

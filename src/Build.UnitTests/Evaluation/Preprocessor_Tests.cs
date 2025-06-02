@@ -49,7 +49,7 @@ namespace Microsoft.Build.UnitTests.Preprocessor
         /// <summary>
         /// Basic project
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Single()
         {
             Project project = new Project();
@@ -72,7 +72,7 @@ namespace Microsoft.Build.UnitTests.Preprocessor
         /// <summary>
         /// InitialTargets are concatenated, outermost to innermost
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InitialTargetsOuterAndInner()
         {
             ProjectRootElement xml1 = ProjectRootElement.Create("p1");
@@ -117,7 +117,7 @@ namespace Microsoft.Build.UnitTests.Preprocessor
         /// <summary>
         /// InitialTargets are concatenated, outermost to innermost
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InitialTargetsInnerOnly()
         {
             ProjectRootElement xml1 = ProjectRootElement.Create("p1");
@@ -161,7 +161,7 @@ namespace Microsoft.Build.UnitTests.Preprocessor
         /// <summary>
         /// InitialTargets are concatenated, outermost to innermost
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InitialTargetsOuterOnly()
         {
             ProjectRootElement xml1 = ProjectRootElement.Create("p1");
@@ -205,7 +205,7 @@ namespace Microsoft.Build.UnitTests.Preprocessor
         /// <summary>
         /// Basic empty project importing another
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TwoFirstEmpty()
         {
             ProjectRootElement xml1 = ProjectRootElement.Create("p1");
@@ -252,7 +252,7 @@ namespace Microsoft.Build.UnitTests.Preprocessor
         /// <summary>
         /// False import should not be followed
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void FalseImport()
         {
             ProjectRootElement xml1 = ProjectRootElement.Create("p1");
@@ -287,7 +287,7 @@ namespace Microsoft.Build.UnitTests.Preprocessor
         /// <summary>
         /// Basic project importing another empty one
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TwoSecondEmpty()
         {
             ProjectRootElement xml1 = ProjectRootElement.Create("p1");
@@ -334,7 +334,7 @@ namespace Microsoft.Build.UnitTests.Preprocessor
         /// <summary>
         /// Basic project importing another
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TwoWithContent()
         {
             string one = ObjectModelHelpers.CleanupFileContents(
@@ -407,7 +407,7 @@ namespace Microsoft.Build.UnitTests.Preprocessor
         /// <summary>
         /// Basic project importing another one via an ImportGroup
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImportGroup()
         {
             ProjectRootElement xml1 = ProjectRootElement.Create("p1");
@@ -460,7 +460,7 @@ namespace Microsoft.Build.UnitTests.Preprocessor
         /// <summary>
         /// Basic project importing another one via an ImportGroup with two imports inside it, and a condition on it
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImportGroupDoubleChildPlusCondition()
         {
             ProjectRootElement xml1 = ProjectRootElement.Create("p1");
@@ -535,7 +535,7 @@ namespace Microsoft.Build.UnitTests.Preprocessor
         /// <summary>
         /// First DefaultTargets encountered is used
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DefaultTargetsOuterAndInner()
         {
             ProjectRootElement xml1 = ProjectRootElement.Create("p1");
@@ -597,7 +597,7 @@ namespace Microsoft.Build.UnitTests.Preprocessor
         /// <summary>
         /// First DefaultTargets encountered is used
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DefaultTargetsInnerOnly()
         {
             ProjectRootElement xml1 = ProjectRootElement.Create("p1");
@@ -658,7 +658,7 @@ namespace Microsoft.Build.UnitTests.Preprocessor
         /// <summary>
         /// Basic project importing another one via an ImportGroup, but the ImportGroup condition is false
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImportGroupFalseCondition()
         {
             ProjectRootElement xml1 = ProjectRootElement.Create("p1");
@@ -696,7 +696,7 @@ namespace Microsoft.Build.UnitTests.Preprocessor
         /// <summary>
         /// Import has a wildcard expression
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImportWildcard()
         {
             string directory = null;
@@ -786,7 +786,7 @@ namespace Microsoft.Build.UnitTests.Preprocessor
         /// <summary>
         /// CDATA node type cloned correctly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CData()
         {
             Project project = new Project();
@@ -809,7 +809,7 @@ namespace Microsoft.Build.UnitTests.Preprocessor
         /// <summary>
         /// Metadata named "Project" should not confuse it..
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ProjectMetadata()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -842,7 +842,7 @@ namespace Microsoft.Build.UnitTests.Preprocessor
             Helpers.VerifyAssertLineByLine(expected, writer.ToString());
         }
 
-        [Fact]
+        [TestMethod]
         public void SdkImportsAreInPreprocessedOutput()
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -932,7 +932,7 @@ namespace Microsoft.Build.UnitTests.Preprocessor
             }
         }
 
-        [Fact]
+        [TestMethod]
         [ActiveIssue("https://github.com/dotnet/msbuild/issues/11498")]
         public void SdkResolverItemsAndPropertiesAreInPreprocessedOutput()
         {
@@ -1048,7 +1048,7 @@ namespace Microsoft.Build.UnitTests.Preprocessor
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ImportedProjectsSdkImportsAreInPreprocessedOutput()
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -1220,7 +1220,7 @@ namespace Microsoft.Build.UnitTests.Preprocessor
         /// two different folders both import "..\dir.props" or "$(Property)".  Those values will evaluate to different paths at run time
         /// but the preprocessor builds a map of the imports.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DuplicateUnevaluatedImports()
         {
             ProjectRootElement xml1 = ProjectRootElement.Create("p1");

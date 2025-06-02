@@ -18,7 +18,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Get name and value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Accessors()
         {
             ProjectPropertyInstance property = GetPropertyInstance();
@@ -30,7 +30,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Set value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetValue()
         {
             ProjectPropertyInstance property = GetPropertyInstance();
@@ -41,7 +41,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Set value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetValue_Escaped()
         {
             ProjectPropertyInstance property = GetPropertyInstance();
@@ -52,7 +52,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Set empty value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetEmptyValue()
         {
             ProjectPropertyInstance property = GetPropertyInstance();
@@ -63,7 +63,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Set invalid null value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetInvalidNullValue()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -75,7 +75,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Immutable getter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImmutableGetterFalse()
         {
             ProjectPropertyInstance property = GetPropertyInstance();
@@ -85,7 +85,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Immutable getter true
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImmutableGetterTrue()
         {
             var project = new Project();

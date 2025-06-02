@@ -428,8 +428,8 @@ namespace Microsoft.Build.UnitTests
         /// (many coincidentally like existing QA tests) to give breadth coverage.
         /// Please add more cases as they arise.
         /// </summary>
-        [Theory]
-        [MemberData(nameof(TrueTests))]
+        [TestMethod]
+        [DynamicData(nameof(TrueTests))]
         public void EvaluateAVarietyOfTrueExpressions(string expression)
         {
             Parser p = new Parser();
@@ -452,8 +452,8 @@ namespace Microsoft.Build.UnitTests
         /// (many coincidentally like existing QA tests) to give breadth coverage.
         /// Please add more cases as they arise.
         /// </summary>
-        [Theory]
-        [MemberData(nameof(FalseTests))]
+        [TestMethod]
+        [DynamicData(nameof(FalseTests))]
         public void EvaluateAVarietyOfFalseExpressions(string expression)
         {
             Parser p = new Parser();
@@ -476,8 +476,8 @@ namespace Microsoft.Build.UnitTests
         /// (many coincidentally like existing QA tests) to give breadth coverage.
         /// Please add more cases as they arise.
         /// </summary>
-        [Theory]
-        [MemberData(nameof(ErrorTests))]
+        [TestMethod]
+        [DynamicData(nameof(ErrorTests))]
         public void EvaluateAVarietyOfErrorExpressions(string expression)
         {
             // If an expression is invalid,

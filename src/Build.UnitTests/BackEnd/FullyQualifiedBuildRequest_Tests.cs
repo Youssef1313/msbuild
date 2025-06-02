@@ -13,7 +13,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
 {
     public class FullyQualifiedBuildRequest_Tests
     {
-        [Fact]
+        [TestMethod]
         public void TestConstructorGood()
         {
             BuildRequestData data1 = new BuildRequestData("foo", new Dictionary<string, string>(), "tools", Array.Empty<string>(), null);
@@ -25,7 +25,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             request = new FullyQualifiedBuildRequest(new BuildRequestConfiguration(data1, "2.0"), Array.Empty<string>(), false);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestConstructorBad1()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -34,7 +34,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void TestConstructorBad2()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -42,7 +42,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 FullyQualifiedBuildRequest request = new FullyQualifiedBuildRequest(new BuildRequestConfiguration(new BuildRequestData("foo", new Dictionary<string, string>(), "tools", Array.Empty<string>(), null), "2.0"), null, true);
             });
         }
-        [Fact]
+        [TestMethod]
         public void TestProperties()
         {
             BuildRequestData data = new BuildRequestData("foo", new Dictionary<string, string>(), "tools", Array.Empty<string>(), null);

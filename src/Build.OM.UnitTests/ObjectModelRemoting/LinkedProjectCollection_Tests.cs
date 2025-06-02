@@ -23,7 +23,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             group.Clear();
         }
 
-        [Fact]
+        [TestMethod]
         public void EnumerationBasic()
         {
             var pcLocal = this.StdGroup.Local;
@@ -60,7 +60,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.VerifyLinkedNotNull(remoteProj);
         }
 
-        [Fact]
+        [TestMethod]
         public void EnumerationMultiple()
         {
             var pcLocal = this.StdGroup.Local;
@@ -118,7 +118,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ViewValidation.VerifyLinkedNotNull(prj3Coll.FirstOrDefault());
         }
 
-        [Fact]
+        [TestMethod]
         public void DynamicEnumeration()
         {
             var pcLocal = this.StdGroup.Local;
@@ -150,7 +150,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             Assert.Equal(1, pcLocal.Collection.GetLoadedProjects(proj2Path).Count);
         }
 
-        [Fact]
+        [TestMethod]
         public void CrossLinked()
         {
             this.StdGroup.Local.Importing = true;

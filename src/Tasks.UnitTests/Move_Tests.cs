@@ -17,7 +17,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Basic case of moving a file
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BasicMove()
         {
             string sourceFile = FileUtilities.GetTemporaryFile();
@@ -62,7 +62,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Basic case of moving a file but with OverwriteReadOnlyFiles = true.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BasicMoveOverwriteReadOnlyFilesTrue()
         {
             string sourceFile = FileUtilities.GetTemporaryFile();
@@ -115,7 +115,7 @@ namespace Microsoft.Build.UnitTests
         /// File to move does not exist
         /// Should not overwrite destination!
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NonexistentSource()
         {
             string sourceFile = FileUtilities.GetTemporaryFile();
@@ -163,7 +163,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// A file can be moved onto itself successfully (it's a no-op).
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MoveOverSelfIsSuccessful()
         {
             string sourceFile = FileUtilities.GetTemporaryFile();
@@ -198,7 +198,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Move should overwrite any destination file except if it's r/o
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MoveOverExistingFileReadOnlyNoOverwrite()
         {
             string sourceFile = FileUtilities.GetTemporaryFile();
@@ -253,7 +253,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Move should overwrite any writable destination file
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MoveOverExistingFileDestinationWriteable()
         {
             string sourceFile = FileUtilities.GetTemporaryFile();
@@ -305,7 +305,7 @@ namespace Microsoft.Build.UnitTests
         /// This is a regression test for bug 814744 where a move operation with OverwriteReadonlyFiles = true on a destination file with the readonly
         /// flag not set caused the readonly flag to be set before the move which caused the move to fail.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MoveOverExistingFileOverwriteReadOnly()
         {
             string sourceFile = FileUtilities.GetTemporaryFile();
@@ -359,7 +359,7 @@ namespace Microsoft.Build.UnitTests
         /// Move should overwrite any destination file even if it's r/o
         /// if OverwriteReadOnlyFiles is set.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MoveOverExistingFileOverwriteReadOnlyOverWriteReadOnlyFilesTrue()
         {
             string sourceFile = FileUtilities.GetTemporaryFile();
@@ -525,7 +525,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Must have destination
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NoDestination()
         {
             Move move = new Move();
@@ -539,7 +539,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Can't have both destination file and directory
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DestinationFileAndDirectory()
         {
             Move move = new Move();
@@ -555,7 +555,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Can't specify a directory for the destination file
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DestinationFileIsDirectory()
         {
             Move move = new Move();
@@ -570,7 +570,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Can't move a directory to a file
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SourceFileIsDirectory()
         {
             Move move = new Move();
@@ -629,7 +629,7 @@ namespace Microsoft.Build.UnitTests
         /// Moving a file on top of itself should be a success (no-op).
         /// Variation with a second move failure.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MoveFileOnItselfAndFailAMove()
         {
             string temp = Path.GetTempPath();
@@ -673,7 +673,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// DestinationFolder should work.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MoveToNonexistentDestinationFolder()
         {
             string sourceFile = FileUtilities.GetTemporaryFile();
@@ -728,7 +728,7 @@ namespace Microsoft.Build.UnitTests
         /// DestinationFiles should only include files that were successfully moved,
         /// not files for which there was an error.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DestinationFilesLengthNotEqualSourceFilesLength()
         {
             string temp = Path.GetTempPath();
@@ -838,7 +838,7 @@ namespace Microsoft.Build.UnitTests
         /// If the SourceFiles parameter is given invalid path
         /// characters, make sure the task exits gracefully.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExitGracefullyOnInvalidPathCharacters()
         {
             Move t = new Move();
@@ -856,7 +856,7 @@ namespace Microsoft.Build.UnitTests
         /// If the DestinationFile parameter is given invalid path
         /// characters, make sure the task exits gracefully.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExitGracefullyOnInvalidPathCharactersInDestinationFile()
         {
             Move t = new Move();
@@ -874,7 +874,7 @@ namespace Microsoft.Build.UnitTests
         /// If the DestinationFile parameter is given invalid path
         /// characters, make sure the task exits gracefully.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExitGracefullyOnInvalidPathCharactersInDestinationFolder()
         {
             Move t = new Move();

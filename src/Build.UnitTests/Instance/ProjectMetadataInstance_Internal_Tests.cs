@@ -20,7 +20,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Cloning
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DeepClone()
         {
             ProjectMetadataInstance metadata = GetMetadataInstance();
@@ -35,7 +35,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Tests serialization
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Serialization()
         {
             ProjectMetadataInstance metadata = new ProjectMetadataInstance("m1", "v1", false);

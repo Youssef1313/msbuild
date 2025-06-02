@@ -33,7 +33,7 @@ namespace Microsoft.Build.Graph.UnitTests
 
         private ParallelWorkSet<string, string> _workSet;
 
-        [Fact]
+        [TestMethod]
         public void GivenExceptionsOnCompletionThread_CompletesAndThrowsException()
         {
             TestParallelWorkSet(new ParallelWorkSetTestCase
@@ -61,7 +61,7 @@ namespace Microsoft.Build.Graph.UnitTests
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void GivenExceptionsOnWorkerThread_CompletesAndThrowsExceptions()
         {
             TestParallelWorkSet(new ParallelWorkSetTestCase
@@ -89,7 +89,7 @@ namespace Microsoft.Build.Graph.UnitTests
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void GivenNoWorkItemAndMultipleWorkers_Completes()
         {
             TestParallelWorkSet(new ParallelWorkSetTestCase
@@ -98,13 +98,13 @@ namespace Microsoft.Build.Graph.UnitTests
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void GivenNoWorkItemAndNoWorkers_Completes()
         {
             TestParallelWorkSet(new ParallelWorkSetTestCase());
         }
 
-        [Fact]
+        [TestMethod]
         public void GivenRecursiveWorkItemsAndMultipleWorkers_Completes()
         {
             TestParallelWorkSet(new ParallelWorkSetTestCase
@@ -136,7 +136,7 @@ namespace Microsoft.Build.Graph.UnitTests
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void GivenRecursiveWorkItemsAndNoWorker_Completes()
         {
             TestParallelWorkSet(new ParallelWorkSetTestCase
@@ -168,7 +168,7 @@ namespace Microsoft.Build.Graph.UnitTests
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void GivenWorkItemsAndMultipleWorkers_Completes()
         {
             TestParallelWorkSet(new ParallelWorkSetTestCase
@@ -201,7 +201,7 @@ namespace Microsoft.Build.Graph.UnitTests
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void GivenWorkItemsAndNoWorker_Completes()
         {
             TestParallelWorkSet(new ParallelWorkSetTestCase

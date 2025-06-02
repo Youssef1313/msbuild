@@ -11,13 +11,13 @@ namespace Microsoft.Build.UnitTests.Telemetry;
 
 public class LoggingConfigurationTelemetry_Tests
 {
-    [Fact]
+    [TestMethod]
     public void LoggingConfigurationTelemetryIsThere()
     {
         KnownTelemetry.LoggingConfigurationTelemetry.ShouldNotBeNull();
     }
 
-    [Fact]
+    [TestMethod]
     public void BuildTelemetryConstructedHasNoProperties()
     {
         LoggingConfigurationTelemetry telemetry = new();
@@ -41,7 +41,7 @@ public class LoggingConfigurationTelemetry_Tests
         telemetry.GetProperties().Where(kv => kv.Value != bool.FalseString).ShouldBeEmpty();
     }
 
-    [Fact]
+    [TestMethod]
     public void BuildTelemetryCreateProperProperties()
     {
         LoggingConfigurationTelemetry telemetry = new()

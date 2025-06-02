@@ -12,7 +12,7 @@ namespace Microsoft.Build.Engine.UnitTests.BackEnd
 {
     public class RedirectConsoleWriter_Tests
     {
-        [Fact]
+        [TestMethod]
         public async Task EmitConsoleMessages()
         {
             StringBuilder sb = new StringBuilder();

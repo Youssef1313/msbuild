@@ -25,7 +25,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verifies that construction and serialization with a null parameter is OK.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NullParameter()
         {
             TaskParameter t = new TaskParameter(null);
@@ -40,22 +40,22 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(TaskParameterType.Null, t2.ParameterType);
         }
 
-        [Theory]
-        [InlineData(typeof(bool), (int)TypeCode.Boolean, "True")]
-        [InlineData(typeof(byte), (int)TypeCode.Byte, "127")]
-        [InlineData(typeof(sbyte), (int)TypeCode.SByte, "-127")]
-        [InlineData(typeof(double), (int)TypeCode.Double, "3.14")]
-        [InlineData(typeof(float), (int)TypeCode.Single, "3.14")]
-        [InlineData(typeof(short), (int)TypeCode.Int16, "-20000")]
-        [InlineData(typeof(ushort), (int)TypeCode.UInt16, "30000")]
-        [InlineData(typeof(int), (int)TypeCode.Int32, "-1")]
-        [InlineData(typeof(uint), (int)TypeCode.UInt32, "1")]
-        [InlineData(typeof(long), (int)TypeCode.Int64, "-1000000000000")]
-        [InlineData(typeof(ulong), (int)TypeCode.UInt64, "1000000000000")]
-        [InlineData(typeof(decimal), (int)TypeCode.Decimal, "29.99")]
-        [InlineData(typeof(char), (int)TypeCode.Char, "q")]
-        [InlineData(typeof(string), (int)TypeCode.String, "foo")]
-        [InlineData(typeof(DateTime), (int)TypeCode.DateTime, "1/1/2000 12:12:12")]
+        [TestMethod]
+        [DataRow(typeof(bool), (int)TypeCode.Boolean, "True")]
+        [DataRow(typeof(byte), (int)TypeCode.Byte, "127")]
+        [DataRow(typeof(sbyte), (int)TypeCode.SByte, "-127")]
+        [DataRow(typeof(double), (int)TypeCode.Double, "3.14")]
+        [DataRow(typeof(float), (int)TypeCode.Single, "3.14")]
+        [DataRow(typeof(short), (int)TypeCode.Int16, "-20000")]
+        [DataRow(typeof(ushort), (int)TypeCode.UInt16, "30000")]
+        [DataRow(typeof(int), (int)TypeCode.Int32, "-1")]
+        [DataRow(typeof(uint), (int)TypeCode.UInt32, "1")]
+        [DataRow(typeof(long), (int)TypeCode.Int64, "-1000000000000")]
+        [DataRow(typeof(ulong), (int)TypeCode.UInt64, "1000000000000")]
+        [DataRow(typeof(decimal), (int)TypeCode.Decimal, "29.99")]
+        [DataRow(typeof(char), (int)TypeCode.Char, "q")]
+        [DataRow(typeof(string), (int)TypeCode.String, "foo")]
+        [DataRow(typeof(DateTime), (int)TypeCode.DateTime, "1/1/2000 12:12:12")]
         public void PrimitiveParameter(Type type, int expectedTypeCodeAsInt, string testValueAsString)
         {
             TypeCode expectedTypeCode = (TypeCode)expectedTypeCodeAsInt;
@@ -75,22 +75,22 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(expectedTypeCode, t2.ParameterTypeCode);
         }
 
-        [Theory]
-        [InlineData(typeof(bool), (int)TypeCode.Boolean, "True;False;True")]
-        [InlineData(typeof(byte), (int)TypeCode.Byte, "127;100;0")]
-        [InlineData(typeof(sbyte), (int)TypeCode.SByte, "-127;-126;12")]
-        [InlineData(typeof(double), (int)TypeCode.Double, "3.14;3.15")]
-        [InlineData(typeof(float), (int)TypeCode.Single, "3.14;3.15")]
-        [InlineData(typeof(short), (int)TypeCode.Int16, "-20000;0;-1")]
-        [InlineData(typeof(ushort), (int)TypeCode.UInt16, "30000;20000;10")]
-        [InlineData(typeof(int), (int)TypeCode.Int32, "-1;-2")]
-        [InlineData(typeof(uint), (int)TypeCode.UInt32, "1;5;6")]
-        [InlineData(typeof(long), (int)TypeCode.Int64, "-1000000000000;0")]
-        [InlineData(typeof(ulong), (int)TypeCode.UInt64, "1000000000000;0")]
-        [InlineData(typeof(decimal), (int)TypeCode.Decimal, "29.99;0.88")]
-        [InlineData(typeof(char), (int)TypeCode.Char, "q;r;c")]
-        [InlineData(typeof(string), (int)TypeCode.String, "foo;bar")]
-        [InlineData(typeof(DateTime), (int)TypeCode.DateTime, "1/1/2000 12:12:12;2/2/2000 13:13:13")]
+        [TestMethod]
+        [DataRow(typeof(bool), (int)TypeCode.Boolean, "True;False;True")]
+        [DataRow(typeof(byte), (int)TypeCode.Byte, "127;100;0")]
+        [DataRow(typeof(sbyte), (int)TypeCode.SByte, "-127;-126;12")]
+        [DataRow(typeof(double), (int)TypeCode.Double, "3.14;3.15")]
+        [DataRow(typeof(float), (int)TypeCode.Single, "3.14;3.15")]
+        [DataRow(typeof(short), (int)TypeCode.Int16, "-20000;0;-1")]
+        [DataRow(typeof(ushort), (int)TypeCode.UInt16, "30000;20000;10")]
+        [DataRow(typeof(int), (int)TypeCode.Int32, "-1;-2")]
+        [DataRow(typeof(uint), (int)TypeCode.UInt32, "1;5;6")]
+        [DataRow(typeof(long), (int)TypeCode.Int64, "-1000000000000;0")]
+        [DataRow(typeof(ulong), (int)TypeCode.UInt64, "1000000000000;0")]
+        [DataRow(typeof(decimal), (int)TypeCode.Decimal, "29.99;0.88")]
+        [DataRow(typeof(char), (int)TypeCode.Char, "q;r;c")]
+        [DataRow(typeof(string), (int)TypeCode.String, "foo;bar")]
+        [DataRow(typeof(DateTime), (int)TypeCode.DateTime, "1/1/2000 12:12:12;2/2/2000 13:13:13")]
         public void PrimitiveArrayParameter(Type type, int expectedTypeCodeAsInt, string testValueAsString)
         {
             TypeCode expectedTypeCode = (TypeCode)expectedTypeCodeAsInt;
@@ -117,7 +117,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(expectedTypeCode, t2.ParameterTypeCode);
         }
 
-        [Fact]
+        [TestMethod]
         public void ValueTypeParameter()
         {
             TaskBuilderTestTask.CustomStruct value = new TaskBuilderTestTask.CustomStruct(3.14);
@@ -134,7 +134,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(TaskParameterType.ValueType, t2.ParameterType);
         }
 
-        [Fact]
+        [TestMethod]
         public void ValueTypeArrayParameter()
         {
             TaskBuilderTestTask.CustomStruct[] value = new TaskBuilderTestTask.CustomStruct[]
@@ -166,7 +166,7 @@ namespace Microsoft.Build.UnitTests
             SomethingElse
         }
 
-        [Fact]
+        [TestMethod]
         public void EnumParameter()
         {
             TaskParameter t = new TaskParameter(TestEnumForParameter.SomethingElse);
@@ -186,7 +186,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verifies that construction and serialization with an ITaskItem parameter is OK.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ITaskItemParameter()
         {
             TaskParameter t = new TaskParameter(new TaskItem("foo"));
@@ -210,7 +210,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verifies that construction and serialization with an ITaskItem parameter that has custom metadata is OK.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ITaskItemParameterWithMetadata()
         {
             TaskItem baseItem = new TaskItem("foo");
@@ -242,7 +242,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verifies that construction and serialization with a parameter that is an array of ITaskItems is OK.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ITaskItemArrayParameter()
         {
             TaskParameter t = new TaskParameter(new ITaskItem[] { new TaskItem("foo"), new TaskItem("bar") });
@@ -271,7 +271,7 @@ namespace Microsoft.Build.UnitTests
         /// Verifies that construction and serialization with a parameter that is an ITaskItem with an
         /// itemspec containing escapable characters translates the escaping correctly.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ITaskItemParameter_EscapedItemSpec()
         {
             TaskParameter t = new TaskParameter(new TaskItem("foo%3bbar"));
@@ -296,7 +296,7 @@ namespace Microsoft.Build.UnitTests
         /// Verifies that construction and serialization with a parameter that is an ITaskItem with an
         /// itemspec containing doubly-escaped characters translates the escaping correctly.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ITaskItemParameter_DoubleEscapedItemSpec()
         {
             TaskParameter t = new TaskParameter(new TaskItem("foo%253bbar"));
@@ -332,7 +332,7 @@ namespace Microsoft.Build.UnitTests
         /// Verifies that construction and serialization with a parameter that is an ITaskItem with an
         /// itemspec containing the non-escaped forms of escapable characters translates the escaping correctly.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ITaskItemParameter_EscapableNotEscapedItemSpec()
         {
             TaskParameter t = new TaskParameter(new TaskItem("foo;bar"));
@@ -359,7 +359,7 @@ namespace Microsoft.Build.UnitTests
         /// Verifies that construction and serialization with a parameter that is an ITaskItem with
         /// metadata containing escapable characters translates the escaping correctly.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ITaskItemParameter_EscapedMetadata()
         {
             IDictionary metadata = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
@@ -392,7 +392,7 @@ namespace Microsoft.Build.UnitTests
         /// Verifies that construction and serialization with a parameter that is an ITaskItem with
         /// metadata containing doubly-escaped characters translates the escaping correctly.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ITaskItemParameter_DoubleEscapedMetadata()
         {
             IDictionary metadata = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
@@ -439,7 +439,7 @@ namespace Microsoft.Build.UnitTests
         /// metadata containing the non-escaped versions of escapable characters translates the
         /// escaping correctly.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ITaskItemParameter_EscapableNotEscapedMetadata()
         {
             IDictionary metadata = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);

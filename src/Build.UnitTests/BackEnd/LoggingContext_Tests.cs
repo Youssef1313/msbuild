@@ -26,7 +26,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// A few simple tests for NodeLoggingContexts.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CreateValidNodeLoggingContexts()
         {
             NodeLoggingContext context = new NodeLoggingContext(new MockLoggingService(_output.WriteLine), 1, true);
@@ -53,7 +53,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// an exception -- this is to guarantee that if we're passing around invalid node IDs,
         /// we'll know about it.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidNodeIdOnNodeLoggingContext()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -62,7 +62,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void HasLoggedErrors()
         {
             NodeLoggingContext context = new NodeLoggingContext(new MockLoggingService(_output.WriteLine), 1, true);

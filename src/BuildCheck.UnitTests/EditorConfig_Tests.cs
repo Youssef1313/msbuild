@@ -117,7 +117,7 @@ public class EditorConfig_Tests
 
     // Section Matchin Test cases: https://github.com/dotnet/roslyn/blob/ba163e712b01358a217065eec8a4a82f94a7efd5/src/Compilers/Core/CodeAnalysisTest/Analyzers/AnalyzerConfigTests.cs#L337
     #region Section Matching Tests
-    [Fact]
+    [TestMethod]
     public void SimpleNameMatch()
     {
         SectionNameMatcher matcher = TryCreateSectionNameMatcher("abc").Value;
@@ -129,7 +129,7 @@ public class EditorConfig_Tests
         Assert.False(matcher.IsMatch("/cabc"));
     }
 
-    [Fact]
+    [TestMethod]
     public void StarOnlyMatch()
     {
         SectionNameMatcher matcher = TryCreateSectionNameMatcher("*").Value;
@@ -140,7 +140,7 @@ public class EditorConfig_Tests
         Assert.True(matcher.IsMatch("/abc/123"));
     }
 
-    [Fact]
+    [TestMethod]
     public void StarNameMatch()
     {
         SectionNameMatcher matcher = TryCreateSectionNameMatcher("*.cs").Value;
@@ -157,7 +157,7 @@ public class EditorConfig_Tests
         Assert.False(matcher.IsMatch("/abc.vb"));
     }
 
-    [Fact]
+    [TestMethod]
     public void StarStarNameMatch()
     {
         SectionNameMatcher matcher = TryCreateSectionNameMatcher("**.cs").Value;
@@ -167,7 +167,7 @@ public class EditorConfig_Tests
         Assert.True(matcher.IsMatch("/dir/subpath.cs"));
     }
 
-    [Fact]
+    [TestMethod]
     public void EscapeDot()
     {
         SectionNameMatcher matcher = TryCreateSectionNameMatcher("...").Value;
@@ -180,14 +180,14 @@ public class EditorConfig_Tests
         Assert.False(matcher.IsMatch("/abc"));
     }
 
-    [Fact]
+    [TestMethod]
     public void EndBackslashMatch()
     {
         SectionNameMatcher? matcher = TryCreateSectionNameMatcher("abc\\");
         Assert.Null(matcher);
     }
 
-    [Fact]
+    [TestMethod]
     public void QuestionMatch()
     {
         SectionNameMatcher matcher = TryCreateSectionNameMatcher("ab?def").Value;
@@ -200,7 +200,7 @@ public class EditorConfig_Tests
         Assert.True(matcher.IsMatch("/ab\\def"));
     }
 
-    [Fact]
+    [TestMethod]
     public void LiteralBackslash()
     {
         SectionNameMatcher matcher = TryCreateSectionNameMatcher("ab\\\\c").Value;
@@ -211,7 +211,7 @@ public class EditorConfig_Tests
         Assert.False(matcher.IsMatch("/ab\\\\c"));
     }
 
-    [Fact]
+    [TestMethod]
     public void LiteralStars()
     {
         SectionNameMatcher matcher = TryCreateSectionNameMatcher("\\***\\*\\**").Value;
@@ -223,7 +223,7 @@ public class EditorConfig_Tests
         Assert.False(matcher.IsMatch("/*ab/cd**ef/gh"));
     }
 
-    [Fact]
+    [TestMethod]
     public void LiteralQuestions()
     {
         SectionNameMatcher matcher = TryCreateSectionNameMatcher("\\??\\?*\\??").Value;
@@ -237,7 +237,7 @@ public class EditorConfig_Tests
         Assert.False(matcher.IsMatch("/?axcde?f"));
     }
 
-    [Fact]
+    [TestMethod]
     public void LiteralBraces()
     {
         SectionNameMatcher matcher = TryCreateSectionNameMatcher("abc\\{\\}def").Value;
@@ -249,7 +249,7 @@ public class EditorConfig_Tests
         Assert.False(matcher.IsMatch("/abc}{def"));
     }
 
-    [Fact]
+    [TestMethod]
     public void LiteralComma()
     {
         SectionNameMatcher matcher = TryCreateSectionNameMatcher("abc\\,def").Value;
@@ -262,7 +262,7 @@ public class EditorConfig_Tests
         Assert.False(matcher.IsMatch("/abc`def"));
     }
 
-    [Fact]
+    [TestMethod]
     public void SimpleChoice()
     {
         SectionNameMatcher matcher = TryCreateSectionNameMatcher("*.{cs,vb,fs}").Value;
@@ -283,7 +283,7 @@ public class EditorConfig_Tests
         Assert.False(matcher.IsMatch("/subdir/abcxcs"));
     }
 
-    [Fact]
+    [TestMethod]
     public void OneChoiceHasSlashes()
     {
         SectionNameMatcher matcher = TryCreateSectionNameMatcher("{*.cs,subdir/test.vb}").Value;
@@ -306,7 +306,7 @@ public class EditorConfig_Tests
         Assert.False(matcher.IsMatch("/test.vb"));
     }
 
-    [Fact]
+    [TestMethod]
     public void EmptyChoice()
     {
         SectionNameMatcher matcher = TryCreateSectionNameMatcher("{}").Value;
@@ -318,7 +318,7 @@ public class EditorConfig_Tests
         Assert.False(matcher.IsMatch("/anything"));
     }
 
-    [Fact]
+    [TestMethod]
     public void SingleChoice()
     {
         SectionNameMatcher matcher = TryCreateSectionNameMatcher("{*.cs}").Value;
@@ -330,21 +330,21 @@ public class EditorConfig_Tests
         Assert.False(matcher.IsMatch("testxcs"));
     }
 
-    [Fact]
+    [TestMethod]
     public void UnmatchedBraces()
     {
         SectionNameMatcher? matcher = TryCreateSectionNameMatcher("{{{{}}");
         Assert.Null(matcher);
     }
 
-    [Fact]
+    [TestMethod]
     public void CommaOutsideBraces()
     {
         SectionNameMatcher? matcher = TryCreateSectionNameMatcher("abc,def");
         Assert.Null(matcher);
     }
 
-    [Fact]
+    [TestMethod]
     public void RecursiveChoice()
     {
         SectionNameMatcher matcher = TryCreateSectionNameMatcher("{test{.cs,.vb},other.{a{bb,cc}}}").Value;
@@ -364,7 +364,7 @@ public class EditorConfig_Tests
         Assert.False(matcher.IsMatch("/subdir/other.ccc"));
     }
 
-    [Fact]
+    [TestMethod]
     public void DashChoice()
     {
         SectionNameMatcher matcher = TryCreateSectionNameMatcher("ab{-}cd{-,}ef").Value;
@@ -378,7 +378,7 @@ public class EditorConfig_Tests
         Assert.False(matcher.IsMatch("/ab--cd--ef"));
     }
 
-    [Fact]
+    [TestMethod]
     public void MiddleMatch()
     {
         SectionNameMatcher matcher = TryCreateSectionNameMatcher("ab{cs,vb,fs}cd").Value;
@@ -399,7 +399,7 @@ public class EditorConfig_Tests
         yield return (s2, s1);
     }
 
-    [Fact]
+    [TestMethod]
     public void NumberMatch()
     {
         foreach (var (i1, i2) in RangeAndInverse("0", "10"))
@@ -416,7 +416,7 @@ public class EditorConfig_Tests
         }
     }
 
-    [Fact]
+    [TestMethod]
     public void NumberMatchNegativeRange()
     {
         foreach (var (i1, i2) in RangeAndInverse("-10", "0"))
@@ -432,7 +432,7 @@ public class EditorConfig_Tests
         }
     }
 
-    [Fact]
+    [TestMethod]
     public void NumberMatchNegToPos()
     {
         foreach (var (i1, i2) in RangeAndInverse("-10", "10"))
@@ -450,7 +450,7 @@ public class EditorConfig_Tests
         }
     }
 
-    [Fact]
+    [TestMethod]
     public void MultipleNumberRanges()
     {
         foreach (var matchString in new[] { "a{-10..0}b{0..10}", "a{0..-10}b{10..0}" })
@@ -472,7 +472,7 @@ public class EditorConfig_Tests
         }
     }
 
-    [Fact]
+    [TestMethod]
     public void BadNumberRanges()
     {
         var matcherOpt = TryCreateSectionNameMatcher("{0..");
@@ -498,7 +498,7 @@ public class EditorConfig_Tests
         Assert.Null(matcherOpt);
     }
 
-    [Fact]
+    [TestMethod]
     public void CharacterClassSimple()
     {
         var matcher = TryCreateSectionNameMatcher("*.[cf]s").Value;
@@ -509,7 +509,7 @@ public class EditorConfig_Tests
         Assert.False(matcher.IsMatch("/abc.vs"));
     }
 
-    [Fact]
+    [TestMethod]
     public void CharacterClassNegative()
     {
         var matcher = TryCreateSectionNameMatcher("*.[!cf]s").Value;
@@ -522,7 +522,7 @@ public class EditorConfig_Tests
         Assert.False(matcher.IsMatch("/abc.vxs"));
     }
 
-    [Fact]
+    [TestMethod]
     public void CharacterClassCaret()
     {
         var matcher = TryCreateSectionNameMatcher("*.[^cf]s").Value;
@@ -536,7 +536,7 @@ public class EditorConfig_Tests
         Assert.False(matcher.IsMatch("/abc.vxs"));
     }
 
-    [Fact]
+    [TestMethod]
     public void CharacterClassRange()
     {
         var matcher = TryCreateSectionNameMatcher("[0-9]x").Value;
@@ -549,7 +549,7 @@ public class EditorConfig_Tests
         Assert.False(matcher.IsMatch("/00x"));
     }
 
-    [Fact]
+    [TestMethod]
     public void CharacterClassNegativeRange()
     {
         var matcher = TryCreateSectionNameMatcher("[!0-9]x").Value;
@@ -562,7 +562,7 @@ public class EditorConfig_Tests
         Assert.False(matcher.IsMatch("/00x"));
     }
 
-    [Fact]
+    [TestMethod]
     public void CharacterClassRangeAndChoice()
     {
         var matcher = TryCreateSectionNameMatcher("[ab0-9]x").Value;
@@ -577,28 +577,28 @@ public class EditorConfig_Tests
         Assert.False(matcher.IsMatch("/0ax"));
     }
 
-    [Fact]
+    [TestMethod]
     public void CharacterClassOpenEnded()
     {
         var matcher = TryCreateSectionNameMatcher("[");
         Assert.Null(matcher);
     }
 
-    [Fact]
+    [TestMethod]
     public void CharacterClassEscapedOpenEnded()
     {
         var matcher = TryCreateSectionNameMatcher(@"[\]");
         Assert.Null(matcher);
     }
 
-    [Fact]
+    [TestMethod]
     public void CharacterClassEscapeAtEnd()
     {
         var matcher = TryCreateSectionNameMatcher(@"[\");
         Assert.Null(matcher);
     }
 
-    [Fact]
+    [TestMethod]
     public void CharacterClassOpenBracketInside()
     {
         var matcher = TryCreateSectionNameMatcher(@"[[a]bc").Value;
@@ -614,7 +614,7 @@ public class EditorConfig_Tests
         Assert.Equal(@"^.*/[\[a]bc$", matcher.Regex.ToString());
     }
 
-    [Fact]
+    [TestMethod]
     public void CharacterClassStartingDash()
     {
         var matcher = TryCreateSectionNameMatcher(@"[-ac]bd").Value;
@@ -629,7 +629,7 @@ public class EditorConfig_Tests
         Assert.Equal(@"^.*/[-ac]bd$", matcher.Regex.ToString());
     }
 
-    [Fact]
+    [TestMethod]
     public void CharacterClassEndingDash()
     {
         var matcher = TryCreateSectionNameMatcher(@"[ac-]bd").Value;
@@ -644,7 +644,7 @@ public class EditorConfig_Tests
         Assert.Equal(@"^.*/[ac-]bd$", matcher.Regex.ToString());
     }
 
-    [Fact]
+    [TestMethod]
     public void CharacterClassEndBracketAfter()
     {
         var matcher = TryCreateSectionNameMatcher(@"[ab]]cd").Value;
@@ -658,7 +658,7 @@ public class EditorConfig_Tests
         Assert.Equal(@"^.*/[ab]]cd$", matcher.Regex.ToString());
     }
 
-    [Fact]
+    [TestMethod]
     public void CharacterClassEscapeBackslash()
     {
         var matcher = TryCreateSectionNameMatcher(@"[ab\\]cd").Value;
@@ -673,7 +673,7 @@ public class EditorConfig_Tests
         Assert.Equal(@"^.*/[ab\\]cd$", matcher.Regex.ToString());
     }
 
-    [Fact]
+    [TestMethod]
     public void EscapeOpenBracket()
     {
         var matcher = TryCreateSectionNameMatcher(@"ab\[cd").Value;
@@ -761,7 +761,7 @@ public class EditorConfig_Tests
         return new KeyValuePair<K, V>(key, value);
     }
 
-    [Fact]
+    [TestMethod]
     public void SimpleCase()
     {
         var config = EditorConfigFile.Parse("""
@@ -794,7 +794,7 @@ my_prop = my_val
     }
 
 
-    [Fact]
+    [TestMethod]
     // [WorkItem(52469, "https://github.com/dotnet/roslyn/issues/52469")]
     public void ConfigWithEscapedValues()
     {
@@ -828,7 +828,7 @@ build_metadata.Compile.ToRetrieve = ghi789
     }
 
     /*
-    [Fact]
+    [TestMethod]
     [WorkItem(52469, "https://github.com/dotnet/roslyn/issues/52469")]
     public void CanGetSectionsWithSpecialCharacters()
     {
@@ -850,7 +850,7 @@ build_metadata.Compile.ToRetrieve = def456
         Assert.Equal("def456", sectionOptions.CheckOptions["build_metadata.compile.toretrieve"]);
     }*/
 
-    [Fact]
+    [TestMethod]
     public void MissingClosingBracket()
     {
         var config = EditorConfigFile.Parse(@"
@@ -865,7 +865,7 @@ my_prop = my_val");
     }
 
 
-    [Fact]
+    [TestMethod]
     public void EmptySection()
     {
         var config = EditorConfigFile.Parse(@"
@@ -878,7 +878,7 @@ my_prop = my_val");
     }
 
 
-    [Fact]
+    [TestMethod]
     public void CaseInsensitivePropKey()
     {
         var config = EditorConfigFile.Parse(@"
@@ -891,7 +891,7 @@ my_PROP = my_VAL");
     }
 
     // there is no reversed keys support for msbuild
-    /*[Fact]
+    /*[TestMethod]
     public void NonReservedKeyPreservedCaseVal()
     {
         var config = ParseConfigFile(string.Join(Environment.NewLine,
@@ -902,7 +902,7 @@ my_PROP = my_VAL");
     }*/
 
 
-    [Fact]
+    [TestMethod]
     public void DuplicateKeys()
     {
         var config = EditorConfigFile.Parse(@"
@@ -914,7 +914,7 @@ my_prop = my_other_val");
     }
 
 
-    [Fact]
+    [TestMethod]
     public void DuplicateKeysCasing()
     {
         var config = EditorConfigFile.Parse(@"
@@ -926,7 +926,7 @@ my_PROP = my_other_val");
     }
 
 
-    [Fact]
+    [TestMethod]
     public void MissingKey()
     {
         var config = EditorConfigFile.Parse(@"
@@ -941,7 +941,7 @@ my_prop = my_val2");
 
 
 
-    [Fact]
+    [TestMethod]
     public void MissingVal()
     {
         var config = EditorConfigFile.Parse(@"
@@ -956,7 +956,7 @@ my_prop2 = my_val");
     }
 
 
-    [Fact]
+    [TestMethod]
     public void SpacesInProperties()
     {
         var config = EditorConfigFile.Parse(@"
@@ -970,7 +970,7 @@ my_prop2 = my val2");
     }
 
 
-    [Fact]
+    [TestMethod]
     public void EndOfLineComments()
     {
         var config = EditorConfigFile.Parse(@"
@@ -982,7 +982,7 @@ my_prop2 = my val2 # Comment");
             properties);
     }
 
-    [Fact]
+    [TestMethod]
     public void SymbolsStartKeys()
     {
         var config = EditorConfigFile.Parse(@"
@@ -994,7 +994,7 @@ my_prop2 = my val2 # Comment");
     }
 
 
-    [Fact]
+    [TestMethod]
     public void EqualsAndColon()
     {
         var config = EditorConfigFile.Parse(@"
@@ -1008,7 +1008,7 @@ my_key2 = my:val");
             properties);
     }
 
-    [Fact]
+    [TestMethod]
     public void SymbolsInProperties()
     {
         var config = EditorConfigFile.Parse(@"
@@ -1021,7 +1021,7 @@ my_key2 = my@val");
             properties);
     }
 
-    [Fact]
+    [TestMethod]
     public void LongLines()
     {
         // This example is described in the Python ConfigParser as allowing
@@ -1039,7 +1039,7 @@ long: this value continues
     }
 
 
-    [Fact]
+    [TestMethod]
     public void CaseInsensitiveRoot()
     {
         var config = EditorConfigFile.Parse(@"
@@ -1050,7 +1050,7 @@ RoOt = TruE");
 
     /*
     Reserved values are not supported at the moment
-    [Fact]
+    [TestMethod]
     public void ReservedValues()
     {
         int index = 0;
@@ -1064,7 +1064,7 @@ RoOt = TruE");
     */
 
     /*
-    [Fact]
+    [TestMethod]
     public void ReservedKeys()
     {
         var config = ParseConfigFile(string.Join(Environment.NewLine,

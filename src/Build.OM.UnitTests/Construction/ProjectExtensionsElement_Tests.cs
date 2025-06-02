@@ -15,12 +15,13 @@ namespace Microsoft.Build.UnitTests.OM.Construction
     /// <summary>
     /// Tests for the <see cref="ProjectExtensionsElement"/> class.
     /// </summary>
+    [TestClass]
     public class ProjectExtensionsElement_Tests
     {
         /// <summary>
         /// Read ProjectExtensions with some child
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Read()
         {
             string content = @"
@@ -41,7 +42,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read ProjectExtensions with invalid Condition attribute
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidCondition()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -58,7 +59,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read project with more than one ProjectExtensions
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidDuplicate()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -77,7 +78,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set valid content
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetValid()
         {
             ProjectExtensionsElement extensions = GetEmptyProjectExtensions();
@@ -92,7 +93,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set null content
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetInvalidNull()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -105,7 +106,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Delete by ID
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DeleteById()
         {
             string content = @"
@@ -131,7 +132,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Get by ID
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetById()
         {
             string content = @"
@@ -157,7 +158,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set by ID on not existing ID
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetById()
         {
             string content = @"
@@ -180,7 +181,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set by ID on existing ID
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetByIdWhereItAlreadyExists()
         {
             string content = @"

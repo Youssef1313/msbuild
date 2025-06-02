@@ -20,13 +20,13 @@ namespace Microsoft.Build.UnitTests.BackEnd
 {
     public class ResultsCache_Tests
     {
-        [Fact]
+        [TestMethod]
         public void TestConstructor()
         {
             ResultsCache cache = new ResultsCache();
         }
 
-        [Fact]
+        [TestMethod]
         public void TestAddAndRetrieveResults()
         {
             ResultsCache cache = new ResultsCache();
@@ -39,7 +39,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.True(AreResultsIdentical(result, retrievedResult));
         }
 
-        [Fact]
+        [TestMethod]
         public void TestAddAndRetrieveResultsByConfiguration()
         {
             ResultsCache cache = new ResultsCache();
@@ -59,7 +59,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.True(retrievedResult.HasResultsForTarget("otherTarget"));
         }
 
-        [Fact]
+        [TestMethod]
         public void CacheCanBeEnumerated()
         {
             ResultsCache cache = new ResultsCache();
@@ -86,7 +86,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.True(results[1].HasResultsForTarget("result2target1"));
         }
 
-        [Fact]
+        [TestMethod]
         public void TestMissingResults()
         {
             ResultsCache cache = new ResultsCache();
@@ -96,7 +96,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Null(retrievedResult);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestRetrieveMergedResults()
         {
             ResultsCache cache = new ResultsCache();
@@ -115,7 +115,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.True(AreResultsIdenticalForTarget(result2, retrievedResult, "testTarget2"));
         }
 
-        [Fact]
+        [TestMethod]
         public void TestMergeResultsWithException()
         {
             ResultsCache cache = new ResultsCache();
@@ -132,7 +132,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.NotNull(retrievedResult.Exception);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestRetrieveIncompleteResults()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -146,7 +146,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 cache.GetResultForRequest(request);
             });
         }
-        [Fact]
+        [TestMethod]
         public void TestRetrieveSubsetResults()
         {
             ResultsCache cache = new ResultsCache();
@@ -169,7 +169,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// results, the returned result should only contain the targets we asked for, and the overall
         /// status of the result should reflect the targets we asked for as well.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestRetrieveSubsetTargetsFromResult()
         {
             ResultsCache cache = new ResultsCache();
@@ -189,7 +189,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(BuildResultCode.Success, response.Results.OverallResult);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestCacheOnDifferentBuildFlagsPerRequest_ProvideProjectStateAfterBuild()
         {
             string targetName = "testTarget1";
@@ -258,7 +258,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(ResultsCacheResponseType.Satisfied, cacheResponseForNoBuildDataFlags2.Type);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestCacheOnDifferentBuildFlagsPerRequest_ProvideSubsetOfStateAfterBuild()
         {
             string targetName = "testTarget1";
@@ -336,7 +336,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal("", cachedResponseWithSubsetFlag2.Results.ProjectStateAfterBuild.GetPropertyValue("property2"));
         }
 
-        [Fact]
+        [TestMethod]
         public void TestClearResultsCache()
         {
             ResultsCache cache = new ResultsCache();
@@ -381,8 +381,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
         }
 
         // Serialize latest version and deserialize latest version of the cache
-        [Theory]
-        [MemberData(nameof(CacheSerializationTestData))]
+        [TestMethod]
+        [DynamicData(nameof(CacheSerializationTestData))]
         public void TestResultsCacheTranslation(object obj)
         {
             var resultsCache = (ResultsCache)obj;
@@ -394,9 +394,9 @@ namespace Microsoft.Build.UnitTests.BackEnd
             CompareResultsCache(resultsCache, copy);
         }
 
-        [Theory]
-        [InlineData(1, 1)] // Serialize version 0 and deserialize version 0 
-        [InlineData(1, 0)] // Serialize version 0 and deserialize latest version
+        [TestMethod]
+        [DataRow(1, 1)] // Serialize version 0 and deserialize version 0 
+        [DataRow(1, 0)] // Serialize version 0 and deserialize latest version
         public void TestResultsCacheTranslationAcrossVersions(int envValue1, int envValue2)
         {
             using (var env = TestEnvironment.Create())

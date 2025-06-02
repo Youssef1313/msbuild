@@ -12,7 +12,7 @@ namespace Microsoft.Build.Framework.UnitTests
 {
     public class WorkerNodeTelemetryEventArgs_Tests
     {
-        [Fact]
+        [TestMethod]
         public void SerializationDeserializationTest()
         {
             WorkerNodeTelemetryData td = new WorkerNodeTelemetryData(

@@ -15,7 +15,7 @@ namespace Microsoft.Build.UnitTests
     public class SGen_Tests
     {
 #if RUNTIME_TYPE_NETCORE
-        [Fact]
+        [TestMethod]
         public void TaskFailsOnCore()
         {
             using (TestEnvironment testenv = TestEnvironment.Create())
@@ -53,7 +53,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void KeyFileQuotedOnCommandLineIfNecessary()
         {
             SGenExtension sgen = new SGenExtension();
@@ -74,7 +74,7 @@ namespace Microsoft.Build.UnitTests
             Assert.True(commandLine.IndexOf("/compiler:\"/keyfile:\\\"" + sgen.KeyFile + "\\\"\"", StringComparison.OrdinalIgnoreCase) >= 0);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestKeepFlagTrue()
         {
             SGenExtension sgen = new SGenExtension();
@@ -89,7 +89,7 @@ namespace Microsoft.Build.UnitTests
             Assert.True(commandLine.IndexOf("/keep", StringComparison.OrdinalIgnoreCase) >= 0);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestKeepFlagFalse()
         {
             SGenExtension sgen = new SGenExtension();
@@ -105,7 +105,7 @@ namespace Microsoft.Build.UnitTests
         }
 
 
-        [Fact]
+        [TestMethod]
         public void TestInputChecks1()
         {
             MockEngine engine = new MockEngine();
@@ -121,7 +121,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(1, engine.Errors);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestInputChecks2()
         {
             MockEngine engine = new MockEngine();
@@ -137,7 +137,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(1, engine.Errors);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestInputChecks3()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -155,7 +155,7 @@ namespace Microsoft.Build.UnitTests
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void TestInputChecks4()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -173,7 +173,7 @@ namespace Microsoft.Build.UnitTests
                 string commandLine = sgen.CommandLine();
             });
         }
-        [Fact]
+        [TestMethod]
         public void TestInputPlatform()
         {
             SGenExtension sgen = new SGenExtension();
@@ -191,7 +191,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(targetCommandLine, commandLine);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestInputTypes()
         {
             SGenExtension sgen = new SGenExtension();
@@ -209,7 +209,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(targetCommandLine, commandLine);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestInputEmptyTypesAndPlatform()
         {
             SGenExtension sgen = new SGenExtension();
@@ -224,7 +224,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(targetCommandLine, commandLine);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestNullReferences()
         {
             SGenExtension sgen = new SGenExtension();
@@ -240,7 +240,7 @@ namespace Microsoft.Build.UnitTests
             Assert.True(commandLine.IndexOf("/reference:", StringComparison.OrdinalIgnoreCase) < 0);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestEmptyReferences()
         {
             SGenExtension sgen = new SGenExtension();
@@ -256,7 +256,7 @@ namespace Microsoft.Build.UnitTests
             Assert.True(commandLine.IndexOf("/reference:", StringComparison.OrdinalIgnoreCase) < 0);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestReferencesCommandLine()
         {
             SGenExtension sgen = new SGenExtension();

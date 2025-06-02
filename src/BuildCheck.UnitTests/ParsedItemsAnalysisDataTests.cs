@@ -12,7 +12,7 @@ namespace Microsoft.Build.BuildCheck.UnitTests;
 
 public class ParsedItemsCheckDataTests
 {
-    [Fact]
+    [TestMethod]
     public void ItemsHolder_GetItemsOfType_ShouldFilterProperly()
     {
         ProjectRootElement root = ProjectRootElement.Create();

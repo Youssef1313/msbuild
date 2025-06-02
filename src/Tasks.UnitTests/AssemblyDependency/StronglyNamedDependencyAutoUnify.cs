@@ -46,7 +46,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// dependency seen.
         /// </summary>
         /// <param name="rarSimulationMode"></param>
-        [Fact]
+        [TestMethod]
         public void Exists()
         {
             ExistsImpl();
@@ -107,7 +107,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// When AutoUnify is true, we need to resolve to the highest version of each particular assembly
         /// dependency seen. However if the higher assembly is a dependency of an assembly in the deny list it should not be considered during unification.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExistsWithPrimaryReferenceOnDenyList()
         {
             string implicitRedistListContents =
@@ -186,7 +186,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// When AutoUnify is true, we need to resolve to the highest version of each particular assembly
         /// dependency seen. However if the higher assembly is a dependency of an assembly in the deny list it should not be considered during unification.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExistsPromotedDependencyInTheDenyList()
         {
             string implicitRedistListContents =
@@ -264,7 +264,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// There should be a warning indicating the primary reference DependsOnUnified 1.0.0.0 has a dependency that in the deny list
         /// There should be a warning indicating the primary reference DependsOnUnified 2.0.0.0 has a dependency that in the deny list
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExistsWithBothDependentReferenceOnDenyList()
         {
             string implicitRedistListContents =
@@ -340,7 +340,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// Rationale:
         /// AutoUnify works even when unifying multiple prior versions.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MultipleUnifiedFromNamesMiddlePrimaryOnDenyList()
         {
             string implicitRedistListContents =
@@ -414,7 +414,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// Rationale:
         /// AutoUnify works even when unifying multiple prior versions.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MultipleUnifiedFromNames()
         {
             // Create the engine.
@@ -466,7 +466,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// Rationale:
         /// AutoUnify works even when unifying prior versions that don't exist on disk.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LowVersionDoesntExist()
         {
             // Create the engine.

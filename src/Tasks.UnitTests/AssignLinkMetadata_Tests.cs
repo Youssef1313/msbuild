@@ -22,7 +22,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// AssignLinkMetadata should behave nicely when no items are set to it
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NoItems()
         {
             AssignLinkMetadata t = new AssignLinkMetadata
@@ -39,7 +39,7 @@ namespace Microsoft.Build.UnitTests
         /// AssignLinkMetadata should behave nicely when there is an item with an
         /// itemspec that contains invalid path characters.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidItemPath()
         {
             ITaskItem item = GetParentedTaskItem(_defaultItemSpec);
@@ -59,7 +59,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Test basic function of the AssignLinkMetadata task
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Basic()
         {
             ITaskItem item = GetParentedTaskItem(_defaultItemSpec);
@@ -85,7 +85,7 @@ namespace Microsoft.Build.UnitTests
         /// itemspec that contains invalid path characters, and still successfully
         /// output any items that aren't problematic.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidItemPathWithOtherValidItem()
         {
             ITaskItem item1 = GetParentedTaskItem(itemSpec: "|||");
@@ -110,7 +110,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// AssignLinkMetadata should not override if Link is already set
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DontOverrideLink()
         {
             ITaskItem item = GetParentedTaskItem(_defaultItemSpec, Path.Combine("SubFolder2", "SubSubFolder", "a.cs"));
@@ -130,7 +130,7 @@ namespace Microsoft.Build.UnitTests
         /// AssignLinkMetadata should not set Link if the item is outside the
         /// defining project's cone
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OutsideDefiningProjectCone()
         {
             var item = GetParentedTaskItem(NativeMethodsShared.IsUnixLike
@@ -152,7 +152,7 @@ namespace Microsoft.Build.UnitTests
         /// AssignLinkMetadata should not set Link if the item does not know its
         /// defining project
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NoDefiningProjectMetadata()
         {
             ITaskItem item = new TaskItem(Path.Combine("SubFolder", "a.cs"));

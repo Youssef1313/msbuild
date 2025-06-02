@@ -200,27 +200,27 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             Assert.False(externalSource && sourceProject.HasUnsavedChanges);
         }
 
-        [Fact]
+        [TestMethod]
         public void CloneAndAddInnerProject()
         {
             CloneAndAddInternal(null);
         }
 
-        [Fact]
+        [TestMethod]
         public void CloneAndAddCrossProjectSameCollection()
         {
             // view gets "a view" object as argument from different project (but in the same collection)
             CloneAndAddInternal(this.StdGroup.TargetXmlPair.View);
         }
 
-        [Fact]
+        [TestMethod]
         public void CloneAndAddCrossProjectLocalSource()
         {
             // view gets "a real" object as argument
             CloneAndAddInternal(this.StdGroup.LocalBig.Xml);
         }
 
-        [Fact]
+        [TestMethod]
         public void CloneAndAddCrossProjectCrossCollection()
         {
             // view gets "a view" object as argument from different project and collection (double proxy)
@@ -228,25 +228,25 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
         }
 
 
-        [Fact]
+        [TestMethod]
         public void CopyFromInnerProject()
         {
             CopyFromInternal(null);
         }
 
-        [Fact]
+        [TestMethod]
         public void CopyFromCrossProjectSameCollection()
         {
             CopyFromInternal(this.StdGroup.TargetXmlPair.View);
         }
 
-        [Fact]
+        [TestMethod]
         public void CopyFromCrossProjectLocalSource()
         {
             CopyFromInternal(this.StdGroup.LocalBig.Xml);
         }
 
-        [Fact]
+        [TestMethod]
         public void CopyFromCrossProjectCrossCollection()
         {
             CopyFromInternal(this.StdGroup.GuestXmlPair.View);

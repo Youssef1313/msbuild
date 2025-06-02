@@ -100,9 +100,9 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 .ShouldBeSameIgnoringOrder(new[] { (Name: "MetadataName", EvaluatedValue: "MetadataValue") });
         }
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void SdkResolverCanReturnNoPaths(bool includePropertiesAndItems)
         {
             Dictionary<string, string> propertiesToAdd = null;
@@ -138,7 +138,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             _logger.WarningCount.ShouldBe(0);
         }
 
-        [Fact]
+        [TestMethod]
         public void SuccessfullyEvaluatesSdkResultWithPropertiesForNullProjectRootElement()
         {
             Dictionary<string, string> propertiesToAdd = null;
@@ -172,11 +172,11 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Project.FromXmlReader(xmlReader, projectOptions);
         }
 
-        [Theory]
-        [InlineData(true, true)]
-        [InlineData(true, false)]
-        [InlineData(false, true)]
-        [InlineData(false, false)]
+        [TestMethod]
+        [DataRow(true, true)]
+        [DataRow(true, false)]
+        [DataRow(false, true)]
+        [DataRow(false, false)]
         public void SdkResolverCanReturnSinglePath(bool includePropertiesAndItems, bool useSinglePathResult)
         {
             Dictionary<string, string> propertiesToAdd = null;
@@ -268,9 +268,9 @@ namespace Microsoft.Build.UnitTests.Evaluation
             _logger.WarningCount.ShouldBe(0);
         }
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void SdkResolverCanReturnMultiplePaths(bool includePropertiesAndItems)
         {
             Dictionary<string, string> propertiesToAdd = null;
@@ -376,7 +376,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         // When two different SdkResults (ie from the Sdk.props and Sdk.targets imports) return the same combination of items / properties:
         //  - Test that there aren't warnings for duplicate imports
         //  - Test that items from resolver are duplicated in final evaluation result
-        [Fact]
+        [TestMethod]
         public void SdkResolverCanReturnTheSamePropertiesAndItemsMultipleTimes()
         {
             Dictionary<string, string> propertiesToAdd;
@@ -442,7 +442,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             _logger.WarningCount.ShouldBe(0);
         }
 
-        [Fact]
+        [TestMethod]
         public void SdkResolverCanReturnSpecialCharacters()
         {
             // %3B - semicolon

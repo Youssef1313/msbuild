@@ -88,8 +88,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
             }
         }
 
-        [Theory]
-        [MemberData(nameof(CacheData))]
+        [TestMethod]
+        [DynamicData(nameof(CacheData))]
         public void OnlySerializeCacheEntryWithSmallestConfigId(object configCache, object resultsCache)
         {
             string cacheFile = null;
@@ -113,8 +113,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
             }
         }
 
-        [Theory]
-        [MemberData(nameof(CacheData))]
+        [TestMethod]
+        [DynamicData(nameof(CacheData))]
         public void OnlySerializeResultsForSpecifiedTargets(object configCache, object resultsCache)
         {
             // Setup:

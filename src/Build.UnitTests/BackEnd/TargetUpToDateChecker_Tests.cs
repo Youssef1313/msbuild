@@ -40,7 +40,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             GC.Collect();
         }
 
-        [Fact]
+        [TestMethod]
         public void EmptyItemSpecInTargetInputs()
         {
             MockLogger ml = new MockLogger();
@@ -70,7 +70,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// https://github.com/dotnet/msbuild/issues/10497
         /// .NET Framework Path.Combine should have exception handling for invalid path characters
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidPathInTargetOutPuts()
         {
             MockLogger ml = new MockLogger();
@@ -96,7 +96,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Verify missing output metadata does not cause errors.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EmptyItemSpecInTargetOutputs()
         {
             MockLogger ml = new MockLogger();
@@ -163,7 +163,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// If Items = [a.cs;b.cs], and only b.cs is out of date w/r/t its
         /// correlated output b.dll, then we should only build "b" incrementally.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MetaInputAndInputItemThatCorrelatesWithOutputItem()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -200,7 +200,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// If Items = [a.cs;b.cs;c.cs], and only b.cs is out of date w/r/t its
         /// correlated outputs (dll or xml), then we should only build "b" incrementally.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InputItemThatCorrelatesWithMultipleTransformOutputItems()
         {
             ProjectInstance project = ProjectHelpers.CreateEmptyProjectInstance();
@@ -243,7 +243,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// If Items = [a.cs;b.cs;c.cs], and only b.cs is out of date w/r/t its
         /// correlated outputs (dll or xml), then we should only build "b" incrementally.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MultiInputItemsThatCorrelatesWithMultipleTransformOutputItems()
         {
             Console.WriteLine("MultiInputItemsThatCorrelatesWithMultipleTransformOutputItems");
@@ -294,7 +294,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.True(changedTargetInputs.HasEmptyMarker("MoreItems"));
         }
 
-        [Fact]
+        [TestMethod]
         public void InputItemsTransformedToDifferentNumberOfOutputsFewer()
         {
             Console.WriteLine("InputItemsTransformedToDifferentNumberOfOutputsFewer");
@@ -323,7 +323,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             logger.AssertLogContains("SomeMetaThing");
         }
 
-        [Fact]
+        [TestMethod]
         public void InputItemsTransformedToDifferentNumberOfOutputsFewer1()
         {
             Console.WriteLine("InputItemsTransformedToDifferentNumberOfOutputsFewer1");
@@ -352,7 +352,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             logger.AssertLogContains("SomeMetaThing");
         }
 
-        [Fact]
+        [TestMethod]
         public void InputItemsTransformedToDifferentNumberOfOutputsMore()
         {
             Console.WriteLine("InputItemsTransformedToDifferentNumberOfOutputsMore");
@@ -382,7 +382,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             logger.AssertLogContains("a;b;c;d;e;f;g");
         }
 
-        [Fact]
+        [TestMethod]
         public void InputItemsTransformedToDifferentNumberOfOutputsMore1()
         {
             Console.WriteLine("InputItemsTransformedToDifferentNumberOfOutputsMore1");
@@ -412,7 +412,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             logger.AssertLogContains("a;b;c;d;e;f;g");
         }
 
-        [Fact]
+        [TestMethod]
         public void InputItemsTransformedToDifferentNumberOfOutputsTwoWays()
         {
             Console.WriteLine("InputItemsTransformedToDifferentNumberOfOutputsTwoWays");
@@ -455,7 +455,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Ensure that items not involved in the incremental build are explicitly empty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MultiInputItemsThatCorrelatesWithMultipleTransformOutputItems2()
         {
             Console.WriteLine("MultiInputItemsThatCorrelatesWithMultipleTransformOutputItems2");
@@ -632,7 +632,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test comparison of inputs/outputs: up to date
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestIsAnyOutOfDate1()
         {
             IsAnyOutOfDateTestHelper(
@@ -646,7 +646,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test comparison of inputs/outputs: first input out of date wrt second output
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestIsAnyOutOfDate2()
         {
             IsAnyOutOfDateTestHelper(
@@ -660,7 +660,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test comparison of inputs/outputs: second input out of date wrt first output
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestIsAnyOutOfDate3()
         {
             IsAnyOutOfDateTestHelper(
@@ -674,7 +674,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test comparison of inputs/outputs: inputs and outputs have same dates
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestIsAnyOutOfDate4()
         {
             IsAnyOutOfDateTestHelper(
@@ -688,7 +688,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test comparison of inputs/outputs: first input missing
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestIsAnyOutOfDate5()
         {
             IsAnyOutOfDateTestHelper(
@@ -703,7 +703,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test comparison of inputs/outputs: second input missing
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestIsAnyOutOfDate6()
         {
             IsAnyOutOfDateTestHelper(
@@ -717,7 +717,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test comparison of inputs/outputs: second output missing
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestIsAnyOutOfDate7()
         {
             IsAnyOutOfDateTestHelper(
@@ -731,7 +731,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test comparison of inputs/outputs: first output missing
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestIsAnyOutOfDate8()
         {
             IsAnyOutOfDateTestHelper(
@@ -745,7 +745,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test comparison of inputs/outputs: first input and first output missing
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestIsAnyOutOfDate9()
         {
             IsAnyOutOfDateTestHelper(
@@ -759,7 +759,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test comparison of inputs/outputs: one input, two outputs, input out of date
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestIsAnyOutOfDate10()
         {
             IsAnyOutOfDateTestHelper(
@@ -777,7 +777,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test comparison of inputs/outputs: one input, two outputs, input up to date
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestIsAnyOutOfDate11()
         {
             IsAnyOutOfDateTestHelper(
@@ -795,7 +795,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test comparison of inputs/outputs: two inputs, one output, inputs up to date
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestIsAnyOutOfDate12()
         {
             IsAnyOutOfDateTestHelper(
@@ -813,7 +813,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Test comparison of inputs/outputs: two inputs, one output, second input out of date
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestIsAnyOutOfDate13()
         {
             IsAnyOutOfDateTestHelper(
@@ -958,7 +958,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         private static readonly DateTime Middle = new DateTime(2001, 1, 1);
         private static readonly DateTime New = new DateTime(2002, 1, 1);
 
-        [Fact(Skip = "Creating a symlink on Windows requires elevation.")]
+        [TestMethod(Skip = "Creating a symlink on Windows requires elevation.")]
         [SkipOnPlatform(TestPlatforms.AnyUnix, "Windows-specific test")]
         [SupportedOSPlatform("windows")]
         public void NewSymlinkOldDestinationIsUpToDate()
@@ -969,7 +969,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 expectedOutOfDate: false);
         }
 
-        [Fact(Skip = "Creating a symlink on Windows requires elevation.")]
+        [TestMethod(Skip = "Creating a symlink on Windows requires elevation.")]
         [SkipOnPlatform(TestPlatforms.AnyUnix, "Windows-specific test")]
         [SupportedOSPlatform("windows")]
         public void OldSymlinkOldDestinationIsUpToDate()
@@ -980,7 +980,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 expectedOutOfDate: false);
         }
 
-        [Fact(Skip = "Creating a symlink on Windows requires elevation.")]
+        [TestMethod(Skip = "Creating a symlink on Windows requires elevation.")]
         [SkipOnPlatform(TestPlatforms.AnyUnix, "Windows-specific test")]
         [SupportedOSPlatform("windows")]
         public void OldSymlinkNewDestinationIsNotUpToDate()
@@ -991,7 +991,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 expectedOutOfDate: true);
         }
 
-        [Fact(Skip = "Creating a symlink on Windows requires elevation.")]
+        [TestMethod(Skip = "Creating a symlink on Windows requires elevation.")]
         [SkipOnPlatform(TestPlatforms.AnyUnix, "Windows-specific test")]
         [SupportedOSPlatform("windows")]
         public void NewSymlinkNewDestinationIsNotUpToDate()

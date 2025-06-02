@@ -44,9 +44,9 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// Rationale:
         /// Strongly named dependencies should unify according to the bindingRedirects in the app.config.
         /// </summary>
-        [Theory]
-        [InlineData(null)]
-        [InlineData("\uE025\uE026")]
+        [TestMethod]
+        [DataRow(null)]
+        [DataRow("\uE025\uE026")]
         public void Exists(string appConfigNameSuffix)
         {
             // Create the engine.
@@ -99,7 +99,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// Rationale:
         /// Strongly named dependencies should unify according to the bindingRedirects in the app.config, if the unified version is in the deny list it should be removed and warned.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExistsPromotedDependencyInTheDenyList()
         {
             string engineOnlySubset =
@@ -177,7 +177,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// An unrelated bindingRedirect in the app.config should have no bearing on unification
         /// of another file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExistsDifferentName()
         {
             // Create the engine.
@@ -227,7 +227,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// Strongly named dependencies should unify according to the bindingRedirects in the app.config, even
         /// if a range is involved.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExistsOldVersionRange()
         {
             // Create the engine.
@@ -279,7 +279,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// The fusion loader is going to want to respect the app.config file. There's no point in
         /// feeding it the wrong version.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void HighVersionDoesntExist()
         {
             // Create the engine.
@@ -345,7 +345,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// The lower (unified-from) version need not exist on disk (in fact we shouldn't even try to
         /// resolve it) in order to arrive at the correct answer.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LowVersionDoesntExist()
         {
             // Create the engine.
@@ -391,7 +391,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// Rationale:
         /// Can't proceed with a bad app.config.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GarbageVersionInAppConfigFile()
         {
             // Create the engine.
@@ -433,7 +433,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// Rationale:
         /// Can't proceed with a bad app.config.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GarbageAppConfigMissingOldVersion()
         {
             // Create the engine.
@@ -477,7 +477,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// Rationale:
         /// Can't proceed with a bad app.config.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GarbageAppConfigMissingNewVersion()
         {
             // Create the engine.
@@ -522,7 +522,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// Rationale:
         /// Can't proceed with a bad app.config.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GarbageAppConfigAssemblyNameMissingPKTAndCulture()
         {
             // Create the engine.
@@ -566,7 +566,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// Rationale:
         /// With the introduction of the GenerateBindingRedirects task, RAR now accepts AutoUnify and App.Config at the same time.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AppConfigSpecifiedWhenAutoUnifyEqualsTrue()
         {
             // Create the engine.
@@ -611,7 +611,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// Rationale:
         /// App.config must exist if specified.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AppConfigDoesntExist()
         {
             // Create the engine.

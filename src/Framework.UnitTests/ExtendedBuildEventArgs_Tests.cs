@@ -11,9 +11,9 @@ namespace Microsoft.Build.Framework.UnitTests;
 
 public class ExtendedBuildEventArgs_Tests
 {
-    [InlineData(true)]
-    [InlineData(false)]
-    [Theory]
+    [DataRow(true)]
+    [DataRow(false)]
+    [TestMethod]
     public void ExtendedCustomBuildEventArgs_SerializationDeserialization(bool withOptionalData)
     {
         ExtendedCustomBuildEventArgs arg = new(
@@ -41,9 +41,9 @@ public class ExtendedBuildEventArgs_Tests
         argDeserialized.Should().BeEquivalentTo(arg);
     }
 
-    [InlineData(true)]
-    [InlineData(false)]
-    [Theory]
+    [DataRow(true)]
+    [DataRow(false)]
+    [TestMethod]
     public void ExtendedErrorEventArgs_SerializationDeserialization(bool withOptionalData)
     {
         ExtendedBuildErrorEventArgs arg = new(
@@ -80,9 +80,9 @@ public class ExtendedBuildEventArgs_Tests
     }
 
 
-    [InlineData(true)]
-    [InlineData(false)]
-    [Theory]
+    [DataRow(true)]
+    [DataRow(false)]
+    [TestMethod]
     public void ExtendedWarningEventArgs_SerializationDeserialization(bool withOptionalData)
     {
         ExtendedBuildWarningEventArgs arg = new(
@@ -118,9 +118,9 @@ public class ExtendedBuildEventArgs_Tests
         argDeserialized.Should().BeEquivalentTo(arg);
     }
 
-    [InlineData(true)]
-    [InlineData(false)]
-    [Theory]
+    [DataRow(true)]
+    [DataRow(false)]
+    [TestMethod]
     public void ExtendedMessageEventArgs_SerializationDeserialization(bool withOptionalData)
     {
         ExtendedBuildMessageEventArgs arg = new(
@@ -156,9 +156,9 @@ public class ExtendedBuildEventArgs_Tests
         argDeserialized.Should().BeEquivalentTo(arg);
     }
 
-    [InlineData(true)]
-    [InlineData(false)]
-    [Theory]
+    [DataRow(true)]
+    [DataRow(false)]
+    [TestMethod]
     public void ExtendedCriticalMessageEventArgs_SerializationDeserialization(bool withOptionalData)
     {
         ExtendedCriticalBuildMessageEventArgs arg = new(
@@ -193,7 +193,7 @@ public class ExtendedBuildEventArgs_Tests
         argDeserialized.Should().BeEquivalentTo(arg);
     }
 
-    [Fact]
+    [TestMethod]
     public void ExtendedCustomBuildEventArgs_Ctors()
     {
         var ea = new ExtendedCustomBuildEventArgs();
@@ -207,7 +207,7 @@ public class ExtendedBuildEventArgs_Tests
         ea = new ExtendedCustomBuildEventArgs("type", null, null, null, default(DateTime), null);
     }
 
-    [Fact]
+    [TestMethod]
     public void ExtendedBuildErrorEventArgs_Ctors()
     {
         var ea = new ExtendedBuildErrorEventArgs();
@@ -220,7 +220,7 @@ public class ExtendedBuildEventArgs_Tests
         ea = new ExtendedBuildErrorEventArgs("type", null, null, null, 1, 2, 3, 4, null, null, null, null, DateTime.Now, null);
     }
 
-    [Fact]
+    [TestMethod]
     public void ExtendedBuildWarningEventArgs_Ctors()
     {
         var ea = new ExtendedBuildWarningEventArgs();
@@ -233,7 +233,7 @@ public class ExtendedBuildEventArgs_Tests
         ea = new ExtendedBuildWarningEventArgs("type", null, null, null, 1, 2, 3, 4, null, null, null, null, DateTime.Now, null);
     }
 
-    [Fact]
+    [TestMethod]
     public void ExtendedBuildMessageEventArgs_Ctors()
     {
         var ea = new ExtendedBuildMessageEventArgs();
@@ -253,7 +253,7 @@ public class ExtendedBuildEventArgs_Tests
         ea = new ExtendedBuildMessageEventArgs("type", null, null, null, 1, 2, 3, 4, null, null, null, default, DateTime.Now, null);
     }
 
-    [Fact]
+    [TestMethod]
     public void ExtendedCriticalBuildMessageEventArgs_Ctors()
     {
         var ea = new ExtendedCriticalBuildMessageEventArgs();

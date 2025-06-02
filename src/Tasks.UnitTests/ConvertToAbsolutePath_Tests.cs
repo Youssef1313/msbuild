@@ -17,7 +17,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Passing in a relative path (expecting an absolute back)
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void RelativePath()
@@ -49,7 +49,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Passing in a relative path (expecting an absolute back)
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void RelativePathWithEscaping()
@@ -81,7 +81,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Passing in a absolute path (expecting an absolute back)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AbsolutePath()
         {
             string fileName = ObjectModelHelpers.CreateFileInTempProjectDirectory("file.temp", "foo");
@@ -111,7 +111,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Passing in a relative path that doesn't exist (expecting success)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void FakeFile()
         {
             ConvertToAbsolutePath t = new ConvertToAbsolutePath();

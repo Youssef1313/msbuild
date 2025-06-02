@@ -97,7 +97,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests a command line generated from all of the specified switch values.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BasicCommandLine()
         {
             CommandLineGenerator generator = CreateGenerator();
@@ -108,7 +108,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests a command line generated from a specific template
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TemplatedCommandLine()
         {
             CommandLineGenerator generator = CreateGenerator();
@@ -120,7 +120,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests a command line generated from a specific template is not case sensitive on the parameter names.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TemplateParametersAreCaseInsensitive()
         {
             CommandLineGenerator generator = CreateGenerator();

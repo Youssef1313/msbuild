@@ -17,13 +17,13 @@ namespace Microsoft.Build.Framework.UnitTests
                 => base.RegisterImmutableDirectory(directory, false);
         }
 
-        [Fact]
+        [TestMethod]
         public void Shared_ReturnsInstance()
         {
             FileClassifier.Shared.ShouldNotBeNull();
         }
 
-        [Fact]
+        [TestMethod]
         public void IsNonModifiable_EvaluatesModifiability()
         {
             FileClassifierUnderTest classifier = new();
@@ -37,7 +37,7 @@ namespace Microsoft.Build.Framework.UnitTests
             classifier.IsNonModifiable(Path.Combine(volume, "Test3", "File.ext")).ShouldBeFalse();
         }
 
-        [Fact]
+        [TestMethod]
         public void IsNonModifiable_DuplicateNugetRegistry_EvaluatesModifiability()
         {
             FileClassifierUnderTest classifier = new();
@@ -55,7 +55,7 @@ namespace Microsoft.Build.Framework.UnitTests
             classifier.IsNonModifiable(Path.Combine(volume, "Test3", "File.ext")).ShouldBeFalse();
         }
 
-        [Fact]
+        [TestMethod]
         public void IsNonModifiable_RespectsOSCaseSensitivity()
         {
             FileClassifierUnderTest classifier = new();
@@ -75,7 +75,7 @@ namespace Microsoft.Build.Framework.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void IsNonModifiable_DoesntThrowWhenPackageFoldersAreNotRegistered()
         {
             FileClassifierUnderTest classifier = new();

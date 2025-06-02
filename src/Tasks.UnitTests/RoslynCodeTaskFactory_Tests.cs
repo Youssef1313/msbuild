@@ -41,7 +41,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             _verifySettings.ScrubLinesContaining("Runtime Version:");
         }
 
-        [Fact]
+        [TestMethod]
         public void InlineTaskWithAssemblyPlatformAgnostic()
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -81,7 +81,7 @@ Log.LogError(Alpha.GetString());
             }
         }
 
-        [Fact]
+        [TestMethod]
         [SkipOnPlatform(TestPlatforms.AnyUnix, ".NETFramework 4.0 isn't on unix machines.")]
         public void InlineTaskWithAssembly()
         {
@@ -143,7 +143,7 @@ Log.LogError(Class1.ToPrint());
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void RoslynCodeTaskFactory_ReuseCompilation()
         {
             string text1 = $@"
@@ -214,7 +214,7 @@ Log.LogError(Class1.ToPrint());
             messages.Length.ShouldBe(1);
         }
 
-        [Fact]
+        [TestMethod]
         public void VisualBasicFragment()
         {
             const string fragment = "Dim x = 0";
@@ -226,7 +226,7 @@ Log.LogError(Class1.ToPrint());
                 expectedCodeType: RoslynCodeTaskFactoryCodeType.Fragment);
         }
 
-        [Fact]
+        [TestMethod]
         public void VisualBasicFragmentWithProperties()
         {
             ICollection<TaskPropertyInfo> parameters = new List<TaskPropertyInfo>
@@ -248,7 +248,7 @@ Log.LogError(Class1.ToPrint());
                 parameters: parameters);
         }
 
-        [Fact]
+        [TestMethod]
         public void VisualBasicMethod()
         {
             const string method = @"Public Overrides Function Execute() As Boolean
@@ -263,7 +263,7 @@ Log.LogError(Class1.ToPrint());
                 expectedCodeType: RoslynCodeTaskFactoryCodeType.Method);
         }
 
-        [Fact]
+        [TestMethod]
         public void CodeLanguageFromTaskBody()
         {
             TryLoadTaskBodyAndExpectSuccess("<Code Language=\"CS\">code</Code>", expectedCodeLanguage: "CS");
@@ -280,7 +280,7 @@ Log.LogError(Class1.ToPrint());
             TryLoadTaskBodyAndExpectSuccess("<Code>code</Code>", expectedCodeLanguage: "CS");
         }
 
-        [Fact]
+        [TestMethod]
         public void CodeTypeFromTaskBody()
         {
             foreach (RoslynCodeTaskFactoryCodeType codeType in Enum.GetValues(typeof(RoslynCodeTaskFactoryCodeType)).Cast<RoslynCodeTaskFactoryCodeType>())
@@ -302,7 +302,7 @@ Log.LogError(Class1.ToPrint());
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void CSharpClass()
         {
             const string taskClassSourceCode = @"namespace InlineTask
@@ -327,7 +327,7 @@ Log.LogError(Class1.ToPrint());
                 expectedCodeLanguage: "CS");
         }
 
-        [Fact]
+        [TestMethod]
         public void CSharpFragment()
         {
             const string fragment = "int x = 0;";
@@ -335,7 +335,7 @@ Log.LogError(Class1.ToPrint());
             TryLoadTaskBodyAndExpectSuccess(taskBody: $"<Code>{fragment}</Code>", verifySource: true);
         }
 
-        [Fact]
+        [TestMethod]
         public void CSharpFragmentWithProperties()
         {
             ICollection<TaskPropertyInfo> parameters = new List<TaskPropertyInfo>
@@ -356,7 +356,7 @@ Log.LogError(Class1.ToPrint());
                 parameters: parameters);
         }
 
-        [Fact]
+        [TestMethod]
         public void CSharpMethod()
         {
             const string method = @"public override bool Execute() { int x = 0; return true; }";
@@ -367,7 +367,7 @@ Log.LogError(Class1.ToPrint());
                 expectedCodeType: RoslynCodeTaskFactoryCodeType.Method);
         }
 
-        [Fact]
+        [TestMethod]
         public void CSharpClassSourceCodeFromFile()
         {
             const string taskClassSourceCode = @"namespace InlineTask
@@ -397,7 +397,7 @@ Log.LogError(Class1.ToPrint());
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void CSharpFragmentSourceCodeFromFile()
         {
             const string sourceCodeFileContents = "int x = 0;";
@@ -413,7 +413,7 @@ Log.LogError(Class1.ToPrint());
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void CSharpMethodSourceCodeFromFile()
         {
             const string sourceCodeFileContents = @"public override bool Execute() { int x = 0; return true; }";
@@ -429,7 +429,7 @@ Log.LogError(Class1.ToPrint());
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void EmptyCodeElement()
         {
             TryLoadTaskBodyAndExpectFailure(
@@ -437,10 +437,10 @@ Log.LogError(Class1.ToPrint());
                 expectedErrorMessage: "You must specify source code within the Code element or a path to a file containing source code.");
         }
 
-        [Theory]
-        [InlineData("")]
-        [InlineData("Include=\"\"")]
-        [InlineData("Include=\" \"")]
+        [TestMethod]
+        [DataRow("")]
+        [DataRow("Include=\"\"")]
+        [DataRow("Include=\" \"")]
         public void EmptyIncludeAttributeOnReferenceElement(string includeSetting)
         {
             TryLoadTaskBodyAndExpectFailure(
@@ -448,7 +448,7 @@ Log.LogError(Class1.ToPrint());
                 expectedErrorMessage: $"The \"Include\" attribute of the <Reference> element in the task \"{TaskName}\" has been set but is empty. Make sure the attribute has a proper value.");
         }
 
-        [Fact]
+        [TestMethod]
         public void EmptyLanguageAttributeOnCodeElement()
         {
             TryLoadTaskBodyAndExpectFailure(
@@ -456,7 +456,7 @@ Log.LogError(Class1.ToPrint());
                 expectedErrorMessage: "The \"Language\" attribute of the <Code> element has been set but is empty. If the \"Language\" attribute is set it must not be empty.");
         }
 
-        [Fact]
+        [TestMethod]
         public void EmptyNamespaceAttributeOnUsingElement()
         {
             TryLoadTaskBodyAndExpectFailure(
@@ -464,7 +464,7 @@ Log.LogError(Class1.ToPrint());
                 expectedErrorMessage: "The \"Namespace\" attribute of the <Using> element has been set but is empty. If the \"Namespace\" attribute is set it must not be empty.");
         }
 
-        [Fact]
+        [TestMethod]
         public void EmptySourceAttributeOnCodeElement()
         {
             TryLoadTaskBodyAndExpectFailure(
@@ -472,7 +472,7 @@ Log.LogError(Class1.ToPrint());
                 expectedErrorMessage: "The \"Source\" attribute of the <Code> element has been set but is empty. If the \"Source\" attribute is set it must not be empty.");
         }
 
-        [Fact]
+        [TestMethod]
         public void EmptyTypeAttributeOnCodeElement()
         {
             TryLoadTaskBodyAndExpectFailure(
@@ -480,14 +480,14 @@ Log.LogError(Class1.ToPrint());
                 expectedErrorMessage: "The \"Type\" attribute of the <Code> element has been set but is empty. If the \"Type\" attribute is set it must not be empty.");
         }
 
-        [Fact]
+        [TestMethod]
         public void IgnoreTaskCommentsAndWhiteSpace()
         {
             TryLoadTaskBodyAndExpectSuccess("<!-- Comment --><Code>code</Code>");
             TryLoadTaskBodyAndExpectSuccess("                <Code>code</Code>");
         }
 
-        [Fact]
+        [TestMethod]
         public void InvalidCodeElementAttribute()
         {
             TryLoadTaskBodyAndExpectFailure(
@@ -495,7 +495,7 @@ Log.LogError(Class1.ToPrint());
                 expectedErrorMessage: "The attribute \"Invalid\" is not valid for the <Code> element.  Valid attributes are \"Language\", \"Source\", and \"Type\".");
         }
 
-        [Fact]
+        [TestMethod]
         public void InvalidCodeLanguage()
         {
             TryLoadTaskBodyAndExpectFailure(
@@ -503,7 +503,7 @@ Log.LogError(Class1.ToPrint());
                 expectedErrorMessage: "The specified code language \"Invalid\" is invalid.  The supported code languages are \"CS, VB\".");
         }
 
-        [Fact]
+        [TestMethod]
         public void InvalidCodeType()
         {
             TryLoadTaskBodyAndExpectFailure(
@@ -511,7 +511,7 @@ Log.LogError(Class1.ToPrint());
                 expectedErrorMessage: "The specified code type \"Invalid\" is invalid.  The supported code types are \"Fragment, Method, Class\".");
         }
 
-        [Fact]
+        [TestMethod]
         public void InvalidTaskChildElement()
         {
             TryLoadTaskBodyAndExpectFailure(
@@ -523,7 +523,7 @@ Log.LogError(Class1.ToPrint());
                 expectedErrorMessage: "The element <Text> is not a valid child of the <Task> element.  Valid child elements are <Code>, <Reference>, and <Using>.");
         }
 
-        [Fact]
+        [TestMethod]
         public void InvalidTaskXml()
         {
             TryLoadTaskBodyAndExpectFailure(
@@ -531,7 +531,7 @@ Log.LogError(Class1.ToPrint());
                 expectedErrorMessage: "The specified task XML is invalid.  '<' is an unexpected token. The expected token is '='. Line 1, position 19.");
         }
 
-        [Fact]
+        [TestMethod]
         public void MissingCodeElement()
         {
             TryLoadTaskBodyAndExpectFailure(
@@ -539,7 +539,7 @@ Log.LogError(Class1.ToPrint());
                 expectedErrorMessage: $"The <Code> element is missing for the \"{TaskName}\" task. This element is required.");
         }
 
-        [Fact]
+        [TestMethod]
         public void MultipleCodeNodes()
         {
             TryLoadTaskBodyAndExpectFailure(
@@ -547,7 +547,7 @@ Log.LogError(Class1.ToPrint());
                 expectedErrorMessage: "Only one <Code> element can be specified.");
         }
 
-        [Fact]
+        [TestMethod]
         public void NamespacesFromTaskBody()
         {
             const string taskBody = @"
@@ -566,7 +566,7 @@ Log.LogError(Class1.ToPrint());
                 });
         }
 
-        [Fact]
+        [TestMethod]
         public void ReferencesFromTaskBody()
         {
             const string taskBody = @"
@@ -587,7 +587,7 @@ Log.LogError(Class1.ToPrint());
                 });
         }
 
-        [Fact]
+        [TestMethod]
         public void SourceCodeFromFile()
         {
             const string sourceCodeFileContents = @"
@@ -605,7 +605,7 @@ Log.LogError(Class1.ToPrint());
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void MismatchedTaskNameAndTaskClassName()
         {
             const string taskName = "SayHello";
@@ -646,7 +646,7 @@ namespace InlineTask
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void EmbedsGeneratedFromSourceFileInBinlog()
         {
             string taskName = "HelloTask";
@@ -671,7 +671,7 @@ namespace InlineTask
                 FactoryType.RoslynCodeTaskFactory, taskName, sourceContent, true);
         }
 
-        [Fact]
+        [TestMethod]
         public void EmbedsGeneratedFromSourceFileInBinlogWhenFailsToCompile()
         {
             string taskName = "HelloTask";
@@ -689,7 +689,7 @@ namespace InlineTask
                 FactoryType.RoslynCodeTaskFactory, taskName, sourceContent, false);
         }
 
-        [Fact]
+        [TestMethod]
         public void EmbedsGeneratedFileInBinlog()
         {
             string taskXml = @"
@@ -705,7 +705,7 @@ namespace InlineTask
                 FactoryType.RoslynCodeTaskFactory, "HelloTask", taskXml, true);
         }
 
-        [Fact]
+        [TestMethod]
         public void EmbedsGeneratedFileInBinlogWhenFailsToCompile()
         {
             string taskXml = @"
@@ -722,7 +722,7 @@ namespace InlineTask
         }
 
 #if !FEATURE_RUN_EXE_IN_TESTS
-        [Fact]
+        [TestMethod]
         public void RoslynCodeTaskFactory_UsingAPI()
         {
             string text = $@"

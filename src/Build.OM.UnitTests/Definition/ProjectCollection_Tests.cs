@@ -56,7 +56,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Add a single project from disk and verify it's put in the global project collection
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddProjectFromDisk()
         {
             string path = null;
@@ -85,7 +85,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// When an unnamed project is saved, it gets a name, and should be entered into
         /// the appropriate project collection.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddProjectOnSave()
         {
             string path = null;
@@ -114,7 +114,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// When an unnamed project is saved, it gets a name, and should be entered into
         /// the appropriate project collection.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddProjectOnSave_SpecifiedProjectCollection()
         {
             string path = null;
@@ -143,7 +143,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// When an unnamed project is given a name, it should be entered into its
         /// project collection.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddProjectOnSetName()
         {
             var project = new Project { FullPath = "c:\\x" };
@@ -154,7 +154,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Loading a project from a file inherits the project collection's global properties
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GlobalPropertyInheritLoadFromFile()
         {
             string path = null;
@@ -182,9 +182,9 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Loading a project from a file inherits the project collection's global properties
         /// </summary>
 #if FEATURE_INSTALLED_MSBUILD
-        [Fact]
+        [TestMethod]
 #else
-        [Fact(Skip = "https://github.com/dotnet/msbuild/issues/276")]
+        [TestMethod(Skip = "https://github.com/dotnet/msbuild/issues/276")]
 #endif
         public void GlobalPropertyInheritLoadFromFile2()
         {
@@ -213,9 +213,9 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Loading a project from a file inherits the project collection's global properties
         /// </summary>
 #if FEATURE_INSTALLED_MSBUILD
-        [Fact]
+        [TestMethod]
 #else
-        [Fact(Skip = "https://github.com/dotnet/msbuild/issues/276")]
+        [TestMethod(Skip = "https://github.com/dotnet/msbuild/issues/276")]
 #endif
         public void GlobalPropertyInheritLoadFromFile3()
         {
@@ -243,7 +243,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Loading a project from a reader inherits the project collection's global properties
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GlobalPropertyInheritLoadFromXml1()
         {
             using XmlReader reader = CreateProjectXmlReader();
@@ -259,7 +259,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Loading a project from a reader inherits the project collection's global properties
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GlobalPropertyInheritLoadFromXml2()
         {
             using XmlReader reader = CreateProjectXmlReader();
@@ -275,7 +275,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Creating a project inherits the project collection's global properties
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GlobalPropertyInheritProjectConstructor()
         {
             using var collection = new ProjectCollection();
@@ -289,7 +289,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Load project should load a project, if it wasn't already loaded.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetLoadedProjectNonExistent()
         {
             string path = null;
@@ -317,7 +317,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Verify that one project collection doesn't contain the projects of another
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetLoadedProjectWrongCollection()
         {
             var project1 = new Project { FullPath = "c:\\1" };
@@ -333,7 +333,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Verify that one project collection doesn't contain the ProjectRootElements of another
         /// -- because they don't share a ProjectRootElementCache
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void GetLoadedProjectRootElementWrongCollection()
         {
             string path = null;
@@ -366,7 +366,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Attempt to have two equivalent projects in a project collection fails.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ErrorTwoProjectsEquivalentOneCollection()
         {
             _ = new Project { FullPath = "c:\\x" };
@@ -380,7 +380,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Validates that when loading two projects with nominally different global properties, but that match when we take
         /// into account the ProjectCollection's global properties, we get the pre-existing project if one exists.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TwoProjectsEquivalentWhenOneInheritsFromProjectCollection()
         {
             var project = new Project { FullPath = "c:\\1" };
@@ -402,7 +402,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Two projects may have the same path but different global properties.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TwoProjectsDistinguishedByGlobalPropertiesOnly()
         {
             ProjectRootElement xml = ProjectRootElement.Create();
@@ -437,7 +437,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Validates that we can correctly load two of the same project file with different global properties, even when
         /// those global properties are applied to the project by the project collection (and then overridden in one case).
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TwoProjectsDistinguishedByGlobalPropertiesOnly_ProjectOverridesProjectCollection()
         {
             var project = new Project { FullPath = "c:\\1" };
@@ -490,7 +490,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Two projects may have the same path but different tools version.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TwoProjectsDistinguishedByToolsVersionOnly()
         {
             if (ToolLocationHelper.GetPathToDotNetFramework(TargetDotNetFrameworkVersion.Version35) == null)
@@ -518,7 +518,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// If the ToolsVersion in the project file is bogus, we'll default to the current ToolsVersion and successfully
         /// load it.  Make sure we can RE-load it, too, and successfully pick up the correct copy of the loaded project.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReloadProjectWithInvalidToolsVersionInFile()
         {
             const string content = @"
@@ -540,7 +540,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Make sure we can reload a project that has a ToolsVersion that doesn't match what it ends up getting
         /// forced to by default (current).
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReloadProjectWithProjectToolsVersionDifferentFromEffectiveToolsVersion()
         {
             const string content = @"
@@ -562,7 +562,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Collection stores projects distinguished by path, global properties, and tools version.
         /// Changing global properties should update the collection.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ChangingGlobalPropertiesUpdatesCollection()
         {
             using ProjectCollection collection = new ProjectCollection();
@@ -579,7 +579,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Changing global properties on collection should update the collection's defaults,
         /// and any projects even if they have defined the same global properties
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SettingGlobalPropertiesOnCollectionUpdatesProjects()
         {
             using var collection = new ProjectCollection();
@@ -606,7 +606,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Changing global properties on collection should update the collection's defaults,
         /// and any projects even if they have defined the same global properties
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SettingGlobalPropertiesOnCollectionUpdatesProjects2()
         {
             using var collection = new ProjectCollection();
@@ -628,7 +628,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Changing global properties on collection should update the collection's defaults,
         /// and all projects as well
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemovingGlobalPropertiesOnCollectionUpdatesProjects()
         {
             using var collection = new ProjectCollection();
@@ -673,7 +673,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Changing global properties on collection should update the collection's defaults,
         /// and all projects as well
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemovingGlobalPropertiesOnCollectionUpdatesProjects2()
         {
             using var collection = new ProjectCollection();
@@ -692,7 +692,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Unloading a project should remove it from the project collection
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void UnloadProject()
         {
             var project = new Project { FullPath = "c:\\x" };
@@ -708,7 +708,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Unloading project XML should remove it from the weak cache.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void UnloadProjectXml()
         {
             var project = new Project { FullPath = "c:\\x" };
@@ -734,7 +734,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Unloading project XML while it is in use should result in an exception.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void UnloadProjectXmlWhileInDirectUse()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -749,7 +749,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Unloading project XML while it is in use should result in an exception.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void UnloadProjectXmlWhileInImportUse()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -782,7 +782,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Renaming a project should correctly update the project collection's set of loaded projects.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RenameProject()
         {
             var project = new Project { FullPath = "c:\\x" };
@@ -801,7 +801,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Validates that we don't somehow lose the ProjectCollection global properties when renaming the project.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RenameProjectAndVerifyStillContainsProjectCollectionGlobalProperties()
         {
             var project = new Project { FullPath = "c:\\1" };
@@ -821,7 +821,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Saving a project to a new name should correctly update the project collection's set of loaded projects.
         /// Reported by F#.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SaveToNewNameAndUnload()
         {
             string file1 = null;
@@ -860,7 +860,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Saving a project to a new name after loading, unloading, and reloading, should work.
         /// Reported by F#.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LoadUnloadReloadSaveToNewName()
         {
             string file1 = null;
@@ -903,7 +903,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Saving a project to a new name after loading, unloading, and reloading, should work.
         /// Reported by F#.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LoadUnloadAllReloadSaveToNewName()
         {
             string file1 = null;
@@ -945,7 +945,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Add a toolset
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddToolset()
         {
             using var collection = new ProjectCollection();
@@ -965,7 +965,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Add two toolsets
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddTwoToolsets()
         {
             using var collection = new ProjectCollection();
@@ -989,7 +989,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Add a toolset that overrides another
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReplaceToolset()
         {
             using var collection = new ProjectCollection();
@@ -1011,7 +1011,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Attempt to add a null toolset
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddNullToolset()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -1023,7 +1023,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Remove a toolset
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveToolset()
         {
             using var collection = new ProjectCollection();
@@ -1045,7 +1045,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Remove a nonexistent toolset
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveNonexistentToolset()
         {
             using var collection = new ProjectCollection();
@@ -1055,7 +1055,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Attempt to remove a null tools version
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveNullToolsVersion()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -1067,7 +1067,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Attempt to remove an empty string toolsversion
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveEmptyToolsVersion()
         {
             Assert.Throws<ArgumentException>(() =>
@@ -1079,7 +1079,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Current default from registry is 2.0 if 2.0 is installed
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DefaultToolsVersion()
         {
             if (ToolLocationHelper.GetPathToDotNetFramework(TargetDotNetFrameworkVersion.Version20) == null)
@@ -1096,9 +1096,9 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// Current default from registry is 4.0 if 2.0 is not installed
         /// </summary>
 #if FEATURE_INSTALLED_MSBUILD
-        [Fact]
+        [TestMethod]
 #else
-        [Fact(Skip = "https://github.com/dotnet/msbuild/issues/276")]
+        [TestMethod(Skip = "https://github.com/dotnet/msbuild/issues/276")]
 #endif
         public void DefaultToolsVersion2()
         {
@@ -1115,7 +1115,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Error setting default tools version to empty
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetDefaultToolsVersionEmpty()
         {
             Assert.Throws<ArgumentException>(() =>
@@ -1127,7 +1127,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Error setting default tools version to a toolset that does not exist
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetDefaultToolsVersionNonexistentToolset()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -1139,7 +1139,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Set default tools version; subsequent projects should use it
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetDefaultToolsVersion()
         {
             using var collection = new ProjectCollection();
@@ -1168,7 +1168,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Changes to the ProjectCollection object should raise a ProjectCollectionChanged event.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ProjectCollectionChangedEvent()
         {
             using var collection = new ProjectCollection();
@@ -1258,7 +1258,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Changes to the ProjectCollection object should raise a ProjectCollectionChanged event.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ProjectCollectionChangedEvent2()
         {
             // Verify if the project, project collection and the value we are setting in the project collection are all the same
@@ -1326,7 +1326,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Changes to project XML should raise an ProjectXmlChanged event.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ProjectXmlChangedEvent()
         {
             using var collection = new ProjectCollection();
@@ -1385,7 +1385,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Changes to a Project evaluation object should raise a ProjectChanged event.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ProjectChangedEvent()
         {
             using var collection = new ProjectCollection();
@@ -1445,7 +1445,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// This test was written because on OS X and Ubuntu, the version is showing "0.0.0.0"
         /// while Windows was working just fine.
         /// </remarks>
-        [Fact]
+        [TestMethod]
         public void ProjectCollectionVersionIsCorrect()
         {
             Version expectedVersion = new Version(this.GetType().GetTypeInfo().Assembly.GetCustomAttribute<AssemblyFileVersionAttribute>().Version);

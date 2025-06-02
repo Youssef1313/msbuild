@@ -34,7 +34,7 @@ namespace Microsoft.Build.UnitTests
 
     public class Logger_Tests
     {
-        [Fact]
+        [TestMethod]
         public void ExerciseMiscProperties()
         {
             EmptyLogger logger = new EmptyLogger(LoggerVerbosity.Diagnostic);
@@ -46,7 +46,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Exercises every combination of the Logger.IsVerbosityAtLeast method.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IsVerbosityAtLeast()
         {
             new EmptyLogger(LoggerVerbosity.Quiet).IsVerbosityAtLeast(LoggerVerbosity.Quiet).ShouldBeTrue();

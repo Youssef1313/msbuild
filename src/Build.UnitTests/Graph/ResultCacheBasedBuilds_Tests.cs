@@ -43,12 +43,12 @@ namespace Microsoft.Build.Graph.UnitTests
         private readonly TestEnvironment _env;
         private readonly MockLogger _logger;
 
-        [Theory]
-        [InlineData(new byte[] { })]
-        [InlineData(new byte[] { 1 })]
-        [InlineData(new byte[] { 0 })]
-        [InlineData(new byte[] { 1, 1 })]
-        [InlineData(new byte[] { 1, 1, 90, 23 })]
+        [TestMethod]
+        [DataRow(new byte[] { })]
+        [DataRow(new byte[] { 1 })]
+        [DataRow(new byte[] { 0 })]
+        [DataRow(new byte[] { 1, 1 })]
+        [DataRow(new byte[] { 1, 1, 90, 23 })]
         public void InvalidCacheFilesShouldLogError(byte[] cacheContents)
         {
             var project = CreateProjectFileWithBuildTargetAndItems(_env, 1).Path;
@@ -73,9 +73,9 @@ namespace Microsoft.Build.Graph.UnitTests
             _logger.ErrorCount.ShouldBe(1);
         }
 
-        [Theory]
-        [InlineData("")]
-        [InlineData("   ")]
+        [TestMethod]
+        [DataRow("")]
+        [DataRow("   ")]
         public void ShouldGeneratePathForEmptyOutputPath(string emptyInput)
         {
             var project = CreateProjectFileWithBuildTargetAndItems(_env, 1).Path;
@@ -95,7 +95,7 @@ namespace Microsoft.Build.Graph.UnitTests
             _logger.ErrorCount.ShouldBe(0);
         }
 
-        [Fact]
+        [TestMethod]
         public void CachesGetLogged()
         {
             using (var buildManager = new BuildManager())
@@ -116,11 +116,11 @@ namespace Microsoft.Build.Graph.UnitTests
             _logger.ErrorCount.ShouldBe(1);
         }
 
-        [Theory]
-        [InlineData("", "")]
-        [InlineData("", "Build")]
-        [InlineData("Build", "")]
-        [InlineData("Build", "Build")]
+        [TestMethod]
+        [DataRow("", "")]
+        [DataRow("", "Build")]
+        [DataRow("Build", "")]
+        [DataRow("Build", "Build")]
         public void RebuildSingleProjectFromCache(string defaultTargets, string explicitTargets)
         {
             var projectFile = CreateProjectFileWithBuildTargetAndItems(_env, 1, null, defaultTargets, explicitTargets).Path;
@@ -281,8 +281,8 @@ namespace Microsoft.Build.Graph.UnitTests
             }
         }
 
-        [Theory]
-        [MemberData(nameof(BuildGraphData))]
+        [TestMethod]
+        [DynamicData(nameof(BuildGraphData))]
         public void BuildProjectGraphUsingCaches(Dictionary<int, int[]> edges)
         {
             var topoSortedNodes =
@@ -329,7 +329,7 @@ namespace Microsoft.Build.Graph.UnitTests
                 (node, localExpectedOutput) => localExpectedOutput[node].Skip(1).ToArray());
         }
 
-        [Fact]
+        [TestMethod]
         public void OutputCacheShouldNotContainInformationFromInputCaches()
         {
             var topoSortedNodes =
@@ -367,7 +367,7 @@ namespace Microsoft.Build.Graph.UnitTests
             configEntries.First().ConfigurationId.ShouldBe(rootNodeBuildResult.ConfigurationId);
         }
 
-        [Fact]
+        [TestMethod]
         public void MissingResultFromCacheShouldErrorDueToIsolatedBuildCacheEnforcement()
         {
             var topoSortedNodes =
@@ -549,7 +549,7 @@ namespace Microsoft.Build.Graph.UnitTests
                 sb.ToString());
         }
 
-        [Fact]
+        [TestMethod]
         public void NonExistingInputResultsCacheShouldLogError()
         {
             var project = CreateProjectFileWithBuildTargetAndItems(_env, 1).Path;

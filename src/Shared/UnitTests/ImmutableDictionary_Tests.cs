@@ -29,7 +29,7 @@ namespace Microsoft.Build.UnitTests
     {
         private readonly ImmutableDictionary _emptyDict = ImmutableDictionary.Empty;
 
-        [Fact]
+        [TestMethod]
         public void SimplesBoolPropertiesReturnExpectedValues()
         {
             ((IDictionary)_emptyDict).IsFixedSize.ShouldBeTrue();
@@ -37,7 +37,7 @@ namespace Microsoft.Build.UnitTests
             ((IDictionary)_emptyDict).IsSynchronized.ShouldBeTrue();
         }
 
-        [Fact]
+        [TestMethod]
         public void CountReturnsExpectedValue()
         {
             _emptyDict.Count.ShouldBe(0);
@@ -49,7 +49,7 @@ namespace Microsoft.Build.UnitTests
             dict.Count.ShouldBe(0);
         }
 
-        [Fact]
+        [TestMethod]
         public void IndexerReturnsPreviouslySetItem()
         {
             ImmutableDictionary dict = _emptyDict.SetItem("Key1", "Value1");
@@ -58,7 +58,7 @@ namespace Microsoft.Build.UnitTests
             ((IDictionary<string, string>)dict)["Key1"].ShouldBe("Value1");
         }
 
-        [Fact]
+        [TestMethod]
         public void IndexerThrowsForItemNotPreviouslySet()
         {
             ImmutableDictionary dict = _emptyDict.SetItem("Key1", "Value1");
@@ -67,7 +67,7 @@ namespace Microsoft.Build.UnitTests
             Should.Throw<KeyNotFoundException>(() => _ = ((IDictionary<string, string>)dict)["Key2"]);
         }
 
-        [Fact]
+        [TestMethod]
         public void ContainsReturnsTrueForPeviouslySetItem()
         {
             ImmutableDictionary dict = _emptyDict.SetItem("Key1", "Value1");
@@ -76,7 +76,7 @@ namespace Microsoft.Build.UnitTests
             ((IDictionary)dict).Contains("Key1").ShouldBeTrue();
         }
 
-        [Fact]
+        [TestMethod]
         public void ContainsReturnsFalseForItemNotPeviouslySet()
         {
             ImmutableDictionary dict = _emptyDict.SetItem("Key1", "Value1");
@@ -85,7 +85,7 @@ namespace Microsoft.Build.UnitTests
             ((IDictionary)dict).Contains("Key2").ShouldBeFalse();
         }
 
-        [Fact]
+        [TestMethod]
         public void EnumeratorEnumeratesItems()
         {
             ImmutableDictionary dict = _emptyDict.SetItem("Key1", "Value1");
@@ -122,7 +122,7 @@ namespace Microsoft.Build.UnitTests
             i.ShouldBe(dict.Count);
         }
 
-        [Fact]
+        [TestMethod]
         public void CopyToCopiesItemsToArray()
         {
             ImmutableDictionary dict = _emptyDict.SetItem("Key1", "Value1");
@@ -148,7 +148,7 @@ namespace Microsoft.Build.UnitTests
             array2[1].Value.ShouldBe("Value1");
         }
 
-        [Fact]
+        [TestMethod]
         public void CopyToThrowsOnInvalidInput()
         {
             ImmutableDictionary dict = _emptyDict.SetItem("Key1", "Value1");
@@ -165,7 +165,7 @@ namespace Microsoft.Build.UnitTests
             Should.Throw<ArgumentException>(() => ((ICollection)dict).CopyTo(array1, 1));
         }
 
-        [Fact]
+        [TestMethod]
         public void KeysReturnsKeys()
         {
             ImmutableDictionary dict = _emptyDict.SetItem("Key1", "Value1");
@@ -177,7 +177,7 @@ namespace Microsoft.Build.UnitTests
             keys2.ShouldBe(new string[] { "Key1" });
         }
 
-        [Fact]
+        [TestMethod]
         public void ValuesReturnsValues()
         {
             ImmutableDictionary dict = _emptyDict.SetItem("Key1", "Value1");
@@ -189,14 +189,14 @@ namespace Microsoft.Build.UnitTests
             values2.ShouldBe(new string[] { "Value1" });
         }
 
-        [Fact]
+        [TestMethod]
         public void SetItemReturnsNewInstanceAfterAdding()
         {
             ImmutableDictionary dict = _emptyDict.SetItem("Key1", "Value1");
             dict.ShouldNotBeSameAs(_emptyDict);
         }
 
-        [Fact]
+        [TestMethod]
         public void SetItemReturnsNewInstanceAfterUpdating()
         {
             ImmutableDictionary dict1 = _emptyDict.SetItem("Key1", "Value1");
@@ -204,7 +204,7 @@ namespace Microsoft.Build.UnitTests
             dict2.ShouldNotBeSameAs(dict1);
         }
 
-        [Fact]
+        [TestMethod]
         public void SetItemReturnsSameInstanceWhenItemAlreadyExists()
         {
             ImmutableDictionary dict1 = _emptyDict.SetItem("Key1", "Value1");
@@ -212,7 +212,7 @@ namespace Microsoft.Build.UnitTests
             dict2.ShouldBeSameAs(dict1);
         }
 
-        [Fact]
+        [TestMethod]
         public void RemoveReturnsNewInstanceAfterDeleting()
         {
             ImmutableDictionary dict1 = _emptyDict.SetItem("Key1", "Value1");
@@ -220,7 +220,7 @@ namespace Microsoft.Build.UnitTests
             dict2.ShouldNotBeSameAs(dict1);
         }
 
-        [Fact]
+        [TestMethod]
         public void RemoveReturnsSameInstanceWhenItemDoesNotExist()
         {
             ImmutableDictionary dict1 = _emptyDict.SetItem("Key1", "Value1");
@@ -228,7 +228,7 @@ namespace Microsoft.Build.UnitTests
             dict2.ShouldBeSameAs(dict1);
         }
 
-        [Fact]
+        [TestMethod]
         public void ClearReturnsNewInstance()
         {
             ImmutableDictionary dict1 = _emptyDict.SetItem("Key1", "Value1");
@@ -236,7 +236,7 @@ namespace Microsoft.Build.UnitTests
             dict2.ShouldNotBeSameAs(dict1);
         }
 
-        [Fact]
+        [TestMethod]
         public void WithComparersCreatesNewInstanceWithSpecifiedKeyComparer()
         {
             ImmutableDictionary dict1 = _emptyDict.SetItem("Key1", "Value1");
@@ -244,7 +244,7 @@ namespace Microsoft.Build.UnitTests
             dict2["KEY1"].ShouldBe("Value1");
         }
 
-        [Fact]
+        [TestMethod]
         public void AddRangeAddsAllItems()
         {
             ImmutableDictionary dict = _emptyDict.AddRange(new KeyValuePair<string, string>[]

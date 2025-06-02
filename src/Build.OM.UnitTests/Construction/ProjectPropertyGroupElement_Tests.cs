@@ -16,7 +16,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read property groups in an empty project
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadNoPropertyGroup()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -27,7 +27,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read an empty property group
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadEmptyPropertyGroup()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -46,7 +46,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read an property group with two property children
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadPropertyGroupTwoProperties()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -71,7 +71,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set the condition value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetCondition()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -88,7 +88,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set the Label value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetLabel()
         {
             ProjectRootElement project = ProjectRootElement.Create();
@@ -105,7 +105,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Add a property through the convenience method on a property group
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddProperty_ExistingPropertySameName()
         {
             ProjectRootElement project = ProjectRootElement.Create();

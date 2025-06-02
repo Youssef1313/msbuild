@@ -17,7 +17,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests a simple case of valid arguments
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SimpleValidArgumentsCommandLine()
         {
             LC task = new LC();
@@ -42,7 +42,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests a simple case of valid arguments
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SimpleValidArgumentsResponseFile()
         {
             LC task = new LC();

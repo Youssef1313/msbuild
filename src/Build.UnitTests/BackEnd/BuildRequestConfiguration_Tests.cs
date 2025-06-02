@@ -36,7 +36,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             _env.Dispose();
         }
 
-        [Fact]
+        [TestMethod]
         public void TestConstructorNullFile()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -44,7 +44,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 BuildRequestData config1 = new BuildRequestData(null, new Dictionary<string, string>(), "toolsVersion", Array.Empty<string>(), null);
             });
         }
-        [Fact]
+        [TestMethod]
         public void TestConstructorNullProps()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -52,13 +52,13 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 BuildRequestData config1 = new BuildRequestData("file", null, "toolsVersion", Array.Empty<string>(), null);
             });
         }
-        [Fact]
+        [TestMethod]
         public void TestConstructor1()
         {
             BuildRequestData config1 = new BuildRequestData("file", new Dictionary<string, string>(), "toolsVersion", Array.Empty<string>(), null);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestConstructorInvalidConfigId()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -68,21 +68,21 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 config1.ShallowCloneWithNewId(0);
             });
         }
-        [Fact]
+        [TestMethod]
         public void TestConstructor2PositiveConfigId()
         {
             BuildRequestData config1 = new BuildRequestData("file", new Dictionary<string, string>(), "toolsVersion", Array.Empty<string>(), null);
             new BuildRequestConfiguration(1, config1, "2.0");
         }
 
-        [Fact]
+        [TestMethod]
         public void TestConstructor2NegativeConfigId()
         {
             BuildRequestData config1 = new BuildRequestData("file", new Dictionary<string, string>(), "toolsVersion", Array.Empty<string>(), null);
             new BuildRequestConfiguration(-1, config1, "2.0");
         }
 
-        [Fact]
+        [TestMethod]
         public void TestConstructor2NullFile()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -91,7 +91,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void TestConstructor2NullProps()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -99,7 +99,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 BuildRequestData config1 = new BuildRequestData("file", null, "toolsVersion", Array.Empty<string>(), null);
             });
         }
-        [Fact]
+        [TestMethod]
         public void TestWasGeneratedByNode()
         {
             BuildRequestData data1 = new BuildRequestData("file", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase), "toolsVersion", Array.Empty<string>(), null);
@@ -115,7 +115,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.False(config3.WasGeneratedByNode);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestDefaultConfigurationId()
         {
             BuildRequestData data1 = new BuildRequestData("file", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase), "toolsVersion", Array.Empty<string>(), null);
@@ -131,7 +131,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(0, config3.ConfigurationId);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestSetConfigurationIdBad()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -141,7 +141,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 config1.ConfigurationId = -2;
             });
         }
-        [Fact]
+        [TestMethod]
         public void TestSetConfigurationIdGood()
         {
             BuildRequestData data = new BuildRequestData("file", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase), "toolsVersion", Array.Empty<string>(), null);
@@ -151,7 +151,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(1, config1.ConfigurationId);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestGetFileName()
         {
             BuildRequestData data = new BuildRequestData("file", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase), "toolsVersion", Array.Empty<string>(), null);
@@ -159,7 +159,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(config1.ProjectFullPath, Path.GetFullPath("file"));
         }
 
-        [Fact]
+        [TestMethod]
         public void TestGetToolsVersion()
         {
             BuildRequestData data1 = new BuildRequestData("file", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase), "toolsVersion", Array.Empty<string>(), null);
@@ -167,7 +167,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal("toolsVersion", config1.ToolsVersion);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestGetProperties()
         {
             Dictionary<string, string> props = new Dictionary<string, string>();
@@ -176,7 +176,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(props.Count, Helpers.MakeList((IEnumerable<ProjectPropertyInstance>)(config1.GlobalProperties)).Count);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestSetProjectGood()
         {
             BuildRequestData data1 = new BuildRequestData("file", new Dictionary<string, string>(), "toolsVersion", Array.Empty<string>(), null);
@@ -190,7 +190,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Same(config1.Project, projectInstance);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestPacketType()
         {
             BuildRequestData data1 = new BuildRequestData("file", new Dictionary<string, string>(), "toolsVersion", Array.Empty<string>(), null);
@@ -198,7 +198,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(NodePacketType.BuildRequestConfiguration, config1.Type);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestGetHashCode()
         {
             BuildRequestConfiguration config1 = new BuildRequestConfiguration(new BuildRequestData("file", new Dictionary<string, string>(), "toolsVersion", Array.Empty<string>(), null), "2.0");
@@ -213,7 +213,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.NotEqual(config4.GetHashCode(), config5.GetHashCode());
         }
 
-        [Fact]
+        [TestMethod]
         public void TestEquals()
         {
             BuildRequestConfiguration config1 = new BuildRequestConfiguration(new BuildRequestData("file", new Dictionary<string, string>(), "toolsVersion", Array.Empty<string>(), null), "2.0");
@@ -237,7 +237,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.NotEqual(config1, config3);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestTranslation()
         {
             PropertyDictionary<ProjectPropertyInstance> properties = new PropertyDictionary<ProjectPropertyInstance>();
@@ -257,7 +257,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(config, deserializedConfig);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestTranslationWithEntireProjectState()
         {
             string projectBody = ObjectModelHelpers.CleanupFileContents(@"
@@ -304,7 +304,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             deserializedConfig.Project.Directory.ShouldBe(configuration.Project.Directory);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestProperties()
         {
             BuildRequestConfiguration configuration = new BuildRequestConfiguration(new BuildRequestData("path", new Dictionary<string, string>(), "2.0", Array.Empty<string>(), null), "2.0");
@@ -314,7 +314,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.False(configuration.IsActivelyBuilding);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestCache()
         {
             string projectBody = ObjectModelHelpers.CleanupFileContents(@"
@@ -418,7 +418,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             }
         }
 
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void WorksCorrectlyWithCurlyBraces()
@@ -489,7 +489,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void SkipIsolationChecksRejectsMissingEvaluation()
         {
             var configWithoutEvaluation = new BuildRequestConfiguration();
@@ -501,7 +501,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 });
         }
 
-        [Fact]
+        [TestMethod]
         public void SkipIsolationChecksRejectsRelativeReferencePaths()
         {
             var exception = Assert.Throws<InternalErrorException>(
@@ -513,24 +513,24 @@ namespace Microsoft.Build.UnitTests.BackEnd
             exception.Message.ShouldContain("Method does not treat path normalization cases");
         }
 
-        [Fact]
+        [TestMethod]
         public void SkipIsolationConstraintsDoesNotSkipWhenItemDoesNotExist()
         {
             TestSkipIsolationConstraints(@"c:\*.csproj", @"c:\foo.csproj", false, "<Project></Project>");
         }
 
-        [Theory]
-        [InlineData("", @"c:\foo", false)]
-        [InlineData("*", @"c:\foo.proj", false)] // relative glob is normalized to project directory
-        [InlineData("*", @"$(MSBuildProjectDirectory)\foo.proj", true)] // relative glob is normalized to project directory
-        [InlineData(@"c:\*.csproj", @"c:\foo.proj", false)]
-        [InlineData(@"c:\*.csproj", @"c:\foo.csproj", true)]
-        [InlineData(@"c:\*.props;c:\*.csproj", @"c:\foo.csproj", true)]
-        [InlineData(@"c:\project\*script*\**\*.proj", @"c:\foo.csproj", false)]
-        [InlineData(@"c:\project\*script*\**\*.proj", @"c:\project\scripts\a\b\build.proj", true)]
-        [InlineData(@"c:\project\script\Project*.proj", @"c:\project\script\Project.proj", true)]
-        [InlineData(@"c:\project\script\Project*.proj", @"c:\project\script\Project1.proj", true)]
-        [InlineData(@"c:\project\script\Project*.proj", @"c:\project\script\build.proj", false)]
+        [TestMethod]
+        [DataRow("", @"c:\foo", false)]
+        [DataRow("*", @"c:\foo.proj", false)] // relative glob is normalized to project directory
+        [DataRow("*", @"$(MSBuildProjectDirectory)\foo.proj", true)] // relative glob is normalized to project directory
+        [DataRow(@"c:\*.csproj", @"c:\foo.proj", false)]
+        [DataRow(@"c:\*.csproj", @"c:\foo.csproj", true)]
+        [DataRow(@"c:\*.props;c:\*.csproj", @"c:\foo.csproj", true)]
+        [DataRow(@"c:\project\*script*\**\*.proj", @"c:\foo.csproj", false)]
+        [DataRow(@"c:\project\*script*\**\*.proj", @"c:\project\scripts\a\b\build.proj", true)]
+        [DataRow(@"c:\project\script\Project*.proj", @"c:\project\script\Project.proj", true)]
+        [DataRow(@"c:\project\script\Project*.proj", @"c:\project\script\Project1.proj", true)]
+        [DataRow(@"c:\project\script\Project*.proj", @"c:\project\script\build.proj", false)]
         public void SkipIsolationCheckShouldFilterReferencesViaMSBuildGlobs(string glob, string referencePath, bool expectedOutput)
         {
             TestSkipIsolationConstraints(glob, referencePath, expectedOutput);

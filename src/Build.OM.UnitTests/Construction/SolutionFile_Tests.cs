@@ -25,9 +25,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Test that a project with the C++ project guid and an extension of vcproj is seen as invalid.
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         public void ParseSolution_VC(bool isOptInSlnParsingWithNewParser)
         {
             string solutionFileContents =
@@ -64,10 +64,10 @@ namespace Microsoft.Build.UnitTests.Construction
         /// Test that a project with the C++ project guid and an arbitrary extension is seen as valid --
         /// we assume that all C++ projects except .vcproj are MSBuild format.
         /// </summary>
-        [Theory]
-        [InlineData(false, false)]
-        [InlineData(true, false)]
-        [InlineData(false, true)]
+        [TestMethod]
+        [DataRow(false, false)]
+        [DataRow(true, false)]
+        [DataRow(false, true)]
         public void ParseSolution_VC2(bool isOptInSlnParsingWithNewParser, bool convertToSlnx)
         {
             string solutionFileContents =
@@ -110,9 +110,9 @@ namespace Microsoft.Build.UnitTests.Construction
         // This is somewhat malformed, but with old parser we should still behave reasonably instead of crashing.
         // The new parser throws an exception.
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         public void ParseSolution_EmptyProjectName(bool isOptInSlnParsingWithNewParser)
         {
             string solutionFileContents =
@@ -157,10 +157,10 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Tests the parsing of a very basic .SLN file with three independent projects.
         /// </summary>
-        [Theory]
-        [InlineData(false, false)]
-        [InlineData(true, false)]
-        [InlineData(false, true)]
+        [TestMethod]
+        [DataRow(false, false)]
+        [DataRow(true, false)]
+        [DataRow(false, true)]
         public void BasicSolution(bool isOptInSlnParsingWithNewParser, bool convertToSlnx)
         {
             string solutionFileContents =
@@ -233,9 +233,9 @@ namespace Microsoft.Build.UnitTests.Construction
         /// For the new parser, solution folders are not included to ProjectsInOrder or ProjectsByGuid.
         /// See the test with the same name in SolutionFile_Tests_OldParser.
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         public void SolutionFolders(bool convertToSlnx)
         {
             string solutionFileContents =
@@ -322,10 +322,10 @@ namespace Microsoft.Build.UnitTests.Construction
         /// Verifies that hand-coded project-to-project dependencies listed in the .SLN file
         /// are correctly recognized by the solution parser.
         /// </summary>
-        [Theory]
-        [InlineData(false, false)]
-        [InlineData(true, false)]
-        [InlineData(false, true)]
+        [TestMethod]
+        [DataRow(false, false)]
+        [DataRow(true, false)]
+        [DataRow(false, true)]
         public void SolutionDependencies(bool isOptInSlnParsingWithNewParser, bool convertToSlnx)
         {
             string solutionFileContents =
@@ -399,10 +399,10 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Make sure the solution configurations get parsed correctly for a simple mixed C#/VC solution
         /// </summary>
-        [Theory]
-        [InlineData(false, false)]
-        [InlineData(true, false)]
-        [InlineData(false, true)]
+        [TestMethod]
+        [DataRow(false, false)]
+        [DataRow(true, false)]
+        [DataRow(false, true)]
         public void ParseSolutionConfigurations(bool isOptInSlnParsingWithNewParser, bool convertToSlnx)
         {
             string solutionFileContents =
@@ -477,10 +477,10 @@ namespace Microsoft.Build.UnitTests.Construction
         /// <summary>
         /// Make sure the solution configurations get parsed correctly for a simple C# application
         /// </summary>
-        [Theory]
-        [InlineData(false, false)]
-        [InlineData(true, false)]
-        [InlineData(false, true)]
+        [TestMethod]
+        [DataRow(false, false)]
+        [DataRow(true, false)]
+        [DataRow(false, true)]
         public void ParseSolutionConfigurationsNoMixedPlatform(bool isOptInSlnParsingWithNewParser, bool convertToSlnx)
         {
             string solutionFileContents =
@@ -541,10 +541,10 @@ namespace Microsoft.Build.UnitTests.Construction
         /// Make sure the project configurations in solution configurations get parsed correctly
         /// for a simple mixed C#/VC solution
         /// </summary>
-        [Theory]
-        [InlineData(false, false)]
-        [InlineData(true, false)]
-        [InlineData(false, true)]
+        [TestMethod]
+        [DataRow(false, false)]
+        [DataRow(true, false)]
+        [DataRow(false, true)]
         public void ParseProjectConfigurationsInSolutionConfigurations1(bool isOptInSlnParsingWithNewParser, bool convertToSlnx)
         {
             string solutionFileContents =
@@ -638,10 +638,10 @@ namespace Microsoft.Build.UnitTests.Construction
             Assert.True(vcProject.ProjectConfigurations["Release|Win32"].IncludeInBuild);
         }
 
-        [Theory]
-        [InlineData(false, false)]
-        [InlineData(true, false)]
-        [InlineData(false, true)]
+        [TestMethod]
+        [DataRow(false, false)]
+        [DataRow(true, false)]
+        [DataRow(false, true)]
         public void ParseProjectConfigurationsInSolutionConfigurations2(bool isOptInSlnParsingWithNewParser, bool convertToSlnx)
         {
             string solutionFileContents =

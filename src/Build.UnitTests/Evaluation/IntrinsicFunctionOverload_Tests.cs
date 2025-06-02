@@ -13,7 +13,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
 {
     public class IntrinsicFunctionOverload_Tests
     {
-        [Fact]
+        [TestMethod]
         public void MSBuildAddInteger()
         {
             const string projectContent = @"
@@ -35,7 +35,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             actualProperty.EvaluatedValue.ShouldBe(expected);
         }
 
-        [Fact]
+        [TestMethod]
         public void MSBuildAddIntegerGreaterThanMax()
         {
             const string projectContent = @"
@@ -57,7 +57,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             actualProperty.EvaluatedValue.ShouldBe(expected);
         }
 
-        [Fact]
+        [TestMethod]
         public void MSBuildAddIntegerLessThanMin()
         {
             const string projectContent = @"
@@ -79,7 +79,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             actualProperty.EvaluatedValue.ShouldBe(expected);
         }
 
-        [Fact]
+        [TestMethod]
         public void MSBuildAddReal()
         {
             const string projectContent = @"
@@ -101,7 +101,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             actualProperty.EvaluatedValue.ShouldBe(expected);
         }
 
-        [Fact]
+        [TestMethod]
         public void MSBuildSubtractInteger()
         {
             const string projectContent = @"
@@ -121,7 +121,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             actualProperty.EvaluatedValue.ShouldBe(expected);
         }
 
-        [Fact]
+        [TestMethod]
         public void MSBuildSubtractIntegerGreaterThanMax()
         {
             const string projectContent = @"
@@ -143,7 +143,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             actualProperty.EvaluatedValue.ShouldBe(expected);
         }
 
-        [Fact]
+        [TestMethod]
         public void MSBuildSubtractIntegerLessThanMin()
         {
             const string projectContent = @"
@@ -165,7 +165,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             actualProperty.EvaluatedValue.ShouldBe(expected);
         }
 
-        [Fact]
+        [TestMethod]
         public void MSBuildSubtractReal()
         {
             const string projectContent = @"
@@ -187,7 +187,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             actualProperty.EvaluatedValue.ShouldBe(expected);
         }
 
-        [Fact]
+        [TestMethod]
         public void MSBuildMultiplyInteger()
         {
             const string projectContent = @"
@@ -207,7 +207,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             actualProperty.EvaluatedValue.ShouldBe(expected);
         }
 
-        [Fact]
+        [TestMethod]
         public void MSBuildMultiplyIntegerGreaterThanMax()
         {
             const string projectContent = @"
@@ -229,7 +229,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             actualProperty.EvaluatedValue.ShouldBe(expected);
         }
 
-        [Fact]
+        [TestMethod]
         public void MSBuildMultiplyIntegerLessThanMin()
         {
             const string projectContent = @"
@@ -251,7 +251,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             actualProperty.EvaluatedValue.ShouldBe(expected);
         }
 
-        [Fact]
+        [TestMethod]
         public void MSBuildMultiplyReal()
         {
             const string projectContent = @"
@@ -273,7 +273,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             actualProperty.EvaluatedValue.ShouldBe(expected);
         }
 
-        [Fact]
+        [TestMethod]
         public void MSBuildDivideInteger()
         {
             const string projectContent = @"
@@ -293,7 +293,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             actualProperty.EvaluatedValue.ShouldBe(expected);
         }
 
-        [Fact]
+        [TestMethod]
         public void MSBuildDivideIntegerGreaterThanMax()
         {
             const string projectContent = @"
@@ -315,7 +315,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             actualProperty.EvaluatedValue.ShouldBe(expected);
         }
 
-        [Fact]
+        [TestMethod]
         public void MSBuildDivideIntegerLessThanMin()
         {
             const string projectContent = @"
@@ -337,7 +337,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             actualProperty.EvaluatedValue.ShouldBe(expected);
         }
 
-        [Fact]
+        [TestMethod]
         public void MSBuildDivideReal()
         {
             const string projectContent = @"
@@ -359,7 +359,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             actualProperty.EvaluatedValue.ShouldBe(expected);
         }
 
-        [Fact]
+        [TestMethod]
         public void MSBuildModuloInteger()
         {
             const string projectContent = @"
@@ -379,7 +379,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             actualProperty.EvaluatedValue.ShouldBe(expected);
         }
 
-        [Fact]
+        [TestMethod]
         public void MSBuildModuloIntegerGreaterThanMax()
         {
             const string projectContent = @"
@@ -401,7 +401,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             actualProperty.EvaluatedValue.ShouldBe(expected);
         }
 
-        [Fact]
+        [TestMethod]
         public void MSBuildModuloIntegerLessThanMin()
         {
             const string projectContent = @"
@@ -423,7 +423,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             actualProperty.EvaluatedValue.ShouldBe(expected);
         }
 
-        [Fact]
+        [TestMethod]
         public void MSBuildModuloReal()
         {
             const string projectContent = @"

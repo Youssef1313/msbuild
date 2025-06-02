@@ -32,11 +32,11 @@ namespace Microsoft.Build.Engine.UnitTests.Telemetry
         {
         }
 
-        [Theory]
-        [InlineData(DotnetOptOut, "true")]
-        [InlineData(TelemetryFxOptoutEnvVarName, "true")]
-        [InlineData(DotnetOptOut, "1")]
-        [InlineData(TelemetryFxOptoutEnvVarName, "1")]
+        [TestMethod]
+        [DataRow(DotnetOptOut, "true")]
+        [DataRow(TelemetryFxOptoutEnvVarName, "true")]
+        [DataRow(DotnetOptOut, "1")]
+        [DataRow(TelemetryFxOptoutEnvVarName, "1")]
         public void Initialize_ShouldSetStateToOptOut_WhenOptOutEnvVarIsTrue(string optoutVar, string value)
         {
             // Arrange
@@ -51,7 +51,7 @@ namespace Microsoft.Build.Engine.UnitTests.Telemetry
         }
 
 #if NETCOREAPP
-        [Fact]
+        [TestMethod]
         public void Initialize_ShouldSetStateToUnsampled_WhenNoOverrideOnNetCore()
         {
             using TestEnvironment environment = TestEnvironment.Create();
@@ -65,9 +65,9 @@ namespace Microsoft.Build.Engine.UnitTests.Telemetry
         }
 #endif
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void Initialize_ShouldSetSampleRateOverride_AndCreateActivitySource_WhenRandomBelowOverride(bool standalone)
         {
             // Arrange
@@ -84,7 +84,7 @@ namespace Microsoft.Build.Engine.UnitTests.Telemetry
             OpenTelemetryManager.Instance.DefaultActivitySource.ShouldNotBeNull();
         }
 
-        [Fact]
+        [TestMethod]
         public void Initialize_ShouldNoOp_WhenCalledMultipleTimes()
         {
             using TestEnvironment environment = TestEnvironment.Create();
@@ -101,7 +101,7 @@ namespace Microsoft.Build.Engine.UnitTests.Telemetry
             state2.ShouldBe(false);
         }
 
-        [Fact]
+        [TestMethod]
         public void TelemetryLoadFailureIsLoggedOnce()
         {
             OpenTelemetryManager.Instance.LoadFailureExceptionMessage = new System.IO.FileNotFoundException().ToString();

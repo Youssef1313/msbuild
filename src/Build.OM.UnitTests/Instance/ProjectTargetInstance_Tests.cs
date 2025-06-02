@@ -20,7 +20,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Test accessors
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Accessors()
         {
             ProjectTargetInstance target = GetSampleTargetInstance();
@@ -45,7 +45,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// Evaluation of a project with more than one target with the same name
         /// should skip all but the last one.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TargetOverride()
         {
             ProjectRootElement projectXml = ProjectRootElement.Create();
@@ -65,7 +65,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// should skip all but the last one.  This is true even if the targets
         /// involved only have the same unescaped name (Orcas compat)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TargetOverride_Escaped()
         {
             ProjectRootElement projectXml = ProjectRootElement.Create();
@@ -85,7 +85,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// should skip all but the last one.  This is true even if the targets
         /// involved only have the same unescaped name (Orcas compat)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TargetOverride_Escaped2()
         {
             ProjectRootElement projectXml = ProjectRootElement.Create();
@@ -104,7 +104,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// Verify that targets from a saved, but subsequently edited, project
         /// provide the correct full path.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void FileLocationAvailableEvenAfterEdits()
         {
             string path = null;

@@ -172,7 +172,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         private Dictionary<INodeEndpoint, LinkStatusContext> _linkStatusTable;
         private MockHost _host;
 
-        [Fact]
+        [TestMethod]
         public void ConstructionWithValidHost()
         {
             NodeEndpointInProc.EndpointPair endpoints =
@@ -184,7 +184,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                     NodeEndpointInProc.EndpointMode.Asynchronous, _host);
         }
 
-        [Fact]
+        [TestMethod]
         public void ConstructionSynchronousWithInvalidHost()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -194,7 +194,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void ConstructionAsynchronousWithInvalidHost()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -209,7 +209,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// 2. and that attempting to send data while they are
         /// inactive throws the expected exception.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InactiveLinkTestSynchronous()
         {
             NodeEndpointInProc.EndpointPair endpoints =
@@ -229,7 +229,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Verify that the links are marked inactive and that attempting to send data while they are
         /// inactive throws the expected exception.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InactiveLinkTestAsynchronous()
         {
             NodeEndpointInProc.EndpointPair endpoints =
@@ -247,7 +247,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             endpoints.ManagerEndpoint.Disconnect();
         }
 
-        [Fact]
+        [TestMethod]
         public void ConnectionTestSynchronous()
         {
             NodeEndpointInProc.EndpointPair endpoints =
@@ -273,20 +273,20 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(LinkStatus.Active, _linkStatusTable[endpoints.ManagerEndpoint].status);
         }
 
-        [Fact]
+        [TestMethod]
         public void DisconnectionTestSynchronous()
         {
             DisconnectionTestHelper(NodeEndpointInProc.EndpointMode.Synchronous);
         }
 
-        [Fact]
+        [TestMethod]
         public void DisconnectionTestAsynchronous()
         {
             DisconnectionTestHelper(NodeEndpointInProc.EndpointMode.Asynchronous);
         }
 
 
-        [Fact]
+        [TestMethod]
         public void SynchronousData()
         {
             // Create the endpoints
@@ -315,7 +315,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(_host.DataReceivedContext.thread.ManagedThreadId, Thread.CurrentThread.ManagedThreadId);
         }
 
-        [Fact]
+        [TestMethod]
         public void AsynchronousData()
         {
             // Create the endpoints

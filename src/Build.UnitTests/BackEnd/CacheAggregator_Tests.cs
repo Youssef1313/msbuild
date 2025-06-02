@@ -25,7 +25,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             aggregator = new CacheAggregator(() => i++);
         }
 
-        [Fact]
+        [TestMethod]
         public void NoCachesProducesEmptyCaches()
         {
             var aggregation = aggregator.Aggregate();
@@ -39,7 +39,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             aggregation.LastConfigurationId.ShouldBe(0);
         }
 
-        [Fact]
+        [TestMethod]
         public void CannotCallAggregateTwice()
         {
             aggregator.Aggregate();
@@ -52,7 +52,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void CannotAddAfterAggregation()
         {
             aggregator.Aggregate();
@@ -69,7 +69,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void RejectCachesWithMoreConfigEntriesThanResultEntries()
         {
             var configCache = new ConfigCache();
@@ -91,7 +91,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void RejectCachesWithMoreResultEntriesThanConfigEntries()
         {
             var configCache = new ConfigCache();
@@ -118,7 +118,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void RejectCachesWithMismatchedIds()
         {
             // one entry in each cache but different config ids
@@ -141,7 +141,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void RejectCollidingConfigurationsFromSeparateCaches()
         {
             // collides with the config id from configCache2
@@ -172,7 +172,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void SingleEmpty()
         {
             var configCache = new ConfigCache();
@@ -186,7 +186,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             AssertAggregation(new[] { (configCache, resultsCache) }, results);
         }
 
-        [Fact]
+        [TestMethod]
         public void SingleCacheWithSingleEntry()
         {
             var configCache = new ConfigCache();
@@ -204,7 +204,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             AssertAggregation(new[] { (configCache, resultsCache) }, results);
         }
 
-        [Fact]
+        [TestMethod]
         public void MultipleCachesMultipleEntries()
         {
             var configCache1 = new ConfigCache();

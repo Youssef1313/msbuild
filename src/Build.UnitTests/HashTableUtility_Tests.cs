@@ -22,7 +22,7 @@ namespace Microsoft.Build.UnitTests
         /// This test ensures that hashtable     with unequal numbers of items are considered not
         /// equivalent.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Regress_Mutation_HashtablesWithDifferentCountsAreNotEquivalent()
         {
             Dictionary<string, string> h1 = new Dictionary<string, string>();
@@ -35,7 +35,7 @@ namespace Microsoft.Build.UnitTests
             Assert.True(HashTableUtility.Compare(h2, h1) > 0);
         }
 
-        [Fact]
+        [TestMethod]
         public void HashtableComparisons()
         {
             Dictionary<string, string> h1 = new Dictionary<string, string>();

@@ -13,7 +13,7 @@ namespace Microsoft.Build.UnitTests
 {
     public class ProcessExtensions_Tests
     {
-        [Fact]
+        [TestMethod]
         public async Task KillTree()
         {
             var psi =

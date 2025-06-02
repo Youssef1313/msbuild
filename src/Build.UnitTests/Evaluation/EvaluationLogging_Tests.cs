@@ -104,7 +104,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void AllEvaluationEventsShouldHaveAnEvaluationId()
         {
             AssertLoggingEvents(
@@ -120,7 +120,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 });
         }
 
-        [Fact]
+        [TestMethod]
         public void GivenOneProjectThereShouldBeOneStartedAndOneEndedEvent()
         {
             AssertLoggingEvents(
@@ -134,7 +134,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 });
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectShouldHaveValidEvaluationIdDuringEvaluation()
         {
             AssertLoggingEvents(
@@ -155,7 +155,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 });
         }
 
-        [Fact]
+        [TestMethod]
         public void TurnOnProfileEvaluationFromLogger()
         {
             AssertLoggingEvents(

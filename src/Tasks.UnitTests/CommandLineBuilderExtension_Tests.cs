@@ -22,7 +22,7 @@ namespace Microsoft.Build.UnitTests
         * the boolean flag has a string value that cannot be converted to a boolean. In this
         * case we expect an exception.
         */
-        [Fact]
+        [TestMethod]
         public void AppendItemWithInvalidBooleanAttribute()
         {
             Assert.Throws<ArgumentException>(() =>
@@ -65,7 +65,7 @@ namespace Microsoft.Build.UnitTests
         /// order on the command-line, so we skip all subsequent attributes as soon
         /// as we find one missing.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AppendItemWithMissingAttribute()
         {
             // Construct the task items.

@@ -15,8 +15,8 @@ namespace Microsoft.Build.UnitTests
 {
     public sealed class ResGenDependencies_Tests
     {
-        [Theory]
-        [MemberData(nameof(GenerateResource_Tests.Utilities.UsePreserializedResourceStates), MemberType = typeof(GenerateResource_Tests.Utilities))]
+        [TestMethod]
+        [DynamicData(nameof(GenerateResource_Tests.Utilities.UsePreserializedResourceStates), MemberType = typeof(GenerateResource_Tests.Utilities))]
 
         public void DirtyCleanScenario(bool useMSBuildResXReader)
         {

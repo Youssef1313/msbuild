@@ -31,7 +31,7 @@ namespace Microsoft.Build.UnitTests
             _output = testOutputHelper;
         }
 
-        [Fact]
+        [TestMethod]
         public void Basic()
         {
             Assert.True(TypeLoader.IsPartialTypeNameMatch("Csc", "csc")); // ==> exact match
@@ -46,20 +46,20 @@ namespace Microsoft.Build.UnitTests
             Assert.False(TypeLoader.IsPartialTypeNameMatch("MyTasks.ATask\\\\\\.Csc", "Csc")); // ==> no match
         }
 
-        [Fact]
+        [TestMethod]
         public void Regress_Mutation_TrailingPartMustMatch()
         {
             Assert.False(TypeLoader.IsPartialTypeNameMatch("Microsoft.Build.Tasks.Csc", "Vbc"));
         }
 
-        [Fact]
+        [TestMethod]
         public void Regress_Mutation_ParameterOrderDoesntMatter()
         {
             Assert.True(TypeLoader.IsPartialTypeNameMatch("Csc", "Microsoft.Build.Tasks.Csc"));
         }
 
 
-        [Fact]
+        [TestMethod]
         public void LoadNonExistingAssembly()
         {
             using var dir = new FileUtilities.TempWorkingDirectory(ProjectFileFolder);
@@ -76,7 +76,7 @@ namespace Microsoft.Build.UnitTests
             CheckIfCorrectAssemblyLoaded(output, dllPath, false);
         }
 
-        [Fact]
+        [TestMethod]
         public void LoadInsideAsssembly()
         {
             using (var dir = new FileUtilities.TempWorkingDirectory(ProjectFileFolder))
@@ -93,7 +93,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void LoadTaskDependingOnMSBuild()
         {
             using (TestEnvironment env = TestEnvironment.Create())
@@ -115,7 +115,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void LoadOutsideAssembly()
         {
             using (var dir = new FileUtilities.TempWorkingDirectory(ProjectFileFolder))
@@ -140,7 +140,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact(Skip = "https://github.com/dotnet/msbuild/issues/325")]
+        [TestMethod(Skip = "https://github.com/dotnet/msbuild/issues/325")]
         public void LoadInsideAssemblyWhenGivenOutsideAssemblyWithSameName()
         {
             using (var dir = new FileUtilities.TempWorkingDirectory(ProjectFileFolder))
@@ -228,7 +228,7 @@ namespace Microsoft.Build.UnitTests
         /// Make sure that when we load multiple types out of the same assembly with different type filters that both the fullyqualified name matching and the
         /// partial name matching still work.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Regress640476PartialName()
         {
             string forwardingLoggerLocation = typeof(Microsoft.Build.Logging.ConfigurableForwardingLogger).Assembly.Location;
@@ -248,7 +248,7 @@ namespace Microsoft.Build.UnitTests
         /// Make sure that when we load multiple types out of the same assembly with different type filters that both the fullyqualified name matching and the
         /// partial name matching still work.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Regress640476FullyQualifiedName()
         {
             Type forwardingLoggerType = typeof(Microsoft.Build.Logging.ConfigurableForwardingLogger);
@@ -272,7 +272,7 @@ namespace Microsoft.Build.UnitTests
         /// This has been in since whidbey but there has been no test for it and it was broken in the last refactoring of TypeLoader.
         /// This test is to prevent that from happening again.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NoTypeNamePicksFirstType()
         {
             Type forwardingLoggerType = typeof(Microsoft.Build.Logging.ConfigurableForwardingLogger);

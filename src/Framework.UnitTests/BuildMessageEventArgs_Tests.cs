@@ -18,7 +18,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Trivially exercise event args default ctors to boost Frameworks code coverage
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EventArgsCtors()
         {
             BuildMessageEventArgs bmea = new BuildMessageEventArgs2();

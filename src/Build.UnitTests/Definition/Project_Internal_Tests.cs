@@ -25,7 +25,7 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Set default tools version; subsequent projects should use it
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetDefaultToolsVersion()
         {
             string oldValue = Environment.GetEnvironmentVariable("MSBUILDLEGACYDEFAULTTOOLSVERSION");
@@ -69,7 +69,7 @@ namespace Microsoft.Build.UnitTests.Definition
         ///
         /// ... Make sure we can do this even if we're not using the "always default everything to current anyway" codepath.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReloadProjectWithInvalidToolsVersionInFile()
         {
             string oldValue = Environment.GetEnvironmentVariable("MSBUILDLEGACYDEFAULTTOOLSVERSION");
@@ -107,7 +107,7 @@ namespace Microsoft.Build.UnitTests.Definition
         /// Project.ToolsVersion should be set to ToolsVersion evaluated with,
         /// even if it is subsequently changed on the XML (without reevaluation)
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void ProjectToolsVersion20Present()
@@ -146,7 +146,7 @@ namespace Microsoft.Build.UnitTests.Definition
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void UsingExplicitToolsVersionShouldBeFalseWhenNoToolsetIsReferencedInProject()
         {
             var project = ObjectModelHelpers.CreateInMemoryProject("<Project></Project>");
@@ -158,7 +158,7 @@ namespace Microsoft.Build.UnitTests.Definition
         /// $(MSBuildToolsVersion) should be set to ToolsVersion evaluated with,
         /// even if it is subsequently changed on the XML (without reevaluation)
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void MSBuildToolsVersionProperty()
@@ -202,7 +202,7 @@ namespace Microsoft.Build.UnitTests.Definition
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectEvaluationShouldRespectConditionsIfProjectLoadSettingsSaysSo()
         {
             var projectContents = @"
@@ -262,9 +262,9 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Verifies that when calling <see cref="Project.FromFile(string, ProjectOptions)" /> with <see cref="ProjectOptions.Interactive" /> <see langword="true" />, the built-in &quot;MSBuildInteractive&quot; property is set to <see langword="true" />, otherwise the property is <see cref="string.Empty" />.
         /// </summary>
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void ProjectFromFileInteractive(bool interactive)
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -290,9 +290,9 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Verifies that when calling <see cref="Project.FromProjectRootElement(ProjectRootElement, ProjectOptions)" /> with <see cref="ProjectOptions.Interactive" /> <see langword="true" />, the built-in &quot;MSBuildInteractive&quot; property is set to <see langword="true" />, otherwise the property is <see cref="string.Empty" />.
         /// </summary>
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void ProjectFromProjectRootElementInteractive(bool interactive)
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -318,9 +318,9 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Verifies that when calling <see cref="Project.FromXmlReader(XmlReader, ProjectOptions)" /> with <see cref="ProjectOptions.Interactive" /> <see langword="true" />, the built-in &quot;MSBuildInteractive&quot; property is set to <see langword="true" />, otherwise the property is <see cref="string.Empty" />.
         /// </summary>
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void ProjectFromXmlReaderInteractive(bool interactive)
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())

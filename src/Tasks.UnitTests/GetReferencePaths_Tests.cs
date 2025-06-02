@@ -22,7 +22,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Test the case where there is a good target framework moniker passed in.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestGeneralFrameworkMonikerGood()
         {
             string targetFrameworkMoniker = ".NetFramework, Version=v4.8";
@@ -39,7 +39,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Test the case where there is a good target framework moniker passed in.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestGeneralFrameworkMonikerGoodWithRoot()
         {
             string tempDirectory = Path.Combine(Path.GetTempPath(), "TestGeneralFrameworkMonikerGoodWithRoot");
@@ -85,7 +85,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Test the case where there is a good target framework moniker passed in.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestGeneralFrameworkMonikerGoodWithRootWithProfile()
         {
             string tempDirectory = Path.Combine(Path.GetTempPath(), "TestGeneralFrameworkMonikerGoodWithRootWithProfile");
@@ -130,7 +130,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Test the case where the target framework moniker is null. Expect there to be an error logged.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestGeneralFrameworkMonikerNull()
         {
             MockEngine engine = new MockEngine();
@@ -147,7 +147,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Test the case where the target framework moniker is empty. Expect there to be an error logged.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestGeneralFrameworkMonikerNonExistent()
         {
             MockEngine engine = new MockEngine();
@@ -166,7 +166,7 @@ namespace Microsoft.Build.UnitTests
             engine.AssertLogContains("ERROR MSB3644: " + message);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestSuppressNotFoundError()
         {
             MockEngine engine = new MockEngine();
@@ -187,7 +187,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Test the case where there is a good target framework moniker passed in.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestGeneralFrameworkMonikerGoodWithInvalidIncludePath()
         {
             string tempDirectory = Path.Combine(Path.GetTempPath(), "TestGeneralFrameworkMonikerGoodWithInvalidIncludePath");
@@ -234,7 +234,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Test the case where there is a good target framework moniker passed in but there is a problem with the RedistList.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestGeneralFrameworkMonikerGoodWithInvalidCharInIncludePath()
         {
             string tempDirectory = Path.Combine(Path.GetTempPath(), "TestGeneralFrameworkMonikerGoodWithInvalidCharInIncludePath");
@@ -293,7 +293,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Test the case where there is a good target framework moniker passed in.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestGeneralFrameworkMonikerGoodWithFrameworkInFallbackPaths()
         {
             using (var env = TestEnvironment.Create())

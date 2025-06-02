@@ -19,7 +19,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Find with the same key inserted using the indexer
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Indexer_ReferenceFound()
         {
             string k1 = new string(nameof(Indexer_ReferenceFound).ToCharArray()); // force create new string
@@ -38,7 +38,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Find something not present with the indexer
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Indexer_NotFound()
         {
             Assert.Throws<KeyNotFoundException>(() =>
@@ -50,7 +50,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Find with the same key inserted using TryGetValue
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TryGetValue_ReferenceFound()
         {
             string k1 = new string(nameof(TryGetValue_ReferenceFound).ToCharArray());
@@ -70,7 +70,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Find something not present with TryGetValue
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TryGetValue_ReferenceNotFound()
         {
             var dictionary = new CopyOnWriteDictionary<object>();
@@ -86,7 +86,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Find a key that wasn't inserted but is equal
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EqualityComparer()
         {
             string k1 = String.Concat("ke", "y");
@@ -109,7 +109,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Cloning sees the same values
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CloneVisibility()
         {
             var dictionary = new CopyOnWriteDictionary<string>();
@@ -125,7 +125,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Clone uses same comparer
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CloneComparer()
         {
             var dictionary = new CopyOnWriteDictionary<string>(StringComparer.OrdinalIgnoreCase);
@@ -140,7 +140,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Writes to original not visible to clone
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OriginalWritesNotVisibleToClones()
         {
             var dictionary = new CopyOnWriteDictionary<string>();
@@ -166,7 +166,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         /// <summary>
         /// Writes to clone not visible to original
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CloneWritesNotVisibleToOriginal()
         {
             var dictionary = new CopyOnWriteDictionary<string>();

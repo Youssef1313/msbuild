@@ -51,7 +51,7 @@ namespace Microsoft.Build.UnitTests
             return exec;
         }
 
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void EscapeSpecifiedCharactersInPathToGeneratedBatchFile()
@@ -70,8 +70,8 @@ namespace Microsoft.Build.UnitTests
         }
 
         [UnixOnlyTheory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [DataRow(true)]
+        [DataRow(false)]
         public void ExecSetsLocaleOnUnix(bool enableChangeWave)
         {
             using (var env = TestEnvironment.Create())
@@ -109,7 +109,7 @@ namespace Microsoft.Build.UnitTests
         /// Ensures that calling the Exec task does not leave any extra TEMP files
         /// lying around.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NoTempFileLeaks()
         {
             using (var testEnvironment = TestEnvironment.Create())
@@ -141,7 +141,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ExitCodeCausesFailure()
         {
             Exec exec = PrepareExec(NativeMethodsShared.IsWindows ? "xcopy thisisanonexistentfile" : "cp thisisanonexistentfile thatisanonexistentfile");
@@ -156,7 +156,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void Timeout()
         {
             // On non-Windows the exit code of a killed process is SIGKILL (137)
@@ -189,7 +189,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(0, ((MockEngine)exec.BuildEngine).Errors);
         }
 
-        [Fact]
+        [TestMethod]
         public void TimeoutFailsEvenWhenExitCodeIsIgnored()
         {
             Exec exec = PrepareExec(NativeMethodsShared.IsWindows ? ":foo \n goto foo" : "while true; do sleep 1; done");
@@ -221,7 +221,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(0, ((MockEngine)exec.BuildEngine).Errors);
         }
 
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void ExitCodeGetter()
@@ -232,7 +232,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(120, exec.ExitCode);
         }
 
-        [Fact]
+        [TestMethod]
         public void LoggedErrorsCauseFailureDespiteExitCode0()
         {
             var cmdLine = NativeMethodsShared.IsWindows
@@ -249,7 +249,7 @@ namespace Microsoft.Build.UnitTests
             ((MockEngine)exec.BuildEngine).AssertLogContains("MSB3073");
         }
 
-        [Fact]
+        [TestMethod]
         public void IgnoreExitCodeTrueMakesTaskSucceedDespiteLoggingErrors()
         {
             var cmdLine = NativeMethodsShared.IsWindows
@@ -263,7 +263,7 @@ namespace Microsoft.Build.UnitTests
             Assert.True(result);
         }
 
-        [Fact]
+        [TestMethod]
         public void IgnoreExitCodeTrueMakesTaskSucceedDespiteExitCode1()
         {
             Exec exec = PrepareExec("dir ||invalid||");
@@ -273,7 +273,7 @@ namespace Microsoft.Build.UnitTests
             Assert.True(result);
         }
 
-        [Fact]
+        [TestMethod]
         public void NonUNCWorkingDirectoryUsed()
         {
             Exec exec = PrepareExec(NativeMethodsShared.IsWindows ? "echo [%cd%]" : "echo [$PWD]");
@@ -302,7 +302,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(system, exec.GetWorkingDirectoryAccessor());
         }
 
-        [Fact]
+        [TestMethod]
         public void NoWorkingDirectorySet()
         {
             var cd = Directory.GetCurrentDirectory();
@@ -328,7 +328,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests that Exec still executes properly when there's an '&' in the temp directory path
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TempPathContainsAmpersand1()
         {
             string directoryWithAmpersand = "nospace&nospace";
@@ -365,7 +365,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests that Exec still executes properly when there's an ' &' in the temp directory path
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TempPathContainsAmpersand2()
         {
             string directoryWithAmpersand = "space &nospace";
@@ -403,7 +403,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests that Exec still executes properly when there's an '& ' in the temp directory path
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TempPathContainsAmpersand3()
         {
             string directoryWithAmpersand = "nospace& space";
@@ -440,7 +440,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests that Exec still executes properly when there's an ' & ' in the temp directory path
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TempPathContainsAmpersand4()
         {
             string directoryWithAmpersand = "space & space";
@@ -477,7 +477,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests that Exec still executes properly when there's a non-ANSI character in the command
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExecTaskUnicodeCharacterInCommand()
         {
             RunExec(true, new UTF8Encoding(false).EncodingName);
@@ -486,7 +486,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Tests that Exec task will choose the default code page when UTF8 is not needed.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExecTaskWithoutUnicodeCharacterInCommand()
         {
             RunExec(false, EncodingUtilities.CurrentSystemOemEncoding.EncodingName);
@@ -495,7 +495,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Exec task will use UTF8 when UTF8 Always is specified (with non-ANSI characters in the Command)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExecTaskUtf8AlwaysWithNonAnsi()
         {
             RunExec(true, new UTF8Encoding(false).EncodingName, "Always");
@@ -504,7 +504,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Exec task will use UTF8 when UTF8 Always is specified (without non-ANSI characters in the Command)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExecTaskUtf8AlwaysWithAnsi()
         {
             RunExec(false, new UTF8Encoding(false).EncodingName, "Always");
@@ -515,8 +515,8 @@ namespace Microsoft.Build.UnitTests
         /// <remarks>Exec task will fail as the cmd processor will not be able to run the command.</remarks>
         /// </summary>
         [WindowsOnlyTheory]
-        [InlineData("Never")]
-        [InlineData("System")]
+        [DataRow("Never")]
+        [DataRow("System")]
         public void ExecTaskUtf8NeverWithNonAnsi(string useUtf8)
         {
             RunExec(true, EncodingUtilities.CurrentSystemOemEncoding.EncodingName, useUtf8, false);
@@ -525,17 +525,17 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Exec task will NOT use UTF8 when UTF8 Never is specified and only ANSI characters are in the Command
         /// </summary>
-        [Theory]
-        [InlineData("Never")]
-        [InlineData("System")]
+        [TestMethod]
+        [DataRow("Never")]
+        [DataRow("System")]
         public void ExecTaskUtf8NeverWithAnsi(string useUtf8)
         {
             RunExec(false, EncodingUtilities.CurrentSystemOemEncoding.EncodingName, useUtf8);
         }
 
-        [Theory]
-        [InlineData("MSBUILDUSERAUTORUNINCMD", null, true)]
-        [InlineData("MSBUILDUSERAUTORUNINCMD", "1", false)]
+        [TestMethod]
+        [DataRow("MSBUILDUSERAUTORUNINCMD", null, true)]
+        [DataRow("MSBUILDUSERAUTORUNINCMD", "1", false)]
         [Trait("Category", "nonosxtests")]
         [Trait("Category", "nonlinuxtests")]
         public void ExecTaskDisablesAutoRun(string environmentVariableName, string environmentVariableValue, bool autoRunShouldBeDisabled)
@@ -619,7 +619,7 @@ namespace Microsoft.Build.UnitTests
             return;
         }
 
-        [Fact]
+        [TestMethod]
         public void InvalidUncDirectorySet()
         {
             Exec exec = PrepareExec("echo [%cd%]");
@@ -630,7 +630,7 @@ namespace Microsoft.Build.UnitTests
             ((MockEngine)exec.BuildEngine).AssertLogContains("MSB6003");
         }
 
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void InvalidWorkingDirectorySet()
@@ -643,7 +643,7 @@ namespace Microsoft.Build.UnitTests
             ((MockEngine)exec.BuildEngine).AssertLogContains("MSB6003");
         }
 
-        [Fact]
+        [TestMethod]
         public void BogusCustomRegexesCauseOneErrorEach()
         {
             Exec exec;
@@ -666,7 +666,7 @@ namespace Microsoft.Build.UnitTests
             e.AssertLogContains("MSB3076");
         }
 
-        [Fact]
+        [TestMethod]
         public void CustomErrorRegexSupplied()
         {
             string cmdLine;
@@ -697,7 +697,7 @@ namespace Microsoft.Build.UnitTests
             e.AssertLogContains("ALERT:This is an error");
         }
 
-        [Fact]
+        [TestMethod]
         public void CustomWarningRegexSupplied()
         {
             string cmdLine;
@@ -730,7 +730,7 @@ namespace Microsoft.Build.UnitTests
             e.AssertLogContains("YOOHOO:This is a warning");
         }
 
-        [Fact]
+        [TestMethod]
         public void ErrorsAndWarningsWithIgnoreStandardErrorWarningFormatTrue()
         {
             var cmdLine = NativeMethodsShared.IsWindows
@@ -746,7 +746,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(0, ((MockEngine)exec.BuildEngine).Warnings);
         }
 
-        [Fact]
+        [TestMethod]
         public void CustomAndStandardErrorsAndWarnings()
         {
             var cmdLine = NativeMethodsShared.IsWindows
@@ -767,7 +767,7 @@ namespace Microsoft.Build.UnitTests
         /// Nobody should try to run a string emitted from the task through String.Format.
         /// Firstly that's unnecessary and secondly if there's eg an unmatched curly it will throw.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DoNotAttemptToFormatTaskOutput()
         {
             Exec exec = PrepareExec("echo unmatched curly {");
@@ -783,7 +783,7 @@ namespace Microsoft.Build.UnitTests
         /// Nobody should try to run a string emitted from the task through String.Format.
         /// Firstly that's unnecessary and secondly if there's eg an unmatched curly it will throw.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DoNotAttemptToFormatTaskOutput2()
         {
             Exec exec = PrepareExec("echo unmatched curly {");
@@ -796,7 +796,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(0, ((MockEngine)exec.BuildEngine).Warnings);
         }
 
-        [Fact]
+        [TestMethod]
         public void NoDuplicateMessagesWhenCustomRegexAndRegularRegexBothMatch()
         {
             var cmdLine = NativeMethodsShared.IsWindows
@@ -813,7 +813,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(1, ((MockEngine)exec.BuildEngine).Warnings);
         }
 
-        [Fact]
+        [TestMethod]
         public void OnlySingleErrorWhenCustomWarningAndCustomErrorRegexesBothMatch()
         {
             Exec exec = PrepareExec("echo YOGI BEAR ");
@@ -826,7 +826,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(0, ((MockEngine)exec.BuildEngine).Warnings);
         }
 
-        [Fact]
+        [TestMethod]
         public void GettersSetters()
         {
             Exec exec = PrepareExec("echo [%cd%]");
@@ -842,7 +842,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(items, exec.Outputs);
         }
 
-        [Fact]
+        [TestMethod]
         public void StdEncodings()
         {
             ExecWrapper exec = PrepareExecWrapper("echo [%cd%]");
@@ -856,7 +856,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Contains("US-ASCII", exec.StdOutputEncoding.EncodingName);
         }
 
-        [Fact]
+        [TestMethod]
         public void AnyExistingEnvVarCalledErrorLevelIsIgnored()
         {
             string oldValue = Environment.GetEnvironmentVariable("errorlevel");
@@ -875,7 +875,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ValidateParametersNoCommand()
         {
             Exec exec = PrepareExec("   ");
@@ -890,7 +890,7 @@ namespace Microsoft.Build.UnitTests
         /// Verify that the EnvironmentVariables parameter exposed publicly
         /// by ToolTask can be used to modify the environment of the cmd.exe spawned.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetEnvironmentVariableParameter()
         {
             Exec exec = new Exec();
@@ -906,7 +906,7 @@ namespace Microsoft.Build.UnitTests
         /// Execute return output as an Item
         /// Test include ConsoleToMSBuild, StandardOutput
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConsoleToMSBuild()
         {
             // Exec with no output
@@ -937,7 +937,7 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(2, exec.ConsoleOutput.Length);
         }
 
-        [Fact]
+        [TestMethod]
         public void EndToEndMultilineExec()
         {
             using (var env = TestEnvironment.Create(_output))
@@ -988,7 +988,7 @@ echo line 3"" />
             }
         }
 
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void EndToEndMultilineExec_EscapeSpecialCharacters()
@@ -1040,7 +1040,7 @@ echo line 3"" />
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ConsoleOutputDoesNotTrimLeadingWhitespace()
         {
             string lineWithLeadingWhitespace = "    line with some leading whitespace";

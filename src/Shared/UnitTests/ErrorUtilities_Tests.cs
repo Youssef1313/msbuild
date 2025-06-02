@@ -11,7 +11,7 @@ namespace Microsoft.Build.UnitTests
 {
     public sealed class ErrorUtilities_Tests
     {
-        [Fact]
+        [TestMethod]
         public void VerifyThrowFalse()
         {
             try
@@ -27,42 +27,42 @@ namespace Microsoft.Build.UnitTests
             Assert.Fail("Should have thrown an exception");
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyThrowTrue()
         {
             // This shouldn't throw.
             ErrorUtilities.VerifyThrow(true, "msbuild rules");
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyThrow0True()
         {
             // This shouldn't throw.
             ErrorUtilities.VerifyThrow(true, "blah");
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyThrow1True()
         {
             // This shouldn't throw.
             ErrorUtilities.VerifyThrow(true, "{0}", "a");
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyThrow2True()
         {
             // This shouldn't throw.
             ErrorUtilities.VerifyThrow(true, "{0}{1}", "a", "b");
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyThrow3True()
         {
             // This shouldn't throw.
             ErrorUtilities.VerifyThrow(true, "{0}{1}{2}", "a", "b", "c");
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifyThrow4True()
         {
             // This shouldn't throw.

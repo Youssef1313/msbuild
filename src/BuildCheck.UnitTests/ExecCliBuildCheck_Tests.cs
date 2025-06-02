@@ -64,8 +64,8 @@ namespace Microsoft.Build.BuildCheck.UnitTests
             _check.RegisterActions(_registrationContext);
         }
 
-        [Theory]
-        [MemberData(nameof(BuildCommandTestData))]
+        [TestMethod]
+        [DynamicData(nameof(BuildCommandTestData))]
         public void ExecTask_WithCommandExecutingBuild_ShouldShowWarning(string? command)
         {
             _registrationContext.TriggerTaskInvocationAction(MakeTaskInvocationData("Exec", new Dictionary<string, TaskInvocationCheckData.TaskParameter>
@@ -77,8 +77,8 @@ namespace Microsoft.Build.BuildCheck.UnitTests
             _registrationContext.Results[0].CheckRule.Id.ShouldBe("BC0302");
         }
 
-        [Theory]
-        [MemberData(nameof(NonBuildCommandTestData))]
+        [TestMethod]
+        [DynamicData(nameof(NonBuildCommandTestData))]
         public void ExecTask_WithCommandNotExecutingBuild_ShouldNotShowWarning(string? command)
         {
             _registrationContext.TriggerTaskInvocationAction(MakeTaskInvocationData("Exec", new Dictionary<string, TaskInvocationCheckData.TaskParameter>

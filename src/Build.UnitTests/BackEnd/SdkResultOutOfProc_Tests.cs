@@ -91,7 +91,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
     </ItemGroup>
  </Target>";
 
-        [Fact]
+        [TestMethod]
         public void RunOutOfProcBuild()
         {
             string contents = $@"
@@ -123,7 +123,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         // Test scenario where using an SdkResolver in a project that hasn't been evaluated
         //  in the main node (which is where the SdkResolver runs).  This validates that
         //  the SdkResult is correctly transferred between nodes.
-        [Fact]
+        [TestMethod]
         public void RunOutOfProcBuildWithTwoProjects()
         {
             string entryProjectContents = $@"

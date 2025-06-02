@@ -12,7 +12,7 @@ namespace Microsoft.Build.UnitTests
 {
     public class ResourceUtilitiesTests
     {
-        [Fact]
+        [TestMethod]
         public void ExtractMSBuildCode()
         {
             // most common message pattern

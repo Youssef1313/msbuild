@@ -18,7 +18,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Test accessors
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Accessors()
         {
             var output = GetSampleTaskOutputInstance();

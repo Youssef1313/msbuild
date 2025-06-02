@@ -23,7 +23,7 @@ namespace Microsoft.VisualStudio.Build.UnitTest
         /// <summary>
         /// Verifies that an empty build with no loggers causes no exceptions.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EmptyBuildWithNoLoggers()
         {
             BuildManager buildManager = BuildManager.DefaultBuildManager;
@@ -37,7 +37,7 @@ namespace Microsoft.VisualStudio.Build.UnitTest
         /// <summary>
         /// Verifies that a simple build with no loggers causes no exceptions.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SimpleBuildWithNoLoggers()
         {
             string projectBody = ObjectModelHelpers.CleanupFileContents(@"
@@ -61,7 +61,7 @@ namespace Microsoft.VisualStudio.Build.UnitTest
         /// <summary>
         /// Verifies that attempting to register a logger before a build has started is invalid.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RegisteringLoggerBeforeBuildStartedThrows()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -73,7 +73,7 @@ namespace Microsoft.VisualStudio.Build.UnitTest
         /// <summary>
         /// Verifies that building with a logger attached to the mux logger is equivalent to building with the logger directly.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuildWithMuxLoggerEquivalentToNormalLogger()
         {
             string projectBody = ObjectModelHelpers.CleanupFileContents(@"
@@ -132,7 +132,7 @@ namespace Microsoft.VisualStudio.Build.UnitTest
         /// <summary>
         /// Verifies correctness of a simple build with one logger.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OneSubmissionOneLogger()
         {
             string projectBody = ObjectModelHelpers.CleanupFileContents(@"
@@ -174,7 +174,7 @@ namespace Microsoft.VisualStudio.Build.UnitTest
         /// <summary>
         /// Verifies correctness of a two submissions in a single build using separate loggers.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TwoSubmissionsWithSeparateLoggers()
         {
             string projectBody1 = ObjectModelHelpers.CleanupFileContents(@"
@@ -241,7 +241,7 @@ namespace Microsoft.VisualStudio.Build.UnitTest
         /// <summary>
         /// Verifies correctness of a simple build with one logger.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OneSubmissionTwoLoggers()
         {
             string projectBody = ObjectModelHelpers.CleanupFileContents(@"
@@ -291,7 +291,7 @@ namespace Microsoft.VisualStudio.Build.UnitTest
         /// <summary>
         /// Verifies correctness of a simple build with one logger.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RegisteringLoggerDuringBuildThrowsException()
         {
             string projectBody = ObjectModelHelpers.CleanupFileContents(@"

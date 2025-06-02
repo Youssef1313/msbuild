@@ -39,7 +39,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// And neither D1 nor D2 are CopyLocal = true. In this case, both dependencies
         /// are kept because this will work in a SxS manner.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConflictBetweenNonCopyLocalDependencies()
         {
             ResolveAssemblyReference t = new ResolveAssemblyReference();
@@ -84,7 +84,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// And both D1 and D2 are CopyLocal = true. This case is a warning because both
         /// assemblies can't be copied to the output directory.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConflictBetweenCopyLocalDependencies()
         {
             ResolveAssemblyReference t = new ResolveAssemblyReference();
@@ -133,7 +133,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// And both D1 and D2 are CopyLocal = true. In this case, there is no warning because
         /// AutoUnify is set to true.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConflictBetweenCopyLocalDependenciesWithAutoUnify()
         {
             ResolveAssemblyReference t = new ResolveAssemblyReference();
@@ -173,7 +173,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// than D2 so that can't unify. These means that eventually when they're copied
         /// to the output directory they'll conflict.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConflictWithBackVersionPrimary()
         {
             ResolveAssemblyReference t = new ResolveAssemblyReference();
@@ -216,7 +216,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// Even when AutoUnify is set we should see a warning since the binder will not allow
         /// an older version to satisfy a reference to a newer version.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConflictWithBackVersionPrimaryWithAutoUnify()
         {
             ResolveAssemblyReference t = new ResolveAssemblyReference();
@@ -269,7 +269,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// Notice that the two primaries have dependencies that only differ by PKT. Suggested redirects should
         /// only happen if the two assemblies differ by nothing but version.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Regress313747_FalseSuggestedRedirectsWhenAssembliesDifferOnlyByPkt()
         {
             ResolveAssemblyReference t = new ResolveAssemblyReference();
@@ -306,7 +306,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// redirect to function. Without a binding redirect, loading B will cause A.V1 to try to load. It won't be
         /// there and there won't be a binding redirect to point it at 2.0.0.0.
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void Regress442570_MissingBackVersionShouldWarn()
@@ -343,7 +343,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// When AutoGenerateBindingRedirects is used, we need to find the redirect
         /// in the externally resolved graph.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RedirectsAreSuggestedInExternallyResolvedGraph()
         {
             ResolveAssemblyReference t = new ResolveAssemblyReference();
@@ -385,7 +385,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// There should be no suggested redirect because only strongly named assemblies can have
         /// binding redirects.
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void Regress387218_UnificationRequiresStrongName()
@@ -428,7 +428,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         ///
         /// There should be no suggested redirect because assemblies with different cultures cannot unify.
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void Regress390219_UnificationRequiresSameCulture()
@@ -465,7 +465,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         //
         // So to add some coverage, simply check that we get a Culture=neutral when enumerating references of this test
         // assembly.
-        [Fact]
+        [TestMethod]
         public void RealGetAssemblyNameIncludesCulture()
         {
             using (var info = new AssemblyInformation(Assembly.GetExecutingAssembly().Location))

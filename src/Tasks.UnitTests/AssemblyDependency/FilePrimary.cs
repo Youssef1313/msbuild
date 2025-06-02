@@ -36,7 +36,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         ///     dependencies anyway to make things work consistently. This would be a significant
         ///     perf hit when loading large solutions.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Exists()
         {
             // This WriteLine is a hack.  On a slow machine, the Tasks unittest fails because remoting
@@ -81,7 +81,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// <summary>
         /// Test the case where the appconfig has a malformed binding redirect version.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BadAppconfigOldVersion()
         {
             // Create the engine.
@@ -132,7 +132,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// <summary>
         /// Test the case where the appconfig has a malformed binding redirect version.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BadAppconfigNewVersion()
         {
             // Create the engine.
@@ -194,7 +194,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// Rationale:
         /// Strongly named dependencies should unify according to the bindingRedirects in the app.config, if the unified version is in the deny list it should be removed and warned.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExistsPromotedDependencyInTheDenyList()
         {
             string implicitRedistListContents =
@@ -271,7 +271,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// One entry in the app.config file should not be able to impact the mapping of an assembly
         /// with a different name.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExistsDifferentName()
         {
             // Create the engine.
@@ -322,7 +322,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         ///     dependencies anyway to make things work consistently. This would be a significant
         ///     perf hit when loading large solutions.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExistsOldVersionRange()
         {
             // Create the engine.
@@ -373,7 +373,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         ///     dependencies anyway to make things work consistently. This would be a significant
         ///     perf hit when loading large solutions.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void HighVersionDoesntExist()
         {
             // Create the engine.
@@ -422,7 +422,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
         /// to a particular AssemblyName. Because of this, there's no way to determine that we want to
         /// promote from 0.5.0.0 to 2.0.0.0. In this case, just use the assembly name that was passed in.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void LowVersionDoesntExist()
         {
             // Create the engine.

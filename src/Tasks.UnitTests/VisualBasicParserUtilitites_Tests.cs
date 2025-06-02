@@ -11,14 +11,14 @@ namespace Microsoft.Build.UnitTests
     public sealed class VisualBasicParserUtilititesTests
     {
         // Try just and empty file
-        [Fact]
+        [TestMethod]
         public void EmptyFile()
         {
             AssertParse("", null);
         }
 
         // A simple form
-        [Fact]
+        [TestMethod]
         public void SimpleForm()
         {
             AssertParse(
@@ -31,7 +31,7 @@ namespace Microsoft.Build.UnitTests
         }
 
         // A simple form with a namespace
-        [Fact]
+        [TestMethod]
         public void Namespace()
         {
             AssertParse(
@@ -47,7 +47,7 @@ namespace Microsoft.Build.UnitTests
         }
 
         // A simple form with a namespace
-        [Fact]
+        [TestMethod]
         public void NestedNamespace()
         {
             AssertParse(
@@ -60,7 +60,7 @@ namespace Microsoft.Build.UnitTests
         }
 
         // A namespace the is ended before the class
-        [Fact]
+        [TestMethod]
         public void NestedAndEndedNamespace()
         {
             AssertParse(
@@ -80,7 +80,7 @@ namespace Microsoft.Build.UnitTests
         /// name was something like "BugResources.RemoveStuff.XYZ", because we would
         /// only match the "BugResources" bit.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NamespaceElementBeginsWithRem()
         {
             AssertParse(

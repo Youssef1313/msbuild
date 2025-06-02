@@ -23,7 +23,7 @@ namespace Microsoft.Build.Graph.UnitTests
     public class ProjectGraphSetPlatformTests
     {
 
-        [Fact]
+        [TestMethod]
         public void ValidateGlobalPropertyCopyByValueNotReference()
         {
             using (var env = TestEnvironment.Create())
@@ -50,7 +50,7 @@ namespace Microsoft.Build.Graph.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ValidateSetPlatformOverride()
         {
             using (var env = TestEnvironment.Create())
@@ -91,7 +91,7 @@ namespace Microsoft.Build.Graph.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ValidateNegotiationOverride()
         {
             using (var env = TestEnvironment.Create())
@@ -133,7 +133,7 @@ namespace Microsoft.Build.Graph.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ResolvesMultipleReferencesToSameProject()
         {
             using (var env = TestEnvironment.Create())
@@ -174,7 +174,7 @@ namespace Microsoft.Build.Graph.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ResolvesViaPlatformLookupTable()
         {
             using (var env = TestEnvironment.Create())
@@ -201,7 +201,7 @@ namespace Microsoft.Build.Graph.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ResolvesViaProjectReferencesPlatformLookupTable()
         {
             using (var env = TestEnvironment.Create())
@@ -229,7 +229,7 @@ namespace Microsoft.Build.Graph.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ResolvesViaAnyCPUDefault()
         {
             using (var env = TestEnvironment.Create())
@@ -256,7 +256,7 @@ namespace Microsoft.Build.Graph.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ResolvesViaSamePlatform()
         {
             using (var env = TestEnvironment.Create())
@@ -284,7 +284,7 @@ namespace Microsoft.Build.Graph.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void FailsToResolve()
         {
             using (var env = TestEnvironment.Create())
@@ -314,7 +314,7 @@ namespace Microsoft.Build.Graph.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void PlatformIsChosenAsDefault()
         {
             using (var env = TestEnvironment.Create())
@@ -342,7 +342,7 @@ namespace Microsoft.Build.Graph.UnitTests
         }
 
         // Validate configurations are defined in project reference protocol
-        [Fact]
+        [TestMethod]
         public void SolutionWithoutAllConfigurations()
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())

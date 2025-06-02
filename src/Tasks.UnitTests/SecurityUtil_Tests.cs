@@ -16,8 +16,8 @@ namespace Microsoft.Build.Tasks.UnitTests
         private static string TestAssembliesPaths { get; } = Path.Combine(AppContext.BaseDirectory, "TestResources");
 
         [WindowsOnlyTheory]
-        [InlineData("v4.5", Constants.DotNetFrameworkIdentifier)]
-        [InlineData("v4.5", Constants.DotNetCoreAppIdentifier)]
+        [DataRow("v4.5", Constants.DotNetFrameworkIdentifier)]
+        [DataRow("v4.5", Constants.DotNetCoreAppIdentifier)]
         [SupportedOSPlatform("windows")]
         public void SignFile_Success(string tfVersion, string tfIdentifier)
         {

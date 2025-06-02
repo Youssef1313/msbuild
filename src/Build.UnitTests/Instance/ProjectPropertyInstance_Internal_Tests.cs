@@ -20,7 +20,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Cloning
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DeepClone()
         {
             ProjectPropertyInstance property = GetPropertyInstance();
@@ -35,7 +35,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Serialization test
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Serialization()
         {
             ProjectPropertyInstance property = GetPropertyInstance();
@@ -51,7 +51,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Tests serialization.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ProjectPropertyInstanceSerializationTest_Mutable()
         {
             var property = ProjectPropertyInstance.Create("p", "v", false /*mutable*/);
@@ -70,7 +70,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Tests serialization.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ProjectPropertyInstanceSerializationTest_Immutable()
         {
             var property = ProjectPropertyInstance.Create("p", "v", mayBeReserved: true, isImmutable: true);

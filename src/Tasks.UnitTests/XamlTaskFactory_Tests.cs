@@ -30,7 +30,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// <summary>
         /// Tests the load method. Expects true to be returned.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestLoadXml()
         {
             TaskParser tp = new TaskParser();
@@ -46,7 +46,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// Tests the TaskName property.
         /// Should get "CL" back for this specific case.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestGetTaskName()
         {
             string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:Microsoft.Build.Framework.XamlTypes;assembly=Microsoft.Build.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
@@ -62,7 +62,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// <summary>
         /// Tests the BaseClass property. XamlTaskFactory does not currently support setting the BaseClass.
         /// </summary>
-        [Fact(Skip = "Ignored in MSTest")]
+        [TestMethod(Skip = "Ignored in MSTest")]
         public void TestGetBaseClass()
         {
             string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:Microsoft.Build.Framework.XamlTypes;assembly=Microsoft.Build.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
@@ -78,7 +78,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// <summary>
         /// Tests the ResourceNamespace property. XamlTaskFactory does not currently support setting the ResourceNamespace.
         /// </summary>
-        [Fact(Skip = "Ignored in MSTest")]
+        [TestMethod(Skip = "Ignored in MSTest")]
         public void TestGetResourceNamespace()
         {
             string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:Microsoft.Build.Framework.XamlTypes;assembly=Microsoft.Build.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
@@ -94,7 +94,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// <summary>
         /// Tests the Namespace property. XamlTaskFactory does not currently support setting the Namespace.
         /// </summary>
-        [Fact(Skip = "Ignored in MSTest")]
+        [TestMethod(Skip = "Ignored in MSTest")]
         public void TestGetNamespace()
         {
             string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:Microsoft.Build.Framework.XamlTypes;assembly=Microsoft.Build.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
@@ -110,7 +110,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// <summary>
         /// See what happens when the name is missing from the task element
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestParseIncorrect_NoName()
         {
             bool exceptionCaught = false;
@@ -135,7 +135,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// <summary>
         /// See what happens when the task element is valid, but we're searching for a different rule that's not in the file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestParseIncorrect_NoMatchingRule()
         {
             bool exceptionCaught = false;
@@ -160,7 +160,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// <summary>
         /// Basic test of several reversible boolean switches, to verify that everything gets passed through correctly.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBasicReversibleBooleanSwitches()
         {
             string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:Microsoft.Build.Framework.XamlTypes;assembly=Microsoft.Build.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
@@ -190,7 +190,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
             Assert.Equal(PropertyType.Boolean, properties.First.Value.Type);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestParseIncorrect_PropertyNamesMustBeUnique()
         {
             string incorrectXmlContents = @"<ProjectSchemaDefinitions
@@ -212,7 +212,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// <summary>
         /// Tests a basic non-reversible booleans switch
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBasicNonReversibleBooleanSwitch()
         {
             string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:Microsoft.Build.Framework.XamlTypes;assembly=Microsoft.Build.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
@@ -237,7 +237,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// <summary>
         /// Tests a basic non-reversible booleans switch that has a default value set.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBasicNonReversibleBooleanSwitch_WithDefault()
         {
             string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:Microsoft.Build.Framework.XamlTypes;assembly=Microsoft.Build.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
@@ -262,7 +262,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// <summary>
         /// Test for a basic string property switch
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBasicEnumProperty()
         {
             string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:Microsoft.Build.Framework.XamlTypes;assembly=Microsoft.Build.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
@@ -289,7 +289,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// Tests XamlTaskFactory support for DynamicEnumProperties.  These are primarily of use as a visualization in the property pages; as far as the
         /// XamlTaskFactory and XamlDataDrivenToolTask are concerned, they are treated as StringProperties.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestDynamicEnumProperty()
         {
             string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:Microsoft.Build.Framework.XamlTypes;assembly=Microsoft.Build.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
@@ -310,7 +310,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// <summary>
         /// Tests a simple string property.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBasicStringProperty()
         {
             string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:Microsoft.Build.Framework.XamlTypes;assembly=Microsoft.Build.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
@@ -329,7 +329,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
             Assert.Equal("/target:\"[value]\"", properties.First.Value.SwitchName);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestLoadAndParseFromAbsoluteFilePath()
         {
             string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:Microsoft.Build.Framework.XamlTypes;assembly=Microsoft.Build.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
@@ -363,7 +363,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// <summary>
         /// Tests a simple string array property.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBasicStringArrayProperty()
         {
             string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:Microsoft.Build.Framework.XamlTypes;assembly=Microsoft.Build.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
@@ -386,7 +386,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// <summary>
         /// Tests a simple string array property.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestStringArrayPropertyWithDataSource()
         {
             string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:Microsoft.Build.Framework.XamlTypes;assembly=Microsoft.Build.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
@@ -413,7 +413,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// <summary>
         /// Tests a simple string array property.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestStringArrayPropertyWithDataSource_DataSourceIsItem()
         {
             string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:Microsoft.Build.Framework.XamlTypes;assembly=Microsoft.Build.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
@@ -448,7 +448,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// Tests to see if the generated stream compiles
         /// Code must be compilable on its own.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestGenerateCodeToStream()
         {
             string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:Microsoft.Build.Framework.XamlTypes;assembly=Microsoft.Build.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
@@ -500,7 +500,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// <summary>
         /// Tests to make sure the file generated compiles
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestGenerateToFile()
         {
             string xml = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:Microsoft.Build.Framework.XamlTypes;assembly=Microsoft.Build.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
@@ -569,7 +569,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// <summary>
         /// Tests that quotes are correctly escaped
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestQuotingQuotes()
         {
             _fakeTaskDll = XamlTestHelpers.SetupGeneratedCode(XamlTestHelpers.QuotingQuotesXml);
@@ -579,7 +579,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// <summary>
         /// Tests that backslashes are correctly escaped
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestQuotingBackslashes()
         {
             _fakeTaskDll = XamlTestHelpers.SetupGeneratedCode(XamlTestHelpers.QuotingBackslashXml);
@@ -589,7 +589,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// <summary>
         /// Tests the GenerateReversible method
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestGenerateReversible()
         {
             _fakeTaskDll = XamlTestHelpers.SetupGeneratedCode();
@@ -607,7 +607,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// <summary>
         /// Tests the GenerateNonreversible method
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestGenerateNonreversible()
         {
             _fakeTaskDll = XamlTestHelpers.SetupGeneratedCode();
@@ -625,7 +625,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// <summary>
         /// Tests the GenerateStrings method
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestGenerateStrings()
         {
             _fakeTaskDll = XamlTestHelpers.SetupGeneratedCode();
@@ -643,7 +643,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// <summary>
         /// Tests the GenerateIntegers method
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestGenerateIntegers()
         {
             _fakeTaskDll = XamlTestHelpers.SetupGeneratedCode();
@@ -661,7 +661,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         /// <summary>
         /// Tests the GenerateStringArrays method
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestGenerateStringArrays()
         {
             _fakeTaskDll = XamlTestHelpers.SetupGeneratedCode();
@@ -685,7 +685,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void TestBasicReversibleTrue()
         {
             _fakeTaskDll = XamlTestHelpers.SetupGeneratedCode();
@@ -707,7 +707,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
             Assert.Equal("/Br", toolSwitchValue);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestBasicReversibleFalse()
         {
             _fakeTaskDll = XamlTestHelpers.SetupGeneratedCode();
@@ -728,7 +728,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
             Assert.Equal("/BrF", toolSwitchValue);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestBasicNonreversible()
         {
             _fakeTaskDll = XamlTestHelpers.SetupGeneratedCode();
@@ -742,7 +742,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
             Assert.Equal("/Bn", toolSwitchValue);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestBasicString()
         {
             _fakeTaskDll = XamlTestHelpers.SetupGeneratedCode();
@@ -760,7 +760,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
             Assert.Equal("/Bs2", CommandLineToolSwitchOutput);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestBasicStringArray()
         {
             _fakeTaskDll = XamlTestHelpers.SetupGeneratedCode();
@@ -772,7 +772,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
             Assert.Equal("/Bsa", toolSwitchValue);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestBasicFileWSwitch()
         {
             _fakeTaskDll = XamlTestHelpers.SetupGeneratedCode();
@@ -784,7 +784,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
             Assert.Equal("/Bfws", toolSwitchValue);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestBasicFileWOSwitch()
         {
             _fakeTaskDll = XamlTestHelpers.SetupGeneratedCode();
@@ -796,7 +796,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
             Assert.True(String.IsNullOrEmpty(toolSwitchValue), "Expected nothing, got " + toolSwitchValue);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestBasicDynamicEnum()
         {
             _fakeTaskDll = XamlTestHelpers.SetupGeneratedCode();
@@ -808,7 +808,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
             Assert.True(String.IsNullOrEmpty(toolSwitchValue), "Expected nothing, got " + toolSwitchValue);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestBasicDirectory()
         {
             _fakeTaskDll = XamlTestHelpers.SetupGeneratedCode();
@@ -820,7 +820,7 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
             Assert.True(String.IsNullOrEmpty(toolSwitchValue), "Expected nothing, got " + toolSwitchValue);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestBasicInteger()
         {
             _fakeTaskDll = XamlTestHelpers.SetupGeneratedCode();

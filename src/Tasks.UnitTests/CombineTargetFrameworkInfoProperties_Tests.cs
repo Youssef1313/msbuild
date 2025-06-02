@@ -13,10 +13,10 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// https://github.com/dotnet/msbuild/issues/8320
         /// </summary>
-        [Theory]
-        [InlineData(null, false, "MSB3991")]
-        [InlineData("", false, "MSB3991")]
-        [InlineData(null, true, "MSB3992")]
+        [TestMethod]
+        [DataRow(null, false, "MSB3991")]
+        [DataRow("", false, "MSB3991")]
+        [DataRow(null, true, "MSB3992")]
         public void RootElementNameNotValid(string? rootElementName, bool UseAttributeForTargetFrameworkInfoPropertyNames, string errorCode)
         {
             MockEngine e = new MockEngine();

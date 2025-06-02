@@ -15,7 +15,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify that a reference without a public key works correctly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SerializeDeserialize()
         {
             var dependentAssembly = new DependentAssembly();

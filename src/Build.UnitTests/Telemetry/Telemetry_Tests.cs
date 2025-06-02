@@ -50,7 +50,7 @@ namespace Microsoft.Build.Engine.UnitTests
             { }
         }
 
-        [Fact]
+        [TestMethod]
         public void WorkerNodeTelemetryCollection_BasicTarget()
         {
             WorkerNodeTelemetryData? workerNodeTelemetryData = null;
@@ -89,7 +89,7 @@ namespace Microsoft.Build.Engine.UnitTests
                 .Count(v => v.CumulativeExecutionTime > TimeSpan.Zero || v.ExecutionsCount > 0).ShouldBe(2);
         }
 
-        [Fact]
+        [TestMethod]
         public void WorkerNodeTelemetryCollection_CustomTargetsAndTasks()
         {
             WorkerNodeTelemetryData? workerNodeTelemetryData = null;
@@ -173,7 +173,7 @@ namespace Microsoft.Build.Engine.UnitTests
 
 #if NET
         // test in .net core with opentelemetry opted in to avoid sending it but enable listening to it
-        [Fact]
+        [TestMethod]
         public void NodeTelemetryE2E()
         {
             using TestEnvironment env = TestEnvironment.Create();

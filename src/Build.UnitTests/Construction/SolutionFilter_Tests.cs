@@ -43,9 +43,9 @@ namespace Microsoft.Build.Engine.UnitTests.Construction
         /// <summary>
         /// Test that a solution filter file excludes projects not covered by its list of projects or their dependencies.
         /// </summary>
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void SolutionFilterFiltersProjects(bool graphBuild)
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -152,8 +152,8 @@ namespace Microsoft.Build.Engine.UnitTests.Construction
             }
         }
 
-        [Theory]
-        [InlineData(/*lang=json,strict*/ """
+        [TestMethod]
+        [DataRow(/*lang=json,strict*/ """
             {
               "solution": {
                 "path": "C:\\notAPath\\MSBuild.Dev.sln",
@@ -166,7 +166,7 @@ namespace Microsoft.Build.Engine.UnitTests.Construction
                 }
             }
             """, "MSBuild.SolutionFilterJsonParsingError")]
-        [InlineData(/*lang=json,strict*/ """
+        [DataRow(/*lang=json,strict*/ """
             [{
               "solution": {
                 "path": "C:\\notAPath\\MSBuild.Dev.sln",
@@ -179,7 +179,7 @@ namespace Microsoft.Build.Engine.UnitTests.Construction
                 }
             }]
             """, "MSBuild.SolutionFilterJsonParsingError")]
-        [InlineData(/*lang=json,strict*/ """
+        [DataRow(/*lang=json,strict*/ """
             {
               "solution": {
                 "path": "C:\\notAPath\\MSBuild.Dev.sln",
@@ -192,7 +192,7 @@ namespace Microsoft.Build.Engine.UnitTests.Construction
                 }
             }
             """, "MSBuild.SolutionFilterJsonParsingError")]
-        [InlineData(/*lang=json,strict*/ """
+        [DataRow(/*lang=json,strict*/ """
             {
               "solution": {
                 "path": "C:\\notAPath2\\MSBuild.Dev.sln",
@@ -221,9 +221,9 @@ namespace Microsoft.Build.Engine.UnitTests.Construction
         /// <summary>
         /// Test that a solution filter file is parsed correctly, and it can accurately respond as to whether a project should be filtered out.
         /// </summary>
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         public void ParseSolutionFilter(bool convertToSlnx)
         {
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
@@ -284,7 +284,7 @@ EndGlobal
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void SolutionFilterWithSpecialSymbolInThePath()
         {
             using TestEnvironment testEnvironment = TestEnvironment.Create();

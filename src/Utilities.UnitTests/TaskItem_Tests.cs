@@ -21,7 +21,7 @@ namespace Microsoft.Build.UnitTests
     public class TaskItemTests
     {
         // Make sure a TaskItem can be constructed using an ITaskItem
-        [Fact]
+        [TestMethod]
         public void ConstructWithITaskItem()
         {
             TaskItem from = new TaskItem();
@@ -47,7 +47,7 @@ namespace Microsoft.Build.UnitTests
         }
 
         // Make sure metadata can be cloned from an existing ITaskItem
-        [Fact]
+        [TestMethod]
         public void CopyMetadataFromITaskItem()
         {
             TaskItem from = new TaskItem();
@@ -70,7 +70,7 @@ namespace Microsoft.Build.UnitTests
             to.GetMetadata("Bird").ShouldBe("Big");
         }
 
-        [Fact]
+        [TestMethod]
         public void NullITaskItem()
         {
             Should.Throw<ArgumentNullException>(() =>
@@ -82,7 +82,7 @@ namespace Microsoft.Build.UnitTests
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void MetadataNamesAndCount()
         {
             TaskItem taskItem = new TaskItem("x");
@@ -98,7 +98,7 @@ namespace Microsoft.Build.UnitTests
             taskItem.MetadataCount.ShouldBe(FileUtilities.ItemSpecModifiers.All.Length + 1);
         }
 
-        [Fact]
+        [TestMethod]
         public void NullITaskItemCast()
         {
             Should.Throw<ArgumentNullException>(() =>
@@ -109,7 +109,7 @@ namespace Microsoft.Build.UnitTests
                 // no NullReferenceException
             });
         }
-        [Fact]
+        [TestMethod]
         public void ConstructFromDictionary()
         {
             Hashtable h = new Hashtable();
@@ -125,7 +125,7 @@ namespace Microsoft.Build.UnitTests
             t.GetMetadata("CUSTOM").ShouldBe("hello");
         }
 
-        [Fact]
+        [TestMethod]
         public void CannotChangeModifiers()
         {
             Should.Throw<ArgumentException>(() =>
@@ -145,7 +145,7 @@ namespace Microsoft.Build.UnitTests
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void CannotRemoveModifiers()
         {
             Should.Throw<ArgumentException>(() =>
@@ -164,7 +164,7 @@ namespace Microsoft.Build.UnitTests
                 }
             });
         }
-        [Fact]
+        [TestMethod]
         public void CheckMetadataCount()
         {
             TaskItem t = new TaskItem("foo");
@@ -176,7 +176,7 @@ namespace Microsoft.Build.UnitTests
             t.MetadataCount.ShouldBe(FileUtilities.ItemSpecModifiers.All.Length + 1);
         }
 
-        [Fact]
+        [TestMethod]
         public void NonexistentRequestFullPath()
         {
             TaskItem from = new TaskItem();
@@ -187,7 +187,7 @@ namespace Microsoft.Build.UnitTests
                     "Monkey.txt"));
         }
 
-        [Fact]
+        [TestMethod]
         public void NonexistentRequestRootDir()
         {
             TaskItem from = new TaskItem();
@@ -195,7 +195,7 @@ namespace Microsoft.Build.UnitTests
             from.GetMetadata(FileUtilities.ItemSpecModifiers.RootDir).ShouldBe(Path.GetPathRoot(from.GetMetadata(FileUtilities.ItemSpecModifiers.FullPath)));
         }
 
-        [Fact]
+        [TestMethod]
         public void NonexistentRequestFilename()
         {
             TaskItem from = new TaskItem();
@@ -203,7 +203,7 @@ namespace Microsoft.Build.UnitTests
             from.GetMetadata(FileUtilities.ItemSpecModifiers.Filename).ShouldBe("Monkey");
         }
 
-        [Fact]
+        [TestMethod]
         public void NonexistentRequestExtension()
         {
             TaskItem from = new TaskItem();
@@ -211,7 +211,7 @@ namespace Microsoft.Build.UnitTests
             from.GetMetadata(FileUtilities.ItemSpecModifiers.Extension).ShouldBe(".txt");
         }
 
-        [Fact]
+        [TestMethod]
         public void NonexistentRequestRelativeDir()
         {
             TaskItem from = new TaskItem();
@@ -219,7 +219,7 @@ namespace Microsoft.Build.UnitTests
             from.GetMetadata(FileUtilities.ItemSpecModifiers.RelativeDir).Length.ShouldBe(0);
         }
 
-        [Fact]
+        [TestMethod]
         public void NonexistentRequestDirectory()
         {
             TaskItem from = new TaskItem();
@@ -235,7 +235,7 @@ namespace Microsoft.Build.UnitTests
             from.GetMetadata(FileUtilities.ItemSpecModifiers.Directory).ShouldBe(@"subdir\");
         }
 
-        [Fact]
+        [TestMethod]
         public void NonexistentRequestRecursiveDir()
         {
             TaskItem from = new TaskItem();
@@ -244,7 +244,7 @@ namespace Microsoft.Build.UnitTests
             from.GetMetadata(FileUtilities.ItemSpecModifiers.RecursiveDir).Length.ShouldBe(0);
         }
 
-        [Fact]
+        [TestMethod]
         public void NonexistentRequestIdentity()
         {
             TaskItem from = new TaskItem();
@@ -252,7 +252,7 @@ namespace Microsoft.Build.UnitTests
             from.GetMetadata(FileUtilities.ItemSpecModifiers.Identity).ShouldBe("Monkey.txt");
         }
 
-        [Fact]
+        [TestMethod]
         public void RequestTimeStamps()
         {
             TaskItem from = new TaskItem();
@@ -276,7 +276,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify metadata cannot be created with null name
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CreateNullNamedMetadata()
         {
             Should.Throw<ArgumentNullException>(() =>
@@ -288,7 +288,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify metadata cannot be created with empty name
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CreateEmptyNamedMetadata()
         {
             Should.Throw<ArgumentException>(() =>
@@ -301,7 +301,7 @@ namespace Microsoft.Build.UnitTests
         /// Create a TaskItem with a null metadata value -- this is allowed, but
         /// internally converted to the empty string.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CreateTaskItemWithNullMetadata()
         {
             IDictionary<string, string> metadata = new Dictionary<string, string>();
@@ -315,7 +315,7 @@ namespace Microsoft.Build.UnitTests
         /// Set metadata value to null value -- this is allowed, but
         /// internally converted to the empty string.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetNullMetadataValue()
         {
             TaskItem item = new TaskItem("bar");
@@ -323,7 +323,7 @@ namespace Microsoft.Build.UnitTests
             item.GetMetadata("m").ShouldBe(string.Empty);
         }
 
-        [Fact]
+        [TestMethod]
         public void ImplementsIMetadataContainer()
         {
             Dictionary<string, string> metadata = new()
@@ -346,7 +346,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Test that task items can be successfully constructed based on a task item from another appdomain.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoteTaskItem()
         {
             AppDomain appDomain = null;

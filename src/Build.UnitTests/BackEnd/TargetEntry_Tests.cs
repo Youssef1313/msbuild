@@ -73,7 +73,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests a constructor with a null target.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestConstructorNullTarget()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -88,7 +88,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests a constructor with a null lookup.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestConstructorNullLookup()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -102,7 +102,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests a constructor with a null host.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestConstructorNullHost()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -118,7 +118,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests a valid constructor call.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestConstructorValid()
         {
             ProjectInstance project = CreateTestProject(true /* Returns enabled */);
@@ -129,7 +129,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests incorrect invocation of ExecuteTarget
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestInvalidState_Execution()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -143,7 +143,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests incorrect invocation of GatherResults.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestInvalidState_Completed()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -157,7 +157,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Verifies that the dependencies specified for a target are returned by the GetDependencies call.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestDependencies()
         {
             bool[] returnsEnabled = new bool[] { true, false };
@@ -197,7 +197,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests normal target execution and verifies the tasks expected to be executed are.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestExecution()
         {
             bool[] returnsEnabled = new bool[] { true, false };
@@ -242,7 +242,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Executes various cases where tasks cause an error.  Verifies that the expected tasks
         /// executed.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestExecutionWithErrors()
         {
             bool[] returnsEnabled = new bool[] { true, false };
@@ -310,7 +310,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Tests that the dependencies returned can also be built and that their entries in the lookup
         /// are appropriately aggregated into the parent target entry.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBuildDependencies()
         {
             bool[] returnsEnabled = new bool[] { true, false };
@@ -342,7 +342,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests a variety of situations returning various results
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestGatherResults()
         {
             bool[] returnsEnabled = new bool[] { true, false };
@@ -451,7 +451,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests that multiple outputs are allowed
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestMultipleOutputs()
         {
             bool[] returnsEnabled = new bool[] { true, false };
@@ -482,7 +482,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests that multiple return values are still passed through, even when there is no Outputs specified.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestMultipleReturnsNoOutputs()
         {
             ProjectInstance project = CreateTestProject(true /* returns are enabled */);
@@ -500,7 +500,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Tests that multiple return values are still passed through, and verifies that when both Outputs and Returns
         /// are specified, Returns is what controls the return value of the target.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestMultipleReturnsWithOutputs()
         {
             ProjectInstance project = CreateTestProject(true /* returns are enabled */);
@@ -517,7 +517,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests that duplicate outputs are allowed
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestDuplicateOutputs()
         {
             bool[] returnsEnabled = new bool[] { true, false };
@@ -538,7 +538,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests that duplicate outputs are not trimmed under the false trim condition
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestKeepDuplicateOutputsTrue()
         {
             bool[] returnsEnabled = new bool[] { true, false };
@@ -559,7 +559,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests that duplicate outputs are trimmed under the false keep condition
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestKeepDuplicateOutputsFalse()
         {
             bool[] returnsEnabled = new bool[] { true, false };
@@ -580,7 +580,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests that duplicate outputs are trimmed if they have the same metadata
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestKeepDuplicateOutputsSameMetadata()
         {
             bool[] returnsEnabled = new bool[] { true, false };
@@ -601,7 +601,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests that duplicate outputs are not trimmed if they have different metadata
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestKeepDuplicateOutputsDiffMetadata()
         {
             bool[] returnsEnabled = new bool[] { true, false };
@@ -622,7 +622,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests that metadata references in target outputs are correctly expanded
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestMetadataReferenceInTargetOutputs()
         {
             bool[] returnsEnabled = new bool[] { true, false };
@@ -663,7 +663,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests that we get the target outputs correctly.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestTargetOutputsOnFinishedEvent()
         {
             bool[] returnsEnabled = new bool[] { false, true };
@@ -759,7 +759,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Tests that we get no target outputs when the environment variable is not set
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestTargetOutputsOnFinishedEventNoVariableSet()
         {
             bool[] returnsEnabled = new bool[] { true, false };
@@ -826,7 +826,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// <summary>
         /// Make sure that if an after target fails that the build result is reported as failed.
         /// </summary>
-        [Fact(Skip = "https://github.com/dotnet/msbuild/issues/515")]
+        [TestMethod(Skip = "https://github.com/dotnet/msbuild/issues/515")]
         public void AfterTargetsShouldReportFailedBuild()
         {
             // Since we're creating our own BuildManager, we need to make sure that the default
@@ -902,7 +902,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// Tests that with an invalid target specification (inputs but no outputs) we
         /// still raise the TargetFinished event.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestTargetFinishedRaisedOnInvalidTarget()
         {
             string content = @"

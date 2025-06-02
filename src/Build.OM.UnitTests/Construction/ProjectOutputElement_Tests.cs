@@ -20,7 +20,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read an output item
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadOutputItem()
         {
             ProjectOutputElement output = GetOutputItem();
@@ -35,7 +35,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read an output property
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadOutputProperty()
         {
             ProjectOutputElement output = GetOutputProperty();
@@ -50,7 +50,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read an output property with missing itemname and propertyname
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidOutputWithoutPropertyOrItem()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -72,7 +72,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read an output property with reserved property name
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidReservedOutputPropertyName()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -94,7 +94,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read an output property with missing taskparameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidOutputWithoutTaskName()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -116,7 +116,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read an output property with missing taskparameter
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidOutputWithEmptyTaskName()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -138,7 +138,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read an output property with child element
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidOutputWithChildElement()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -162,7 +162,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read an output property with propertyname but an empty itemname attribute
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidPropertyValueItemBlank()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -184,7 +184,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read an output property with an itemname but an empty propertyname attribute
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidItemValuePropertyBlank()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -206,7 +206,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Modify the condition
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetOutputPropertyCondition()
         {
             ProjectOutputElement output = GetOutputProperty();
@@ -220,7 +220,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Modify the property name value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetOutputPropertyName()
         {
             ProjectOutputElement output = GetOutputProperty();
@@ -234,7 +234,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Attempt to set the item name value when property name is set
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetOutputPropertyItemType()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -247,7 +247,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Set the item name value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetOutputItemItemType()
         {
             ProjectOutputElement output = GetOutputItem();
@@ -261,7 +261,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Attempt to set the property name when the item name is set
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetOutputItemPropertyName()
         {
             Assert.Throws<InvalidOperationException>(() =>

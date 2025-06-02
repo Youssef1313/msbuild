@@ -15,7 +15,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
     /// </summary>
     public class CopyOnWritePropertyDictionary_Tests
     {
-        [Fact]
+        [TestMethod]
         public void Count()
         {
             var dic = CreateInstance();
@@ -39,7 +39,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             dic.Count.ShouldBe(0);
         }
 
-        [Fact]
+        [TestMethod]
         public void Indexer()
         {
             var dic = CreateInstance();
@@ -67,7 +67,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             Assert.ThrowsAny<Exception>(() => dic["a"] = b);
         }
 
-        [Fact]
+        [TestMethod]
         public void Contains()
         {
             var dic = CreateInstance();
@@ -89,7 +89,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             dic.Contains("b").ShouldBeTrue();
         }
 
-        [Fact]
+        [TestMethod]
         public void Clear()
         {
             var dic = CreateInstance("a", "b", "c");
@@ -101,7 +101,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             dic.Count.ShouldBe(0);
         }
 
-        [Fact]
+        [TestMethod]
         public void Enumeration()
         {
             var dic = CreateInstance();
@@ -115,7 +115,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             dic.ShouldBeSetEquivalentTo(new[] { a, b });
         }
 
-        [Fact]
+        [TestMethod]
         public void Equal()
         {
             var dic1 = CreateInstance("a", "b", "c");
@@ -148,7 +148,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void Remove()
         {
             var dic = CreateInstance("a", "b", "c");
@@ -163,7 +163,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             dic.Count.ShouldBe(0);
         }
 
-        [Fact]
+        [TestMethod]
         public void ImportProperties()
         {
             var dic = CreateInstance();
@@ -176,7 +176,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             dic.ShouldBeSetEquivalentTo(new[] { a, b });
         }
 
-        [Fact]
+        [TestMethod]
         public void DeepClone()
         {
             CopyOnWritePropertyDictionary<MockValue> source = CreateInstance("a", "b", "c");

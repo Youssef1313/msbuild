@@ -36,7 +36,7 @@ namespace Microsoft.Build.Tasks.UnitTests
         /// <summary>
         /// Test when both BaseOutputPath and OutputPath are not specified.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BothBaseOutputPathAndOutputPathWereNotSpecified()
         {
             // Arrange
@@ -73,7 +73,7 @@ namespace Microsoft.Build.Tasks.UnitTests
         /// <summary>
         /// Test when BaseOutputPath is specified without the OutputPath.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BaseOutputPathWasSpecifiedAndIsOverridable()
         {
             // Arrange
@@ -111,7 +111,7 @@ namespace Microsoft.Build.Tasks.UnitTests
         /// <summary>
         /// Test when both BaseOutputPath and OutputPath are specified.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BothBaseOutputPathAndOutputPathWereSpecified()
         {
             // Arrange

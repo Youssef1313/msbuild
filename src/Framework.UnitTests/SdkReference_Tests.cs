@@ -10,7 +10,7 @@ namespace Microsoft.Build.Framework.UnitTests
 {
     public class SdkReference_Tests
     {
-        [Fact]
+        [TestMethod]
         public void VerifySdkReferenceParseNoVersion()
         {
             string sdkString = "Name";
@@ -23,7 +23,7 @@ namespace Microsoft.Build.Framework.UnitTests
             sdk.MinimumVersion.ShouldBeNull();
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifySdkReferenceParseWithVersion()
         {
             string sdkString = "Name/Version";
@@ -37,7 +37,7 @@ namespace Microsoft.Build.Framework.UnitTests
             sdk.ToString().ShouldBe(sdkString);
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifySdkReferenceParseWithMinimumVersion()
         {
             string sdkString = "Name/min=Version";
@@ -51,7 +51,7 @@ namespace Microsoft.Build.Framework.UnitTests
             sdk.ToString().ShouldBe(sdkString);
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifySdkReferenceParseWithWhitespace()
         {
             string sdkString = "   \r\n  \t Name  \t  \n     \n  \r /   min=Version  \t  ";
@@ -65,10 +65,10 @@ namespace Microsoft.Build.Framework.UnitTests
             sdk.ToString().ShouldBe("Name/min=Version");
         }
 
-        [Theory]
-        [InlineData("")]
-        [InlineData("/")]
-        [InlineData("/Version")]
+        [TestMethod]
+        [DataRow("")]
+        [DataRow("/")]
+        [DataRow("/Version")]
         public void VerifySdkReferenceParseWith(string sdkString)
         {
             SdkReference sdk;
@@ -77,7 +77,7 @@ namespace Microsoft.Build.Framework.UnitTests
             sdk.ShouldBeNull();
         }
 
-        [Fact]
+        [TestMethod]
         public void VerifySdkReferenceEquality()
         {
             SdkReference sdk = new SdkReference("Name", "Version", "Min");

@@ -19,7 +19,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Changes the item type on an item used with the at operator.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ChangeItemTypeInReferencedItem()
         {
             Project project = GetProject(
@@ -53,7 +53,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Removes an item in a ; separated list. It blows up the list.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveItemInList()
         {
             Project project = GetProject(
@@ -82,7 +82,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Renames an item in a ; separated list. It blows up the list.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RenameItemInList()
         {
             Project project = GetProject(
@@ -111,7 +111,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Removes metadata duplicated in item.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveMetadata1()
         {
             Project project = GetProject(
@@ -162,7 +162,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Removes duplicated metadata and checks evaluation.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveMetadata2()
         {
             Project project = GetProject(
@@ -214,7 +214,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Removes metadata but still keep inherited one from item definition.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveMetadata3()
         {
             Project project = GetProject(
@@ -268,7 +268,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Removes metadata referenced with % qualification.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveReferencedMetadata()
         {
             Project project = GetProject(
@@ -307,7 +307,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// <summary>
         /// Removes duplicated property.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RemoveProperty()
         {
             Project project = GetProject(

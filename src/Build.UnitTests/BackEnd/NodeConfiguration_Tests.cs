@@ -18,9 +18,9 @@ namespace Microsoft.Build.Engine.UnitTests.BackEnd
         /// <summary>
         /// Test serialization / deserialization of the AppDomainSetup instance.
         /// </summary>
-        [Theory]
-        [InlineData(new byte[] { 1, 2, 3 })]
-        [InlineData(null)]
+        [TestMethod]
+        [DataRow(new byte[] { 1, 2, 3 })]
+        [DataRow(null)]
         public void TestTranslationWithAppDomainSetup(byte[]? configBytes)
         {
             AppDomainSetup setup = new AppDomainSetup();

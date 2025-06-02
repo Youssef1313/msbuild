@@ -23,7 +23,7 @@ namespace Microsoft.Build.UnitTests
     {
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SimpleEvaluationTests()
         {
             Parser p = new Parser();
@@ -39,7 +39,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EqualityTests()
         {
             Parser p = new Parser();
@@ -64,7 +64,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RelationalTests()
         {
             Parser p = new Parser();
@@ -83,7 +83,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AndandOrTests()
         {
             Parser p = new Parser();
@@ -94,7 +94,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void FunctionTests()
         {
             Parser p = new Parser();
@@ -131,7 +131,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void PropertyTests()
         {
             Parser p = new Parser();
@@ -175,7 +175,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ItemListTests()
         {
             Parser p = new Parser();
@@ -205,7 +205,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void StringExpansionTests()
         {
             Parser p = new Parser();
@@ -241,7 +241,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ComplexTests()
         {
             Parser p = new Parser();
@@ -273,7 +273,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Make sure when a non number is used in an expression which expects a numeric value that a error is emitted.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidItemInConditionEvaluation()
         {
             Parser p = new Parser();
@@ -290,7 +290,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OldSyntaxTests()
         {
             Parser p = new Parser();
@@ -319,7 +319,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ConditionedPropertyUpdateTests()
         {
             Parser p = new Parser();
@@ -406,7 +406,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NotTests()
         {
             Console.WriteLine("NegationParseTest()");
@@ -499,7 +499,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NegativeTests()
         {
             Parser p = new Parser();

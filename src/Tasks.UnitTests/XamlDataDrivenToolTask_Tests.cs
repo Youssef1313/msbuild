@@ -28,7 +28,7 @@ namespace Microsoft.Build.UnitTests.XamlDataDrivenToolTask_Tests
         /// <summary>
         /// Test to see whether all of the correct boolean switches are appended.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestDefaultFlags()
         {
             object fakeTaskInstance = CreateFakeTask();
@@ -39,7 +39,7 @@ namespace Microsoft.Build.UnitTests.XamlDataDrivenToolTask_Tests
         /// A test to see if all of the reversible flags are generated correctly
         /// This test case leaves the default flags the way they are
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestReversibleFlagsWithDefaults()
         {
             object fakeTaskInstance = CreateFakeTask();
@@ -52,7 +52,7 @@ namespace Microsoft.Build.UnitTests.XamlDataDrivenToolTask_Tests
         /// A test to see if all of the reversible flags are generated correctly
         /// This test case explicitly sets the ComplexReversible to be false
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestReversibleFlagsWithoutDefaults()
         {
             object fakeTaskInstance = CreateFakeTask();
@@ -65,7 +65,7 @@ namespace Microsoft.Build.UnitTests.XamlDataDrivenToolTask_Tests
         /// <summary>
         /// Tests to make sure enums are working well.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBasicString()
         {
             object fakeTaskInstance = CreateFakeTask();
@@ -74,7 +74,7 @@ namespace Microsoft.Build.UnitTests.XamlDataDrivenToolTask_Tests
             CheckCommandLine(expectedResult, XamlTestHelpers.GenerateCommandLine(fakeTaskInstance));
         }
 
-        [Fact]
+        [TestMethod]
         public void TestDynamicEnum()
         {
             object fakeTaskInstance = CreateFakeTask();
@@ -86,7 +86,7 @@ namespace Microsoft.Build.UnitTests.XamlDataDrivenToolTask_Tests
         /// <summary>
         /// Tests the basic string array type
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBasicStringArray()
         {
             object fakeTaskInstance = CreateFakeTask();
@@ -100,7 +100,7 @@ namespace Microsoft.Build.UnitTests.XamlDataDrivenToolTask_Tests
         /// <summary>
         /// Tests the basic string array type, with an array that contains multiple values.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestBasicStringArray_MultipleValues()
         {
             object fakeTaskInstance = CreateFakeTask();
@@ -116,7 +116,7 @@ namespace Microsoft.Build.UnitTests.XamlDataDrivenToolTask_Tests
         /// <summary>
         /// Tests to see whether the integer appears correctly on the command line
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestInteger()
         {
             object fakeTaskInstance = CreateFakeTask();
@@ -129,7 +129,7 @@ namespace Microsoft.Build.UnitTests.XamlDataDrivenToolTask_Tests
         /// <summary>
         /// Tests the (full) functionality of a reversible property
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestComplexReversible()
         {
             // When flag is set to false
@@ -145,7 +145,7 @@ namespace Microsoft.Build.UnitTests.XamlDataDrivenToolTask_Tests
             CheckCommandLine(expectedResult, XamlTestHelpers.GenerateCommandLine(fakeTaskInstance));
         }
 
-        [Fact]
+        [TestMethod]
         public void TestComplexString()
         {
             // check to see that the resulting value is good
@@ -158,7 +158,7 @@ namespace Microsoft.Build.UnitTests.XamlDataDrivenToolTask_Tests
         /// <summary>
         /// Tests the functionality of a string type property
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestComplexStringArray()
         {
             object fakeTaskInstance = CreateFakeTask();
@@ -168,7 +168,7 @@ namespace Microsoft.Build.UnitTests.XamlDataDrivenToolTask_Tests
             CheckCommandLine(expectedResult, XamlTestHelpers.GenerateCommandLine(fakeTaskInstance));
         }
 
-        [Fact]
+        [TestMethod]
         public void TestComplexIntegerLessThanMin()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -178,7 +178,7 @@ namespace Microsoft.Build.UnitTests.XamlDataDrivenToolTask_Tests
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void TestComplexIntegerGreaterThanMax()
         {
             Assert.Throws<InvalidOperationException>(() =>
@@ -189,7 +189,7 @@ namespace Microsoft.Build.UnitTests.XamlDataDrivenToolTask_Tests
                 CheckCommandLine(expectedResult, XamlTestHelpers.GenerateCommandLine(fakeTaskInstance));
             });
         }
-        [Fact]
+        [TestMethod]
         public void TestComplexIntegerWithinRange()
         {
             object fakeTaskInstance = CreateFakeTask();
@@ -233,7 +233,7 @@ namespace Microsoft.Build.UnitTests.XamlDataDrivenToolTask_Tests
         /// <summary>
         /// Tests that when a call to a XamlDataDrivenTask fails, the commandline is reported in the error message.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CommandLineErrorsReportFullCommandlineAmpersandTemp()
         {
             string projectFile = @"
@@ -289,7 +289,7 @@ namespace Microsoft.Build.UnitTests.XamlDataDrivenToolTask_Tests
         /// <summary>
         /// Tests that when a call to a XamlDataDrivenTask fails, the commandline is reported in the error message.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CommandLineErrorsReportFullCommandline()
         {
             string projectFile = @"
@@ -325,7 +325,7 @@ namespace Microsoft.Build.UnitTests.XamlDataDrivenToolTask_Tests
         /// <summary>
         /// Tests that when a call to a XamlDataDrivenTask fails, the commandline is reported in the error message.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SquareBracketEscaping()
         {
             string projectFile = @"

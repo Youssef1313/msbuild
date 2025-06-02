@@ -27,7 +27,7 @@ namespace Microsoft.Build.Tasks.UnitTests
         /// <summary>
         /// Invalid encoding
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidEncoding()
         {
             var a = new WriteLinesToFile
@@ -46,7 +46,7 @@ namespace Microsoft.Build.Tasks.UnitTests
         /// <summary>
         /// Reading blank lines from a file should be ignored.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Encoding()
         {
             var file = FileUtilities.GetTemporaryFile();
@@ -96,7 +96,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void WriteLinesWriteOnlyWhenDifferentTest()
         {
             var file = FileUtilities.GetTemporaryFile();
@@ -154,7 +154,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void RedundantParametersAreLogged()
         {
             using TestEnvironment testEnv = TestEnvironment.Create(_output);
@@ -179,7 +179,7 @@ namespace Microsoft.Build.Tasks.UnitTests
         /// <summary>
         /// Question WriteLines to return false when a write will be required.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void QuestionWriteLinesWriteOnlyWhenDifferentTest()
         {
             var file = FileUtilities.GetTemporaryFile();
@@ -241,7 +241,7 @@ namespace Microsoft.Build.Tasks.UnitTests
         /// <summary>
         /// Question WriteLines to return true when Lines are empty.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void QuestionWriteLinesWhenLinesAreEmpty()
         {
             // Test the combination of:
@@ -292,7 +292,7 @@ namespace Microsoft.Build.Tasks.UnitTests
         /// <summary>
         /// Should create directory structure when target <see cref="WriteLinesToFile.File"/> does not exist.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void WriteLinesToFileDoesCreateDirectory()
         {
             using (var testEnv = TestEnvironment.Create())
@@ -316,9 +316,9 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void WritingNothingErasesExistingFile(bool useNullLines)
         {
             ITaskItem[] lines = useNullLines ? null : Array.Empty<ITaskItem>();
@@ -343,9 +343,9 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
         }
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void WritingNothingCreatesNewFile(bool useNullLines)
         {
             ITaskItem[] lines = useNullLines ? null : Array.Empty<ITaskItem>();

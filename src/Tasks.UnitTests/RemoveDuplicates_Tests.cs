@@ -14,7 +14,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Pass one item in, get the same item back.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OneItemNop()
         {
             var t = new RemoveDuplicates();
@@ -32,7 +32,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Pass in two of the same items.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TwoItemsTheSame()
         {
             var t = new RemoveDuplicates();
@@ -50,7 +50,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Item order preserved
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OrderPreservedNoDups()
         {
             var t = new RemoveDuplicates();
@@ -76,7 +76,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Item order preserved, keeping the first items seen when there are duplicates.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OrderPreservedDups()
         {
             var t = new RemoveDuplicates();
@@ -102,7 +102,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Pass in two items that are different.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TwoItemsDifferent()
         {
             var t = new RemoveDuplicates();
@@ -121,7 +121,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Case should not matter.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CaseInsensitive()
         {
             var t = new RemoveDuplicates();
@@ -139,7 +139,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// No inputs should result in zero-length outputs.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MissingInputs()
         {
             var t = new RemoveDuplicates();

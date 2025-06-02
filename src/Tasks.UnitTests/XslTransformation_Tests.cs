@@ -94,7 +94,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// When combination of (xml, xmlfile) x (xsl, xslfile).
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void XmlXslParameters()
         {
             string dir;
@@ -156,7 +156,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// When Xsl parameters are missing.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MissingXslParameter()
         {
             string dir;
@@ -202,7 +202,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// When Xml parameters are missing.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MissingXmlParameter()
         {
             string dir;
@@ -252,7 +252,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Both missing.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MissingXmlXslParameter()
         {
             string dir;
@@ -282,7 +282,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Too many Xml parameters.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ManyXmlParameters()
         {
             string dir;
@@ -316,7 +316,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Too many Xsl parameters.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ManyXslParameters()
         {
             string dir;
@@ -350,7 +350,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Test out parameter.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OutputTest()
         {
             string dir;
@@ -387,7 +387,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Setting correct "Parameter" parameters for Xsl.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void XsltParametersCorrect()
         {
             string dir;
@@ -423,7 +423,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Setting the combination of "Parameter" parameters (Name, Namespace, Value) and testing the cases when they should run ok.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void XsltParametersIncorrect()
         {
             string dir;
@@ -477,7 +477,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Setting "Parameter" parameter as empty string (should run OK).
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EmptyParameters()
         {
             string dir;
@@ -509,7 +509,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Compiled Dll with type information.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CompiledDllWithType()
         {
             string dir;
@@ -540,7 +540,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Compiled Dll without type information.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CompiledDllWithoutType()
         {
             string dir;
@@ -568,7 +568,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Load Xslt with incorrect character as CNAME (load exception).
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BadXsltFile()
         {
             string dir;
@@ -600,7 +600,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Load Xslt with incorrect character as CNAME (load exception).
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MissingOutputFile()
         {
             Assert.Throws<System.ArgumentNullException>(() =>
@@ -631,7 +631,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Missing XmlFile file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MissingXmlFile()
         {
             string dir;
@@ -660,7 +660,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Missing XslFile file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MissingXsltFile()
         {
             string dir;
@@ -690,7 +690,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Missing XsltCompiledDll file.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MissingCompiledDllFile()
         {
             string dir;
@@ -718,7 +718,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Bad XML on "Parameter" parameter.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BadXmlAsParameter()
         {
             string dir;
@@ -751,7 +751,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Out parameter pointing to nonexistent location (K:\folder\file.xml)
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void OutputFileCannotBeWritten()
         {
             string dir;
@@ -784,7 +784,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// The files are not kept locked by the task
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InputFilesDontLock()
         {
             string dir;
@@ -817,7 +817,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// XslDocument that throws runtime exception.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void XsltDocumentThrowsError()
         {
             string dir;
@@ -849,7 +849,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Xslt PreserveWhitespace = true
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void XsltPreserveWhitespace()
         {
             string dir;
@@ -899,7 +899,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Passing a dll that has two types to XsltCompiledDll parameter without specifying a type.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CompiledDllWithTwoTypes()
         {
             string dir;
@@ -937,7 +937,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Matching XmlInputPaths and OutputPaths
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MultipleXmlInputs_Matching()
         {
             string dir;
@@ -986,7 +986,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Not Matching XmlInputPaths and OutputPaths
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void MultipleXmlInputs_NotMatching()
         {
             string dir;
@@ -1040,7 +1040,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Validate that the XslTransformation task allows use of the document function
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void XslDocumentFunctionWorks()
         {
             string dir;

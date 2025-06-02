@@ -30,7 +30,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify we get the right invalid char listed in the error string
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidNameErrorLocation()
         {
             for (int i = 0; i <= _invalidNames.GetUpperBound(0); i++)

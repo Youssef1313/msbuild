@@ -18,12 +18,13 @@ namespace Microsoft.Build.UnitTests.OM.Construction
     /// <summary>
     /// Tests for the ProjectChooseElement class (and for ProjectWhenElement and ProjectOtherwiseElement)
     /// </summary>
+    [TestClass]
     public class ProjectChooseElement_Tests
     {
         /// <summary>
         /// Read choose with unexpected attribute
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidAttribute()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -41,7 +42,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// Read choose with unexpected Condition attribute.
         /// Condition is not currently allowed on Choose.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidConditionAttribute()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -58,7 +59,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read choose with unexpected child
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidChild()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -77,7 +78,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read choose with a When containing no Condition attribute
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidWhen()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -101,7 +102,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read choose with only an otherwise
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidOnlyOtherwise()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -120,7 +121,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read choose with two otherwises
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidTwoOtherwise()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -140,7 +141,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read choose with otherwise before when
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidOtherwiseBeforeWhen()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -163,7 +164,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <remarks>
         /// One might think this should work but 2.0 required at least one When.
         /// </remarks>
-        [Fact]
+        [TestMethod]
         public void ReadInvalidEmptyChoose()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -183,7 +184,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read choose with only a when
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadChooseOnlyWhen()
         {
             string content = @"
@@ -204,7 +205,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Read basic choose
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ReadChooseBothWhenOtherwise()
         {
             string content = @"
@@ -231,7 +232,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Test stack overflow is prevented.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExcessivelyNestedChoose()
         {
             Assert.Throws<InvalidProjectFileException>(() =>
@@ -256,7 +257,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Setting a When's condition should dirty the project
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SettingWhenConditionDirties()
         {
             string content = @"

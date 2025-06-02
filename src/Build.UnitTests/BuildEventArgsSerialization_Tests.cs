@@ -31,7 +31,7 @@ namespace Microsoft.Build.UnitTests
             _ = ItemGroupLoggingHelper.ItemGroupIncludeLogMessagePrefix;
         }
 
-        [Fact]
+        [TestMethod]
         public void WriteBlobFromStream()
         {
             byte[] bytes = new byte[] { 1, 2, 3, 4, 5 };
@@ -51,9 +51,9 @@ namespace Microsoft.Build.UnitTests
             Assert.Equal(bytes, binaryReader.ReadBytes(bytes.Length));
         }
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void RoundtripBuildStartedEventArgs(bool serializeAllEnvironmentVariables)
         {
             Traits.LogAllEnvironmentVariables = serializeAllEnvironmentVariables;
@@ -82,7 +82,7 @@ namespace Microsoft.Build.UnitTests
             Traits.LogAllEnvironmentVariables = false;
         }
 
-        [Fact]
+        [TestMethod]
         public void RoundtripBuildFinishedEventArgs()
         {
             var args = new BuildFinishedEventArgs(
@@ -97,7 +97,7 @@ namespace Microsoft.Build.UnitTests
                 e => e.Succeeded.ToString());
         }
 
-        [Fact]
+        [TestMethod]
         public void RoundtripBuildCanceledEventArgs()
         {
             var args = new BuildCanceledEventArgs(
@@ -109,7 +109,7 @@ namespace Microsoft.Build.UnitTests
                 e => e.Timestamp.ToString());
         }
 
-        [Fact]
+        [TestMethod]
         public void RoundtripBuildSubmissionStartedEventArgs()
         {
             var globalVariables = new Dictionary<string, string>
@@ -148,7 +148,7 @@ namespace Microsoft.Build.UnitTests
                 e => e.SubmissionId.ToString());
         }
 
-        [Fact]
+        [TestMethod]
         public void RoundtripProjectStartedEventArgs()
         {
             var args = new ProjectStartedEventArgs(
@@ -179,7 +179,7 @@ namespace Microsoft.Build.UnitTests
                 e => e.ToolsVersion);
         }
 
-        [Fact]
+        [TestMethod]
         public void RoundtripProjectFinishedEventArgs()
         {
             var args = new ProjectFinishedEventArgs(
@@ -194,7 +194,7 @@ namespace Microsoft.Build.UnitTests
                 e => e.Succeeded.ToString());
         }
 
-        [Fact]
+        [TestMethod]
         public void RoundtripTargetStartedEventArgs()
         {
             var args = new TargetStartedEventArgs(
@@ -216,7 +216,7 @@ namespace Microsoft.Build.UnitTests
                 e => e.Timestamp.ToString());
         }
 
-        [Fact]
+        [TestMethod]
         public void RoundtripTargetFinishedEventArgs()
         {
             var args = new TargetFinishedEventArgs(
@@ -236,7 +236,7 @@ namespace Microsoft.Build.UnitTests
                 e => ToString(e.TargetOutputs.OfType<ITaskItem>()));
         }
 
-        [Fact]
+        [TestMethod]
         public void RoundtripTaskStartedEventArgs()
         {
             var args = new TaskStartedEventArgs(
@@ -259,7 +259,7 @@ namespace Microsoft.Build.UnitTests
                 e => e.TaskAssemblyLocation);
         }
 
-        [Fact]
+        [TestMethod]
         public void RoundtripEnvironmentVariableReadEventArgs()
         {
             EnvironmentVariableReadEventArgs args = new("VarName", "VarValue", "file", 10, 20);
@@ -270,7 +270,7 @@ namespace Microsoft.Build.UnitTests
                 e => e.BuildEventContext.ToString());
         }
 
-        [Fact]
+        [TestMethod]
         public void RoundtripTaskFinishedEventArgs()
         {
             var args = new TaskFinishedEventArgs(
@@ -288,9 +288,9 @@ namespace Microsoft.Build.UnitTests
                 e => e.ThreadId.ToString());
         }
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void RoundtripBuildErrorEventArgs(bool useArguments)
         {
             var args = new BuildErrorEventArgs(
@@ -321,9 +321,9 @@ namespace Microsoft.Build.UnitTests
         }
 
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void RoundtripExtendedErrorEventArgs_SerializedAsError(bool withOptionalData)
         {
             var args = new ExtendedBuildErrorEventArgs(
@@ -362,9 +362,9 @@ namespace Microsoft.Build.UnitTests
                 e => string.Join(", ", e.RawArguments ?? Array.Empty<object>()));
         }
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void RoundtripBuildWarningEventArgs(bool useArguments)
         {
             var args = new BuildWarningEventArgs(
@@ -394,9 +394,9 @@ namespace Microsoft.Build.UnitTests
                 e => string.Join(", ", e.RawArguments ?? Array.Empty<object>()));
         }
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void RoundtripExtendedWarningEventArgs_SerializedAsWarning(bool withOptionalData)
         {
             var args = new ExtendedBuildWarningEventArgs(
@@ -435,9 +435,9 @@ namespace Microsoft.Build.UnitTests
                 e => string.Join(", ", e.RawArguments ?? Array.Empty<object>()));
         }
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void RoundtripBuildMessageEventArgs(bool useArguments)
         {
             var args = new BuildMessageEventArgs(
@@ -469,9 +469,9 @@ namespace Microsoft.Build.UnitTests
                 e => string.Join(", ", e.RawArguments ?? Array.Empty<object>()));
         }
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void RoundtripExtendedBuildMessageEventArgs_SerializedAsMessage(bool withOptionalData)
         {
             var args = new ExtendedBuildMessageEventArgs(
@@ -512,7 +512,7 @@ namespace Microsoft.Build.UnitTests
                 e => string.Join(", ", e.RawArguments ?? Array.Empty<object>()));
         }
 
-        [Fact]
+        [TestMethod]
         public void RoundtripAssemblyLoadBuild()
         {
             string assemblyName = Guid.NewGuid().ToString();
@@ -544,7 +544,7 @@ namespace Microsoft.Build.UnitTests
                 e => string.Join(", ", e.RawArguments ?? Array.Empty<object>()));
         }
 
-        [Fact]
+        [TestMethod]
         public void RoundtripBuildCheckTracingEventArgs()
         {
             string key1 = "AA";
@@ -565,9 +565,9 @@ namespace Microsoft.Build.UnitTests
                     .Select(v => v.TotalSeconds.ToString(CultureInfo.InvariantCulture)).ToCsvString(false));
         }
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void ExtendedCustomBuildEventArgs_SerializedAsMessage(bool withOptionalData)
         {
             ExtendedCustomBuildEventArgs args = new(
@@ -616,7 +616,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void RoundtripResponseFileUsedEventArgs()
         {
             var args = new ResponseFileUsedEventArgs("MSBuild.rsp");
@@ -625,7 +625,7 @@ namespace Microsoft.Build.UnitTests
         }
 
 
-        [Fact]
+        [TestMethod]
         public void RoundtripCriticalBuildMessageEventArgs()
         {
             var args = new CriticalBuildMessageEventArgs(
@@ -653,9 +653,9 @@ namespace Microsoft.Build.UnitTests
                 e => e.Subcategory);
         }
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [TestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         public void RoundtripExtendedCriticalBuildMessageEventArgs(bool withOptionalData)
         {
             var args = new ExtendedCriticalBuildMessageEventArgs(
@@ -695,7 +695,7 @@ namespace Microsoft.Build.UnitTests
                 e => string.Join(", ", e.RawArguments ?? Array.Empty<object>()));
         }
 
-        [Fact]
+        [TestMethod]
         public void RoundtripTaskCommandLineEventArgs()
         {
             var args = new TaskCommandLineEventArgs(
@@ -716,7 +716,7 @@ namespace Microsoft.Build.UnitTests
                 e => e.Subcategory);
         }
 
-        [Fact]
+        [TestMethod]
         public void RoundtripTaskParameterEventArgs()
         {
             var items = new ITaskItem[]
@@ -739,7 +739,7 @@ namespace Microsoft.Build.UnitTests
                 e => TranslationHelpers.GetItemsString(e.Items));
         }
 
-        [Fact]
+        [TestMethod]
         public void RoundtripProjectEvaluationStartedEventArgs()
         {
             var projectFile = @"C:\foo\bar.proj";
@@ -756,7 +756,7 @@ namespace Microsoft.Build.UnitTests
                 e => e.ProjectFile);
         }
 
-        [Fact]
+        [TestMethod]
         public void RoundtripProjectEvaluationFinishedEventArgs()
         {
             var projectFile = @"C:\foo\bar.proj";
@@ -779,7 +779,7 @@ namespace Microsoft.Build.UnitTests
                 e => TranslationHelpers.GetMultiItemsString(e.Items));
         }
 
-        [Fact]
+        [TestMethod]
         public void RoundtripProjectEvaluationFinishedEventArgsWithProfileData()
         {
             var projectFile = @"C:\foo\bar.proj";
@@ -812,7 +812,7 @@ namespace Microsoft.Build.UnitTests
                 e => ToString(e.ProfilerResult.Value.ProfiledLocations));
         }
 
-        [Fact]
+        [TestMethod]
         public void RoundtripProjectImportedEventArgs()
         {
             var args = new ProjectImportedEventArgs(
@@ -837,7 +837,7 @@ namespace Microsoft.Build.UnitTests
                 e => e.ProjectFile);
         }
 
-        [Fact]
+        [TestMethod]
         public void RoundtripTargetSkippedEventArgs()
         {
             var args = new TargetSkippedEventArgs(
@@ -874,7 +874,7 @@ namespace Microsoft.Build.UnitTests
                 e => e.OriginallySucceeded.ToString());
         }
 
-        [Fact]
+        [TestMethod]
         public void RoundTripPropertyReassignmentEventArgs()
         {
             var args = new PropertyReassignmentEventArgs(
@@ -899,7 +899,7 @@ namespace Microsoft.Build.UnitTests
                 e => e.SenderName);
         }
 
-        [Fact]
+        [TestMethod]
         public void UninitializedPropertyReadEventArgs()
         {
             var args = new UninitializedPropertyReadEventArgs(
@@ -915,7 +915,7 @@ namespace Microsoft.Build.UnitTests
                 e => e.SenderName);
         }
 
-        [Fact]
+        [TestMethod]
         public void PropertyInitialValueEventArgs()
         {
             var args = new PropertyInitialValueSetEventArgs(
@@ -940,7 +940,7 @@ namespace Microsoft.Build.UnitTests
                 e => e.SenderName);
         }
 
-        [Fact]
+        [TestMethod]
         public void ReadingCorruptedStreamThrows()
         {
             var memoryStream = new MemoryStream();
@@ -970,7 +970,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ForwardCompatibleRead_HandleAppendOnlyChanges()
         {
             // Let's not write any strings prior the first event - to make locating (and overwriting) the size byte(s) easier.
@@ -1034,7 +1034,7 @@ namespace Microsoft.Build.UnitTests
             memoryStream.Position.Should().Be(length);
         }
 
-        [Fact]
+        [TestMethod]
         public void ForwardCompatibleRead_HandleUnknownEvent()
         {
             // Let's not write any strings prior the first event - to make locating (and overwriting) the event type byte(s) easier.
@@ -1088,7 +1088,7 @@ namespace Microsoft.Build.UnitTests
             memoryStream.Position.Should().Be(length);
         }
 
-        [Fact]
+        [TestMethod]
         public void ForwardCompatibleRead_HandleMismatchedFormatOfEvent()
         {
             // BuildErrorEventArgs error = new("Subcategory", "Code", "File", 1, 2, 3, 4, "Message", "HelpKeyword", "SenderName");
@@ -1140,7 +1140,7 @@ namespace Microsoft.Build.UnitTests
             memoryStream.Position.Should().Be(length);
         }
 
-        [Fact]
+        [TestMethod]
         public void ForwardCompatibleRead_HandleRemovalOfDataFromEventDefinition()
         {
             // BuildErrorEventArgs error = new("Subcategory", "Code", "File", 1, 2, 3, 4, "Message", "HelpKeyword", "SenderName");

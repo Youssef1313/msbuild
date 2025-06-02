@@ -14,7 +14,7 @@ namespace Microsoft.Build.UnitTests
 {
     public sealed class AssignTargetPath_Tests
     {
-        [Fact]
+        [TestMethod]
         public void Regress314791()
         {
             AssignTargetPath t = new AssignTargetPath();
@@ -29,7 +29,7 @@ namespace Microsoft.Build.UnitTests
             t.AssignedFiles[0].GetMetadata("TargetPath").ShouldBe("abc.efg");
         }
 
-        [Fact]
+        [TestMethod]
         public void AtConeRoot()
         {
             AssignTargetPath t = new AssignTargetPath();
@@ -43,7 +43,7 @@ namespace Microsoft.Build.UnitTests
             t.AssignedFiles[0].GetMetadata("TargetPath").ShouldBe("file.txt");
         }
 
-        [Fact]
+        [TestMethod]
         public void OutOfCone()
         {
             AssignTargetPath t = new AssignTargetPath();
@@ -64,7 +64,7 @@ namespace Microsoft.Build.UnitTests
             t.AssignedFiles[0].GetMetadata("TargetPath").ShouldBe("file.txt");
         }
 
-        [Fact]
+        [TestMethod]
         public void InConeButAbsolute()
         {
             AssignTargetPath t = new AssignTargetPath();
@@ -81,12 +81,12 @@ namespace Microsoft.Build.UnitTests
             t.AssignedFiles[0].GetMetadata("TargetPath").ShouldBe(NativeMethodsShared.IsWindows ? @"f3\f4\file.txt" : "f3/f4/file.txt");
         }
 
-        [Theory]
-        [InlineData("c:/fully/qualified/path.txt")]
-        [InlineData("test/output/file.txt")]
-        [InlineData(@"some\dir\to\file.txt")]
-        [InlineData("file.txt")]
-        [InlineData("file")]
+        [TestMethod]
+        [DataRow("c:/fully/qualified/path.txt")]
+        [DataRow("test/output/file.txt")]
+        [DataRow(@"some\dir\to\file.txt")]
+        [DataRow("file.txt")]
+        [DataRow("file")]
         public void TargetPathAlreadySet(string targetPath)
         {
             AssignTargetPath t = new AssignTargetPath();

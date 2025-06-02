@@ -13,7 +13,7 @@ namespace Microsoft.Build.UnitTests
 {
     public class XmakeAttributesTest
     {
-        [Fact]
+        [TestMethod]
         public void TestIsSpecialTaskAttribute()
         {
             Assert.False(XMakeAttributes.IsSpecialTaskAttribute("NotAnAttribute"));
@@ -24,7 +24,7 @@ namespace Microsoft.Build.UnitTests
             Assert.True(XMakeAttributes.IsSpecialTaskAttribute(XMakeAttributes.msbuildRuntime));
         }
 
-        [Fact]
+        [TestMethod]
         public void TestIsBadlyCasedSpecialTaskAttribute()
         {
             Assert.False(XMakeAttributes.IsBadlyCasedSpecialTaskAttribute("NotAnAttribute"));
@@ -39,7 +39,7 @@ namespace Microsoft.Build.UnitTests
             Assert.True(XMakeAttributes.IsBadlyCasedSpecialTaskAttribute("msbuildarchitecture"));
         }
 
-        [Fact]
+        [TestMethod]
         public void TestIsNonBatchingTargetAttribute()
         {
             Assert.False(XMakeAttributes.IsNonBatchingTargetAttribute("NotAnAttribute"));
@@ -48,7 +48,7 @@ namespace Microsoft.Build.UnitTests
             Assert.True(XMakeAttributes.IsNonBatchingTargetAttribute(XMakeAttributes.condition));
         }
 
-        [Fact]
+        [TestMethod]
         public void TestRuntimeValuesMatch()
         {
             Assert.True(XMakeAttributes.RuntimeValuesMatch(XMakeAttributes.MSBuildRuntimeValues.any, XMakeAttributes.MSBuildRuntimeValues.currentRuntime));
@@ -69,12 +69,12 @@ namespace Microsoft.Build.UnitTests
             Assert.False(XMakeAttributes.RuntimeValuesMatch(XMakeAttributes.MSBuildRuntimeValues.clr2, XMakeAttributes.MSBuildRuntimeValues.net));
         }
 
-        [Theory]
-        [InlineData(XMakeAttributes.MSBuildRuntimeValues.any, XMakeAttributes.MSBuildRuntimeValues.clr4, true, XMakeAttributes.MSBuildRuntimeValues.clr4)]
-        [InlineData(XMakeAttributes.MSBuildRuntimeValues.clr4, XMakeAttributes.MSBuildRuntimeValues.any, true, XMakeAttributes.MSBuildRuntimeValues.clr4)]
-        [InlineData(XMakeAttributes.MSBuildRuntimeValues.clr2, XMakeAttributes.MSBuildRuntimeValues.any, true, XMakeAttributes.MSBuildRuntimeValues.clr2)]
-        [InlineData(XMakeAttributes.MSBuildRuntimeValues.currentRuntime, XMakeAttributes.MSBuildRuntimeValues.clr2, false, null)]
-        [InlineData(XMakeAttributes.MSBuildRuntimeValues.clr4, XMakeAttributes.MSBuildRuntimeValues.clr2, false, null)]
+        [TestMethod]
+        [DataRow(XMakeAttributes.MSBuildRuntimeValues.any, XMakeAttributes.MSBuildRuntimeValues.clr4, true, XMakeAttributes.MSBuildRuntimeValues.clr4)]
+        [DataRow(XMakeAttributes.MSBuildRuntimeValues.clr4, XMakeAttributes.MSBuildRuntimeValues.any, true, XMakeAttributes.MSBuildRuntimeValues.clr4)]
+        [DataRow(XMakeAttributes.MSBuildRuntimeValues.clr2, XMakeAttributes.MSBuildRuntimeValues.any, true, XMakeAttributes.MSBuildRuntimeValues.clr2)]
+        [DataRow(XMakeAttributes.MSBuildRuntimeValues.currentRuntime, XMakeAttributes.MSBuildRuntimeValues.clr2, false, null)]
+        [DataRow(XMakeAttributes.MSBuildRuntimeValues.clr4, XMakeAttributes.MSBuildRuntimeValues.clr2, false, null)]
         public void TestMergeRuntimeValues(string left, string right, bool success, string expected)
         {
             XMakeAttributes.TryMergeRuntimeValues(left, right, out string mergedRuntime)
@@ -83,7 +83,7 @@ namespace Microsoft.Build.UnitTests
             mergedRuntime.ShouldBe(expected);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestMergeRuntimeValuesAnyAcceptsCurrent()
         {
             XMakeAttributes.TryMergeRuntimeValues(XMakeAttributes.MSBuildRuntimeValues.any,
@@ -126,7 +126,7 @@ namespace Microsoft.Build.UnitTests
             mergedRuntime.ShouldBeNull();
         }
 
-        [Fact]
+        [TestMethod]
         public void TestArchitectureValuesMatch()
         {
             string currentArchitecture = XMakeAttributes.GetCurrentMSBuildArchitecture();
@@ -141,7 +141,7 @@ namespace Microsoft.Build.UnitTests
             Assert.False(XMakeAttributes.ArchitectureValuesMatch(XMakeAttributes.MSBuildArchitectureValues.x64, XMakeAttributes.MSBuildArchitectureValues.x86));
         }
 
-        [Fact]
+        [TestMethod]
         public void TestMergeArchitectureValues()
         {
             string currentArchitecture = XMakeAttributes.GetCurrentMSBuildArchitecture();

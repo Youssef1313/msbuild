@@ -10,7 +10,7 @@ namespace Microsoft.Build.Framework.UnitTests
 {
     public class BuildCanceledEventArgs_Tests
     {
-        [Fact]
+        [TestMethod]
         public void SerializationDeserializationTest()
         {
             var message = "message";

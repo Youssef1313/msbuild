@@ -27,7 +27,7 @@ namespace Microsoft.Build.UnitTests
          * the project contents are invalid
          *
          **********************************************************************/
-        [Fact]
+        [TestMethod]
         public void VerifyInvalidProjectSchema()
         {
             string[] msbuildTempXsdFilenames = Array.Empty<string>();
@@ -71,7 +71,7 @@ namespace Microsoft.Build.UnitTests
         /// Checks that an exception is thrown when the schema being validated
         /// against is itself invalid
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyInvalidSchemaItself1()
         {
             string invalidSchemaFile = null;
@@ -118,7 +118,7 @@ namespace Microsoft.Build.UnitTests
         /// Checks that an exception is thrown when the schema being validated
         /// against is itself invalid
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyInvalidSchemaItself2()
         {
             string invalidSchemaFile = null;
@@ -182,7 +182,7 @@ namespace Microsoft.Build.UnitTests
          * specified in a string, where the project passed is valid
          *
          **********************************************************************/
-        [Fact]
+        [TestMethod]
         public void VerifyValidProjectSchema()
         {
             string oldValueForMSBuildLoadMicrosoftTargetsReadOnly = Environment.GetEnvironmentVariable("MSBuildLoadMicrosoftTargetsReadOnly");
@@ -226,7 +226,7 @@ namespace Microsoft.Build.UnitTests
         /// We should not validate imported files against the schema in V1, so this
         /// should not be caught by the schema
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyInvalidImportNotCaughtBySchema()
         {
             string oldValueForMSBuildLoadMicrosoftTargetsReadOnly = Environment.GetEnvironmentVariable("MSBuildLoadMicrosoftTargetsReadOnly");

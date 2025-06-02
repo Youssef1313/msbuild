@@ -18,7 +18,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Test accessors
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void Accessors()
         {
             var task = GetSampleTaskInstance();
@@ -39,7 +39,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// of array type, an empty array is set on the task class.
         /// Therefore empty task parameters should be returned by the parameter list.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EmptyParameter()
         {
             var task = GetTaskInstance(@"<t1 a=''/>");

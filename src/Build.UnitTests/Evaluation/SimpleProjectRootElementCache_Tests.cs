@@ -26,7 +26,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             ProjectCollection.GlobalProjectCollection.UnloadAllProjects();
         }
 
-        [Fact]
+        [TestMethod]
         public void Get_GivenCachedProjectFile_ReturnsRootElement()
         {
             string projectFile = NativeMethodsShared.IsUnixLike ? "/foo" : "c:\\foo";
@@ -40,7 +40,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             actualRootElement.ShouldBe(rootElementToCache);
         }
 
-        [Fact]
+        [TestMethod]
         public void Get_GivenCachedProjectFileWithDifferentCasing_ReturnsRootElement()
         {
             string projectFile = NativeMethodsShared.IsUnixLike ? "/foo" : "c:\\foo";
@@ -54,7 +54,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             actualRootElement.ShouldBe(rootElementToCache);
         }
 
-        [Fact]
+        [TestMethod]
         public void Get_GivenOpenFuncWhichAddsRootElement_ReturnsRootElement()
         {
             string projectFile = NativeMethodsShared.IsUnixLike ? "/foo" : "c:\\foo";
@@ -72,7 +72,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             actualRootElement.ShouldBe(rootElementToCache);
         }
 
-        [Fact]
+        [TestMethod]
         public void Get_GivenOpenFuncWhichAddsRootElementWithDifferentCasing_ReturnsRootElement()
         {
             string projectFile = NativeMethodsShared.IsUnixLike ? "/foo" : "c:\\foo";
@@ -90,7 +90,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             actualRootElement.ShouldBe(rootElementToCache);
         }
 
-        [Fact]
+        [TestMethod]
         public void Get_GivenOpenFuncWhichReturnsNull_ThrowsInternalErrorException()
         {
             string projectFile = NativeMethodsShared.IsUnixLike ? "/foo" : "c:\\foo";
@@ -104,7 +104,7 @@ namespace Microsoft.Build.Engine.UnitTests.Evaluation
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void Get_GivenOpenFuncWhichReturnsIncorrectProject_ThrowsInternalErrorException()
         {
             string projectFile = NativeMethodsShared.IsUnixLike ? "/foo" : "c:\\foo";

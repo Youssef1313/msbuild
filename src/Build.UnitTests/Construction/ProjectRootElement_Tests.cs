@@ -17,14 +17,14 @@ namespace Microsoft.Build.UnitTests.Construction
     /// </summary>
     public class ProjectRootElement_Tests
     {
-        [Theory]
-        [InlineData("", true)]
-        [InlineData("", false)]
-        [InlineData(@"<?xml version=""1.0"" encoding=""utf-8""?>", true)]
-        [InlineData(@"<?xml version=""1.0"" encoding=""utf-8""?>", false)]
-        [InlineData(@"<?xml version=""1.0"" encoding=""utf-8""?>
+        [TestMethod]
+        [DataRow("", true)]
+        [DataRow("", false)]
+        [DataRow(@"<?xml version=""1.0"" encoding=""utf-8""?>", true)]
+        [DataRow(@"<?xml version=""1.0"" encoding=""utf-8""?>", false)]
+        [DataRow(@"<?xml version=""1.0"" encoding=""utf-8""?>
 ", true)]
-        [InlineData(@"<?xml version=""1.0"" encoding=""utf-8""?>
+        [DataRow(@"<?xml version=""1.0"" encoding=""utf-8""?>
 ", false)]
         public void IsEmptyXmlFileReturnsTrue(string contents, bool useByteOrderMark)
         {
@@ -35,16 +35,16 @@ namespace Microsoft.Build.UnitTests.Construction
             Assert.True(ProjectRootElement.IsEmptyXmlFile(path));
         }
 
-        [Theory]
-        [InlineData("<Foo/>", true)]
-        [InlineData("Foo/>", false)]
-        [InlineData(@"<?xml version=""1.0"" encoding=""utf-8""?>
+        [TestMethod]
+        [DataRow("<Foo/>", true)]
+        [DataRow("Foo/>", false)]
+        [DataRow(@"<?xml version=""1.0"" encoding=""utf-8""?>
 <Foo/>", true)]
-        [InlineData(@"<?xml version=""1.0"" encoding=""utf-8""?>
+        [DataRow(@"<?xml version=""1.0"" encoding=""utf-8""?>
 <Foo/>", false)]
-        [InlineData(@"<?xml version=""1.0"" encoding=""utf-8""?>
+        [DataRow(@"<?xml version=""1.0"" encoding=""utf-8""?>
 bar", true)]
-        [InlineData(@"<?xml version=""1.0"" encoding=""utf-8""?>
+        [DataRow(@"<?xml version=""1.0"" encoding=""utf-8""?>
 bar", false)]
         public void IsEmptyXmlFileReturnsFalse(string contents, bool useByteOrderMark)
         {
@@ -55,7 +55,7 @@ bar", false)]
             Assert.False(ProjectRootElement.IsEmptyXmlFile(path));
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectLoadedPreservingCommentsAndWhiteSpaceIsNotReadOnly()
         {
             var projectContents =
@@ -86,7 +86,7 @@ bar", false)]
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void ProjectLoadedStrippingCommentsAndWhiteSpaceIsReadOnly()
         {
             var projectContents =
@@ -118,7 +118,7 @@ bar", false)]
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void CreateEphemeralCannotBeDirtied()
         {
             var projectRootElement = ProjectRootElement.CreateEphemeral(ProjectCollection.GlobalProjectCollection.ProjectRootElementCache);

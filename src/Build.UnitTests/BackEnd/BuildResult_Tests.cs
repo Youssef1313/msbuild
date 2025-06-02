@@ -24,14 +24,14 @@ namespace Microsoft.Build.UnitTests.BackEnd
             _nodeRequestId = 1;
         }
 
-        [Fact]
+        [TestMethod]
         public void TestConstructorGood()
         {
             BuildRequest request = CreateNewBuildRequest(1, Array.Empty<string>());
             BuildResult result2 = new BuildResult(request);
         }
 
-        [Fact]
+        [TestMethod]
         public void Clone()
         {
             BuildRequest request = CreateNewBuildRequest(1, Array.Empty<string>());
@@ -55,7 +55,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(result1.OverallResult, result2.OverallResult);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestConstructorBad()
         {
             Assert.Throws<NullReferenceException>(() =>
@@ -63,7 +63,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 BuildResult result = new BuildResult(null!);
             });
         }
-        [Fact]
+        [TestMethod]
         public void TestConfigurationId()
         {
             BuildRequest request = CreateNewBuildRequest(-1, Array.Empty<string>());
@@ -75,7 +75,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(1, result2.ConfigurationId);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestExceptionGood()
         {
             BuildRequest request = CreateNewBuildRequest(1, Array.Empty<string>());
@@ -87,7 +87,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(e, result.Exception);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestOverallResult()
         {
             BuildRequest request = CreateNewBuildRequest(1, Array.Empty<string>());
@@ -110,7 +110,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(BuildResultCode.Failure, result2.OverallResult);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestPacketType()
         {
             BuildRequest request = CreateNewBuildRequest(1, Array.Empty<string>());
@@ -118,7 +118,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(NodePacketType.BuildResult, ((INodePacket)result).Type);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestAddAndRetrieve()
         {
             BuildRequest request = CreateNewBuildRequest(1, Array.Empty<string>());
@@ -130,7 +130,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(TargetResultCode.Failure, result["bar"].ResultCode);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestIndexerBad1()
         {
             Assert.Throws<KeyNotFoundException>(() =>
@@ -141,7 +141,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void TestIndexerBad2()
         {
             Assert.Throws<KeyNotFoundException>(() =>
@@ -153,7 +153,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void TestAddResultsInvalid1()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -164,7 +164,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void TestAddResultsInvalid2()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -175,7 +175,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void TestAddResultsInvalid3()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -185,7 +185,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 result.AddResultsForTarget(null!, BuildResultUtilities.GetEmptySucceedingTargetResult());
             });
         }
-        [Fact]
+        [TestMethod]
         public void TestMergeResults()
         {
             BuildRequest request = CreateNewBuildRequest(1, Array.Empty<string>());
@@ -210,7 +210,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(TargetResultCode.Success, result["xor"].ResultCode);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestMergeResultsBad1()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -223,7 +223,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void TestMergeResultsBad3()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -239,7 +239,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 result.MergeResults(result2);
             });
         }
-        [Fact]
+        [TestMethod]
         public void TestHasResultsForTarget()
         {
             BuildRequest request = CreateNewBuildRequest(1, Array.Empty<string>());
@@ -250,7 +250,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.False(result.HasResultsForTarget("bar"));
         }
 
-        [Fact]
+        [TestMethod]
         public void TestEnumerator()
         {
             BuildRequest request = CreateNewBuildRequest(1, Array.Empty<string>());
@@ -306,7 +306,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.True(foundBar);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestTranslation()
         {
             BuildRequest request = new BuildRequest(1, 1, 2, new string[] { "alpha", "omega" }, null, new BuildEventContext(1, 1, 2, 3, 4, 5), null);

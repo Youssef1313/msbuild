@@ -26,12 +26,12 @@ namespace Microsoft.Build.Tasks.UnitTests
 
         public AddToWin32Manifest_Tests(ITestOutputHelper testOutput) => _testOutput = testOutput;
 
-        [Theory]
-        [InlineData("testManifestWithInvalidSupportedArchs.manifest", false)]
-        [InlineData("testManifestWithApplicationDefined.manifest", true)]
-        [InlineData("testManifestSavesTheCurrentNodesPositions.manifest", true)]
-        [InlineData("testManifestNoPrefixes.manifest", true)]
-        [InlineData(null, true)]
+        [TestMethod]
+        [DataRow("testManifestWithInvalidSupportedArchs.manifest", false)]
+        [DataRow("testManifestWithApplicationDefined.manifest", true)]
+        [DataRow("testManifestSavesTheCurrentNodesPositions.manifest", true)]
+        [DataRow("testManifestNoPrefixes.manifest", true)]
+        [DataRow(null, true)]
         public void ManifestPopulationCheck(string? manifestName, bool expectedResult)
         {
             AddToWin32Manifest task = new AddToWin32Manifest()
@@ -72,9 +72,9 @@ namespace Microsoft.Build.Tasks.UnitTests
 
         [SupportedOSPlatform("windows")]
         [WindowsOnlyTheory]
-        [InlineData(null, true)]
-        [InlineData("buildIn.manifest", true)]
-        [InlineData("testManifestWithValidSupportedArchs.manifest", true)]
+        [DataRow(null, true)]
+        [DataRow("buildIn.manifest", true)]
+        [DataRow("testManifestWithValidSupportedArchs.manifest", true)]
         public void E2EScenarioTests(string? manifestName, bool expectedResult)
         {
             using (TestEnvironment env = TestEnvironment.Create())

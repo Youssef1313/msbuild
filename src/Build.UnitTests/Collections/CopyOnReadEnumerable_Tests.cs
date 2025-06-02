@@ -15,7 +15,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
     /// </summary>
     public class CopyOnReadEnumerable_Tests
     {
-        [Fact]
+        [TestMethod]
         public void EnumeratesBackingCollection()
         {
             List<int> values = new List<int>(new int[] { 1, 2, 3 });
@@ -33,7 +33,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void CopiesBackingCollection()
         {
             List<string> values = new List<string>(new string[] { "a", "b", "c" });

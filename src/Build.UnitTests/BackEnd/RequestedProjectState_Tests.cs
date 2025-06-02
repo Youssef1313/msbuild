@@ -10,7 +10,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
 {
     public class RequestedProjectState_Tests
     {
-        [Fact]
+        [TestMethod]
         public void DeepCloneEmpty()
         {
             RequestedProjectState state = new();
@@ -20,7 +20,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             clone.ItemFilters.Should().BeNull();
         }
 
-        [Fact]
+        [TestMethod]
         public void DeepCloneProperties()
         {
             List<string> properties = ["prop1", "prop2"];
@@ -38,7 +38,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             clone.PropertyFilters.Count.Should().NotBe(properties.Count);
         }
 
-        [Fact]
+        [TestMethod]
         public void DeepCloneItemsNoMetadata()
         {
             Dictionary<string, List<string>> items = new()
@@ -60,7 +60,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             clone.ItemFilters.Count.Should().NotBe(items.Count);
         }
 
-        [Fact]
+        [TestMethod]
         public void DeepCloneItemsWithMetadata()
         {
             Dictionary<string, List<string>> items = new()
@@ -82,7 +82,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             clone.ItemFilters["item2"].Count.Should().NotBe(items["item2"].Count);
         }
 
-        [Fact]
+        [TestMethod]
         public void IsSubsetOfEmpty()
         {
             RequestedProjectState state1 = new();
@@ -103,7 +103,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             state2.IsSubsetOf(state1).Should().BeFalse();
         }
 
-        [Fact]
+        [TestMethod]
         public void IsSubsetOfProperties()
         {
             RequestedProjectState state1 = new()
@@ -132,7 +132,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             state2.IsSubsetOf(state1).Should().BeFalse();
         }
 
-        [Fact]
+        [TestMethod]
         public void IsSubsetOfItemsNoMetadata()
         {
             RequestedProjectState state1 = new()
@@ -168,7 +168,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             state2.IsSubsetOf(state1).Should().BeFalse();
         }
 
-        [Fact]
+        [TestMethod]
         public void IsSubsetOfItemsWithMetadata()
         {
             RequestedProjectState state1 = new()

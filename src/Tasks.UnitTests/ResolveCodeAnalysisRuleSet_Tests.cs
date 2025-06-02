@@ -47,7 +47,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void GetResolvedRuleSetPath_FullPath_NonExistent()
         {
             MockEngine mockEngine = new MockEngine();
@@ -68,7 +68,7 @@ namespace Microsoft.Build.UnitTests
             mockEngine.AssertLogContains("MSB3884");
         }
 
-        [Fact]
+        [TestMethod]
         public void GetResolvedRuleSetPath_FullPath_Existent()
         {
             MockEngine mockEngine = new MockEngine();
@@ -92,7 +92,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void GetResolvedRuleSetPath_SimpleNameAlone_NonExistent()
         {
             MockEngine mockEngine = new MockEngine();
@@ -111,7 +111,7 @@ namespace Microsoft.Build.UnitTests
             mockEngine.AssertLogContains("MSB3884");
         }
 
-        [Fact]
+        [TestMethod]
         public void GetResolvedRuleSetPath_SimpleNameAndProjectDirectory_Existent()
         {
             MockEngine mockEngine = new MockEngine();
@@ -138,7 +138,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void GetResolvedRuleSetPath_SimpleNameAndProjectDirectory_NonExistent()
@@ -162,7 +162,7 @@ namespace Microsoft.Build.UnitTests
             mockEngine.AssertLogContains("MSB3884");
         }
 
-        [Fact]
+        [TestMethod]
         public void GetResolvedRuleSetPath_SimpleNameAndDirectories_Existent()
         {
             MockEngine mockEngine = new MockEngine();
@@ -189,7 +189,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void GetResolvedRuleSetPath_SimpleNameAndDirectories_NonExistent()
@@ -212,7 +212,7 @@ namespace Microsoft.Build.UnitTests
             mockEngine.AssertLogContains("MSB3884");
         }
 
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void GetResolvedRuleSetPath_RelativePath_WithProject_NonExistent()
@@ -236,7 +236,7 @@ namespace Microsoft.Build.UnitTests
             mockEngine.AssertLogContains("MSB3884");
         }
 
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void GetResolvedRuleSetPath_RelativePath_WithProject_Existent()
@@ -267,7 +267,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void GetResolvedRuleSetPath_RelativePath_NoProject()
@@ -289,7 +289,7 @@ namespace Microsoft.Build.UnitTests
             mockEngine.AssertLogContains("MSB3884");
         }
 
-        [Fact]
+        [TestMethod]
         public void GetResolvedRuleSetPath_EmptyString()
         {
             MockEngine mockEngine = new MockEngine();
@@ -308,7 +308,7 @@ namespace Microsoft.Build.UnitTests
             mockEngine.AssertLogDoesntContain("MSB3884");
         }
 
-        [Fact]
+        [TestMethod]
         public void GetResolvedRuleSetPath_Null()
         {
             MockEngine mockEngine = new MockEngine();

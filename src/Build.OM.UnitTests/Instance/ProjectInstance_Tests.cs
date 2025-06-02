@@ -33,7 +33,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Verify that a cloned off project instance can see environment variables
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CreateProjectInstancePassesEnvironment()
         {
             Project p = new Project();
@@ -45,7 +45,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Read off properties
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void PropertiesAccessors()
         {
             ProjectInstance p = GetSampleProjectInstance();
@@ -57,7 +57,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Read off items
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ItemsAccessors()
         {
             ProjectInstance p = GetSampleProjectInstance();
@@ -77,7 +77,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Add item
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemWithoutMetadata()
         {
             ProjectInstance p = GetEmptyProjectInstance();
@@ -98,7 +98,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Add item
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemWithoutMetadata_Escaped()
         {
             ProjectInstance p = GetEmptyProjectInstance();
@@ -119,7 +119,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Add item with metadata
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemWithMetadata()
         {
             ProjectInstance p = GetEmptyProjectInstance();
@@ -148,7 +148,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Add item null item type
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemInvalidNullItemType()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -160,7 +160,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Add item empty item type
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemInvalidEmptyItemType()
         {
             Assert.Throws<ArgumentException>(() =>
@@ -172,7 +172,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Add item null include
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemInvalidNullInclude()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -184,7 +184,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Add item null metadata
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AddItemNullMetadata()
         {
             ProjectInstance p = GetEmptyProjectInstance();
@@ -196,7 +196,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// It's okay to set properties that are also global properties, masking their value
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SetGlobalPropertyOnInstance()
         {
             Dictionary<string, string> globals = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) { { "p", "p1" } };
@@ -216,7 +216,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// ProjectInstance itself is cloned properly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CloneProjectItself()
         {
             ProjectInstance first = GetSampleProjectInstance();
@@ -228,7 +228,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Properties are cloned properly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CloneProperties()
         {
             ProjectInstance first = GetSampleProjectInstance();
@@ -245,7 +245,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Passing an item list into another list should copy the metadata too
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ItemEvaluationCopiesMetadata()
         {
             string content = @"
@@ -271,7 +271,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// Wildcards are expanded in item groups inside targets, and the evaluatedinclude
         /// is not the wildcard itself!
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "serialize")]
         public void WildcardsInsideTargets()
         {
@@ -321,7 +321,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Items are cloned properly
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CloneItems()
         {
             ProjectInstance first = GetSampleProjectInstance();
@@ -337,7 +337,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Null target in array should give ArgumentNullException
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuildNullTargetInArray()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -349,7 +349,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Null logger in array should give ArgumentNullException
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuildNullLoggerInArray()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -361,7 +361,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Null remote logger in array should give ArgumentNullException
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void BuildNullRemoteLoggerInArray()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -373,7 +373,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Null target name should imply the default target
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "serialize")]
         public void BuildNullTargetNameIsDefaultTarget()
         {
@@ -390,7 +390,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// Build system should correctly reset itself between builds of
         /// project instances.
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "serialize")]
         public void BuildProjectInstancesConsecutively()
         {
@@ -410,7 +410,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Verifies that the built-in metadata for specialized ProjectInstances is present when items are the simplest (no macros or wildcards).
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CreateProjectInstanceWithItemsContainingProjects()
         {
             const string CapturedMetadataName = "DefiningProjectFullPath";
@@ -446,7 +446,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Constructs a new ProjectInstances from Project.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CreateProjectInstanceFromProject()
         {
             const string CapturedMetadataName = "DefiningProjectFullPath";
@@ -488,7 +488,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Verifies that the built-in metadata for specialized ProjectInstances is present when items are based on wildcards in the construction model.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DefiningProjectItemBuiltInMetadataFromWildcards()
         {
             const string CapturedMetadataName = "DefiningProjectFullPath";
@@ -524,7 +524,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// Validate that the DefiningProject* metadata is set to the correct project based on a variety
         /// of means of item creation.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void TestDefiningProjectMetadata()
         {
             string projectA = Path.Combine(ObjectModelHelpers.TempProjectDir, "a.proj");
@@ -662,7 +662,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Test operation fails on immutable project instance
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImmutableProjectInstance_SetProperty()
         {
             var instance = GetSampleProjectInstance(true /* immutable */);
@@ -673,7 +673,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Test operation fails on immutable project instance
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImmutableProjectInstance_RemoveProperty()
         {
             var instance = GetSampleProjectInstance(true /* immutable */);
@@ -684,7 +684,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Test operation fails on immutable project instance
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImmutableProjectInstance_RemoveItem()
         {
             var instance = GetSampleProjectInstance(true /* immutable */);
@@ -695,7 +695,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Test operation fails on immutable project instance
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImmutableProjectInstance_AddItem()
         {
             var instance = GetSampleProjectInstance(true /* immutable */);
@@ -706,7 +706,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Test operation fails on immutable project instance
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImmutableProjectInstance_AddItemWithMetadata()
         {
             var instance = GetSampleProjectInstance(true /* immutable */);
@@ -717,7 +717,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Test operation fails on immutable project instance
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImmutableProjectInstance_Build()
         {
             var instance = GetSampleProjectInstance(true /* immutable */);
@@ -728,7 +728,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Test operation fails on immutable project instance
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImmutableProjectInstance_SetEvaluatedInclude()
         {
             var instance = GetSampleProjectInstance(true /* immutable */);
@@ -739,7 +739,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Test operation fails on immutable project instance
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImmutableProjectInstance_SetEvaluatedIncludeEscaped()
         {
             var instance = GetSampleProjectInstance(true /* immutable */);
@@ -750,7 +750,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Test operation fails on immutable project instance
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImmutableProjectInstance_SetItemSpec()
         {
             var instance = GetSampleProjectInstance(true /* immutable */);
@@ -761,7 +761,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Test operation fails on immutable project instance
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImmutableProjectInstance_SetMetadataOnItem1()
         {
             var instance = GetSampleProjectInstance(true /* immutable */);
@@ -772,7 +772,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Test operation fails on immutable project instance
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImmutableProjectInstance_SetMetadataOnItem2()
         {
             var instance = GetSampleProjectInstance(true /* immutable */);
@@ -783,7 +783,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Test operation fails on immutable project instance
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImmutableProjectInstance_SetMetadataOnItem3()
         {
             var instance = GetSampleProjectInstance(true /* immutable */);
@@ -794,7 +794,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Test operation fails on immutable project instance
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImmutableProjectInstance_RemoveMetadataFromItem()
         {
             var instance = GetSampleProjectInstance(true /* immutable */);
@@ -805,7 +805,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Test operation fails on immutable project instance
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImmutableProjectInstance_SetEvaluatedValueOnProperty()
         {
             var instance = GetSampleProjectInstance(true /* immutable */);
@@ -816,7 +816,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Test operation fails on immutable project instance
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImmutableProjectInstance_SetEvaluatedValueOnPropertyFromProject()
         {
             var instance = GetSampleProjectInstance(true /* immutable */);
@@ -827,7 +827,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Test operation fails on immutable project instance
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImmutableProjectInstance_SetNewProperty()
         {
             var instance = GetSampleProjectInstance(true /* immutable */);
@@ -839,7 +839,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// Setting global properties should fail if the project is immutable, even though the property
         /// was originally created as mutable
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImmutableProjectInstance_SetGlobalProperty()
         {
             var instance = GetSampleProjectInstance(true /* immutable */);
@@ -851,7 +851,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// Setting environment originating properties should fail if the project is immutable, even though the property
         /// was originally created as mutable
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImmutableProjectInstance_SetEnvironmentProperty()
         {
             var instance = GetSampleProjectInstance(true /* immutable */);
@@ -862,7 +862,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Cloning inherits unless otherwise specified
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImmutableProjectInstance_CloneMutableFromImmutable()
         {
             var protoInstance = GetSampleProjectInstance(true /* immutable */);
@@ -879,7 +879,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Cloning inherits unless otherwise specified
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void ImmutableProjectInstance_CloneImmutableFromMutable()
@@ -901,7 +901,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Cloning inherits unless otherwise specified
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void ImmutableProjectInstance_CloneImmutableFromImmutable()
@@ -926,7 +926,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Cloning inherits unless otherwise specified
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void ImmutableProjectInstance_CloneImmutableFromImmutable2()
@@ -948,7 +948,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Cloning inherits unless otherwise specified
         /// </summary>
-        [Fact]
+        [TestMethod]
         [Trait("Category", "netcore-osx-failing")]
         [Trait("Category", "netcore-linux-failing")]
         public void ImmutableProjectInstance_CloneMutableFromMutable()
@@ -967,7 +967,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Cloning inherits unless otherwise specified
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ImmutableProjectInstance_CloneMutableFromMutable2()
         {
             var protoInstance = GetSampleProjectInstance(false /* mutable */);

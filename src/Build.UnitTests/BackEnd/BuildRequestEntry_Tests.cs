@@ -16,7 +16,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
     {
         private int _nodeRequestId;
 
-        [Fact]
+        [TestMethod]
         public void TestConstructorGood()
         {
             BuildRequest request = CreateNewBuildRequest(1, Array.Empty<string>());
@@ -28,7 +28,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(entry.Request, request);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestConstructorBad()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -36,7 +36,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 BuildRequestEntry entry = new BuildRequestEntry(null!, null!);
             });
         }
-        [Fact]
+        [TestMethod]
         public void TestSimpleStateProgression()
         {
             // Start in Ready
@@ -85,7 +85,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(entry.Result, result);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestResolveConfiguration()
         {
             BuildRequest request = CreateNewBuildRequest(1, new string[1] { "foo" });
@@ -107,7 +107,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(BuildRequestEntryState.Ready, entry.State);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestMultipleWaitingRequests()
         {
             BuildRequest request = CreateNewBuildRequest(1, new string[1] { "foo" });
@@ -137,7 +137,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(BuildRequestEntryState.Ready, entry.State);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestMixedWaitingRequests()
         {
             BuildRequest request = CreateNewBuildRequest(1, new string[1] { "foo" });
@@ -172,7 +172,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Assert.Equal(BuildRequestEntryState.Ready, entry.State);
         }
 
-        [Fact]
+        [TestMethod]
         public void TestNoReadyToWaiting()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -188,7 +188,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void TestNoReadyToComplete()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -205,7 +205,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void TestNoWaitingToComplete()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -229,7 +229,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             });
         }
 
-        [Fact]
+        [TestMethod]
         public void TestNoCompleteToWaiting()
         {
             Assert.Throws<InternalErrorException>(() =>
@@ -251,7 +251,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 entry.WaitForResult(waitingRequest1);
             });
         }
-        [Fact]
+        [TestMethod]
         public void TestResultsWithNoMatch1()
         {
             BuildRequest request = CreateNewBuildRequest(1, new string[1] { "foo" });

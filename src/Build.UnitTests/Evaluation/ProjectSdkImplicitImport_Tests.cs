@@ -93,10 +93,10 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Directory.CreateDirectory(_testSdkDirectory);
         }
 
-        [Theory]
-        [InlineData(ProjectTemplateSdkAsAttribute, false)]
-        [InlineData(ProjectTemplateSdkAsElement, true)]
-        [InlineData(ProjectTemplateSdkAsExplicitImport, false)]
+        [TestMethod]
+        [DataRow(ProjectTemplateSdkAsAttribute, false)]
+        [DataRow(ProjectTemplateSdkAsElement, true)]
+        [DataRow(ProjectTemplateSdkAsExplicitImport, false)]
         public void SdkImportsAreInLogicalProject(string projectFormatString, bool expectImportInLogicalProject)
         {
             _env.SetEnvironmentVariable("MSBuildSDKsPath", _testSdkRoot);
@@ -117,10 +117,10 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Assert.Equal(expectImportInLogicalProject ? 7 : 6, children.Count);
         }
 
-        [Theory]
-        [InlineData(ProjectTemplateSdkAsAttribute, false)]
-        [InlineData(ProjectTemplateSdkAsElement, false)]
-        [InlineData(ProjectTemplateSdkAsExplicitImport, true)]
+        [TestMethod]
+        [DataRow(ProjectTemplateSdkAsAttribute, false)]
+        [DataRow(ProjectTemplateSdkAsElement, false)]
+        [DataRow(ProjectTemplateSdkAsExplicitImport, true)]
         public void SdkImportsAreInImportList(string projectFormatString, bool expectImportInLogicalProject)
         {
             _env.SetEnvironmentVariable("MSBuildSDKsPath", _testSdkRoot);
@@ -156,17 +156,17 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Verifies that when a user specifies more than one SDK that everything works as expected
         /// </summary>
-        [Theory]
-        [InlineData(@"
+        [TestMethod]
+        [DataRow(@"
 <Project Sdk=""{0};{1};{2}"">
 </Project >", false)]
-        [InlineData(@"
+        [DataRow(@"
 <Project>
   <Sdk Name=""{0}"" />
   <Sdk Name=""{1}"" />
   <Sdk Name=""{2}"" />
 </Project>", false)]
-        [InlineData(@"
+        [DataRow(@"
 <Project>
   <Import Project=""Sdk.props"" Sdk=""{0}"" />
   <Import Project=""Sdk.props"" Sdk=""{1}"" />
@@ -212,10 +212,10 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             VerifyPropertyFromImplicitImport(project, "FinalImportProperty", Path.Combine(_testSdkRoot, sdkNames.Last(), "Sdk", "Sdk.targets"), sdkNames.Last());
         }
 
-        [Theory]
-        [InlineData(ProjectTemplateSdkAsAttribute)]
-        [InlineData(ProjectTemplateSdkAsElement)]
-        [InlineData(ProjectTemplateSdkAsExplicitImport)]
+        [TestMethod]
+        [DataRow(ProjectTemplateSdkAsAttribute)]
+        [DataRow(ProjectTemplateSdkAsElement)]
+        [DataRow(ProjectTemplateSdkAsExplicitImport)]
         public void ProjectWithSdkImportsIsCloneable(string projectFormatString)
         {
             _env.SetEnvironmentVariable("MSBuildSDKsPath", _testSdkRoot);
@@ -246,10 +246,10 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             project.DeepClone();
         }
 
-        [Theory]
-        [InlineData(ProjectTemplateSdkAsAttribute)]
-        [InlineData(ProjectTemplateSdkAsElement)]
-        [InlineData(ProjectTemplateSdkAsExplicitImport)]
+        [TestMethod]
+        [DataRow(ProjectTemplateSdkAsAttribute)]
+        [DataRow(ProjectTemplateSdkAsElement)]
+        [DataRow(ProjectTemplateSdkAsExplicitImport)]
         public void ProjectWithSdkImportsIsRemoveable(string projectFormatString)
         {
             _env.SetEnvironmentVariable("MSBuildSDKsPath", _testSdkRoot);
@@ -286,7 +286,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Verifies that an error occurs when an SDK name is not in the correct format.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ProjectWithInvalidSdkName()
         {
             _env.SetEnvironmentVariable("MSBuildSDKsPath", _testSdkRoot);
@@ -311,10 +311,10 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Verifies that an empty SDK attribute works and nothing is imported.
         /// </summary>
-        [Theory]
-        [InlineData(ProjectTemplateSdkAsAttribute, false)]
-        [InlineData(ProjectTemplateSdkAsElement, true)]
-        [InlineData(ProjectTemplateSdkAsExplicitImport, true)]
+        [TestMethod]
+        [DataRow(ProjectTemplateSdkAsAttribute, false)]
+        [DataRow(ProjectTemplateSdkAsElement, true)]
+        [DataRow(ProjectTemplateSdkAsExplicitImport, true)]
         public void ProjectWithEmptySdkName(string projectFormatString, bool throwsOnEvaluate)
         {
             string projectInnerContents =
@@ -336,10 +336,10 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             }
         }
 
-        [Theory]
-        [InlineData(ProjectTemplateSdkAsAttribute)]
-        [InlineData(ProjectTemplateSdkAsElement)]
-        [InlineData(ProjectTemplateSdkAsExplicitImport)]
+        [TestMethod]
+        [DataRow(ProjectTemplateSdkAsAttribute)]
+        [DataRow(ProjectTemplateSdkAsElement)]
+        [DataRow(ProjectTemplateSdkAsExplicitImport)]
         public void ProjectResolverContextRefersToBuildingProject(string projectFormatString)
         {
             string projectInnerContents = _projectInnerContents;
@@ -379,7 +379,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Verifies that an empty SDK attribute works and nothing is imported.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ProjectWithEmptySdkNameElementThrows()
         {
             _env.SetEnvironmentVariable("MSBuildSDKsPath", _testSdkRoot);
@@ -402,7 +402,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Verifies that an error occurs when one or more SDK names are empty.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ProjectWithEmptySdkNameInValidList()
         {
             _env.SetEnvironmentVariable("MSBuildSDKsPath", _testSdkRoot);
@@ -424,13 +424,13 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Assert.Equal("MSB4229", exception.ErrorCode);
         }
 
-        [Theory]
+        [TestMethod]
         // MinimumVersion & Version not supported in SDK attribute at the same time
-        [InlineData(ProjectTemplateSdkAsAttributeWithVersion, "1.0.0", null)]
-        [InlineData(ProjectTemplateSdkAsAttributeWithVersion, "min=1.0.0", "1.0.0")]
+        [DataRow(ProjectTemplateSdkAsAttributeWithVersion, "1.0.0", null)]
+        [DataRow(ProjectTemplateSdkAsAttributeWithVersion, "min=1.0.0", "1.0.0")]
 
-        [InlineData(ProjectTemplateSdkAsElementWithVersion, "1.0.0", "1.0.0")]
-        [InlineData(ProjectTemplateSdkAsExplicitImportWithVersion, "1.0.0", "1.0.0")]
+        [DataRow(ProjectTemplateSdkAsElementWithVersion, "1.0.0", "1.0.0")]
+        [DataRow(ProjectTemplateSdkAsExplicitImportWithVersion, "1.0.0", "1.0.0")]
         public void SdkImportsSupportVersion(string projectFormatString, string sdkVersion, string minimumSdkVersion)
         {
             _env.SetEnvironmentVariable("MSBuildSDKsPath", _testSdkRoot);
@@ -461,7 +461,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         /// <summary>
         /// Verifies that when <see cref="ProjectLoadSettings.IgnoreMissingImports"/> is set that we don't throw an <see cref="InvalidProjectFileException"/> when an SDK cannot be found.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void IgnoreMissingImportsSdkNotFoundDoesNotThrow()
         {
             const string projectContents = @"
@@ -499,10 +499,10 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             events[1].ImportedProjectFile.ShouldBeNull();
         }
 
-        [Theory]
-        [InlineData(ProjectTemplateSdkAsAttributeWithVersion, "min=1.0.0", null, null, "1.0.0", typeof(ProjectRootElement))]
-        [InlineData(ProjectTemplateSdkAsAttributeWithVersion, "1.0.0", null, "1.0.0", null, typeof(ProjectRootElement))]
-        [InlineData(ProjectTemplateSdkAsElementWithVersion, "2.0.0", "1.0.0", "2.0.0", "1.0.0", typeof(ProjectSdkElement))]
+        [TestMethod]
+        [DataRow(ProjectTemplateSdkAsAttributeWithVersion, "min=1.0.0", null, null, "1.0.0", typeof(ProjectRootElement))]
+        [DataRow(ProjectTemplateSdkAsAttributeWithVersion, "1.0.0", null, "1.0.0", null, typeof(ProjectRootElement))]
+        [DataRow(ProjectTemplateSdkAsElementWithVersion, "2.0.0", "1.0.0", "2.0.0", "1.0.0", typeof(ProjectSdkElement))]
         public void ImplicitImportsShouldHaveParsedSdkInfo(
             string projectTemplate,
             string version,
@@ -626,8 +626,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             }
         }
 
-        [Theory]
-        [MemberData(nameof(SdkPropertiesAreExpandedData))]
+        [TestMethod]
+        [DynamicData(nameof(SdkPropertiesAreExpandedData))]
         internal void SdkPropertiesAreExpanded(SdkPropertiesAreExpandedCase data)
         {
             _env.SetEnvironmentVariable("MSBuildSDKsPath", _testSdkRoot);

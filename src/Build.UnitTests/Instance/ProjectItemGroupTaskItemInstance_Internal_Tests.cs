@@ -36,8 +36,8 @@ namespace Microsoft.Build.Engine.UnitTests.Instance
             }
         }
 
-        [Theory]
-        [MemberData(nameof(MetadataTestData))]
+        [TestMethod]
+        [DynamicData(nameof(MetadataTestData))]
         public void ProjectItemGroupTaskItemInstanceCanSerializeViaTranslator(List<ProjectItemGroupTaskMetadataInstance> metadata)
         {
             var original = CreateTargetItem(null, metadata);

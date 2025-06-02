@@ -23,7 +23,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Check to make sure if, the specific version metadata is set on a primary reference, that true is returned from CheckForSpecificMetadataOnParent
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CheckForSpecificMetadataOnParent()
         {
             Reference reference = new Reference(isWinMDFile, fileExists, getRuntimeVersion);
@@ -36,7 +36,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Check to make sure if, the specific version metadata is set on all primary references which a dependency depends on, that true is returned from CheckForSpecificMetadataOnParent
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CheckForSpecificMetadataOnParentAllParentsHaveMetadata()
         {
             Reference primaryReference1 = new Reference(isWinMDFile, fileExists, getRuntimeVersion);
@@ -63,7 +63,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Check to make sure if, the specific version metadata is set on some primary references which a dependency depends on, that false is returned from CheckForSpecificMetadataOnParent
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CheckForSpecificMetadataOnParentNotAllParentsHaveMetadata()
         {
             Reference primaryReference1 = new Reference(isWinMDFile, fileExists, getRuntimeVersion);
@@ -90,7 +90,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Check to make sure if, the specific version metadata is set on some primary references which a dependency depends on, that false is returned from CheckForSpecificMetadataOnParent
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CheckForSpecificMetadataOnParentNotAllParentsHaveMetadata2()
         {
             Reference primaryReference1 = new Reference(isWinMDFile, fileExists, getRuntimeVersion);
@@ -116,7 +116,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
         /// <summary>
         /// Check to make sure if, the specific version metadata is set on some primary references which a dependency depends on, that true is returned from CheckForSpecificMetadataOnParent if the anyParentHasmetadata parameter is set to true.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void CheckForSpecificMetadataOnParentNotAllParentsHaveMetadata3()
         {
             Reference primaryReference1 = new Reference(isWinMDFile, fileExists, getRuntimeVersion);

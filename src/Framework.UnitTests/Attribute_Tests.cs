@@ -16,7 +16,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Test RequiredRuntimeAttribute
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RequiredRuntimeAttribute()
         {
             RequiredRuntimeAttribute attribute =
@@ -25,7 +25,7 @@ namespace Microsoft.Build.UnitTests
             attribute.RuntimeVersion.ShouldBe("v5");
         }
 
-        [Fact]
+        [TestMethod]
         public void OutputAttribute()
         {
             OutputAttribute attribute =
@@ -33,7 +33,7 @@ namespace Microsoft.Build.UnitTests
             attribute.ShouldNotBeNull();
         }
 
-        [Fact]
+        [TestMethod]
         public void RequiredAttribute()
         {
             RequiredAttribute attribute =
