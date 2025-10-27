@@ -43,7 +43,6 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(IsUnitTestProject)' == 'true' OR '$(IsTestLibrary)'=='true'">
-    <Compile Include="$(RepoRoot)src\Shared\UnitTests\XunitAdapterHelpers.cs" />
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
 
