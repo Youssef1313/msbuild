@@ -7,7 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		NuGet.Config = NuGet.Config
 		testenvironments.json = testenvironments.json
-		src\Shared\UnitTests\xunit.runner.json = src\Shared\UnitTests\xunit.runner.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{760FF85D-8BEB-4992-8095-A9678F88FD47}"
@@ -34,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Build.Utilities",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Build.Utilities.UnitTests", "src\Utilities.UnitTests\Microsoft.Build.Utilities.UnitTests.csproj", "{EEFE7E34-B3C6-473E-9F4D-4D64DB63F0C4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xunit.NetCore.Extensions", "src\Xunit.NetCore.Extensions\Xunit.NetCore.Extensions.csproj", "{66C6C1ED-30E7-45DD-9F73-2FBB7889CDBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSTest.MSBuildExtensions", "src\MSTest.MSBuildExtensions\MSTest.MSBuildExtensions.csproj", "{66C6C1ED-30E7-45DD-9F73-2FBB7889CDBA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dependency", "src\Samples\Dependency\Dependency.csproj", "{F1A7AA75-72EE-44FE-8493-7FD99F6F42B0}"
 EndProject

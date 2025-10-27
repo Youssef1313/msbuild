@@ -118,9 +118,5 @@
       <Uri>https://github.com/dotnet/roslyn</Uri>
       <Sha>56162ff4dcb7f35ef0a6ee93b9561fb2826f0142</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.XUnitExtensions" Version="10.0.0-beta.25555.6">
-      <Uri>https://github.com/dotnet/arcade</Uri>
-      <Sha>987d1a73ea67d323c0fc7537bce8ec65d87eb43f</Sha>
-    </Dependency>
   </ToolsetDependencies>
 </Dependencies>

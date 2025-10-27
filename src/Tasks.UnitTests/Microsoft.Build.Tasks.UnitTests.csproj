@@ -17,14 +17,20 @@
 
   <ItemGroup>
     <PackageReference Include="Shouldly" />
-    <PackageReference Include="Verify.Xunit" />
+    <PackageReference Include="Verify.MSTest" />
+
+    <!--
+      error NU1109: Detected package downgrade: System.Memory from 4.6.3 to centrally defined 4.6.0.
+                    Update the centrally managed package version to a higher version.
+    -->
+    <PackageReference Include="System.Memory" VersionOverride="4.6.0" />
 
     <ProjectReference Include="..\Build\Microsoft.Build.csproj" />
     <ProjectReference Include="..\Framework\Microsoft.Build.Framework.csproj" />
     <ProjectReference Include="..\MSBuild\MSBuild.csproj" />
     <ProjectReference Include="..\Tasks\Microsoft.Build.Tasks.csproj" />
     <ProjectReference Include="..\Utilities\Microsoft.Build.Utilities.csproj" />
-    <ProjectReference Include="..\Xunit.NetCore.Extensions\Xunit.NetCore.Extensions.csproj" />
+    <ProjectReference Include="..\MSTest.MSBuildExtensions\MSTest.MSBuildExtensions.csproj" />
     <ProjectReference Include="..\UnitTests.Shared\Microsoft.Build.UnitTests.Shared.csproj" />
     <ProjectReference Include="..\Samples\PortableTask\PortableTask.csproj" ReferenceOutputAssembly="false" Private="false" />
     <ProjectReference Include="..\Samples\Dependency\Dependency.csproj" ReferenceOutputAssembly="false" Private="false" />
@@ -61,9 +67,6 @@
     <None Include="..\Shared\UnitTests\App.config">
       <Link>App.config</Link>
       <SubType>Designer</SubType>
-    </None>
-    <None Include="..\Shared\UnitTests\xunit.runner.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="TestResources\CustomCulture\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

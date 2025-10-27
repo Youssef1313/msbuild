@@ -22,7 +22,14 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" />
     <PackageReference Include="Shouldly" />
     <PackageReference Include="FakeItEasy" />
-    <PackageReference Include="Verify.Xunit" />
+    <PackageReference Include="Verify.MSTest" />
+
+    <!--
+      error NU1109: Detected package downgrade: System.Memory from 4.6.3 to centrally defined 4.6.0.
+                    Update the centrally managed package version to a higher version.
+    -->
+    <PackageReference Include="System.Memory" VersionOverride="4.6.0" />
+
     <PackageReference Include="Microsoft.VisualStudio.SolutionPersistence" />
     <PackageReference Include="NuGet.Frameworks">
       <PrivateAssets>all</PrivateAssets>
@@ -37,7 +44,7 @@
     <ProjectReference Include="..\MSBuildTaskHost\MSBuildTaskHost.csproj" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'" Aliases="MSBuildTaskHost" />
     <ProjectReference Include="..\Tasks\Microsoft.Build.Tasks.csproj" />
     <ProjectReference Include="..\Utilities\Microsoft.Build.Utilities.csproj" />
-    <ProjectReference Include="..\Xunit.NetCore.Extensions\Xunit.NetCore.Extensions.csproj" />
+    <ProjectReference Include="..\MSTest.MSBuildExtensions\MSTest.MSBuildExtensions.csproj" />
     <ProjectReference Include="..\UnitTests.Shared\Microsoft.Build.UnitTests.Shared.csproj" />
 
     <ProjectReference Include="..\Samples\TaskWithDependency\TaskWithDependency.csproj" Private="false" ReferenceOutputAssembly="false" OutputItemType="TaskWithDependencyResolvedProjectReferencePath">
@@ -85,9 +92,6 @@
     <None Include="..\Shared\UnitTests\App.config">
       <Link>App.config</Link>
       <SubType>Designer</SubType>
-    </None>
-    <None Include="..\Shared\UnitTests\xunit.runner.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="TestAssets\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

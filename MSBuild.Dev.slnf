@@ -16,7 +16,7 @@
       "src\\UnitTests.Shared\\Microsoft.Build.UnitTests.Shared.csproj",
       "src\\Utilities.UnitTests\\Microsoft.Build.Utilities.UnitTests.csproj",
       "src\\Utilities\\Microsoft.Build.Utilities.csproj",
-      "src\\Xunit.NetCore.Extensions\\Xunit.NetCore.Extensions.csproj"
+      "src\\MSTest.MSBuildExtensions\\MSTest.MSBuildExtensions.csproj"
     ]
   }
 }

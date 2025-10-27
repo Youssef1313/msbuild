@@ -58,6 +58,13 @@
     <MicrosoftVisualStudioOpenTelemetryVersion>0.2.104-beta</MicrosoftVisualStudioOpenTelemetryVersion>
     <!-- Microsoft.VisualStudio.SolutionPersistence is maintained in eng/dependabot/Packages.props -->
   </PropertyGroup>
+
+  <!-- Testing dependencies -->
+  <PropertyGroup>
+    <MSTestVersion>4.0.1</MSTestVersion>
+    <MicrosoftTestingPlatformVersion>2.0.1</MicrosoftTestingPlatformVersion>
+  </PropertyGroup>
+
   <!-- Toolset Dependencies -->
   <PropertyGroup>
     <!-- DotNetCliVersion MUST match the dotnet version in global.json.

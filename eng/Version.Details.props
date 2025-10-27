@@ -25,7 +25,6 @@ This file should be imported by eng/Versions.props
     <SystemThreadingTasksDataflowPackageVersion>9.0.11</SystemThreadingTasksDataflowPackageVersion>
     <!-- dotnet/arcade dependencies -->
     <MicrosoftDotNetArcadeSdkPackageVersion>10.0.0-beta.25555.6</MicrosoftDotNetArcadeSdkPackageVersion>
-    <MicrosoftDotNetXUnitExtensionsPackageVersion>10.0.0-beta.25555.6</MicrosoftDotNetXUnitExtensionsPackageVersion>
     <!-- nuget/nuget.client dependencies -->
     <NuGetBuildTasksPackageVersion>7.0.0-rc.288</NuGetBuildTasksPackageVersion>
     <!-- dotnet/roslyn dependencies -->
@@ -53,7 +52,6 @@ This file should be imported by eng/Versions.props
     <SystemThreadingTasksDataflowVersion>$(SystemThreadingTasksDataflowPackageVersion)</SystemThreadingTasksDataflowVersion>
     <!-- dotnet/arcade dependencies -->
     <MicrosoftDotNetArcadeSdkVersion>$(MicrosoftDotNetArcadeSdkPackageVersion)</MicrosoftDotNetArcadeSdkVersion>
-    <MicrosoftDotNetXUnitExtensionsVersion>$(MicrosoftDotNetXUnitExtensionsPackageVersion)</MicrosoftDotNetXUnitExtensionsVersion>
     <!-- nuget/nuget.client dependencies -->
     <NuGetBuildTasksVersion>$(NuGetBuildTasksPackageVersion)</NuGetBuildTasksVersion>
     <!-- dotnet/roslyn dependencies -->

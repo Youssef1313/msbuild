@@ -56,9 +56,6 @@
       <Link>App.config</Link>
       <SubType>Designer</SubType>
     </None>
-    <None Include="..\Shared\UnitTests\xunit.runner.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -66,7 +63,7 @@
     <ProjectReference Include="..\Framework\Microsoft.Build.Framework.csproj" />
     <ProjectReference Include="..\Utilities\Microsoft.Build.Utilities.csproj" />
     <ProjectReference Include="..\Tasks\Microsoft.Build.Tasks.csproj" />
-    <ProjectReference Include="..\Xunit.NetCore.Extensions\Xunit.NetCore.Extensions.csproj" />
+    <ProjectReference Include="..\MSTest.MSBuildExtensions\MSTest.MSBuildExtensions.csproj" />
     <ProjectReference Include="..\UnitTests.Shared\Microsoft.Build.UnitTests.Shared.csproj" />
     <PackageReference Include="Microsoft.VisualStudio.SolutionPersistence" PrivateAssets="all"/>
   </ItemGroup>

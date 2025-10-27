@@ -24,8 +24,5 @@
       <Link>App.config</Link>
       <SubType>Designer</SubType>
     </None>
-    <None Include="..\Shared\UnitTests\xunit.runner.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 </Project>

@@ -22,50 +22,26 @@
     <OutputType>Exe</OutputType>
     <GenerateProgramFile>false</GenerateProgramFile>
 
-    <!-- Makes xunit print all test names in stdout -->
-    <XunitOptions>$(XunitOptions)</XunitOptions>
-
-    <!-- Respect the traits set up by PlatformSpecific attribute. -->
-    <XunitOptions Condition="$([MSBuild]::IsOSPlatform('windows'))">$(XunitOptions) --filter &quot;Category!=nonwindowstests</XunitOptions>
-    <XunitOptions Condition="$([MSBuild]::IsOSPlatform('linux'))">$(XunitOptions) --filter &quot;Category!=nonlinuxtests</XunitOptions>
-    <XunitOptions Condition="$([MSBuild]::IsOSPlatform('linux')) and '$(NetCoreBuild)'=='true'">--filter &quot;Category!=nonlinuxtests&amp;Category!=netcore-linux-failing</XunitOptions>
-    <XunitOptions Condition="$([MSBuild]::IsOSPlatform('osx'))">$(XunitOptions) --filter &quot;Category!=nonosxtests</XunitOptions>
-    <XunitOptions Condition="$([MSBuild]::IsOSPlatform('osx')) and '$(NetCoreBuild)'=='true'">--filter &quot;Category!=nonosxtests&amp;Category!=netcore-osx-failing</XunitOptions>
-    <!-- Replace with MSBuild::IsBsdLike once the initial msbuild knows about it -->
-    <XunitOptions Condition="$([MSBuild]::IsOSPlatform('FREEBSD')) Or $([MSBuild]::IsOSPlatform('NETBSD')) Or $([MSBuild]::IsOSPlatform('OPENBSD'))">$(XunitOptions) --filter &quot;Category!=nonfreebsdtests</XunitOptions>
-
-    <XunitOptions Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">$(XunitOptions)&amp;Category!=nonnetcoreapptests</XunitOptions>
-    <XunitOptions Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">$(XunitOptions)&amp;Category!=nonnetfxtests</XunitOptions>
-
-    <XunitOptions>$(XunitOptions)&amp;Category!=failing&quot; --Diag $(TargetName).log</XunitOptions>
-    
-    <!-- Enable code coverage -->
-    <!-- There are separate runsettings files for Windows and non-Windows. -->
     <!-- Some test projects hang on windows and hence coverage is disabled for these projects. -->
-    <!-- <XunitOptions Condition="$([MSBuild]::IsOSPlatform('windows'))">$(XunitOptions) - -settings $(RepoRoot)CoverageWindowsFull.runsettings - -test-adapter-path $(NuGetPackageRoot)microsoft.codecoverage/18.0.0-preview-25479-103/build/netstandard2.0</XunitOptions> -->
-    <XunitOptions Condition="!$([MSBuild]::IsOSPlatform('windows'))">$(XunitOptions) --settings $(RepoRoot)Coverage.runsettings --test-adapter-path $(NuGetPackageRoot)microsoft.codecoverage/18.0.0-preview-25479-103/build/netstandard2.0</XunitOptions>
+    <EnableCodeCoverage>true</EnableCodeCoverage>
+    <EnableCodeCoverage Condition="$([MSBuild]::IsOSPlatform('windows'))">false</EnableCodeCoverage>
 
-    <TestRunnerAdditionalArguments>$(XunitOptions)</TestRunnerAdditionalArguments>
+    <!-- There are separate coverage config files for Windows and non-Windows. -->
+    <CodeCoverageConfigFile>$(RepoRoot)Coverage.config</CodeCoverageConfigFile>
+    <CodeCoverageConfigFile Condition="$([MSBuild]::IsOSPlatform('windows'))">$(RepoRoot)CoverageWindowsFull.config</CodeCoverageConfigFile>
+
+    <TestRunnerAdditionalArguments Condition="$(EnableCodeCoverage)">$(TestRunnerAdditionalArguments) --coverage --coverage-settings $(CodeCoverageConfigFile)</TestRunnerAdditionalArguments>
 
     <PackageOutputPath Condition="'$(IsVisualStudioInsertionPackage)' == 'true'">$(DevDivPackagesDir)</PackageOutputPath>
-
-    <!-- Arcade sdk also carries an xunit.runner.json which sometimes overrides the one in this repo. Assign a value to the arcade properties XUnitDesktopSettingsFile and XUnitCoreSettingsFile to prevent the arcade version of the file being added. -->
-    <XUnitDesktopSettingsFile>$(MSBuildThisFileDirectory)Shared\UnitTests\xunit.runner.json</XUnitDesktopSettingsFile>
-    <XUnitCoreSettingsFile>$(XUnitDesktopSettingsFile)</XUnitCoreSettingsFile>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(IsUnitTestProject)' == 'true'">
-    <!-- As of 17.3, one TF of Microsoft.NET.Test.Sdk depends on Newtonsoft.Json
-         9.0.1, causing it to be downloaded and flagged by component governance -->
-    <PackageReference Include="Newtonsoft.Json" />
-
-    <PackageReference Include="Microsoft.DotNet.XUnitExtensions" />
-
     <!-- Don't localize unit test projects -->
     <PackageReference Remove="XliffTasks" />
 
     <Compile Include="$(RepoRoot)src\Shared\UnitTests\TestAssemblyInfo.cs" Condition="'$(IsLibraryTestProject)' != 'true'" />
-    <Compile Include="$(RepoRoot)src\Shared\UnitTests\TestProgram.cs" />
+
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
 
   <ItemGroup>
@@ -84,10 +60,6 @@
     <PublicApiTfm Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETStandard'">netstandard</PublicApiTfm>
     <PublicApiTfm Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">netstandard</PublicApiTfm>
   </PropertyGroup>
-
-  <ItemGroup Condition="'$(IsUnitTestProject)' == 'true' And '$(TargetFrameworkIdentifier)' != '.NETFramework' ">
-    <PackageReference Include="xunit.console" />
-  </ItemGroup>
 
   <ItemGroup Condition="'$(OutputType)' == 'Exe'">
     <!-- Copy empty Directory.Build.props and Directory.Build.targets files to output directory to prevent

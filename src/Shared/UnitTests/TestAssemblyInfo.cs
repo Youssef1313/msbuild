@@ -5,34 +5,28 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Xml;
 using System.Xml.Linq;
 using Microsoft.Build.Shared;
 using Microsoft.Build.Shared.FileSystem;
 using Microsoft.Build.UnitTests;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Xunit;
 
 #nullable disable
 
-[assembly: CollectionBehavior(CollectionBehavior.CollectionPerAssembly)]
-
-// Register test framework for assembly fixture
-[assembly: TestFramework("Xunit.NetCore.Extensions.XunitTestFrameworkWithAssemblyFixture", "Xunit.NetCore.Extensions")]
-
-[assembly: AssemblyFixture(typeof(MSBuildTestAssemblyFixture))]
-
-// Wrap a TestEnvironment around each test method and class so if invariants have changed we will know where
-[assembly: AssemblyFixture(typeof(MSBuildTestEnvironmentFixture), LifetimeScope = AssemblyFixtureAttribute.Scope.Class)]
-[assembly: AssemblyFixture(typeof(MSBuildTestEnvironmentFixture), LifetimeScope = AssemblyFixtureAttribute.Scope.Method)]
+[assembly: DoNotParallelize]
 
 namespace Microsoft.Build.UnitTests
 {
-    public class MSBuildTestAssemblyFixture : IDisposable
+    [TestClass]
+    public static class MSBuildTestAssemblyFixtures
     {
-        private bool _disposed;
-        private TestEnvironment _testEnvironment;
+        private static TestEnvironment _testEnvironment;
 
-        public MSBuildTestAssemblyFixture()
+        [AssemblyInitialize]
+        public static void MSBuildAssemblyInitialize(TestContext context)
         {
             // Set field to indicate tests are running in the TestInfo class in Microsoft.Build.Framework.
             //  See the comments on the TestInfo class for an explanation of why it works this way.
@@ -150,35 +144,29 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        public void Dispose()
+        [AssemblyCleanup]
+        public static void Dispose(TestContext context)
         {
-            if (!_disposed)
-            {
-                _testEnvironment.Dispose();
-
-                _disposed = true;
-            }
+            _testEnvironment.Dispose();
         }
     }
 
-    public class MSBuildTestEnvironmentFixture : IDisposable
+    // Wrap a TestEnvironment around each test method and class so if invariants have changed we will know where
+    [TestClass]
+    public static class MSBuildGlobalTestMethodFixtures
     {
-        private bool _disposed;
-        private TestEnvironment _testEnvironment;
+        private static AsyncLocal<TestEnvironment> _testEnvironment = new();
 
-        public MSBuildTestEnvironmentFixture()
+        [GlobalTestInitialize]
+        public static void MSBuildGlobalTestInitialize(TestContext context)
         {
-            _testEnvironment = TestEnvironment.Create();
+            _testEnvironment.Value = TestEnvironment.Create();
         }
 
-        public void Dispose()
+        [GlobalTestCleanup]
+        public static void MSBuildGlobalTestCleanup(TestContext context)
         {
-            if (!_disposed)
-            {
-                _testEnvironment.Dispose();
-
-                _disposed = true;
-            }
+            _testEnvironment.Value.Dispose();
         }
     }
 }

@@ -8,16 +8,13 @@
     <IsTestLibrary>true</IsTestLibrary>
   </PropertyGroup>
   <ItemGroup>
-    <!-- Implicit references to xunit.core and xunit.assert in test projects by Arcade
-         cause restore failures if PackageVersion is in the normal .props file. -->
-    <PackageReference Include="xunit.assert" VersionOverride="$(XUnitVersion)" />
-    <PackageReference Include="xunit.core" VersionOverride="$(XUnitVersion)" />
+    <PackageReference Include="MSTest.TestFramework" VersionOverride="$(MSTestVersion)" />
     <PackageReference Include="Shouldly" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Build\Microsoft.Build.csproj" />
     <ProjectReference Include="..\Utilities\Microsoft.Build.Utilities.csproj" />
-    <ProjectReference Include="..\Xunit.NetCore.Extensions\Xunit.NetCore.Extensions.csproj" />
+    <ProjectReference Include="..\MSTest.MSBuildExtensions\MSTest.MSBuildExtensions.csproj" />
     <ProjectReference Include="..\MSBuild.Bootstrap\MSBuild.Bootstrap.csproj">
       <Private>false</Private>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
