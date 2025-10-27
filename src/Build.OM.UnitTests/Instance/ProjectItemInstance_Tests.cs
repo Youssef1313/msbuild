@@ -1002,7 +1002,8 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Log warning for drive enumerating wildcards that exist in projects on Windows platform.
         /// </summary>
-        [WindowsOnlyTheory]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         [InlineData(
             TargetItemWithIncludeAndExclude,
             @"%DRIVE%:$(Microsoft_WindowsAzure_EngSys)\**\*",
@@ -1071,7 +1072,8 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Tests target item evaluation resulting in no build failures.
         /// </summary>
-        [WindowsOnlyTheory]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         [InlineData(
             TargetWithDefinedPropertyAndItemWithInclude,
             @"$(Microsoft_WindowsAzure_EngSys)*.cs",

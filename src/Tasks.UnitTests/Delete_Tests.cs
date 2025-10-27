@@ -42,7 +42,8 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Retry Delete. Specify windows since readonly not working on others
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void DeleteWithRetries()
         {
             string source = FileUtilities.GetTemporaryFile();

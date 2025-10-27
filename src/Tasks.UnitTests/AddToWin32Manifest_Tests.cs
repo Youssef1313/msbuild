@@ -72,7 +72,8 @@ namespace Microsoft.Build.Tasks.UnitTests
         }
 
         [SupportedOSPlatform("windows")]
-        [WindowsOnlyTheory]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         [InlineData(null, true)]
         [InlineData("buildIn.manifest", true)]
         [InlineData("testManifestWithValidSupportedArchs.manifest", true)]

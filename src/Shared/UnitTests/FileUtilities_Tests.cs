@@ -409,7 +409,8 @@ namespace Microsoft.Build.UnitTests
             Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsDerivableItemSpecModifier("recursivedir"));
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void NormalizePathThatFitsIntoMaxPath()
         {
             string currentDirectory = @"c:\aardvark\aardvark\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890";
@@ -435,7 +436,8 @@ namespace Microsoft.Build.UnitTests
             });
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetItemSpecModifierRootDirThatFitsIntoMaxPath()
         {
             string currentDirectory = @"c:\aardvark\aardvark\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890";
@@ -490,13 +492,15 @@ namespace Microsoft.Build.UnitTests
             });
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void NormalizePathGoodUNC()
         {
             Assert.AreEqual(@"\\localhost\share", FileUtilities.NormalizePath(@"\\localhost\share"));
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void NormalizePathTooLongWithDots()
         {
             string longPart = new string('x', 300);
@@ -514,7 +518,8 @@ namespace Microsoft.Build.UnitTests
             });
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void CannotNormalizePathWithNewLineAndSpace()
         {
             string filePath = "\r\n      C:\\work\\sdk3\\artifacts\\tmp\\Debug\\SimpleNamesWi---6143883E\\NETFrameworkLibrary\\bin\\Debug\\net462\\NETFrameworkLibrary.dll\r\n      ";
@@ -869,7 +874,8 @@ namespace Microsoft.Build.UnitTests
             Assert.IsTrue(FileUtilities.LooksLikeUnixFilePath(rootLevelPath));
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void PathDoesNotLookLikeUnixPathOnWindows()
         {
             Assert.IsFalse(FileUtilities.LooksLikeUnixFilePath(SystemSpecificAbsolutePath));

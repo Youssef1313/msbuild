@@ -318,7 +318,8 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Logs warning when encountering wildcard drive enumeration during task item creation on Windows platform.
         /// </summary>
-        [WindowsOnlyTheory]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         [InlineData(@"%DRIVE%:\**")]
         [InlineData(@"%DRIVE%:\**\*.log")]
         [InlineData(@"%DRIVE%:\\\\**\*.log")]
@@ -396,7 +397,8 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Logs warning when encountering wildcard drive enumeration during CreateItem task execution on Windows platform.
         /// </summary>
-        [WindowsOnlyTheory]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         [InlineData(
             CreateItemWithInclude,
             @"%DRIVE%:\**")]

@@ -2510,7 +2510,8 @@ namespace Microsoft.Build.UnitTests
             engine.AssertLogContains("MSB3027");
         }
 
-        [WindowsOnlyTheory]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         [InlineData(false, true)]
         [InlineData(true, false)]
         public void ErrorIfLinkFailedCheck(bool isUseHardLinks, bool isUseSymbolicLinks)

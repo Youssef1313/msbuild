@@ -242,7 +242,8 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Test which ensures that setting an Any affinity for a project with a remote host object does not throws.
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         [SupportedOSPlatform("windows")]
         public void TestNoContradictoryRemoteHostObjectAffinity()
         {
@@ -295,7 +296,8 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Test which ensures the remote host object cannot affect a project which has the Any affinity specifically set.
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         [SupportedOSPlatform("windows")]
         public void TestRegisterRemoteHostObjectNoAffect_Any2()
         {
@@ -333,7 +335,8 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Test which ensures the affinity for a project can be changed once the in process host object is registered
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         [SupportedOSPlatform("windows")]
         public void TestAffinityChangeAfterRegisterInprocessHostObject()
         {
@@ -442,7 +445,8 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         /// <summary>
         /// Tests that register overrides existing reigsted remote host object.
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         [SupportedOSPlatform("windows")]
         public void TestRegisterOverrideExistingRegisted()
         {

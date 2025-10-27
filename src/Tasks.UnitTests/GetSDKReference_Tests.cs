@@ -250,7 +250,8 @@ namespace Microsoft.Build.UnitTests.GetSDKReferenceFiles_Tests
         /// <summary>
         /// Make sure we get the correct folder list when asking for it.
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetSDKReferenceFolders()
         {
             var getReferenceFolders = new GetSDKFolders(ToolLocationHelper.GetSDKReferenceFolders);
@@ -259,7 +260,8 @@ namespace Microsoft.Build.UnitTests.GetSDKReferenceFiles_Tests
             VerifySDKFolders(getReferenceFolders, getReferenceFolders2, "References", _sdkDirectory);
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void VerifyGetSdkReferenceTranslator()
         {
             Dictionary<string, GetSDKReferenceFiles.SdkReferenceInfo> pathToReferenceMetadata = new();
@@ -317,7 +319,8 @@ namespace Microsoft.Build.UnitTests.GetSDKReferenceFiles_Tests
         /// <summary>
         /// Make sure we get the correct folder list when asking for it.
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetSDKRedistFolders()
         {
             var getRedistFolders = new GetSDKFolders(ToolLocationHelper.GetSDKRedistFolders);
@@ -329,7 +332,8 @@ namespace Microsoft.Build.UnitTests.GetSDKReferenceFiles_Tests
         /// <summary>
         /// Make sure we get the correct folder list when asking for it.
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetSDKDesignTimeFolders()
         {
             var getDesignTimeFolders = new GetSDKFolders(ToolLocationHelper.GetSDKDesignTimeFolders);
@@ -341,7 +345,8 @@ namespace Microsoft.Build.UnitTests.GetSDKReferenceFiles_Tests
         /// <summary>
         /// Make sure there are no outputs if an sdk which does not exist is passed in.
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void PassNoSDKReferences()
         {
             var engine = new MockEngine(_output);
@@ -359,7 +364,8 @@ namespace Microsoft.Build.UnitTests.GetSDKReferenceFiles_Tests
         /// <summary>
         /// Make sure there are no outputs if expand sdks is not true.
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void PassReferenceWithExpandFalse()
         {
             var engine = new MockEngine(_output);
@@ -384,7 +390,8 @@ namespace Microsoft.Build.UnitTests.GetSDKReferenceFiles_Tests
         /// <summary>
         /// Make sure there are no redist outputs if CopyRedist is false
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void PassReferenceWithCopyRedistFalse()
         {
             var engine = new MockEngine(_output);

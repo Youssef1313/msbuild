@@ -81,7 +81,8 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// The URL to format is white space.
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void WhitespaceTestOnWindows()
         {
             var t = new FormatUrl();
@@ -152,7 +153,8 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// The URL to format is a Windows-style local absolute file path.
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void LocalWindowsAbsolutePathTest()
         {
             var t = new FormatUrl();

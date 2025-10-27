@@ -1343,7 +1343,8 @@ namespace Microsoft.Build.UnitTests
         public void DriveEnumeratingWildcardIsObservedOnAnyPlatform(string directoryPart, string wildcardPart) =>
             DriveEnumeratingWildcardIsObserved(directoryPart, wildcardPart);
 
-        [WindowsOnlyTheory]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         [InlineData(@"\", "**")]
         [InlineData(@"c:\", "**")]
         [InlineData(@"c:\\", "**")]
@@ -1405,7 +1406,8 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        [WindowsOnlyTheory]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         [InlineData(@"%DRIVE%:\**")]
         [InlineData(@"%DRIVE%:\\**")]
         [InlineData(@"%DRIVE%:\\\\\\\\**")]
@@ -1888,7 +1890,8 @@ namespace Microsoft.Build.UnitTests
                 expectedIsLegalFileSpec);
         }
 
-        [WindowsOnlyTheory]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         // Escape pecial regex characters valid in Windows paths
         [InlineData(
             @"$()+.[^{\?$()+.[^{\$()+.[^{",

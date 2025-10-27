@@ -1011,7 +1011,8 @@ Project(""{";
         /// <summary>
         /// Open lots of projects concurrently to try to trigger problems
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void ConcurrentProjectOpenAndCloseThroughProject()
         {
             int iterations = 500;

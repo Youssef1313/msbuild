@@ -139,7 +139,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
             }
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         [SupportedOSPlatform("windows")]
         public void TestRunningObjectTableErrorLogging()
         {

@@ -17,7 +17,8 @@ namespace Microsoft.Build.UnitTests
         /// Test the CanEncode method with and without ANSI characters to determine if they can be encoded
         /// in the current system encoding.
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void CanEncodeTest()
         {
             var defaultEncoding = EncodingUtilities.CurrentSystemOemEncoding;
@@ -51,7 +52,8 @@ namespace Microsoft.Build.UnitTests
             EncodingUtilities.GetExternalOverriddenUILanguageIfSupportableWithEncoding().ShouldBeEquivalentTo(new CultureInfo(expectedLanguage));
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void BatchFileEncoding_EncodingSpecificationTrueEqualsAlways()
         {
             const string content = @"example";

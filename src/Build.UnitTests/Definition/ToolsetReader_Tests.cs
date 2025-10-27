@@ -125,7 +125,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests that the data is correctly populated using function GetToolsetDataFromConfiguration
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetDataFromConfiguration_Basic()
         {
             string v2Folder = NativeMethodsShared.IsWindows
@@ -169,7 +170,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Relative paths can be used in a config file value
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void RelativePathInValue()
         {
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(@"
@@ -210,7 +212,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Invalid relative path in msbuildbinpath value
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void InvalidRelativePath()
         {
             if (NativeMethodsShared.IsLinux)
@@ -247,7 +250,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests the case where application configuration file is invalid
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetDataFromConfiguration_InvalidXmlFile()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -266,7 +270,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests the case where application configuration file is invalid
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetDataFromConfiguration_InvalidConfigFile()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -295,7 +300,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests the case where application configuration file is empty
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetDataFromConfiguration_FileEmpty()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -315,7 +321,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// Tests the case when ReadConfiguration throws exception
         /// Make sure that we don't eat it and always throw ConfigurationErrorsException
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetDataFromConfiguration_ConfigurationExceptionThrown()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -336,7 +343,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// Tests the case when ReadConfiguration throws exception
         /// Make sure that we don't eat it and always throw ConfigurationErrorsException
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetDataFromConfiguration_ConfigurationErrorsExceptionThrown()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -356,7 +364,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests the case where default attribute is not specified in the config file
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetDataFromConfiguration_DefaultAttributeNotSpecified()
         {
             string v2Folder = NativeMethodsShared.IsWindows
@@ -391,7 +400,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Default toolset has no toolsVersion element definition
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetDataFromConfiguration_DefaultToolsetUndefined()
         {
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(@"
@@ -421,7 +431,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// Tests the case where msbuildToolsets is not specified in the config file
         /// Basically in the code we should be checking if config.GetSection("msbuildToolsets") returns a null
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetDataFromConfiguration_MSBuildToolsetsNodeNotPresent()
         {
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(@"
@@ -445,7 +456,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests that we handle empty MSBuildToolsets element correctly
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetDataFromConfiguration_EmptyMSBuildToolsetsNode()
         {
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(@"
@@ -470,7 +482,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests the case where only default ToolsVersion is specified in the application configuration file
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetDataFromConfiguration_OnlyDefaultSpecified()
         {
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(@"
@@ -497,7 +510,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests the case where only one ToolsVersion data is specified in the application configuration file
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetDataFromConfiguration_OneToolsVersionNode()
         {
             string v2Folder = NativeMethodsShared.IsWindows
@@ -531,7 +545,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests the case when an invalid value of ToolsVersion is specified
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetDataFromConfiguration_ToolsVersionIsEmptyString()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -564,7 +579,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// If both MSBuildToolsPath and MSBuildBinPath are present, they must match
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetDataFromConfiguration_ToolsPathAndBinPathDiffer()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -594,7 +610,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests the case when a blank value of PropertyName is specified in the config file
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void BlankPropertyNameInConfigFile()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -628,7 +645,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests the case when a blank property name is specified in the registry
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void BlankPropertyNameInRegistry()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -655,7 +673,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// Tests the case when a blank property name is specified in the registry in a
         /// sub-toolset.
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void BlankPropertyNameInRegistrySubToolset()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -688,7 +707,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests the case when a blank property value is specified in the config file
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void BlankPropertyValueInConfigFile()
         {
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(@"
@@ -719,7 +739,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests the case when a blank property value is specified in the registry
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void BlankPropertyValueInRegistry()
         {
             RegistryKey rk = _toolsVersionsRegistryKey.CreateSubKey("2.0");
@@ -744,7 +765,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests the case when a blank property value is specified in the registry
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void BlankPropertyValueInRegistrySubToolset()
         {
             string binPath = NativeMethodsShared.IsWindows ? @"c:\someBinPath" : "/someBinPath";
@@ -779,7 +801,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests the case when an invalid value of PropertyName is specified in the config file
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void InvalidPropertyNameInConfigFile()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -812,7 +835,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests the case when an invalid value of PropertyName is specified in the registry
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void InvalidPropertyNameInRegistry()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -838,7 +862,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests the case when an invalid value of PropertyName is specified in the registry
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void InvalidPropertyNameInRegistrySubToolset()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -868,7 +893,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests that empty string is an invalid value for MSBuildBinPath
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetDataFromConfiguration_PropertyValueIsEmptyString1()
         {
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(@"
@@ -897,7 +923,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests that empty string is a valid property value for an arbitrary property
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetDataFromConfiguration_PropertyValueIsEmptyString2()
         {
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(@"
@@ -931,7 +958,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// Note that this comes for free with the current implementation using the
         /// framework api to access section in the config file
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetDataFromConfiguration_XmlEscapedCharacters()
         {
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(@"
@@ -968,7 +996,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests the case where registry and config file contains different toolsVersion
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetData_NoConflict()
         {
             string binPath = NativeMethodsShared.IsWindows ? @"D:\somepath" : "/somepath";
@@ -1028,7 +1057,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests that ToolsetInitialization are respected.
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void ToolsetInitializationFlagsSetToNone()
         {
             // Set up registry with two tools versions and one property each
@@ -1083,7 +1113,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests that ToolsetInitialization are respected.
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void ToolsetInitializationFlagsSetToRegistry()
         {
             string binPath = NativeMethodsShared.IsWindows ? @"D:\somepath" : "/somepath";
@@ -1131,7 +1162,8 @@ namespace Microsoft.Build.UnitTests.Definition
             Assert.AreEqual(binPath2, values["4.0"].ToolsPath);
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void ThrowOnNonStringRegistryValueTypes()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -1156,7 +1188,8 @@ namespace Microsoft.Build.UnitTests.Definition
                                                                ToolsetDefinitionLocations.Registry);
             });
         }
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void PropertiesInRegistryCannotReferToOtherPropertiesInRegistry()
         {
             string binPath = NativeMethodsShared.IsWindows ? "c:\\x" : "/x";
@@ -1186,7 +1219,8 @@ namespace Microsoft.Build.UnitTests.Definition
             Assert.AreEqual(binPath, values["2.0"].ToolsPath);
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void SubToolsetPropertiesInRegistryCannotReferToOtherPropertiesInRegistry()
         {
             RegistryKey rk = _toolsVersionsRegistryKey.CreateSubKey("2.0");
@@ -1217,7 +1251,8 @@ namespace Microsoft.Build.UnitTests.Definition
             Assert.AreEqual("c:\\x", values["2.0"].SubToolsets["dogfood"].Properties["p3"].EvaluatedValue);
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void SubToolsetsCannotDefineMSBuildToolsPath()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -1247,7 +1282,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests that ToolsetInitialization are respected.
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void ToolsetInitializationFlagsSetToConfigurationFile()
         {
             string v2Dir = NativeMethodsShared.IsWindows ? "D:\\windows\\Microsoft.NET\\Framework\\v2.0.x86ret" : "/windows/Microsoft.NET/Framework/v2.0.x86ret";
@@ -1351,7 +1387,8 @@ namespace Microsoft.Build.UnitTests.Definition
             Registry.CurrentUser.DeleteSubKeyTree(@"Software\Vendor");
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void ToolsPathInRegistryHasInvalidPathChars()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -1376,7 +1413,8 @@ namespace Microsoft.Build.UnitTests.Definition
         }
 
 #if FEATURE_SYSTEM_CONFIGURATION
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void SamePropertyDefinedMultipleTimesForSingleToolsVersionInConfigurationFile()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -1408,7 +1446,8 @@ namespace Microsoft.Build.UnitTests.Definition
             });
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void SamePropertyDifferentCaseDefinedMultipleTimesForSingleToolsVersionInConfigurationFile()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -1441,7 +1480,8 @@ namespace Microsoft.Build.UnitTests.Definition
         }
 
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void SameToolsVersionDefinedMultipleTimesInConfigurationFile()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -1479,7 +1519,8 @@ namespace Microsoft.Build.UnitTests.Definition
             });
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void SameToolsVersionDifferentCaseDefinedMultipleTimesInConfigurationFile()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -1517,7 +1558,8 @@ namespace Microsoft.Build.UnitTests.Definition
             });
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void CannotSetReservedPropertyInConfigFile()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -1548,7 +1590,8 @@ namespace Microsoft.Build.UnitTests.Definition
         }
 #endif
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void CannotSetReservedPropertyInRegistry()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -1572,7 +1615,8 @@ namespace Microsoft.Build.UnitTests.Definition
             });
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void CannotSetReservedPropertyInRegistrySubToolset()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -1602,7 +1646,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// Properties defined in previously processed toolset definitions should
         /// not affect the evaluation of subsequent toolset definitions.
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void NoInterferenceBetweenToolsetDefinitions()
         {
             string v20Dir = NativeMethodsShared.IsWindows ? @"D:\20\some\folder\on\disk" : "/20/some/folder/on/disk";
@@ -1679,21 +1724,24 @@ namespace Microsoft.Build.UnitTests.Definition
             ConfigFileInvalidRegistryExpressionHelper(@"<property name=""p"" value=""$(Registry:@)""/>");
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void ConfigFileInvalidRegistryExpression4()
         {
             // Double @
             ConfigFileInvalidRegistryExpressionHelper(@"<property name=""p"" value=""$(Registry:HKEY_CURRENT_USER\Software\Vendor\Tools@@TaskLocation)""/>");
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void ConfigFileInvalidRegistryExpression5()
         {
             // Trailing @
             ConfigFileInvalidRegistryExpressionHelper(@"<property name=""p"" value=""$(Registry:HKEY_CURRENT_USER\Software\Vendor\Tools@TaskLocation@)""/>");
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void ConfigFileInvalidRegistryExpression6()
         {
             // Leading @
@@ -1707,7 +1755,8 @@ namespace Microsoft.Build.UnitTests.Definition
             ConfigFileInvalidRegistryExpressionHelper(@"<property name=""p"" value=""$(Registry:BOGUS_HIVE\Software\Vendor\Tools@TaskLocation)""/>");
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void ConfigFileStringEmptyRegistryExpression1()
         {
             // Regular undefined property beginning with "Registry"
@@ -1715,7 +1764,8 @@ namespace Microsoft.Build.UnitTests.Definition
                                           String.Empty);
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void ConfigFileStringEmptyRegistryExpression2()
         {
             // Nonexistent key
@@ -1723,7 +1773,8 @@ namespace Microsoft.Build.UnitTests.Definition
                                           String.Empty);
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void ConfigFileNonPropertyRegistryExpression1()
         {
             // Property not terminated with paren, does not look like property
@@ -1731,7 +1782,8 @@ namespace Microsoft.Build.UnitTests.Definition
                                           @"$(Registry:HKEY_CURRENT_USER\Software\Vendor\Tools@TaskLocation");
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void ConfigFileNonPropertyRegistryExpression2()
         {
             // Missing colon, looks like regular property (but with invalid property name chars, we will return blank as a result)
@@ -1739,7 +1791,8 @@ namespace Microsoft.Build.UnitTests.Definition
                                           String.Empty);
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void ConfigFileItemExpressionsDoNotExpandInConfigurationProperties()
         {
             // Expect that item expressions such as '@(SomeItem)' are not evaluated in any way, e.g., they are treated literally
@@ -1754,7 +1807,8 @@ namespace Microsoft.Build.UnitTests.Definition
             RegistryInvalidRegistryExpressionHelper("$(Registry:__bogus__)");
         }
 
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void RegistryValidRegistryExpression1()
         {
             // Regular undefined property beginning with "Registry"
@@ -1866,7 +1920,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests the case where application configuration file overrides a value already specified in the registry
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetData_ConflictingPropertyValuesSameCase()
         {
             string binPath = NativeMethodsShared.IsWindows ? @"D:\somepath" : "/somepath";
@@ -1912,7 +1967,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// where that registry value is bogus and would otherwise throw.  However, since the config file also
         /// contains an entry for that toolset, the registry toolset never gets read, and thus never throws.
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetData_ConflictingPropertyValuesRegistryThrows()
         {
             string binPath = NativeMethodsShared.IsWindows ? @"D:\somepath" : "/somepath";
@@ -1957,7 +2013,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// well as in the config file for the same tools version.
         /// We should not merge them; we should take the config file ones only
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetData_NoMerging()
         {
             string binPath = NativeMethodsShared.IsWindows ? @"D:\somepath" : "/somepath";
@@ -2007,7 +2064,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// The absence of the ToolsVersion attribute on the main Project element in a project file means
         /// that the engine's default tools version should be used.
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void ToolsVersionAttributeNotSpecifiedOnProjectElementAndDefaultVersionSpecifiedInRegistry()
         {
             string oldValue = Environment.GetEnvironmentVariable("MSBUILDLEGACYDEFAULTTOOLSVERSION");
@@ -2049,7 +2107,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests the case when no values are specified in the registry
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetData_RegistryNotPresent()
         {
             string binPath = NativeMethodsShared.IsWindows ? @"D:\somedifferentpath" : "/somedifferentpath";
@@ -2090,7 +2149,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// Note that config file not present is same as config file
         /// with no MSBuildToolsets Section
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetData_ConfigFileNotPresent()
         {
             // Registry Read
@@ -2119,7 +2179,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests the case where nothing is specified in registry and config file
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetData_RegistryAndConfigNotPresent()
         {
             Dictionary<string, Toolset> values = new Dictionary<string, Toolset>(StringComparer.OrdinalIgnoreCase);
@@ -2150,7 +2211,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests the case when reading config file throws an exception
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetData_ReadConfigThrowsException()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -2180,7 +2242,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests the case where reading from registry throws exception
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GetToolsetData_ReadRegistryOpenSubKeyThrowsException()
         {
             Assert.Throws<InvalidToolsetDefinitionException>(() =>
@@ -2224,7 +2287,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// Tests that the default ToolsVersion is correctly resolved when specified
         /// in registry and config file
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void SetDefaultToolsetVersion_SpecifiedInRegistryAndConfigFile()
         {
             // Set up registry with two tools versions and one property each
@@ -2270,7 +2334,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests that the default ToolsVersion is correctly resolved when specified in registry only
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void SetDefaultToolsetVersion_SpecifiedOnlyInRegistry()
         {
 #if FEATURE_SYSTEM_CONFIGURATION
@@ -2314,7 +2379,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests that the override task path is correctly resolved when specified in registry only
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void SetOverrideTasks_SpecifiedOnlyInRegistry()
         {
 #if FEATURE_SYSTEM_CONFIGURATION
@@ -2365,7 +2431,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests that the override default toolsversion is correctly resolved when specified in registry only
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void SetDefaultOverrideToolsVersion_SpecifiedOnlyInRegistry()
         {
 #if FEATURE_SYSTEM_CONFIGURATION
@@ -2413,7 +2480,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// Tests that the default ToolsVersion is correctly resolved
         /// when specified in config file only
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void SetDefaultToolsetVersion_SpecifiedOnlyInConfigFile()
         {
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(@"
@@ -2453,7 +2521,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// when specified in config file only.
         /// Also, that MSBuildOverrideTasksPath can be overridden.
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void SetOverrideTaskPath_SpecifiedOnlyInConfigFile()
         {
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(@"
@@ -2495,7 +2564,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// Tests that the override default ToolsVersion is correctly resolved
         /// when specified in config file only.
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void SetDefaultOverrideToolsVersion_SpecifiedOnlyInConfigFile()
         {
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(@"
@@ -2534,7 +2604,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests that the default ToolsVersion is correctly resolved when specified nowhere
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void SetDefaultToolsetVersion_SpecifiedNowhere()
         {
 #if FEATURE_SYSTEM_CONFIGURATION
@@ -2582,7 +2653,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests that properties are properly expanded when reading them from the config file
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void PropertiesInToolsetsFromConfigFileAreExpanded()
         {
             // $(COMPUTERNAME) is just a convenient env var. $(NUMBER_OF_PROCESSORS) isn't defined on Longhorn
@@ -2623,7 +2695,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// <summary>
         /// Tests that properties in MSBuildToolsPath are properly expanded when reading them from the config file
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void PropertiesInToolsetsFromConfigFileAreExpandedInToolsPath()
         {
             string binPathConfig = NativeMethodsShared.IsWindows ?
@@ -2678,7 +2751,8 @@ namespace Microsoft.Build.UnitTests.Definition
         /// Global properties are available, but they cannot be overwritten by other toolset properties, just as they cannot
         /// be overwritten by project file properties.
         /// </summary>
-        [WindowsOnlyFact]
+        [TestMethod]
+        [OSCondition(OperatingSystems.Windows)]
         public void GlobalPropertiesInToolsetsAreExpandedButAreNotOverwritten()
         {
 #if FEATURE_SYSTEM_CONFIGURATION
