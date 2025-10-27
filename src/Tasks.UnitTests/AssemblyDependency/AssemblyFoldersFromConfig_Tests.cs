@@ -15,6 +15,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.Tasks.UnitTests.AssemblyDependency
 {
+    [TestClass]
     public class AssemblyFoldersFromConfig_Tests : ResolveAssemblyReferenceTestFixture
     {
         public AssemblyFoldersFromConfig_Tests(ITestOutputHelper output) : base(output)

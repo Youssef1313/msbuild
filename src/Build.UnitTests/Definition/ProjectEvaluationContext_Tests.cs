@@ -22,6 +22,7 @@ using SdkResult = Microsoft.Build.BackEnd.SdkResolution.SdkResult;
 
 namespace Microsoft.Build.UnitTests.Definition
 {
+    [TestClass]
     /// <summary>
     ///     Tests some manipulations of Project and ProjectCollection that require dealing with internal data.
     /// </summary>

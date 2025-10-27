@@ -14,6 +14,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.OM.Definition
 {
+    [TestClass]
     /// <summary>
     /// Tests for ProjectMetadata
     /// </summary>

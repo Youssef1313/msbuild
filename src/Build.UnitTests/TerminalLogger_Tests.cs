@@ -25,6 +25,7 @@ namespace Microsoft.Build.UnitTests
 {
     [UsesVerify]
     [UseInvariantCulture]
+    [TestClass]
     public class TerminalLogger_Tests : IEventSource, IDisposable
     {
         private const int _nodeCount = 8;

@@ -21,6 +21,7 @@ using InvalidToolsetDefinitionException = Microsoft.Build.Exceptions.InvalidTool
 
 namespace Microsoft.Build.UnitTests.Definition
 {
+    [TestClass]
     /// <summary>
     /// Unit test for ToolsetRegistryReader class
     /// </summary>

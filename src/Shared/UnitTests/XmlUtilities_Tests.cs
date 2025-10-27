@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class XmlUtilities_Tests
     {
         // Various invalid names, with the first invalid character listed for each

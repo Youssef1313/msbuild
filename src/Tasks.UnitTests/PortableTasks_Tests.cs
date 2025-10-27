@@ -14,6 +14,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public sealed class PortableTasks_Tests
     {
         private readonly ITestOutputHelper _outputHelper;

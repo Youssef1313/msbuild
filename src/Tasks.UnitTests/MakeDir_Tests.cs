@@ -13,6 +13,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public sealed class MakeDir_Tests
     {
         /// <summary>

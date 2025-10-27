@@ -19,6 +19,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.Engine.UnitTests.BackEnd
 {
+    [TestClass]
     /// <summary>
     /// Tests for the TaskHostFactory functionality, which manages task host processes
     /// for executing MSBuild tasks in separate processes.

@@ -17,6 +17,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests.Construction
 {
+    [TestClass]
     public class SolutionFile_NewParser_Tests
     {
         public ITestOutputHelper TestOutputHelper { get; }

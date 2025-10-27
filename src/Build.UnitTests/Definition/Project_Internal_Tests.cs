@@ -17,6 +17,7 @@ using InternalUtilities = Microsoft.Build.Internal.Utilities;
 
 namespace Microsoft.Build.UnitTests.Definition
 {
+    [TestClass]
     /// <summary>
     /// Tests some manipulations of Project and ProjectCollection that require dealing with internal data.
     /// </summary>

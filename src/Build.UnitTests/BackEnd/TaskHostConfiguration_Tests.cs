@@ -19,6 +19,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     /// <summary>
     /// Unit Tests for TaskHostConfiguration packet.
     /// </summary>

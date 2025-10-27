@@ -12,6 +12,8 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests;
 
+[TestClass]
+
 /// <summary>
 /// End to end tests for the terminal logger configuration.
 /// We need to execute msbuild process as tested code path is also in XMake.cs.

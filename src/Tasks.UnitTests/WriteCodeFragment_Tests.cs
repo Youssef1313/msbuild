@@ -15,6 +15,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     /// <summary>
     /// Tests for write code fragment task
     /// </summary>

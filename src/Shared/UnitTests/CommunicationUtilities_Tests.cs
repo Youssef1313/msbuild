@@ -10,6 +10,7 @@ using CommunicationsUtilities = Microsoft.Build.Internal.CommunicationsUtilities
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class CommunicationUtilitiesTests
     {
         /// <summary>

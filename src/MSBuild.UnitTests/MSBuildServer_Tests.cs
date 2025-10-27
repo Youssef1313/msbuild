@@ -56,6 +56,7 @@ namespace Microsoft.Build.Engine.UnitTests
         }
     }
 
+    [TestClass]
     public class MSBuildServer_Tests : IDisposable
     {
         private readonly ITestOutputHelper _output;

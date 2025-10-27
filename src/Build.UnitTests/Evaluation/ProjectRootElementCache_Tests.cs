@@ -15,6 +15,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.OM.Evaluation
 {
+    [TestClass]
     /// <summary>
     /// Tests for ProjectRootElementCache
     /// </summary>

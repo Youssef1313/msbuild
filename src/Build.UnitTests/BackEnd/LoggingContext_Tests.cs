@@ -11,6 +11,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     /// <summary>
     /// Tests for logging contexts.
     /// </summary>

@@ -22,6 +22,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     public class BuildRequestConfiguration_Tests : IDisposable
     {
         private TestEnvironment _env;

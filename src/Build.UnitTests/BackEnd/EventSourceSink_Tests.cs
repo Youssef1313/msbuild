@@ -13,6 +13,7 @@ using InternalLoggerException = Microsoft.Build.Exceptions.InternalLoggerExcepti
 
 namespace Microsoft.Build.UnitTests.Logging
 {
+    [TestClass]
     /// <summary>
     /// Verify the event source sink functions correctly.
     /// </summary>

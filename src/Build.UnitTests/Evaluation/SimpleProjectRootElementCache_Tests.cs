@@ -12,6 +12,7 @@ using Xunit;
 
 namespace Microsoft.Build.Engine.UnitTests.Evaluation
 {
+    [TestClass]
     public class SimpleProjectRootElementCache_Tests : IDisposable
     {
         public SimpleProjectRootElementCache_Tests()

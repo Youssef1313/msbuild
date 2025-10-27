@@ -22,6 +22,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.Logging
 {
+    [TestClass]
     /// <summary>
     /// Test the logging service component
     /// </summary>

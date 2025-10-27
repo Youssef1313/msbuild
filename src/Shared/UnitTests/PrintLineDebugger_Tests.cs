@@ -16,6 +16,7 @@ using CommonWriterType = System.Action<string, string, System.Collections.Generi
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public sealed class PrintLineDebugger_Tests
     {
         private sealed class MockWriter

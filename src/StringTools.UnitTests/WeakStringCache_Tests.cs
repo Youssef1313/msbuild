@@ -21,6 +21,7 @@ using StringToolsNet35::Microsoft.NET.StringTools;
 
 namespace Microsoft.NET.StringTools.Tests
 {
+    [TestClass]
     public class WeakStringCache_Tests : IDisposable
     {
         /// <summary>

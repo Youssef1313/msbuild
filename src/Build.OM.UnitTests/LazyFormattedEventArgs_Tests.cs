@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.Framework
 {
+    [TestClass]
     /// <summary>
     /// Tests for LazyFormattedEventArgs
     /// </summary>

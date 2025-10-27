@@ -30,6 +30,7 @@ using XMakeElements = Microsoft.Build.Shared.XMakeElements;
 
 namespace Microsoft.Build.UnitTests.Construction
 {
+    [TestClass]
     public class SolutionProjectGenerator_Tests : IDisposable
     {
         private readonly ITestOutputHelper output;

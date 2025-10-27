@@ -15,6 +15,7 @@ using MuxLogger = Microsoft.Build.Utilities.MuxLogger;
 
 namespace Microsoft.VisualStudio.Build.UnitTest
 {
+    [TestClass]
     /// <summary>
     /// Tests for the MuxLogger.
     /// </summary>

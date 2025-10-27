@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.Build.Framework.UnitTests;
 
+[TestClass]
 public class ExtendedBuildEventArgs_Tests
 {
     [InlineData(true)]

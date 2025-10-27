@@ -15,6 +15,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.OM.Definition
 {
+    [TestClass]
     /// <summary>
     /// Tests for editing through the definition model
     /// </summary>

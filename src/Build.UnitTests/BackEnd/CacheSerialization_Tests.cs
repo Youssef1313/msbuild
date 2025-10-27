@@ -15,6 +15,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     public class CacheSerialization_Tests
     {
         public static IEnumerable<object[]> CacheData

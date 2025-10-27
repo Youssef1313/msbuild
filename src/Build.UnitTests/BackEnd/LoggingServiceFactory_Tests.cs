@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.Logging
 {
+    [TestClass]
     /// <summary>
     /// Test the Factory to create components of the type LoggingService
     /// </summary>

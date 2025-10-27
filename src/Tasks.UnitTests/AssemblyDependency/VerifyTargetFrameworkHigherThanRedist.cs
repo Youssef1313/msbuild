@@ -13,6 +13,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 {
+    [TestClass]
     /// <summary>
     /// Unit test the cases where we need to determine if the target framework is greater than the current target framework
     /// </summary>

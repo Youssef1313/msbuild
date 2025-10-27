@@ -12,6 +12,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public sealed class Move_Tests
     {
         /// <summary>

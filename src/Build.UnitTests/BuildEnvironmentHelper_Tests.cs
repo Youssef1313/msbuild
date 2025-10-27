@@ -12,6 +12,7 @@ using Xunit;
 
 namespace Microsoft.Build.Engine.UnitTests
 {
+    [TestClass]
     public class BuildEnvironmentHelper_Tests
     {
 #if USE_MSBUILD_DLL_EXTN

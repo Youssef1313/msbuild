@@ -28,6 +28,7 @@ using TaskItem = Microsoft.Build.Execution.ProjectItemInstance.TaskItem;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     /// <summary>
     /// The test class for the TaskExecutionHost
     /// </summary>

@@ -13,6 +13,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.Tasks.UnitTests
 {
+    [TestClass]
     public class HintPathResolver_Tests : IDisposable
     {
         private readonly TestEnvironment _env;

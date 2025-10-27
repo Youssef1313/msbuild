@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.Build.Evaluation;
 
+[TestClass]
 public sealed class UsedUninitializedProperties_Tests
 {
     [Fact]

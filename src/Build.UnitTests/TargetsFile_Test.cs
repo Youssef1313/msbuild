@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     /// <summary>
     /// Tests from Orcas
     /// </summary>

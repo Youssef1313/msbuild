@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.Evaluation
 {
+    [TestClass]
     public class SemiColonTokenizer_Tests
     {
         [Theory]

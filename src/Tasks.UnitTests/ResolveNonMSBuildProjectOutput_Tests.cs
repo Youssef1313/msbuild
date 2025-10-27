@@ -14,6 +14,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public sealed class ResolveNonMSBuildProjectOutput_Tests
     {
         private const string attributeProject = "Project";

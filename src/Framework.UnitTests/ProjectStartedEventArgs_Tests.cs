@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     /// <summary>
     /// Verify the functioning of the ProjectStartedEventArgs class.
     /// </summary>

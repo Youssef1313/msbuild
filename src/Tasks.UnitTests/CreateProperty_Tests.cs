@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public sealed class CreateProperty_Tests : IDisposable
     {
         public CreateProperty_Tests()

@@ -18,6 +18,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.BuildCheck.UnitTests;
 
+[TestClass]
 public class EndToEndTests : IDisposable
 {
     private const string EditorConfigFileName = ".editorconfig";

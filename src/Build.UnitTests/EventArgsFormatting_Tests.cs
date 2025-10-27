@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     /// <summary>
     /// These tests are repeated in the Utilities unit test assembly. We know that this isn't
     /// too useful, because both Engine and Utilities pull the code from the same Shared file. But it

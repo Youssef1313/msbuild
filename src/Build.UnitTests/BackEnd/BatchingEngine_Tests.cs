@@ -20,6 +20,7 @@ using ProjectItemInstanceFactory = Microsoft.Build.Execution.ProjectItemInstance
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     public class BatchingEngine_Tests
     {
         [Fact]

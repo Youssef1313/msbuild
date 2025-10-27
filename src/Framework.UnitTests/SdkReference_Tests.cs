@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Microsoft.Build.Framework.UnitTests
 {
+    [TestClass]
     public class SdkReference_Tests
     {
         [Fact]

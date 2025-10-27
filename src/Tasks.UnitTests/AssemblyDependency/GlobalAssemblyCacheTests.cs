@@ -17,6 +17,7 @@ using SystemProcessorArchitecture = System.Reflection.ProcessorArchitecture;
 
 namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 {
+    [TestClass]
     /// <summary>
     /// Unit tests for the ResolveAssemblyReference GlobalAssemblyCache.
     /// </summary>

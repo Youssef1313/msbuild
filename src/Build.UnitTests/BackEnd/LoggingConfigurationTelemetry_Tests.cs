@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.Telemetry;
 
+[TestClass]
 public class LoggingConfigurationTelemetry_Tests
 {
     [Fact]

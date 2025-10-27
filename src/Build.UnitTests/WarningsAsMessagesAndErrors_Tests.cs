@@ -14,6 +14,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.Engine.UnitTests
 {
+    [TestClass]
     public sealed class WarningsAsMessagesAndErrorsTests
     {
         private const string ExpectedEventMessage = "03767942CDB147B98D0ECDBDE1436DA3";

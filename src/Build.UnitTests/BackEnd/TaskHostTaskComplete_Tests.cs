@@ -15,6 +15,7 @@ using TaskHostPacketHelpers = Microsoft.Build.UnitTests.BackEnd.TaskHostConfigur
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     /// <summary>
     /// Unit Tests for TaskHostTaskComplete packet.
     /// </summary>

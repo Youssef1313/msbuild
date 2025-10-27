@@ -12,6 +12,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.OM.Construction
 {
+    [TestClass]
     /// <summary>
     /// Tests for the ProjectItemDefinitionElement class
     /// </summary>

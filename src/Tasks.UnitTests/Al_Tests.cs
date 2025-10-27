@@ -10,12 +10,13 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     /*
-     * Class:   AlTests
-     *
-     * Test the AL task in various ways.
-     *
-     */
+* Class:   AlTests
+*
+* Test the AL task in various ways.
+*
+*/
     public sealed class AlTests
     {
         /// <summary>

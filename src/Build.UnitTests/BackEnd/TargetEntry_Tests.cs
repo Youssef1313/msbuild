@@ -24,6 +24,7 @@ using ElementLocation = Microsoft.Build.Construction.ElementLocation;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     /// <summary>
     /// Test for the TargetEntry class used by the TargetBuilder.  This class does most of the
     /// actual work to build a target.

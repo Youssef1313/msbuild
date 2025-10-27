@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.Build.BuildCheck.UnitTests
 {
+    [TestClass]
     public class SharedOutputPathCheck_Tests
     {
         private readonly SharedOutputPathCheck _check;

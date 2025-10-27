@@ -20,6 +20,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.TrackedDependencies
 {
+    [TestClass]
     public sealed class TrackedDependenciesTests
     {
         private readonly int _sleepTimeMilliseconds = NativeMethodsShared.IsWindows ? 100 : 1000;

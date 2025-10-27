@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.AxTlbImp_Tests
 {
+    [TestClass]
     public sealed class TlbImp_Tests
     {
         /// <summary>

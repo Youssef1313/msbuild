@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class FindAppConfigFile_Tests
     {
         [Fact]

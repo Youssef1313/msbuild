@@ -23,6 +23,7 @@ using static Microsoft.Build.Engine.UnitTests.TestComparers.ProjectInstanceModel
 
 namespace Microsoft.Build.UnitTests.OM.Instance
 {
+    [TestClass]
     /// <summary>
     /// Tests for ProjectInstance internal members
     /// </summary>

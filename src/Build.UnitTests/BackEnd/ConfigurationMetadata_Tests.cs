@@ -14,6 +14,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     /// <summary>
     /// Unit tests for ConfigurationMetadata
     /// </summary>

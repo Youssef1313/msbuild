@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.Construction
 {
+    [TestClass]
     public class XmlReaderWithoutLocation_Tests
     {
         private sealed class XmlReaderNoIXmlLineInfo : XmlReader

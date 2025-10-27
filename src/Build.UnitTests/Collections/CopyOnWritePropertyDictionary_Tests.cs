@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.OM.Collections
 {
+    [TestClass]
     /// <summary>
     /// Tests for <see cref="CopyOnWritePropertyDictionary{T}"/>.
     /// </summary>

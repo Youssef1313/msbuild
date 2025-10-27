@@ -25,6 +25,7 @@ using SdkResultImpl = Microsoft.Build.BackEnd.SdkResolution.SdkResult;
 
 namespace Microsoft.Build.Engine.UnitTests.BackEnd
 {
+    [TestClass]
     public class SdkResolverService_Tests
     {
         private readonly MockLogger _logger;

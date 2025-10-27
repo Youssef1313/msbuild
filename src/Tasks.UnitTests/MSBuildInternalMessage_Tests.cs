@@ -11,6 +11,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.Tasks.UnitTests
 {
+    [TestClass]
     public class MSBuildInternalMessage_Tests
     {
         private readonly ITestOutputHelper _testOutput;

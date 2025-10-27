@@ -14,6 +14,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 {
+    [TestClass]
     public class TaskTranslatorHelpers
     {
         private MemoryStream _serializationStream;

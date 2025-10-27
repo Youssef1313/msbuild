@@ -14,6 +14,7 @@ using static Microsoft.Build.Experimental.BuildCheck.Infrastructure.EditorConfig
 
 namespace Microsoft.Build.BuildCheck.UnitTests;
 
+[TestClass]
 public class EditorConfig_Tests
 {
 

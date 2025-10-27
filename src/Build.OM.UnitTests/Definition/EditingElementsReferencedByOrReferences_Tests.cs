@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.OM.Definition
 {
+    [TestClass]
     /// <summary>
     /// Tests around editing elements that are referenced by others or the ones that references others.
     /// </summary>

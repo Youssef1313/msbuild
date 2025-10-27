@@ -24,6 +24,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class BinaryLoggerTests : IDisposable
     {
         private const string s_testProject = @"

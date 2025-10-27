@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.Evaluation
 {
+    [TestClass]
     public class SimpleVersion_Tests
     {
         [Fact]

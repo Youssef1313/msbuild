@@ -28,6 +28,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace Microsoft.Build.Engine.UnitTests.ProjectCache
 {
+    [TestClass]
     public class ProjectCacheTests : IDisposable
     {
         private static string s_currentTargetNETFramework = $"net{RunnerUtilities.BootstrapSdkVersion.Split('.')?.FirstOrDefault()}.0";

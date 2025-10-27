@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Microsoft.Build.Tasks.UnitTests
 {
+    [TestClass]
     public class Hash_Tests
     {
         [Fact]

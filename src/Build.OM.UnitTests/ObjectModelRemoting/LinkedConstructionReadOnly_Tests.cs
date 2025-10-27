@@ -9,6 +9,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
     using Microsoft.Build.Construction;
     using Xunit;
 
+    [TestClass]
     /// <summary>
     /// Most importantly we want to touch implementation to all public method to catch any
     /// potential transitional error.

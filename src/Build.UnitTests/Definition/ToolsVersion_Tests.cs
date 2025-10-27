@@ -23,6 +23,7 @@ using LoggingService = Microsoft.Build.BackEnd.Logging.LoggingService;
 
 namespace Microsoft.Build.UnitTests.Definition
 {
+    [TestClass]
     public class ToolsetState_Tests
     {
         [Fact]

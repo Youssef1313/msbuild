@@ -15,6 +15,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.OM.Construction
 {
+    [TestClass]
     public class WhitespacePreservation_Tests
     {
         [Theory]

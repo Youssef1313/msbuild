@@ -15,6 +15,7 @@ using InvalidProjectFileException = Microsoft.Build.Exceptions.InvalidProjectFil
 
 namespace Microsoft.Build.UnitTests.OM.Construction
 {
+    [TestClass]
     /// <summary>
     /// Tests for the ProjectChooseElement class (and for ProjectWhenElement and ProjectOtherwiseElement)
     /// </summary>

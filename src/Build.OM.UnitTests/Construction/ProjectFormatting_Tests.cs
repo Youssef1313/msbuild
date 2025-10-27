@@ -17,6 +17,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.Engine.OM.UnitTests.Construction
 {
+    [TestClass]
     public class ProjectFormatting_Tests : IDisposable
     {
         private readonly ITestOutputHelper _testOutput;

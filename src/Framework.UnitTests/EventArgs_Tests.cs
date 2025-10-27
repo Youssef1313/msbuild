@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     /// <summary>
     /// Unit test the base class BuildEventArgs
     /// </summary>

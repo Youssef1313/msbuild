@@ -10,6 +10,7 @@ using InvalidProjectFileException = Microsoft.Build.Exceptions.InvalidProjectFil
 
 namespace Microsoft.Build.UnitTests.OM.Construction
 {
+    [TestClass]
     /// <summary>
     /// Tests for the ProjectTaskElement class
     /// </summary>

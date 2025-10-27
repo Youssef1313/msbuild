@@ -13,6 +13,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
 #if FEATURE_CODETASKFACTORY
 
     using System.CodeDom.Compiler;
@@ -21,6 +22,7 @@ namespace Microsoft.Build.UnitTests
     using Microsoft.Build.Tasks.UnitTests;
     using Shouldly;
 
+    [TestClass]
     public sealed class CodeTaskFactoryTests
     {
         /// <summary>

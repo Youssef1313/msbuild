@@ -15,6 +15,7 @@ using LegacyThreadingData = Microsoft.Build.Execution.LegacyThreadingData;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     public class NodeEndpointInProc_Tests
     {
         private delegate void EndpointOperationDelegate(NodeEndpointInProc endpoint);

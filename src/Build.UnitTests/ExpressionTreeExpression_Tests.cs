@@ -18,6 +18,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class ExpressionTest : IDisposable
     {
         private readonly ITestOutputHelper output;

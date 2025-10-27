@@ -18,6 +18,7 @@ using Xunit.Sdk;
 
 namespace Microsoft.Build.Tasks.UnitTests
 {
+    [TestClass]
     public class GetAssembliesMetadata_Tests
     {
         private static string TestAssembliesPaths { get; } = Path.Combine(AppContext.BaseDirectory, "TestResources", "Projects");

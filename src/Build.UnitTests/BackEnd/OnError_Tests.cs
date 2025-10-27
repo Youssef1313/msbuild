@@ -17,11 +17,12 @@ using InvalidProjectFileException = Microsoft.Build.Exceptions.InvalidProjectFil
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     /*
-     * Class:   OnErrorHandling
-     *
-     * Tests that exercise the <OnError> tag.
-     */
+* Class:   OnErrorHandling
+*
+* Tests that exercise the <OnError> tag.
+*/
     public sealed class OnError_Tests
     {
         /*

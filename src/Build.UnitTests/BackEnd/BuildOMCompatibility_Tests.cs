@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.Build.Engine.UnitTests.BackEnd
 {
+    [TestClass]
     public class BuildOMCompatibility_Tests
     {
         [Theory]

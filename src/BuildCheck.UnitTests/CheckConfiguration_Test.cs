@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.Build.BuildCheck.UnitTests;
 
+[TestClass]
 public class CheckConfiguration_Test
 {
     [Fact]

@@ -21,6 +21,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     /// <summary>
     /// Tests for the Exec task
     /// </summary>

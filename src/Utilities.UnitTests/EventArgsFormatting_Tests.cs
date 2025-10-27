@@ -14,6 +14,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class EventArgsFormattingTests
     {
         [Fact]

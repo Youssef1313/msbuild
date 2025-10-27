@@ -13,6 +13,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.Tasks.UnitTests
 {
+    [TestClass]
     public sealed class RegressionTests
     {
         private readonly ITestOutputHelper _output;

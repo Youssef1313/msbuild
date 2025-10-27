@@ -15,6 +15,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAndUnification.AppConfig
 {
+    [TestClass]
     public sealed class StronglyNamedDependencyAppConfig : ResolveAssemblyReferenceTestFixture
     {
         public StronglyNamedDependencyAppConfig(ITestOutputHelper output) : base(output)

@@ -22,6 +22,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
     using System.Threading.Tasks;
     using InvalidProjectFileException = Microsoft.Build.Exceptions.InvalidProjectFileException;
 
+    [TestClass]
     public class RequestBuilder_Tests : IDisposable
     {
         private AutoResetEvent _newBuildRequestsEvent;

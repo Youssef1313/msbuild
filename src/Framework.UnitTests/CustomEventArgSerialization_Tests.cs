@@ -14,6 +14,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class CustomEventArgSerialization_Tests : IDisposable
     {
         // Generic build class to test custom serialization of abstract class BuildEventArgs

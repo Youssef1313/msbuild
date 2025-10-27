@@ -14,6 +14,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     public class Lookup_Tests
     {
         /// <summary>

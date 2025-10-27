@@ -18,6 +18,7 @@ using StringToolsNet35::Microsoft.NET.StringTools;
 
 namespace Microsoft.NET.StringTools.Tests
 {
+    [TestClass]
     public class SpanBasedStringBuilder_Tests
     {
         private SpanBasedStringBuilder MakeSpanBasedStringBuilder(InterningTestData.TestDatum datum, bool appendSubStrings = false)

@@ -13,6 +13,7 @@ using Xunit;
 
 namespace Microsoft.Build.BuildCheck.UnitTests;
 
+[TestClass]
 public class ConfigurationProvider_Tests
 {
     [Fact]

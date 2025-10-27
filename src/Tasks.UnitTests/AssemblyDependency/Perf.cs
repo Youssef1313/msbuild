@@ -15,6 +15,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 {
+    [TestClass]
     /// <summary>
     /// Test a few perf scenarios.
     /// </summary>

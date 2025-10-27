@@ -20,6 +20,7 @@ using InvalidProjectFileException = Microsoft.Build.Exceptions.InvalidProjectFil
 
 namespace Microsoft.Build.UnitTests.OM.Definition
 {
+    [TestClass]
     /// <summary>
     /// Tests for ProjectCollection
     /// </summary>

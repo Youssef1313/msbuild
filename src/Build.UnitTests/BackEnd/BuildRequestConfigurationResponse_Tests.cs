@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     /// <summary>
     /// Tests for the BuildRequestConfigurationResponse class.
     /// </summary>

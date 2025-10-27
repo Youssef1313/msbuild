@@ -15,6 +15,7 @@ using Xunit.NetCore.Extensions;
 namespace Microsoft.Build.Engine.UnitTests.Evaluation
 {
     [UseInvariantCulture]
+    [TestClass]
     public class IntrinsicFunctionOverload_Tests
     {
         [Fact]

@@ -16,6 +16,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAndUnification.Prerequisite
 {
+    [TestClass]
     public sealed class StronglyNamedDependency : ResolveAssemblyReferenceTestFixture
     {
         public StronglyNamedDependency(ITestOutputHelper output) : base(output)

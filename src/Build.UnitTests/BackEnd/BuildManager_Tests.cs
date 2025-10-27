@@ -31,6 +31,7 @@ using static Microsoft.Build.UnitTests.ObjectModelHelpers;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     /// <summary>
     /// The test fixture for the BuildManager
     /// </summary>

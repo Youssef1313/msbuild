@@ -9,6 +9,7 @@ using CanonicalError = Microsoft.Build.Shared.CanonicalError;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class CanonicalErrorTest
     {
         [Fact]

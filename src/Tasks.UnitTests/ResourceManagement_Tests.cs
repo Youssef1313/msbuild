@@ -12,6 +12,7 @@ using Xunit;
 
 namespace Microsoft.Build.Tasks.UnitTests
 {
+    [TestClass]
     public class ResourceManagement_Tests
     {
         [Fact]

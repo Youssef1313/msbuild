@@ -24,6 +24,7 @@ using TaskItem = Microsoft.Build.Execution.ProjectItemInstance.TaskItem;
 
 namespace Microsoft.Build.UnitTests.Logging
 {
+    [TestClass]
     /// <summary>
     /// Contain the logging services tests which deal with the logging methods themselves
     /// </summary>

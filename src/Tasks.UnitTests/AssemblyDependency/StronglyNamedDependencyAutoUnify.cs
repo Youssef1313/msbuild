@@ -15,6 +15,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAndUnification.AutoUnify
 {
+    [TestClass]
     public sealed class StronglyNamedDependencyAutoUnify : ResolveAssemblyReferenceTestFixture
     {
         public StronglyNamedDependencyAutoUnify(ITestOutputHelper output) : base(output)

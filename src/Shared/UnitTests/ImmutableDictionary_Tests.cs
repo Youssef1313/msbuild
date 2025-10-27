@@ -25,6 +25,7 @@ using ImmutableDictionary = MSBuildTaskHost::System.Collections.Immutable.Immuta
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class ImmutableDictionary_Tests
     {
         private readonly ImmutableDictionary _emptyDict = ImmutableDictionary.Empty;

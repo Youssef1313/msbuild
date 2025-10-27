@@ -13,6 +13,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public sealed class CommandLineGenerator_Tests
     {
         private const string testXamlFile = @"<?xml version='1.0' encoding='utf-8'?>

@@ -19,6 +19,7 @@ using TaskItem = Microsoft.Build.Execution.ProjectItemInstance.TaskItem;
 
 namespace Microsoft.Build.UnitTests.Definition
 {
+    [TestClass]
     /// <summary>
     /// Class containing tests for the ProjectItemDefinition and related functionality.
     /// </summary>

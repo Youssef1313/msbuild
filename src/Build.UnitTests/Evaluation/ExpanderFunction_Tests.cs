@@ -12,6 +12,7 @@ using ParseArgs = Microsoft.Build.Evaluation.Expander.ArgumentParser;
 
 namespace Microsoft.Build.Engine.UnitTests.Evaluation
 {
+    [TestClass]
     public class ExpanderFunction_Tests
     {
         /* Tests for TryConvertToInt */

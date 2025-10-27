@@ -19,6 +19,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class FileMatcherTest : IDisposable
     {
         private readonly TestEnvironment _env;

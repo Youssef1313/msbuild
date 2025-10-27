@@ -21,6 +21,7 @@ using static Microsoft.Build.UnitTests.Helpers;
 
 namespace Microsoft.Build.Graph.UnitTests
 {
+    [TestClass]
     public class GraphLoadedFromSolutionTests : IDisposable
     {
         private TestEnvironment _env;

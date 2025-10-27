@@ -20,6 +20,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
 {
+    [TestClass]
     public sealed class RequiredTransformations : IDisposable
     {
         private readonly TestEnvironment _env;
@@ -1667,6 +1668,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         }
     }
 
+    [TestClass]
     public sealed class TransformationErrors
     {
         private readonly ITestOutputHelper _output;
@@ -2160,6 +2162,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         }
     }
 
+    [TestClass]
     public sealed class PropertyHandling
     {
         private readonly ITestOutputHelper _output;
@@ -2495,6 +2498,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         }
     }
 
+    [TestClass]
     public sealed class PropertyErrors
     {
         private readonly ITestOutputHelper _output;
@@ -3385,6 +3389,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
         }
     }
 
+    [TestClass]
     public class MiscTests
     {
         private readonly ITestOutputHelper _output;

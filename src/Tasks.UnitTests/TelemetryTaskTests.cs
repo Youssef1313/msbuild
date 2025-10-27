@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Microsoft.Build.Tasks.UnitTests
 {
+    [TestClass]
     public sealed class TelemetryTaskTests
     {
         [Fact]

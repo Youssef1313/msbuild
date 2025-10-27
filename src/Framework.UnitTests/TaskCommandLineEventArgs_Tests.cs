@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     /// <summary>
     /// Verify the functioning of the TaskCommandLineEventArgs class.
     /// </summary>

@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.Build.BuildCheck.UnitTests
 {
+    [TestClass]
     public sealed class ExecCliBuildCheck_Tests
     {
         private const int MaxStackSizeWindows = 1024 * 1024; // 1 MB

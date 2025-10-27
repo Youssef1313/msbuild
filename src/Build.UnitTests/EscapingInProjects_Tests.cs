@@ -62,6 +62,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         }
     }
 
+    [TestClass]
     public class SimpleScenarios : IDisposable
     {
         private readonly ITestOutputHelper _output;
@@ -918,6 +919,8 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
             Assert.AreEqual("bar", items.ElementAt(3).EvaluatedInclude);
         }
     }
+
+    [TestClass]
 
 #if FEATURE_COMPILE_IN_TESTS
     public class FullProjectsUsingMicrosoftCommonTargets

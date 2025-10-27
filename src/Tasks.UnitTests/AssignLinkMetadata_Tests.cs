@@ -15,6 +15,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public sealed class AssignLinkMetadata_Tests
     {
         private readonly string _defaultItemSpec = Path.Combine(Path.GetTempPath(), "SubFolder", "a.cs");

@@ -19,6 +19,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.Engine.UnitTests.BackEnd
 {
+    [TestClass]
     /// <summary>
     /// Integration tests for task routing in multi-threaded mode.
     /// Tests verify that tasks with MSBuildMultiThreadableTaskAttribute (non-inheritable)

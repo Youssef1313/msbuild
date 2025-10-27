@@ -18,6 +18,7 @@ using Xunit.Abstractions;
 namespace Microsoft.Build.Engine.UnitTests
 {
     [Collection("OpenTelemetryManagerTests")]
+    [TestClass]
     public class Telemetry_Tests
     {
         private readonly ITestOutputHelper _output;

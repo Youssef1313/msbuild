@@ -16,6 +16,7 @@ using InvalidProjectFileException = Microsoft.Build.Exceptions.InvalidProjectFil
 
 namespace Microsoft.Build.UnitTests.OM.Instance
 {
+    [TestClass]
     /// <summary>
     /// Tests for ProjectItemInstance public members
     /// </summary>

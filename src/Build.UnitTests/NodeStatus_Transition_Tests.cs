@@ -19,6 +19,7 @@ namespace Microsoft.Build.CommandLine.UnitTests;
 
 [UsesVerify]
 [UseInvariantCulture]
+[TestClass]
 public class NodeStatus_Transition_Tests
 {
     public NodeStatus_Transition_Tests()

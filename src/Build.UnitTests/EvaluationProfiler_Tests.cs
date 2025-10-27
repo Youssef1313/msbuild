@@ -19,6 +19,7 @@ using static Microsoft.Build.UnitTests.ObjectModelHelpers;
 
 namespace Microsoft.Build.Engine.UnitTests
 {
+    [TestClass]
     /// <summary>
     /// Integration tests that run a build with the profiler turned on and validates the profiler report
     /// </summary>

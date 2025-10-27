@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.OM.Instance
 {
+    [TestClass]
     /// <summary>
     /// Tests for ProjectMetadataInstance public members
     /// </summary>

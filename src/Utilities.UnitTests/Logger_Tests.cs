@@ -32,6 +32,7 @@ namespace Microsoft.Build.UnitTests
         }
     }
 
+    [TestClass]
     public class Logger_Tests
     {
         [Fact]

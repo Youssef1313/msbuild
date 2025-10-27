@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class DependentAssembly_Tests
     {
         /// <summary>

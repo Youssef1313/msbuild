@@ -12,6 +12,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public sealed class SdkToolsPathUtility_Tests
     {
         private string _defaultSdkToolsPath = NativeMethodsShared.IsWindows ? "C:\\ProgramFiles\\WIndowsSDK\\bin" : "/ProgramFiles/WindowsSDK/bin";

@@ -14,6 +14,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAndUnification.AppConfig
 {
+    [TestClass]
     public sealed class SpecificVersionPrimary : ResolveAssemblyReferenceTestFixture
     {
         public SpecificVersionPrimary(ITestOutputHelper output) : base(output)

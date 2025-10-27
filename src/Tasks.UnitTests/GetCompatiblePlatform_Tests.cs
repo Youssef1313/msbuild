@@ -11,6 +11,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.Tasks.UnitTests
 {
+    [TestClass]
     public sealed class GetCompatiblePlatform_Tests
     {
         private readonly ITestOutputHelper _output;

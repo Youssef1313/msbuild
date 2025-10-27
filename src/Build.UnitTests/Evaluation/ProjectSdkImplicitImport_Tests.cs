@@ -25,6 +25,7 @@ using SdkResultFactory = Microsoft.Build.Framework.SdkResultFactory;
 
 namespace Microsoft.Build.UnitTests.OM.Construction
 {
+    [TestClass]
     /// <summary>
     /// Tests for the ProjectImportElement class when imports are implicit through an Sdk specification.
     /// </summary>

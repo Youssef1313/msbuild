@@ -26,6 +26,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class Copy_Tests : IDisposable
     {
         public static IEnumerable<object[]> GetDestinationExists() =>

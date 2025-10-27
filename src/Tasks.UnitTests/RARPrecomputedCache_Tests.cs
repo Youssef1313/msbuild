@@ -14,6 +14,7 @@ using Xunit;
 
 namespace Microsoft.Build.Tasks.UnitTests
 {
+    [TestClass]
     public class RARPrecomputedCache_Tests
     {
         [Fact]

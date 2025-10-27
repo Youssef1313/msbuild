@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.OM.Instance
 {
+    [TestClass]
     /// <summary>
     /// Tests for the ProjectTaskOutputItemInstance class.
     /// </summary>

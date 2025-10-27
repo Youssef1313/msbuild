@@ -17,6 +17,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.Evaluation
 {
+    [TestClass]
     /// <summary>
     /// Tests mainly for project evaluation
     /// </summary>

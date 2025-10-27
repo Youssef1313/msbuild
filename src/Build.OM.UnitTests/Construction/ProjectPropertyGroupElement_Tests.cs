@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.OM.Construction
 {
+    [TestClass]
     /// <summary>
     /// Test the ProjectPropertyGroupElement class
     /// </summary>

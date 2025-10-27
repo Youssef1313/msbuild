@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public sealed class PropertyParser_Tests
     {
         [Fact]

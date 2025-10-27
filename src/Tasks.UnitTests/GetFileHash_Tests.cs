@@ -14,6 +14,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class GetFileHash_Tests
     {
         private readonly MockEngine _mockEngine;

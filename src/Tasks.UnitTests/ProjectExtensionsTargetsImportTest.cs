@@ -7,6 +7,7 @@ using System.IO;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     /// <summary>
     /// Tests that Microsoft.Common.props successfully imports project extensions written by package management systems.
     /// </summary>

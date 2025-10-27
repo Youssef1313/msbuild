@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.Build.Framework.UnitTests
 {
+    [TestClass]
     public class WorkerNodeTelemetryEventArgs_Tests
     {
         [Fact]

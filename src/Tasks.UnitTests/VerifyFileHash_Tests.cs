@@ -13,6 +13,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public sealed class VerifyFileHash_Tests
     {
         private readonly MockEngine _mockEngine;

@@ -13,6 +13,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAndUnification.AppConfig
 {
+    [TestClass]
     public sealed class NonSpecificVersionStrictPrimary : ResolveAssemblyReferenceTestFixture
     {
         public NonSpecificVersionStrictPrimary(ITestOutputHelper output) : base(output)

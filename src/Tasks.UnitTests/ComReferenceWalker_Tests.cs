@@ -12,6 +12,7 @@ using COMException = System.Runtime.InteropServices.COMException;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class ComReferenceWalker_Tests
     {
         private static int MockReleaseComObject(object o)

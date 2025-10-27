@@ -11,6 +11,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class EndToEndCondition_Tests
     {
         private readonly ITestOutputHelper _output;

@@ -17,6 +17,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.Preprocessor
 {
+    [TestClass]
     /// <summary>
     /// Tests mainly for project preprocessing
     /// </summary>

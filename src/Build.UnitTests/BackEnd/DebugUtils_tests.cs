@@ -13,6 +13,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class DebugUtils_Tests
     {
         [Fact]

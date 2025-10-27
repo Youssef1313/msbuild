@@ -23,6 +23,7 @@ using static Microsoft.Build.UnitTests.ObjectModelHelpers;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     public class SdkResultOutOfProc_Tests : IDisposable
     {
         /// <summary>

@@ -22,6 +22,7 @@ using NodeLoggingContext = Microsoft.Build.BackEnd.Logging.NodeLoggingContext;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     public class IntrinsicTask_Tests
     {
         [Fact]

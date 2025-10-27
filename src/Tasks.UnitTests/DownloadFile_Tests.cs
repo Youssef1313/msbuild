@@ -20,6 +20,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace Microsoft.Build.Tasks.UnitTests
 {
+    [TestClass]
     public class DownloadFile_Tests
     {
         private readonly MockEngine _mockEngine = new MockEngine();

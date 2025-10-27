@@ -13,6 +13,7 @@ using Xunit;
 
 namespace Microsoft.Build.Tasks.UnitTests
 {
+    [TestClass]
     public class ZipDirectory_Tests
     {
         private readonly MockEngine _mockEngine = new MockEngine();

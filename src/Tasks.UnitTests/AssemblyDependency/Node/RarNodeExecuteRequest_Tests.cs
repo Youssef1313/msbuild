@@ -13,6 +13,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 {
+    [TestClass]
     public sealed class RarNodeExecuteRequest_Tests
     {
         [Fact]

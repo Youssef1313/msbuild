@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.OM.Definition
 {
+    [TestClass]
     /// <summary>
     /// Tests the <see cref="ItemDataCollectionValue{I}"/> data type.
     /// </summary>

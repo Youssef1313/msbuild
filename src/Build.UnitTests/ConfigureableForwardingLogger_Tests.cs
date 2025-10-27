@@ -13,6 +13,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class ConfigureableForwardingLogger_Tests
     {
         private readonly BuildFinishedEventArgs _buildFinished = new BuildFinishedEventArgs("Message", "Keyword", true);

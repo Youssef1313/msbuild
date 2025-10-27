@@ -36,6 +36,7 @@ using TaskItem = Microsoft.Build.Execution.ProjectItemInstance.TaskItem;
 
 namespace Microsoft.Build.UnitTests.Evaluation
 {
+    [TestClass]
     public class Expander_Tests
     {
         private string _dateToParse = new DateTime(2010, 12, 25).ToString(CultureInfo.CurrentCulture);

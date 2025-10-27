@@ -15,6 +15,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 {
+    [TestClass]
     public class ResolveAssemblyReferenceCacheSerialization : IDisposable
     {
         private readonly string _rarCacheFile;

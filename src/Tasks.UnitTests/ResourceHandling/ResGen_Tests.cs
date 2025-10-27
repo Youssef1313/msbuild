@@ -15,6 +15,7 @@ using ResGen = Microsoft.Build.Tasks.GenerateResource.ResGen;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class ResGen_Tests
     {
         /// <summary>

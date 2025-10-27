@@ -14,6 +14,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public sealed class CallTarget_Tests : IDisposable
     {
         public CallTarget_Tests()

@@ -16,6 +16,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
 {
+    [TestClass]
     public sealed class RequiredTransformations
     {
         private readonly ITestOutputHelper _output;
@@ -1271,6 +1272,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         }
     }
 
+    [TestClass]
     public sealed class TransformationErrors
     {
         private readonly ITestOutputHelper _output;
@@ -1678,6 +1680,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         }
     }
 
+    [TestClass]
     public sealed class PropertyHandling
     {
         private readonly ITestOutputHelper _output;
@@ -1985,6 +1988,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         }
     }
 
+    [TestClass]
     public sealed class PropertyErrors
     {
         private readonly ITestOutputHelper _output;
@@ -2555,6 +2559,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         }
     }
 
+    [TestClass]
     public class References
     {
         private readonly ITestOutputHelper _output;
@@ -2887,6 +2892,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
         }
     }
 
+    [TestClass]
     public class MiscTests
     {
         private readonly ITestOutputHelper _output;

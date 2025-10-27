@@ -15,6 +15,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.Tasks.UnitTests.GenerateResource
 {
+    [TestClass]
     public class MSBuildResXReader_Tests
     {
         private readonly ITestOutputHelper _output;

@@ -13,6 +13,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.Evaluation
 {
+    [TestClass]
     /// <summary>
     /// Compares the items and metadata that ExpressionShredder finds
     /// with the results from the old regexes to make sure they're identical

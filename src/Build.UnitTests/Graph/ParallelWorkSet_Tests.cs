@@ -12,6 +12,7 @@ using Xunit;
 
 namespace Microsoft.Build.Graph.UnitTests
 {
+    [TestClass]
     public class ParallelWorkSet_Tests
     {
         private sealed class ParallelWorkSetTestCase

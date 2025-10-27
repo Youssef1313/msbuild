@@ -16,6 +16,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     /// <summary>
     /// Class to specifically test the TaskParameter class, particularly its serialization
     /// of various types of parameters.

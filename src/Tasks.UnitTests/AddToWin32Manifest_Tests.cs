@@ -15,6 +15,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.Tasks.UnitTests
 {
+    [TestClass]
     public class AddToWin32Manifest_Tests
     {
         private static string TestAssetsRootPath { get; } = Path.Combine(

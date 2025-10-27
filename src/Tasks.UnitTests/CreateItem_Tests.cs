@@ -17,6 +17,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public sealed class CreateItem_Tests : IDisposable
     {
         internal const string CreateItemWithInclude = @"

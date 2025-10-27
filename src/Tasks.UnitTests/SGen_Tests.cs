@@ -12,6 +12,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class SGen_Tests
     {
 #if RUNTIME_TYPE_NETCORE

@@ -12,6 +12,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.Construction
 {
+    [TestClass]
     /// <summary>
     /// Tests for the ElementLocation class
     /// </summary>

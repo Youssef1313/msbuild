@@ -27,6 +27,7 @@ using LegacyThreadingData = Microsoft.Build.Execution.LegacyThreadingData;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     /// <summary>
     /// Unit tests for the TaskBuilder component
     /// </summary>

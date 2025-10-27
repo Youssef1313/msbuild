@@ -12,6 +12,7 @@ using Xunit;
 
 namespace Microsoft.Build.Engine.UnitTests.Globbing
 {
+    [TestClass]
     public class CompositeGlobTests
     {
         public static IEnumerable<object[]> CompositeMatchingTestData

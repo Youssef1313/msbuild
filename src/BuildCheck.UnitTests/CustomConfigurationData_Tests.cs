@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Microsoft.Build.BuildCheck.UnitTests;
 
+[TestClass]
 public class CustomConfigurationData_Tests
 {
     [Fact]

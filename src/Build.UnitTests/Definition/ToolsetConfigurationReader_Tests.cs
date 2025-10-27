@@ -14,6 +14,7 @@ using ToolsetConfigurationSection = Microsoft.Build.Evaluation.ToolsetConfigurat
 
 namespace Microsoft.Build.UnitTests.Definition
 {
+    [TestClass]
     /// <summary>
     /// Unit tests for ToolsetConfigurationReader class
     /// </summary>

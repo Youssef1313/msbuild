@@ -21,6 +21,7 @@ using TaskItem = Microsoft.Build.Execution.ProjectItemInstance.TaskItem;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     /// <summary>
     /// Test the task host class which acts as a communication mechanism between tasks and the msbuild engine.
     /// </summary>

@@ -18,6 +18,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     public class ResultsCache_Tests
     {
         [Fact]

@@ -24,6 +24,7 @@ using OutputCacheDictionary = System.Collections.Generic.Dictionary<Microsoft.Bu
 
 namespace Microsoft.Build.Graph.UnitTests
 {
+    [TestClass]
     public class ResultCacheBasedBuilds_Tests : IDisposable
     {
         public ResultCacheBasedBuilds_Tests(ITestOutputHelper output)

@@ -12,6 +12,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.Construction
 {
+    [TestClass]
     public class ProjectImportElement_Tests
     {
         [Fact]

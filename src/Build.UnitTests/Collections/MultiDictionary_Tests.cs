@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.OM.Collections
 {
+    [TestClass]
     /// <summary>
     /// Tests for the multi-dictionary class
     /// </summary>

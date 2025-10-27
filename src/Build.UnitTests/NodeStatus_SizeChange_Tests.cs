@@ -16,6 +16,7 @@ namespace Microsoft.Build.CommandLine.UnitTests;
 
 [UsesVerify]
 [UseInvariantCulture]
+[TestClass]
 public class NodeStatus_SizeChange_Tests
 {
     private readonly TerminalNodeStatus _status = new("Namespace.Project", "TargetFramework", null, "Target", new MockStopwatch());

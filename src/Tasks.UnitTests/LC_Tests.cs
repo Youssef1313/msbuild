@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     /// <summary>
     /// Unit tests for the LC task
     /// </summary>

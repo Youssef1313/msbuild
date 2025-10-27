@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     public class RequestedProjectState_Tests
     {
         [Fact]

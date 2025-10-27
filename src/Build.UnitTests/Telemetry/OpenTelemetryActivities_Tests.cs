@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.Build.Engine.UnitTests.Telemetry
 {
+    [TestClass]
     public class ActivityExtensionsTests
     {
         [Fact]
@@ -134,7 +135,7 @@ namespace Microsoft.Build.Engine.UnitTests.Telemetry
         }
     }
 
-
+    [TestClass]
     public class MSBuildActivitySourceTests
     {
         [Fact]

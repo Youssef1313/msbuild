@@ -15,6 +15,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public sealed class NativeMethodsShared_Tests
     {
         #region Data

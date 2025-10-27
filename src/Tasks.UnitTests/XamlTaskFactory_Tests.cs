@@ -23,6 +23,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
 {
+    [TestClass]
     #region Tests for Load and Parse methods
     /// <summary>
     /// The text fixture to unit test the task generator.
@@ -441,6 +442,8 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
         }
     }
 
+    [TestClass]
+
     #endregion
 
     #region Tests for compilation
@@ -596,6 +599,8 @@ namespace Microsoft.Build.UnitTests.XamlTaskFactory_Tests
             }
         }
     }
+
+    [TestClass]
     #endregion
 
     #region Tests Generated code based on one xml file

@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Microsoft.Build.Engine.UnitTests.BackEnd
 {
+    [TestClass]
     public sealed class GenerateTemporaryTargetAssembly_Tests
     {
         [Fact]

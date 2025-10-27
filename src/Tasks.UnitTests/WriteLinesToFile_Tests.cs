@@ -15,6 +15,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.Tasks.UnitTests
 {
+    [TestClass]
     public sealed class WriteLinesToFile_Tests
     {
         private readonly ITestOutputHelper _output;

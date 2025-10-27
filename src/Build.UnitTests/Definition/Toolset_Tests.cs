@@ -16,6 +16,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.Definition
 {
+    [TestClass]
     public class Toolset_Tests
     {
         [Fact]

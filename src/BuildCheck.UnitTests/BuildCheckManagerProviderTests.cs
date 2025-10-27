@@ -19,6 +19,7 @@ using static Microsoft.Build.Experimental.BuildCheck.Infrastructure.BuildCheckMa
 
 namespace Microsoft.Build.BuildCheck.UnitTests;
 
+[TestClass]
 public class BuildCheckManagerTests
 {
     private readonly IBuildCheckManager _testedInstance;

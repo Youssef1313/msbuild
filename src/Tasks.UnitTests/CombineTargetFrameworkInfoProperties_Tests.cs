@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public sealed class CombineTargetFrameworkInfoProperties_Tests
     {
         /// <summary>

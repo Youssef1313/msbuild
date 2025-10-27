@@ -18,6 +18,7 @@ using static Microsoft.Build.Experimental.BuildCheck.Infrastructure.BuildCheckMa
 
 namespace Microsoft.Build.BuildCheck.UnitTests
 {
+    [TestClass]
     public class TaskInvocationCheckDataTests : IDisposable
     {
         internal sealed class TestCheck : Check

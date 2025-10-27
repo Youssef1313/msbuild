@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.Build.Engine.UnitTests.Globbing
 {
+    [TestClass]
     public class MSBuildGlobWithGaps_Tests
     {
         [Fact]

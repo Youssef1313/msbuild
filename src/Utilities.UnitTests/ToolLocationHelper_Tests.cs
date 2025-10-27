@@ -28,6 +28,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public sealed class ToolLocationHelper_Tests
     {
 #if FEATURE_CODETASKFACTORY
@@ -2911,6 +2912,7 @@ namespace Microsoft.Build.UnitTests
         }
     }
 
+    [TestClass]
     /// <summary>
     /// Verify the toolLocation helper method that enumerates the disk and registry to get the list of installed SDKs.
     /// </summary>

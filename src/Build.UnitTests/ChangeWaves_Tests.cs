@@ -14,6 +14,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.Engine.UnitTests
 {
+    [TestClass]
     public sealed class ChangeWaves_Tests
     {
         private ITestOutputHelper _output;

@@ -15,6 +15,7 @@ using Xunit;
 
 namespace Microsoft.Build.Tasks.UnitTests
 {
+    [TestClass]
     public class Unzip_Tests
     {
         private readonly MockEngine _mockEngine = new MockEngine();

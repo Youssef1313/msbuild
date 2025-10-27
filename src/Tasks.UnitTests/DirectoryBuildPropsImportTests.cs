@@ -5,6 +5,7 @@
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     /// <summary>
     /// Tests that Microsoft.Common.props successfully imports a directory build project in the directory tree of the project being built.
     /// </summary>

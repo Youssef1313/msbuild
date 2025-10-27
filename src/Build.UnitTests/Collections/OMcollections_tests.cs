@@ -19,6 +19,7 @@ using ObjectModel = System.Collections.ObjectModel;
 
 namespace Microsoft.Build.UnitTests.OM.Collections
 {
+    [TestClass]
     /// <summary>
     /// Tests for several of the collections classes
     /// </summary>

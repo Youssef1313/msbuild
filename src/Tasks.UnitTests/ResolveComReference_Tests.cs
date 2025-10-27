@@ -18,6 +18,7 @@ using TYPELIBATTR = System.Runtime.InteropServices.ComTypes.TYPELIBATTR;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public sealed class ResolveComReference_Tests
     {
         /// <summary>

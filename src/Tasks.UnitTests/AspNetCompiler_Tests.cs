@@ -10,12 +10,13 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     /*
-     * Class:   AspNetCompilerTests
-     *
-     * Test the AspNetCompiler task in various ways.
-     *
-     */
+* Class:   AspNetCompilerTests
+*
+* Test the AspNetCompiler task in various ways.
+*
+*/
     public sealed class AspNetCompilerTests
     {
         [Fact]

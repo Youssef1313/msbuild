@@ -21,6 +21,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     public class TargetUpToDateChecker_Tests : IDisposable
     {
         private MockHost _mockHost;

@@ -26,6 +26,7 @@ using static Microsoft.Build.Graph.UnitTests.GraphTestingUtilities;
 namespace Microsoft.Build.Graph.UnitTests
 {
     [ActiveIssue("https://github.com/dotnet/msbuild/issues/4368")]
+    [TestClass]
     public class ProjectGraphTests : IDisposable
     {
         private TestEnvironment _env;

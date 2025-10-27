@@ -15,6 +15,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.Evaluation
 {
+    [TestClass]
     /// <summary>
     /// Unit tests for MSBuild Net5.0 Configuration Parsing
     /// </summary>

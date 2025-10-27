@@ -24,6 +24,7 @@ using TaskItem = Microsoft.Build.Execution.ProjectItemInstance.TaskItem;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class ConsoleLoggerTest
     {
         /// <summary>

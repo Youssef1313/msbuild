@@ -16,6 +16,7 @@ using Project = Microsoft.Build.Evaluation.Project;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class FileLogger_Tests
     {
         /// <summary>

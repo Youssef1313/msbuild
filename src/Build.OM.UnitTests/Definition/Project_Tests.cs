@@ -30,6 +30,7 @@ using ToolLocationHelper = Microsoft.Build.Utilities.ToolLocationHelper;
 
 namespace Microsoft.Build.UnitTests.OM.Definition
 {
+    [TestClass]
     /// <summary>
     /// Tests for Project public members
     /// </summary>

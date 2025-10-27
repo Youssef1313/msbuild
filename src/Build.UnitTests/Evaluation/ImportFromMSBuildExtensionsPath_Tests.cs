@@ -15,6 +15,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.Evaluation
 {
+    [TestClass]
     /// <summary>
     /// Unit tests for Importing from $(MSBuildExtensionsPath*)
     /// </summary>

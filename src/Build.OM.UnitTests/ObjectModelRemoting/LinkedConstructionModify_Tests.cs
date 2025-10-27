@@ -12,6 +12,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
     using Microsoft.Build.Evaluation;
     using Xunit;
 
+    [TestClass]
     public class LinkedConstructionModify_Tests : IClassFixture<LinkedConstructionModify_Tests.MyTestCollectionGroup>
     {
         public class MyTestCollectionGroup : TestCollectionGroup

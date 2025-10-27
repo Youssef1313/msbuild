@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.Telemetry;
 
+[TestClass]
 public class KnownTelemetry_Tests
 {
     [Fact]

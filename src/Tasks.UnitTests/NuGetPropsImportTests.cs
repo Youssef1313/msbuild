@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     /// <summary>
     /// Test the NuGet.props import functionality in Microsoft.Common.props.
     /// </summary>

@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Microsoft.Build.Engine.UnitTests
 {
+    [TestClass]
     public class FileUtilitiesRegex_Tests
     {
         private string _directoryStart = new string(MSBuildConstants.BackslashChar[0], 2);

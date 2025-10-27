@@ -20,6 +20,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
 {
     using NodeLoggingContext = Microsoft.Build.BackEnd.Logging.NodeLoggingContext;
 
+    [TestClass]
     public class BuildRequestEngine_Tests : IDisposable
     {
         internal sealed class MockRequestBuilder : IRequestBuilder, IBuildComponent

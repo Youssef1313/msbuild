@@ -17,6 +17,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.Tasks.UnitTests
 {
+    [TestClass]
     public class GenerateBindingRedirectsTests : IDisposable
     {
         private readonly ITestOutputHelper _output;

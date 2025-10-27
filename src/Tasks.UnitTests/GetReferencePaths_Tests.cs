@@ -14,6 +14,7 @@ using FrameworkNameVersioning = System.Runtime.Versioning.FrameworkName;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     /// <summary>
     /// Tests for the task which gets the reference assembly paths for a given target framework version / moniker
     /// </summary>

@@ -21,6 +21,7 @@ using InvalidProjectFileException = Microsoft.Build.Exceptions.InvalidProjectFil
 
 namespace Microsoft.Build.UnitTests.OM.Definition
 {
+    [TestClass]
     /// <summary>
     /// Tests for ProjectItem
     /// </summary>
@@ -3760,6 +3761,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         }
     }
 
+    [TestClass]
     public class ProjectItemWithOptimizations_Tests : ProjectItem_Tests
     {
         public ProjectItemWithOptimizations_Tests()

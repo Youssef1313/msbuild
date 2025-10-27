@@ -18,6 +18,7 @@ using ForwardingLoggerRecord = Microsoft.Build.Logging.ForwardingLoggerRecord;
 
 namespace Microsoft.Build.UnitTests.OM.Instance
 {
+    [TestClass]
     /// <summary>
     /// Tests for ProjectInstance public members
     /// </summary>

@@ -17,6 +17,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 {
+    [TestClass]
     /// <summary>
     /// End-to-end tests for RAR out-of-proc execution.
     /// The actual inputs for RAR should be kept simple since we're not aiming to test the full serialization format

@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.Build.Framework.UnitTests
 {
+    [TestClass]
     public class BuildSubmissionStartedEventArgs_Tests
     {
         [Fact]

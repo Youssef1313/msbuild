@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     public class FullyQualifiedBuildRequest_Tests
     {
         [Fact]

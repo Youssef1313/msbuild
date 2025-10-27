@@ -13,6 +13,7 @@ using ProjectItemFactory = Microsoft.Build.Evaluation.ProjectItem.ProjectItemFac
 
 namespace Microsoft.Build.UnitTests.Definition
 {
+    [TestClass]
     /// <summary>
     /// Class containing tests for the ProjectItem and related functionality.
     /// </summary>

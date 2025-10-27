@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Microsoft.Build.Framework.UnitTests
 {
+    [TestClass]
     public class BuildCanceledEventArgs_Tests
     {
         [Fact]

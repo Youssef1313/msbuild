@@ -22,6 +22,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
     using FluentAssertions;
     using Microsoft.Build.Unittest;
 
+    [TestClass]
     /// <summary>
     /// Tests of the scheduler.
     /// </summary>

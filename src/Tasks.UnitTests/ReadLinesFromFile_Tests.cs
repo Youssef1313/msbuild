@@ -16,6 +16,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public sealed class ReadLinesFromFile_Tests
     {
         /// <summary>

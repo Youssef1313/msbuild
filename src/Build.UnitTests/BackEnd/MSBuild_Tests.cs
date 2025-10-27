@@ -17,6 +17,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public sealed class MSBuildTask_Tests : IDisposable
     {
         private readonly ITestOutputHelper _testOutput;

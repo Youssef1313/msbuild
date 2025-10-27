@@ -22,6 +22,7 @@ using ProjectInstanceItemSpec =
 
 namespace Microsoft.Build.UnitTests.OM.Evaluation
 {
+    [TestClass]
     public class ItemSpec_Tests
     {
         [Fact]

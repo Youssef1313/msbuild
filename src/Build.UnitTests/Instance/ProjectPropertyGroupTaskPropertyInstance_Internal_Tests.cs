@@ -13,6 +13,7 @@ using static Microsoft.Build.Engine.UnitTests.TestData.ProjectInstanceTestObject
 
 namespace Microsoft.Build.Engine.UnitTests.Instance
 {
+    [TestClass]
     public class ProjectPropertyGroupTaskPropertyInstance_Internal_Tests
     {
         [Fact]

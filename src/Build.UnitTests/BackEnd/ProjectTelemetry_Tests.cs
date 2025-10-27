@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     /// <summary>
     /// Tests for ProjectTelemetry class
     /// </summary>

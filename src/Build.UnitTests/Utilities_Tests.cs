@@ -19,6 +19,7 @@ using XmlElementWithLocation = Microsoft.Build.Construction.XmlElementWithLocati
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class UtilitiesTestStandard : UtilitiesTest
     {
         public UtilitiesTestStandard()
@@ -54,6 +55,7 @@ namespace Microsoft.Build.UnitTests
         }
     }
 
+    [TestClass]
     public class UtilitiesTestReadOnlyLoad : UtilitiesTest
     {
         public UtilitiesTestReadOnlyLoad()

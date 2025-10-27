@@ -15,6 +15,7 @@ using TaskItem = Microsoft.Build.Execution.ProjectItemInstance.TaskItem;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     public class BuildResult_Tests
     {
         private int _nodeRequestId;

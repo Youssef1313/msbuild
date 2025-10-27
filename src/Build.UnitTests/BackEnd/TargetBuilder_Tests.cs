@@ -26,6 +26,7 @@ using ProjectLoggingContext = Microsoft.Build.BackEnd.Logging.ProjectLoggingCont
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     /// <summary>
     /// This is the unit test for the TargetBuilder.  This particular test is confined to just using the
     /// actual TargetBuilder, and uses a mock TaskBuilder on which TargetBuilder depends.

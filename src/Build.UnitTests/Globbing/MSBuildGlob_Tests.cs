@@ -13,6 +13,7 @@ using Xunit;
 
 namespace Microsoft.Build.Engine.UnitTests.Globbing
 {
+    [TestClass]
     /// <summary>
     ///     Actual parsing tests are covered by FileMatcher_Tests (e.g. FileMatcher_Tests.SplitFileSpec)/>
     /// </summary>

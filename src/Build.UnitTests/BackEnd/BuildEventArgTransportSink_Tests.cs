@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests.Logging
 {
+    [TestClass]
     /// <summary>
     /// Test the central forwarding logger by initializing a new one and sending events through it.
     /// </summary>

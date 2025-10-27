@@ -21,6 +21,7 @@ using Microsoft.NET.StringTools;
 
 namespace Microsoft.NET.StringTools.Tests
 {
+    [TestClass]
     public class StringTools_Tests
     {
         [Theory]

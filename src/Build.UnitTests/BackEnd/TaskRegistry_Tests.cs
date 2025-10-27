@@ -35,6 +35,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         }
     }
 
+    [TestClass]
     /// <summary>
     /// Test the task registry
     /// </summary>

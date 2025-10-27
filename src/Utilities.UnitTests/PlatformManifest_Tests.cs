@@ -14,6 +14,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     /// <summary>
     /// Basic tests of Platform.xml parsing
     /// </summary>

@@ -29,6 +29,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class XMakeAppTests : IDisposable
     {
         public static TheoryData<string, MessageImportance> MinimumMessageImportanceTestData

@@ -13,6 +13,7 @@ using static Microsoft.Build.Graph.UnitTests.GraphTestingUtilities;
 
 namespace Microsoft.Build.Graph.UnitTests
 {
+    [TestClass]
     /// <summary>
     /// Performs SetPlatform negotiation for all project references when opted
     /// in via the EnableDynamicPlatformResolution property.

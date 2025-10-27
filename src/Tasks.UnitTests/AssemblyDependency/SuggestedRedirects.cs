@@ -17,6 +17,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 {
+    [TestClass]
     /// <summary>
     /// Unit tests for the ResolveAssemblyReference task that involve, among other things, checking suggested redirects
     /// </summary>

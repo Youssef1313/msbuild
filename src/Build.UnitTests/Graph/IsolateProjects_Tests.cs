@@ -19,6 +19,7 @@ using OutputCacheDictionary = System.Collections.Generic.Dictionary<Microsoft.Bu
 
 namespace Microsoft.Build.Graph.UnitTests
 {
+    [TestClass]
     public class IsolateProjectsTests : IDisposable
     {
         private readonly string _project = @"

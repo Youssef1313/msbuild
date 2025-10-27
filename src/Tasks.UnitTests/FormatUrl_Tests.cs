@@ -10,6 +10,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public sealed class FormatUrl_Tests
     {
         private readonly ITestOutputHelper _out;

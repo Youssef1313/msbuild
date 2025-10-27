@@ -13,6 +13,7 @@ using Xunit;
 
 namespace Microsoft.Build.Engine.UnitTests.InstanceFromRemote
 {
+    [TestClass]
     public class ProjectInstance_FromImmutableProjectLink_Tests
     {
         /// <summary>

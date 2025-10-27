@@ -26,6 +26,7 @@ using SdkResultFactoryBase = Microsoft.Build.Framework.SdkResultFactory;
 
 namespace Microsoft.Build.Engine.UnitTests.BackEnd
 {
+    [TestClass]
     public class SdkResolverLoader_Tests
     {
         private readonly ITestOutputHelper _output;

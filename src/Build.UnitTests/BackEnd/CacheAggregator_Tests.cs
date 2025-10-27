@@ -15,6 +15,7 @@ using static Microsoft.Build.Unittest.BuildResultUtilities;
 
 namespace Microsoft.Build.UnitTests.BackEnd
 {
+    [TestClass]
     public class CacheAggregator_Tests
     {
         private CacheAggregator aggregator;

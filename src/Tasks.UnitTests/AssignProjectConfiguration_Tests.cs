@@ -14,6 +14,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     /// <summary>
     /// Most of the common ResolveNonMSBuildOutput/AssignProjectConfiguration functionality is tested
     /// in ResolveNonMSBuildProjectOutput_Tests.

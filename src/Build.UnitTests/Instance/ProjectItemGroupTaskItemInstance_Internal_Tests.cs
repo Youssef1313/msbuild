@@ -14,6 +14,7 @@ using static Microsoft.Build.Engine.UnitTests.TestData.ProjectInstanceTestObject
 
 namespace Microsoft.Build.Engine.UnitTests.Instance
 {
+    [TestClass]
     public class ProjectItemGroupTaskItemInstance_Internal_Tests
     {
         public static IEnumerable<object[]> MetadataTestData

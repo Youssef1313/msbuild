@@ -24,6 +24,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.Engine.UnitTests.Construction
 {
+    [TestClass]
     public class SolutionFilter_Tests : IDisposable
     {
         private readonly ITestOutputHelper output;

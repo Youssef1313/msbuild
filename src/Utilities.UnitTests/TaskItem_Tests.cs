@@ -18,6 +18,7 @@ using Xunit;
 
 namespace Microsoft.Build.UnitTests
 {
+    [TestClass]
     public class TaskItemTests
     {
         // Make sure a TaskItem can be constructed using an ITaskItem

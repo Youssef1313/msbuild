@@ -20,6 +20,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Build.UnitTests.Evaluation
 {
+    [TestClass]
     public class SdkResultEvaluation_Tests : IDisposable
     {
         private TestEnvironment _env;

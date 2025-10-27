@@ -15,6 +15,7 @@ namespace Microsoft.Build.Engine.UnitTests.Telemetry
 {
     // Putting the tests to a collection ensures tests run serially by default, that's needed to isolate the manager singleton state and env vars in some telemetry tests.
     [Collection("OpenTelemetryManagerTests")]
+    [TestClass]
     public class OpenTelemetryManagerTests : IDisposable
     {
 

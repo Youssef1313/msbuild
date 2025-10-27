@@ -28,6 +28,7 @@ using BackEndNativeMethods = Microsoft.Build.BackEnd.NativeMethods;
 
 namespace Microsoft.Build.UnitTests.FileTracking
 {
+    [TestClass]
     public sealed class FileTrackerTests : IDisposable
     {
         private static string s_defaultFileTrackerPathUnquoted;
