@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace Xunit.Abstractions
 {
@@ -41,6 +42,23 @@ namespace Xunit
             : base(callerFilePath, callerLineNumber)
         {
         }
+
+        // TODO: Remove this property and replace this with MSTest's IgnoreAttribute.
+        // This is only added to ease the move from xunit.
+        public string? Skip { get; set; }
+
+        public override Task<TestResult[]> ExecuteAsync(ITestMethod testMethod)
+        {
+            if (string.IsNullOrEmpty(Skip))
+            {
+                return base.ExecuteAsync(testMethod);
+            }
+
+            return Task.FromResult<TestResult[]>([new TestResult()
+            {
+                Outcome = UnitTestOutcome.Ignored
+            }]);
+        }
     }
 
     public sealed class TheoryAttribute : TestMethodAttribute
@@ -49,11 +67,36 @@ namespace Xunit
             : base(callerFilePath, callerLineNumber)
         {
         }
+
+        // TODO: Remove this property and replace this with MSTest's IgnoreAttribute.
+        // This is only added to ease the move from xunit.
+        public string? Skip { get; set; }
+
+        public override Task<TestResult[]> ExecuteAsync(ITestMethod testMethod)
+        {
+            if (string.IsNullOrEmpty(Skip))
+            {
+                return base.ExecuteAsync(testMethod);
+            }
+
+            return Task.FromResult<TestResult[]>([new TestResult()
+            {
+                Outcome = UnitTestOutcome.Ignored
+            }]);
+        }
     }
 
     public sealed class InlineDataAttribute : DataRowAttribute
     {
         public InlineDataAttribute(params object?[]? data) : base(data)
+        {
+        }
+    }
+
+    public sealed class TraitAttribute : TestPropertyAttribute
+    {
+        public TraitAttribute(string name, string value)
+            : base(name, value)
         {
         }
     }
