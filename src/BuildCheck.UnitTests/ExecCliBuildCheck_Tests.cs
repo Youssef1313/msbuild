@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Experimental.BuildCheck;
 using Microsoft.Build.Experimental.BuildCheck.Checks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shouldly;
 using Xunit;
 
@@ -20,43 +21,47 @@ namespace Microsoft.Build.BuildCheck.UnitTests
 
         private readonly MockBuildCheckRegistrationContext _registrationContext;
 
-        public static TheoryData<string?> BuildCommandTestData => new TheoryData<string?>(
-            "dotnet build",
-            "dotnet build&dotnet build",
-            "dotnet     build",
-            "dotnet clean",
-            "dotnet msbuild",
-            "dotnet restore",
-            "dotnet publish",
-            "dotnet pack",
-            "dotnet test",
-            "dotnet vstest",
-            "dotnet build -p:Configuration=Release",
-            "dotnet build /t:Restore;Clean",
-            "dotnet build&some command",
-            "some command&dotnet build&some other command",
-            "some command&dotnet build",
-            "some command&amp;dotnet build&amp;some other command",
-            "msbuild",
-            "msbuild /t:Build",
-            "msbuild --t:Restore;Clean",
-            "nuget restore",
-            "dotnet run --project project.SLN",
-            "dotnet run project.csproj",
-            "dotnet run project.proj",
-            "dotnet run",
-            string.Join(";", new string('a', 1025), "dotnet build", new string('a', 1025)),
-            string.Join(";", new string('a', RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? MaxStackSizeWindows * 2 : MaxStackSizeLinux * 2), "dotnet build"));
+        public static TestDataRow<string?>[] BuildCommandTestData =>
+        [
+            new("dotnet build"),
+            new("dotnet build&dotnet build"),
+            new("dotnet     build"),
+            new("dotnet clean"),
+            new("dotnet msbuild"),
+            new("dotnet restore"),
+            new("dotnet publish"),
+            new("dotnet pack"),
+            new("dotnet test"),
+            new("dotnet vstest"),
+            new("dotnet build -p:Configuration=Release"),
+            new("dotnet build /t:Restore;Clean"),
+            new("dotnet build&some command"),
+            new("some command&dotnet build&some other command"),
+            new("some command&dotnet build"),
+            new("some command&amp;dotnet build&amp;some other command"),
+            new("msbuild"),
+            new("msbuild /t:Build"),
+            new("msbuild --t:Restore;Clean"),
+            new("nuget restore"),
+            new("dotnet run --project project.SLN"),
+            new("dotnet run project.csproj"),
+            new("dotnet run project.proj"),
+            new("dotnet run"),
+            new(string.Join(";", new string('a', 1025), "dotnet build", new string('a', 1025))),
+            new(string.Join(";", new string('a', RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? MaxStackSizeWindows * 2 : MaxStackSizeLinux * 2), "dotnet build"))
+        ];
 
-        public static TheoryData<string?> NonBuildCommandTestData => new TheoryData<string?>(
-            "dotnet help",
-            "where dotnet",
-            "where msbuild",
-            "where nuget",
-            "dotnet bin/net472/project.dll",
-            string.Empty,
-            null,
-            new string('a', RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? MaxStackSizeWindows * 2 : MaxStackSizeLinux * 2));
+        public static TestDataRow<string?>[] NonBuildCommandTestData =>
+        [
+            new("dotnet help"),
+            new("where dotnet"),
+            new("where msbuild"),
+            new("where nuget"),
+            new("dotnet bin/net472/project.dll"),
+            new(string.Empty),
+            new(null),
+            new(new string('a', RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? MaxStackSizeWindows * 2 : MaxStackSizeLinux * 2))
+        ];
 
         public ExecCliBuildCheck_Tests()
         {

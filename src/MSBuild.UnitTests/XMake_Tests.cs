@@ -32,32 +32,32 @@ namespace Microsoft.Build.UnitTests
     [TestClass]
     public class XMakeAppTests : IDisposable
     {
-        public static TheoryData<string, MessageImportance> MinimumMessageImportanceTestData
+        public static TestDataRow<(string, MessageImportance)>[] MinimumMessageImportanceTestData
         {
             get
             {
-                var data = new TheoryData<string, MessageImportance>
+                var data = new TestDataRow<(string, MessageImportance)>[]
                 {
-                    { "/v:diagnostic /tl:off", MessageImportance.Low },
-                    { "/v:detailed /tl:off", MessageImportance.Low },
-                    { "/v:normal /tl:off", MessageImportance.Normal },
-                    { "/v:minimal /tl:off", MessageImportance.High },
-                    { "/v:quiet /tl:off", MessageImportance.High - 1 },
-                    { "/v:diagnostic /bl", MessageImportance.Low },
-                    { "/v:detailed /bl", MessageImportance.Low },
-                    { "/v:normal /bl", MessageImportance.Low }, // v:normal but with binary logger so everything must be logged
-                    { "/v:minimal /bl", MessageImportance.Low }, // v:minimal but with binary logger so everything must be logged
-                    { "/v:quiet /bl", MessageImportance.Low }, // v:quiet but with binary logger so everything must be logged
-                    { "/v:diagnostic /check", MessageImportance.Low },
-                    { "/v:detailed /check", MessageImportance.Low },
-                    { "/v:normal /check", MessageImportance.Normal },
-                    { "/v:minimal /check", MessageImportance.High },
-                    { "/v:quiet /check", MessageImportance.High },
-                    { "/v:diagnostic /tl:on", MessageImportance.High },
-                    { "/v:detailed /tl:on", MessageImportance.High },
-                    { "/v:normal /tl:on", MessageImportance.High },
-                    { "/v:minimal /tl:on", MessageImportance.High },
-                    { "/v:quiet /tl:on", MessageImportance.High - 1 }
+                    new(("/v:diagnostic /tl:off", MessageImportance.Low)),
+                    new(("/v:detailed /tl:off", MessageImportance.Low)),
+                    new(("/v:normal /tl:off", MessageImportance.Normal)),
+                    new(("/v:minimal /tl:off", MessageImportance.High)),
+                    new(("/v:quiet /tl:off", MessageImportance.High - 1)),
+                    new(("/v:diagnostic /bl", MessageImportance.Low)),
+                    new(("/v:detailed /bl", MessageImportance.Low)),
+                    new(("/v:normal /bl", MessageImportance.Low)), // v:normal but with binary logger so everything must be logged
+                    new(("/v:minimal /bl", MessageImportance.Low)), // v:minimal but with binary logger so everything must be logged
+                    new(("/v:quiet /bl", MessageImportance.Low)), // v:quiet but with binary logger so everything must be logged
+                    new(("/v:diagnostic /check", MessageImportance.Low)),
+                    new(("/v:detailed /check", MessageImportance.Low)),
+                    new(("/v:normal /check", MessageImportance.Normal)),
+                    new(("/v:minimal /check", MessageImportance.High)),
+                    new(("/v:quiet /check", MessageImportance.High)),
+                    new(("/v:diagnostic /tl:on", MessageImportance.High)),
+                    new(("/v:detailed /tl:on", MessageImportance.High)),
+                    new(("/v:normal /tl:on", MessageImportance.High)),
+                    new(("/v:minimal /tl:on", MessageImportance.High)),
+                    new(("/v:quiet /tl:on", MessageImportance.High - 1))
                 };
 
                 return data;
