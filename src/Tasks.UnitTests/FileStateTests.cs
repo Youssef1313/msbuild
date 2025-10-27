@@ -43,7 +43,8 @@ namespace Microsoft.Build.UnitTests
             Assert.Throws<ArgumentException>(() => { var time = state.LastWriteTime; });
         }
 
-        [LongPathSupportDisabledFact]
+        [LongPathSupportCondition]
+        [TestMethod]
         public void BadTooLongLastWriteTime()
         {
             Helpers.VerifyAssertThrowsSameWay(

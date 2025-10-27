@@ -2797,7 +2797,8 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// DestinationFolder should work.
         /// </summary>
-        [RequiresSymbolicLinksFact]
+        [RequiresSymbolicLinksCondition]
+        [TestMethod]
         public void CopyToDestinationFolderWithSymbolicLinkCheck()
         {
             string sourceFile = FileUtilities.GetTemporaryFile();

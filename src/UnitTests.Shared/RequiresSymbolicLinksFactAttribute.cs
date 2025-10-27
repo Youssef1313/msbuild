@@ -12,15 +12,18 @@ namespace Microsoft.Build.UnitTests
     /// <summary>
     /// A custom <see cref="FactAttribute"/> that skips the test if the OS doesn't support creating symlinks.
     /// </summary>
-    public sealed class RequiresSymbolicLinksFactAttribute : FactAttribute
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
+    public sealed class RequiresSymbolicLinksConditionAttribute : ConditionBaseAttribute
     {
         private static readonly bool s_runningInAzurePipeline =
             bool.TryParse(Environment.GetEnvironmentVariable("TF_BUILD"), out bool value) && value;
 
-        public RequiresSymbolicLinksFactAttribute()
+        public RequiresSymbolicLinksConditionAttribute()
+            : base(ConditionMode.Include)
         {
             if (s_runningInAzurePipeline || !NativeMethodsShared.IsWindows)
             {
+                IsConditionMet = true;
                 return;
             }
 
@@ -35,8 +38,9 @@ namespace Microsoft.Build.UnitTests
                 string? errorMessage = null;
                 if (!NativeMethodsShared.MakeSymbolicLink(destinationFile, sourceFile, ref errorMessage))
                 {
-                    Skip = "Requires permission to create symbolic links. Need to be run elevated or under development mode " +
+                    IgnoreMessage = "Requires permission to create symbolic links. Need to be run elevated or under development mode " +
                         "(https://learn.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development).";
+                    IsConditionMet = false;
                 }
             }
             finally
@@ -51,5 +55,9 @@ namespace Microsoft.Build.UnitTests
                 }
             }
         }
+
+        public override string GroupName => nameof(RequiresSymbolicLinksConditionAttribute);
+
+        public override bool IsConditionMet { get; }
     }
 }

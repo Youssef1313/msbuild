@@ -71,7 +71,8 @@ namespace Microsoft.Build.UnitTests
         }
 
 #if FEATURE_SYMLINK_TARGET
-        [RequiresSymbolicLinksFact]
+        [RequiresSymbolicLinksCondition]
+        [TestMethod]
         public void DoNotFollowRecursiveSymlinks()
         {
             TransientTestFolder testFolder = _env.CreateFolder();
