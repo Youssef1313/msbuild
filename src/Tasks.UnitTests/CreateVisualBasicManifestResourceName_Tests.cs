@@ -48,7 +48,7 @@ End Namespace
 "),
                     log: null);
 
-            Assert.Equal("Nested.TestNamespace.TestClass", result);
+            Assert.AreEqual("Nested.TestNamespace.TestClass", result);
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ End Namespace
 "),
                     log: null);
 
-            Assert.Equal("TestNamespace.TestClass", result);
+            Assert.AreEqual("TestNamespace.TestClass", result);
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ End Namespace
 "),
                     log: null);
 
-            Assert.Equal("Nested.TestNamespace.TestClass", result);
+            Assert.AreEqual("Nested.TestNamespace.TestClass", result);
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ End Namespace
 "),
                     log: null);
 
-            Assert.Equal("Nested.TestNamespace.TestClass.en-GB", result);
+            Assert.AreEqual("Nested.TestNamespace.TestClass.en-GB", result);
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ End Namespace
 "),
                     log: null);
 
-            Assert.Equal("Nested.TestNamespace.TestClass.en-GB", result);
+            Assert.AreEqual("Nested.TestNamespace.TestClass.en-GB", result);
         }
 
         /// <summary>
@@ -179,7 +179,7 @@ End Namespace
 "),
                     log: null);
 
-            Assert.Equal("RootNamespace.Nested.TestNamespace.TestClass.en-GB", result);
+            Assert.AreEqual("RootNamespace.Nested.TestNamespace.TestClass.en-GB", result);
         }
 
         /// <summary>
@@ -205,7 +205,7 @@ End Namespace
 "),
                     log: null);
 
-            Assert.Equal("RootNamespace.Nested.TestNamespace.TestClass.fr-fr", result);
+            Assert.AreEqual("RootNamespace.Nested.TestNamespace.TestClass.fr-fr", result);
         }
 
         /// <summary>
@@ -232,7 +232,7 @@ End Namespace
                     binaryStream: null,
                     log: null);
 
-            Assert.Equal("RootNamespace.MyForm.en-GB", result);
+            Assert.AreEqual("RootNamespace.MyForm.en-GB", result);
         }
 
         [Fact]
@@ -272,7 +272,7 @@ End Namespace
                     binaryStream: null,
                     log: null);
 
-            Assert.Equal("RootNamespace.MyXmlEditor.rgs", result);
+            Assert.AreEqual("RootNamespace.MyXmlEditor.rgs", result);
         }
 
         /// <summary>
@@ -292,7 +292,7 @@ End Namespace
                     binaryStream: null,
                     log: null);
 
-            Assert.Equal("RootNamespace.SplashScreen.bmp", result);
+            Assert.AreEqual("RootNamespace.SplashScreen.bmp", result);
         }
 
         /// <summary>
@@ -312,7 +312,7 @@ End Namespace
                     binaryStream: null,
                     log: null);
 
-            Assert.Equal(FileUtilities.FixFilePath(@"fr\RootNamespace.SplashScreen.bmp"), result);
+            Assert.AreEqual(FileUtilities.FixFilePath(@"fr\RootNamespace.SplashScreen.bmp"), result);
         }
 
         /// <summary>
@@ -332,7 +332,7 @@ End Namespace
                     binaryStream: null,
                     log: null);
 
-            Assert.Equal(@"RootNamespace.SplashScreen.bmp", result);
+            Assert.AreEqual(@"RootNamespace.SplashScreen.bmp", result);
         }
 
         /// <summary>
@@ -355,12 +355,12 @@ End Namespace
 
             bool success = t.Execute(new Microsoft.Build.Tasks.CreateFileStream(CreateFileStream));
 
-            Assert.True(success); // "Expected the task to succeed."
+            Assert.IsTrue(success); // "Expected the task to succeed."
 
             ITaskItem[] resourceNames = t.ManifestResourceNames;
 
             Assert.Single(resourceNames);
-            Assert.Equal(@"CustomToolTest.SR1", resourceNames[0].ItemSpec);
+            Assert.AreEqual(@"CustomToolTest.SR1", resourceNames[0].ItemSpec);
         }
 
         /// <summary>
@@ -459,7 +459,7 @@ End Namespace
 "),
                     log: null);
 
-            Assert.Equal("RootNamespace.MyForm", result);
+            Assert.AreEqual("RootNamespace.MyForm", result);
         }
 
         /// <summary>
@@ -520,13 +520,13 @@ End Namespace
             t.RootNamespace = "ResourceRoot";
             bool success = t.Execute();
 
-            Assert.True(success); // "Expected the task to succeed."
+            Assert.IsTrue(success); // "Expected the task to succeed."
 
             ITaskItem[] resourceFiles = t.ResourceFilesWithManifestResourceNames;
 
             Assert.Single(resourceFiles);
-            Assert.Equal(@"strings.resx", resourceFiles[0].ItemSpec);
-            Assert.Equal(@"ResourceRoot.strings", resourceFiles[0].GetMetadata("ManifestResourceName"));
+            Assert.AreEqual(@"strings.resx", resourceFiles[0].ItemSpec);
+            Assert.AreEqual(@"ResourceRoot.strings", resourceFiles[0].GetMetadata("ManifestResourceName"));
         }
 
         /// <summary>
@@ -546,13 +546,13 @@ End Namespace
             t.RootNamespace = "ResourceRoot";
             bool success = t.Execute();
 
-            Assert.True(success); // "Expected the task to succeed."
+            Assert.IsTrue(success); // "Expected the task to succeed."
 
             ITaskItem[] resourceFiles = t.ResourceFilesWithManifestResourceNames;
 
             Assert.Single(resourceFiles);
-            Assert.Equal(@"pic.bmp", resourceFiles[0].ItemSpec);
-            Assert.Equal(@"ResourceRoot.pic.bmp", resourceFiles[0].GetMetadata("LogicalName"));
+            Assert.AreEqual(@"pic.bmp", resourceFiles[0].ItemSpec);
+            Assert.AreEqual(@"ResourceRoot.pic.bmp", resourceFiles[0].GetMetadata("LogicalName"));
         }
 
         /// <summary>
@@ -572,13 +572,13 @@ End Namespace
             t.RootNamespace = "ResourceRoot";
             bool success = t.Execute();
 
-            Assert.True(success); // "Expected the task to succeed."
+            Assert.IsTrue(success); // "Expected the task to succeed."
 
             ITaskItem[] resourceFiles = t.ResourceFilesWithManifestResourceNames;
 
             Assert.Single(resourceFiles);
-            Assert.Equal(@"pic.bmp", resourceFiles[0].ItemSpec);
-            Assert.Equal(@"foo", resourceFiles[0].GetMetadata("LogicalName"));
+            Assert.AreEqual(@"pic.bmp", resourceFiles[0].ItemSpec);
+            Assert.AreEqual(@"foo", resourceFiles[0].GetMetadata("LogicalName"));
         }
 
         /// <summary>
@@ -597,13 +597,13 @@ End Namespace
             t.RootNamespace = "ResourceRoot";
             bool success = t.Execute();
 
-            Assert.True(success); // "Expected the task to succeed."
+            Assert.IsTrue(success); // "Expected the task to succeed."
 
             ITaskItem[] resourceFiles = t.ResourceFilesWithManifestResourceNames;
 
             Assert.Single(resourceFiles);
-            Assert.Equal(@"strings.resx", resourceFiles[0].ItemSpec);
-            Assert.Equal(String.Empty, resourceFiles[0].GetMetadata("LogicalName"));
+            Assert.AreEqual(@"strings.resx", resourceFiles[0].ItemSpec);
+            Assert.AreEqual(String.Empty, resourceFiles[0].GetMetadata("LogicalName"));
         }
 
         /// <summary>
@@ -623,7 +623,7 @@ End Namespace
                     binaryStream: null,
                     log: null);
 
-            Assert.Equal(@"RootNamespace.MyResource.fr.resources", result);
+            Assert.AreEqual(@"RootNamespace.MyResource.fr.resources", result);
         }
 
         /// <summary>
@@ -643,7 +643,7 @@ End Namespace
                     binaryStream: null,
                     log: null);
 
-            Assert.Equal(@"RootNamespace.MyResource.fr.resources", result);
+            Assert.AreEqual(@"RootNamespace.MyResource.fr.resources", result);
         }
 
         /// <summary>
@@ -663,7 +663,7 @@ End Namespace
                     binaryStream: null,
                     log: null);
 
-            Assert.Equal(@"RootNamespace.MyResource.resources", result);
+            Assert.AreEqual(@"RootNamespace.MyResource.resources", result);
         }
     }
 }

@@ -23,10 +23,10 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         {
             MultiDictionary<string, string> dictionary = new MultiDictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
-            Assert.Equal(0, dictionary.KeyCount);
-            Assert.Equal(0, dictionary.ValueCount);
+            Assert.AreEqual(0, dictionary.KeyCount);
+            Assert.AreEqual(0, dictionary.ValueCount);
 
-            Assert.False(dictionary.Remove("x", "y"));
+            Assert.IsFalse(dictionary.Remove("x", "y"));
 
             foreach (string value in dictionary["x"])
             {
@@ -46,28 +46,28 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             dictionary.Add("x", "x2");
             dictionary.Add("y", "y1");
 
-            Assert.True(dictionary.Remove("x", "x1"));
+            Assert.IsTrue(dictionary.Remove("x", "x1"));
 
-            Assert.Equal(2, dictionary.KeyCount);
-            Assert.Equal(2, dictionary.ValueCount);
+            Assert.AreEqual(2, dictionary.KeyCount);
+            Assert.AreEqual(2, dictionary.ValueCount);
 
-            Assert.True(dictionary.Remove("x", "x2"));
+            Assert.IsTrue(dictionary.Remove("x", "x2"));
 
-            Assert.Equal(1, dictionary.KeyCount);
-            Assert.Equal(1, dictionary.ValueCount);
+            Assert.AreEqual(1, dictionary.KeyCount);
+            Assert.AreEqual(1, dictionary.ValueCount);
 
-            Assert.True(dictionary.Remove("y", "y1"));
+            Assert.IsTrue(dictionary.Remove("y", "y1"));
 
-            Assert.Equal(0, dictionary.KeyCount);
-            Assert.Equal(0, dictionary.ValueCount);
+            Assert.AreEqual(0, dictionary.KeyCount);
+            Assert.AreEqual(0, dictionary.ValueCount);
 
             dictionary.Add("x", "x1");
             dictionary.Add("x", "x2");
 
-            Assert.True(dictionary.Remove("x", "x2"));
+            Assert.IsTrue(dictionary.Remove("x", "x2"));
 
-            Assert.Equal(1, dictionary.KeyCount);
-            Assert.Equal(1, dictionary.ValueCount);
+            Assert.AreEqual(1, dictionary.KeyCount);
+            Assert.AreEqual(1, dictionary.ValueCount);
         }
 
         /// <summary>
@@ -82,12 +82,12 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             dictionary.Add("x", "x2");
             dictionary.Add("y", "y1");
 
-            Assert.False(dictionary.Remove("z", "y1"));
-            Assert.False(dictionary.Remove("x", "y1"));
-            Assert.False(dictionary.Remove("y", "y2"));
+            Assert.IsFalse(dictionary.Remove("z", "y1"));
+            Assert.IsFalse(dictionary.Remove("x", "y1"));
+            Assert.IsFalse(dictionary.Remove("y", "y2"));
 
-            Assert.Equal(2, dictionary.KeyCount);
-            Assert.Equal(3, dictionary.ValueCount);
+            Assert.AreEqual(2, dictionary.KeyCount);
+            Assert.AreEqual(3, dictionary.ValueCount);
         }
 
         /// <summary>
@@ -105,14 +105,14 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             List<string> values = Helpers.MakeList<string>(dictionary["x"]);
             values.Sort();
 
-            Assert.Equal(2, values.Count);
-            Assert.Equal("x1", values[0]);
-            Assert.Equal("x2", values[1]);
+            Assert.AreEqual(2, values.Count);
+            Assert.AreEqual("x1", values[0]);
+            Assert.AreEqual("x2", values[1]);
 
             values = Helpers.MakeList<string>(dictionary["y"]);
 
             Assert.Single(values);
-            Assert.Equal("y1", values[0]);
+            Assert.AreEqual("y1", values[0]);
 
             values = Helpers.MakeList<string>(dictionary["z"]);
 
@@ -137,13 +137,13 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             dictionary.Remove("x", "x1");
             dictionary.Add("x", "x2");
 
-            Assert.Equal(1, dictionary.KeyCount);
-            Assert.Equal(1, dictionary.ValueCount);
+            Assert.AreEqual(1, dictionary.KeyCount);
+            Assert.AreEqual(1, dictionary.ValueCount);
 
             List<string> values = Helpers.MakeList<string>(dictionary["x"]);
 
             Assert.Single(values);
-            Assert.Equal("x2", values[0]);
+            Assert.AreEqual("x2", values[0]);
         }
 
         /// <summary>
@@ -160,8 +160,8 @@ namespace Microsoft.Build.UnitTests.OM.Collections
 
             dictionary.Clear();
 
-            Assert.Equal(0, dictionary.KeyCount);
-            Assert.Equal(0, dictionary.ValueCount);
+            Assert.AreEqual(0, dictionary.KeyCount);
+            Assert.AreEqual(0, dictionary.ValueCount);
         }
     }
 }

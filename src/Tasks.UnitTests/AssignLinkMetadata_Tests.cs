@@ -31,7 +31,7 @@ namespace Microsoft.Build.UnitTests
             };
             bool success = t.Execute();
 
-            Assert.True(success);
+            Assert.IsTrue(success);
             Assert.Empty(t.OutputItems);
         }
 
@@ -52,7 +52,7 @@ namespace Microsoft.Build.UnitTests
             };
             bool success = t.Execute();
 
-            Assert.True(success);
+            Assert.IsTrue(success);
             Assert.Empty(t.OutputItems);
         }
 
@@ -71,13 +71,13 @@ namespace Microsoft.Build.UnitTests
             };
             bool success = t.Execute();
 
-            Assert.True(success);
+            Assert.IsTrue(success);
             Assert.Single(t.OutputItems);
-            Assert.Equal(item.ItemSpec, t.OutputItems[0].ItemSpec);
+            Assert.AreEqual(item.ItemSpec, t.OutputItems[0].ItemSpec);
 
             // Link metadata should have been added by the task, and OriginalItemSpec was added by the copy
-            Assert.Equal(item.MetadataCount + 2, t.OutputItems[0].MetadataCount);
-            Assert.Equal(Path.Combine("SubFolder", "a.cs"), t.OutputItems[0].GetMetadata("Link"));
+            Assert.AreEqual(item.MetadataCount + 2, t.OutputItems[0].MetadataCount);
+            Assert.AreEqual(Path.Combine("SubFolder", "a.cs"), t.OutputItems[0].GetMetadata("Link"));
         }
 
         /// <summary>
@@ -98,13 +98,13 @@ namespace Microsoft.Build.UnitTests
             };
             bool success = t.Execute();
 
-            Assert.True(success);
+            Assert.IsTrue(success);
             Assert.Single(t.OutputItems);
-            Assert.Equal(item2.ItemSpec, t.OutputItems[0].ItemSpec);
+            Assert.AreEqual(item2.ItemSpec, t.OutputItems[0].ItemSpec);
 
             // Link metadata should have been added by the task, and OriginalItemSpec was added by the copy
-            Assert.Equal(item2.MetadataCount + 2, t.OutputItems[0].MetadataCount);
-            Assert.Equal(Path.Combine("SubFolder", "a.cs"), t.OutputItems[0].GetMetadata("Link"));
+            Assert.AreEqual(item2.MetadataCount + 2, t.OutputItems[0].MetadataCount);
+            Assert.AreEqual(Path.Combine("SubFolder", "a.cs"), t.OutputItems[0].GetMetadata("Link"));
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace Microsoft.Build.UnitTests
             };
             bool success = t.Execute();
 
-            Assert.True(success);
+            Assert.IsTrue(success);
             Assert.Empty(t.OutputItems);
         }
 
@@ -144,7 +144,7 @@ namespace Microsoft.Build.UnitTests
             };
             bool success = t.Execute();
 
-            Assert.True(success);
+            Assert.IsTrue(success);
             Assert.Empty(t.OutputItems);
         }
 
@@ -164,7 +164,7 @@ namespace Microsoft.Build.UnitTests
             };
             bool success = t.Execute();
 
-            Assert.True(success);
+            Assert.IsTrue(success);
             Assert.Empty(t.OutputItems);
         }
 

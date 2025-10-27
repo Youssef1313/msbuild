@@ -25,11 +25,11 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         {
             ProjectOutputElement output = GetOutputItem();
 
-            Assert.False(output.IsOutputProperty);
-            Assert.True(output.IsOutputItem);
-            Assert.Equal("p", output.TaskParameter);
-            Assert.Equal(String.Empty, output.PropertyName);
-            Assert.Equal("i1", output.ItemType);
+            Assert.IsFalse(output.IsOutputProperty);
+            Assert.IsTrue(output.IsOutputItem);
+            Assert.AreEqual("p", output.TaskParameter);
+            Assert.AreEqual(String.Empty, output.PropertyName);
+            Assert.AreEqual("i1", output.ItemType);
         }
 
         /// <summary>
@@ -40,11 +40,11 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         {
             ProjectOutputElement output = GetOutputProperty();
 
-            Assert.True(output.IsOutputProperty);
-            Assert.False(output.IsOutputItem);
-            Assert.Equal("p", output.TaskParameter);
-            Assert.Equal("p1", output.PropertyName);
-            Assert.Equal(String.Empty, output.ItemType);
+            Assert.IsTrue(output.IsOutputProperty);
+            Assert.IsFalse(output.IsOutputItem);
+            Assert.AreEqual("p", output.TaskParameter);
+            Assert.AreEqual("p1", output.PropertyName);
+            Assert.AreEqual(String.Empty, output.ItemType);
         }
 
         /// <summary>
@@ -213,8 +213,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(output.ContainingProject);
 
             output.Condition = "c";
-            Assert.Equal("c", output.Condition);
-            Assert.True(output.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual("c", output.Condition);
+            Assert.IsTrue(output.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -227,8 +227,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(output.ContainingProject);
 
             output.PropertyName = "p1b";
-            Assert.Equal("p1b", output.PropertyName);
-            Assert.True(output.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual("p1b", output.PropertyName);
+            Assert.IsTrue(output.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -254,8 +254,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(output.ContainingProject);
 
             output.ItemType = "p1b";
-            Assert.Equal("p1b", output.ItemType);
-            Assert.True(output.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual("p1b", output.ItemType);
+            Assert.IsTrue(output.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>

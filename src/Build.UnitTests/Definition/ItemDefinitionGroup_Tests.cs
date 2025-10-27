@@ -42,8 +42,8 @@ namespace Microsoft.Build.UnitTests.Definition
 	            </Project>");
             Project p = projectFromString.Project;
 
-            Assert.True(ContainsMetadata(p.ItemDefinitions["Compile"].Metadata, "First", "1st"));
-            Assert.True(ContainsMetadata(p.ItemDefinitions["Compile"].Metadata, "Second", "2nd"));
+            Assert.IsTrue(ContainsMetadata(p.ItemDefinitions["Compile"].Metadata, "First", "1st"));
+            Assert.IsTrue(ContainsMetadata(p.ItemDefinitions["Compile"].Metadata, "Second", "2nd"));
         }
 
         /// <summary>
@@ -70,10 +70,10 @@ namespace Microsoft.Build.UnitTests.Definition
 	            </Project>");
             Project p = projectFromString.Project;
 
-            Assert.True(ContainsMetadata(p.ItemDefinitions["Compile"].Metadata, "First", "1st"));
-            Assert.True(ContainsMetadata(p.ItemDefinitions["Compile"].Metadata, "Second", "2nd"));
-            Assert.True(ContainsMetadata(p.ItemDefinitions["Link"].Metadata, "Third", "3rd"));
-            Assert.True(ContainsMetadata(p.ItemDefinitions["Link"].Metadata, "Fourth", "4th"));
+            Assert.IsTrue(ContainsMetadata(p.ItemDefinitions["Compile"].Metadata, "First", "1st"));
+            Assert.IsTrue(ContainsMetadata(p.ItemDefinitions["Compile"].Metadata, "Second", "2nd"));
+            Assert.IsTrue(ContainsMetadata(p.ItemDefinitions["Link"].Metadata, "Third", "3rd"));
+            Assert.IsTrue(ContainsMetadata(p.ItemDefinitions["Link"].Metadata, "Fourth", "4th"));
         }
 
         /// <summary>
@@ -103,11 +103,11 @@ namespace Microsoft.Build.UnitTests.Definition
 	            </Project>");
             Project p = projectFromString.Project;
 
-            Assert.True(ItemContainsMetadata(p, "Compile", "a.cs", "First", "1st"));
-            Assert.True(ItemContainsMetadata(p, "Compile", "b.cs", "First", "1st"));
-            Assert.True(ItemContainsMetadata(p, "Compile", "a.cs", "Second", "2nd"));
-            Assert.True(ItemContainsMetadata(p, "Compile", "b.cs", "Second", "2nd"));
-            Assert.False(ItemContainsMetadata(p, "Compile", "a.cs", "Third", "3rd"));
+            Assert.IsTrue(ItemContainsMetadata(p, "Compile", "a.cs", "First", "1st"));
+            Assert.IsTrue(ItemContainsMetadata(p, "Compile", "b.cs", "First", "1st"));
+            Assert.IsTrue(ItemContainsMetadata(p, "Compile", "a.cs", "Second", "2nd"));
+            Assert.IsTrue(ItemContainsMetadata(p, "Compile", "b.cs", "Second", "2nd"));
+            Assert.IsFalse(ItemContainsMetadata(p, "Compile", "a.cs", "Third", "3rd"));
         }
 
         /// <summary>
@@ -146,12 +146,12 @@ namespace Microsoft.Build.UnitTests.Definition
 	            </Project>");
             Project p = projectFromString.Project;
 
-            Assert.True(ItemContainsMetadata(p, "Compile", "a.cs", "First", "Not1st"));
-            Assert.True(ItemContainsMetadata(p, "Compile", "a.cs", "Second", "2nd"));
-            Assert.True(ItemContainsMetadata(p, "Compile", "b.cs", "First", "1st"));
-            Assert.True(ItemContainsMetadata(p, "Compile", "b.cs", "Second", "2nd"));
-            Assert.True(ItemContainsMetadata(p, "Link", "a.o", "Third", "3rd"));
-            Assert.True(ItemContainsMetadata(p, "Link", "a.o", "Fourth", "4th"));
+            Assert.IsTrue(ItemContainsMetadata(p, "Compile", "a.cs", "First", "Not1st"));
+            Assert.IsTrue(ItemContainsMetadata(p, "Compile", "a.cs", "Second", "2nd"));
+            Assert.IsTrue(ItemContainsMetadata(p, "Compile", "b.cs", "First", "1st"));
+            Assert.IsTrue(ItemContainsMetadata(p, "Compile", "b.cs", "Second", "2nd"));
+            Assert.IsTrue(ItemContainsMetadata(p, "Link", "a.o", "Third", "3rd"));
+            Assert.IsTrue(ItemContainsMetadata(p, "Link", "a.o", "Fourth", "4th"));
         }
 
         /// <summary>
@@ -276,7 +276,7 @@ namespace Microsoft.Build.UnitTests.Definition
 	            </Project>");
             Project p = projectFromString.Project;
 
-            Assert.True(ItemContainsMetadata(p, "Link", "a.o", "Third", "----"));
+            Assert.IsTrue(ItemContainsMetadata(p, "Link", "a.o", "Third", "----"));
         }
 
         /// <summary>
@@ -317,8 +317,8 @@ namespace Microsoft.Build.UnitTests.Definition
 	            </Project>");
             Project p = projectFromString.Project;
 
-            Assert.True(ItemContainsMetadata(p, "Compile", "a.cs", "Foo", "Bar"));
-            Assert.True(ItemContainsMetadata(p, "Compile", "b.cs", "Foo", "Bar"));
+            Assert.IsTrue(ItemContainsMetadata(p, "Compile", "a.cs", "Foo", "Bar"));
+            Assert.IsTrue(ItemContainsMetadata(p, "Compile", "b.cs", "Foo", "Bar"));
         }
 
         [Fact]
@@ -434,9 +434,9 @@ namespace Microsoft.Build.UnitTests.Definition
 	            </Project>");
             Project p = projectFromString.Project;
 
-            Assert.False(p.ItemDefinitions.ContainsKey("Compile"));
-            Assert.True(ItemContainsMetadata(p, "Compile", "a.cs", "Foo", "Bar"));
-            Assert.False(ItemContainsMetadata(p, "Compile", "a.cs", "First", "1st"));
+            Assert.IsFalse(p.ItemDefinitions.ContainsKey("Compile"));
+            Assert.IsTrue(ItemContainsMetadata(p, "Compile", "a.cs", "Foo", "Bar"));
+            Assert.IsFalse(ItemContainsMetadata(p, "Compile", "a.cs", "First", "1st"));
         }
 
         /// <summary>
@@ -461,9 +461,9 @@ namespace Microsoft.Build.UnitTests.Definition
 	            </Project>");
             Project p = projectFromString.Project;
 
-            Assert.True(p.ItemDefinitions.ContainsKey("Compile"));
-            Assert.True(ItemContainsMetadata(p, "Compile", "a.cs", "Foo", "Bar"));
-            Assert.True(ItemContainsMetadata(p, "Compile", "a.cs", "First", "1st"));
+            Assert.IsTrue(p.ItemDefinitions.ContainsKey("Compile"));
+            Assert.IsTrue(ItemContainsMetadata(p, "Compile", "a.cs", "Foo", "Bar"));
+            Assert.IsTrue(ItemContainsMetadata(p, "Compile", "a.cs", "First", "1st"));
         }
 
         /// <summary>
@@ -488,9 +488,9 @@ namespace Microsoft.Build.UnitTests.Definition
 	            </Project>");
             Project p = projectFromString.Project;
 
-            Assert.False(p.ItemDefinitions.ContainsKey("Compile"));
-            Assert.True(ItemContainsMetadata(p, "Compile", "a.cs", "Foo", "Bar"));
-            Assert.False(ItemContainsMetadata(p, "Compile", "a.cs", "First", "1st"));
+            Assert.IsFalse(p.ItemDefinitions.ContainsKey("Compile"));
+            Assert.IsTrue(ItemContainsMetadata(p, "Compile", "a.cs", "Foo", "Bar"));
+            Assert.IsFalse(ItemContainsMetadata(p, "Compile", "a.cs", "First", "1st"));
         }
 
         /// <summary>
@@ -515,9 +515,9 @@ namespace Microsoft.Build.UnitTests.Definition
 	            </Project>");
             Project p = projectFromString.Project;
 
-            Assert.True(p.ItemDefinitions.ContainsKey("Compile"));
-            Assert.True(ItemContainsMetadata(p, "Compile", "a.cs", "Foo", "Bar"));
-            Assert.True(ItemContainsMetadata(p, "Compile", "a.cs", "First", "1st"));
+            Assert.IsTrue(p.ItemDefinitions.ContainsKey("Compile"));
+            Assert.IsTrue(ItemContainsMetadata(p, "Compile", "a.cs", "Foo", "Bar"));
+            Assert.IsTrue(ItemContainsMetadata(p, "Compile", "a.cs", "First", "1st"));
         }
 
         /// <summary>
@@ -542,9 +542,9 @@ namespace Microsoft.Build.UnitTests.Definition
 	            </Project>");
             Project p = projectFromString.Project;
 
-            Assert.True(p.ItemDefinitions.ContainsKey("Compile"));
-            Assert.True(ItemContainsMetadata(p, "Compile", "a.cs", "Foo", "Bar"));
-            Assert.False(ItemContainsMetadata(p, "Compile", "a.cs", "First", "1st"));
+            Assert.IsTrue(p.ItemDefinitions.ContainsKey("Compile"));
+            Assert.IsTrue(ItemContainsMetadata(p, "Compile", "a.cs", "Foo", "Bar"));
+            Assert.IsFalse(ItemContainsMetadata(p, "Compile", "a.cs", "First", "1st"));
         }
 
         /// <summary>
@@ -569,9 +569,9 @@ namespace Microsoft.Build.UnitTests.Definition
 	            </Project>");
             Project p = projectFromString.Project;
 
-            Assert.True(p.ItemDefinitions.ContainsKey("Compile"));
-            Assert.True(ItemContainsMetadata(p, "Compile", "a.cs", "Foo", "Bar"));
-            Assert.True(ItemContainsMetadata(p, "Compile", "a.cs", "First", "1st"));
+            Assert.IsTrue(p.ItemDefinitions.ContainsKey("Compile"));
+            Assert.IsTrue(ItemContainsMetadata(p, "Compile", "a.cs", "Foo", "Bar"));
+            Assert.IsTrue(ItemContainsMetadata(p, "Compile", "a.cs", "First", "1st"));
         }
 
         /// <summary>
@@ -591,7 +591,7 @@ namespace Microsoft.Build.UnitTests.Definition
             </Project>");
             Project p = projectFromString.Project;
 
-            Assert.True(p.ItemDefinitions.ContainsKey("ItemA"));
+            Assert.IsTrue(p.ItemDefinitions.ContainsKey("ItemA"));
 
             ProjectInstance pi = p.CreateProjectInstance();
             ITaskItem withMetaItem;
@@ -606,8 +606,8 @@ namespace Microsoft.Build.UnitTests.Definition
             // from an item definition. The destination item's metadata should be maintained
             noMetaItem.CopyMetadataTo(withMetaItem);
 
-            Assert.Equal("M-A(b)", withMetaItem.GetMetadata("MetaA"));
-            Assert.Equal("M-B(b)", withMetaItem.GetMetadata("MetaB"));
+            Assert.AreEqual("M-A(b)", withMetaItem.GetMetadata("MetaA"));
+            Assert.AreEqual("M-B(b)", withMetaItem.GetMetadata("MetaB"));
         }
 
         /// <summary>
@@ -627,7 +627,7 @@ namespace Microsoft.Build.UnitTests.Definition
             </Project>");
             Project p = projectFromString.Project;
 
-            Assert.True(p.ItemDefinitions.ContainsKey("ItemA"));
+            Assert.IsTrue(p.ItemDefinitions.ContainsKey("ItemA"));
 
             ProjectInstance pi = p.CreateProjectInstance();
             ITaskItem withMetaItem;
@@ -645,8 +645,8 @@ namespace Microsoft.Build.UnitTests.Definition
             noMetaItem.CopyMetadataTo(withMetaItem);
 
             // New direct metadata takes precedence over item definitions on the destination item
-            Assert.Equal("NEWMETA_A", withMetaItem.GetMetadata("MetaA"));
-            Assert.Equal("M-B(b)", withMetaItem.GetMetadata("MetaB"));
+            Assert.AreEqual("NEWMETA_A", withMetaItem.GetMetadata("MetaA"));
+            Assert.AreEqual("M-B(b)", withMetaItem.GetMetadata("MetaB"));
         }
 
         /// <summary>
@@ -669,7 +669,7 @@ namespace Microsoft.Build.UnitTests.Definition
             </Project>");
             Project p = projectFromString.Project;
 
-            Assert.True(p.ItemDefinitions.ContainsKey("ItemA"));
+            Assert.IsTrue(p.ItemDefinitions.ContainsKey("ItemA"));
 
             ProjectInstance pi = p.CreateProjectInstance();
             ITaskItem withMetaItem = null;
@@ -689,8 +689,8 @@ namespace Microsoft.Build.UnitTests.Definition
             // from an item definition. The destination item's metadata should be maintained
             noMetaItem.CopyMetadataTo(withMetaItem);
 
-            Assert.Equal("M-A(b)", withMetaItem.GetMetadata("MetaA"));
-            Assert.Equal("M-B(b)", withMetaItem.GetMetadata("MetaB"));
+            Assert.AreEqual("M-A(b)", withMetaItem.GetMetadata("MetaA"));
+            Assert.AreEqual("M-B(b)", withMetaItem.GetMetadata("MetaB"));
         }
 
         #region Project tests
@@ -1266,7 +1266,7 @@ namespace Microsoft.Build.UnitTests.Definition
             p.AddItem("i", "i1");
             p.ReevaluateIfNecessary();
 
-            Assert.True(ItemContainsMetadata(p, "i", "i1", "m", "m1"));
+            Assert.IsTrue(ItemContainsMetadata(p, "i", "i1", "m", "m1"));
         }
 
         /// <summary>
@@ -1295,8 +1295,8 @@ namespace Microsoft.Build.UnitTests.Definition
             p.AddItem("i", "i1");
             p.ReevaluateIfNecessary();
 
-            Assert.True(ItemContainsMetadata(p, "i", "i1", "m", "m1"));
-            Assert.True(ItemContainsMetadata(p, "i", "i2", "m", "m2"));
+            Assert.IsTrue(ItemContainsMetadata(p, "i", "i1", "m", "m1"));
+            Assert.IsTrue(ItemContainsMetadata(p, "i", "i2", "m", "m2"));
         }
 
         [Fact]
@@ -1459,7 +1459,7 @@ namespace Microsoft.Build.UnitTests.Definition
             ");
             Project p = projectFromString.Project;
 
-            Assert.Equal("m1", p.GetItems("j").First().GetMetadataValue("m"));
+            Assert.AreEqual("m1", p.GetItems("j").First().GetMetadataValue("m"));
 
             p.Build("t", new ILogger[] { logger });
 
@@ -1517,47 +1517,47 @@ namespace Microsoft.Build.UnitTests.Definition
             ");
             Project p = projectFromString.Project;
 
-            Assert.Equal("im1", p.GetItems("i").First().GetMetadataValue("m"));
-            Assert.Equal("in1", p.GetItems("i").First().GetMetadataValue("n"));
-            Assert.Equal("io2", p.GetItems("i").First().GetMetadataValue("o"));
-            Assert.Equal("ip1", p.GetItems("i").First().GetMetadataValue("p"));
-            Assert.Equal("", p.GetItems("i").First().GetMetadataValue("q"));
+            Assert.AreEqual("im1", p.GetItems("i").First().GetMetadataValue("m"));
+            Assert.AreEqual("in1", p.GetItems("i").First().GetMetadataValue("n"));
+            Assert.AreEqual("io2", p.GetItems("i").First().GetMetadataValue("o"));
+            Assert.AreEqual("ip1", p.GetItems("i").First().GetMetadataValue("p"));
+            Assert.AreEqual("", p.GetItems("i").First().GetMetadataValue("q"));
 
-            Assert.Equal("jm3", p.GetItems("j").First().GetMetadataValue("m"));
-            Assert.Equal("jn3", p.GetItems("j").First().GetMetadataValue("n"));
-            Assert.Equal("", p.GetItems("j").First().GetMetadataValue("o"));
-            Assert.Equal("", p.GetItems("j").First().GetMetadataValue("p"));
-            Assert.Equal("jq3", p.GetItems("j").First().GetMetadataValue("q"));
+            Assert.AreEqual("jm3", p.GetItems("j").First().GetMetadataValue("m"));
+            Assert.AreEqual("jn3", p.GetItems("j").First().GetMetadataValue("n"));
+            Assert.AreEqual("", p.GetItems("j").First().GetMetadataValue("o"));
+            Assert.AreEqual("", p.GetItems("j").First().GetMetadataValue("p"));
+            Assert.AreEqual("jq3", p.GetItems("j").First().GetMetadataValue("q"));
 
-            Assert.Equal("jm6", p.GetItems("j").ElementAt(1).GetMetadataValue("m"));
-            Assert.Equal("in1", p.GetItems("j").ElementAt(1).GetMetadataValue("n"));
-            Assert.Equal("io2", p.GetItems("j").ElementAt(1).GetMetadataValue("o"));
-            Assert.Equal("ip1", p.GetItems("j").ElementAt(1).GetMetadataValue("p"));
-            Assert.Equal("jq3", p.GetItems("j").ElementAt(1).GetMetadataValue("q"));
+            Assert.AreEqual("jm6", p.GetItems("j").ElementAt(1).GetMetadataValue("m"));
+            Assert.AreEqual("in1", p.GetItems("j").ElementAt(1).GetMetadataValue("n"));
+            Assert.AreEqual("io2", p.GetItems("j").ElementAt(1).GetMetadataValue("o"));
+            Assert.AreEqual("ip1", p.GetItems("j").ElementAt(1).GetMetadataValue("p"));
+            Assert.AreEqual("jq3", p.GetItems("j").ElementAt(1).GetMetadataValue("q"));
 
-            Assert.Equal("km5", p.GetItems("k").ElementAt(0).GetMetadataValue("m"));
-            Assert.Equal("", p.GetItems("k").ElementAt(0).GetMetadataValue("n"));
-            Assert.Equal("", p.GetItems("k").ElementAt(0).GetMetadataValue("o"));
-            Assert.Equal("", p.GetItems("k").ElementAt(0).GetMetadataValue("p"));
-            Assert.Equal("kq4", p.GetItems("k").ElementAt(0).GetMetadataValue("q"));
-            Assert.Equal("kr4", p.GetItems("k").ElementAt(0).GetMetadataValue("r"));
-            Assert.Equal("", p.GetItems("k").ElementAt(0).GetMetadataValue("s"));
+            Assert.AreEqual("km5", p.GetItems("k").ElementAt(0).GetMetadataValue("m"));
+            Assert.AreEqual("", p.GetItems("k").ElementAt(0).GetMetadataValue("n"));
+            Assert.AreEqual("", p.GetItems("k").ElementAt(0).GetMetadataValue("o"));
+            Assert.AreEqual("", p.GetItems("k").ElementAt(0).GetMetadataValue("p"));
+            Assert.AreEqual("kq4", p.GetItems("k").ElementAt(0).GetMetadataValue("q"));
+            Assert.AreEqual("kr4", p.GetItems("k").ElementAt(0).GetMetadataValue("r"));
+            Assert.AreEqual("", p.GetItems("k").ElementAt(0).GetMetadataValue("s"));
 
-            Assert.Equal("jm3", p.GetItems("k").ElementAt(1).GetMetadataValue("m"));
-            Assert.Equal("jn3", p.GetItems("k").ElementAt(1).GetMetadataValue("n"));
-            Assert.Equal("", p.GetItems("k").ElementAt(1).GetMetadataValue("o"));
-            Assert.Equal("", p.GetItems("k").ElementAt(1).GetMetadataValue("p"));
-            Assert.Equal("jq3", p.GetItems("k").ElementAt(1).GetMetadataValue("q"));
-            Assert.Equal("kr4", p.GetItems("k").ElementAt(1).GetMetadataValue("r"));
-            Assert.Equal("ks3", p.GetItems("k").ElementAt(1).GetMetadataValue("s"));
+            Assert.AreEqual("jm3", p.GetItems("k").ElementAt(1).GetMetadataValue("m"));
+            Assert.AreEqual("jn3", p.GetItems("k").ElementAt(1).GetMetadataValue("n"));
+            Assert.AreEqual("", p.GetItems("k").ElementAt(1).GetMetadataValue("o"));
+            Assert.AreEqual("", p.GetItems("k").ElementAt(1).GetMetadataValue("p"));
+            Assert.AreEqual("jq3", p.GetItems("k").ElementAt(1).GetMetadataValue("q"));
+            Assert.AreEqual("kr4", p.GetItems("k").ElementAt(1).GetMetadataValue("r"));
+            Assert.AreEqual("ks3", p.GetItems("k").ElementAt(1).GetMetadataValue("s"));
 
-            Assert.Equal("jm6", p.GetItems("k").ElementAt(2).GetMetadataValue("m"));
-            Assert.Equal("in1", p.GetItems("k").ElementAt(2).GetMetadataValue("n"));
-            Assert.Equal("io2", p.GetItems("k").ElementAt(2).GetMetadataValue("o"));
-            Assert.Equal("ip1", p.GetItems("k").ElementAt(2).GetMetadataValue("p"));
-            Assert.Equal("jq3", p.GetItems("k").ElementAt(2).GetMetadataValue("q"));
-            Assert.Equal("kr4", p.GetItems("k").ElementAt(2).GetMetadataValue("r"));
-            Assert.Equal("ks3", p.GetItems("k").ElementAt(1).GetMetadataValue("s"));
+            Assert.AreEqual("jm6", p.GetItems("k").ElementAt(2).GetMetadataValue("m"));
+            Assert.AreEqual("in1", p.GetItems("k").ElementAt(2).GetMetadataValue("n"));
+            Assert.AreEqual("io2", p.GetItems("k").ElementAt(2).GetMetadataValue("o"));
+            Assert.AreEqual("ip1", p.GetItems("k").ElementAt(2).GetMetadataValue("p"));
+            Assert.AreEqual("jq3", p.GetItems("k").ElementAt(2).GetMetadataValue("q"));
+            Assert.AreEqual("kr4", p.GetItems("k").ElementAt(2).GetMetadataValue("r"));
+            Assert.AreEqual("ks3", p.GetItems("k").ElementAt(1).GetMetadataValue("s"));
         }
 
         /// <summary>
@@ -1734,12 +1734,12 @@ namespace Microsoft.Build.UnitTests.Definition
 
             logger.AssertLogContains("[a.cpp==CODEANALYSIS;RETAIL]");
 
-            Assert.True(ItemContainsMetadata(p, "CppCompile", "a.cpp", "Defines", "CODEANALYSIS;RETAIL"));
+            Assert.IsTrue(ItemContainsMetadata(p, "CppCompile", "a.cpp", "Defines", "CODEANALYSIS;RETAIL"));
 
             p.SetProperty("BuildFlavor", "chk");
             p.ReevaluateIfNecessary();
 
-            Assert.True(ItemContainsMetadata(p, "CppCompile", "a.cpp", "Defines", "CODEANALYSIS;DEBUG"));
+            Assert.IsTrue(ItemContainsMetadata(p, "CppCompile", "a.cpp", "Defines", "CODEANALYSIS;DEBUG"));
         }
 
         [Fact]

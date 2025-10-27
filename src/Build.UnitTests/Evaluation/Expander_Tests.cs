@@ -148,7 +148,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             ProjectItemInstanceFactory itemFactory = new ProjectItemInstanceFactory(project, "i");
             IList<ProjectItemInstance> itemsOut = expander.ExpandIntoItemsLeaveEscaped("foo$(a);$(b);$(c);$(d", itemFactory, ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(5, itemsOut.Count);
+            Assert.AreEqual(5, itemsOut.Count);
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Expander<ProjectPropertyInstance, ProjectItemInstance> expander = new Expander<ProjectPropertyInstance, ProjectItemInstance>(pg, FileSystems.Default);
 
             string result = expander.ExpandIntoStringLeaveEscaped("$()", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
-            Assert.Equal(String.Empty, result);
+            Assert.AreEqual(String.Empty, result);
         }
 
         /// <summary>
@@ -179,11 +179,11 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             IList<ProjectItemInstance> items = expander.ExpandIntoItemsLeaveEscaped("@(i)", itemFactory, ExpanderOptions.ExpandItems, MockElementLocation.Instance);
 
-            Assert.Equal(2, items.Count);
-            Assert.Equal("j", items[0].ItemType);
-            Assert.Equal("j", items[1].ItemType);
-            Assert.Equal("i0", items[0].EvaluatedInclude);
-            Assert.Equal("i1", items[1].EvaluatedInclude);
+            Assert.AreEqual(2, items.Count);
+            Assert.AreEqual("j", items[0].ItemType);
+            Assert.AreEqual("j", items[1].ItemType);
+            Assert.AreEqual("i0", items[0].EvaluatedInclude);
+            Assert.AreEqual("i1", items[1].EvaluatedInclude);
         }
 
         /// <summary>
@@ -199,11 +199,11 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             IList<ProjectItemInstance> items = expander.ExpandIntoItemsLeaveEscaped("@(i)", itemFactory, ExpanderOptions.ExpandItems, MockElementLocation.Instance);
 
-            Assert.Equal(2, items.Count);
-            Assert.Equal("i", items[0].ItemType);
-            Assert.Equal("i", items[1].ItemType);
-            Assert.Equal("i0", items[0].EvaluatedInclude);
-            Assert.Equal("i1", items[1].EvaluatedInclude);
+            Assert.AreEqual(2, items.Count);
+            Assert.AreEqual("i", items[0].ItemType);
+            Assert.AreEqual("i", items[1].ItemType);
+            Assert.AreEqual("i0", items[0].EvaluatedInclude);
+            Assert.AreEqual("i1", items[1].EvaluatedInclude);
         }
 
         /// <summary>
@@ -220,14 +220,14 @@ namespace Microsoft.Build.UnitTests.Evaluation
             IList<ProjectItemInstance> itemsTrue = expander.ExpandIntoItemsLeaveEscaped("@(i->AnyHaveMetadataValue('Even', 'true'))", itemFactory, ExpanderOptions.ExpandItems, MockElementLocation.Instance);
 
             Assert.Single(itemsTrue);
-            Assert.Equal("i", itemsTrue[0].ItemType);
-            Assert.Equal("true", itemsTrue[0].EvaluatedInclude);
+            Assert.AreEqual("i", itemsTrue[0].ItemType);
+            Assert.AreEqual("true", itemsTrue[0].EvaluatedInclude);
 
             IList<ProjectItemInstance> itemsFalse = expander.ExpandIntoItemsLeaveEscaped("@(i->AnyHaveMetadataValue('Even', 'goop'))", itemFactory, ExpanderOptions.ExpandItems, MockElementLocation.Instance);
 
             Assert.Single(itemsFalse);
-            Assert.Equal("i", itemsFalse[0].ItemType);
-            Assert.Equal("false", itemsFalse[0].EvaluatedInclude);
+            Assert.AreEqual("i", itemsFalse[0].ItemType);
+            Assert.AreEqual("false", itemsFalse[0].EvaluatedInclude);
         }
 
         [Fact]
@@ -258,14 +258,14 @@ namespace Microsoft.Build.UnitTests.Evaluation
             IList<ProjectItemInstance> itemsTrue = expander.ExpandIntoItemsLeaveEscaped("@(i->Metadata('Meta0')->DirectoryName()->Distinct())", itemFactory, ExpanderOptions.ExpandItems, MockElementLocation.Instance);
 
             Assert.Single(itemsTrue);
-            Assert.Equal("i", itemsTrue[0].ItemType);
-            Assert.Equal(Path.Combine(s_rootPathPrefix, "firstdirectory", "seconddirectory"), itemsTrue[0].EvaluatedInclude);
+            Assert.AreEqual("i", itemsTrue[0].ItemType);
+            Assert.AreEqual(Path.Combine(s_rootPathPrefix, "firstdirectory", "seconddirectory"), itemsTrue[0].EvaluatedInclude);
 
             IList<ProjectItemInstance> itemsDir = expander.ExpandIntoItemsLeaveEscaped("@(i->Metadata('Meta9')->DirectoryName()->Distinct())", itemFactory, ExpanderOptions.ExpandItems, MockElementLocation.Instance);
 
             Assert.Single(itemsDir);
-            Assert.Equal("i", itemsDir[0].ItemType);
-            Assert.Equal(Path.Combine(Directory.GetCurrentDirectory(), @"seconddirectory"), itemsDir[0].EvaluatedInclude);
+            Assert.AreEqual("i", itemsDir[0].ItemType);
+            Assert.AreEqual(Path.Combine(Directory.GetCurrentDirectory(), @"seconddirectory"), itemsDir[0].EvaluatedInclude);
         }
 
         /// <summary>
@@ -283,21 +283,21 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             IList<ProjectItemInstance> itemsTrue = expander.ExpandIntoItemsLeaveEscaped("@(i->Metadata('Meta0')->Directory())", itemFactory, ExpanderOptions.ExpandItems, MockElementLocation.Instance);
 
-            Assert.Equal(10, itemsTrue.Count);
-            Assert.Equal("i", itemsTrue[5].ItemType);
-            Assert.Equal(Path.Combine("firstdirectory", "seconddirectory") + Path.DirectorySeparatorChar, itemsTrue[5].EvaluatedInclude);
+            Assert.AreEqual(10, itemsTrue.Count);
+            Assert.AreEqual("i", itemsTrue[5].ItemType);
+            Assert.AreEqual(Path.Combine("firstdirectory", "seconddirectory") + Path.DirectorySeparatorChar, itemsTrue[5].EvaluatedInclude);
 
             itemsTrue = expander.ExpandIntoItemsLeaveEscaped("@(i->Metadata('Meta0')->Filename())", itemFactory, ExpanderOptions.ExpandItems, MockElementLocation.Instance);
 
-            Assert.Equal(10, itemsTrue.Count);
-            Assert.Equal("i", itemsTrue[5].ItemType);
-            Assert.Equal(@"file0", itemsTrue[5].EvaluatedInclude);
+            Assert.AreEqual(10, itemsTrue.Count);
+            Assert.AreEqual("i", itemsTrue[5].ItemType);
+            Assert.AreEqual(@"file0", itemsTrue[5].EvaluatedInclude);
 
             itemsTrue = expander.ExpandIntoItemsLeaveEscaped("@(i->Metadata('Meta0')->Extension())", itemFactory, ExpanderOptions.ExpandItems, MockElementLocation.Instance);
 
-            Assert.Equal(10, itemsTrue.Count);
-            Assert.Equal("i", itemsTrue[5].ItemType);
-            Assert.Equal(@".ext", itemsTrue[5].EvaluatedInclude);
+            Assert.AreEqual(10, itemsTrue.Count);
+            Assert.AreEqual("i", itemsTrue[5].ItemType);
+            Assert.AreEqual(@".ext", itemsTrue[5].EvaluatedInclude);
         }
 
         /// <summary>
@@ -311,7 +311,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped("[@(type-&gt;'%($(a)), '%'')]", ExpanderOptions.ExpandAll, MockElementLocation.Instance);
 
-            Assert.Equal(@"[@(type-&gt;'%(filename), '%'')]", result);
+            Assert.AreEqual(@"[@(type-&gt;'%(filename), '%'')]", result);
         }
 
         /// <summary>
@@ -325,7 +325,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped("[@(i->'%(Meta9))']", ExpanderOptions.ExpandAll, MockElementLocation.Instance);
 
-            Assert.Equal(@"[@(i->')']", result);
+            Assert.AreEqual(@"[@(i->')']", result);
         }
 
         /// <summary>
@@ -341,7 +341,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped("@(i->'%(Meta0)'->'%(Directory)'->Distinct())", ExpanderOptions.ExpandItems, MockElementLocation.Instance);
 
-            Assert.Equal(Path.Combine("firstdirectory", "seconddirectory") + Path.DirectorySeparatorChar, result);
+            Assert.AreEqual(Path.Combine("firstdirectory", "seconddirectory") + Path.DirectorySeparatorChar, result);
         }
 
         /// <summary>
@@ -357,7 +357,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped("[@(i->'%(Meta0)'->'%(Directory)'->Distinct())]", ExpanderOptions.ExpandItems, MockElementLocation.Instance);
 
-            Assert.Equal(@"[firstdirectory\seconddirectory\]", result);
+            Assert.AreEqual(@"[firstdirectory\seconddirectory\]", result);
         }
 
         /// <summary>
@@ -371,7 +371,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped("@(i->'%(MetaBlank)'->'%(Directory)'->Distinct())", ExpanderOptions.ExpandItems, MockElementLocation.Instance);
 
-            Assert.Equal(@"", result);
+            Assert.AreEqual(@"", result);
         }
 
         [Fact]
@@ -695,27 +695,27 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             IList<ProjectItemInstance> itemsTrue = expander.ExpandIntoItemsLeaveEscaped("@(i->'%(Meta0)'->'%(Directory)')", itemFactory, ExpanderOptions.ExpandItems, MockElementLocation.Instance);
 
-            Assert.Equal(10, itemsTrue.Count);
-            Assert.Equal("i", itemsTrue[5].ItemType);
-            Assert.Equal(Path.Combine("firstdirectory", "seconddirectory") + Path.DirectorySeparatorChar, itemsTrue[5].EvaluatedInclude);
+            Assert.AreEqual(10, itemsTrue.Count);
+            Assert.AreEqual("i", itemsTrue[5].ItemType);
+            Assert.AreEqual(Path.Combine("firstdirectory", "seconddirectory") + Path.DirectorySeparatorChar, itemsTrue[5].EvaluatedInclude);
 
             itemsTrue = expander.ExpandIntoItemsLeaveEscaped("@(i->'%(Meta0)'->'%(Filename)')", itemFactory, ExpanderOptions.ExpandItems, MockElementLocation.Instance);
 
-            Assert.Equal(10, itemsTrue.Count);
-            Assert.Equal("i", itemsTrue[5].ItemType);
-            Assert.Equal(@"file0", itemsTrue[5].EvaluatedInclude);
+            Assert.AreEqual(10, itemsTrue.Count);
+            Assert.AreEqual("i", itemsTrue[5].ItemType);
+            Assert.AreEqual(@"file0", itemsTrue[5].EvaluatedInclude);
 
             itemsTrue = expander.ExpandIntoItemsLeaveEscaped("@(i->'%(Meta0)'->'%(Extension)'->Distinct())", itemFactory, ExpanderOptions.ExpandItems, MockElementLocation.Instance);
 
             Assert.Single(itemsTrue);
-            Assert.Equal("i", itemsTrue[0].ItemType);
-            Assert.Equal(@".ext", itemsTrue[0].EvaluatedInclude);
+            Assert.AreEqual("i", itemsTrue[0].ItemType);
+            Assert.AreEqual(@".ext", itemsTrue[0].EvaluatedInclude);
 
             itemsTrue = expander.ExpandIntoItemsLeaveEscaped("@(i->'%(Meta0)'->'%(Filename)'->Substring($(Val)))", itemFactory, ExpanderOptions.ExpandItems, MockElementLocation.Instance);
 
-            Assert.Equal(10, itemsTrue.Count);
-            Assert.Equal("i", itemsTrue[5].ItemType);
-            Assert.Equal(@"le0", itemsTrue[5].EvaluatedInclude);
+            Assert.AreEqual(10, itemsTrue.Count);
+            Assert.AreEqual("i", itemsTrue[5].ItemType);
+            Assert.AreEqual(@"le0", itemsTrue[5].EvaluatedInclude);
         }
 
         /// <summary>
@@ -733,9 +733,9 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             IList<ProjectItemInstance> itemsTrue = expander.ExpandIntoItemsLeaveEscaped("@(i->Metadata('Meta0')->DirectoryName())", itemFactory, ExpanderOptions.ExpandItems, MockElementLocation.Instance);
 
-            Assert.Equal(10, itemsTrue.Count);
-            Assert.Equal("i", itemsTrue[5].ItemType);
-            Assert.Equal(Path.Combine(s_rootPathPrefix, "firstdirectory", "seconddirectory"), itemsTrue[5].EvaluatedInclude);
+            Assert.AreEqual(10, itemsTrue.Count);
+            Assert.AreEqual("i", itemsTrue[5].ItemType);
+            Assert.AreEqual(Path.Combine(s_rootPathPrefix, "firstdirectory", "seconddirectory"), itemsTrue[5].EvaluatedInclude);
         }
 
         /// <summary>
@@ -753,11 +753,11 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             IList<ProjectItemInstance> items = expander.ExpandIntoItemsLeaveEscaped("@(i->Metadata('Meta10')->DirectoryName())", itemFactory, ExpanderOptions.ExpandItems, MockElementLocation.Instance);
 
-            Assert.Equal(20, items.Count);
-            Assert.Equal("i", items[5].ItemType);
-            Assert.Equal("i", items[6].ItemType);
-            Assert.Equal(Path.Combine(Directory.GetCurrentDirectory(), @"secondd;rectory"), items[5].EvaluatedInclude);
-            Assert.Equal(Path.Combine(Directory.GetCurrentDirectory(), @"someo;herplace"), items[6].EvaluatedInclude);
+            Assert.AreEqual(20, items.Count);
+            Assert.AreEqual("i", items[5].ItemType);
+            Assert.AreEqual("i", items[6].ItemType);
+            Assert.AreEqual(Path.Combine(Directory.GetCurrentDirectory(), @"secondd;rectory"), items[5].EvaluatedInclude);
+            Assert.AreEqual(Path.Combine(Directory.GetCurrentDirectory(), @"someo;herplace"), items[6].EvaluatedInclude);
         }
 
         /// <summary>
@@ -773,8 +773,8 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             IList<ProjectItemInstance> items = expander.ExpandIntoItemsLeaveEscaped("@(i->ClearMetadata())", itemFactory, ExpanderOptions.ExpandItems, MockElementLocation.Instance);
 
-            Assert.Equal(10, items.Count);
-            Assert.Equal("i", items[5].ItemType);
+            Assert.AreEqual(10, items.Count);
+            Assert.AreEqual("i", items[5].ItemType);
             Assert.Empty(items[5].Metadata);
         }
 
@@ -1303,7 +1303,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             }
             catch (Microsoft.Build.Exceptions.InvalidProjectFileException e)
             {
-                Assert.NotEqual(-1, e.Message.IndexOf("[System.IO.Path]::Combine(null, '')", StringComparison.OrdinalIgnoreCase));
+                Assert.AreNotEqual(-1, e.Message.IndexOf("[System.IO.Path]::Combine(null, '')", StringComparison.OrdinalIgnoreCase));
                 return;
             }
 
@@ -1330,7 +1330,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             }
             catch (Microsoft.Build.Exceptions.InvalidProjectFileException e)
             {
-                Assert.NotEqual(-1, e.Message.IndexOf("System.IO.Path::Combine('a','b')", StringComparison.OrdinalIgnoreCase));
+                Assert.AreNotEqual(-1, e.Message.IndexOf("System.IO.Path::Combine('a','b')", StringComparison.OrdinalIgnoreCase));
                 return;
             }
 
@@ -1496,42 +1496,42 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Expander<ProjectPropertyInstance, ProjectItemInstance> expander = new Expander<ProjectPropertyInstance, ProjectItemInstance>(lookup, lookup, itemMetadata, FileSystems.Default);
 
             string stringToExpand = "@(Resource->'%(Filename)') ;";
-            Assert.Equal(
+            Assert.AreEqual(
                 @"string$(p);dialogs%3b ;",
                 expander.ExpandIntoStringAndUnescape(stringToExpand, ExpanderOptions.ExpandAll, MockElementLocation.Instance));
 
             stringToExpand = "@(Content)";
-            Assert.Equal(
+            Assert.AreEqual(
                 @"splash.bmp",
                 expander.ExpandIntoStringAndUnescape(stringToExpand, ExpanderOptions.ExpandAll, MockElementLocation.Instance));
 
             stringToExpand = "@(NonExistent)";
-            Assert.Equal(
+            Assert.AreEqual(
                 @"",
                 expander.ExpandIntoStringAndUnescape(stringToExpand, ExpanderOptions.ExpandAll, MockElementLocation.Instance));
 
             stringToExpand = "$(NonExistent)";
-            Assert.Equal(
+            Assert.AreEqual(
                 @"",
                 expander.ExpandIntoStringAndUnescape(stringToExpand, ExpanderOptions.ExpandAll, MockElementLocation.Instance));
 
             stringToExpand = "%(NonExistent)";
-            Assert.Equal(
+            Assert.AreEqual(
                 @"",
                 expander.ExpandIntoStringAndUnescape(stringToExpand, ExpanderOptions.ExpandAll, MockElementLocation.Instance));
 
             stringToExpand = "$(OutputPath)";
-            Assert.Equal(
+            Assert.AreEqual(
                 @"\jk ; l\mno%3bpqr\stu",
                 expander.ExpandIntoStringAndUnescape(stringToExpand, ExpanderOptions.ExpandAll, MockElementLocation.Instance));
 
             stringToExpand = "$(TargetPath)";
-            Assert.Equal(
+            Assert.AreEqual(
                 "subdir1" + Path.DirectorySeparatorChar + ";subdir2" + Path.DirectorySeparatorChar,
                 expander.ExpandIntoStringAndUnescape(stringToExpand, ExpanderOptions.ExpandAll, MockElementLocation.Instance));
 
             stringToExpand = "%(Language)_%(Culture)";
-            Assert.Equal(
+            Assert.AreEqual(
                 @"english_abc%3bdef;ghi",
                 expander.ExpandIntoStringAndUnescape(stringToExpand, ExpanderOptions.ExpandAll, MockElementLocation.Instance));
         }
@@ -1551,13 +1551,13 @@ namespace Microsoft.Build.UnitTests.Evaluation
             XmlAttribute xmlattribute = (new XmlDocument()).CreateAttribute("dummy");
             xmlattribute.Value = "@(IntermediateAssembly->'')";
 
-            Assert.Equal(
+            Assert.AreEqual(
                 @";",
                 expander.ExpandIntoStringAndUnescape(xmlattribute.Value, ExpanderOptions.ExpandAll, MockElementLocation.Instance));
 
             xmlattribute.Value = "@(IntermediateAssembly->'%(goop)')";
 
-            Assert.Equal(
+            Assert.AreEqual(
                 @";",
                 expander.ExpandIntoStringAndUnescape(xmlattribute.Value, ExpanderOptions.ExpandAll, MockElementLocation.Instance));
         }
@@ -1578,7 +1578,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             xmlattribute.Value = "@(Resource->'%(Filename)') ; @(Content) ; @(NonExistent) ; $(NonExistent) ; %(NonExistent) ; " +
                 "$(OutputPath) ; $(TargetPath) ; %(Language)_%(Culture)";
 
-            Assert.Equal(
+            Assert.AreEqual(
                 @"string$(p);dialogs%3b ; splash.bmp ;  ;  ;  ; \jk ; l\mno%3bpqr\stu ; subdir1" + Path.DirectorySeparatorChar + ";subdir2" +
                 Path.DirectorySeparatorChar + " ; english_abc%3bdef;ghi",
                 expander.ExpandIntoStringAndUnescape(xmlattribute.Value, ExpanderOptions.ExpandAll, MockElementLocation.Instance));
@@ -1600,7 +1600,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             xmlattribute.Value = "@(Resource->'%(Filename)') ; @(Content) ; @(NonExistent) ; $(NonExistent) ; %(NonExistent) ; " +
                 "$(OutputPath) ; $(TargetPath) ; %(Language)_%(Culture)";
 
-            Assert.Equal(
+            Assert.AreEqual(
                 @"string$(p);dialogs%253b ; splash.bmp ;  ;  ;  ; \jk ; l\mno%253bpqr\stu ; subdir1" + Path.DirectorySeparatorChar + ";subdir2" + Path.DirectorySeparatorChar + " ; english_abc%253bdef;ghi",
                 expander.ExpandIntoStringLeaveEscaped(xmlattribute.Value, ExpanderOptions.ExpandAll, MockElementLocation.Instance));
         }
@@ -1661,7 +1661,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             // but that goes back to MSBuild 4.something so I'm codifying it in this test. If you're here because you cleaned it up
             // and want to fix the test my current opinion is that's fine.
 
-            Assert.Equal(expected, expander.ExpandIntoStringAndUnescape(xmlattribute.Value, ExpanderOptions.ExpandAll | ExpanderOptions.Truncate, MockElementLocation.Instance));
+            Assert.AreEqual(expected, expander.ExpandIntoStringAndUnescape(xmlattribute.Value, ExpanderOptions.ExpandAll | ExpanderOptions.Truncate, MockElementLocation.Instance));
         }
 
         /// <summary>
@@ -1687,11 +1687,11 @@ namespace Microsoft.Build.UnitTests.Evaluation
             string expandedString = expander.ExpandIntoStringLeaveEscaped(xmlattribute.Value, ExpanderOptions.ExpandAll, MockElementLocation.Instance);
 
             // Verify neither string got interned, so that this test is meaningful
-            Assert.Null(string.IsInterned(xmlattribute.Value));
-            Assert.Null(string.IsInterned(expandedString));
+            Assert.IsNull(string.IsInterned(xmlattribute.Value));
+            Assert.IsNull(string.IsInterned(expandedString));
 
             // Finally verify Expander indeed didn't create a new string.
-            Assert.True(Object.ReferenceEquals(xmlattribute.Value, expandedString));
+            Assert.IsTrue(Object.ReferenceEquals(xmlattribute.Value, expandedString));
         }
 
         /// <summary>
@@ -1708,13 +1708,13 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             Expander<ProjectPropertyInstance, ProjectItemInstance> expander = new Expander<ProjectPropertyInstance, ProjectItemInstance>(lookup, lookup, itemMetadata, FileSystems.Default);
 
-            Assert.Equal(@"@(Resource->'%(Filename)') ; @(Content) ; @(NonExistent) ;  ; %(NonExistent) ; \jk ; l\mno%3bpqr\stu ; @(IntermediateAssembly->'%(RelativeDir)') ; %(Language)_%(Culture)", expander.ExpandIntoStringAndUnescape(value, ExpanderOptions.ExpandProperties, MockElementLocation.Instance));
+            Assert.AreEqual(@"@(Resource->'%(Filename)') ; @(Content) ; @(NonExistent) ;  ; %(NonExistent) ; \jk ; l\mno%3bpqr\stu ; @(IntermediateAssembly->'%(RelativeDir)') ; %(Language)_%(Culture)", expander.ExpandIntoStringAndUnescape(value, ExpanderOptions.ExpandProperties, MockElementLocation.Instance));
 
-            Assert.Equal(@"@(Resource->'%(Filename)') ; @(Content) ; @(NonExistent) ;  ;  ; \jk ; l\mno%3bpqr\stu ; @(IntermediateAssembly->'%(RelativeDir)') ; english_abc%3bdef;ghi", expander.ExpandIntoStringAndUnescape(value, ExpanderOptions.ExpandPropertiesAndMetadata, MockElementLocation.Instance));
+            Assert.AreEqual(@"@(Resource->'%(Filename)') ; @(Content) ; @(NonExistent) ;  ;  ; \jk ; l\mno%3bpqr\stu ; @(IntermediateAssembly->'%(RelativeDir)') ; english_abc%3bdef;ghi", expander.ExpandIntoStringAndUnescape(value, ExpanderOptions.ExpandPropertiesAndMetadata, MockElementLocation.Instance));
 
-            Assert.Equal(@"string$(p);dialogs%3b ; splash.bmp ;  ;  ;  ; \jk ; l\mno%3bpqr\stu ; subdir1" + Path.DirectorySeparatorChar + ";subdir2" + Path.DirectorySeparatorChar + " ; english_abc%3bdef;ghi", expander.ExpandIntoStringAndUnescape(value, ExpanderOptions.ExpandAll, MockElementLocation.Instance));
+            Assert.AreEqual(@"string$(p);dialogs%3b ; splash.bmp ;  ;  ;  ; \jk ; l\mno%3bpqr\stu ; subdir1" + Path.DirectorySeparatorChar + ";subdir2" + Path.DirectorySeparatorChar + " ; english_abc%3bdef;ghi", expander.ExpandIntoStringAndUnescape(value, ExpanderOptions.ExpandAll, MockElementLocation.Instance));
 
-            Assert.Equal(@"string$(p);dialogs%3b ; splash.bmp ;  ; $(NonExistent) ; %(NonExistent) ; $(OutputPath) ; $(TargetPath) ; %(Language)_%(Culture)", expander.ExpandIntoStringAndUnescape(value, ExpanderOptions.ExpandItems, MockElementLocation.Instance));
+            Assert.AreEqual(@"string$(p);dialogs%3b ; splash.bmp ;  ; $(NonExistent) ; %(NonExistent) ; $(OutputPath) ; $(TargetPath) ; %(Language)_%(Culture)", expander.ExpandIntoStringAndUnescape(value, ExpanderOptions.ExpandItems, MockElementLocation.Instance));
         }
 
         /// <summary>
@@ -1734,16 +1734,16 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             IList<string> expanded = expander.ExpandIntoStringListLeaveEscaped(value, ExpanderOptions.ExpandAll, MockElementLocation.Instance).ToList();
 
-            Assert.Equal(9, expanded.Count);
-            Assert.Equal(@"string$(p)", expanded[0]);
-            Assert.Equal(@"dialogs%253b", expanded[1]);
-            Assert.Equal(@"splash.bmp", expanded[2]);
-            Assert.Equal(@"\jk", expanded[3]);
-            Assert.Equal(@"l\mno%253bpqr\stu", expanded[4]);
-            Assert.Equal("subdir1" + Path.DirectorySeparatorChar, expanded[5]);
-            Assert.Equal("subdir2" + Path.DirectorySeparatorChar, expanded[6]);
-            Assert.Equal(@"english_abc%253bdef", expanded[7]);
-            Assert.Equal(@"ghi", expanded[8]);
+            Assert.AreEqual(9, expanded.Count);
+            Assert.AreEqual(@"string$(p)", expanded[0]);
+            Assert.AreEqual(@"dialogs%253b", expanded[1]);
+            Assert.AreEqual(@"splash.bmp", expanded[2]);
+            Assert.AreEqual(@"\jk", expanded[3]);
+            Assert.AreEqual(@"l\mno%253bpqr\stu", expanded[4]);
+            Assert.AreEqual("subdir1" + Path.DirectorySeparatorChar, expanded[5]);
+            Assert.AreEqual("subdir2" + Path.DirectorySeparatorChar, expanded[6]);
+            Assert.AreEqual(@"english_abc%253bdef", expanded[7]);
+            Assert.AreEqual(@"ghi", expanded[8]);
         }
 
         internal ITaskItem[] GetTaskArrayFromItemList(IList<TaskItem> list)
@@ -1773,7 +1773,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped(@"$(HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VisualStudio\9.0\VSTSDB@VSTSDBDirectory)", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(String.Empty, result);
+            Assert.AreEqual(String.Empty, result);
         }
 
         // Compat hack: WebProjects may have an import with a condition like:
@@ -1789,7 +1789,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped(@"$(Solutions.VSVersion)", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(String.Empty, result);
+            Assert.AreEqual(String.Empty, result);
         }
 
         /// <summary>
@@ -1840,7 +1840,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 key.SetValue("Value", "String", RegistryValueKind.String);
                 string result = expander.ExpandIntoStringLeaveEscaped(@"$(Registry:HKEY_CURRENT_USER\Software\Microsoft\MSBuild_test@Value)", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-                Assert.Equal("String", result);
+                Assert.AreEqual("String", result);
             }
             finally
             {
@@ -1865,7 +1865,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 key.SetValue("Value", utfText, RegistryValueKind.Binary);
                 string result = expander.ExpandIntoStringLeaveEscaped(@"$(Registry:HKEY_CURRENT_USER\Software\Microsoft\MSBuild_test@Value)", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-                Assert.Equal("83;116;114;105;110;103", result);
+                Assert.AreEqual("83;116;114;105;110;103", result);
             }
             finally
             {
@@ -1887,7 +1887,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 key.SetValue("Value", 123456, RegistryValueKind.DWord);
                 string result = expander.ExpandIntoStringLeaveEscaped(@"$(Registry:HKEY_CURRENT_USER\Software\Microsoft\MSBuild_test@Value)", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-                Assert.Equal("123456", result);
+                Assert.AreEqual("123456", result);
             }
             finally
             {
@@ -1910,7 +1910,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 key.SetValue("Value", "%" + envVar + "%", RegistryValueKind.ExpandString);
                 string result = expander.ExpandIntoStringLeaveEscaped(@"$(Registry:HKEY_CURRENT_USER\Software\Microsoft\MSBuild_test@Value)", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-                Assert.Equal(Environment.GetEnvironmentVariable(envVar), result);
+                Assert.AreEqual(Environment.GetEnvironmentVariable(envVar), result);
             }
             finally
             {
@@ -1932,7 +1932,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 key.SetValue("Value", (long)123456789123456789, RegistryValueKind.QWord);
                 string result = expander.ExpandIntoStringLeaveEscaped(@"$(Registry:HKEY_CURRENT_USER\Software\Microsoft\MSBuild_test@Value)", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-                Assert.Equal("123456789123456789", result);
+                Assert.AreEqual("123456789123456789", result);
             }
             finally
             {
@@ -1954,7 +1954,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 key.SetValue("Value", new string[] { "A", "B", "C", "D" }, RegistryValueKind.MultiString);
                 string result = expander.ExpandIntoStringLeaveEscaped(@"$(Registry:HKEY_CURRENT_USER\Software\Microsoft\MSBuild_test@Value)", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-                Assert.Equal("A;B;C;D", result);
+                Assert.AreEqual("A;B;C;D", result);
             }
             finally
             {
@@ -2047,7 +2047,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped("$([System.Convert]::ChangeType('null',$(SomeStuff.GetTypeCode())))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal("null", result);
+            Assert.AreEqual("null", result);
         }
 
         /// <summary>
@@ -2062,11 +2062,11 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             // The null-returning function is the only thing in the expression.
             string result = expander.ExpandIntoStringLeaveEscaped("$([System.Environment]::GetEnvironmentVariable(`_NonExistentVar`))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
-            Assert.Equal("", result);
+            Assert.AreEqual("", result);
 
             // The result of the null-returning function is concatenated with a non-empty string.
             result = expander.ExpandIntoStringLeaveEscaped("prefix_$([System.Environment]::GetEnvironmentVariable(`_NonExistentVar`))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
-            Assert.Equal("prefix_", result);
+            Assert.AreEqual("prefix_", result);
         }
 
         /// <summary>
@@ -2082,7 +2082,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped("$(SomeStuff.ToUpperInvariant())", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal("THIS IS SOME STUFF", result);
+            Assert.AreEqual("THIS IS SOME STUFF", result);
         }
 
         /// <summary>
@@ -2098,7 +2098,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped("$(FileName.Trim())", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal("foo.ext", result);
+            Assert.AreEqual("foo.ext", result);
         }
 
         /// <summary>
@@ -2114,7 +2114,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped("$(SomeStuff.Length)", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal("18", result);
+            Assert.AreEqual("18", result);
         }
 
         /// <summary>
@@ -2130,7 +2130,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped("$(SomeStuff.get_Length())", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal("18", result);
+            Assert.AreEqual("18", result);
         }
 
         /// <summary>
@@ -2146,7 +2146,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped("$(SomeStuff.ToLowerInvariant())_goop", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal("this is some stuff_goop", result);
+            Assert.AreEqual("this is some stuff_goop", result);
         }
 
         /// <summary>
@@ -2162,7 +2162,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped("$(SomeStuff.SubString(13))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal("STUff", result);
+            Assert.AreEqual("STUff", result);
         }
 
         /// <summary>
@@ -2178,7 +2178,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped("$(SomeStuff.SubString(8))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal("SOME STUff", result);
+            Assert.AreEqual("SOME STUff", result);
         }
 
         /// <summary>
@@ -2195,7 +2195,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped("$(MyPath.SubString($(RootPath.Length)))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(Path.Combine(Path.DirectorySeparatorChar.ToString(), "my", "project", "is", "here.proj"), result);
+            Assert.AreEqual(Path.Combine(Path.DirectorySeparatorChar.ToString(), "my", "project", "is", "here.proj"), result);
         }
 
         /// <summary>
@@ -2212,7 +2212,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped("$(SomeStuff.SubString(1$(Value)))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal("STUff", result);
+            Assert.AreEqual("STUff", result);
         }
 
         /// <summary>
@@ -2228,9 +2228,9 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Expander<ProjectPropertyInstance, ProjectItemInstance> expander = new Expander<ProjectPropertyInstance, ProjectItemInstance>(pg, FileSystems.Default);
 
             string result = expander.ExpandIntoStringLeaveEscaped(@"$(PathRoot2.Endswith(" + Path.DirectorySeparatorChar + "))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
-            Assert.Equal("True", result);
+            Assert.AreEqual("True", result);
             result = expander.ExpandIntoStringLeaveEscaped(@"$(PathRoot.Endswith(" + Path.DirectorySeparatorChar + "))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
-            Assert.Equal("False", result);
+            Assert.AreEqual("False", result);
         }
 
         /// <summary>
@@ -2247,7 +2247,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped("$(SomeStuff.SubString(1$(Value)).ToLowerInvariant().SubString($(Value)))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal("ff", result);
+            Assert.AreEqual("ff", result);
         }
 
 
@@ -2264,7 +2264,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Expander<ProjectPropertyInstance, ProjectItemInstance> expander = new Expander<ProjectPropertyInstance, ProjectItemInstance>(pg, FileSystems.Default);
 
             string result = expander.ExpandIntoStringLeaveEscaped("$(SomeStuff.ToUpperInvariant().ToLowerInvariant())", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
-            Assert.Equal("this is some stuff", result);
+            Assert.AreEqual("this is some stuff", result);
         }
 
         /// <summary>
@@ -2281,7 +2281,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped("$(SomeStuff.SubString($(Value.get_Length())))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal("67890", result);
+            Assert.AreEqual("67890", result);
         }
 
         /// <summary>
@@ -2296,7 +2296,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped("$([MSBuild]::__GetListTest())", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal("A;B;C;D", result);
+            Assert.AreEqual("A;B;C;D", result);
         }
 
         /// <summary>
@@ -2312,7 +2312,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped("$(List.Split(-))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal("A;B;C;D", result);
+            Assert.AreEqual("A;B;C;D", result);
         }
 
         /// <summary>
@@ -2347,7 +2347,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped("$(List.Split($(Splitter.ToCharArray())))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal("A;B;C;D", result);
+            Assert.AreEqual("A;B;C;D", result);
         }
 
         /// <summary>
@@ -2362,7 +2362,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             Expander<ProjectPropertyInstance, ProjectItemInstance> expander = new Expander<ProjectPropertyInstance, ProjectItemInstance>(pg, FileSystems.Default);
 
-            Assert.True(
+            Assert.IsTrue(
                 ConditionEvaluator.EvaluateCondition(
                     @"'$(PathRoot2.Endswith(`" + Path.DirectorySeparatorChar + "`))' == 'true'",
                     ParserOptions.AllowAll,
@@ -2372,7 +2372,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                     MockElementLocation.Instance,
                     FileSystems.Default,
                     new TestLoggingContext(null!, new BuildEventContext(1, 2, 3, 4))));
-            Assert.True(
+            Assert.IsTrue(
                 ConditionEvaluator.EvaluateCondition(
                     @"'$(PathRoot.EndsWith(" + Path.DirectorySeparatorChar + "))' == 'false'",
                     ParserOptions.AllowAll,
@@ -2529,7 +2529,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped("[%(LowerLetterList.Identity.ToUpper())]", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal("[%(LowerLetterList.Identity.ToUpper())]", result);
+            Assert.AreEqual("[%(LowerLetterList.Identity.ToUpper())]", result);
         }
 
         /// <summary>
@@ -2545,7 +2545,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped("$(System)", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal("The System Namespace", result);
+            Assert.AreEqual("The System Namespace", result);
         }
 
         /// <summary>
@@ -2564,7 +2564,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::MakeRelative($(ParentPath), `$(FilePath)`))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(@"foo.cpp", result);
+            Assert.AreEqual(@"foo.cpp", result);
         }
 
         /// <summary>
@@ -2581,7 +2581,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped(@"$([System.IO.Path]::Combine($(Drive), `$(File)`))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(Path.Combine(s_rootPathPrefix, "foo", "file.txt"), result);
+            Assert.AreEqual(Path.Combine(s_rootPathPrefix, "foo", "file.txt"), result);
         }
 
         /// <summary>
@@ -2601,10 +2601,10 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             Version v = (Version)result;
 
-            Assert.Equal(1, v.Major);
-            Assert.Equal(2, v.Minor);
-            Assert.Equal(3, v.Build);
-            Assert.Equal(4, v.Revision);
+            Assert.AreEqual(1, v.Major);
+            Assert.AreEqual(2, v.Minor);
+            Assert.AreEqual(3, v.Build);
+            Assert.AreEqual(4, v.Revision);
         }
 
         /// <summary>
@@ -2621,7 +2621,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped(@"$([System.Version]::new($(ver1)).CompareTo($([System.Version]::new($(ver2)))))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(@"-1", result);
+            Assert.AreEqual(@"-1", result);
         }
 
         /// <summary>
@@ -2642,7 +2642,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 {
                     string result = expander.ExpandIntoStringLeaveEscaped("$([System.Type]::GetType(`System.Type`))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-                    Assert.Equal("System.Type", result);
+                    Assert.AreEqual("System.Type", result);
                 }
                 finally
                 {
@@ -2670,8 +2670,8 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 string result = expander.ExpandIntoStringLeaveEscaped("$([System.Diagnostics.Process]::GetCurrentProcess().Id)", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
                 int pid;
-                Assert.True(int.TryParse(result, out pid));
-                Assert.Equal(System.Diagnostics.Process.GetCurrentProcess().Id, pid);
+                Assert.IsTrue(int.TryParse(result, out pid));
+                Assert.AreEqual(System.Diagnostics.Process.GetCurrentProcess().Id, pid);
             }
             finally
             {
@@ -2726,7 +2726,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped(@"$([System.IO.Path]::Combine(`" + s_rootPathPrefix + "`, `$(File)`))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(Path.Combine(s_rootPathPrefix, "foo", "file.txt"), result);
+            Assert.AreEqual(Path.Combine(s_rootPathPrefix, "foo", "file.txt"), result);
         }
 
         /// <summary>
@@ -2744,7 +2744,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 Path.Combine(s_rootPathPrefix, "foo goo") + "`, `$(File)`))",
                 ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(Path.Combine(s_rootPathPrefix, "foo goo", "foo goo", "file.txt"), result);
+            Assert.AreEqual(Path.Combine(s_rootPathPrefix, "foo goo", "foo goo", "file.txt"), result);
         }
 
         /// <summary>
@@ -2762,7 +2762,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 Path.Combine(s_rootPathPrefix, "foo baz") + @"`, `$(File)`))",
                 ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(Path.Combine(s_rootPathPrefix, "foo baz", "foo bar", "baz.txt"), result);
+            Assert.AreEqual(Path.Combine(s_rootPathPrefix, "foo baz", "foo bar", "baz.txt"), result);
         }
 
         /// <summary>
@@ -2779,7 +2779,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             string result = expander.ExpandIntoStringLeaveEscaped(@"$([System.IO.Path]::Combine(`" +
                 Path.Combine(s_rootPathPrefix, "foo baz") + @" `, `$(File)`))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(Path.Combine(s_rootPathPrefix, "foo baz ", "foo bar", "baz.txt"), result);
+            Assert.AreEqual(Path.Combine(s_rootPathPrefix, "foo baz ", "foo bar", "baz.txt"), result);
         }
 
         /// <summary>
@@ -2795,7 +2795,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             string dateTime = "'" + _dateToParse + "'";
             string result = expander.ExpandIntoStringLeaveEscaped("$([System.DateTime]::Parse(" + dateTime + ").ToString(\"yyyy/MM/dd HH:mm:ss\"))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(System.DateTime.Parse(_dateToParse).ToString("yyyy/MM/dd HH:mm:ss"), result);
+            Assert.AreEqual(System.DateTime.Parse(_dateToParse).ToString("yyyy/MM/dd HH:mm:ss"), result);
         }
 
         /// <summary>
@@ -2810,7 +2810,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             string dateTime = "'" + _dateToParse + "'";
             string result = expander.ExpandIntoStringLeaveEscaped("$([System.DateTime]::Parse(" + dateTime + ").ToString(\"MM.dd.yyyy\"))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(System.DateTime.Parse(_dateToParse).ToString("MM.dd.yyyy"), result);
+            Assert.AreEqual(System.DateTime.Parse(_dateToParse).ToString("MM.dd.yyyy"), result);
         }
 
         /// <summary>
@@ -2825,7 +2825,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped("$([System.DateTime]::Now.ToString(\"MM.dd.yyyy\"))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(DateTime.Now.ToString("MM.dd.yyyy"), result);
+            Assert.AreEqual(DateTime.Now.ToString("MM.dd.yyyy"), result);
         }
 
         /// <summary>
@@ -2843,7 +2843,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 s_rootPathPrefix +
                 @"`, $([System.IO.Path]::Combine(`foo`,`file.txt`))))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(Path.Combine(s_rootPathPrefix, "foo", "file.txt"), result);
+            Assert.AreEqual(Path.Combine(s_rootPathPrefix, "foo", "file.txt"), result);
         }
 
         /// <summary>
@@ -2860,16 +2860,16 @@ namespace Microsoft.Build.UnitTests.Evaluation
             // Support enum combines as Enum.Parse expects them
             string result = expander.ExpandIntoStringLeaveEscaped(@"$([System.Text.RegularExpressions.Regex]::IsMatch(`-42`, `^-?\d+(\.\d{2})?$`, `RegexOptions.IgnoreCase,RegexOptions.Singleline`))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(@"True", result);
+            Assert.AreEqual(@"True", result);
 
             // We support the C# style enum combining syntax too
             result = expander.ExpandIntoStringLeaveEscaped(@"$([System.Text.RegularExpressions.Regex]::IsMatch(`-42`, `^-?\d+(\.\d{2})?$`, System.Text.RegularExpressions.RegexOptions.IgnoreCase|RegexOptions.Singleline))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(@"True", result);
+            Assert.AreEqual(@"True", result);
 
             result = expander.ExpandIntoStringLeaveEscaped(@"$([System.Text.RegularExpressions.Regex]::IsMatch(`100 GBP`, `^-?\d+(\.\d{2})?$`))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(@"False", result);
+            Assert.AreEqual(@"False", result);
         }
 
         /// <summary>
@@ -2884,7 +2884,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             string dateTime = "'" + _dateToParse + "'";
             string result = expander.ExpandIntoStringLeaveEscaped(@"$([System.DateTime]::Parse(" + dateTime + ").ToString(`yyyy/MM/dd HH:mm:ss`))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(DateTime.Parse(_dateToParse).ToString("yyyy/MM/dd HH:mm:ss"), result);
+            Assert.AreEqual(DateTime.Parse(_dateToParse).ToString("yyyy/MM/dd HH:mm:ss"), result);
         }
 
         /// <summary>
@@ -2899,7 +2899,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped(@"$([System.Environment]::GetFolderPath(SpecialFolder.System))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(System.Environment.GetFolderPath(Environment.SpecialFolder.System), result);
+            Assert.AreEqual(System.Environment.GetFolderPath(Environment.SpecialFolder.System), result);
         }
 
         /// <summary>
@@ -2936,7 +2936,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             var result = expander.ExpandIntoStringLeaveEscaped(propertyFunction, ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(expectedExpansion, result);
+            Assert.AreEqual(expectedExpansion, result);
         }
 
         [Theory]
@@ -3274,7 +3274,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             var result = expander.ExpandIntoStringLeaveEscaped($"$([MSBuild]::IsOsPlatform({osPlatformLowerCase}))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal("True", result);
+            Assert.AreEqual("True", result);
         }
 
         [Theory]
@@ -3422,7 +3422,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 ExpanderOptions.ExpandProperties,
                 MockElementLocation.Instance);
 
-            Assert.Equal(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
@@ -3436,7 +3436,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             Expander<ProjectPropertyInstance, ProjectItemInstance> expander = new Expander<ProjectPropertyInstance, ProjectItemInstance>(pg, FileSystems.Default);
 
             string result = expander.ExpandIntoStringLeaveEscaped("$([System.String]::Equals(`a`, `A`, StringComparison.OrdinalIgnoreCase))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
-            Assert.Equal(true.ToString(), result);
+            Assert.AreEqual(true.ToString(), result);
         }
 
         /// <summary>
@@ -3460,11 +3460,11 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
                 string result = expander.ExpandIntoStringAndUnescape(@"$([MSBuild]::GetDirectoryNameOfFileAbove($(StartingDirectory), $(FileToFind)))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-                Assert.Equal(Microsoft.Build.Shared.FileUtilities.EnsureTrailingSlash(tempPath), Microsoft.Build.Shared.FileUtilities.EnsureTrailingSlash(result));
+                Assert.AreEqual(Microsoft.Build.Shared.FileUtilities.EnsureTrailingSlash(tempPath), Microsoft.Build.Shared.FileUtilities.EnsureTrailingSlash(result));
 
                 result = expander.ExpandIntoStringAndUnescape(@"$([MSBuild]::GetDirectoryNameOfFileAbove($(StartingDirectory), Hobbits))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-                Assert.Equal(String.Empty, result);
+                Assert.AreEqual(String.Empty, result);
             }
             finally
             {
@@ -3494,11 +3494,11 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
                 string result = expander.ExpandIntoStringAndUnescape(@"$([MSBuild]::GetPathOfFileAbove($(FileToFind)))", ExpanderOptions.ExpandProperties, mockElementLocation);
 
-                Assert.Equal(fileToFind, result);
+                Assert.AreEqual(fileToFind, result);
 
                 result = expander.ExpandIntoStringAndUnescape(@"$([MSBuild]::GetPathOfFileAbove('Hobbits'))", ExpanderOptions.ExpandProperties, mockElementLocation);
 
-                Assert.Equal(String.Empty, result);
+                Assert.AreEqual(String.Empty, result);
             }
             finally
             {
@@ -3557,7 +3557,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             string result = expander.ExpandIntoStringLeaveEscaped(@"$([System.Globalization.CultureInfo]::new(`en-US`).ToString())", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 #endif
 
-            Assert.Equal(new CultureInfo("en-US").ToString(), result);
+            Assert.AreEqual(new CultureInfo("en-US").ToString(), result);
         }
 
         /// <summary>
@@ -3572,7 +3572,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::Add(40, 2))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal((40 + 2).ToString(), result);
+            Assert.AreEqual((40 + 2).ToString(), result);
         }
 
         /// <summary>
@@ -3587,7 +3587,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::Add(39.9, 2.1))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal((39.9 + 2.1).ToString(), result);
+            Assert.AreEqual((39.9 + 2.1).ToString(), result);
         }
 
         /// <summary>
@@ -3602,11 +3602,11 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::ValueOrDefault('', '42'))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal("42", result);
+            Assert.AreEqual("42", result);
 
             result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::ValueOrDefault('42', '43'))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal("42", result);
+            Assert.AreEqual("42", result);
         }
 
         /// <summary>
@@ -3623,13 +3623,13 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::ValueOrDefault('$(DifferentTargetsPath)', '42'))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal("Different", result);
+            Assert.AreEqual("Different", result);
 
             pg["DifferentTargetsPath"] = ProjectPropertyInstance.Create("DifferentTargetsPath", String.Empty);
 
             result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::ValueOrDefault('$(DifferentTargetsPath)', '43'))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal("43", result);
+            Assert.AreEqual("43", result);
         }
 
 #if FEATURE_APPDOMAIN
@@ -3646,7 +3646,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             string result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::DoesTaskHostExist('CurrentRuntime', 'CurrentArchitecture'))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
             // This is the current, so it had better be true!
-            Assert.Equal("true", result, true);
+            Assert.AreEqual("true", result, true);
         }
 
         /// <summary>
@@ -3662,7 +3662,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             string result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::DoesTaskHostExist('   CurrentRuntime    ', 'CurrentArchitecture'))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
             // This is the current, so it had better be true!
-            Assert.Equal("true", result, true);
+            Assert.AreEqual("true", result, true);
         }
 #endif
 
@@ -3675,11 +3675,11 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 ProjectPropertyInstance.Create("MySecondPath", "two"),
             }), FileSystems.Default);
 
-            Assert.Equal(
+            Assert.AreEqual(
                 $"{Path.GetFullPath("one")}{Path.DirectorySeparatorChar}",
                 expander.ExpandIntoStringAndUnescape(@"$([MSBuild]::NormalizeDirectory($(MyPath)))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance));
 
-            Assert.Equal(
+            Assert.AreEqual(
                 $"{Path.GetFullPath(Path.Combine("one", "two"))}{Path.DirectorySeparatorChar}",
                 expander.ExpandIntoStringAndUnescape(@"$([MSBuild]::NormalizeDirectory($(MyPath), $(MySecondPath)))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance));
         }
@@ -3720,7 +3720,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             string result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::DoesTaskHostExist('$(Runtime)', '$(Architecture)'))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
             // This is the current, so it had better be true!
-            Assert.Equal("true", result, true);
+            Assert.AreEqual("true", result, true);
         }
 #endif
 
@@ -3744,7 +3744,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 string result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::DoesTaskHostExist('CLR2', 'CurrentArchitecture'))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
                 // CLR has been forced to pretend not to exist, whether it actually does or not
-                Assert.Equal("false", result, true);
+                Assert.AreEqual("false", result, true);
             }
             finally
             {
@@ -3773,7 +3773,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
                 string result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::BitwiseAnd(32,$([System.IO.File]::GetAttributes(" + tempFile + "))))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-                Assert.Equal("32", result);
+                Assert.AreEqual("32", result);
             }
             finally
             {
@@ -3795,43 +3795,43 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::Add(39.9, 2.1))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal((39.9 + 2.1).ToString(), result);
+            Assert.AreEqual((39.9 + 2.1).ToString(), result);
 
             result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::Add(40, 2))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal((40 + 2).ToString(), result);
+            Assert.AreEqual((40 + 2).ToString(), result);
 
             result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::Subtract(44, 2))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal((44 - 2).ToString(), result);
+            Assert.AreEqual((44 - 2).ToString(), result);
 
             result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::Subtract(42.9, 0.9))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal((42.9 - 0.9).ToString(), result);
+            Assert.AreEqual((42.9 - 0.9).ToString(), result);
 
             result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::Multiply(21, 2))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal((21 * 2).ToString(), result);
+            Assert.AreEqual((21 * 2).ToString(), result);
 
             result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::Multiply(84.0, 0.5))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal((84.0 * 0.5).ToString(), result);
+            Assert.AreEqual((84.0 * 0.5).ToString(), result);
 
             result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::Divide(84, 2))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal((84 / 2).ToString(), result);
+            Assert.AreEqual((84 / 2).ToString(), result);
 
             result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::Divide(84.4, 2.0))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal((84.4 / 2.0).ToString(), result);
+            Assert.AreEqual((84.4 / 2.0).ToString(), result);
 
             result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::Modulo(85, 2))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal((85 % 2).ToString(), result);
+            Assert.AreEqual((85 % 2).ToString(), result);
 
             result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::Modulo(2345.5, 43))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal((2345.5 % 43).ToString(), result);
+            Assert.AreEqual((2345.5 % 43).ToString(), result);
         }
 
         /// <summary>
@@ -3866,7 +3866,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped(@"$( SomeStuff )", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(String.Empty, result);
+            Assert.AreEqual(String.Empty, result);
         }
 
         [WindowsOnlyFact]
@@ -3885,7 +3885,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 key.SetValue("Value", "%" + envVar + "%", RegistryValueKind.ExpandString);
                 string result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::GetRegistryValue('HKEY_CURRENT_USER\Software\Microsoft\MSBuild_test', '$(SomeProperty)'))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-                Assert.Equal(Environment.GetEnvironmentVariable(envVar), result);
+                Assert.AreEqual(Environment.GetEnvironmentVariable(envVar), result);
             }
             finally
             {
@@ -3909,7 +3909,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 key.SetValue(String.Empty, "%" + envVar + "%", RegistryValueKind.ExpandString);
                 string result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::GetRegistryValue('HKEY_CURRENT_USER\Software\Microsoft\MSBuild_test', null))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-                Assert.Equal(Environment.GetEnvironmentVariable(envVar), result);
+                Assert.AreEqual(Environment.GetEnvironmentVariable(envVar), result);
             }
             finally
             {
@@ -3933,7 +3933,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 key.SetValue(String.Empty, "%" + envVar + "%", RegistryValueKind.ExpandString);
                 string result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::GetRegistryValueFromView('HKEY_CURRENT_USER\Software\Microsoft\MSBuild_test', null, null, RegistryView.Default, RegistryView.Default))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-                Assert.Equal(Environment.GetEnvironmentVariable(envVar), result);
+                Assert.AreEqual(Environment.GetEnvironmentVariable(envVar), result);
             }
             finally
             {
@@ -3957,7 +3957,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 key.SetValue(String.Empty, "%" + envVar + "%", RegistryValueKind.ExpandString);
                 string result = expander.ExpandIntoStringLeaveEscaped(@"$([MSBuild]::GetRegistryValueFromView('HKEY_CURRENT_USER\Software\Microsoft\MSBuild_test', null, null, Microsoft.Win32.RegistryView.Default))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-                Assert.Equal(Environment.GetEnvironmentVariable(envVar), result);
+                Assert.AreEqual(Environment.GetEnvironmentVariable(envVar), result);
             }
             finally
             {
@@ -3988,7 +3988,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             string result = expander.ExpandIntoStringLeaveEscaped(@"$([System.IO.Path]::Combine($(SomePath),%(Compile.Identity)))", ExpanderOptions.ExpandAll, MockElementLocation.Instance);
 
-            Assert.Equal(Path.Combine(s_rootPathPrefix, "some", "path", "fOo.Cs"), result);
+            Assert.AreEqual(Path.Combine(s_rootPathPrefix, "some", "path", "fOo.Cs"), result);
         }
 
         /// <summary>
@@ -4397,7 +4397,7 @@ $(
                     Console.WriteLine(errorTests[i] + " caused '" + ex.Message + "'");
                     caughtException = true;
                 }
-                Assert.True(
+                Assert.IsTrue(
                         !success || caughtException,
                         "FAILURE: Expected '" + errorTests[i] + "' to not parse or not be evaluated but it evaluated to '" + result + "'");
             }
@@ -4417,12 +4417,12 @@ $(
             // Verify a constant expands properly
             string result = expander.ExpandIntoStringLeaveEscaped($"$([MSBuild]::EnsureTrailingSlash('{path}'))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(path + Path.DirectorySeparatorChar, result);
+            Assert.AreEqual(path + Path.DirectorySeparatorChar, result);
 
             // Verify that a property expands properly
             result = expander.ExpandIntoStringLeaveEscaped("$([MSBuild]::EnsureTrailingSlash($(SomeProperty)))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(path + Path.DirectorySeparatorChar, result);
+            Assert.AreEqual(path + Path.DirectorySeparatorChar, result);
         }
 
         [Fact]
@@ -4488,7 +4488,7 @@ $(
 
             string result = expander.ExpandIntoStringLeaveEscaped("$([System.Guid]::NewGuid())", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.True(Guid.TryParse(result, out Guid guid));
+            Assert.IsTrue(Guid.TryParse(result, out Guid guid));
         }
 
         [Theory]
@@ -4500,7 +4500,7 @@ $(
 
             var result = expander.ExpandIntoStringLeaveEscaped($"$([MSBuild]::CheckFeatureAvailability({featureName}))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(availability, result);
+            Assert.AreEqual(availability, result);
         }
 
         [Theory]
@@ -4512,7 +4512,7 @@ $(
 
             var result = expander.ExpandIntoStringLeaveEscaped($"$([MSBuild]::SubstringByAsciiChars({featureName}, {start}, {length}))", ExpanderOptions.ExpandProperties, MockElementLocation.Instance);
 
-            Assert.Equal(expected, result);
+            Assert.AreEqual(expected, result);
         }
 
         [Fact]

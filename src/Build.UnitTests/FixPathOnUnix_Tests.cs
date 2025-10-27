@@ -47,7 +47,7 @@ namespace Microsoft.Build.UnitTests
             var project = projColln.LoadProject(buildProjectPath);
             var result = project.Build("Build");
 
-            Assert.True(result);
+            Assert.IsTrue(result);
 
             logger.AssertLogContains($"ItemMetadata: Md0 = {Path.Combine("lib", "foo.dll")}");
         }

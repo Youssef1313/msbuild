@@ -27,9 +27,9 @@ namespace Microsoft.Build.UnitTests
 
             Assert.Single(t.AssignedFiles);
             Assert.Single(t.CultureNeutralAssignedFiles);
-            Assert.Equal("fr", t.AssignedFiles[0].GetMetadata("Culture"));
-            Assert.Equal("MyResource.fr.resx", t.AssignedFiles[0].ItemSpec);
-            Assert.Equal("MyResource.resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
+            Assert.AreEqual("fr", t.AssignedFiles[0].GetMetadata("Culture"));
+            Assert.AreEqual("MyResource.fr.resx", t.AssignedFiles[0].ItemSpec);
+            Assert.AreEqual("MyResource.resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
         }
 
         /// <summary>
@@ -47,9 +47,9 @@ namespace Microsoft.Build.UnitTests
 
             Assert.Single(t.AssignedFiles);
             Assert.Single(t.CultureNeutralAssignedFiles);
-            Assert.Equal("fr", t.AssignedFiles[0].GetMetadata("Culture"));
-            Assert.Equal("MyResource.fr.resx", t.AssignedFiles[0].ItemSpec);
-            Assert.Equal("MyResource.resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
+            Assert.AreEqual("fr", t.AssignedFiles[0].GetMetadata("Culture"));
+            Assert.AreEqual("MyResource.fr.resx", t.AssignedFiles[0].ItemSpec);
+            Assert.AreEqual("MyResource.resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
         }
 
         /// <summary>
@@ -69,9 +69,9 @@ namespace Microsoft.Build.UnitTests
 
             Assert.Single(t.AssignedFiles);
             Assert.Single(t.CultureNeutralAssignedFiles);
-            Assert.Equal("fr", t.AssignedFiles[0].GetMetadata("Culture"));
-            Assert.Equal("MyResource.fr.resx", t.AssignedFiles[0].ItemSpec);
-            Assert.Equal("MyResource.resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
+            Assert.AreEqual("fr", t.AssignedFiles[0].GetMetadata("Culture"));
+            Assert.AreEqual("MyResource.fr.resx", t.AssignedFiles[0].ItemSpec);
+            Assert.AreEqual("MyResource.resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
         }
 
         /// <summary>
@@ -90,10 +90,10 @@ namespace Microsoft.Build.UnitTests
 
             Assert.Single(t.AssignedFiles);
             Assert.Single(t.CultureNeutralAssignedFiles);
-            Assert.Equal("fr", t.AssignedFiles[0].GetMetadata("Culture"));
-            Assert.Equal("My Random String", t.AssignedFiles[0].GetMetadata("MyAttribute"));
-            Assert.Equal("MyResource.fr.resx", t.AssignedFiles[0].ItemSpec);
-            Assert.Equal("MyResource.resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
+            Assert.AreEqual("fr", t.AssignedFiles[0].GetMetadata("Culture"));
+            Assert.AreEqual("My Random String", t.AssignedFiles[0].GetMetadata("MyAttribute"));
+            Assert.AreEqual("MyResource.fr.resx", t.AssignedFiles[0].ItemSpec);
+            Assert.AreEqual("MyResource.resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
         }
 
 
@@ -112,9 +112,9 @@ namespace Microsoft.Build.UnitTests
 
             Assert.Single(t.AssignedFiles);
             Assert.Single(t.CultureNeutralAssignedFiles);
-            Assert.Equal(String.Empty, t.AssignedFiles[0].GetMetadata("Culture"));
-            Assert.Equal("MyResource.resx", t.AssignedFiles[0].ItemSpec);
-            Assert.Equal("MyResource.resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
+            Assert.AreEqual(String.Empty, t.AssignedFiles[0].GetMetadata("Culture"));
+            Assert.AreEqual("MyResource.resx", t.AssignedFiles[0].ItemSpec);
+            Assert.AreEqual("MyResource.resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
         }
 
         /// <summary>
@@ -131,9 +131,9 @@ namespace Microsoft.Build.UnitTests
 
             Assert.Single(t.AssignedFiles);
             Assert.Single(t.CultureNeutralAssignedFiles);
-            Assert.Equal(String.Empty, t.AssignedFiles[0].GetMetadata("Culture"));
-            Assert.Equal("MyResource", t.AssignedFiles[0].ItemSpec);
-            Assert.Equal("MyResource", t.CultureNeutralAssignedFiles[0].ItemSpec);
+            Assert.AreEqual(String.Empty, t.AssignedFiles[0].GetMetadata("Culture"));
+            Assert.AreEqual("MyResource", t.AssignedFiles[0].ItemSpec);
+            Assert.AreEqual("MyResource", t.CultureNeutralAssignedFiles[0].ItemSpec);
         }
 
         /// <summary>
@@ -151,9 +151,9 @@ namespace Microsoft.Build.UnitTests
 
             Assert.Single(t.AssignedFiles);
             Assert.Single(t.CultureNeutralAssignedFiles);
-            Assert.Equal(String.Empty, t.AssignedFiles[0].GetMetadata("Culture"));
-            Assert.Equal("MyResource..resx", t.AssignedFiles[0].ItemSpec);
-            Assert.Equal("MyResource..resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
+            Assert.AreEqual(String.Empty, t.AssignedFiles[0].GetMetadata("Culture"));
+            Assert.AreEqual("MyResource..resx", t.AssignedFiles[0].ItemSpec);
+            Assert.AreEqual("MyResource..resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
         }
 
         /// <summary>
@@ -197,9 +197,9 @@ namespace Microsoft.Build.UnitTests
 
             Assert.Single(t.AssignedFiles);
             Assert.Single(t.CultureNeutralAssignedFiles);
-            Assert.Equal(culture, t.AssignedFiles[0].GetMetadata("Culture"));
-            Assert.Equal($"MyResource.{culture}.resx", t.AssignedFiles[0].ItemSpec);
-            Assert.Equal("MyResource.resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
+            Assert.AreEqual(culture, t.AssignedFiles[0].GetMetadata("Culture"));
+            Assert.AreEqual($"MyResource.{culture}.resx", t.AssignedFiles[0].ItemSpec);
+            Assert.AreEqual("MyResource.resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
         }
 
         /// <summary>
@@ -219,9 +219,9 @@ namespace Microsoft.Build.UnitTests
 
             Assert.Single(t.AssignedFiles);
             Assert.Single(t.CultureNeutralAssignedFiles);
-            Assert.Equal(culture, t.AssignedFiles[0].GetMetadata("Culture"));
-            Assert.Equal($"MyResource.{culture}.resx", t.AssignedFiles[0].ItemSpec);
-            Assert.Equal("MyResource.resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
+            Assert.AreEqual(culture, t.AssignedFiles[0].GetMetadata("Culture"));
+            Assert.AreEqual($"MyResource.{culture}.resx", t.AssignedFiles[0].ItemSpec);
+            Assert.AreEqual("MyResource.resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
         }
 
         [DotNetOnlyTheory(additionalMessage: "These cultures are not returned via Culture api on net472.")]
@@ -237,9 +237,9 @@ namespace Microsoft.Build.UnitTests
 
             Assert.Single(t.AssignedFiles);
             Assert.Single(t.CultureNeutralAssignedFiles);
-            Assert.Equal(culture, t.AssignedFiles[0].GetMetadata("Culture"));
-            Assert.Equal($"MyResource.{culture}.resx", t.AssignedFiles[0].ItemSpec);
-            Assert.Equal("MyResource.resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
+            Assert.AreEqual(culture, t.AssignedFiles[0].GetMetadata("Culture"));
+            Assert.AreEqual($"MyResource.{culture}.resx", t.AssignedFiles[0].ItemSpec);
+            Assert.AreEqual("MyResource.resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
         }
 
         [DotNetOnlyFact(additionalMessage: "Pseudoloc is special-cased in .NET relative to Framework.")]
@@ -254,10 +254,10 @@ namespace Microsoft.Build.UnitTests
 
             Assert.Single(t.AssignedFiles);
             Assert.Single(t.CultureNeutralAssignedFiles);
-            Assert.Equal("true", t.AssignedFiles[0].GetMetadata("WithCulture"));
-            Assert.Equal(culture, t.AssignedFiles[0].GetMetadata("Culture"));
-            Assert.Equal($"MyResource.{culture}.resx", t.AssignedFiles[0].ItemSpec);
-            Assert.Equal("MyResource.resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
+            Assert.AreEqual("true", t.AssignedFiles[0].GetMetadata("WithCulture"));
+            Assert.AreEqual(culture, t.AssignedFiles[0].GetMetadata("Culture"));
+            Assert.AreEqual($"MyResource.{culture}.resx", t.AssignedFiles[0].ItemSpec);
+            Assert.AreEqual("MyResource.resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
         }
 
         /// <summary>
@@ -276,9 +276,9 @@ namespace Microsoft.Build.UnitTests
 
             Assert.Single(t.AssignedFiles);
             Assert.Single(t.CultureNeutralAssignedFiles);
-            Assert.Equal("en-GB", t.AssignedFiles[0].GetMetadata("Culture"));
-            Assert.Equal("MyResource.fr.resx", t.AssignedFiles[0].ItemSpec);
-            Assert.Equal("MyResource.fr.resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
+            Assert.AreEqual("en-GB", t.AssignedFiles[0].GetMetadata("Culture"));
+            Assert.AreEqual("MyResource.fr.resx", t.AssignedFiles[0].ItemSpec);
+            Assert.AreEqual("MyResource.fr.resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
         }
 
         /// <summary>
@@ -297,9 +297,9 @@ namespace Microsoft.Build.UnitTests
 
             Assert.Single(t.AssignedFiles);
             Assert.Single(t.CultureNeutralAssignedFiles);
-            Assert.Equal("fr", t.AssignedFiles[0].GetMetadata("Culture"));
-            Assert.Equal("MyResource.fr.resx", t.AssignedFiles[0].ItemSpec);
-            Assert.Equal("MyResource.resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
+            Assert.AreEqual("fr", t.AssignedFiles[0].GetMetadata("Culture"));
+            Assert.AreEqual("MyResource.fr.resx", t.AssignedFiles[0].ItemSpec);
+            Assert.AreEqual("MyResource.resx", t.CultureNeutralAssignedFiles[0].ItemSpec);
         }
     }
 }

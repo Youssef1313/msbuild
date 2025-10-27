@@ -36,7 +36,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectItemDefinitionGroupElement itemDefinitionGroup = (ProjectItemDefinitionGroupElement)Helpers.GetFirst(project.Children);
             ProjectItemDefinitionElement itemDefinition = Helpers.GetFirst(itemDefinitionGroup.ItemDefinitions);
 
-            Assert.Equal(0, Helpers.Count(itemDefinition.Metadata));
+            Assert.AreEqual(0, Helpers.Count(itemDefinition.Metadata));
         }
 
         /// <summary>
@@ -60,10 +60,10 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectItemDefinitionGroupElement itemDefinitionGroup = (ProjectItemDefinitionGroupElement)Helpers.GetFirst(project.Children);
             ProjectItemDefinitionElement definition = Helpers.GetFirst(itemDefinitionGroup.ItemDefinitions);
 
-            Assert.Equal("i", definition.ItemType);
-            Assert.Equal(1, Helpers.Count(definition.Metadata));
-            Assert.Equal("m1", Helpers.GetFirst(definition.Metadata).Name);
-            Assert.Equal("v1", Helpers.GetFirst(definition.Metadata).Value);
+            Assert.AreEqual("i", definition.ItemType);
+            Assert.AreEqual(1, Helpers.Count(definition.Metadata));
+            Assert.AreEqual("m1", Helpers.GetFirst(definition.Metadata).Name);
+            Assert.AreEqual("v1", Helpers.GetFirst(definition.Metadata).Value);
         }
 
         /// <summary>
@@ -111,14 +111,14 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             var metadata = Helpers.MakeList(itemDefinition.Metadata);
 
-            Assert.Equal(3, metadata.Count);
-            Assert.Equal("m1", metadata[0].Name);
-            Assert.Equal("v1", metadata[0].Value);
-            Assert.Equal("m2", metadata[1].Name);
-            Assert.Equal("v2", metadata[1].Value);
-            Assert.Equal("c", metadata[1].Condition);
-            Assert.Equal("m1", metadata[2].Name);
-            Assert.Equal("v3", metadata[2].Value);
+            Assert.AreEqual(3, metadata.Count);
+            Assert.AreEqual("m1", metadata[0].Name);
+            Assert.AreEqual("v1", metadata[0].Value);
+            Assert.AreEqual("m2", metadata[1].Name);
+            Assert.AreEqual("v2", metadata[1].Value);
+            Assert.AreEqual("c", metadata[1].Condition);
+            Assert.AreEqual("m1", metadata[2].Name);
+            Assert.AreEqual("v3", metadata[2].Value);
         }
 
         /// <summary>
@@ -209,8 +209,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             itemDefinition.Condition = "c";
 
-            Assert.Equal("c", itemDefinition.Condition);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual("c", itemDefinition.Condition);
+            Assert.IsTrue(project.HasUnsavedChanges);
         }
     }
 }

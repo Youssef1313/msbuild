@@ -72,7 +72,7 @@ namespace Microsoft.Build.UnitTests.OM.Evaluation
             ProjectRootElement projectRootElement = ProjectRootElement.Create(rootedPath);
             ProjectRootElement projectRootElement2 = ProjectCollection.GlobalProjectCollection.ProjectRootElementCache.Get(rootedPath, (p, c) => { throw new InvalidOperationException(); }, true, false);
 
-            Assert.Same(projectRootElement, projectRootElement2);
+            Assert.AreSame(projectRootElement, projectRootElement2);
         }
 
         /// <summary>
@@ -89,13 +89,13 @@ namespace Microsoft.Build.UnitTests.OM.Evaluation
 
             projectRootElement = ProjectCollection.GlobalProjectCollection.ProjectRootElementCache.Get(projectPath, (p, c) => { throw new InvalidOperationException(); }, true, false);
 
-            Assert.NotNull(projectRootElement);
+            Assert.IsNotNull(projectRootElement);
 
             ProjectCollection.GlobalProjectCollection.ProjectRootElementCache.DiscardStrongReferences();
             projectRootElement = null;
             GC.Collect();
 
-            Assert.Null(ProjectCollection.GlobalProjectCollection.ProjectRootElementCache.TryGet(projectPath));
+            Assert.IsNull(ProjectCollection.GlobalProjectCollection.ProjectRootElementCache.TryGet(projectPath));
         }
 
         /// <summary>
@@ -119,12 +119,12 @@ namespace Microsoft.Build.UnitTests.OM.Evaluation
                 cache.AddEntry(xml0);
 
                 ProjectRootElement xml1 = cache.TryGet(path);
-                Assert.True(Object.ReferenceEquals(xml0, xml1));
+                Assert.IsTrue(Object.ReferenceEquals(xml0, xml1));
 
                 File.SetLastWriteTime(path, DateTime.Now + new TimeSpan(1, 0, 0));
 
                 ProjectRootElement xml2 = cache.TryGet(path);
-                Assert.False(Object.ReferenceEquals(xml0, xml2));
+                Assert.IsFalse(Object.ReferenceEquals(xml0, xml2));
             }
             finally
             {
@@ -153,12 +153,12 @@ namespace Microsoft.Build.UnitTests.OM.Evaluation
                 cache.AddEntry(xml0);
 
                 ProjectRootElement xml1 = cache.TryGet(path);
-                Assert.True(Object.ReferenceEquals(xml0, xml1));
+                Assert.IsTrue(Object.ReferenceEquals(xml0, xml1));
 
                 File.SetLastWriteTime(path, DateTime.Now + new TimeSpan(1, 0, 0));
 
                 ProjectRootElement xml2 = cache.TryGet(path);
-                Assert.True(Object.ReferenceEquals(xml0, xml2));
+                Assert.IsTrue(Object.ReferenceEquals(xml0, xml2));
             }
             finally
             {

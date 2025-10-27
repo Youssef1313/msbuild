@@ -33,7 +33,7 @@ namespace Microsoft.Build.UnitTests
             task.OutputFile = new TaskItem("foo");
             bool result = task.Execute();
 
-            Assert.False(result);
+            Assert.IsFalse(result);
             engine.AssertLogContains("MSB3712");
         }
 
@@ -49,7 +49,7 @@ namespace Microsoft.Build.UnitTests
             task.OutputFile = new TaskItem("foo");
             bool result = task.Execute();
 
-            Assert.False(result);
+            Assert.IsFalse(result);
             engine.AssertLogContains("MSB3098");
         }
 
@@ -65,7 +65,7 @@ namespace Microsoft.Build.UnitTests
             task.Language = "c#";
             bool result = task.Execute();
 
-            Assert.False(result);
+            Assert.IsFalse(result);
             engine.AssertLogContains("MSB3711");
         }
 
@@ -84,11 +84,11 @@ namespace Microsoft.Build.UnitTests
             task.OutputDirectory = new TaskItem(Path.GetTempPath());
             bool result = task.Execute();
 
-            Assert.True(result);
+            Assert.IsTrue(result);
 
             string file = Path.Combine(Path.GetTempPath(), "CombineFileDirectory.tmp");
-            Assert.Equal(file, task.OutputFile.ItemSpec);
-            Assert.True(File.Exists(file));
+            Assert.AreEqual(file, task.OutputFile.ItemSpec);
+            Assert.IsTrue(File.Exists(file));
 
             File.Delete(task.OutputFile.ItemSpec);
         }
@@ -111,9 +111,9 @@ namespace Microsoft.Build.UnitTests
             task.BuildEngine = engine;
             bool result = task.Execute();
 
-            Assert.True(result);
-            Assert.Equal(expectedFile, task.OutputFile.ItemSpec);
-            Assert.True(File.Exists(expectedFile));
+            Assert.IsTrue(result);
+            Assert.AreEqual(expectedFile, task.OutputFile.ItemSpec);
+            Assert.IsTrue(File.Exists(expectedFile));
         }
 
         /// <summary>
@@ -131,9 +131,9 @@ namespace Microsoft.Build.UnitTests
             task.BuildEngine = engine;
             bool result = task.Execute();
 
-            Assert.True(result);
-            Assert.Equal(file.ItemSpec, task.OutputFile.ItemSpec);
-            Assert.True(File.Exists(task.OutputFile.ItemSpec));
+            Assert.IsTrue(result);
+            Assert.AreEqual(file.ItemSpec, task.OutputFile.ItemSpec);
+            Assert.IsTrue(File.Exists(task.OutputFile.ItemSpec));
         }
 
         /// <summary>
@@ -154,10 +154,10 @@ namespace Microsoft.Build.UnitTests
             task.OutputFile = new TaskItem(fileName);
             bool result = task.Execute();
 
-            Assert.True(result);
+            Assert.IsTrue(result);
 
-            Assert.Equal(fileName, task.OutputFile.ItemSpec);
-            Assert.True(File.Exists(file.Path));
+            Assert.AreEqual(fileName, task.OutputFile.ItemSpec);
+            Assert.IsTrue(File.Exists(file.Path));
         }
 
         /// <summary>
@@ -179,10 +179,10 @@ namespace Microsoft.Build.UnitTests
             task.OutputDirectory = new TaskItem("c:\\");
             bool result = task.Execute();
 
-            Assert.True(result);
+            Assert.IsTrue(result);
 
-            Assert.Equal(file, task.OutputFile.ItemSpec);
-            Assert.True(File.Exists(file));
+            Assert.AreEqual(file, task.OutputFile.ItemSpec);
+            Assert.IsTrue(File.Exists(file));
 
             FileUtilities.DeleteWithoutTrailingBackslash(folder, true);
         }
@@ -209,9 +209,9 @@ namespace Microsoft.Build.UnitTests
             task.OutputFile = new TaskItem(file);
             bool result = task.Execute();
 
-            Assert.True(result);
-            Assert.False(File.Exists(file));
-            Assert.Null(task.OutputFile);
+            Assert.IsTrue(result);
+            Assert.IsFalse(File.Exists(file));
+            Assert.IsNull(task.OutputFile);
         }
 
         /// <summary>
@@ -236,9 +236,9 @@ namespace Microsoft.Build.UnitTests
             task.OutputFile = new TaskItem(file);
             bool result = task.Execute();
 
-            Assert.True(result);
-            Assert.False(File.Exists(file));
-            Assert.Null(task.OutputFile);
+            Assert.IsTrue(result);
+            Assert.IsFalse(File.Exists(file));
+            Assert.IsNull(task.OutputFile);
         }
 
         /// <summary>
@@ -255,7 +255,7 @@ namespace Microsoft.Build.UnitTests
             task.OutputFile = new TaskItem("||//invalid||");
             bool result = task.Execute();
 
-            Assert.False(result);
+            Assert.IsFalse(result);
             engine.AssertLogContains("MSB3713");
         }
 
@@ -273,7 +273,7 @@ namespace Microsoft.Build.UnitTests
             task.OutputDirectory = new TaskItem("||invalid||");
             bool result = task.Execute();
 
-            Assert.False(result);
+            Assert.IsFalse(result);
             engine.AssertLogContains("MSB3713");
         }
 
@@ -296,8 +296,8 @@ namespace Microsoft.Build.UnitTests
                 task.OutputFile = new TaskItem(file);
                 bool result = task.Execute();
 
-                Assert.True(result);
-                Assert.True(File.Exists(file));
+                Assert.IsTrue(result);
+                Assert.IsTrue(File.Exists(file));
 
                 string content = File.ReadAllText(file);
                 Console.WriteLine(content);
@@ -325,7 +325,7 @@ namespace Microsoft.Build.UnitTests
             task.OutputDirectory = new TaskItem(Path.GetTempPath());
             bool result = task.Execute();
 
-            Assert.True(result);
+            Assert.IsTrue(result);
 
             string content = File.ReadAllText(task.OutputFile.ItemSpec);
             Console.WriteLine(content);
@@ -351,7 +351,7 @@ namespace Microsoft.Build.UnitTests
             task.OutputDirectory = new TaskItem(Path.GetTempPath());
             bool result = task.Execute();
 
-            Assert.True(result);
+            Assert.IsTrue(result);
 
             string content = File.ReadAllText(task.OutputFile.ItemSpec);
             Console.WriteLine(content);
@@ -377,10 +377,10 @@ namespace Microsoft.Build.UnitTests
             task.OutputDirectory = new TaskItem(Path.GetTempPath());
             bool result = task.Execute();
 
-            Assert.True(result);
-            Assert.True(File.Exists(task.OutputFile.ItemSpec));
-            Assert.Equal(Path.GetTempPath(), task.OutputFile.ItemSpec.Substring(0, Path.GetTempPath().Length));
-            Assert.Equal(".cs", task.OutputFile.ItemSpec.Substring(task.OutputFile.ItemSpec.Length - 3));
+            Assert.IsTrue(result);
+            Assert.IsTrue(File.Exists(task.OutputFile.ItemSpec));
+            Assert.AreEqual(Path.GetTempPath(), task.OutputFile.ItemSpec.Substring(0, Path.GetTempPath().Length));
+            Assert.AreEqual(".cs", task.OutputFile.ItemSpec.Substring(task.OutputFile.ItemSpec.Length - 3));
 
             File.Delete(task.OutputFile.ItemSpec);
         }
@@ -400,10 +400,10 @@ namespace Microsoft.Build.UnitTests
             task.BuildEngine = engine;
             bool result = task.Execute();
 
-            Assert.True(result);
-            Assert.True(File.Exists(task.OutputFile.ItemSpec));
-            Assert.Equal(folder.ItemSpec, task.OutputFile.ItemSpec.Substring(0, folder.ItemSpec.Length));
-            Assert.Equal(".cs", task.OutputFile.ItemSpec.Substring(task.OutputFile.ItemSpec.Length - 3));
+            Assert.IsTrue(result);
+            Assert.IsTrue(File.Exists(task.OutputFile.ItemSpec));
+            Assert.AreEqual(folder.ItemSpec, task.OutputFile.ItemSpec.Substring(0, folder.ItemSpec.Length));
+            Assert.AreEqual(".cs", task.OutputFile.ItemSpec.Substring(task.OutputFile.ItemSpec.Length - 3));
         }
 
         /// <summary>
@@ -427,8 +427,8 @@ namespace Microsoft.Build.UnitTests
                 task.OutputFile = new TaskItem(file);
                 bool result = task.Execute();
 
-                Assert.True(result);
-                Assert.True(File.Exists(file));
+                Assert.IsTrue(result);
+                Assert.IsTrue(File.Exists(file));
 
                 string content = File.ReadAllText(file);
                 Console.WriteLine(content);
@@ -458,7 +458,7 @@ namespace Microsoft.Build.UnitTests
             task.OutputDirectory = new TaskItem(Path.GetTempPath());
             bool result = task.Execute();
 
-            Assert.True(result);
+            Assert.IsTrue(result);
 
             File.Delete(task.OutputFile.ItemSpec);
         }
@@ -480,7 +480,7 @@ namespace Microsoft.Build.UnitTests
             task.OutputDirectory = new TaskItem(Path.GetTempPath());
             bool result = task.Execute();
 
-            Assert.False(result);
+            Assert.IsFalse(result);
 
             engine.AssertLogContains("MSB3098");
         }
@@ -504,7 +504,7 @@ namespace Microsoft.Build.UnitTests
             task.OutputDirectory = new TaskItem(Path.GetTempPath());
             bool result = task.Execute();
 
-            Assert.True(result);
+            Assert.IsTrue(result);
 
             string content = File.ReadAllText(task.OutputFile.ItemSpec);
             Console.WriteLine(content);
@@ -528,7 +528,7 @@ namespace Microsoft.Build.UnitTests
             task.OutputDirectory = new TaskItem(Path.GetTempPath());
             bool result = task.Execute();
 
-            Assert.True(result);
+            Assert.IsTrue(result);
 
             string content = File.ReadAllText(task.OutputFile.ItemSpec);
             Console.WriteLine(content);
@@ -560,7 +560,7 @@ namespace Microsoft.Build.UnitTests
             task.OutputDirectory = new TaskItem(Path.GetTempPath());
             bool result = task.Execute();
 
-            Assert.True(result);
+            Assert.IsTrue(result);
 
             string content = File.ReadAllText(task.OutputFile.ItemSpec);
             Console.WriteLine(content);
@@ -596,7 +596,7 @@ namespace Microsoft.Build.UnitTests
             task.OutputDirectory = new TaskItem(Path.GetTempPath());
             bool result = task.Execute();
 
-            Assert.True(result);
+            Assert.IsTrue(result);
 
             string content = File.ReadAllText(task.OutputFile.ItemSpec);
             Console.WriteLine(content);
@@ -628,7 +628,7 @@ namespace Microsoft.Build.UnitTests
             task.OutputDirectory = new TaskItem(Path.GetTempPath());
             bool result = task.Execute();
 
-            Assert.False(result);
+            Assert.IsFalse(result);
 
             engine.AssertLogContains("MSB3714");
         }
@@ -651,7 +651,7 @@ namespace Microsoft.Build.UnitTests
             task.OutputDirectory = new TaskItem(Path.GetTempPath());
             bool result = task.Execute();
 
-            Assert.False(result);
+            Assert.IsFalse(result);
 
             engine.AssertLogContains("MSB3098");
         }
@@ -674,7 +674,7 @@ namespace Microsoft.Build.UnitTests
             task.OutputDirectory = new TaskItem(Path.GetTempPath());
             bool result = task.Execute();
 
-            Assert.False(result);
+            Assert.IsFalse(result);
 
             engine.AssertLogContains("MSB3098");
         }
@@ -699,7 +699,7 @@ namespace Microsoft.Build.UnitTests
             task.OutputDirectory = new TaskItem(Path.GetTempPath());
             bool result = task.Execute();
 
-            Assert.True(result);
+            Assert.IsTrue(result);
 
             string content = File.ReadAllText(task.OutputFile.ItemSpec);
             Console.WriteLine(content);
@@ -732,7 +732,7 @@ namespace Microsoft.Build.UnitTests
             task.OutputDirectory = new TaskItem(Path.GetTempPath());
             bool result = task.Execute();
 
-            Assert.True(result);
+            Assert.IsTrue(result);
 
             string content = File.ReadAllText(task.OutputFile.ItemSpec);
             Console.WriteLine(content);
@@ -1119,7 +1119,7 @@ namespace Microsoft.Build.UnitTests
 
                 // Provide the log output as the user message so that the assertion failure
                 // message is a bit more meaningful than just "Expected false to equal true".
-                Assert.True(result, engine.Log);
+                Assert.IsTrue(result, engine.Log);
 
                 string content = File.ReadAllText(task.OutputFile.ItemSpec);
                 Console.WriteLine(content);
@@ -1153,7 +1153,7 @@ namespace Microsoft.Build.UnitTests
 
                 // Provide the log output as the user message so that the assertion failure
                 // message is a bit more meaningful than just "Expected true to equal false".
-                Assert.False(result, engine.Log);
+                Assert.IsFalse(result, engine.Log);
 
                 engine.AssertLogContains(errorCode);
             }

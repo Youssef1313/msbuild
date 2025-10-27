@@ -339,7 +339,7 @@ namespace Microsoft.Build.UnitTests
 
             var actualMetadata = metadataContainer.EnumerateMetadata().OrderBy(metadata => metadata.Key).ToList();
             var expectedMetadata = metadata.OrderBy(metadata => metadata.Value).ToList();
-            Assert.True(actualMetadata.SequenceEqual(expectedMetadata));
+            Assert.IsTrue(actualMetadata.SequenceEqual(expectedMetadata));
         }
 
 #if FEATURE_APPDOMAIN

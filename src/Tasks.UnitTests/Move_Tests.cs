@@ -43,14 +43,14 @@ namespace Microsoft.Build.UnitTests
                 t.SourceFiles = sourceFiles;
                 t.DestinationFiles = destinationFiles;
 
-                Assert.True(t.Execute());
+                Assert.IsTrue(t.Execute());
 
-                Assert.False(File.Exists(sourceFile)); // "Expected the source file to be gone."
-                Assert.True(File.Exists(destinationFile)); // "Expected the destination file to exist."
+                Assert.IsFalse(File.Exists(sourceFile)); // "Expected the source file to be gone."
+                Assert.IsTrue(File.Exists(destinationFile)); // "Expected the destination file to exist."
                 Assert.Single(t.DestinationFiles);
-                Assert.Equal(destinationFile, t.DestinationFiles[0].ItemSpec);
+                Assert.AreEqual(destinationFile, t.DestinationFiles[0].ItemSpec);
                 Assert.Single(t.MovedFiles);
-                Assert.True(((new FileInfo(destinationFile)).Attributes & FileAttributes.ReadOnly) == 0); // should have cleared r/o bit
+                Assert.IsTrue(((new FileInfo(destinationFile)).Attributes & FileAttributes.ReadOnly) == 0); // should have cleared r/o bit
             }
             finally
             {
@@ -89,14 +89,14 @@ namespace Microsoft.Build.UnitTests
                 t.OverwriteReadOnlyFiles = true;
                 t.DestinationFiles = destinationFiles;
 
-                Assert.True(t.Execute());
+                Assert.IsTrue(t.Execute());
 
-                Assert.False(File.Exists(sourceFile)); // "Expected the source file to be gone."
-                Assert.True(File.Exists(destinationFile)); // "Expected the destination file to exist."
+                Assert.IsFalse(File.Exists(sourceFile)); // "Expected the source file to be gone."
+                Assert.IsTrue(File.Exists(destinationFile)); // "Expected the destination file to exist."
                 Assert.Single(t.DestinationFiles);
-                Assert.Equal(destinationFile, t.DestinationFiles[0].ItemSpec);
+                Assert.AreEqual(destinationFile, t.DestinationFiles[0].ItemSpec);
                 Assert.Single(t.MovedFiles);
-                Assert.True(((new FileInfo(destinationFile)).Attributes & FileAttributes.ReadOnly) == 0); // should have cleared r/o bit
+                Assert.IsTrue(((new FileInfo(destinationFile)).Attributes & FileAttributes.ReadOnly) == 0); // should have cleared r/o bit
             }
             finally
             {
@@ -137,12 +137,12 @@ namespace Microsoft.Build.UnitTests
                 t.SourceFiles = sourceFiles;
                 t.DestinationFiles = destinationFiles;
 
-                Assert.False(t.Execute());
+                Assert.IsFalse(t.Execute());
 
-                Assert.False(File.Exists(sourceFile)); // "Expected the source file to still not exist."
-                Assert.True(File.Exists(destinationFile)); // "Expected the destination file to still exist."
+                Assert.IsFalse(File.Exists(sourceFile)); // "Expected the source file to still not exist."
+                Assert.IsTrue(File.Exists(destinationFile)); // "Expected the destination file to still exist."
                 Assert.Single(t.DestinationFiles);
-                Assert.Equal(destinationFile, t.DestinationFiles[0].ItemSpec);
+                Assert.AreEqual(destinationFile, t.DestinationFiles[0].ItemSpec);
                 Assert.Empty(t.MovedFiles);
 
                 string destinationFileContents;
@@ -151,7 +151,7 @@ namespace Microsoft.Build.UnitTests
                     destinationFileContents = sr.ReadToEnd();
                 }
 
-                Assert.Equal("This is a destination temp file.", destinationFileContents); // "Expected the destination file to still contain the contents of destination file."
+                Assert.AreEqual("This is a destination temp file.", destinationFileContents); // "Expected the destination file to still contain the contents of destination file."
             }
             finally
             {
@@ -184,10 +184,10 @@ namespace Microsoft.Build.UnitTests
                 t.DestinationFiles = destinationFiles;
 
                 // Success
-                Assert.True(t.Execute());
+                Assert.IsTrue(t.Execute());
 
                 // File is still there.
-                Assert.True(File.Exists(sourceFile)); // "Source file should be there"
+                Assert.IsTrue(File.Exists(sourceFile)); // "Source file should be there"
             }
             finally
             {
@@ -226,9 +226,9 @@ namespace Microsoft.Build.UnitTests
                 t.SourceFiles = sourceFiles;
                 t.DestinationFiles = destinationFiles;
 
-                Assert.False(t.Execute());
+                Assert.IsFalse(t.Execute());
 
-                Assert.True(File.Exists(sourceFile)); // "Source file should be present"
+                Assert.IsTrue(File.Exists(sourceFile)); // "Source file should be present"
 
                 string destinationFileContents;
                 using (StreamReader sr = FileUtilities.OpenRead(destinationFile))
@@ -236,9 +236,9 @@ namespace Microsoft.Build.UnitTests
                     destinationFileContents = sr.ReadToEnd();
                 }
 
-                Assert.Equal("This is a destination temp file.", destinationFileContents); // "Expected the destination file to be unchanged."
+                Assert.AreEqual("This is a destination temp file.", destinationFileContents); // "Expected the destination file to be unchanged."
 
-                Assert.True(((new FileInfo(destinationFile)).Attributes & FileAttributes.ReadOnly) != 0); // should still be r/o
+                Assert.IsTrue(((new FileInfo(destinationFile)).Attributes & FileAttributes.ReadOnly) != 0); // should still be r/o
             }
             finally
             {
@@ -280,7 +280,7 @@ namespace Microsoft.Build.UnitTests
 
                 t.Execute();
 
-                Assert.False(File.Exists(sourceFile)); // "Source file should be gone"
+                Assert.IsFalse(File.Exists(sourceFile)); // "Source file should be gone"
 
                 string destinationFileContents;
                 using (StreamReader sr = FileUtilities.OpenRead(destinationFile))
@@ -288,7 +288,7 @@ namespace Microsoft.Build.UnitTests
                     destinationFileContents = sr.ReadToEnd();
                 }
 
-                Assert.Equal("This is a source temp file.", destinationFileContents); // "Expected the destination file to contain the contents of source file."
+                Assert.AreEqual("This is a source temp file.", destinationFileContents); // "Expected the destination file to contain the contents of source file."
             }
             finally
             {
@@ -336,7 +336,7 @@ namespace Microsoft.Build.UnitTests
 
                 t.Execute();
 
-                Assert.False(File.Exists(sourceFile)); // "Source file should be gone"
+                Assert.IsFalse(File.Exists(sourceFile)); // "Source file should be gone"
 
                 string destinationFileContents;
                 using (StreamReader sr = FileUtilities.OpenRead(destinationFile))
@@ -344,9 +344,9 @@ namespace Microsoft.Build.UnitTests
                     destinationFileContents = sr.ReadToEnd();
                 }
 
-                Assert.Equal("This is a source temp file.", destinationFileContents); // "Expected the destination file to contain the contents of source file."
+                Assert.AreEqual("This is a source temp file.", destinationFileContents); // "Expected the destination file to contain the contents of source file."
 
-                Assert.True(((new FileInfo(destinationFile)).Attributes & FileAttributes.ReadOnly) == 0); // readonly bit should not be set
+                Assert.IsTrue(((new FileInfo(destinationFile)).Attributes & FileAttributes.ReadOnly) == 0); // readonly bit should not be set
             }
             finally
             {
@@ -390,7 +390,7 @@ namespace Microsoft.Build.UnitTests
 
                 t.Execute();
 
-                Assert.False(File.Exists(sourceFile)); // "Source file should be gone"
+                Assert.IsFalse(File.Exists(sourceFile)); // "Source file should be gone"
 
                 string destinationFileContents;
                 using (StreamReader sr = FileUtilities.OpenRead(destinationFile))
@@ -398,9 +398,9 @@ namespace Microsoft.Build.UnitTests
                     destinationFileContents = sr.ReadToEnd();
                 }
 
-                Assert.Equal("This is a source temp file.", destinationFileContents); // "Expected the destination file to contain the contents of source file."
+                Assert.AreEqual("This is a source temp file.", destinationFileContents); // "Expected the destination file to contain the contents of source file."
 
-                Assert.True(((new FileInfo(destinationFile)).Attributes & FileAttributes.ReadOnly) == 0); // should have cleared r/o bit
+                Assert.IsTrue(((new FileInfo(destinationFile)).Attributes & FileAttributes.ReadOnly) == 0); // should have cleared r/o bit
             }
             finally
             {
@@ -454,32 +454,32 @@ namespace Microsoft.Build.UnitTests
 
                 bool success = t.Execute();
 
-                Assert.False(success);
+                Assert.IsFalse(success);
                 Assert.Single(t.MovedFiles);
-                Assert.Equal(validOutFile, t.MovedFiles[0].ItemSpec);
-                Assert.Equal(2, t.DestinationFiles.Length);
-                Assert.Equal("fr", t.DestinationFiles[1].GetMetadata("Locale"));
+                Assert.AreEqual(validOutFile, t.MovedFiles[0].ItemSpec);
+                Assert.AreEqual(2, t.DestinationFiles.Length);
+                Assert.AreEqual("fr", t.DestinationFiles[1].GetMetadata("Locale"));
 
                 // Output ItemSpec should not be overwritten.
-                Assert.Equal(invalidFile, t.DestinationFiles[0].ItemSpec);
-                Assert.Equal(validOutFile, t.DestinationFiles[1].ItemSpec);
-                Assert.Equal(validOutFile, t.MovedFiles[0].ItemSpec);
+                Assert.AreEqual(invalidFile, t.DestinationFiles[0].ItemSpec);
+                Assert.AreEqual(validOutFile, t.DestinationFiles[1].ItemSpec);
+                Assert.AreEqual(validOutFile, t.MovedFiles[0].ItemSpec);
 
                 // Sources attributes should be left untouched.
-                Assert.Equal("en-GB", t.SourceFiles[1].GetMetadata("Locale"));
-                Assert.Equal("taupe", t.SourceFiles[1].GetMetadata("Color"));
+                Assert.AreEqual("en-GB", t.SourceFiles[1].GetMetadata("Locale"));
+                Assert.AreEqual("taupe", t.SourceFiles[1].GetMetadata("Color"));
 
                 // Attributes not on Sources should be left untouched.
-                Assert.Equal("Pumpkin", t.DestinationFiles[1].GetMetadata("Flavor"));
-                Assert.Equal("Pumpkin", t.MovedFiles[0].GetMetadata("Flavor"));
+                Assert.AreEqual("Pumpkin", t.DestinationFiles[1].GetMetadata("Flavor"));
+                Assert.AreEqual("Pumpkin", t.MovedFiles[0].GetMetadata("Flavor"));
 
                 // Attribute should have been forwarded
-                Assert.Equal("taupe", t.DestinationFiles[1].GetMetadata("Color"));
-                Assert.Equal("taupe", t.MovedFiles[0].GetMetadata("Color"));
+                Assert.AreEqual("taupe", t.DestinationFiles[1].GetMetadata("Color"));
+                Assert.AreEqual("taupe", t.MovedFiles[0].GetMetadata("Color"));
 
                 // Attribute should not have been updated if it already existed on destination
-                Assert.Equal("fr", t.DestinationFiles[1].GetMetadata("Locale"));
-                Assert.Equal("fr", t.MovedFiles[0].GetMetadata("Locale"));
+                Assert.AreEqual("fr", t.DestinationFiles[1].GetMetadata("Locale"));
+                Assert.AreEqual("fr", t.MovedFiles[0].GetMetadata("Locale"));
             }
             finally
             {
@@ -512,9 +512,9 @@ namespace Microsoft.Build.UnitTests
                     result = move.Execute();
                 }
 
-                Assert.False(result);
+                Assert.IsFalse(result);
                 ((MockEngine)move.BuildEngine).AssertLogContains("MSB3677");
-                Assert.False(File.Exists(file + "2"));
+                Assert.IsFalse(File.Exists(file + "2"));
             }
             finally
             {
@@ -532,7 +532,7 @@ namespace Microsoft.Build.UnitTests
             move.BuildEngine = new MockEngine();
             move.SourceFiles = new ITaskItem[] { new TaskItem("source") };
 
-            Assert.False(move.Execute());
+            Assert.IsFalse(move.Execute());
             ((MockEngine)move.BuildEngine).AssertLogContains("MSB3679");
         }
 
@@ -548,7 +548,7 @@ namespace Microsoft.Build.UnitTests
             move.DestinationFiles = new ITaskItem[] { new TaskItem("x") };
             move.DestinationFolder = new TaskItem(Directory.GetCurrentDirectory());
 
-            Assert.False(move.Execute());
+            Assert.IsFalse(move.Execute());
             ((MockEngine)move.BuildEngine).AssertLogContains("MSB3678");
         }
 
@@ -563,7 +563,7 @@ namespace Microsoft.Build.UnitTests
             move.SourceFiles = new ITaskItem[] { new TaskItem("source") };
             move.DestinationFiles = new ITaskItem[] { new TaskItem(Directory.GetCurrentDirectory()) };
 
-            Assert.False(move.Execute());
+            Assert.IsFalse(move.Execute());
             ((MockEngine)move.BuildEngine).AssertLogContains("MSB3676");
         }
 
@@ -578,7 +578,7 @@ namespace Microsoft.Build.UnitTests
             move.DestinationFiles = new ITaskItem[] { new TaskItem("destination") };
             move.SourceFiles = new ITaskItem[] { new TaskItem(Directory.GetCurrentDirectory()) };
 
-            Assert.False(move.Execute());
+            Assert.IsFalse(move.Execute());
             ((MockEngine)move.BuildEngine).AssertLogContains("MSB3681");
         }
 
@@ -613,11 +613,11 @@ namespace Microsoft.Build.UnitTests
                 t.DestinationFiles = new ITaskItem[] { new TaskItem(filename.ToLowerInvariant()) };
                 bool success = t.Execute();
 
-                Assert.True(success);
+                Assert.IsTrue(success);
                 Assert.Single(t.DestinationFiles);
-                Assert.Equal(filename.ToLowerInvariant(), t.DestinationFiles[0].ItemSpec);
+                Assert.AreEqual(filename.ToLowerInvariant(), t.DestinationFiles[0].ItemSpec);
 
-                Assert.True(File.Exists(file)); // "Source file should be there"
+                Assert.IsTrue(File.Exists(file)); // "Source file should be there"
             }
             finally
             {
@@ -657,12 +657,12 @@ namespace Microsoft.Build.UnitTests
                 t.DestinationFiles = new ITaskItem[] { new TaskItem(file), new TaskItem(dest2) };
                 bool success = t.Execute();
 
-                Assert.False(success);
-                Assert.Equal(2, t.DestinationFiles.Length);
-                Assert.Equal(file, t.DestinationFiles[0].ItemSpec);
-                Assert.Equal(dest2, t.DestinationFiles[1].ItemSpec);
+                Assert.IsFalse(success);
+                Assert.AreEqual(2, t.DestinationFiles.Length);
+                Assert.AreEqual(file, t.DestinationFiles[0].ItemSpec);
+                Assert.AreEqual(dest2, t.DestinationFiles[1].ItemSpec);
                 Assert.Single(t.MovedFiles);
-                Assert.Equal(file, t.MovedFiles[0].ItemSpec);
+                Assert.AreEqual(file, t.MovedFiles[0].ItemSpec);
             }
             finally
             {
@@ -698,9 +698,9 @@ namespace Microsoft.Build.UnitTests
 
                 bool success = t.Execute();
 
-                Assert.True(success); // "success"
-                Assert.False(File.Exists(sourceFile)); // "source gone"
-                Assert.True(File.Exists(destFile)); // "destination exists"
+                Assert.IsTrue(success); // "success"
+                Assert.IsFalse(File.Exists(sourceFile)); // "source gone"
+                Assert.IsTrue(File.Exists(destFile)); // "destination exists"
 
                 string destinationFileContents;
                 using (StreamReader sr = FileUtilities.OpenRead(destFile))
@@ -708,12 +708,12 @@ namespace Microsoft.Build.UnitTests
                     destinationFileContents = sr.ReadToEnd();
                 }
 
-                Assert.Equal("This is a source temp file.", destinationFileContents); // "Expected the destination file to contain the contents of source file."
+                Assert.AreEqual("This is a source temp file.", destinationFileContents); // "Expected the destination file to contain the contents of source file."
 
                 Assert.Single(t.DestinationFiles);
                 Assert.Single(t.MovedFiles);
-                Assert.Equal(destFile, t.DestinationFiles[0].ItemSpec);
-                Assert.Equal(destFile, t.MovedFiles[0].ItemSpec);
+                Assert.AreEqual(destFile, t.DestinationFiles[0].ItemSpec);
+                Assert.AreEqual(destFile, t.MovedFiles[0].ItemSpec);
             }
             finally
             {
@@ -761,10 +761,10 @@ namespace Microsoft.Build.UnitTests
 
                 bool success = t.Execute();
 
-                Assert.False(success);
+                Assert.IsFalse(success);
                 Assert.Single(t.DestinationFiles);
-                Assert.Null(t.MovedFiles);
-                Assert.False(File.Exists(outFile1));
+                Assert.IsNull(t.MovedFiles);
+                Assert.IsFalse(File.Exists(outFile1));
             }
             finally
             {
@@ -802,7 +802,7 @@ namespace Microsoft.Build.UnitTests
                 bool result = t.Execute();
 
                 // Expect for there to have been no copies.
-                Assert.False(result);
+                Assert.IsFalse(result);
             }
             finally
             {
@@ -831,7 +831,7 @@ namespace Microsoft.Build.UnitTests
             bool result = t.Execute();
 
             // Expect for there to have been no copies.
-            Assert.False(result);
+            Assert.IsFalse(result);
         }
 
         /// <summary>
@@ -849,7 +849,7 @@ namespace Microsoft.Build.UnitTests
             bool result = t.Execute();
 
             // Expect for there to have been no copies.
-            Assert.False(result);
+            Assert.IsFalse(result);
         }
 
         /// <summary>
@@ -867,7 +867,7 @@ namespace Microsoft.Build.UnitTests
             bool result = t.Execute();
 
             // Expect for there to have been no copies.
-            Assert.False(result);
+            Assert.IsFalse(result);
         }
 
         /// <summary>
@@ -885,7 +885,7 @@ namespace Microsoft.Build.UnitTests
             bool result = t.Execute();
 
             // Expect for there to have been no copies.
-            Assert.False(result);
+            Assert.IsFalse(result);
         }
     }
 }

@@ -102,7 +102,7 @@ namespace Microsoft.Build.UnitTests
         {
             CommandLineGenerator generator = CreateGenerator();
             string commandLine = generator.GenerateCommandLine();
-            Assert.Equal("/P /SSubstituteThis!_postfix SubstituteThis!AsWell /AtEndSubstitute\\ /I42_postfix /Xone /Xtwo /Xthree a.cs b.cs /Z7", commandLine);
+            Assert.AreEqual("/P /SSubstituteThis!_postfix SubstituteThis!AsWell /AtEndSubstitute\\ /I42_postfix /Xone /Xtwo /Xthree a.cs b.cs /Z7", commandLine);
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Microsoft.Build.UnitTests
             CommandLineGenerator generator = CreateGenerator();
             generator.CommandLineTemplate = "[Sources] [Program]";
             string commandLine = generator.GenerateCommandLine();
-            Assert.Equal("a.cs b.cs /P", commandLine);
+            Assert.AreEqual("a.cs b.cs /P", commandLine);
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace Microsoft.Build.UnitTests
             CommandLineGenerator generator = CreateGenerator();
             generator.CommandLineTemplate = "[sources]";
             string commandLine = generator.GenerateCommandLine();
-            Assert.Equal("a.cs b.cs", commandLine);
+            Assert.AreEqual("a.cs b.cs", commandLine);
         }
 
         private CommandLineGenerator CreateGenerator()

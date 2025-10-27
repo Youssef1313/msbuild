@@ -104,8 +104,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
             BuildRequestEntry entry = new BuildRequestEntry(CreateNewBuildRequest(1, target), cache[1]);
 
             BuildResult result = builder.BuildTargets(GetProjectLoggingContext(entry), entry, this, target, CreateStandardLookup(project), CancellationToken.None).Result;
-            Assert.True(result.HasResultsForTarget("Empty"));
-            Assert.Equal(TargetResultCode.Success, result["Empty"].ResultCode);
+            Assert.IsTrue(result.HasResultsForTarget("Empty"));
+            Assert.AreEqual(TargetResultCode.Success, result["Empty"].ResultCode);
             Assert.Empty(result["Empty"].Items);
         }
 
@@ -126,14 +126,14 @@ namespace Microsoft.Build.UnitTests.BackEnd
             BuildResult result = builder.BuildTargets(GetProjectLoggingContext(entry), entry, this, target, CreateStandardLookup(project), CancellationToken.None).Result;
 
             // The result returned from the builder includes only those for the specified targets.
-            Assert.True(result.HasResultsForTarget("Baz"));
-            Assert.False(result.HasResultsForTarget("Bar"));
-            Assert.Equal(TargetResultCode.Success, result["Baz"].ResultCode);
+            Assert.IsTrue(result.HasResultsForTarget("Baz"));
+            Assert.IsFalse(result.HasResultsForTarget("Bar"));
+            Assert.AreEqual(TargetResultCode.Success, result["Baz"].ResultCode);
 
             // The results cache should have ALL of the results.
             IResultsCache resultsCache = (IResultsCache)_host.GetComponent(BuildComponentType.ResultsCache);
-            Assert.True(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("Bar"));
-            Assert.Equal(TargetResultCode.Success, resultsCache.GetResultForRequest(entry.Request)["Bar"].ResultCode);
+            Assert.IsTrue(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("Bar"));
+            Assert.AreEqual(TargetResultCode.Success, resultsCache.GetResultForRequest(entry.Request)["Bar"].ResultCode);
         }
 
         /// <summary>
@@ -150,13 +150,13 @@ namespace Microsoft.Build.UnitTests.BackEnd
             (string name, TargetBuiltReason reason)[] target = { ("DepSkip", TargetBuiltReason.None) };
             BuildRequestEntry entry = new BuildRequestEntry(CreateNewBuildRequest(1, target), cache[1]);
             BuildResult result = builder.BuildTargets(GetProjectLoggingContext(entry), entry, this, target, CreateStandardLookup(project), CancellationToken.None).Result;
-            Assert.True(result.HasResultsForTarget("DepSkip"));
-            Assert.False(result.HasResultsForTarget("Skip"));
-            Assert.Equal(TargetResultCode.Success, result["DepSkip"].ResultCode);
+            Assert.IsTrue(result.HasResultsForTarget("DepSkip"));
+            Assert.IsFalse(result.HasResultsForTarget("Skip"));
+            Assert.AreEqual(TargetResultCode.Success, result["DepSkip"].ResultCode);
 
             IResultsCache resultsCache = (IResultsCache)_host.GetComponent(BuildComponentType.ResultsCache);
-            Assert.True(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("SkipCondition"));
-            Assert.Equal(TargetResultCode.Skipped, resultsCache.GetResultForRequest(entry.Request)["SkipCondition"].ResultCode);
+            Assert.IsTrue(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("SkipCondition"));
+            Assert.AreEqual(TargetResultCode.Skipped, resultsCache.GetResultForRequest(entry.Request)["SkipCondition"].ResultCode);
         }
 
         /// <summary>
@@ -179,28 +179,28 @@ namespace Microsoft.Build.UnitTests.BackEnd
             (string name, TargetBuiltReason reason)[] target = { ("DepError", TargetBuiltReason.None) };
             BuildRequestEntry entry = new BuildRequestEntry(CreateNewBuildRequest(1, target), cache[1]);
             BuildResult result = builder.BuildTargets(GetProjectLoggingContext(entry), entry, this, target, CreateStandardLookup(project), CancellationToken.None).Result;
-            Assert.True(result.HasResultsForTarget("DepError"));
-            Assert.False(result.HasResultsForTarget("Foo"));
-            Assert.False(result.HasResultsForTarget("Skip"));
-            Assert.False(result.HasResultsForTarget("Error"));
-            Assert.False(result.HasResultsForTarget("Baz2"));
-            Assert.False(result.HasResultsForTarget("Bar"));
-            Assert.False(result.HasResultsForTarget("Baz"));
+            Assert.IsTrue(result.HasResultsForTarget("DepError"));
+            Assert.IsFalse(result.HasResultsForTarget("Foo"));
+            Assert.IsFalse(result.HasResultsForTarget("Skip"));
+            Assert.IsFalse(result.HasResultsForTarget("Error"));
+            Assert.IsFalse(result.HasResultsForTarget("Baz2"));
+            Assert.IsFalse(result.HasResultsForTarget("Bar"));
+            Assert.IsFalse(result.HasResultsForTarget("Baz"));
 
             IResultsCache resultsCache = (IResultsCache)_host.GetComponent(BuildComponentType.ResultsCache);
 
-            Assert.True(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("Foo"));
-            Assert.True(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("Skip"));
-            Assert.True(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("Error"));
-            Assert.False(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("Baz2"));
-            Assert.True(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("Bar"));
-            Assert.True(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("Baz"));
-            Assert.Equal(TargetResultCode.Failure, resultsCache.GetResultForRequest(entry.Request)["DepError"].ResultCode);
-            Assert.Equal(TargetResultCode.Success, resultsCache.GetResultForRequest(entry.Request)["Foo"].ResultCode);
-            Assert.Equal(TargetResultCode.Success, resultsCache.GetResultForRequest(entry.Request)["Skip"].ResultCode);
-            Assert.Equal(TargetResultCode.Failure, resultsCache.GetResultForRequest(entry.Request)["Error"].ResultCode);
-            Assert.Equal(TargetResultCode.Success, resultsCache.GetResultForRequest(entry.Request)["Bar"].ResultCode);
-            Assert.Equal(TargetResultCode.Success, resultsCache.GetResultForRequest(entry.Request)["Baz"].ResultCode);
+            Assert.IsTrue(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("Foo"));
+            Assert.IsTrue(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("Skip"));
+            Assert.IsTrue(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("Error"));
+            Assert.IsFalse(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("Baz2"));
+            Assert.IsTrue(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("Bar"));
+            Assert.IsTrue(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("Baz"));
+            Assert.AreEqual(TargetResultCode.Failure, resultsCache.GetResultForRequest(entry.Request)["DepError"].ResultCode);
+            Assert.AreEqual(TargetResultCode.Success, resultsCache.GetResultForRequest(entry.Request)["Foo"].ResultCode);
+            Assert.AreEqual(TargetResultCode.Success, resultsCache.GetResultForRequest(entry.Request)["Skip"].ResultCode);
+            Assert.AreEqual(TargetResultCode.Failure, resultsCache.GetResultForRequest(entry.Request)["Error"].ResultCode);
+            Assert.AreEqual(TargetResultCode.Success, resultsCache.GetResultForRequest(entry.Request)["Bar"].ResultCode);
+            Assert.AreEqual(TargetResultCode.Success, resultsCache.GetResultForRequest(entry.Request)["Baz"].ResultCode);
         }
 
         [Fact]
@@ -774,7 +774,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
 
             BuildResult result = builder.BuildTargets(GetProjectLoggingContext(entry), entry, this, target, CreateStandardLookup(project), CancellationToken.None).Result;
             AssertTaskExecutionOrder(new string[] { "BuildTask" });
-            Assert.False(result.ResultsByTarget["Build"].AfterTargetsHaveFailed);
+            Assert.IsFalse(result.ResultsByTarget["Build"].AfterTargetsHaveFailed);
         }
 
         /// <summary>
@@ -801,7 +801,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
 
             BuildResult result = builder.BuildTargets(GetProjectLoggingContext(entry), entry, this, target, CreateStandardLookup(project), CancellationToken.None).Result;
             AssertTaskExecutionOrder(new string[] { "AfterTask" });
-            Assert.False(result.ResultsByTarget["Build"].AfterTargetsHaveFailed);
+            Assert.IsFalse(result.ResultsByTarget["Build"].AfterTargetsHaveFailed);
         }
 
         /// <summary>
@@ -831,7 +831,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
 
             BuildResult result = builder.BuildTargets(GetProjectLoggingContext(entry), entry, this, target, CreateStandardLookup(project), CancellationToken.None).Result;
             AssertTaskExecutionOrder(new string[] { "BuildTask" });
-            Assert.False(result.ResultsByTarget["Build"].AfterTargetsHaveFailed);
+            Assert.IsFalse(result.ResultsByTarget["Build"].AfterTargetsHaveFailed);
         }
 
         /// <summary>
@@ -875,7 +875,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
 
             BuildResult result = builder.BuildTargets(GetProjectLoggingContext(entry), entry, this, target, CreateStandardLookup(project), CancellationToken.None).Result;
             AssertTaskExecutionOrder(new string[] { "BuildTask", "AfterTask", "Error2" });
-            Assert.False(result.ResultsByTarget["PostBuild"].AfterTargetsHaveFailed);
+            Assert.IsFalse(result.ResultsByTarget["PostBuild"].AfterTargetsHaveFailed);
         }
 
         /// <summary>
@@ -902,7 +902,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
 
             BuildResult result = builder.BuildTargets(GetProjectLoggingContext(entry), entry, this, target, CreateStandardLookup(project), CancellationToken.None).Result;
             AssertTaskExecutionOrder(new string[] { "BuildTask", "AfterTask" });
-            Assert.False(result.ResultsByTarget["Build"].AfterTargetsHaveFailed);
+            Assert.IsFalse(result.ResultsByTarget["Build"].AfterTargetsHaveFailed);
         }
 
         /// <summary>
@@ -929,7 +929,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
 
             BuildResult result = builder.BuildTargets(GetProjectLoggingContext(entry), entry, this, target, CreateStandardLookup(project), CancellationToken.None).Result;
             AssertTaskExecutionOrder(new string[] { "BuildTask", "AfterTask" });
-            Assert.False(result.ResultsByTarget["Build;Me"].AfterTargetsHaveFailed);
+            Assert.IsFalse(result.ResultsByTarget["Build;Me"].AfterTargetsHaveFailed);
         }
 
         /// <summary>
@@ -961,7 +961,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
 
             BuildResult result = builder.BuildTargets(GetProjectLoggingContext(entry), entry, this, target, CreateStandardLookup(project), CancellationToken.None).Result;
             AssertTaskExecutionOrder(new string[] { "BuildTask", "AfterTask", "AfterTask2" });
-            Assert.False(result.ResultsByTarget["Build"].AfterTargetsHaveFailed);
+            Assert.IsFalse(result.ResultsByTarget["Build"].AfterTargetsHaveFailed);
         }
 
         /// <summary>
@@ -1247,7 +1247,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
 
             BuildResult result = builder.BuildTargets(GetProjectLoggingContext(entry), entry, this, target, CreateStandardLookup(project), CancellationToken.None).Result;
             AssertTaskExecutionOrder(new string[] { "BuildTask", "BeforeErrorTargetTask", "ErrorTargetTask", "AfterErrorTargetTask" });
-            Assert.False(result.ResultsByTarget["Build"].AfterTargetsHaveFailed);
+            Assert.IsFalse(result.ResultsByTarget["Build"].AfterTargetsHaveFailed);
         }
 
         /// <summary>
@@ -1346,7 +1346,7 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
             using ProjectFromString projectFromString = new(projectContents, null, null);
             Project project = projectFromString.Project;
             bool success = project.Build(_mockLogger);
-            Assert.False(success);
+            Assert.IsFalse(success);
         }
 
         /// <summary>
@@ -1432,14 +1432,14 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
             var buildResult = builder.BuildTargets(GetProjectLoggingContext(entry), entry, this, target, CreateStandardLookup(project), CancellationToken.None).Result;
 
             IResultsCache resultsCache = (IResultsCache)_host.GetComponent(BuildComponentType.ResultsCache);
-            Assert.True(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("Build"));
-            Assert.True(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("ProduceError1"));
-            Assert.False(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("ProduceError2"));
-            Assert.True(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("_Error1"));
+            Assert.IsTrue(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("Build"));
+            Assert.IsTrue(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("ProduceError1"));
+            Assert.IsFalse(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("ProduceError2"));
+            Assert.IsTrue(resultsCache.GetResultForRequest(entry.Request).HasResultsForTarget("_Error1"));
 
-            Assert.Equal(TargetResultCode.Failure, resultsCache.GetResultForRequest(entry.Request)["Build"].ResultCode);
-            Assert.Equal(TargetResultCode.Skipped, resultsCache.GetResultForRequest(entry.Request)["ProduceError1"].ResultCode);
-            Assert.Equal(TargetResultCode.Failure, resultsCache.GetResultForRequest(entry.Request)["_Error1"].ResultCode);
+            Assert.AreEqual(TargetResultCode.Failure, resultsCache.GetResultForRequest(entry.Request)["Build"].ResultCode);
+            Assert.AreEqual(TargetResultCode.Skipped, resultsCache.GetResultForRequest(entry.Request)["ProduceError1"].ResultCode);
+            Assert.AreEqual(TargetResultCode.Failure, resultsCache.GetResultForRequest(entry.Request)["_Error1"].ResultCode);
         }
 
         [Fact]
@@ -1543,12 +1543,12 @@ Done building target ""Build"" in project ""build.proj"".".Replace("\r\n", "\n")
         {
             MockTaskBuilder mockBuilder = (MockTaskBuilder)_host.GetComponent(BuildComponentType.TaskBuilder);
 
-            Assert.Equal(tasks.Length, mockBuilder.ExecutedTasks.Count);
+            Assert.AreEqual(tasks.Length, mockBuilder.ExecutedTasks.Count);
 
             int currentTask = 0;
             foreach (ProjectTaskInstance task in mockBuilder.ExecutedTasks)
             {
-                Assert.Equal(task.Name, tasks[currentTask]);
+                Assert.AreEqual(task.Name, tasks[currentTask]);
                 currentTask++;
             }
         }

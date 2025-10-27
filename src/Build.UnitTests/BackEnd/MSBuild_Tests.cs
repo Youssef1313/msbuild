@@ -82,7 +82,7 @@ namespace Microsoft.Build.UnitTests
                     Project p = ObjectModelHelpers.CreateInMemoryProject(parentProjectContents);
 
                     bool success = p.Build();
-                    Assert.True(success); // "Build failed.  See 'Standard Out' tab for details."
+                    Assert.IsTrue(success); // "Build failed.  See 'Standard Out' tab for details."
                 }
                 finally
                 {
@@ -144,7 +144,7 @@ namespace Microsoft.Build.UnitTests
                 IDictionary<string, TargetResult> targetOutputs;
                 bool success = pi.Build(null, null, null, out targetOutputs);
 
-                Assert.True(success); // "Build failed.  See 'Standard Out' tab for details."
+                Assert.IsTrue(success); // "Build failed.  See 'Standard Out' tab for details."
 
                 string expectedItemOutputs = string.Format(@"
                     a1.dll : MSBuildSourceProjectFile={0} ; MSBuildSourceTargetName=TargetA
@@ -156,8 +156,8 @@ namespace Microsoft.Build.UnitTests
                     h1.dll : MSBuildSourceProjectFile={1} ; MSBuildSourceTargetName=TargetH
                     ", projectFile1, projectFile2);
 
-                Assert.True(targetOutputs.ContainsKey("Build"));
-                Assert.Equal(7, targetOutputs["Build"].Items.Length);
+                Assert.IsTrue(targetOutputs.ContainsKey("Build"));
+                Assert.AreEqual(7, targetOutputs["Build"].Items.Length);
                 ObjectModelHelpers.AssertItemsMatch(expectedItemOutputs, targetOutputs["Build"].Items, false /* order of items not enforced */);
             }
             finally
@@ -186,7 +186,7 @@ namespace Microsoft.Build.UnitTests
             Project project = ObjectModelHelpers.CreateInMemoryProject(projectContents, logger);
 
             bool success = project.Build();
-            Assert.True(success); // "Build failed.  See test output (Attachments in Azure Pipelines) for details"
+            Assert.IsTrue(success); // "Build failed.  See test output (Attachments in Azure Pipelines) for details"
         }
 
         /// <summary>
@@ -230,8 +230,8 @@ namespace Microsoft.Build.UnitTests
             MockLogger logger = new MockLogger(_testOutput);
             ObjectModelHelpers.BuildTempProjectFileExpectFailure(@"SkipNonexistentProjectsMain.csproj", logger);
             string error = String.Format(AssemblyResources.GetString("MSBuild.ProjectFileNotFound"), "this_project_does_not_exist.csproj");
-            Assert.Equal(0, logger.WarningCount);
-            Assert.Equal(1, logger.ErrorCount);
+            Assert.AreEqual(0, logger.WarningCount);
+            Assert.AreEqual(1, logger.ErrorCount);
             Assert.Contains(error, logger.FullLog);
         }
 
@@ -266,8 +266,8 @@ namespace Microsoft.Build.UnitTests
             logger.AssertLogContains("Hello from foo.csproj");
             string message = String.Format(AssemblyResources.GetString("MSBuild.ProjectFileNotFoundMessage"), "this_project_does_not_exist.csproj");
             string error = String.Format(AssemblyResources.GetString("MSBuild.ProjectFileNotFound"), "this_project_does_not_exist.csproj");
-            Assert.Equal(0, logger.WarningCount);
-            Assert.Equal(0, logger.ErrorCount);
+            Assert.AreEqual(0, logger.WarningCount);
+            Assert.AreEqual(0, logger.ErrorCount);
             Assert.Contains(message, logger.FullLog); // for the missing project
             Assert.DoesNotContain(error, logger.FullLog);
         }
@@ -304,8 +304,8 @@ namespace Microsoft.Build.UnitTests
             logger.AssertLogContains("Hello from foo.csproj");
             string message = String.Format(AssemblyResources.GetString("MSBuild.ProjectFileNotFoundMessage"), "this_project_does_not_exist.csproj");
             string error = String.Format(AssemblyResources.GetString("MSBuild.ProjectFileNotFound"), "this_project_does_not_exist.csproj");
-            Assert.Equal(0, logger.WarningCount);
-            Assert.Equal(0, logger.ErrorCount);
+            Assert.AreEqual(0, logger.WarningCount);
+            Assert.AreEqual(0, logger.ErrorCount);
             Assert.Contains(message, logger.FullLog); // for the missing project
             Assert.DoesNotContain(error, logger.FullLog);
         }
@@ -353,8 +353,8 @@ namespace Microsoft.Build.UnitTests
             string message = String.Format(AssemblyResources.GetString("MSBuild.ProjectFileNotFoundMessage"), "this_project_does_not_exist_warn.csproj");
             string error = String.Format(AssemblyResources.GetString("MSBuild.ProjectFileNotFound"), "this_project_does_not_exist_warn.csproj");
             string error2 = String.Format(AssemblyResources.GetString("MSBuild.ProjectFileNotFound"), "this_project_does_not_exist_error.csproj");
-            Assert.Equal(0, logger.WarningCount);
-            Assert.Equal(1, logger.ErrorCount);
+            Assert.AreEqual(0, logger.WarningCount);
+            Assert.AreEqual(1, logger.ErrorCount);
             Assert.Contains(message, logger.FullLog); // for the missing project
             Assert.Contains(error2, logger.FullLog);
             Assert.DoesNotContain(error, logger.FullLog);
@@ -397,8 +397,8 @@ namespace Microsoft.Build.UnitTests
 
             logger.AssertLogContains("Hello from foo.csproj");
             string error = String.Format(AssemblyResources.GetString("MSBuild.ProjectUpgradeNeededToVcxProj"), "blah.vcproj");
-            Assert.Equal(0, logger.WarningCount);
-            Assert.Equal(1, logger.ErrorCount);
+            Assert.AreEqual(0, logger.WarningCount);
+            Assert.AreEqual(1, logger.ErrorCount);
             Assert.Contains(error, logger.FullLog);
         }
 
@@ -556,7 +556,7 @@ namespace Microsoft.Build.UnitTests
 
                 IDictionary<string, TargetResult> targetOutputs;
                 bool success = pi.Build(null, null, null, out targetOutputs);
-                Assert.True(success); // "Build failed.  See 'Standard Out' tab for details."
+                Assert.IsTrue(success); // "Build failed.  See 'Standard Out' tab for details."
 
                 string expectedItemOutputs = string.Format(@"
                     a1.dll : MSBuildSourceProjectFile={0} ; MSBuildSourceTargetName=TargetA
@@ -565,8 +565,8 @@ namespace Microsoft.Build.UnitTests
                     h1.dll : MSBuildSourceProjectFile={1} ; MSBuildSourceTargetName=TargetH
                     ", projectFile1, projectFile2);
 
-                Assert.True(targetOutputs.ContainsKey("Build"));
-                Assert.Equal(4, targetOutputs["Build"].Items.Length);
+                Assert.IsTrue(targetOutputs.ContainsKey("Build"));
+                Assert.AreEqual(4, targetOutputs["Build"].Items.Length);
                 ObjectModelHelpers.AssertItemsMatch(expectedItemOutputs, targetOutputs["Build"].Items, false /* order of items not enforced */);
             }
             finally
@@ -625,15 +625,15 @@ namespace Microsoft.Build.UnitTests
 
                 IDictionary<string, TargetResult> targetOutputs;
                 bool success = pi.Build(null, null, null, out targetOutputs);
-                Assert.True(success); // "Build failed.  See 'Standard Out' tab for details."
+                Assert.IsTrue(success); // "Build failed.  See 'Standard Out' tab for details."
 
                 string expectedItemOutputs = string.Format(@"
                     b1.dll : MSBuildSourceProjectFile={0} ; MSBuildSourceTargetName=TargetB
                     h1.dll : MSBuildSourceProjectFile={1} ; MSBuildSourceTargetName=TargetH
                     ", projectFile1, projectFile2);
 
-                Assert.True(targetOutputs.ContainsKey("Build"));
-                Assert.Equal(2, targetOutputs["Build"].Items.Length);
+                Assert.IsTrue(targetOutputs.ContainsKey("Build"));
+                Assert.AreEqual(2, targetOutputs["Build"].Items.Length);
                 ObjectModelHelpers.AssertItemsMatch(expectedItemOutputs, targetOutputs["Build"].Items, false /* order of items not enforced */);
             }
             finally
@@ -840,8 +840,8 @@ namespace Microsoft.Build.UnitTests
             logger.AssertMessageCount($"{projFileName}(4,34):", 2, false);
             logger.AssertMessageCount($"{projFileName}(5,34):", 2, false);
             logger.AssertMessageCount($"{projFileName}(6,34):", 2, false);
-            Assert.Equal(0, logger.WarningCount);
-            Assert.Equal(0, logger.ErrorCount);
+            Assert.AreEqual(0, logger.WarningCount);
+            Assert.AreEqual(0, logger.ErrorCount);
         }
 
         /// <summary>
@@ -879,8 +879,8 @@ namespace Microsoft.Build.UnitTests
             logger.AssertLogContains("iin1-target-paths=[b.foo;d.foo;h.foo]");
 
             logger.AssertLogDoesntContain("MSB4120");
-            Assert.Equal(0, logger.WarningCount);
-            Assert.Equal(0, logger.ErrorCount);
+            Assert.AreEqual(0, logger.WarningCount);
+            Assert.AreEqual(0, logger.ErrorCount);
         }
 
         /// <summary>
@@ -932,13 +932,13 @@ namespace Microsoft.Build.UnitTests
 
                 IDictionary<string, TargetResult> targetOutputs;
                 bool success = pi.Build(null, null, null, out targetOutputs);
-                Assert.True(success); // "Build failed.  See 'Standard Out' tab for details."
+                Assert.IsTrue(success); // "Build failed.  See 'Standard Out' tab for details."
 
                 string expectedItemOutputs = string.Format(@"
                     h1.dll : MSBuildSourceProjectFile={0} ; MSBuildSourceTargetName=TargetH
                     ", projectFile2);
 
-                Assert.True(targetOutputs.ContainsKey("Build"));
+                Assert.IsTrue(targetOutputs.ContainsKey("Build"));
                 Assert.Single(targetOutputs["Build"].Items);
                 ObjectModelHelpers.AssertItemsMatch(expectedItemOutputs, targetOutputs["Build"].Items, false /* order of items not enforced */);
             }
@@ -996,7 +996,7 @@ namespace Microsoft.Build.UnitTests
             {
                 Project p = ObjectModelHelpers.CreateInMemoryProject(parentProjectContents);
                 bool success = p.Build();
-                Assert.False(success); // "Build succeeded.  See 'Standard Out' tab for details."
+                Assert.IsFalse(success); // "Build succeeded.  See 'Standard Out' tab for details."
             }
             finally
             {
@@ -1052,7 +1052,7 @@ namespace Microsoft.Build.UnitTests
 
                 IDictionary<string, TargetResult> targetOutputs;
                 bool success = pi.Build(null, null, null, out targetOutputs);
-                Assert.True(success); // "Build failed.  See 'Standard Out' tab for details."
+                Assert.IsTrue(success); // "Build failed.  See 'Standard Out' tab for details."
 
                 string expectedItemOutputs = string.Format(@"
                     a1.dll : MSBuildSourceProjectFile={0} ; MSBuildSourceTargetName=TargetA
@@ -1060,8 +1060,8 @@ namespace Microsoft.Build.UnitTests
                     g1.dll : MSBuildSourceProjectFile={1} ; MSBuildSourceTargetName=TargetG
                     ", projectFile1, projectFile2);
 
-                Assert.True(targetOutputs.ContainsKey("Build"));
-                Assert.Equal(3, targetOutputs["Build"].Items.Length);
+                Assert.IsTrue(targetOutputs.ContainsKey("Build"));
+                Assert.AreEqual(3, targetOutputs["Build"].Items.Length);
                 ObjectModelHelpers.AssertItemsMatch(expectedItemOutputs, targetOutputs["Build"].Items, false /* order of items not enforced */);
             }
             finally
@@ -1121,7 +1121,7 @@ namespace Microsoft.Build.UnitTests
 
                 IDictionary<string, TargetResult> targetOutputs;
                 bool success = pi.Build(null, null, null, out targetOutputs);
-                Assert.True(success); // "Build failed.  See 'Standard Out' tab for details."
+                Assert.IsTrue(success); // "Build failed.  See 'Standard Out' tab for details."
 
                 string expectedItemOutputs = string.Format(@"
                     b1.dll : MSBuildSourceProjectFile={0} ; MSBuildSourceTargetName=TargetB
@@ -1129,8 +1129,8 @@ namespace Microsoft.Build.UnitTests
                     h1.dll : MSBuildSourceProjectFile={1} ; MSBuildSourceTargetName=TargetH
                     ", projectFile1, projectFile2);
 
-                Assert.True(targetOutputs.ContainsKey("Build"));
-                Assert.Equal(3, targetOutputs["Build"].Items.Length);
+                Assert.IsTrue(targetOutputs.ContainsKey("Build"));
+                Assert.AreEqual(3, targetOutputs["Build"].Items.Length);
                 ObjectModelHelpers.AssertItemsMatch(expectedItemOutputs, targetOutputs["Build"].Items, false /* order of items not enforced */);
             }
             finally
@@ -1188,15 +1188,15 @@ namespace Microsoft.Build.UnitTests
 
                 IDictionary<string, TargetResult> targetOutputs;
                 bool success = pi.Build(null, null, null, out targetOutputs);
-                Assert.True(success); // "Build failed.  See 'Standard Out' tab for details."
+                Assert.IsTrue(success); // "Build failed.  See 'Standard Out' tab for details."
 
                 string expectedItemOutputs = string.Format(@"
                     b1.dll : MSBuildSourceProjectFile={0} ; MSBuildSourceTargetName=TargetB
                     h1.dll : MSBuildSourceProjectFile={1} ; MSBuildSourceTargetName=TargetH
                     ", projectFile1, projectFile2);
 
-                Assert.True(targetOutputs.ContainsKey("Build"));
-                Assert.Equal(2, targetOutputs["Build"].Items.Length);
+                Assert.IsTrue(targetOutputs.ContainsKey("Build"));
+                Assert.AreEqual(2, targetOutputs["Build"].Items.Length);
                 ObjectModelHelpers.AssertItemsMatch(expectedItemOutputs, targetOutputs["Build"].Items, false /* order of items not enforced */);
             }
             finally
@@ -1253,7 +1253,7 @@ namespace Microsoft.Build.UnitTests
             {
                 Project p = ObjectModelHelpers.CreateInMemoryProject(parentProjectContents);
                 bool success = p.Build();
-                Assert.True(success); // "Build failed.  See 'Standard Out' tab for details."
+                Assert.IsTrue(success); // "Build failed.  See 'Standard Out' tab for details."
             }
             finally
             {
@@ -1382,7 +1382,7 @@ namespace Microsoft.Build.UnitTests
                             break;
                     }
                     // The build should fail as the first project has an error
-                    Assert.False(success, "Iteration of i " + i + " Build Succeeded.  See 'Standard Out' tab for details.");
+                    Assert.IsFalse(success, "Iteration of i " + i + " Build Succeeded.  See 'Standard Out' tab for details.");
                 }
             }
             finally
@@ -1506,7 +1506,7 @@ namespace Microsoft.Build.UnitTests
                             break;
                     }
                     // The build should fail as the first project has an error
-                    Assert.False(success, "Iteration of i " + i + " Build Succeeded.  See 'Standard Out' tab for details.");
+                    Assert.IsFalse(success, "Iteration of i " + i + " Build Succeeded.  See 'Standard Out' tab for details.");
                 }
             }
             finally
@@ -1560,7 +1560,7 @@ namespace Microsoft.Build.UnitTests
                 bool success = p.Build();
 
                 logger.AssertLogDoesntContain(AssemblyResources.GetString("MSBuild.SkippingRemainingProjects"));
-                Assert.False(success); // "Build Succeeded.  See 'Standard Out' tab for details."
+                Assert.IsFalse(success); // "Build Succeeded.  See 'Standard Out' tab for details."
 
                 parentProjectContents = @"
                 <Project ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`msbuildnamespace`>
@@ -1580,7 +1580,7 @@ namespace Microsoft.Build.UnitTests
                 Project p2 = ObjectModelHelpers.CreateInMemoryProject(pc, parentProjectContents, logger2);
                 bool success2 = p2.Build();
                 logger2.AssertLogDoesntContain(AssemblyResources.GetString("MSBuild.SkippingRemainingProjects"));
-                Assert.False(success2); // "Build Succeeded.  See 'Standard Out' tab for details."
+                Assert.IsFalse(success2); // "Build Succeeded.  See 'Standard Out' tab for details."
             }
             finally
             {
@@ -1734,7 +1734,7 @@ namespace Microsoft.Build.UnitTests
                     }
 
                     // The build should fail as the first project has an error
-                    Assert.False(success, "Iteration of i:" + i + "Build Succeeded.  See 'Standard Out' tab for details.");
+                    Assert.IsFalse(success, "Iteration of i:" + i + "Build Succeeded.  See 'Standard Out' tab for details.");
                 }
             }
             finally
@@ -1803,15 +1803,15 @@ namespace Microsoft.Build.UnitTests
 
                 IDictionary<string, TargetResult> targetOutputs;
                 bool success = pi.Build(null, null, null, out targetOutputs);
-                Assert.True(success); // "Build failed.  See 'Standard Out' tab for details."
+                Assert.IsTrue(success); // "Build failed.  See 'Standard Out' tab for details."
 
-                Assert.True(targetOutputs.ContainsKey("Build"));
-                Assert.Equal(5, targetOutputs["Build"].Items.Length);
-                Assert.Equal("|a", targetOutputs["Build"].Items[0].ItemSpec);
-                Assert.Equal("A|b", targetOutputs["Build"].Items[1].ItemSpec);
-                Assert.Equal("B|c", targetOutputs["Build"].Items[2].ItemSpec);
-                Assert.Equal("C|d", targetOutputs["Build"].Items[3].ItemSpec);
-                Assert.Equal("D|", targetOutputs["Build"].Items[4].ItemSpec);
+                Assert.IsTrue(targetOutputs.ContainsKey("Build"));
+                Assert.AreEqual(5, targetOutputs["Build"].Items.Length);
+                Assert.AreEqual("|a", targetOutputs["Build"].Items[0].ItemSpec);
+                Assert.AreEqual("A|b", targetOutputs["Build"].Items[1].ItemSpec);
+                Assert.AreEqual("B|c", targetOutputs["Build"].Items[2].ItemSpec);
+                Assert.AreEqual("C|d", targetOutputs["Build"].Items[3].ItemSpec);
+                Assert.AreEqual("D|", targetOutputs["Build"].Items[4].ItemSpec);
             }
             finally
             {
@@ -1849,7 +1849,7 @@ namespace Microsoft.Build.UnitTests
                 Project project = new Project(projectFile2);
                 MockLogger logger = new MockLogger();
 
-                Assert.True(project.Build(logger));
+                Assert.IsTrue(project.Build(logger));
 
                 logger.AssertLogContains("[foo.out]");
             }
@@ -1885,7 +1885,7 @@ namespace Microsoft.Build.UnitTests
                 Project project = new Project(projectFile2);
                 MockLogger logger = new MockLogger();
 
-                Assert.True(project.Build(logger));
+                Assert.IsTrue(project.Build(logger));
 
                 logger.AssertLogContains("[foo.out]");
             }
@@ -1913,7 +1913,7 @@ namespace Microsoft.Build.UnitTests
             var logger = new MockLogger();
             bool result = project.Build(logger);
             _testOutput.WriteLine(logger.FullLog);
-            Assert.True(result);
+            Assert.IsTrue(result);
             logger.AssertLogContains("test message from other");
         }
 
@@ -1934,7 +1934,7 @@ namespace Microsoft.Build.UnitTests
             var logger = new MockLogger();
             bool result = project.Build(logger);
             _testOutput.WriteLine(logger.FullLog);
-            Assert.False(result);
+            Assert.IsFalse(result);
             logger.AssertLogDoesntContain("test message from other");
             logger.AssertLogContains("MSB3202"); // error MSB3202: The project file was not found.
         }
@@ -1962,7 +1962,7 @@ namespace Microsoft.Build.UnitTests
             var logger = new MockLogger();
             bool result = project.Build(logger);
             _testOutput.WriteLine(logger.FullLog);
-            Assert.True(result);
+            Assert.IsTrue(result);
             logger.AssertLogContains("test message from other");
         }
 
@@ -1991,7 +1991,7 @@ namespace Microsoft.Build.UnitTests
             var logger = new MockLogger();
             bool result = project.Build(logger);
             _testOutput.WriteLine(logger.FullLog);
-            Assert.False(result);
+            Assert.IsFalse(result);
             logger.AssertLogDoesntContain("test message from other");
             logger.AssertLogContains(buildNonexistentProjectsByDefault == true
                 ? "MSB4025" // error MSB4025: The project file could not be loaded.

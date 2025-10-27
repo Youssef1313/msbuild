@@ -23,14 +23,14 @@ namespace Microsoft.Build.Tasks.UnitTests
             {
                 new TaskItem("Item1"), new TaskItem("Item2"), new TaskItem("Item3")
             });
-            Assert.Equal(expectedHash, actualHash);
+            Assert.AreEqual(expectedHash, actualHash);
 
             // Try again to ensure the same hash
             var actualHash2 = ExecuteHashTask(new ITaskItem[]
             {
                 new TaskItem("Item1"), new TaskItem("Item2"), new TaskItem("Item3")
             });
-            Assert.Equal(expectedHash, actualHash2);
+            Assert.AreEqual(expectedHash, actualHash2);
         }
 
         [Fact]
@@ -38,15 +38,15 @@ namespace Microsoft.Build.Tasks.UnitTests
         {
             // Hash should be valid for empty item
             var emptyItemHash = ExecuteHashTask(new ITaskItem[] { new TaskItem("") });
-            Assert.False(string.IsNullOrWhiteSpace(emptyItemHash));
+            Assert.IsFalse(string.IsNullOrWhiteSpace(emptyItemHash));
             Assert.NotEmpty(emptyItemHash);
 
             // Hash should be null for null ItemsToHash or array of length 0
             var nullItemsHash = ExecuteHashTask(null);
-            Assert.Null(nullItemsHash);
+            Assert.IsNull(nullItemsHash);
 
             var zeroLengthItemsHash = ExecuteHashTask(System.Array.Empty<ITaskItem>());
-            Assert.Null(zeroLengthItemsHash);
+            Assert.IsNull(zeroLengthItemsHash);
         }
 
         [Fact]
@@ -62,7 +62,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             }
 
             var actualHash = ExecuteHashTask(itemsToHash);
-            Assert.Equal(expectedHash, actualHash);
+            Assert.AreEqual(expectedHash, actualHash);
         }
 
         [Fact]
@@ -79,7 +79,7 @@ namespace Microsoft.Build.Tasks.UnitTests
             ITaskItem[] itemsToHash = new ITaskItem[] { new TaskItem(string.Join("", array)) };
 
             var actualHash = ExecuteHashTask(itemsToHash);
-            Assert.Equal(expectedHash, actualHash);
+            Assert.AreEqual(expectedHash, actualHash);
         }
 
         // This test verifies that hash computes correctly for various numbers of characters.
@@ -108,7 +108,7 @@ namespace Microsoft.Build.Tasks.UnitTests
                     ItemsToHash = new ITaskItem[] { new TaskItem(input) },
                     IgnoreCase = false
                 };
-                Assert.True(hashTask.Execute());
+                Assert.IsTrue(hashTask.Execute());
                 return hashTask.HashResult;
             }
         }
@@ -140,9 +140,9 @@ namespace Microsoft.Build.Tasks.UnitTests
                         new TaskItem("item3")
                     },
                     true);
-            Assert.Equal(uppercaseHash, lowercaseHash);
-            Assert.Equal(uppercaseHash, mixedcaseHash);
-            Assert.Equal(mixedcaseHash, lowercaseHash);
+            Assert.AreEqual(uppercaseHash, lowercaseHash);
+            Assert.AreEqual(uppercaseHash, mixedcaseHash);
+            Assert.AreEqual(mixedcaseHash, lowercaseHash);
         }
 
         private string ExecuteHashTask(ITaskItem[] items, bool ignoreCase = false)
@@ -154,7 +154,7 @@ namespace Microsoft.Build.Tasks.UnitTests
                 IgnoreCase = ignoreCase
             };
 
-            Assert.True(hashTask.Execute());
+            Assert.IsTrue(hashTask.Execute());
 
             return hashTask.HashResult;
         }

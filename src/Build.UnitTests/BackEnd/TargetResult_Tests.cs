@@ -27,8 +27,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
         {
             TargetResult result = new TargetResult(Array.Empty<TaskItem>(), BuildResultUtilities.GetStopWithErrorResult());
             Assert.Empty(result.Items);
-            Assert.Null(result.Exception);
-            Assert.Equal(TargetResultCode.Failure, result.ResultCode);
+            Assert.IsNull(result.Exception);
+            Assert.AreEqual(TargetResultCode.Failure, result.ResultCode);
         }
 
         /// <summary>
@@ -40,8 +40,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
             TaskItem item = new TaskItem("foo", "bar.proj");
             TargetResult result = new TargetResult(new TaskItem[] { item }, BuildResultUtilities.GetStopWithErrorResult());
             Assert.Single(result.Items);
-            Assert.Equal(item.ItemSpec, result.Items[0].ItemSpec);
-            Assert.Equal(TargetResultCode.Failure, result.ResultCode);
+            Assert.AreEqual(item.ItemSpec, result.Items[0].ItemSpec);
+            Assert.AreEqual(TargetResultCode.Failure, result.ResultCode);
         }
 
         /// <summary>
@@ -64,9 +64,9 @@ namespace Microsoft.Build.UnitTests.BackEnd
             TaskItem item = new TaskItem("foo", "bar.proj");
             TargetResult result = new TargetResult(new TaskItem[] { item }, BuildResultUtilities.GetStopWithErrorResult(new ArgumentException()));
             Assert.Single(result.Items);
-            Assert.NotNull(result.Exception);
-            Assert.Equal(typeof(ArgumentException), result.Exception.GetType());
-            Assert.Equal(TargetResultCode.Failure, result.ResultCode);
+            Assert.IsNotNull(result.Exception);
+            Assert.AreEqual(typeof(ArgumentException), result.Exception.GetType());
+            Assert.AreEqual(TargetResultCode.Failure, result.ResultCode);
         }
 
         /// <summary>
@@ -78,8 +78,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
             TaskItem item = new TaskItem("foo", "bar.proj");
             TargetResult result = new TargetResult(new TaskItem[] { item }, BuildResultUtilities.GetStopWithErrorResult());
             Assert.Single(result.Items);
-            Assert.Null(result.Exception);
-            Assert.Equal(TargetResultCode.Failure, result.ResultCode);
+            Assert.IsNull(result.Exception);
+            Assert.AreEqual(TargetResultCode.Failure, result.ResultCode);
         }
 
         /// <summary>
@@ -100,10 +100,10 @@ namespace Microsoft.Build.UnitTests.BackEnd
             ((ITranslatable)result).Translate(TranslationHelpers.GetWriteTranslator());
             TargetResult deserializedResult = TargetResult.FactoryForDeserialization(TranslationHelpers.GetReadTranslator());
 
-            Assert.Equal(result.ResultCode, deserializedResult.ResultCode);
-            Assert.True(TranslationHelpers.CompareCollections(result.Items, deserializedResult.Items, TaskItemComparer.Instance));
-            Assert.True(TranslationHelpers.CompareExceptions(result.Exception, deserializedResult.Exception, out string diffReason), diffReason);
-            Assert.Equal(result.OriginalBuildEventContext, deserializedResult.OriginalBuildEventContext);
+            Assert.AreEqual(result.ResultCode, deserializedResult.ResultCode);
+            Assert.IsTrue(TranslationHelpers.CompareCollections(result.Items, deserializedResult.Items, TaskItemComparer.Instance));
+            Assert.IsTrue(TranslationHelpers.CompareExceptions(result.Exception, deserializedResult.Exception, out string diffReason), diffReason);
+            Assert.AreEqual(result.OriginalBuildEventContext, deserializedResult.OriginalBuildEventContext);
         }
 
         /// <summary>
@@ -120,9 +120,9 @@ namespace Microsoft.Build.UnitTests.BackEnd
             ((ITranslatable)result).Translate(TranslationHelpers.GetWriteTranslator());
             TargetResult deserializedResult = TargetResult.FactoryForDeserialization(TranslationHelpers.GetReadTranslator());
 
-            Assert.Equal(result.ResultCode, deserializedResult.ResultCode);
-            Assert.True(TranslationHelpers.CompareCollections(result.Items, deserializedResult.Items, TaskItemComparer.Instance));
-            Assert.True(TranslationHelpers.CompareExceptions(result.Exception, deserializedResult.Exception, out string diffReason), diffReason);
+            Assert.AreEqual(result.ResultCode, deserializedResult.ResultCode);
+            Assert.IsTrue(TranslationHelpers.CompareCollections(result.Items, deserializedResult.Items, TaskItemComparer.Instance));
+            Assert.IsTrue(TranslationHelpers.CompareExceptions(result.Exception, deserializedResult.Exception, out string diffReason), diffReason);
         }
 
         /// <summary>

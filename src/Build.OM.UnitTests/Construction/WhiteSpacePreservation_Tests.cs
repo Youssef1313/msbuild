@@ -41,7 +41,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             {
                 pe.AddItemGroup();
 
-                Assert.True(p.IsDirty);
+                Assert.IsTrue(p.IsDirty);
             });
         }
 
@@ -103,7 +103,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
                 itemGroup.AddItem("i2", "b");
 
-                Assert.True(p.IsDirty);
+                Assert.IsTrue(p.IsDirty);
             });
         }
 
@@ -507,7 +507,7 @@ multi-line comment here
                 var nlCount = Regex.Matches(projectResults, @"\n").Count;
 
                 // Compare number of \r\n to number of \n, they should be equal.
-                Assert.Equal(crlfCount, nlCount);
+                Assert.AreEqual(crlfCount, nlCount);
             }
             else
             {

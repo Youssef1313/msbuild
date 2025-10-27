@@ -42,11 +42,11 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             t.SearchPaths = new String[] { @"C:\FakeSDK\References" };
             bool succeeded = Execute(t);
 
-            Assert.True(succeeded);
+            Assert.IsTrue(succeeded);
             Assert.Empty(t.ResolvedFiles);
 
-            Assert.Equal(0, engine.Errors);
-            Assert.Equal(1, engine.Warnings);
+            Assert.AreEqual(0, engine.Errors);
+            Assert.AreEqual(1, engine.Warnings);
         }
 
         /// <summary>
@@ -89,11 +89,11 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             t.SearchPaths = new String[] { @"C:\SomeOtherPlace" };
             bool succeeded = Execute(t);
 
-            Assert.True(succeeded);
+            Assert.IsTrue(succeeded);
             Assert.Single(t.ResolvedFiles);
-            Assert.Equal(0, engine.Errors);
-            Assert.Equal(0, engine.Warnings);
-            Assert.Equal(expectedPath, t.ResolvedFiles[0].ItemSpec, true);
+            Assert.AreEqual(0, engine.Errors);
+            Assert.AreEqual(0, engine.Warnings);
+            Assert.AreEqual(expectedPath, t.ResolvedFiles[0].ItemSpec, true);
         }
     }
 }

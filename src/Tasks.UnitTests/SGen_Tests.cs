@@ -71,7 +71,7 @@ namespace Microsoft.Build.UnitTests
 
             string commandLine = sgen.CommandLine();
 
-            Assert.True(commandLine.IndexOf("/compiler:\"/keyfile:\\\"" + sgen.KeyFile + "\\\"\"", StringComparison.OrdinalIgnoreCase) >= 0);
+            Assert.IsTrue(commandLine.IndexOf("/compiler:\"/keyfile:\\\"" + sgen.KeyFile + "\\\"\"", StringComparison.OrdinalIgnoreCase) >= 0);
         }
 
         [Fact]
@@ -86,7 +86,7 @@ namespace Microsoft.Build.UnitTests
 
             string commandLine = sgen.CommandLine();
 
-            Assert.True(commandLine.IndexOf("/keep", StringComparison.OrdinalIgnoreCase) >= 0);
+            Assert.IsTrue(commandLine.IndexOf("/keep", StringComparison.OrdinalIgnoreCase) >= 0);
         }
 
         [Fact]
@@ -101,7 +101,7 @@ namespace Microsoft.Build.UnitTests
 
             string commandLine = sgen.CommandLine();
 
-            Assert.True(commandLine.IndexOf("/keep", StringComparison.OrdinalIgnoreCase) < 0);
+            Assert.IsTrue(commandLine.IndexOf("/keep", StringComparison.OrdinalIgnoreCase) < 0);
         }
 
 
@@ -118,7 +118,7 @@ namespace Microsoft.Build.UnitTests
             // This should result in a quoted parameter...
             sgen.KeyFile = "c:\\Some Folder\\MyKeyFile.snk";
             string commandLine = sgen.CommandLine();
-            Assert.Equal(1, engine.Errors);
+            Assert.AreEqual(1, engine.Errors);
         }
 
         [Fact]
@@ -134,7 +134,7 @@ namespace Microsoft.Build.UnitTests
             // This should result in a quoted parameter...
             sgen.KeyFile = "c:\\Some Folder\\MyKeyFile.snk";
             string commandLine = sgen.CommandLine();
-            Assert.Equal(1, engine.Errors);
+            Assert.AreEqual(1, engine.Errors);
         }
 
         [Fact]
@@ -188,7 +188,7 @@ namespace Microsoft.Build.UnitTests
             string targetCommandLine = "/assembly:\"" + sgen.BuildAssemblyPath + Path.DirectorySeparatorChar
                                        + "MyAsm, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\" /compiler:/platform:x86";
 
-            Assert.Equal(targetCommandLine, commandLine);
+            Assert.AreEqual(targetCommandLine, commandLine);
         }
 
         [Fact]
@@ -206,7 +206,7 @@ namespace Microsoft.Build.UnitTests
             string targetCommandLine = "/assembly:\"" + sgen.BuildAssemblyPath + Path.DirectorySeparatorChar
                                        + "MyAsm, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\" /type:System.String /type:System.Boolean";
 
-            Assert.Equal(targetCommandLine, commandLine);
+            Assert.AreEqual(targetCommandLine, commandLine);
         }
 
         [Fact]
@@ -221,7 +221,7 @@ namespace Microsoft.Build.UnitTests
             string targetCommandLine = "/assembly:\"" + sgen.BuildAssemblyPath + Path.DirectorySeparatorChar
                                        + "MyAsm, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"";
 
-            Assert.Equal(targetCommandLine, commandLine);
+            Assert.AreEqual(targetCommandLine, commandLine);
         }
 
         [Fact]
@@ -237,7 +237,7 @@ namespace Microsoft.Build.UnitTests
 
             string commandLine = sgen.CommandLine();
 
-            Assert.True(commandLine.IndexOf("/reference:", StringComparison.OrdinalIgnoreCase) < 0);
+            Assert.IsTrue(commandLine.IndexOf("/reference:", StringComparison.OrdinalIgnoreCase) < 0);
         }
 
         [Fact]
@@ -253,7 +253,7 @@ namespace Microsoft.Build.UnitTests
 
             string commandLine = sgen.CommandLine();
 
-            Assert.True(commandLine.IndexOf("/reference:", StringComparison.OrdinalIgnoreCase) < 0);
+            Assert.IsTrue(commandLine.IndexOf("/reference:", StringComparison.OrdinalIgnoreCase) < 0);
         }
 
         [Fact]
@@ -271,7 +271,7 @@ namespace Microsoft.Build.UnitTests
             string targetCommandLine = "/assembly:\"" + sgen.BuildAssemblyPath + Path.DirectorySeparatorChar
                                        + "MyAsm, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\" /reference:\"C:\\SomeFolder\\reference1.dll,C:\\SomeFolder\\reference2.dll\"";
 
-            Assert.Equal(targetCommandLine, commandLine);
+            Assert.AreEqual(targetCommandLine, commandLine);
         }
 #endif
     }

@@ -22,8 +22,8 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         {
             ProjectMetadataInstance metadata = GetMetadataInstance();
 
-            Assert.Equal("m", metadata.Name);
-            Assert.Equal("m1", metadata.EvaluatedValue);
+            Assert.AreEqual("m", metadata.Name);
+            Assert.AreEqual("m1", metadata.EvaluatedValue);
         }
 
         /// <summary>

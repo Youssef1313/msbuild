@@ -125,8 +125,8 @@ namespace Microsoft.Build.UnitTests.Evaluation
             var version1 = (SimpleVersion)version1Object;
             var version2 = (SimpleVersion)version2Object;
 
-            Assert.Equal(expectedSign, Comparer<SimpleVersion>.Default.Compare(version1, version2));
-            Assert.Equal(expectedSign, Math.Sign(version1.CompareTo(version2)));
+            Assert.AreEqual(expectedSign, Comparer<SimpleVersion>.Default.Compare(version1, version2));
+            Assert.AreEqual(expectedSign, Math.Sign(version1.CompareTo(version2)));
         }
 
         [Theory]
@@ -138,30 +138,30 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             if (expectedSign < 0)
             {
-                Assert.True(version1 < version2);
-                Assert.True(version1 <= version2);
-                Assert.False(version1 == version2);
-                Assert.False(version1 >= version2);
-                Assert.False(version1 > version2);
-                Assert.True(version1 != version2);
+                Assert.IsTrue(version1 < version2);
+                Assert.IsTrue(version1 <= version2);
+                Assert.IsFalse(version1 == version2);
+                Assert.IsFalse(version1 >= version2);
+                Assert.IsFalse(version1 > version2);
+                Assert.IsTrue(version1 != version2);
             }
             else if (expectedSign == 0)
             {
-                Assert.False(version1 < version2);
-                Assert.True(version1 <= version2);
-                Assert.True(version1 == version2);
-                Assert.True(version1 >= version2);
-                Assert.False(version1 > version2);
-                Assert.False(version1 != version2);
+                Assert.IsFalse(version1 < version2);
+                Assert.IsTrue(version1 <= version2);
+                Assert.IsTrue(version1 == version2);
+                Assert.IsTrue(version1 >= version2);
+                Assert.IsFalse(version1 > version2);
+                Assert.IsFalse(version1 != version2);
             }
             else
             {
-                Assert.False(version1 < version2);
-                Assert.False(version1 <= version2);
-                Assert.False(version1 == version2);
-                Assert.True(version1 >= version2);
-                Assert.True(version1 > version2);
-                Assert.True(version1 != version2);
+                Assert.IsFalse(version1 < version2);
+                Assert.IsFalse(version1 <= version2);
+                Assert.IsFalse(version1 == version2);
+                Assert.IsTrue(version1 >= version2);
+                Assert.IsTrue(version1 > version2);
+                Assert.IsTrue(version1 != version2);
             }
         }
 
@@ -195,16 +195,16 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             if (version2Object is SimpleVersion version2)
             {
-                Assert.Equal(expected, version1.Equals(version2));
-                Assert.Equal(expected, version1 == version2);
-                Assert.Equal(!expected, version1 != version2);
+                Assert.AreEqual(expected, version1.Equals(version2));
+                Assert.AreEqual(expected, version1 == version2);
+                Assert.AreEqual(!expected, version1 != version2);
             }
 
-            Assert.Equal(expected, version1.Equals(version2Object));
+            Assert.AreEqual(expected, version1.Equals(version2Object));
 
             if (version2Object != null)
             {
-                Assert.Equal(expected, version1Object.GetHashCode() == version2Object.GetHashCode());
+                Assert.AreEqual(expected, version1Object.GetHashCode() == version2Object.GetHashCode());
             }
         }
 
@@ -227,7 +227,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         [MemberData(nameof(Parse_Valid_TestData))]
         public static void Parse_ValidInput_ReturnsExpected(string input, object expected)
         {
-            Assert.Equal(expected, SimpleVersion.Parse(input));
+            Assert.AreEqual(expected, SimpleVersion.Parse(input));
         }
 
         public static IEnumerable<object[]> Parse_Invalid_TestData()
@@ -294,15 +294,15 @@ namespace Microsoft.Build.UnitTests.Evaluation
         {
             var version = (SimpleVersion)versionObject;
 
-            Assert.Equal(expected, version.ToString());
+            Assert.AreEqual(expected, version.ToString());
         }
 
         private static void VerifyVersion(SimpleVersion version, int major, int minor, int build, int revision)
         {
-            Assert.Equal(major, version.Major);
-            Assert.Equal(minor, version.Minor);
-            Assert.Equal(build, version.Build);
-            Assert.Equal(revision, version.Revision);
+            Assert.AreEqual(major, version.Major);
+            Assert.AreEqual(minor, version.Minor);
+            Assert.AreEqual(build, version.Build);
+            Assert.AreEqual(revision, version.Revision);
         }
     }
 }

@@ -3046,12 +3046,12 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
                     if (buildConsistencyCheck)
                     {
                         // Some consistency checks between load mode and build mode.
-                        Assert.Equal(loadModeResolvedFiles.Length, t.ResolvedFiles.Length);
+                        Assert.AreEqual(loadModeResolvedFiles.Length, t.ResolvedFiles.Length);
                         for (int i = 0; i < loadModeResolvedFiles.Length; i++)
                         {
-                            Assert.Equal(loadModeResolvedFiles[i].ItemSpec, t.ResolvedFiles[i].ItemSpec);
-                            Assert.Equal(loadModeResolvedFiles[i].GetMetadata("CopyLocal"), t.ResolvedFiles[i].GetMetadata("CopyLocal"));
-                            Assert.Equal(loadModeResolvedFiles[i].GetMetadata("ResolvedFrom"), t.ResolvedFiles[i].GetMetadata("ResolvedFrom"));
+                            Assert.AreEqual(loadModeResolvedFiles[i].ItemSpec, t.ResolvedFiles[i].ItemSpec);
+                            Assert.AreEqual(loadModeResolvedFiles[i].GetMetadata("CopyLocal"), t.ResolvedFiles[i].GetMetadata("CopyLocal"));
+                            Assert.AreEqual(loadModeResolvedFiles[i].GetMetadata("ResolvedFrom"), t.ResolvedFiles[i].GetMetadata("ResolvedFrom"));
                         }
                     }
                 }
@@ -3093,7 +3093,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
                     if (FileUtilities.FileExistsNoThrow(t.StateFile))
                     {
                         Assert.Single(t.FilesWritten);
-                        Assert.Equal(cache, t.FilesWritten[0].ItemSpec);
+                        Assert.AreEqual(cache, t.FilesWritten[0].ItemSpec);
                     }
 
                     File.Delete(t.StateFile);
@@ -3104,7 +3104,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
                         // OriginalItemSpec attribute on resolved items is to support VS in figuring out which
                         // project file reference caused a particular resolved file.
                         string originalItemSpec = t.ResolvedFiles[i].GetMetadata("OriginalItemSpec");
-                        Assert.True(ContainsItem(t.Assemblies, originalItemSpec) || ContainsItem(t.AssemblyFiles, originalItemSpec)); // "Expected to find OriginalItemSpec in Assemblies or AssemblyFiles task parameters"
+                        Assert.IsTrue(ContainsItem(t.Assemblies, originalItemSpec) || ContainsItem(t.AssemblyFiles, originalItemSpec)); // "Expected to find OriginalItemSpec in Assemblies or AssemblyFiles task parameters"
                     }
                 }
             }

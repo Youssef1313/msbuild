@@ -35,14 +35,14 @@ namespace Microsoft.Build.UnitTests.OM.Construction
   <Target Name=""t"" />
 </Project>");
 
-            Assert.True(project.HasUnsavedChanges);
+            Assert.IsTrue(project.HasUnsavedChanges);
             Helpers.VerifyAssertProjectContent(expected, project);
-            Assert.Equal(1, project.Count);
-            Assert.Equal(0, target.Count);
-            Assert.Equal(1, Helpers.Count(project.Children));
-            Assert.Equal(0, Helpers.Count(target.Children));
-            Assert.Null(project.Parent);
-            Assert.Equal(project, target.Parent);
+            Assert.AreEqual(1, project.Count);
+            Assert.AreEqual(0, target.Count);
+            Assert.AreEqual(1, Helpers.Count(project.Children));
+            Assert.AreEqual(0, Helpers.Count(target.Children));
+            Assert.IsNull(project.Parent);
+            Assert.AreEqual(project, target.Parent);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectRootElement project = ProjectRootElement.Create();
             Helpers.ClearDirtyFlag(project);
             ProjectTargetElement target = project.CreateTargetElement("t");
-            Assert.False(project.HasUnsavedChanges);
+            Assert.IsFalse(project.HasUnsavedChanges);
 
             project.AppendChild(target);
 
@@ -64,7 +64,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 </Project>");
 
             Helpers.VerifyAssertProjectContent(expected, project);
-            Assert.Equal(1, project.Count);
+            Assert.AreEqual(1, project.Count);
         }
 
         /// <summary>
@@ -88,11 +88,11 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             Helpers.VerifyAssertProjectContent(expected, project);
 
-            Assert.Equal(2, project.Count);
+            Assert.AreEqual(2, project.Count);
             var targets = Helpers.MakeList(project.Targets);
-            Assert.Equal(2, targets.Count);
-            Assert.Equal(target1, targets[0]);
-            Assert.Equal(target2, targets[1]);
+            Assert.AreEqual(2, targets.Count);
+            Assert.AreEqual(target1, targets[0]);
+            Assert.AreEqual(target2, targets[1]);
         }
 
         /// <summary>
@@ -376,7 +376,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
   <Target Name=""t"" Inputs=""i"" Outputs=""o"" DependsOnTargets=""d"" Condition=""c"" />
 </Project>");
 
-            Assert.True(project.HasUnsavedChanges);
+            Assert.IsTrue(project.HasUnsavedChanges);
             Helpers.VerifyAssertProjectContent(expected, project);
         }
 
@@ -418,13 +418,13 @@ namespace Microsoft.Build.UnitTests.OM.Construction
   <ItemGroup />
 </Project>");
 
-            Assert.True(project.HasUnsavedChanges);
+            Assert.IsTrue(project.HasUnsavedChanges);
             Helpers.VerifyAssertProjectContent(expected, project);
 
-            Assert.Equal(1, project.Count);
+            Assert.AreEqual(1, project.Count);
             var children = Helpers.MakeList(project.Children);
             Assert.Single(children);
-            Assert.Equal(itemGroup, children[0]);
+            Assert.AreEqual(itemGroup, children[0]);
         }
 
         /// <summary>
@@ -448,11 +448,11 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             Helpers.VerifyAssertProjectContent(expected, project);
 
-            Assert.Equal(2, project.Count);
+            Assert.AreEqual(2, project.Count);
             var children = Helpers.MakeList(project.Children);
-            Assert.Equal(2, children.Count);
-            Assert.Equal(target, children[0]);
-            Assert.Equal(itemGroup, children[1]);
+            Assert.AreEqual(2, children.Count);
+            Assert.AreEqual(target, children[0]);
+            Assert.AreEqual(itemGroup, children[1]);
         }
 
         /// <summary>
@@ -525,12 +525,12 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             Helpers.VerifyAssertProjectContent(expected, project);
 
-            Assert.Equal(3, project.Count);
+            Assert.AreEqual(3, project.Count);
             var children = Helpers.MakeList(project.Children);
-            Assert.Equal(3, children.Count);
-            Assert.Equal(target1, children[0]);
-            Assert.Equal(itemGroup, children[1]);
-            Assert.Equal(target2, children[2]);
+            Assert.AreEqual(3, children.Count);
+            Assert.AreEqual(target1, children[0]);
+            Assert.AreEqual(itemGroup, children[1]);
+            Assert.AreEqual(target2, children[2]);
         }
 
         /// <summary>
@@ -549,8 +549,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
   <Target Name=""t"" />
 </Project>");
 
-            Assert.Equal(1, project.Count);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual(1, project.Count);
+            Assert.IsTrue(project.HasUnsavedChanges);
             Helpers.VerifyAssertProjectContent(expected, project);
         }
 
@@ -570,8 +570,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
   <Target Name=""t"" />
 </Project>");
 
-            Assert.Equal(1, project.Count);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual(1, project.Count);
+            Assert.IsTrue(project.HasUnsavedChanges);
             Helpers.VerifyAssertProjectContent(expected, project);
         }
 
@@ -616,7 +616,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
   </Target>
 </Project>");
 
-            Assert.True(project.HasUnsavedChanges);
+            Assert.IsTrue(project.HasUnsavedChanges);
             Helpers.VerifyAssertProjectContent(expected, project);
         }
 
@@ -1177,9 +1177,9 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             string expected = ObjectModelHelpers.CleanupFileContents(@"<Project ToolsVersion=""msbuilddefaulttoolsversion"" xmlns=""msbuildnamespace"" />");
 
-            Assert.True(project.HasUnsavedChanges);
+            Assert.IsTrue(project.HasUnsavedChanges);
             Helpers.VerifyAssertProjectContent(expected, project);
-            Assert.Equal(0, Helpers.Count(project.Children));
+            Assert.AreEqual(0, Helpers.Count(project.Children));
         }
 
         /// <summary>
@@ -1319,8 +1319,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 </Project>");
 
             Helpers.VerifyAssertProjectContent(expected, project);
-            Assert.Equal(1, Helpers.Count(project.Children));
-            Assert.Equal(2, Helpers.Count(choose.Children));
+            Assert.AreEqual(1, Helpers.Count(project.Children));
+            Assert.AreEqual(2, Helpers.Count(choose.Children));
         }
 
         /// <summary>
@@ -1340,11 +1340,11 @@ namespace Microsoft.Build.UnitTests.OM.Construction
   <Target Name=""t1"" />
 </Project>");
 
-            Assert.Equal(1, project.Count);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual(1, project.Count);
+            Assert.IsTrue(project.HasUnsavedChanges);
             Helpers.VerifyAssertProjectContent(expected, project);
-            Assert.Equal(1, Helpers.Count(project.Children));
-            Assert.Equal(target1, Helpers.GetFirst(project.Children));
+            Assert.AreEqual(1, Helpers.Count(project.Children));
+            Assert.AreEqual(target1, Helpers.GetFirst(project.Children));
         }
 
         /// <summary>
@@ -1364,11 +1364,11 @@ namespace Microsoft.Build.UnitTests.OM.Construction
   <Target Name=""t2"" />
 </Project>");
 
-            Assert.Equal(1, project.Count);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual(1, project.Count);
+            Assert.IsTrue(project.HasUnsavedChanges);
             Helpers.VerifyAssertProjectContent(expected, project);
-            Assert.Equal(1, Helpers.Count(project.Children));
-            Assert.Equal(target2, Helpers.GetFirst(project.Children));
+            Assert.AreEqual(1, Helpers.Count(project.Children));
+            Assert.AreEqual(target2, Helpers.GetFirst(project.Children));
         }
 
         /// <summary>
@@ -1383,9 +1383,9 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             project.RemoveAllChildren();
 
-            Assert.Equal(0, project.Count);
-            Assert.Null(target1.Parent);
-            Assert.Null(target2.Parent);
+            Assert.AreEqual(0, project.Count);
+            Assert.IsNull(target1.Parent);
+            Assert.IsNull(target2.Parent);
         }
 
         /// <summary>
@@ -1399,7 +1399,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             target1.RemoveAllChildren();
 
-            Assert.Equal(0, target1.Count);
+            Assert.AreEqual(0, target1.Count);
         }
 
         /// <summary>
@@ -1421,11 +1421,11 @@ namespace Microsoft.Build.UnitTests.OM.Construction
   <Target Name=""t1"" />
 </Project>");
 
-            Assert.Equal(2, project.Count);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual(2, project.Count);
+            Assert.IsTrue(project.HasUnsavedChanges);
             Helpers.VerifyAssertProjectContent(expected, project);
-            Assert.Equal(2, Helpers.Count(project.Children));
-            Assert.Equal(target2, Helpers.GetFirst(project.Children));
+            Assert.AreEqual(2, Helpers.Count(project.Children));
+            Assert.AreEqual(target2, Helpers.GetFirst(project.Children));
         }
 
         /// <summary>
@@ -1447,7 +1447,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
   <Target Name=""t2"" />
 </Project>");
 
-            Assert.Equal(2, project.Count);
+            Assert.AreEqual(2, project.Count);
             Helpers.VerifyAssertProjectContent(expected, project);
         }
 
@@ -1469,7 +1469,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
   <Target Name=""t1"" />
 </Project>");
 
-            Assert.Equal(1, project.Count);
+            Assert.AreEqual(1, project.Count);
             Helpers.VerifyAssertProjectContent(expected, project);
         }
 
@@ -1535,8 +1535,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 </Project>");
 
             Helpers.VerifyAssertProjectContent(expected, project);
-            Assert.Equal(3, Helpers.Count(project.Children));
-            Assert.Equal(propertyGroup, Helpers.GetFirst(project.Children));
+            Assert.AreEqual(3, Helpers.Count(project.Children));
+            Assert.AreEqual(propertyGroup, Helpers.GetFirst(project.Children));
         }
 
         /// <summary>
@@ -1568,8 +1568,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 </Project>");
 
             Helpers.VerifyAssertProjectContent(expected, project);
-            Assert.Equal(5, Helpers.Count(project.Children));
-            Assert.Equal(propertyGroup3, Helpers.GetLast(project.Children));
+            Assert.AreEqual(5, Helpers.Count(project.Children));
+            Assert.AreEqual(propertyGroup3, Helpers.GetLast(project.Children));
         }
 
         /// <summary>
@@ -1606,7 +1606,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 </Project>");
 
             Helpers.VerifyAssertProjectContent(expected, project);
-            Assert.Equal(itemGroup2, Helpers.GetLast(project.ItemGroups));
+            Assert.AreEqual(itemGroup2, Helpers.GetLast(project.ItemGroups));
         }
 
         /// <summary>
@@ -1648,7 +1648,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 </Project>");
 
             Helpers.VerifyAssertProjectContent(expected, project);
-            Assert.Equal(itemGroup2, Helpers.GetLast(project.ItemGroups));
+            Assert.AreEqual(itemGroup2, Helpers.GetLast(project.ItemGroups));
         }
 
         /// <summary>
@@ -1785,7 +1785,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 </Project>");
 
             Helpers.VerifyAssertProjectContent(expected, project);
-            Assert.Equal(item, Helpers.GetFirst(Helpers.GetFirst(project.ItemGroups).Items));
+            Assert.AreEqual(item, Helpers.GetFirst(Helpers.GetFirst(project.ItemGroups).Items));
         }
 
         /// <summary>
@@ -2011,7 +2011,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 </Project>");
 
             Helpers.VerifyAssertProjectContent(expected, project);
-            Assert.Equal(itemDefinition, Helpers.GetFirst(Helpers.GetFirst(project.ItemDefinitionGroups).ItemDefinitions));
+            Assert.AreEqual(itemDefinition, Helpers.GetFirst(Helpers.GetFirst(project.ItemDefinitionGroups).ItemDefinitions));
         }
 
         /// <summary>
@@ -2081,7 +2081,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 </Project>");
 
             Helpers.VerifyAssertProjectContent(expected, project);
-            Assert.Equal(last, Helpers.GetLast(Helpers.GetFirst(project.ItemDefinitionGroups).ItemDefinitions));
+            Assert.AreEqual(last, Helpers.GetLast(Helpers.GetFirst(project.ItemDefinitionGroups).ItemDefinitions));
         }
 
         /// <summary>
@@ -2126,7 +2126,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 </Project>");
 
             Helpers.VerifyAssertProjectContent(expected, project);
-            Assert.Equal(property, Helpers.GetFirst(Helpers.GetFirst(project.PropertyGroups).Properties));
+            Assert.AreEqual(property, Helpers.GetFirst(Helpers.GetFirst(project.PropertyGroups).Properties));
         }
 
         /// <summary>
@@ -2194,7 +2194,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 </Project>");
 
             Helpers.VerifyAssertProjectContent(expected, project);
-            Assert.True(Object.ReferenceEquals(property1, property2));
+            Assert.IsTrue(Object.ReferenceEquals(property1, property2));
         }
 
         /// <summary>
@@ -2325,11 +2325,11 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             item.Xml.Condition = "false";
 
-            Assert.Equal(1, Helpers.Count(project.Items));
+            Assert.AreEqual(1, Helpers.Count(project.Items));
 
             project.ReevaluateIfNecessary();
 
-            Assert.Equal(0, Helpers.Count(project.Items));
+            Assert.AreEqual(0, Helpers.Count(project.Items));
         }
 
         /// <summary>
@@ -2353,12 +2353,12 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             metadatum.Xml.Condition = "false";
 
-            Assert.Equal("m1", metadatum.EvaluatedValue);
+            Assert.AreEqual("m1", metadatum.EvaluatedValue);
 
             project.ReevaluateIfNecessary();
             metadatum = Helpers.GetFirst(project.Items).GetMetadata("m");
 
-            Assert.Null(metadatum);
+            Assert.IsNull(metadatum);
         }
 
         /// <summary>
@@ -2382,7 +2382,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             List<ProjectElement> allChildren = new List<ProjectElement>(group2.AllChildren);
 
             Helpers.AssertListsValueEqual(allChildren, new List<ProjectElement> { item1, item2 });
-            Assert.Equal(0, group1.Count);
+            Assert.AreEqual(0, group1.Count);
         }
 
         /// <summary>
@@ -2405,7 +2405,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             List<ProjectElement> allChildren = new List<ProjectElement>(group2.AllChildren);
 
             Helpers.AssertListsValueEqual(allChildren, new List<ProjectElement> { item2, item1 });
-            Assert.Equal(0, group1.Count);
+            Assert.AreEqual(0, group1.Count);
         }
 
         /// <summary>
@@ -2428,7 +2428,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             List<ProjectElement> allChildren = new List<ProjectElement>(group2.AllChildren);
 
             Helpers.AssertListsValueEqual(allChildren, new List<ProjectElement> { item2, item1 });
-            Assert.Equal(0, group1.Count);
+            Assert.AreEqual(0, group1.Count);
         }
 
         /// <summary>
@@ -2451,7 +2451,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             List<ProjectElement> allChildren = new List<ProjectElement>(group2.AllChildren);
 
             Helpers.AssertListsValueEqual(allChildren, new List<ProjectElement> { item1, item2 });
-            Assert.Equal(0, group1.Count);
+            Assert.AreEqual(0, group1.Count);
         }
 
         /// <summary>
@@ -2474,7 +2474,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             List<ProjectElement> allChildren = new List<ProjectElement>(group2.AllChildren);
 
             Helpers.AssertListsValueEqual(allChildren, new List<ProjectElement> { item1, item2 });
-            Assert.Equal(0, group1.Count);
+            Assert.AreEqual(0, group1.Count);
         }
 
         /// <summary>
@@ -2498,10 +2498,10 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             List<ProjectElement> allChildren = new List<ProjectElement>(group2.AllChildren);
 
             Helpers.AssertListsValueEqual(allChildren, new List<ProjectElement> { item1, item2 });
-            Assert.Equal(1, group1.Count);
-            Assert.True(item3.PreviousSibling == null && item3.NextSibling == null);
-            Assert.True(item2.PreviousSibling == item1 && item1.NextSibling == item2);
-            Assert.True(item1.PreviousSibling == null && item2.NextSibling == null);
+            Assert.AreEqual(1, group1.Count);
+            Assert.IsTrue(item3.PreviousSibling == null && item3.NextSibling == null);
+            Assert.IsTrue(item2.PreviousSibling == item1 && item1.NextSibling == item2);
+            Assert.IsTrue(item1.PreviousSibling == null && item2.NextSibling == null);
         }
 
         /// <summary>
@@ -3244,7 +3244,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
         private static string AdjustSpacesForItem(string expectedItem)
         {
-            Assert.False(string.IsNullOrEmpty(expectedItem));
+            Assert.IsFalse(string.IsNullOrEmpty(expectedItem));
 
             var itemSpace = "    ";
             var metadataSpace = itemSpace + "  ";
@@ -3252,7 +3252,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             var splits = expectedItem.Split(MSBuildConstants.NewlineChar);
             splits = splits.Select(s => s.Trim()).ToArray();
 
-            Assert.True(splits.Length >= 1);
+            Assert.IsTrue(splits.Length >= 1);
 
             var sb = new StringBuilder();
 

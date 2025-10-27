@@ -23,25 +23,25 @@ namespace Microsoft.Build.UnitTests.Logging
             CentralForwardingLogger centralLogger = new CentralForwardingLogger();
 
             // Verify NodeId can be get and set properly
-            Assert.Equal(0, centralLogger.NodeId);
+            Assert.AreEqual(0, centralLogger.NodeId);
             centralLogger.NodeId = 4;
-            Assert.Equal(4, centralLogger.NodeId);
+            Assert.AreEqual(4, centralLogger.NodeId);
 
             // Verify Parameters can be get and set properly
-            Assert.True(string.IsNullOrEmpty(centralLogger.Parameters)); // "Expected parameters to be null or empty"
+            Assert.IsTrue(string.IsNullOrEmpty(centralLogger.Parameters)); // "Expected parameters to be null or empty"
             centralLogger.Parameters = "MyParameters";
-            Assert.Equal("MyParameters", centralLogger.Parameters); // "Expected parameters equal MyParameters"
+            Assert.AreEqual("MyParameters", centralLogger.Parameters); // "Expected parameters equal MyParameters"
 
             // Verify Verbosity can be get and set properly
-            Assert.Equal(LoggerVerbosity.Quiet, centralLogger.Verbosity); // "Expected default to be Quiet"
+            Assert.AreEqual(LoggerVerbosity.Quiet, centralLogger.Verbosity); // "Expected default to be Quiet"
             centralLogger.Verbosity = LoggerVerbosity.Detailed;
-            Assert.Equal(LoggerVerbosity.Detailed, centralLogger.Verbosity); // "Expected default to be Detailed"
+            Assert.AreEqual(LoggerVerbosity.Detailed, centralLogger.Verbosity); // "Expected default to be Detailed"
 
             // Verify BuildEventRedirector can be get and set properly
-            Assert.Null(centralLogger.BuildEventRedirector); // "Expected BuildEventRedirector to be null"
+            Assert.IsNull(centralLogger.BuildEventRedirector); // "Expected BuildEventRedirector to be null"
             TestEventRedirector eventRedirector = new TestEventRedirector(null);
             centralLogger.BuildEventRedirector = eventRedirector;
-            Assert.Equal(centralLogger.BuildEventRedirector, eventRedirector); // "Expected the BuildEventRedirector to match the passed in eventRedirector"
+            Assert.AreEqual(centralLogger.BuildEventRedirector, eventRedirector); // "Expected the BuildEventRedirector to match the passed in eventRedirector"
         }
 
         /// <summary>
@@ -79,10 +79,10 @@ namespace Microsoft.Build.UnitTests.Logging
             CentralForwardingLogger centralLogger = new CentralForwardingLogger();
             centralLogger.BuildEventRedirector = new TestEventRedirector(null);
 
-            Assert.NotNull(centralLogger.BuildEventRedirector);
+            Assert.IsNotNull(centralLogger.BuildEventRedirector);
 
             centralLogger.Shutdown();
-            Assert.Null(centralLogger.BuildEventRedirector);
+            Assert.IsNull(centralLogger.BuildEventRedirector);
         }
 
         /// <summary>
@@ -176,7 +176,7 @@ namespace Microsoft.Build.UnitTests.Logging
             /// <param name="buildEvent">Build event to forward</param>
             public void ForwardEvent(BuildEventArgs buildEvent)
             {
-                Assert.Equal(_expectedEvent, buildEvent); // "Expected the forwarded event to match the expected event"
+                Assert.AreEqual(_expectedEvent, buildEvent); // "Expected the forwarded event to match the expected event"
             }
 
             #endregion

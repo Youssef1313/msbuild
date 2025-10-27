@@ -63,7 +63,7 @@ namespace Microsoft.Build.UnitTests
                 FileInfo info = new FileInfo(file);
                 FileState state = new FileState(file);
 
-                Assert.Equal(info.Exists, state.FileExists);
+                Assert.AreEqual(info.Exists, state.FileExists);
             }
             finally
             {
@@ -82,7 +82,7 @@ namespace Microsoft.Build.UnitTests
                 FileInfo info = new FileInfo(file);
                 FileState state = new FileState(file);
 
-                Assert.Equal(info.FullName, state.Name);
+                Assert.AreEqual(info.FullName, state.Name);
             }
             finally
             {
@@ -95,7 +95,7 @@ namespace Microsoft.Build.UnitTests
         {
             var state = new FileState(Path.GetTempPath());
 
-            Assert.True(state.IsDirectory);
+            Assert.IsTrue(state.IsDirectory);
         }
 
         [Fact]
@@ -109,7 +109,7 @@ namespace Microsoft.Build.UnitTests
                 FileInfo info = new FileInfo(file);
                 FileState state = new FileState(file);
 
-                Assert.Equal(info.LastWriteTime, state.LastWriteTime);
+                Assert.AreEqual(info.LastWriteTime, state.LastWriteTime);
             }
             finally
             {
@@ -128,7 +128,7 @@ namespace Microsoft.Build.UnitTests
                 FileInfo info = new FileInfo(file);
                 FileState state = new FileState(file);
 
-                Assert.Equal(info.LastWriteTimeUtc, state.LastWriteTimeUtcFast);
+                Assert.AreEqual(info.LastWriteTimeUtc, state.LastWriteTimeUtcFast);
             }
             finally
             {
@@ -147,7 +147,7 @@ namespace Microsoft.Build.UnitTests
                 FileInfo info = new FileInfo(file);
                 FileState state = new FileState(file);
 
-                Assert.Equal(info.Length, state.Length);
+                Assert.AreEqual(info.Length, state.Length);
             }
             finally
             {
@@ -166,7 +166,7 @@ namespace Microsoft.Build.UnitTests
                 FileInfo info = new FileInfo(file);
                 FileState state = new FileState(file);
 
-                Assert.Equal(info.IsReadOnly, state.IsReadOnly);
+                Assert.AreEqual(info.IsReadOnly, state.IsReadOnly);
             }
             finally
             {
@@ -185,11 +185,11 @@ namespace Microsoft.Build.UnitTests
                 FileInfo info = new FileInfo(file);
                 FileState state = new FileState(file);
 
-                Assert.Equal(info.Exists, state.FileExists);
+                Assert.AreEqual(info.Exists, state.FileExists);
                 File.Delete(file);
-                Assert.True(state.FileExists);
+                Assert.IsTrue(state.FileExists);
                 state.Reset();
-                Assert.False(state.FileExists);
+                Assert.IsFalse(state.FileExists);
             }
             finally
             {
@@ -211,14 +211,14 @@ namespace Microsoft.Build.UnitTests
                 FileInfo info = new FileInfo(file);
                 FileState state = new FileState(file);
 
-                Assert.Equal(info.FullName, state.Name);
+                Assert.AreEqual(info.FullName, state.Name);
                 string originalName = info.FullName;
                 string oldFile = file;
                 file = oldFile + "2";
                 File.Move(oldFile, file);
-                Assert.Equal(originalName, state.Name);
+                Assert.AreEqual(originalName, state.Name);
                 state.Reset();
-                Assert.Equal(originalName, state.Name); // Name is from the constructor, didn't change
+                Assert.AreEqual(originalName, state.Name); // Name is from the constructor, didn't change
             }
             finally
             {
@@ -237,14 +237,14 @@ namespace Microsoft.Build.UnitTests
                 FileInfo info = new FileInfo(file);
                 FileState state = new FileState(file);
 
-                Assert.Equal(info.LastWriteTime, state.LastWriteTime);
+                Assert.AreEqual(info.LastWriteTime, state.LastWriteTime);
 
                 var time = new DateTime(2111, 1, 1);
                 info.LastWriteTime = time;
 
-                Assert.NotEqual(time, state.LastWriteTime);
+                Assert.AreNotEqual(time, state.LastWriteTime);
                 state.Reset();
-                Assert.Equal(time, state.LastWriteTime);
+                Assert.AreEqual(time, state.LastWriteTime);
             }
             finally
             {
@@ -263,14 +263,14 @@ namespace Microsoft.Build.UnitTests
                 FileInfo info = new FileInfo(file);
                 FileState state = new FileState(file);
 
-                Assert.Equal(info.LastWriteTimeUtc, state.LastWriteTimeUtcFast);
+                Assert.AreEqual(info.LastWriteTimeUtc, state.LastWriteTimeUtcFast);
 
                 var time = new DateTime(2111, 1, 1);
                 info.LastWriteTime = time;
 
-                Assert.NotEqual(time.ToUniversalTime(), state.LastWriteTimeUtcFast);
+                Assert.AreNotEqual(time.ToUniversalTime(), state.LastWriteTimeUtcFast);
                 state.Reset();
-                Assert.Equal(time.ToUniversalTime(), state.LastWriteTimeUtcFast);
+                Assert.AreEqual(time.ToUniversalTime(), state.LastWriteTimeUtcFast);
             }
             finally
             {
@@ -291,13 +291,13 @@ namespace Microsoft.Build.UnitTests
                 FileInfo info = new FileInfo(file);
                 FileState state = new FileState(file);
 
-                Assert.Equal(info.Length, state.Length);
+                Assert.AreEqual(info.Length, state.Length);
                 File.WriteAllText(file, "x");
 
-                Assert.Equal(info.Length, state.Length);
+                Assert.AreEqual(info.Length, state.Length);
                 state.Reset();
                 info.Refresh();
-                Assert.Equal(info.Length, state.Length);
+                Assert.AreEqual(info.Length, state.Length);
             }
             finally
             {
@@ -316,10 +316,10 @@ namespace Microsoft.Build.UnitTests
                 FileInfo info = new FileInfo(file);
                 FileState state = new FileState(file);
 
-                Assert.Equal(info.IsReadOnly, state.IsReadOnly);
+                Assert.AreEqual(info.IsReadOnly, state.IsReadOnly);
                 info.IsReadOnly = !info.IsReadOnly;
                 state.Reset();
-                Assert.True(state.IsReadOnly);
+                Assert.IsTrue(state.IsReadOnly);
             }
             finally
             {
@@ -331,26 +331,26 @@ namespace Microsoft.Build.UnitTests
         [Fact]
         public void ExistsButDirectory()
         {
-            Assert.Equal(new FileInfo(Path.GetTempPath()).Exists, new FileState(Path.GetTempPath()).FileExists);
-            Assert.True(new FileState(Path.GetTempPath()).IsDirectory);
+            Assert.AreEqual(new FileInfo(Path.GetTempPath()).Exists, new FileState(Path.GetTempPath()).FileExists);
+            Assert.IsTrue(new FileState(Path.GetTempPath()).IsDirectory);
         }
 
         [Fact]
         public void ReadOnlyOnDirectory()
         {
-            Assert.Equal(new FileInfo(Path.GetTempPath()).IsReadOnly, new FileState(Path.GetTempPath()).IsReadOnly);
+            Assert.AreEqual(new FileInfo(Path.GetTempPath()).IsReadOnly, new FileState(Path.GetTempPath()).IsReadOnly);
         }
 
         [Fact]
         public void LastWriteTimeOnDirectory()
         {
-            Assert.Equal(new FileInfo(Path.GetTempPath()).LastWriteTime, new FileState(Path.GetTempPath()).LastWriteTime);
+            Assert.AreEqual(new FileInfo(Path.GetTempPath()).LastWriteTime, new FileState(Path.GetTempPath()).LastWriteTime);
         }
 
         [Fact]
         public void LastWriteTimeUtcOnDirectory()
         {
-            Assert.Equal(new FileInfo(Path.GetTempPath()).LastWriteTimeUtc, new FileState(Path.GetTempPath()).LastWriteTimeUtcFast);
+            Assert.AreEqual(new FileInfo(Path.GetTempPath()).LastWriteTimeUtc, new FileState(Path.GetTempPath()).LastWriteTimeUtcFast);
         }
 
         [Fact]
@@ -366,7 +366,7 @@ namespace Microsoft.Build.UnitTests
         {
             string file = Guid.NewGuid().ToString("N");
 
-            Assert.Equal(new FileInfo(file).LastWriteTime, new FileState(file).LastWriteTime);
+            Assert.AreEqual(new FileInfo(file).LastWriteTime, new FileState(file).LastWriteTime);
         }
 
         [Fact]
@@ -376,7 +376,7 @@ namespace Microsoft.Build.UnitTests
         {
             string file = Guid.NewGuid().ToString("N");
 
-            Assert.Equal(new FileInfo(file).LastWriteTimeUtc, new FileState(file).LastWriteTimeUtcFast);
+            Assert.AreEqual(new FileInfo(file).LastWriteTimeUtc, new FileState(file).LastWriteTimeUtcFast);
         }
 
         [Fact]
@@ -402,7 +402,7 @@ namespace Microsoft.Build.UnitTests
         {
             string file = Guid.NewGuid().ToString("N"); // presumably doesn't exist
 
-            Assert.Equal(Directory.Exists(file), new FileState(file).DirectoryExists);
+            Assert.AreEqual(Directory.Exists(file), new FileState(file).DirectoryExists);
         }
 
         [Fact]
@@ -410,8 +410,8 @@ namespace Microsoft.Build.UnitTests
         {
             string file = Guid.NewGuid().ToString("N") + "\\x"; // presumably doesn't exist
 
-            Assert.False(new FileState(file).FileExists);
-            Assert.False(new FileState(file).DirectoryExists);
+            Assert.IsFalse(new FileState(file).FileExists);
+            Assert.IsFalse(new FileState(file).DirectoryExists);
         }
     }
 }

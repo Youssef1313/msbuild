@@ -32,8 +32,8 @@ namespace Microsoft.Build.UnitTests
             getReferencePaths.TargetFrameworkMoniker = targetFrameworkMoniker;
             getReferencePaths.Execute();
             string[] returnedPaths = getReferencePaths.ReferenceAssemblyPaths;
-            Assert.Equal(ToolLocationHelper.GetPathToReferenceAssemblies(new FrameworkNameVersioning(targetFrameworkMoniker)).Count, returnedPaths.Length);
-            Assert.Equal(0, engine.Errors); // "Expected the log to contain no errors"
+            Assert.AreEqual(ToolLocationHelper.GetPathToReferenceAssemblies(new FrameworkNameVersioning(targetFrameworkMoniker)).Count, returnedPaths.Length);
+            Assert.AreEqual(0, engine.Errors); // "Expected the log to contain no errors"
         }
 
         /// <summary>
@@ -69,9 +69,9 @@ namespace Microsoft.Build.UnitTests
                 string[] returnedPaths = getReferencePaths.ReferenceAssemblyPaths;
                 string displayName = getReferencePaths.TargetFrameworkMonikerDisplayName;
                 Assert.Single(returnedPaths);
-                Assert.Equal(framework41Directory, returnedPaths[0]);
-                Assert.Equal(0, engine.Log.Length); // "Expected the log to contain nothing"
-                Assert.Equal(".NET Framework 4.1", displayName);
+                Assert.AreEqual(framework41Directory, returnedPaths[0]);
+                Assert.AreEqual(0, engine.Log.Length); // "Expected the log to contain nothing"
+                Assert.AreEqual(".NET Framework 4.1", displayName);
             }
             finally
             {
@@ -115,8 +115,8 @@ namespace Microsoft.Build.UnitTests
                 string[] returnedPaths = getReferencePaths.ReferenceAssemblyPaths;
                 string displayName = getReferencePaths.TargetFrameworkMonikerDisplayName;
                 Assert.Single(returnedPaths);
-                Assert.Equal(framework41Directory + Path.DirectorySeparatorChar, returnedPaths[0]);
-                Assert.Equal(".NET Framework 4.1 Client", displayName);
+                Assert.AreEqual(framework41Directory + Path.DirectorySeparatorChar, returnedPaths[0]);
+                Assert.AreEqual(".NET Framework 4.1 Client", displayName);
             }
             finally
             {
@@ -139,9 +139,9 @@ namespace Microsoft.Build.UnitTests
             getReferencePaths.TargetFrameworkMoniker = null;
             getReferencePaths.Execute();
             string[] returnedPaths = getReferencePaths.ReferenceAssemblyPaths;
-            Assert.Null(getReferencePaths.TargetFrameworkMonikerDisplayName);
+            Assert.IsNull(getReferencePaths.TargetFrameworkMonikerDisplayName);
             Assert.Empty(returnedPaths);
-            Assert.Equal(1, engine.Errors);
+            Assert.AreEqual(1, engine.Errors);
         }
 
         /// <summary>
@@ -156,11 +156,11 @@ namespace Microsoft.Build.UnitTests
             // Make a framework which does not exist, intentional misspelling of framework
             getReferencePaths.TargetFrameworkMoniker = ".NetFramewok, Version=v99.0";
             bool success = getReferencePaths.Execute();
-            Assert.False(success);
+            Assert.IsFalse(success);
             string[] returnedPaths = getReferencePaths.ReferenceAssemblyPaths;
             Assert.Empty(returnedPaths);
             string displayName = getReferencePaths.TargetFrameworkMonikerDisplayName;
-            Assert.Null(displayName);
+            Assert.IsNull(displayName);
             FrameworkNameVersioning frameworkMoniker = new FrameworkNameVersioning(getReferencePaths.TargetFrameworkMoniker);
             string message = ResourceUtilities.FormatResourceStringStripCodeAndKeyword("GetReferenceAssemblyPaths.NoReferenceAssemblyDirectoryFound", frameworkMoniker.ToString());
             engine.AssertLogContains("ERROR MSB3644: " + message);
@@ -176,12 +176,12 @@ namespace Microsoft.Build.UnitTests
             getReferencePaths.TargetFrameworkMoniker = ".NetFramewok, Version=v99.0";
             getReferencePaths.SuppressNotFoundError = true;
             bool success = getReferencePaths.Execute();
-            Assert.True(success);
+            Assert.IsTrue(success);
             string[] returnedPaths = getReferencePaths.ReferenceAssemblyPaths;
             Assert.Empty(returnedPaths);
             string displayName = getReferencePaths.TargetFrameworkMonikerDisplayName;
-            Assert.Null(displayName);
-            Assert.Equal(0, engine.Errors);
+            Assert.IsNull(displayName);
+            Assert.AreEqual(0, engine.Errors);
         }
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace Microsoft.Build.UnitTests
                 string[] returnedPaths = getReferencePaths.ReferenceAssemblyPaths;
                 Assert.Empty(returnedPaths);
                 string displayName = getReferencePaths.TargetFrameworkMonikerDisplayName;
-                Assert.Null(displayName);
+                Assert.IsNull(displayName);
                 FrameworkNameVersioning frameworkMoniker = new FrameworkNameVersioning(getReferencePaths.TargetFrameworkMoniker);
                 string message = ResourceUtilities.FormatResourceStringStripCodeAndKeyword("GetReferenceAssemblyPaths.NoReferenceAssemblyDirectoryFound", frameworkMoniker.ToString());
                 engine.AssertLogContains(message);
@@ -264,7 +264,7 @@ namespace Microsoft.Build.UnitTests
                 string[] returnedPaths = getReferencePaths.ReferenceAssemblyPaths;
                 Assert.Empty(returnedPaths);
                 string displayName = getReferencePaths.TargetFrameworkMonikerDisplayName;
-                Assert.Null(displayName);
+                Assert.IsNull(displayName);
                 FrameworkNameVersioning frameworkMoniker = new FrameworkNameVersioning(getReferencePaths.TargetFrameworkMoniker);
                 if (NativeMethodsShared.IsWindows)
                 {
@@ -322,9 +322,9 @@ namespace Microsoft.Build.UnitTests
                 string[] returnedPaths = getReferencePaths.ReferenceAssemblyPaths;
                 string displayName = getReferencePaths.TargetFrameworkMonikerDisplayName;
                 Assert.Single(returnedPaths);
-                Assert.Equal(framework41Directory.Path, returnedPaths[0]);
-                Assert.Equal(0, engine.Log.Length); // "Expected the log to contain nothing"
-                Assert.Equal(".NET Framework 4.1", displayName);
+                Assert.AreEqual(framework41Directory.Path, returnedPaths[0]);
+                Assert.AreEqual(0, engine.Log.Length); // "Expected the log to contain nothing"
+                Assert.AreEqual(".NET Framework 4.1", displayName);
             }
         }
     }

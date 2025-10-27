@@ -59,8 +59,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectRootElement project = projectRootElementFromString.Project;
             ProjectTargetElement target = (ProjectTargetElement)Helpers.GetFirst(project.Children);
 
-            Assert.Equal(0, Helpers.Count(target.Children));
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual(0, Helpers.Count(target.Children));
+            Assert.IsTrue(project.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -71,10 +71,10 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         {
             ProjectTargetElement target = GetTargetXml();
 
-            Assert.Equal("i", target.Inputs);
-            Assert.Equal("o", target.Outputs);
-            Assert.Equal("d", target.DependsOnTargets);
-            Assert.Equal("c", target.Condition);
+            Assert.AreEqual("i", target.Inputs);
+            Assert.AreEqual("o", target.Outputs);
+            Assert.AreEqual("d", target.DependsOnTargets);
+            Assert.AreEqual("c", target.Condition);
         }
 
         /// <summary>
@@ -90,10 +90,10 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             target.DependsOnTargets = "db";
             target.Condition = "cb";
 
-            Assert.Equal("ib", target.Inputs);
-            Assert.Equal("ob", target.Outputs);
-            Assert.Equal("db", target.DependsOnTargets);
-            Assert.Equal("cb", target.Condition);
+            Assert.AreEqual("ib", target.Inputs);
+            Assert.AreEqual("ob", target.Outputs);
+            Assert.AreEqual("db", target.DependsOnTargets);
+            Assert.AreEqual("cb", target.Condition);
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectTargetElement target = GetTargetXml();
             target.Condition = null;
 
-            Assert.Equal(String.Empty, target.Condition);
+            Assert.AreEqual(String.Empty, target.Condition);
         }
 
         /// <summary>
@@ -200,13 +200,13 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             var tasks = Helpers.MakeList(target.Children);
 
-            Assert.Equal(2, tasks.Count);
+            Assert.AreEqual(2, tasks.Count);
 
             ProjectTaskElement task1 = (ProjectTaskElement)tasks[0];
             ProjectTaskElement task2 = (ProjectTaskElement)tasks[1];
 
-            Assert.Equal("t1", task1.Name);
-            Assert.Equal("t2", task2.Name);
+            Assert.AreEqual("t1", task1.Name);
+            Assert.AreEqual("t2", task2.Name);
         }
 
         /// <summary>
@@ -221,8 +221,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             target.Name = "t2";
 
-            Assert.Equal("t2", target.Name);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual("t2", target.Name);
+            Assert.IsTrue(project.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -237,8 +237,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             target.Inputs = "in";
 
-            Assert.Equal("in", target.Inputs);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual("in", target.Inputs);
+            Assert.IsTrue(project.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -253,8 +253,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             target.Outputs = "out";
 
-            Assert.Equal("out", target.Outputs);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual("out", target.Outputs);
+            Assert.IsTrue(project.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -269,8 +269,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             target.DependsOnTargets = "dot";
 
-            Assert.Equal("dot", target.DependsOnTargets);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual("dot", target.DependsOnTargets);
+            Assert.IsTrue(project.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -285,8 +285,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             target.Condition = "c";
 
-            Assert.Equal("c", target.Condition);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual("c", target.Condition);
+            Assert.IsTrue(project.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -301,8 +301,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             target.KeepDuplicateOutputs = "true";
 
-            Assert.Equal("true", target.KeepDuplicateOutputs);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual("true", target.KeepDuplicateOutputs);
+            Assert.IsTrue(project.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -318,22 +318,22 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             target.Returns = "@(a)";
 
-            Assert.Equal("@(a)", target.Returns);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual("@(a)", target.Returns);
+            Assert.IsTrue(project.HasUnsavedChanges);
 
             Helpers.ClearDirtyFlag(project);
 
             target.Returns = String.Empty;
 
-            Assert.Equal(String.Empty, target.Returns);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual(String.Empty, target.Returns);
+            Assert.IsTrue(project.HasUnsavedChanges);
 
             Helpers.ClearDirtyFlag(project);
 
             target.Returns = null;
 
-            Assert.Null(target.Returns);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.IsNull(target.Returns);
+            Assert.IsTrue(project.HasUnsavedChanges);
         }
 
         /// <summary>

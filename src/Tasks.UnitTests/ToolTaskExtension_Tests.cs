@@ -71,7 +71,7 @@ namespace Microsoft.Build.UnitTests
         public void GetNonExistentBoolWithDefault()
         {
             MyToolTaskExtension t = new MyToolTaskExtension();
-            Assert.Equal(5, t.GetIntParameterWithDefault("Key", 5));
+            Assert.AreEqual(5, t.GetIntParameterWithDefault("Key", 5));
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace Microsoft.Build.UnitTests
             MyToolTaskExtension t = new MyToolTaskExtension();
             t.Bag["Key"] = true;
 
-            Assert.True(t.GetBoolParameterWithDefault("Key", false));
+            Assert.IsTrue(t.GetBoolParameterWithDefault("Key", false));
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Microsoft.Build.UnitTests
             MyToolTaskExtension t = new MyToolTaskExtension();
             t.Bag["Key"] = 5;
 
-            Assert.Equal(5, t.GetIntParameterWithDefault("Key", 9));
+            Assert.AreEqual(5, t.GetIntParameterWithDefault("Key", 9));
         }
 
         [Fact]
@@ -118,7 +118,7 @@ namespace Microsoft.Build.UnitTests
                 "/B:F9E03765A87543F4B385664B8DB7619D"
             };
 
-            Assert.Equal(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         private sealed class MyToolTaskExtension : ToolTaskExtension

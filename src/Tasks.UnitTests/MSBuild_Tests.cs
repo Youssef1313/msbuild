@@ -128,7 +128,7 @@ namespace Microsoft.Build.UnitTests
                 msbuildTask.Projects = new ITaskItem[] { new TaskItem(projectFile1), new TaskItem(projectFile2) };
 
                 bool success = msbuildTask.Execute();
-                Assert.True(success); // "Build failed.  See 'Standard Out' tab for details."
+                Assert.IsTrue(success); // "Build failed.  See 'Standard Out' tab for details."
 
                 string expectedItemOutputs = string.Format(@"
                     a1.dll : MSBuildSourceProjectFile={0} ; MSBuildSourceTargetName=TargetA
@@ -169,7 +169,7 @@ namespace Microsoft.Build.UnitTests
             Project project = ObjectModelHelpers.CreateInMemoryProject(projectContents, logger);
 
             bool success = project.Build();
-            Assert.True(success); // "Build failed.  See test output (Attachments in Azure Pipelines) for details"
+            Assert.IsTrue(success); // "Build failed.  See test output (Attachments in Azure Pipelines) for details"
         }
 
         /// <summary>
@@ -211,8 +211,8 @@ namespace Microsoft.Build.UnitTests
 
             MockLogger logger = new MockLogger(_testOutput);
             ObjectModelHelpers.BuildTempProjectFileExpectFailure(@"SkipNonexistentProjectsMain.csproj", logger);
-            Assert.Equal(0, logger.WarningCount);
-            Assert.Equal(1, logger.ErrorCount);
+            Assert.AreEqual(0, logger.WarningCount);
+            Assert.AreEqual(1, logger.ErrorCount);
             Assert.Contains("MSB3202", logger.FullLog); // project file not found
         }
 
@@ -245,8 +245,8 @@ namespace Microsoft.Build.UnitTests
             ObjectModelHelpers.BuildTempProjectFileExpectSuccess(@"SkipNonexistentProjectsMain.csproj", logger);
 
             logger.AssertLogContains("Hello from foo.csproj");
-            Assert.Equal(0, logger.WarningCount);
-            Assert.Equal(0, logger.ErrorCount);
+            Assert.AreEqual(0, logger.WarningCount);
+            Assert.AreEqual(0, logger.ErrorCount);
             Assert.Contains("this_project_does_not_exist.csproj", logger.FullLog); // for the missing project
             Assert.DoesNotContain("MSB3202", logger.FullLog); // project file not found error
         }
@@ -281,8 +281,8 @@ namespace Microsoft.Build.UnitTests
             ObjectModelHelpers.BuildTempProjectFileExpectSuccess(@"SkipNonexistentProjectsMain.csproj", logger);
 
             logger.AssertLogContains("Hello from foo.csproj");
-            Assert.Equal(0, logger.WarningCount);
-            Assert.Equal(0, logger.ErrorCount);
+            Assert.AreEqual(0, logger.WarningCount);
+            Assert.AreEqual(0, logger.ErrorCount);
             Assert.Contains("this_project_does_not_exist.csproj", logger.FullLog); // for the missing project
             Assert.DoesNotContain("MSB3202", logger.FullLog); // project file not found error
         }
@@ -329,8 +329,8 @@ namespace Microsoft.Build.UnitTests
             string message = String.Format(AssemblyResources.GetString("MSBuild.ProjectFileNotFoundMessage"), "this_project_does_not_exist_warn.csproj");
             string error = String.Format(AssemblyResources.GetString("MSBuild.ProjectFileNotFound"), "this_project_does_not_exist_warn.csproj");
             string error2 = String.Format(AssemblyResources.GetString("MSBuild.ProjectFileNotFound"), "this_project_does_not_exist_error.csproj");
-            Assert.Equal(0, logger.WarningCount);
-            Assert.Equal(1, logger.ErrorCount);
+            Assert.AreEqual(0, logger.WarningCount);
+            Assert.AreEqual(1, logger.ErrorCount);
             Assert.Contains(message, logger.FullLog); // for the missing project
             Assert.Contains(error2, logger.FullLog);
             Assert.DoesNotContain(error, logger.FullLog);
@@ -372,8 +372,8 @@ namespace Microsoft.Build.UnitTests
             ObjectModelHelpers.BuildTempProjectFileExpectFailure(@"BuildingVCProjMain.csproj", logger);
 
             logger.AssertLogContains("Hello from foo.csproj");
-            Assert.Equal(0, logger.WarningCount);
-            Assert.Equal(1, logger.ErrorCount);
+            Assert.AreEqual(0, logger.WarningCount);
+            Assert.AreEqual(1, logger.ErrorCount);
             Assert.Contains("MSB3204", logger.FullLog); // upgrade to vcxproj needed
         }
 
@@ -524,7 +524,7 @@ namespace Microsoft.Build.UnitTests
                 msbuildTask.Properties = new string[] { "MyProp=0" };
 
                 bool success = msbuildTask.Execute();
-                Assert.True(success); // "Build failed.  See 'Standard Out' tab for details."
+                Assert.IsTrue(success); // "Build failed.  See 'Standard Out' tab for details."
 
                 string expectedItemOutputs = string.Format(@"
                     a1.dll : MSBuildSourceProjectFile={0} ; MSBuildSourceTargetName=TargetA
@@ -582,7 +582,7 @@ namespace Microsoft.Build.UnitTests
                 msbuildTask.Projects = projects;
 
                 bool success = msbuildTask.Execute();
-                Assert.True(success); // "Build failed.  See 'Standard Out' tab for details."
+                Assert.IsTrue(success); // "Build failed.  See 'Standard Out' tab for details."
 
                 string expectedItemOutputs = string.Format(@"
                     b1.dll : MSBuildSourceProjectFile={0} ; MSBuildSourceTargetName=TargetB
@@ -638,7 +638,7 @@ namespace Microsoft.Build.UnitTests
                 msbuildTask.Projects = projects;
 
                 bool success = msbuildTask.Execute();
-                Assert.True(success); // "Build failed.  See 'Standard Out' tab for details."
+                Assert.IsTrue(success); // "Build failed.  See 'Standard Out' tab for details."
 
                 string expectedItemOutputs = string.Format(@"
                     h1.dll : MSBuildSourceProjectFile={0} ; MSBuildSourceTargetName=TargetH
@@ -693,7 +693,7 @@ namespace Microsoft.Build.UnitTests
                 msbuildTask.Projects = projects;
 
                 bool success = msbuildTask.Execute();
-                Assert.False(success); // "Build succeeded.  See 'Standard Out' tab for details."
+                Assert.IsFalse(success); // "Build succeeded.  See 'Standard Out' tab for details."
             }
             finally
             {
@@ -740,7 +740,7 @@ namespace Microsoft.Build.UnitTests
                 msbuildTask.Projects = projects;
 
                 bool success = msbuildTask.Execute();
-                Assert.True(success); // "Build failed.  See 'Standard Out' tab for details."
+                Assert.IsTrue(success); // "Build failed.  See 'Standard Out' tab for details."
 
                 string expectedItemOutputs = string.Format(@"
                     a1.dll : MSBuildSourceProjectFile={0} ; MSBuildSourceTargetName=TargetA
@@ -798,7 +798,7 @@ namespace Microsoft.Build.UnitTests
                 msbuildTask.Projects = projects;
 
                 bool success = msbuildTask.Execute();
-                Assert.True(success); // "Build failed.  See 'Standard Out' tab for details."
+                Assert.IsTrue(success); // "Build failed.  See 'Standard Out' tab for details."
 
                 string expectedItemOutputs = string.Format(@"
                     b1.dll : MSBuildSourceProjectFile={0} ; MSBuildSourceTargetName=TargetB
@@ -853,7 +853,7 @@ namespace Microsoft.Build.UnitTests
                 msbuildTask.Projects = projects;
 
                 bool success = msbuildTask.Execute();
-                Assert.True(success); // "Build failed.  See 'Standard Out' tab for details."
+                Assert.IsTrue(success); // "Build failed.  See 'Standard Out' tab for details."
 
                 string expectedItemOutputs = string.Format(@"
                     b1.dll : MSBuildSourceProjectFile={0} ; MSBuildSourceTargetName=TargetB
@@ -911,7 +911,7 @@ namespace Microsoft.Build.UnitTests
                 msbuildTask.Projects = projects;
 
                 bool success = msbuildTask.Execute();
-                Assert.True(success); // "Build failed.  See 'Standard Out' tab for details."
+                Assert.IsTrue(success); // "Build failed.  See 'Standard Out' tab for details."
             }
             finally
             {
@@ -976,7 +976,7 @@ namespace Microsoft.Build.UnitTests
                             // Verify build did not build second project which has the message SecondProject
                             mockEngine.AssertLogDoesntContain("SecondProject");
                             // Verify the correct msbuild task messages are in the log
-                            Assert.False(msbuildTask.BuildInParallel); // "Iteration of 0 Expected BuildInParallel to be false"
+                            Assert.IsFalse(msbuildTask.BuildInParallel); // "Iteration of 0 Expected BuildInParallel to be false"
                             break;
                         case 1:
                             // Verify setting BuildInParallel to true and StopOnFirstFailure to
@@ -987,7 +987,7 @@ namespace Microsoft.Build.UnitTests
                             // Verify build did  build second project which has the message SecondProject
                             mockEngine.AssertLogContains("SecondProject");
                             // Verify the correct msbuild task messages are in the log
-                            Assert.True(msbuildTask.BuildInParallel); // "Iteration of 1 Expected BuildInParallel to be true"
+                            Assert.IsTrue(msbuildTask.BuildInParallel); // "Iteration of 1 Expected BuildInParallel to be true"
                             break;
                         case 2:
                             // Verify setting BuildInParallel to false and StopOnFirstFailure to
@@ -998,7 +998,7 @@ namespace Microsoft.Build.UnitTests
                             // Verify build did not build second project which has the message SecondProject
                             mockEngine.AssertLogDoesntContain("SecondProject");
                             // Verify the correct msbuild task messages are in the log
-                            Assert.False(msbuildTask.BuildInParallel); // "Iteration of 2 Expected BuildInParallel to be false"
+                            Assert.IsFalse(msbuildTask.BuildInParallel); // "Iteration of 2 Expected BuildInParallel to be false"
                             break;
 
                         case 3:
@@ -1010,11 +1010,11 @@ namespace Microsoft.Build.UnitTests
                             // Verify build did build second project which has the message SecondProject
                             mockEngine.AssertLogContains("SecondProject");
                             // Verify the correct msbuild task messages are in the log
-                            Assert.False(msbuildTask.BuildInParallel); // "Iteration of 3 Expected BuildInParallel to be false"
+                            Assert.IsFalse(msbuildTask.BuildInParallel); // "Iteration of 3 Expected BuildInParallel to be false"
                             break;
                     }
                     // The build should fail as the first project has an error
-                    Assert.False(success, "Iteration of i " + i + " Build Succeeded.  See 'Standard Out' tab for details.");
+                    Assert.IsFalse(success, "Iteration of i " + i + " Build Succeeded.  See 'Standard Out' tab for details.");
                 }
             }
             finally
@@ -1077,7 +1077,7 @@ namespace Microsoft.Build.UnitTests
                             // Verify build did build second project which has the message SecondProject
                             mockEngine.AssertLogContains("SecondProject");
                             // Verify the correct msbuild task messages are in the log
-                            Assert.True(msbuildTask.BuildInParallel); // "Iteration of 0 Expected BuildInParallel to be true"
+                            Assert.IsTrue(msbuildTask.BuildInParallel); // "Iteration of 0 Expected BuildInParallel to be true"
                             break;
                         case 1:
                             // Verify setting BuildInParallel to true and StopOnFirstFailure to
@@ -1088,7 +1088,7 @@ namespace Microsoft.Build.UnitTests
                             // Verify build did build second project which has the message SecondProject
                             mockEngine.AssertLogContains("SecondProject");
                             // Verify the correct msbuild task messages are in the log
-                            Assert.True(msbuildTask.BuildInParallel); // "Iteration of 1 Expected BuildInParallel to be true"
+                            Assert.IsTrue(msbuildTask.BuildInParallel); // "Iteration of 1 Expected BuildInParallel to be true"
                             break;
                         case 2:
                             // Verify setting BuildInParallel to false and StopOnFirstFailure to
@@ -1099,7 +1099,7 @@ namespace Microsoft.Build.UnitTests
                             // Verify build did not build second project which has the message SecondProject
                             mockEngine.AssertLogDoesntContain("SecondProject");
                             // Verify the correct msbuild task messages are in the log
-                            Assert.False(msbuildTask.BuildInParallel); // "Iteration of 2 Expected BuildInParallel to be false"
+                            Assert.IsFalse(msbuildTask.BuildInParallel); // "Iteration of 2 Expected BuildInParallel to be false"
                             break;
 
                         case 3:
@@ -1111,11 +1111,11 @@ namespace Microsoft.Build.UnitTests
                             // Verify build did build second project which has the message SecondProject
                             mockEngine.AssertLogContains("SecondProject");
                             // Verify the correct msbuild task messages are in the log
-                            Assert.False(msbuildTask.BuildInParallel); // "Iteration of 3 Expected BuildInParallel to be false"
+                            Assert.IsFalse(msbuildTask.BuildInParallel); // "Iteration of 3 Expected BuildInParallel to be false"
                             break;
                     }
                     // The build should fail as the first project has an error
-                    Assert.False(success, "Iteration of i " + i + " Build Succeeded.  See 'Standard Out' tab for details.");
+                    Assert.IsFalse(success, "Iteration of i " + i + " Build Succeeded.  See 'Standard Out' tab for details.");
                 }
             }
             finally
@@ -1165,7 +1165,7 @@ namespace Microsoft.Build.UnitTests
                 msbuildTask.BuildInParallel = false;
                 msbuildTask.StopOnFirstFailure = true;
                 bool success = msbuildTask.Execute();
-                Assert.False(success); // "Build Succeeded.  See 'Standard Out' tab for details."
+                Assert.IsFalse(success); // "Build Succeeded.  See 'Standard Out' tab for details."
 
                 // Test the case where there are two projects and the last one has an error
                 projects = new ITaskItem[]
@@ -1182,7 +1182,7 @@ namespace Microsoft.Build.UnitTests
                 msbuildTask.BuildInParallel = false;
                 msbuildTask.StopOnFirstFailure = true;
                 success = msbuildTask.Execute();
-                Assert.False(success); // "Build Succeeded.  See 'Standard Out' tab for details."
+                Assert.IsFalse(success); // "Build Succeeded.  See 'Standard Out' tab for details."
             }
             finally
             {
@@ -1286,7 +1286,7 @@ namespace Microsoft.Build.UnitTests
                     }
 
                     // The build should fail as the first project has an error
-                    Assert.False(success, "Iteration of i:" + i + "Build Succeeded.  See 'Standard Out' tab for details.");
+                    Assert.IsFalse(success, "Iteration of i:" + i + "Build Succeeded.  See 'Standard Out' tab for details.");
                 }
             }
             finally
@@ -1342,14 +1342,14 @@ namespace Microsoft.Build.UnitTests
                 msbuildTask.Projects = projects;
 
                 bool success = msbuildTask.Execute();
-                Assert.True(success); // "Build failed.  See 'Standard Out' tab for details."
+                Assert.IsTrue(success); // "Build failed.  See 'Standard Out' tab for details."
 
-                Assert.Equal(5, msbuildTask.TargetOutputs.Length);
-                Assert.Equal("|a", msbuildTask.TargetOutputs[0].ItemSpec);
-                Assert.Equal("A|b", msbuildTask.TargetOutputs[1].ItemSpec);
-                Assert.Equal("B|c", msbuildTask.TargetOutputs[2].ItemSpec);
-                Assert.Equal("C|d", msbuildTask.TargetOutputs[3].ItemSpec);
-                Assert.Equal("D|", msbuildTask.TargetOutputs[4].ItemSpec);
+                Assert.AreEqual(5, msbuildTask.TargetOutputs.Length);
+                Assert.AreEqual("|a", msbuildTask.TargetOutputs[0].ItemSpec);
+                Assert.AreEqual("A|b", msbuildTask.TargetOutputs[1].ItemSpec);
+                Assert.AreEqual("B|c", msbuildTask.TargetOutputs[2].ItemSpec);
+                Assert.AreEqual("C|d", msbuildTask.TargetOutputs[3].ItemSpec);
+                Assert.AreEqual("D|", msbuildTask.TargetOutputs[4].ItemSpec);
             }
             finally
             {
@@ -1473,7 +1473,7 @@ namespace Microsoft.Build.UnitTests
                 Project project = new Project(projectFile2);
                 var logger = new MockLogger();
 
-                Assert.True(project.Build(logger));
+                Assert.IsTrue(project.Build(logger));
 
                 var expectedTaskId = logger.TaskStartedEvents.First(t => t.TaskName == "MSBuild").BuildEventContext.TaskId;
                 var actualTaskId = logger.ProjectStartedEvents
@@ -1481,7 +1481,7 @@ namespace Microsoft.Build.UnitTests
                     .First()
                     .ParentProjectBuildEventContext.TaskId;
 
-                Assert.Equal(expectedTaskId, actualTaskId);
+                Assert.AreEqual(expectedTaskId, actualTaskId);
             }
             finally
             {
@@ -1509,7 +1509,7 @@ namespace Microsoft.Build.UnitTests
                 Project project = new Project(projectFile1);
                 var logger = new MockLogger();
 
-                Assert.True(project.Build(logger));
+                Assert.IsTrue(project.Build(logger));
 
                 var expectedTaskId = logger.TaskStartedEvents.First(t => t.TaskName == nameof(BuildProjectFileTask)).BuildEventContext.TaskId;
                 var actualTaskId = logger.ProjectStartedEvents
@@ -1517,7 +1517,7 @@ namespace Microsoft.Build.UnitTests
                     .First()
                     .ParentProjectBuildEventContext.TaskId;
 
-                Assert.Equal(expectedTaskId, actualTaskId);
+                Assert.AreEqual(expectedTaskId, actualTaskId);
             }
             finally
             {

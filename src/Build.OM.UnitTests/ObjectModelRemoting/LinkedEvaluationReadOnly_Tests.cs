@@ -23,11 +23,11 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
                 this.BigFile = this.ImmutableDisk.WriteProjectFile($"Big.proj", TestCollectionGroup.BigProjectFile);
                 var projReal = this.Remote[0].LoadProjectWithSettings(this.BigFile, ProjectLoadSettings.IgnoreMissingImports | ProjectLoadSettings.RecordDuplicateButNotCircularImports);
                 this.Local.Importing = true;
-                Assert.NotNull(projReal);
+                Assert.IsNotNull(projReal);
                 this.Real = projReal;
-                Assert.NotNull(this.Real);
+                Assert.IsNotNull(this.Real);
                 var projView = this.Local.GetLoadedProjects(this.BigFile).FirstOrDefault();
-                Assert.NotNull(projView);
+                Assert.IsNotNull(projView);
                 this.View = projView;
 
                 ViewValidation.VerifyNotLinkedNotNull(this.Real);
@@ -39,7 +39,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
                 this.Group.ClearAllRemotes();
 
                 var projView = this.Local.GetLoadedProjects(this.BigFile).FirstOrDefault();
-                Assert.NotNull(projView);
+                Assert.IsNotNull(projView);
                 Assert.NotSame(projView, this.View);
                 this.View = projView;
 

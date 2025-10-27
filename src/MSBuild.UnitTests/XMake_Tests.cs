@@ -970,8 +970,8 @@ namespace Microsoft.Build.UnitTests
                 testEnvironment.SetEnvironmentVariable(DOTNET_CLI_UI_LANGUAGE, "ja"); // Japanese chose arbitrarily.
                 MSBuildApp.SetConsoleUI();
 
-                Assert.Equal(new CultureInfo("ja"), thisThread.CurrentUICulture);
-                Assert.Equal(65001, Console.OutputEncoding.CodePage); // UTF-8 enabled for correct rendering.
+                Assert.AreEqual(new CultureInfo("ja"), thisThread.CurrentUICulture);
+                Assert.AreEqual(65001, Console.OutputEncoding.CodePage); // UTF-8 enabled for correct rendering.
             }
             finally
             {
@@ -1209,7 +1209,7 @@ namespace Microsoft.Build.UnitTests
 
                 var logFileContents = File.ReadAllText(logFile);
 
-                Assert.Equal(new CultureInfo("en"), Thread.CurrentThread.CurrentUICulture);
+                Assert.AreEqual(new CultureInfo("en"), Thread.CurrentThread.CurrentUICulture);
 
                 logFileContents.ShouldContain("Process = ");
                 logFileContents.ShouldContain("MSBuild executable path = ");

@@ -43,10 +43,10 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             ResolveAssemblyReference t = new ResolveAssemblyReference();
             ExecuteRAROnItemsAndRedist(t, e, items, redistString, true);
 
-            Assert.Equal(0, e.Warnings); // "No warnings expected in this scenario."
-            Assert.Equal(0, e.Errors); // "No errors expected in this scenario."
+            Assert.AreEqual(0, e.Warnings); // "No warnings expected in this scenario."
+            Assert.AreEqual(0, e.Errors); // "No errors expected in this scenario."
             Assert.Single(t.ResolvedFiles);
-            Assert.True(ContainsItem(t.ResolvedFiles, Path.Combine(s_myComponentsMiscPath, "DependsOnOnlyv4Assemblies.dll"))); // "Expected to find assembly, but didn't."
+            Assert.IsTrue(ContainsItem(t.ResolvedFiles, Path.Combine(s_myComponentsMiscPath, "DependsOnOnlyv4Assemblies.dll"))); // "Expected to find assembly, but didn't."
         }
 
         /// <summary>
@@ -84,15 +84,15 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             ResolveAssemblyReference t = new ResolveAssemblyReference();
             ExecuteRAROnItemsAndRedist(t, e, items, redistString, false);
 
-            Assert.Equal(0, e.Warnings); // "Expected NO warning in this scenario."
+            Assert.AreEqual(0, e.Warnings); // "Expected NO warning in this scenario."
             e.AssertLogContainsMessageFromResource(resourceDelegate, "ResolveAssemblyReference.RemappedReference", "DependsOnOnlyv4Assemblies", "ReferenceVersion9, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b17a5c561934e089");
             e.AssertLogContainsMessageFromResource(resourceDelegate, "ResolveAssemblyReference.RemappedReference", "AnotherOne", "ReferenceVersion9, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b17a5c561934e089");
 
             Assert.Single(t.ResolvedFiles);
 
-            Assert.Equal("AnotherOne", t.ResolvedFiles[0].GetMetadata("OriginalItemSpec"));
+            Assert.AreEqual("AnotherOne", t.ResolvedFiles[0].GetMetadata("OriginalItemSpec"));
 
-            Assert.Equal(Path.Combine(s_myComponentsMiscPath, "ReferenceVersion9.dll"), t.ResolvedFiles[0].ItemSpec);
+            Assert.AreEqual(Path.Combine(s_myComponentsMiscPath, "ReferenceVersion9.dll"), t.ResolvedFiles[0].ItemSpec);
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
             ExecuteRAROnItemsAndRedist(t, e, items, redistString, false);
 
-            Assert.Equal(1, e.Warnings); // "Expected one warning in this scenario."
+            Assert.AreEqual(1, e.Warnings); // "Expected one warning in this scenario."
             e.AssertLogContains("MSB3257");
             e.AssertLogContains("ReferenceVersion9");
             Assert.Empty(t.ResolvedFiles);
@@ -146,7 +146,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
             ExecuteRAROnItemsAndRedist(t1, e, items, redistString, false);
 
-            Assert.Equal(0, e.Warnings); // "Expected successful resolution with no warnings."
+            Assert.AreEqual(0, e.Warnings); // "Expected successful resolution with no warnings."
             e.AssertLogContains("Microsoft.Build.dll");
             Assert.Single(t1.ResolvedFiles);
 
@@ -155,7 +155,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
             ExecuteRAROnItemsAndRedist(t2, e, items, redistString, false);
 
-            Assert.Equal(1, e.Warnings); // "Expected one warning in this scenario."
+            Assert.AreEqual(1, e.Warnings); // "Expected one warning in this scenario."
 
             // TODO: https://github.com/dotnet/msbuild/issues/2305
             // e.AssertLogContains("Microsoft.Build.dll");
@@ -167,7 +167,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
             ExecuteRAROnItemsAndRedist(t3, e, items, redistString, false);
 
-            Assert.Equal(1, e.Warnings); // "Expected one warning in this scenario."
+            Assert.AreEqual(1, e.Warnings); // "Expected one warning in this scenario."
 
             // TODO: https://github.com/dotnet/msbuild/issues/2305
             // e.AssertLogContains("Microsoft.Build.dll");
@@ -194,7 +194,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             ResolveAssemblyReference t = new ResolveAssemblyReference();
             ExecuteRAROnItemsAndRedist(t, e, items, redistString, false);
 
-            Assert.Equal(0, e.Warnings); // "Expected one warning in this scenario."
+            Assert.AreEqual(0, e.Warnings); // "Expected one warning in this scenario."
             e.AssertLogDoesntContain("MSB3257");
             e.AssertLogContains("ReferenceVersion9");
             Assert.Single(t.ResolvedFiles);
@@ -222,12 +222,12 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             ResolveAssemblyReference t = new ResolveAssemblyReference();
             ExecuteRAROnItemsAndRedist(t, e, items, redistString, false);
 
-            Assert.Equal(0, e.Warnings); // "No warnings expected in this scenario."
+            Assert.AreEqual(0, e.Warnings); // "No warnings expected in this scenario."
             e.AssertLogDoesntContain("MSB3258");
             e.AssertLogDoesntContain("MSB3257");
-            Assert.Equal(0, e.Errors); // "No errors expected in this scenario."
+            Assert.AreEqual(0, e.Errors); // "No errors expected in this scenario."
             Assert.Single(t.ResolvedFiles);
-            Assert.True(ContainsItem(t.ResolvedFiles, Path.Combine(s_myComponentsMiscPath, "ReferenceVersion9.dll"))); // "Expected to find assembly, but didn't."
+            Assert.IsTrue(ContainsItem(t.ResolvedFiles, Path.Combine(s_myComponentsMiscPath, "ReferenceVersion9.dll"))); // "Expected to find assembly, but didn't."
         }
 
         /// <summary>
@@ -252,10 +252,10 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             ResolveAssemblyReference t = new ResolveAssemblyReference();
             ExecuteRAROnItemsAndRedist(t, e, items, redistString, false);
 
-            Assert.Equal(2, e.Warnings); // "Expected one warning in this scenario."
+            Assert.AreEqual(2, e.Warnings); // "Expected one warning in this scenario."
             e.AssertLogContains(t.Log.FormatResourceString("ResolveAssemblyReference.DependencyReferenceOutsideOfFramework", "DependsOn9", "System, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089", "9.0.0.0", "4.0.0.0"));
             e.AssertLogContains(t.Log.FormatResourceString("ResolveAssemblyReference.DependencyReferenceOutsideOfFramework", "DependsOn9", "System.Data, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089", "9.0.0.0", "4.0.0.0"));
-            Assert.Equal(0, e.Errors); // "No errors expected in this scenario."
+            Assert.AreEqual(0, e.Errors); // "No errors expected in this scenario."
             Assert.Empty(t.ResolvedFiles);
         }
 
@@ -282,7 +282,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
             ExecuteRAROnItemsAndRedist(t1, e, items, redistString, false);
 
-            Assert.Equal(0, e.Warnings); // "Expected successful resolution with no warnings."
+            Assert.AreEqual(0, e.Warnings); // "Expected successful resolution with no warnings."
             e.AssertLogContains("DependsOnMSBuild12");
             e.AssertLogContains("Microsoft.Build.dll");
             Assert.Single(t1.ResolvedFiles);
@@ -292,7 +292,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
             ExecuteRAROnItemsAndRedist(t2, e, items, redistString, false);
 
-            Assert.Equal(1, e.Warnings); // "Expected one warning in this scenario"
+            Assert.AreEqual(1, e.Warnings); // "Expected one warning in this scenario"
             e.AssertLogContains("DependsOnMSBuild12");
 
             // TODO: https://github.com/dotnet/msbuild/issues/2305
@@ -304,7 +304,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
             ExecuteRAROnItemsAndRedist(t3, e, items, redistString, false);
 
-            Assert.Equal(1, e.Warnings); // "Expected one warning in this scenario"
+            Assert.AreEqual(1, e.Warnings); // "Expected one warning in this scenario"
             e.AssertLogContains("DependsOnMSBuild12");
 
             // TODO: https://github.com/dotnet/msbuild/issues/2305
@@ -335,12 +335,12 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             ResolveAssemblyReference t = new ResolveAssemblyReference();
             ExecuteRAROnItemsAndRedist(t, e, items, redistString, true);
 
-            Assert.Equal(0, e.Warnings); // "No warnings expected in this scenario."
+            Assert.AreEqual(0, e.Warnings); // "No warnings expected in this scenario."
             e.AssertLogDoesntContain("MSB3258");
             e.AssertLogDoesntContain("MSB3257");
-            Assert.Equal(0, e.Errors); // "No errors expected in this scenario."
+            Assert.AreEqual(0, e.Errors); // "No errors expected in this scenario."
             Assert.Single(t.ResolvedFiles);
-            Assert.True(ContainsItem(t.ResolvedFiles, Path.Combine(s_myComponentsMiscPath, "DependsOn9.dll"))); // "Expected to find assembly, but didn't."
+            Assert.IsTrue(ContainsItem(t.ResolvedFiles, Path.Combine(s_myComponentsMiscPath, "DependsOn9.dll"))); // "Expected to find assembly, but didn't."
         }
 
         /// <summary>
@@ -369,12 +369,12 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
             ExecuteRAROnItemsAndRedist(t, e, items, redistString, false);
 
-            Assert.Equal(1, e.Warnings); // "Expected one warning in this scenario."
+            Assert.AreEqual(1, e.Warnings); // "Expected one warning in this scenario."
             e.AssertLogContains(t.Log.FormatResourceString("ResolveAssemblyReference.DependencyReferenceOutsideOfFramework", "DependsOn9Also", "System, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089", "9.0.0.0", "4.0.0.0"));
-            Assert.Equal(0, e.Errors); // "No errors expected in this scenario."
+            Assert.AreEqual(0, e.Errors); // "No errors expected in this scenario."
             Assert.Single(t.ResolvedFiles);
-            Assert.True(ContainsItem(t.ResolvedFiles, Path.Combine(s_myComponentsMiscPath, "DependsOn9.dll"))); // "Expected to not find assembly, but did."
-            Assert.False(ContainsItem(t.ResolvedFiles, Path.Combine(s_myComponentsMiscPath, "DependsOn9Also.dll"))); // "Expected to find assembly, but didn't."
+            Assert.IsTrue(ContainsItem(t.ResolvedFiles, Path.Combine(s_myComponentsMiscPath, "DependsOn9.dll"))); // "Expected to not find assembly, but did."
+            Assert.IsFalse(ContainsItem(t.ResolvedFiles, Path.Combine(s_myComponentsMiscPath, "DependsOn9Also.dll"))); // "Expected to find assembly, but didn't."
         }
 
         /// <summary>
@@ -403,12 +403,12 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             ResolveAssemblyReference t = new ResolveAssemblyReference();
             ExecuteRAROnItemsAndRedist(t, e, items, redistString, true);
 
-            Assert.Equal(0, e.Warnings); // "No warnings expected in this scenario."
+            Assert.AreEqual(0, e.Warnings); // "No warnings expected in this scenario."
             e.AssertLogDoesntContain("MSB3258");
-            Assert.Equal(0, e.Errors); // "No errors expected in this scenario."
-            Assert.Equal(2, t.ResolvedFiles.Length);
-            Assert.True(ContainsItem(t.ResolvedFiles, Path.Combine(s_myComponentsMiscPath, "DependsOn9.dll"))); // "Expected to find assembly, but didn't."
-            Assert.True(ContainsItem(t.ResolvedFiles, Path.Combine(s_myComponentsMiscPath, "DependsOn9Also.dll"))); // "Expected to find assembly, but didn't."
+            Assert.AreEqual(0, e.Errors); // "No errors expected in this scenario."
+            Assert.AreEqual(2, t.ResolvedFiles.Length);
+            Assert.IsTrue(ContainsItem(t.ResolvedFiles, Path.Combine(s_myComponentsMiscPath, "DependsOn9.dll"))); // "Expected to find assembly, but didn't."
+            Assert.IsTrue(ContainsItem(t.ResolvedFiles, Path.Combine(s_myComponentsMiscPath, "DependsOn9Also.dll"))); // "Expected to find assembly, but didn't."
         }
 
         /// <summary>
@@ -434,10 +434,10 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
             ExecuteRAROnItemsAndRedist(t, e, items, redistString, false);
 
-            Assert.Equal(2, e.Warnings); // "Expected two warnings."
+            Assert.AreEqual(2, e.Warnings); // "Expected two warnings."
             e.AssertLogContains(t.Log.FormatResourceString("ResolveAssemblyReference.DependencyReferenceOutsideOfFramework", "DependsOn9, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b17a5c561934e089", "System, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089", "9.0.0.0", "4.0.0.0"));
             e.AssertLogContains(t.Log.FormatResourceString("ResolveAssemblyReference.DependencyReferenceOutsideOfFramework", "DependsOn9, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b17a5c561934e089", "System, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089", "9.0.0.0", "4.0.0.0"));
-            Assert.Equal(0, e.Errors); // "No errors expected in this scenario."
+            Assert.AreEqual(0, e.Errors); // "No errors expected in this scenario."
             Assert.Empty(t.ResolvedFiles);
         }
 
@@ -473,12 +473,12 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             ResolveAssemblyReference t = new ResolveAssemblyReference();
             ExecuteRAROnItemsAndRedist(t, e, items, redistString, false, additionalPaths);
 
-            Assert.Equal(0, e.Warnings); // "No warnings expected in this scenario."
-            Assert.Equal(0, e.Errors); // "No errors expected in this scenario."
-            Assert.Equal(2, t.ResolvedFiles.Length);
-            Assert.Equal(2, t.ResolvedDependencyFiles.Length);
-            Assert.True(ContainsItem(t.ResolvedFiles, s_40ComponentDependsOnOnlyv4AssembliesDllPath)); // "Expected to find assembly, but didn't."
-            Assert.True(ContainsItem(t.ResolvedFiles, Path.Combine(s_myComponentsMiscPath, "DependsOn9.dll"))); // "Expected to find assembly, but didn't."
+            Assert.AreEqual(0, e.Warnings); // "No warnings expected in this scenario."
+            Assert.AreEqual(0, e.Errors); // "No errors expected in this scenario."
+            Assert.AreEqual(2, t.ResolvedFiles.Length);
+            Assert.AreEqual(2, t.ResolvedDependencyFiles.Length);
+            Assert.IsTrue(ContainsItem(t.ResolvedFiles, s_40ComponentDependsOnOnlyv4AssembliesDllPath)); // "Expected to find assembly, but didn't."
+            Assert.IsTrue(ContainsItem(t.ResolvedFiles, Path.Combine(s_myComponentsMiscPath, "DependsOn9.dll"))); // "Expected to find assembly, but didn't."
         }
 
         /// <summary>
@@ -514,12 +514,12 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
             ExecuteRAROnItemsAndRedist(t, e, items, redistString, false, additionalPaths);
 
-            Assert.Equal(1, e.Warnings); // "No warnings expected in this scenario."
-            Assert.Equal(0, e.Errors); // "No errors expected in this scenario."
+            Assert.AreEqual(1, e.Warnings); // "No warnings expected in this scenario."
+            Assert.AreEqual(0, e.Errors); // "No errors expected in this scenario."
             Assert.Single(t.ResolvedFiles);
             Assert.Single(t.ResolvedDependencyFiles);
-            Assert.True(ContainsItem(t.ResolvedFiles, s_40ComponentDependsOnOnlyv4AssembliesDllPath)); // "Expected to find assembly, but didn't."
-            Assert.False(ContainsItem(t.ResolvedFiles, Path.Combine(s_myComponentsMiscPath, "DependsOn9.dll"))); // "Expected to find assembly, but didn't."
+            Assert.IsTrue(ContainsItem(t.ResolvedFiles, s_40ComponentDependsOnOnlyv4AssembliesDllPath)); // "Expected to find assembly, but didn't."
+            Assert.IsFalse(ContainsItem(t.ResolvedFiles, Path.Combine(s_myComponentsMiscPath, "DependsOn9.dll"))); // "Expected to find assembly, but didn't."
         }
     }
 }

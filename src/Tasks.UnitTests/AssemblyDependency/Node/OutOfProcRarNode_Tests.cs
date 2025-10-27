@@ -49,10 +49,10 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
             // If the out-of-proc path was executed, a client should be registered.
             using OutOfProcRarClient? rarClient = engine.GetRegisteredTaskObject(OutOfProcRarClient.TaskObjectCacheKey, RegisteredTaskObjectLifetime.Build) as OutOfProcRarClient;
-            Assert.NotNull(rarClient);
-            Assert.True(result);
-            Assert.Equal(0, engine.Warnings);
-            Assert.Equal(0, engine.Errors);
+            Assert.IsNotNull(rarClient);
+            Assert.IsTrue(result);
+            Assert.AreEqual(0, engine.Warnings);
+            Assert.AreEqual(0, engine.Errors);
             _ = Assert.Single(rar.ResolvedFiles);
 
             rarClient.Dispose();
@@ -82,10 +82,10 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
             // If the out-of-proc path was skipped, no client should be registered.
             using OutOfProcRarClient? rarClient = engine.GetRegisteredTaskObject(OutOfProcRarClient.TaskObjectCacheKey, RegisteredTaskObjectLifetime.Build) as OutOfProcRarClient;
-            Assert.Null(rarClient);
-            Assert.True(result);
-            Assert.Equal(0, engine.Warnings);
-            Assert.Equal(0, engine.Errors);
+            Assert.IsNull(rarClient);
+            Assert.IsTrue(result);
+            Assert.AreEqual(0, engine.Warnings);
+            Assert.AreEqual(0, engine.Errors);
             _ = Assert.Single(rar.ResolvedFiles);
         }
 
@@ -108,10 +108,10 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
             // If the out-of-proc path was attempted but failed, a client should be registered.
             using OutOfProcRarClient? rarClient = engine.GetRegisteredTaskObject(OutOfProcRarClient.TaskObjectCacheKey, RegisteredTaskObjectLifetime.Build) as OutOfProcRarClient;
-            Assert.NotNull(rarClient);
-            Assert.True(result);
-            Assert.Equal(0, engine.Warnings);
-            Assert.Equal(0, engine.Errors);
+            Assert.IsNotNull(rarClient);
+            Assert.IsTrue(result);
+            Assert.AreEqual(0, engine.Warnings);
+            Assert.AreEqual(0, engine.Errors);
             _ = Assert.Single(rar.ResolvedFiles);
         }
     }

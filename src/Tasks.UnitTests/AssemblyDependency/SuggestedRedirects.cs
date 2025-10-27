@@ -62,14 +62,14 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
             Execute(t);
 
-            Assert.Equal(3, t.ResolvedDependencyFiles.Length);
-            Assert.True(ContainsItem(t.ResolvedDependencyFiles, s_myLibraries_V2_DDllPath));
-            Assert.True(ContainsItem(t.ResolvedDependencyFiles, s_myLibraries_V1_DDllPath));
-            Assert.True(ContainsItem(t.ResolvedDependencyFiles, s_myLibraries_V2_GDllPath));
+            Assert.AreEqual(3, t.ResolvedDependencyFiles.Length);
+            Assert.IsTrue(ContainsItem(t.ResolvedDependencyFiles, s_myLibraries_V2_DDllPath));
+            Assert.IsTrue(ContainsItem(t.ResolvedDependencyFiles, s_myLibraries_V1_DDllPath));
+            Assert.IsTrue(ContainsItem(t.ResolvedDependencyFiles, s_myLibraries_V2_GDllPath));
 
             Assert.Single(t.SuggestedRedirects);
-            Assert.True(ContainsItem(t.SuggestedRedirects, @"D, Culture=neutral, PublicKeyToken=aaaaaaaaaaaaaaaa")); // "Expected to find suggested redirect, but didn't"
-            Assert.Equal(1, e.Warnings); // "Should only be one warning for suggested redirects."
+            Assert.IsTrue(ContainsItem(t.SuggestedRedirects, @"D, Culture=neutral, PublicKeyToken=aaaaaaaaaaaaaaaa")); // "Expected to find suggested redirect, but didn't"
+            Assert.AreEqual(1, e.Warnings); // "Should only be one warning for suggested redirects."
         }
 
         /// <summary>
@@ -104,10 +104,10 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
             bool result = Execute(t);
 
-            Assert.Equal(1, engine.Warnings); // @"Expected a warning because this is an unresolvable conflict."
+            Assert.AreEqual(1, engine.Warnings); // @"Expected a warning because this is an unresolvable conflict."
             Assert.Single(t.SuggestedRedirects);
-            Assert.True(ContainsItem(t.SuggestedRedirects, @"D, Culture=neutral, PublicKeyToken=aaaaaaaaaaaaaaaa")); // "Expected to find suggested redirect, but didn't"
-            Assert.Equal(1, engine.Warnings); // "Should only be one warning for suggested redirects."
+            Assert.IsTrue(ContainsItem(t.SuggestedRedirects, @"D, Culture=neutral, PublicKeyToken=aaaaaaaaaaaaaaaa")); // "Expected to find suggested redirect, but didn't"
+            Assert.AreEqual(1, engine.Warnings); // "Should only be one warning for suggested redirects."
             Assert.Contains(
                 String.Format(
                         AssemblyResources.GetString(
@@ -156,7 +156,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
             // RAR will now produce suggested redirects even if AutoUnify is on.
             Assert.Single(t.SuggestedRedirects);
-            Assert.Equal(0, engine.Warnings); // "Should be no warning for suggested redirects."
+            Assert.AreEqual(0, engine.Warnings); // "Should be no warning for suggested redirects."
         }
 
         /// <summary>
@@ -197,7 +197,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
             bool result = Execute(t);
 
-            Assert.Equal(1, e.Warnings); // @"Expected one warning."
+            Assert.AreEqual(1, e.Warnings); // @"Expected one warning."
 
             // Check that we have a message identifying conflicts with "D"
             string warningMessage = e.WarningEvents[0].Message;
@@ -206,8 +206,8 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             warningMessage.ShouldContain(ResourceUtilities.FormatResourceStringIgnoreCodeAndKeyword("ResolveAssemblyReference.FourSpaceIndent", ResourceUtilities.FormatResourceStringIgnoreCodeAndKeyword("ResolveAssemblyReference.ReferenceDependsOn", "D, Version=1.0.0.0, CulTUre=neutral, PublicKeyToken=aaaaaaaaaaaaaaaa", Path.Combine(s_myLibraries_V1Path, "D.dll"))));
 
             Assert.Empty(t.SuggestedRedirects);
-            Assert.Equal(3, t.ResolvedFiles.Length);
-            Assert.True(ContainsItem(t.ResolvedFiles, s_myLibraries_V1_DDllPath)); // "Expected to find assembly, but didn't."
+            Assert.AreEqual(3, t.ResolvedFiles.Length);
+            Assert.IsTrue(ContainsItem(t.ResolvedFiles, s_myLibraries_V1_DDllPath)); // "Expected to find assembly, but didn't."
         }
 
 
@@ -242,7 +242,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
             bool result = Execute(t);
 
-            Assert.Equal(1, e.Warnings); // @"Expected one warning."
+            Assert.AreEqual(1, e.Warnings); // @"Expected one warning."
 
             // Check that we have a message identifying conflicts with "D"
             string warningMessage = e.WarningEvents[0].Message;
@@ -251,8 +251,8 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             warningMessage.ShouldContain(ResourceUtilities.FormatResourceStringIgnoreCodeAndKeyword("ResolveAssemblyReference.FourSpaceIndent", ResourceUtilities.FormatResourceStringIgnoreCodeAndKeyword("ResolveAssemblyReference.ReferenceDependsOn", "D, Version=1.0.0.0, CulTUre=neutral, PublicKeyToken=aaaaaaaaaaaaaaaa", Path.Combine(s_myLibraries_V1Path, "D.dll"))));
 
             Assert.Empty(t.SuggestedRedirects);
-            Assert.Equal(3, t.ResolvedFiles.Length);
-            Assert.True(ContainsItem(t.ResolvedFiles, s_myLibraries_V1_DDllPath)); // "Expected to find assembly, but didn't."
+            Assert.AreEqual(3, t.ResolvedFiles.Length);
+            Assert.IsTrue(ContainsItem(t.ResolvedFiles, s_myLibraries_V1_DDllPath)); // "Expected to find assembly, but didn't."
         }
 
 
@@ -331,7 +331,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
             // Expect a suggested redirect plus a warning
             Assert.Single(t.SuggestedRedirects);
-            Assert.Equal(1, e.Warnings);
+            Assert.AreEqual(1, e.Warnings);
         }
 
         /// <summary>
@@ -370,7 +370,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
             // Expect a suggested redirect with no warning.
             Assert.Single(t.SuggestedRedirects);
-            Assert.Equal(0, e.Warnings);
+            Assert.AreEqual(0, e.Warnings);
         }
 
         /// <summary>
@@ -410,11 +410,11 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
             Execute(t);
 
-            Assert.Equal(2, t.ResolvedDependencyFiles.Length);
-            Assert.True(ContainsItem(t.ResolvedDependencyFiles, @"c:\Regress387218\v2\D.dll")); // "Expected to find assembly, but didn't."
-            Assert.True(ContainsItem(t.ResolvedDependencyFiles, @"c:\Regress387218\v1\D.dll")); // "Expected to find assembly, but didn't."
+            Assert.AreEqual(2, t.ResolvedDependencyFiles.Length);
+            Assert.IsTrue(ContainsItem(t.ResolvedDependencyFiles, @"c:\Regress387218\v2\D.dll")); // "Expected to find assembly, but didn't."
+            Assert.IsTrue(ContainsItem(t.ResolvedDependencyFiles, @"c:\Regress387218\v1\D.dll")); // "Expected to find assembly, but didn't."
             Assert.Empty(t.SuggestedRedirects);
-            Assert.Equal(0, e.Warnings); // "Should only be no warning about suggested redirects."
+            Assert.AreEqual(0, e.Warnings); // "Should only be no warning about suggested redirects."
         }
 
         /// <summary>
@@ -453,11 +453,11 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
             Execute(t);
 
-            Assert.Equal(2, t.ResolvedDependencyFiles.Length);
-            Assert.True(ContainsItem(t.ResolvedDependencyFiles, @"c:\Regress390219\v2\D.dll")); // "Expected to find assembly, but didn't."
-            Assert.True(ContainsItem(t.ResolvedDependencyFiles, @"c:\Regress390219\v1\D.dll")); // "Expected to find assembly, but didn't."
+            Assert.AreEqual(2, t.ResolvedDependencyFiles.Length);
+            Assert.IsTrue(ContainsItem(t.ResolvedDependencyFiles, @"c:\Regress390219\v2\D.dll")); // "Expected to find assembly, but didn't."
+            Assert.IsTrue(ContainsItem(t.ResolvedDependencyFiles, @"c:\Regress390219\v1\D.dll")); // "Expected to find assembly, but didn't."
             Assert.Empty(t.SuggestedRedirects);
-            Assert.Equal(0, e.Warnings); // "Should only be no warning about suggested redirects."
+            Assert.AreEqual(0, e.Warnings); // "Should only be no warning about suggested redirects."
         }
 
         // It is hard to write a test that will fail with the root cause of https://github.com/dotnet/msbuild/issues/4002

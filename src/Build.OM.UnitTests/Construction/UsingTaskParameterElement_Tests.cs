@@ -51,10 +51,10 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         {
             ProjectUsingTaskParameterElement parameter = GetParameterXml(s_contentAllAttributesSet);
 
-            Assert.Equal("MyParameter", parameter.Name);
-            Assert.Equal("System.String", parameter.ParameterType);
-            Assert.Equal("true", parameter.Output);
-            Assert.Equal("false", parameter.Required);
+            Assert.AreEqual("MyParameter", parameter.Name);
+            Assert.AreEqual("System.String", parameter.ParameterType);
+            Assert.AreEqual("true", parameter.Output);
+            Assert.AreEqual("false", parameter.Required);
         }
 
         /// <summary>
@@ -65,10 +65,10 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         {
             ProjectUsingTaskParameterElement parameter = GetParameterXml(s_contentNoAttributesSet);
 
-            Assert.Equal("MyParameter", parameter.Name);
-            Assert.Equal(typeof(String).FullName, parameter.ParameterType);
-            Assert.Equal(bool.FalseString, parameter.Output);
-            Assert.Equal(bool.FalseString, parameter.Required);
+            Assert.AreEqual("MyParameter", parameter.Name);
+            Assert.AreEqual(typeof(String).FullName, parameter.ParameterType);
+            Assert.AreEqual(bool.FalseString, parameter.Output);
+            Assert.AreEqual(bool.FalseString, parameter.Required);
         }
 
         /// <summary>
@@ -103,8 +103,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(parameter.ContainingProject);
 
             parameter.ParameterType = "newType";
-            Assert.Equal("newType", parameter.ParameterType);
-            Assert.True(parameter.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual("newType", parameter.ParameterType);
+            Assert.IsTrue(parameter.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -117,8 +117,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(parameter.ContainingProject);
 
             parameter.Output = "output";
-            Assert.Equal("output", parameter.Output);
-            Assert.True(parameter.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual("output", parameter.Output);
+            Assert.IsTrue(parameter.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -131,8 +131,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(parameter.ContainingProject);
 
             parameter.Required = "required";
-            Assert.Equal("required", parameter.Required);
-            Assert.True(parameter.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual("required", parameter.Required);
+            Assert.IsTrue(parameter.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -145,8 +145,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(parameter.ContainingProject);
 
             parameter.ParameterType = String.Empty;
-            Assert.Equal(typeof(String).FullName, parameter.ParameterType);
-            Assert.True(parameter.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual(typeof(String).FullName, parameter.ParameterType);
+            Assert.IsTrue(parameter.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -159,8 +159,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(parameter.ContainingProject);
 
             parameter.Output = String.Empty;
-            Assert.Equal(bool.FalseString, parameter.Output);
-            Assert.True(parameter.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual(bool.FalseString, parameter.Output);
+            Assert.IsTrue(parameter.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -173,8 +173,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(parameter.ContainingProject);
 
             parameter.Required = String.Empty;
-            Assert.Equal(bool.FalseString, parameter.Required);
-            Assert.True(parameter.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual(bool.FalseString, parameter.Required);
+            Assert.IsTrue(parameter.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -187,8 +187,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(parameter.ContainingProject);
 
             parameter.ParameterType = null;
-            Assert.Equal(typeof(String).FullName, parameter.ParameterType);
-            Assert.True(parameter.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual(typeof(String).FullName, parameter.ParameterType);
+            Assert.IsTrue(parameter.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -201,8 +201,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(parameter.ContainingProject);
 
             parameter.Output = null;
-            Assert.Equal(bool.FalseString, parameter.Output);
-            Assert.True(parameter.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual(bool.FalseString, parameter.Output);
+            Assert.IsTrue(parameter.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -215,8 +215,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(parameter.ContainingProject);
 
             parameter.Required = null;
-            Assert.Equal(bool.FalseString, parameter.Required);
-            Assert.True(parameter.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual(bool.FalseString, parameter.Required);
+            Assert.IsTrue(parameter.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>

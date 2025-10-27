@@ -164,7 +164,7 @@ namespace Microsoft.Build.UnitTests
         {
             _faultInjector.FailurePointThrow(MockTypeLibrariesFailurePoints.ITypeLib_GetTypeInfo);
 
-            Assert.True(index >= 0 && index < _containedTypeInfos.Count);
+            Assert.IsTrue(index >= 0 && index < _containedTypeInfos.Count);
             ppTI = _containedTypeInfos[index];
         }
 

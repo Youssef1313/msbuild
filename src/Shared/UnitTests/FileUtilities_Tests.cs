@@ -32,55 +32,55 @@ namespace Microsoft.Build.UnitTests
         {
             string cache = null;
             string modifier = FileUtilities.ItemSpecModifiers.GetItemSpecModifier(currentDirectory, "foo", String.Empty, FileUtilities.ItemSpecModifiers.RecursiveDir, ref cache);
-            Assert.Equal(String.Empty, modifier);
+            Assert.AreEqual(String.Empty, modifier);
 
             cache = null;
             modifier = FileUtilities.ItemSpecModifiers.GetItemSpecModifier(currentDirectory, "foo", String.Empty, FileUtilities.ItemSpecModifiers.ModifiedTime, ref cache);
-            Assert.Equal(String.Empty, modifier);
+            Assert.AreEqual(String.Empty, modifier);
 
             cache = null;
             modifier = FileUtilities.ItemSpecModifiers.GetItemSpecModifier(currentDirectory, @"foo\goo", String.Empty, FileUtilities.ItemSpecModifiers.RelativeDir, ref cache);
-            Assert.Equal(@"foo" + Path.DirectorySeparatorChar, modifier);
+            Assert.AreEqual(@"foo" + Path.DirectorySeparatorChar, modifier);
 
             // confirm we get the same thing back the second time
             modifier = FileUtilities.ItemSpecModifiers.GetItemSpecModifier(currentDirectory, @"foo\goo", String.Empty, FileUtilities.ItemSpecModifiers.RelativeDir, ref cache);
-            Assert.Equal(@"foo" + Path.DirectorySeparatorChar, modifier);
+            Assert.AreEqual(@"foo" + Path.DirectorySeparatorChar, modifier);
 
             cache = null;
             string itemSpec = NativeMethodsShared.IsWindows ? @"c:\foo.txt" : "/foo.txt";
             string itemSpecDir = NativeMethodsShared.IsWindows ? @"c:\" : "/";
             modifier = FileUtilities.ItemSpecModifiers.GetItemSpecModifier(currentDirectory, itemSpec, String.Empty, FileUtilities.ItemSpecModifiers.FullPath, ref cache);
-            Assert.Equal(itemSpec, modifier);
-            Assert.Equal(itemSpec, cache);
+            Assert.AreEqual(itemSpec, modifier);
+            Assert.AreEqual(itemSpec, cache);
 
             modifier = FileUtilities.ItemSpecModifiers.GetItemSpecModifier(currentDirectory, itemSpec, String.Empty, FileUtilities.ItemSpecModifiers.RootDir, ref cache);
-            Assert.Equal(itemSpecDir, modifier);
+            Assert.AreEqual(itemSpecDir, modifier);
 
             modifier = FileUtilities.ItemSpecModifiers.GetItemSpecModifier(currentDirectory, itemSpec, String.Empty, FileUtilities.ItemSpecModifiers.Filename, ref cache);
-            Assert.Equal(@"foo", modifier);
+            Assert.AreEqual(@"foo", modifier);
 
             modifier = FileUtilities.ItemSpecModifiers.GetItemSpecModifier(currentDirectory, itemSpec, String.Empty, FileUtilities.ItemSpecModifiers.Extension, ref cache);
-            Assert.Equal(@".txt", modifier);
+            Assert.AreEqual(@".txt", modifier);
 
             modifier = FileUtilities.ItemSpecModifiers.GetItemSpecModifier(currentDirectory, itemSpec, String.Empty, FileUtilities.ItemSpecModifiers.Directory, ref cache);
-            Assert.Equal(String.Empty, modifier);
+            Assert.AreEqual(String.Empty, modifier);
 
             modifier = FileUtilities.ItemSpecModifiers.GetItemSpecModifier(currentDirectory, itemSpec, String.Empty, FileUtilities.ItemSpecModifiers.Identity, ref cache);
-            Assert.Equal(itemSpec, modifier);
+            Assert.AreEqual(itemSpec, modifier);
 
             string projectPath = NativeMethodsShared.IsWindows ? @"c:\abc\goo.proj" : @"/abc/goo.proj";
             string projectPathDir = NativeMethodsShared.IsWindows ? @"c:\abc\" : @"/abc/";
             modifier = FileUtilities.ItemSpecModifiers.GetItemSpecModifier(currentDirectory, itemSpec, projectPath, FileUtilities.ItemSpecModifiers.DefiningProjectDirectory, ref cache);
-            Assert.Equal(projectPathDir, modifier);
+            Assert.AreEqual(projectPathDir, modifier);
 
             modifier = FileUtilities.ItemSpecModifiers.GetItemSpecModifier(currentDirectory, itemSpec, projectPath, FileUtilities.ItemSpecModifiers.DefiningProjectExtension, ref cache);
-            Assert.Equal(@".proj", modifier);
+            Assert.AreEqual(@".proj", modifier);
 
             modifier = FileUtilities.ItemSpecModifiers.GetItemSpecModifier(currentDirectory, itemSpec, projectPath, FileUtilities.ItemSpecModifiers.DefiningProjectFullPath, ref cache);
-            Assert.Equal(projectPath, modifier);
+            Assert.AreEqual(projectPath, modifier);
 
             modifier = FileUtilities.ItemSpecModifiers.GetItemSpecModifier(currentDirectory, itemSpec, projectPath, FileUtilities.ItemSpecModifiers.DefiningProjectName, ref cache);
-            Assert.Equal(@"goo", modifier);
+            Assert.AreEqual(@"goo", modifier);
         }
 
         [Fact]
@@ -88,61 +88,61 @@ namespace Microsoft.Build.UnitTests
         {
             if (NativeMethodsShared.IsWindows)
             {
-                Assert.Equal(@"foo.cpp", FileUtilities.MakeRelative(@"c:\abc\def", @"c:\abc\def\foo.cpp"));
-                Assert.Equal(@"def\foo.cpp", FileUtilities.MakeRelative(@"c:\abc\", @"c:\abc\def\foo.cpp"));
-                Assert.Equal(@"..\foo.cpp", FileUtilities.MakeRelative(@"c:\abc\def\xyz", @"c:\abc\def\foo.cpp"));
-                Assert.Equal(@"..\ttt\foo.cpp", FileUtilities.MakeRelative(@"c:\abc\def\xyz\", @"c:\abc\def\ttt\foo.cpp"));
-                Assert.Equal(@"e:\abc\def\foo.cpp", FileUtilities.MakeRelative(@"c:\abc\def", @"e:\abc\def\foo.cpp"));
-                Assert.Equal(@"foo.cpp", FileUtilities.MakeRelative(@"\\aaa\abc\def", @"\\aaa\abc\def\foo.cpp"));
-                Assert.Equal(@"foo.cpp", FileUtilities.MakeRelative(@"c:\abc\def", @"foo.cpp"));
-                Assert.Equal(@"\\host\path\file", FileUtilities.MakeRelative(@"c:\abc\def", @"\\host\path\file"));
-                Assert.Equal(@"\\host\d$\file", FileUtilities.MakeRelative(@"c:\abc\def", @"\\host\d$\file"));
-                Assert.Equal(@"..\fff\ggg.hh", FileUtilities.MakeRelative(@"c:\foo\bar\..\abc\cde", @"c:\foo\bar\..\abc\fff\ggg.hh"));
+                Assert.AreEqual(@"foo.cpp", FileUtilities.MakeRelative(@"c:\abc\def", @"c:\abc\def\foo.cpp"));
+                Assert.AreEqual(@"def\foo.cpp", FileUtilities.MakeRelative(@"c:\abc\", @"c:\abc\def\foo.cpp"));
+                Assert.AreEqual(@"..\foo.cpp", FileUtilities.MakeRelative(@"c:\abc\def\xyz", @"c:\abc\def\foo.cpp"));
+                Assert.AreEqual(@"..\ttt\foo.cpp", FileUtilities.MakeRelative(@"c:\abc\def\xyz\", @"c:\abc\def\ttt\foo.cpp"));
+                Assert.AreEqual(@"e:\abc\def\foo.cpp", FileUtilities.MakeRelative(@"c:\abc\def", @"e:\abc\def\foo.cpp"));
+                Assert.AreEqual(@"foo.cpp", FileUtilities.MakeRelative(@"\\aaa\abc\def", @"\\aaa\abc\def\foo.cpp"));
+                Assert.AreEqual(@"foo.cpp", FileUtilities.MakeRelative(@"c:\abc\def", @"foo.cpp"));
+                Assert.AreEqual(@"\\host\path\file", FileUtilities.MakeRelative(@"c:\abc\def", @"\\host\path\file"));
+                Assert.AreEqual(@"\\host\d$\file", FileUtilities.MakeRelative(@"c:\abc\def", @"\\host\d$\file"));
+                Assert.AreEqual(@"..\fff\ggg.hh", FileUtilities.MakeRelative(@"c:\foo\bar\..\abc\cde", @"c:\foo\bar\..\abc\fff\ggg.hh"));
 
                 /* Directories */
-                Assert.Equal(@"def\", FileUtilities.MakeRelative(@"c:\abc\", @"c:\abc\def\"));
-                Assert.Equal(@"..\", FileUtilities.MakeRelative(@"c:\abc\def\xyz\", @"c:\abc\def\"));
-                Assert.Equal(@"..\ttt\", FileUtilities.MakeRelative(@"c:\abc\def\xyz\", @"c:\abc\def\ttt\"));
-                Assert.Equal(@".", FileUtilities.MakeRelative(@"c:\abc\def\", @"c:\abc\def\"));
+                Assert.AreEqual(@"def\", FileUtilities.MakeRelative(@"c:\abc\", @"c:\abc\def\"));
+                Assert.AreEqual(@"..\", FileUtilities.MakeRelative(@"c:\abc\def\xyz\", @"c:\abc\def\"));
+                Assert.AreEqual(@"..\ttt\", FileUtilities.MakeRelative(@"c:\abc\def\xyz\", @"c:\abc\def\ttt\"));
+                Assert.AreEqual(@".", FileUtilities.MakeRelative(@"c:\abc\def\", @"c:\abc\def\"));
 
                 /* Directory + File */
-                Assert.Equal(@"def", FileUtilities.MakeRelative(@"c:\abc\", @"c:\abc\def"));
-                Assert.Equal(@"..\..\ghi", FileUtilities.MakeRelative(@"c:\abc\def\xyz\", @"c:\abc\ghi"));
-                Assert.Equal(@"..\ghi", FileUtilities.MakeRelative(@"c:\abc\def\xyz\", @"c:\abc\def\ghi"));
-                Assert.Equal(@"..\ghi", FileUtilities.MakeRelative(@"c:\abc\def\", @"c:\abc\ghi"));
+                Assert.AreEqual(@"def", FileUtilities.MakeRelative(@"c:\abc\", @"c:\abc\def"));
+                Assert.AreEqual(@"..\..\ghi", FileUtilities.MakeRelative(@"c:\abc\def\xyz\", @"c:\abc\ghi"));
+                Assert.AreEqual(@"..\ghi", FileUtilities.MakeRelative(@"c:\abc\def\xyz\", @"c:\abc\def\ghi"));
+                Assert.AreEqual(@"..\ghi", FileUtilities.MakeRelative(@"c:\abc\def\", @"c:\abc\ghi"));
 
                 /* File + Directory */
-                Assert.Equal(@"def\", FileUtilities.MakeRelative(@"c:\abc", @"c:\abc\def\"));
-                Assert.Equal(@"..\", FileUtilities.MakeRelative(@"c:\abc\def\xyz", @"c:\abc\def\"));
-                Assert.Equal(@"..\ghi\", FileUtilities.MakeRelative(@"c:\abc\def\xyz", @"c:\abc\def\ghi\"));
-                Assert.Equal(@".", FileUtilities.MakeRelative(@"c:\abc\def", @"c:\abc\def\"));
+                Assert.AreEqual(@"def\", FileUtilities.MakeRelative(@"c:\abc", @"c:\abc\def\"));
+                Assert.AreEqual(@"..\", FileUtilities.MakeRelative(@"c:\abc\def\xyz", @"c:\abc\def\"));
+                Assert.AreEqual(@"..\ghi\", FileUtilities.MakeRelative(@"c:\abc\def\xyz", @"c:\abc\def\ghi\"));
+                Assert.AreEqual(@".", FileUtilities.MakeRelative(@"c:\abc\def", @"c:\abc\def\"));
             }
             else
             {
-                Assert.Equal(@"bar.cpp", FileUtilities.MakeRelative(@"/abc/def", @"/abc/def/bar.cpp"));
-                Assert.Equal(@"def/foo.cpp", FileUtilities.MakeRelative(@"/abc/", @"/abc/def/foo.cpp"));
-                Assert.Equal(@"../foo.cpp", FileUtilities.MakeRelative(@"/abc/def/xyz", @"/abc/def/foo.cpp"));
-                Assert.Equal(@"../ttt/foo.cpp", FileUtilities.MakeRelative(@"/abc/def/xyz/", @"/abc/def/ttt/foo.cpp"));
-                Assert.Equal(@"foo.cpp", FileUtilities.MakeRelative(@"/abc/def", @"foo.cpp"));
-                Assert.Equal(@"../fff/ggg.hh", FileUtilities.MakeRelative(@"/foo/bar/../abc/cde", @"/foo/bar/../abc/fff/ggg.hh"));
+                Assert.AreEqual(@"bar.cpp", FileUtilities.MakeRelative(@"/abc/def", @"/abc/def/bar.cpp"));
+                Assert.AreEqual(@"def/foo.cpp", FileUtilities.MakeRelative(@"/abc/", @"/abc/def/foo.cpp"));
+                Assert.AreEqual(@"../foo.cpp", FileUtilities.MakeRelative(@"/abc/def/xyz", @"/abc/def/foo.cpp"));
+                Assert.AreEqual(@"../ttt/foo.cpp", FileUtilities.MakeRelative(@"/abc/def/xyz/", @"/abc/def/ttt/foo.cpp"));
+                Assert.AreEqual(@"foo.cpp", FileUtilities.MakeRelative(@"/abc/def", @"foo.cpp"));
+                Assert.AreEqual(@"../fff/ggg.hh", FileUtilities.MakeRelative(@"/foo/bar/../abc/cde", @"/foo/bar/../abc/fff/ggg.hh"));
 
                 /* Directories */
-                Assert.Equal(@"def/", FileUtilities.MakeRelative(@"/abc/", @"/abc/def/"));
-                Assert.Equal(@"../", FileUtilities.MakeRelative(@"/abc/def/xyz/", @"/abc/def/"));
-                Assert.Equal(@"../ttt/", FileUtilities.MakeRelative(@"/abc/def/xyz/", @"/abc/def/ttt/"));
-                Assert.Equal(@".", FileUtilities.MakeRelative(@"/abc/def/", @"/abc/def/"));
+                Assert.AreEqual(@"def/", FileUtilities.MakeRelative(@"/abc/", @"/abc/def/"));
+                Assert.AreEqual(@"../", FileUtilities.MakeRelative(@"/abc/def/xyz/", @"/abc/def/"));
+                Assert.AreEqual(@"../ttt/", FileUtilities.MakeRelative(@"/abc/def/xyz/", @"/abc/def/ttt/"));
+                Assert.AreEqual(@".", FileUtilities.MakeRelative(@"/abc/def/", @"/abc/def/"));
 
                 /* Directory + File */
-                Assert.Equal(@"def", FileUtilities.MakeRelative(@"/abc/", @"/abc/def"));
-                Assert.Equal(@"../../ghi", FileUtilities.MakeRelative(@"/abc/def/xyz/", @"/abc/ghi"));
-                Assert.Equal(@"../ghi", FileUtilities.MakeRelative(@"/abc/def/xyz/", @"/abc/def/ghi"));
-                Assert.Equal(@"../ghi", FileUtilities.MakeRelative(@"/abc/def/", @"/abc/ghi"));
+                Assert.AreEqual(@"def", FileUtilities.MakeRelative(@"/abc/", @"/abc/def"));
+                Assert.AreEqual(@"../../ghi", FileUtilities.MakeRelative(@"/abc/def/xyz/", @"/abc/ghi"));
+                Assert.AreEqual(@"../ghi", FileUtilities.MakeRelative(@"/abc/def/xyz/", @"/abc/def/ghi"));
+                Assert.AreEqual(@"../ghi", FileUtilities.MakeRelative(@"/abc/def/", @"/abc/ghi"));
 
                 /* File + Directory */
-                Assert.Equal(@"def/", FileUtilities.MakeRelative(@"/abc", @"/abc/def/"));
-                Assert.Equal(@"../", FileUtilities.MakeRelative(@"/abc/def/xyz", @"/abc/def/"));
-                Assert.Equal(@"../ghi/", FileUtilities.MakeRelative(@"/abc/def/xyz", @"/abc/def/ghi/"));
-                Assert.Equal(@".", FileUtilities.MakeRelative(@"/abc/def", @"/abc/def/"));
+                Assert.AreEqual(@"def/", FileUtilities.MakeRelative(@"/abc", @"/abc/def/"));
+                Assert.AreEqual(@"../", FileUtilities.MakeRelative(@"/abc/def/xyz", @"/abc/def/"));
+                Assert.AreEqual(@"../ghi/", FileUtilities.MakeRelative(@"/abc/def/xyz", @"/abc/def/ghi/"));
+                Assert.AreEqual(@".", FileUtilities.MakeRelative(@"/abc/def", @"/abc/def/"));
             }
         }
 
@@ -192,7 +192,7 @@ namespace Microsoft.Build.UnitTests
             {
                 file = FileUtilities.GetTemporaryFile();
                 FileInfo info = FileUtilities.GetFileInfoNoThrow(file);
-                Assert.Equal(info.LastWriteTime, new FileInfo(file).LastWriteTime);
+                Assert.AreEqual(info.LastWriteTime, new FileInfo(file).LastWriteTime);
             }
             finally
             {
@@ -207,7 +207,7 @@ namespace Microsoft.Build.UnitTests
         public void GetFileInfoNoThrowNonexistent()
         {
             FileInfo info = FileUtilities.GetFileInfoNoThrow("this_file_is_nonexistent");
-            Assert.Null(info);
+            Assert.IsNull(info);
         }
 
         /// <summary>
@@ -218,20 +218,20 @@ namespace Microsoft.Build.UnitTests
         [Trait("Category", "netcore-linux-failing")]
         public void EndsWithSlash()
         {
-            Assert.True(FileUtilities.EndsWithSlash(@"C:\foo\"));
-            Assert.True(FileUtilities.EndsWithSlash(@"C:\"));
-            Assert.True(FileUtilities.EndsWithSlash(@"\"));
+            Assert.IsTrue(FileUtilities.EndsWithSlash(@"C:\foo\"));
+            Assert.IsTrue(FileUtilities.EndsWithSlash(@"C:\"));
+            Assert.IsTrue(FileUtilities.EndsWithSlash(@"\"));
 
-            Assert.True(FileUtilities.EndsWithSlash(@"http://www.microsoft.com/"));
-            Assert.True(FileUtilities.EndsWithSlash(@"//server/share/"));
-            Assert.True(FileUtilities.EndsWithSlash(@"/"));
+            Assert.IsTrue(FileUtilities.EndsWithSlash(@"http://www.microsoft.com/"));
+            Assert.IsTrue(FileUtilities.EndsWithSlash(@"//server/share/"));
+            Assert.IsTrue(FileUtilities.EndsWithSlash(@"/"));
 
-            Assert.False(FileUtilities.EndsWithSlash(@"C:\foo"));
-            Assert.False(FileUtilities.EndsWithSlash(@"C:"));
-            Assert.False(FileUtilities.EndsWithSlash(@"foo"));
+            Assert.IsFalse(FileUtilities.EndsWithSlash(@"C:\foo"));
+            Assert.IsFalse(FileUtilities.EndsWithSlash(@"C:"));
+            Assert.IsFalse(FileUtilities.EndsWithSlash(@"foo"));
 
             // confirm that empty string doesn't barf
-            Assert.False(FileUtilities.EndsWithSlash(String.Empty));
+            Assert.IsFalse(FileUtilities.EndsWithSlash(String.Empty));
         }
 
         /// <summary>
@@ -242,20 +242,20 @@ namespace Microsoft.Build.UnitTests
         [Trait("Category", "netcore-linux-failing")]
         public void GetDirectoryWithTrailingSlash()
         {
-            Assert.Equal(NativeMethodsShared.IsWindows ? @"c:\" : "/", FileUtilities.GetDirectory(NativeMethodsShared.IsWindows ? @"c:\" : "/"));
-            Assert.Equal(NativeMethodsShared.IsWindows ? @"c:\" : "/", FileUtilities.GetDirectory(NativeMethodsShared.IsWindows ? @"c:\foo" : "/foo"));
-            Assert.Equal(NativeMethodsShared.IsWindows ? @"c:" : "/", FileUtilities.GetDirectory(NativeMethodsShared.IsWindows ? @"c:" : "/"));
-            Assert.Equal(FileUtilities.FixFilePath(@"\"), FileUtilities.GetDirectory(@"\"));
-            Assert.Equal(FileUtilities.FixFilePath(@"\"), FileUtilities.GetDirectory(@"\foo"));
-            Assert.Equal(FileUtilities.FixFilePath(@"..\"), FileUtilities.GetDirectory(@"..\foo"));
-            Assert.Equal(FileUtilities.FixFilePath(@"\foo\"), FileUtilities.GetDirectory(@"\foo\"));
-            Assert.Equal(FileUtilities.FixFilePath(@"\\server\share"), FileUtilities.GetDirectory(@"\\server\share"));
-            Assert.Equal(FileUtilities.FixFilePath(@"\\server\share\"), FileUtilities.GetDirectory(@"\\server\share\"));
-            Assert.Equal(FileUtilities.FixFilePath(@"\\server\share\"), FileUtilities.GetDirectory(@"\\server\share\file"));
-            Assert.Equal(FileUtilities.FixFilePath(@"\\server\share\directory\"), FileUtilities.GetDirectory(@"\\server\share\directory\"));
-            Assert.Equal(FileUtilities.FixFilePath(@"foo\"), FileUtilities.GetDirectory(@"foo\bar"));
-            Assert.Equal(FileUtilities.FixFilePath(@"\foo\bar\"), FileUtilities.GetDirectory(@"\foo\bar\"));
-            Assert.Equal(String.Empty, FileUtilities.GetDirectory("foo"));
+            Assert.AreEqual(NativeMethodsShared.IsWindows ? @"c:\" : "/", FileUtilities.GetDirectory(NativeMethodsShared.IsWindows ? @"c:\" : "/"));
+            Assert.AreEqual(NativeMethodsShared.IsWindows ? @"c:\" : "/", FileUtilities.GetDirectory(NativeMethodsShared.IsWindows ? @"c:\foo" : "/foo"));
+            Assert.AreEqual(NativeMethodsShared.IsWindows ? @"c:" : "/", FileUtilities.GetDirectory(NativeMethodsShared.IsWindows ? @"c:" : "/"));
+            Assert.AreEqual(FileUtilities.FixFilePath(@"\"), FileUtilities.GetDirectory(@"\"));
+            Assert.AreEqual(FileUtilities.FixFilePath(@"\"), FileUtilities.GetDirectory(@"\foo"));
+            Assert.AreEqual(FileUtilities.FixFilePath(@"..\"), FileUtilities.GetDirectory(@"..\foo"));
+            Assert.AreEqual(FileUtilities.FixFilePath(@"\foo\"), FileUtilities.GetDirectory(@"\foo\"));
+            Assert.AreEqual(FileUtilities.FixFilePath(@"\\server\share"), FileUtilities.GetDirectory(@"\\server\share"));
+            Assert.AreEqual(FileUtilities.FixFilePath(@"\\server\share\"), FileUtilities.GetDirectory(@"\\server\share\"));
+            Assert.AreEqual(FileUtilities.FixFilePath(@"\\server\share\"), FileUtilities.GetDirectory(@"\\server\share\file"));
+            Assert.AreEqual(FileUtilities.FixFilePath(@"\\server\share\directory\"), FileUtilities.GetDirectory(@"\\server\share\directory\"));
+            Assert.AreEqual(FileUtilities.FixFilePath(@"foo\"), FileUtilities.GetDirectory(@"foo\bar"));
+            Assert.AreEqual(FileUtilities.FixFilePath(@"\foo\bar\"), FileUtilities.GetDirectory(@"\foo\bar\"));
+            Assert.AreEqual(String.Empty, FileUtilities.GetDirectory("foo"));
         }
 
         [Theory]
@@ -284,7 +284,7 @@ namespace Microsoft.Build.UnitTests
         {
             var result = FileUtilities.HasExtension(fileName, allowedExtensions);
 
-            Assert.False(result);
+            Assert.IsFalse(result);
         }
 
         [WindowsFullFrameworkOnlyFact]
@@ -321,14 +321,14 @@ namespace Microsoft.Build.UnitTests
         public void EnsureTrailingSlash()
         {
             // Doesn't have a trailing slash to start with.
-            Assert.Equal(FileUtilities.FixFilePath(@"foo\bar\"), FileUtilities.EnsureTrailingSlash(@"foo\bar")); // "test 1"
-            Assert.Equal(FileUtilities.FixFilePath(@"foo/bar\"), FileUtilities.EnsureTrailingSlash(@"foo/bar")); // "test 2"
+            Assert.AreEqual(FileUtilities.FixFilePath(@"foo\bar\"), FileUtilities.EnsureTrailingSlash(@"foo\bar")); // "test 1"
+            Assert.AreEqual(FileUtilities.FixFilePath(@"foo/bar\"), FileUtilities.EnsureTrailingSlash(@"foo/bar")); // "test 2"
 
             // Already has a trailing slash to start with.
-            Assert.Equal(FileUtilities.FixFilePath(@"foo/bar/"), FileUtilities.EnsureTrailingSlash(@"foo/bar/")); // test 3"
-            Assert.Equal(FileUtilities.FixFilePath(@"foo\bar\"), FileUtilities.EnsureTrailingSlash(@"foo\bar\")); // test 4"
-            Assert.Equal(FileUtilities.FixFilePath(@"foo/bar\"), FileUtilities.EnsureTrailingSlash(@"foo/bar\")); // test 5"
-            Assert.Equal(FileUtilities.FixFilePath(@"foo\bar/"), FileUtilities.EnsureTrailingSlash(@"foo\bar/")); // "test 5"
+            Assert.AreEqual(FileUtilities.FixFilePath(@"foo/bar/"), FileUtilities.EnsureTrailingSlash(@"foo/bar/")); // test 3"
+            Assert.AreEqual(FileUtilities.FixFilePath(@"foo\bar\"), FileUtilities.EnsureTrailingSlash(@"foo\bar\")); // test 4"
+            Assert.AreEqual(FileUtilities.FixFilePath(@"foo/bar\"), FileUtilities.EnsureTrailingSlash(@"foo/bar\")); // test 5"
+            Assert.AreEqual(FileUtilities.FixFilePath(@"foo\bar/"), FileUtilities.EnsureTrailingSlash(@"foo\bar/")); // "test 5"
         }
 
         /// <summary>
@@ -338,74 +338,74 @@ namespace Microsoft.Build.UnitTests
         public void IsItemSpecModifier()
         {
             // Positive matches using exact case.
-            Assert.True(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("FullPath")); // "test 1"
-            Assert.True(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("RootDir")); // "test 2"
-            Assert.True(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Filename")); // "test 3"
-            Assert.True(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Extension")); // "test 4"
-            Assert.True(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("RelativeDir")); // "test 5"
-            Assert.True(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Directory")); // "test 6"
-            Assert.True(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("RecursiveDir")); // "test 7"
-            Assert.True(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Identity")); // "test 8"
-            Assert.True(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("ModifiedTime")); // "test 9"
-            Assert.True(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("CreatedTime")); // "test 10"
-            Assert.True(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("AccessedTime")); // "test 11"
+            Assert.IsTrue(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("FullPath")); // "test 1"
+            Assert.IsTrue(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("RootDir")); // "test 2"
+            Assert.IsTrue(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Filename")); // "test 3"
+            Assert.IsTrue(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Extension")); // "test 4"
+            Assert.IsTrue(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("RelativeDir")); // "test 5"
+            Assert.IsTrue(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Directory")); // "test 6"
+            Assert.IsTrue(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("RecursiveDir")); // "test 7"
+            Assert.IsTrue(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Identity")); // "test 8"
+            Assert.IsTrue(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("ModifiedTime")); // "test 9"
+            Assert.IsTrue(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("CreatedTime")); // "test 10"
+            Assert.IsTrue(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("AccessedTime")); // "test 11"
 
             // Positive matches using different case.
-            Assert.True(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("fullPath")); // "test 21"
-            Assert.True(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("rootDir")); // "test 22"
-            Assert.True(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("filename")); // "test 23"
-            Assert.True(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("extension")); // "test 24"
-            Assert.True(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("relativeDir")); // "test 25"
-            Assert.True(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("directory")); // "test 26"
-            Assert.True(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("recursiveDir")); // "test 27"
-            Assert.True(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("identity")); // "test 28"
-            Assert.True(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("modifiedTime")); // "test 29"
-            Assert.True(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("createdTime")); // "test 30"
-            Assert.True(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("accessedTime")); // "test 31"
+            Assert.IsTrue(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("fullPath")); // "test 21"
+            Assert.IsTrue(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("rootDir")); // "test 22"
+            Assert.IsTrue(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("filename")); // "test 23"
+            Assert.IsTrue(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("extension")); // "test 24"
+            Assert.IsTrue(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("relativeDir")); // "test 25"
+            Assert.IsTrue(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("directory")); // "test 26"
+            Assert.IsTrue(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("recursiveDir")); // "test 27"
+            Assert.IsTrue(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("identity")); // "test 28"
+            Assert.IsTrue(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("modifiedTime")); // "test 29"
+            Assert.IsTrue(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("createdTime")); // "test 30"
+            Assert.IsTrue(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("accessedTime")); // "test 31"
 
             // Negative tests to get maximum code coverage inside the many different branches
             // of FileUtilities.ItemSpecModifiers.IsItemSpecModifier.
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("rootxxx")); // "test 41"
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Rootxxx")); // "test 42"
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("xxxxxxx")); // "test 43"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("rootxxx")); // "test 41"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Rootxxx")); // "test 42"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("xxxxxxx")); // "test 43"
 
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("filexxxx")); // "test 44"
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Filexxxx")); // "test 45"
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("idenxxxx")); // "test 46"
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Idenxxxx")); // "test 47"
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("xxxxxxxx")); // "test 48"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("filexxxx")); // "test 44"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Filexxxx")); // "test 45"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("idenxxxx")); // "test 46"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Idenxxxx")); // "test 47"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("xxxxxxxx")); // "test 48"
 
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("extenxxxx")); // "test 49"
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Extenxxxx")); // "test 50"
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("direcxxxx")); // "test 51"
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Direcxxxx")); // "test 52"
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("xxxxxxxxx")); // "test 53"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("extenxxxx")); // "test 49"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Extenxxxx")); // "test 50"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("direcxxxx")); // "test 51"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Direcxxxx")); // "test 52"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("xxxxxxxxx")); // "test 53"
 
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("xxxxxxxxxx")); // "test 54"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("xxxxxxxxxx")); // "test 54"
 
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("relativexxx")); // "test 55"
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Relativexxx")); // "test 56"
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("createdxxxx")); // "test 57"
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Createdxxxx")); // "test 58"
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("xxxxxxxxxxx")); // "test 59"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("relativexxx")); // "test 55"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Relativexxx")); // "test 56"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("createdxxxx")); // "test 57"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Createdxxxx")); // "test 58"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("xxxxxxxxxxx")); // "test 59"
 
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("recursivexxx")); // "test 60"
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Recursivexxx")); // "test 61"
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("accessedxxxx")); // "test 62"
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Accessedxxxx")); // "test 63"
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("modifiedxxxx")); // "test 64"
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Modifiedxxxx")); // "test 65"
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("xxxxxxxxxxxx")); // "test 66"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("recursivexxx")); // "test 60"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Recursivexxx")); // "test 61"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("accessedxxxx")); // "test 62"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Accessedxxxx")); // "test 63"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("modifiedxxxx")); // "test 64"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("Modifiedxxxx")); // "test 65"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier("xxxxxxxxxxxx")); // "test 66"
 
-            Assert.False(FileUtilities.ItemSpecModifiers.IsItemSpecModifier(null)); // "test 67"
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsItemSpecModifier(null)); // "test 67"
         }
 
         [Fact]
         public void CheckDerivableItemSpecModifiers()
         {
-            Assert.True(FileUtilities.ItemSpecModifiers.IsDerivableItemSpecModifier("Filename"));
-            Assert.False(FileUtilities.ItemSpecModifiers.IsDerivableItemSpecModifier("RecursiveDir"));
-            Assert.False(FileUtilities.ItemSpecModifiers.IsDerivableItemSpecModifier("recursivedir"));
+            Assert.IsTrue(FileUtilities.ItemSpecModifiers.IsDerivableItemSpecModifier("Filename"));
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsDerivableItemSpecModifier("RecursiveDir"));
+            Assert.IsFalse(FileUtilities.ItemSpecModifiers.IsDerivableItemSpecModifier("recursivedir"));
         }
 
         [WindowsOnlyFact]
@@ -415,7 +415,7 @@ namespace Microsoft.Build.UnitTests
             string filePath = @"..\..\..\..\..\..\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\a.cs";
             string fullPath = @"c:\aardvark\aardvark\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\a.cs";
 
-            Assert.Equal(fullPath, FileUtilities.NormalizePath(Path.Combine(currentDirectory, filePath)));
+            Assert.AreEqual(fullPath, FileUtilities.NormalizePath(Path.Combine(currentDirectory, filePath)));
         }
 
         [LongPathSupportCondition(fullFrameworkOnly: true, additionalMessage: "https://github.com/dotnet/msbuild/issues/4363")]
@@ -430,7 +430,7 @@ namespace Microsoft.Build.UnitTests
                 // This path ends up over 420 characters long
                 string fullPath = @"c:\aardvark\aardvark\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\a.cs";
 
-                Assert.Equal(fullPath, FileUtilities.NormalizePath(Path.Combine(currentDirectory, filePath)));
+                Assert.AreEqual(fullPath, FileUtilities.NormalizePath(Path.Combine(currentDirectory, filePath)));
             });
         }
 
@@ -441,7 +441,7 @@ namespace Microsoft.Build.UnitTests
             string fullPath = @"c:\aardvark\aardvark\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\1234567890\a.cs";
             string cache = fullPath;
 
-            Assert.Equal(@"c:\", FileUtilities.ItemSpecModifiers.GetItemSpecModifier(currentDirectory, fullPath, String.Empty, FileUtilities.ItemSpecModifiers.RootDir, ref cache));
+            Assert.AreEqual(@"c:\", FileUtilities.ItemSpecModifiers.GetItemSpecModifier(currentDirectory, fullPath, String.Empty, FileUtilities.ItemSpecModifiers.RootDir, ref cache));
         }
 
         [Fact]
@@ -449,7 +449,7 @@ namespace Microsoft.Build.UnitTests
         {
             Assert.Throws<ArgumentNullException>(() =>
             {
-                Assert.Null(FileUtilities.NormalizePath(null, null));
+                Assert.IsNull(FileUtilities.NormalizePath(null, null));
             });
         }
 
@@ -458,7 +458,7 @@ namespace Microsoft.Build.UnitTests
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                Assert.Null(FileUtilities.NormalizePath(String.Empty));
+                Assert.IsNull(FileUtilities.NormalizePath(String.Empty));
             });
         }
 
@@ -467,7 +467,7 @@ namespace Microsoft.Build.UnitTests
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                Assert.Null(FileUtilities.NormalizePath(@"\\"));
+                Assert.IsNull(FileUtilities.NormalizePath(@"\\"));
             });
         }
 
@@ -476,7 +476,7 @@ namespace Microsoft.Build.UnitTests
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                Assert.Null(FileUtilities.NormalizePath(@"\\XXX\"));
+                Assert.IsNull(FileUtilities.NormalizePath(@"\\XXX\"));
             });
         }
 
@@ -485,21 +485,21 @@ namespace Microsoft.Build.UnitTests
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                Assert.Equal(@"\\localhost", FileUtilities.NormalizePath(@"\\localhost"));
+                Assert.AreEqual(@"\\localhost", FileUtilities.NormalizePath(@"\\localhost"));
             });
         }
 
         [WindowsOnlyFact]
         public void NormalizePathGoodUNC()
         {
-            Assert.Equal(@"\\localhost\share", FileUtilities.NormalizePath(@"\\localhost\share"));
+            Assert.AreEqual(@"\\localhost\share", FileUtilities.NormalizePath(@"\\localhost\share"));
         }
 
         [WindowsOnlyFact]
         public void NormalizePathTooLongWithDots()
         {
             string longPart = new string('x', 300);
-            Assert.Equal(@"c:\abc\def", FileUtilities.NormalizePath(@"c:\abc\" + longPart + @"\..\def"));
+            Assert.AreEqual(@"c:\abc\def", FileUtilities.NormalizePath(@"c:\abc\" + longPart + @"\..\def"));
         }
 
         [WindowsFullFrameworkOnlyFact(additionalMessage: ".NET Core 2.1+ no longer validates paths: https://github.com/dotnet/corefx/issues/27779#issuecomment-371253486.")]
@@ -521,7 +521,7 @@ namespace Microsoft.Build.UnitTests
 #if FEATURE_LEGACY_GETFULLPATH
             Assert.Throws<ArgumentException>(() => FileUtilities.NormalizePath(filePath));
 #else
-            Assert.NotEqual("C:\\work\\sdk3\\artifacts\\tmp\\Debug\\SimpleNamesWi---6143883E\\NETFrameworkLibrary\\bin\\Debug\\net462\\NETFrameworkLibrary.dll", FileUtilities.NormalizePath(filePath));
+            Assert.AreNotEqual("C:\\work\\sdk3\\artifacts\\tmp\\Debug\\SimpleNamesWi---6143883E\\NETFrameworkLibrary\\bin\\Debug\\net462\\NETFrameworkLibrary.dll", FileUtilities.NormalizePath(filePath));
 #endif
         }
 
@@ -530,17 +530,17 @@ namespace Microsoft.Build.UnitTests
         {
             var isWindows = NativeMethodsShared.IsWindows;
 
-            Assert.False(FileUtilities.FileOrDirectoryExistsNoThrow("||"));
-            Assert.False(FileUtilities.FileOrDirectoryExistsNoThrow(isWindows ? @"c:\doesnot_exist" : "/doesnot_exist"));
-            Assert.True(FileUtilities.FileOrDirectoryExistsNoThrow(isWindows ? @"c:\" : "/"));
-            Assert.True(FileUtilities.FileOrDirectoryExistsNoThrow(Path.GetTempPath()));
+            Assert.IsFalse(FileUtilities.FileOrDirectoryExistsNoThrow("||"));
+            Assert.IsFalse(FileUtilities.FileOrDirectoryExistsNoThrow(isWindows ? @"c:\doesnot_exist" : "/doesnot_exist"));
+            Assert.IsTrue(FileUtilities.FileOrDirectoryExistsNoThrow(isWindows ? @"c:\" : "/"));
+            Assert.IsTrue(FileUtilities.FileOrDirectoryExistsNoThrow(Path.GetTempPath()));
 
             string path = null;
 
             try
             {
                 path = FileUtilities.GetTemporaryFile();
-                Assert.True(FileUtilities.FileOrDirectoryExistsNoThrow(path));
+                Assert.IsTrue(FileUtilities.FileOrDirectoryExistsNoThrow(path));
             }
             finally
             {
@@ -562,8 +562,8 @@ namespace Microsoft.Build.UnitTests
             Console.WriteLine(inputPath.Length);
 
             // "c:\windows\system32\<verylong>\..\..\windows\system32" exists
-            Assert.True(FileUtilities.FileOrDirectoryExistsNoThrow(inputPath));
-            Assert.False(FileUtilities.FileOrDirectoryExistsNoThrow(inputPath.Replace('\\', 'X')));
+            Assert.IsTrue(FileUtilities.FileOrDirectoryExistsNoThrow(inputPath));
+            Assert.IsFalse(FileUtilities.FileOrDirectoryExistsNoThrow(inputPath.Replace('\\', 'X')));
         }
 
         [ConditionalFact(nameof(RunTestsThatDependOnWindowsShortPathBehavior_Workaround4241))]
@@ -584,8 +584,8 @@ namespace Microsoft.Build.UnitTests
             {
                 Directory.SetCurrentDirectory(Environment.SystemDirectory);
 
-                Assert.True(FileUtilities.FileOrDirectoryExistsNoThrow(inputPath));
-                Assert.False(FileUtilities.FileOrDirectoryExistsNoThrow(inputPath.Replace('\\', 'X')));
+                Assert.IsTrue(FileUtilities.FileOrDirectoryExistsNoThrow(inputPath));
+                Assert.IsFalse(FileUtilities.FileOrDirectoryExistsNoThrow(inputPath.Replace('\\', 'X')));
             }
             finally
             {
@@ -616,7 +616,7 @@ namespace Microsoft.Build.UnitTests
             Console.WriteLine(inputPath.Length);
 
             // "c:\windows\system32\<verylong>\..\..\windows\system32" exists
-            Assert.True(FileUtilities.DirectoryExistsNoThrow(inputPath));
+            Assert.IsTrue(FileUtilities.DirectoryExistsNoThrow(inputPath));
         }
 
         [ConditionalFact(nameof(RunTestsThatDependOnWindowsShortPathBehavior_Workaround4241))]
@@ -667,7 +667,7 @@ namespace Microsoft.Build.UnitTests
             Console.WriteLine(inputPath);
 
             // "c:\windows\system32\<verylong>\..\..\windows\system32" exists
-            Assert.True(FileUtilities.FileExistsNoThrow(inputPath));
+            Assert.IsTrue(FileUtilities.FileExistsNoThrow(inputPath));
         }
 
         [ConditionalFact(nameof(RunTestsThatDependOnWindowsShortPathBehavior_Workaround4241))]
@@ -688,8 +688,8 @@ namespace Microsoft.Build.UnitTests
             {
                 Directory.SetCurrentDirectory(Environment.SystemDirectory);
 
-                Assert.True(FileUtilities.FileExistsNoThrow(inputPath));
-                Assert.False(FileUtilities.FileExistsNoThrow(inputPath.Replace('\\', 'X')));
+                Assert.IsTrue(FileUtilities.FileExistsNoThrow(inputPath));
+                Assert.IsFalse(FileUtilities.FileExistsNoThrow(inputPath.Replace('\\', 'X')));
             }
             finally
             {
@@ -708,8 +708,8 @@ namespace Microsoft.Build.UnitTests
             Console.WriteLine(inputPath.Length);
 
             // "c:\windows\system32\<verylong>\..\..\windows\system32" exists
-            Assert.True(FileUtilities.GetFileInfoNoThrow(inputPath) != null);
-            Assert.False(FileUtilities.GetFileInfoNoThrow(inputPath.Replace('\\', 'X')) != null);
+            Assert.IsTrue(FileUtilities.GetFileInfoNoThrow(inputPath) != null);
+            Assert.IsFalse(FileUtilities.GetFileInfoNoThrow(inputPath.Replace('\\', 'X')) != null);
         }
 
         [Fact]
@@ -730,8 +730,8 @@ namespace Microsoft.Build.UnitTests
             {
                 Directory.SetCurrentDirectory(Environment.SystemDirectory);
 
-                Assert.True(FileUtilities.GetFileInfoNoThrow(inputPath) != null);
-                Assert.False(FileUtilities.GetFileInfoNoThrow(inputPath.Replace('\\', 'X')) != null);
+                Assert.IsTrue(FileUtilities.GetFileInfoNoThrow(inputPath) != null);
+                Assert.IsFalse(FileUtilities.GetFileInfoNoThrow(inputPath.Replace('\\', 'X')) != null);
             }
             finally
             {
@@ -753,7 +753,7 @@ namespace Microsoft.Build.UnitTests
                 path = FileUtilities.GetTemporaryFile();
 
                 Assert.EndsWith(".tmp", path);
-                Assert.True(File.Exists(path));
+                Assert.IsTrue(File.Exists(path));
                 Assert.StartsWith(Path.GetTempPath(), path);
             }
             finally
@@ -775,7 +775,7 @@ namespace Microsoft.Build.UnitTests
                 path = FileUtilities.GetTemporaryFile(".bat");
 
                 Assert.EndsWith(".bat", path);
-                Assert.True(File.Exists(path));
+                Assert.IsTrue(File.Exists(path));
                 Assert.StartsWith(Path.GetTempPath(), path);
             }
             finally
@@ -798,7 +798,7 @@ namespace Microsoft.Build.UnitTests
                 path = FileUtilities.GetTemporaryFile(directory, null, ".bat");
 
                 Assert.EndsWith(".bat", path);
-                Assert.True(File.Exists(path));
+                Assert.IsTrue(File.Exists(path));
                 Assert.StartsWith(directory, path);
             }
             finally
@@ -821,7 +821,7 @@ namespace Microsoft.Build.UnitTests
                 path = FileUtilities.GetTemporaryFile("bat");
 
                 Assert.EndsWith(".bat", path);
-                Assert.True(File.Exists(path));
+                Assert.IsTrue(File.Exists(path));
                 Assert.StartsWith(Path.GetTempPath(), path);
             }
             finally
@@ -864,16 +864,16 @@ namespace Microsoft.Build.UnitTests
             var secondSlash = SystemSpecificAbsolutePath.Substring(1).IndexOf(Path.DirectorySeparatorChar) + 1;
             var rootLevelPath = SystemSpecificAbsolutePath.Substring(0, secondSlash);
 
-            Assert.True(FileUtilities.LooksLikeUnixFilePath(SystemSpecificAbsolutePath));
-            Assert.True(FileUtilities.LooksLikeUnixFilePath(rootLevelPath));
+            Assert.IsTrue(FileUtilities.LooksLikeUnixFilePath(SystemSpecificAbsolutePath));
+            Assert.IsTrue(FileUtilities.LooksLikeUnixFilePath(rootLevelPath));
         }
 
         [WindowsOnlyFact]
         public void PathDoesNotLookLikeUnixPathOnWindows()
         {
-            Assert.False(FileUtilities.LooksLikeUnixFilePath(SystemSpecificAbsolutePath));
-            Assert.False(FileUtilities.LooksLikeUnixFilePath("/path/that/looks/unixy"));
-            Assert.False(FileUtilities.LooksLikeUnixFilePath("/root"));
+            Assert.IsFalse(FileUtilities.LooksLikeUnixFilePath(SystemSpecificAbsolutePath));
+            Assert.IsFalse(FileUtilities.LooksLikeUnixFilePath("/path/that/looks/unixy"));
+            Assert.IsFalse(FileUtilities.LooksLikeUnixFilePath("/root"));
         }
 
         [UnixOnlyFact]
@@ -891,10 +891,10 @@ namespace Microsoft.Build.UnitTests
                 Directory.SetCurrentDirectory(tmpDirectory);
 
                 // We are in <tmp_dir> and second is not under that, so this will be false
-                Assert.False(FileUtilities.LooksLikeUnixFilePath("second/file.txt"));
+                Assert.IsFalse(FileUtilities.LooksLikeUnixFilePath("second/file.txt"));
 
                 // .. but if we have baseDirectory:firstDirectory, then it will be true
-                Assert.True(FileUtilities.LooksLikeUnixFilePath("second/file.txt", firstDirectory));
+                Assert.IsTrue(FileUtilities.LooksLikeUnixFilePath("second/file.txt", firstDirectory));
             }
             finally
             {
@@ -922,10 +922,10 @@ namespace Microsoft.Build.UnitTests
                 Directory.SetCurrentDirectory(tmpDirectory);
 
                 // We are in <tmp_dir> and second is not under that, so this won't convert
-                Assert.Equal("second\\file.txt", FileUtilities.MaybeAdjustFilePath("second\\file.txt"));
+                Assert.AreEqual("second\\file.txt", FileUtilities.MaybeAdjustFilePath("second\\file.txt"));
 
                 // .. but if we have baseDirectory:firstDirectory, then it will
-                Assert.Equal("second/file.txt", FileUtilities.MaybeAdjustFilePath("second\\file.txt", firstDirectory));
+                Assert.AreEqual("second/file.txt", FileUtilities.MaybeAdjustFilePath("second\\file.txt", firstDirectory));
             }
             finally
             {
@@ -946,15 +946,15 @@ namespace Microsoft.Build.UnitTests
             string root = NativeMethodsShared.IsWindows ? @"c:\" : "/";
             string path = Path.Combine(root, "1", "2", "3", "4", "5");
 
-            Assert.Equal(Path.Combine(root, "1", "2", "3", "4", "5"), FileUtilities.GetFolderAbove(path, 0));
-            Assert.Equal(Path.Combine(root, "1", "2", "3", "4"), FileUtilities.GetFolderAbove(path));
-            Assert.Equal(Path.Combine(root, "1", "2", "3"), FileUtilities.GetFolderAbove(path, 2));
-            Assert.Equal(Path.Combine(root, "1", "2"), FileUtilities.GetFolderAbove(path, 3));
-            Assert.Equal(Path.Combine(root, "1"), FileUtilities.GetFolderAbove(path, 4));
-            Assert.Equal(root, FileUtilities.GetFolderAbove(path, 5));
-            Assert.Equal(root, FileUtilities.GetFolderAbove(path, 99));
+            Assert.AreEqual(Path.Combine(root, "1", "2", "3", "4", "5"), FileUtilities.GetFolderAbove(path, 0));
+            Assert.AreEqual(Path.Combine(root, "1", "2", "3", "4"), FileUtilities.GetFolderAbove(path));
+            Assert.AreEqual(Path.Combine(root, "1", "2", "3"), FileUtilities.GetFolderAbove(path, 2));
+            Assert.AreEqual(Path.Combine(root, "1", "2"), FileUtilities.GetFolderAbove(path, 3));
+            Assert.AreEqual(Path.Combine(root, "1"), FileUtilities.GetFolderAbove(path, 4));
+            Assert.AreEqual(root, FileUtilities.GetFolderAbove(path, 5));
+            Assert.AreEqual(root, FileUtilities.GetFolderAbove(path, 99));
 
-            Assert.Equal(root, FileUtilities.GetFolderAbove(root, 99));
+            Assert.AreEqual(root, FileUtilities.GetFolderAbove(root, 99));
         }
 
         [Fact]
@@ -963,11 +963,11 @@ namespace Microsoft.Build.UnitTests
             // These tests run in .NET 4+, so we can cheat
             var root = @"c:\";
 
-            Assert.Equal(
+            Assert.AreEqual(
                 Path.Combine(root, "path1"),
                 FileUtilities.CombinePaths(root, "path1"));
 
-            Assert.Equal(
+            Assert.AreEqual(
                 Path.Combine(root, "path1", "path2", "file.txt"),
                 FileUtilities.CombinePaths(root, "path1", "path2", "file.txt"));
         }

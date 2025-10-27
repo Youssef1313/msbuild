@@ -47,25 +47,25 @@ namespace Microsoft.Build.UnitTests.Definition
 
             foreach (string expectedRegisteredTask in expectedRegisteredTasks)
             {
-                Assert.True(taskRegistry.TaskRegistrations.ContainsKey(new TaskRegistry.RegisteredTaskIdentity(expectedRegisteredTask, TaskHostParameters.Empty)),
+                Assert.IsTrue(taskRegistry.TaskRegistrations.ContainsKey(new TaskRegistry.RegisteredTaskIdentity(expectedRegisteredTask, TaskHostParameters.Empty)),
                               String.Format("Expected task '{0}' registered!", expectedRegisteredTask));
             }
 
             foreach (string expectedRegisteredTask in expectedOverrideTasks)
             {
-                Assert.True(taskoverrideRegistry.TaskRegistrations.ContainsKey(new TaskRegistry.RegisteredTaskIdentity(expectedRegisteredTask, TaskHostParameters.Empty)),
+                Assert.IsTrue(taskoverrideRegistry.TaskRegistrations.ContainsKey(new TaskRegistry.RegisteredTaskIdentity(expectedRegisteredTask, TaskHostParameters.Empty)),
                               String.Format("Expected task '{0}' registered!", expectedRegisteredTask));
             }
 
             foreach (string unexpectedRegisteredTask in unexpectedRegisteredTasks)
             {
-                Assert.False(taskRegistry.TaskRegistrations.ContainsKey(new TaskRegistry.RegisteredTaskIdentity(unexpectedRegisteredTask, TaskHostParameters.Empty)),
+                Assert.IsFalse(taskRegistry.TaskRegistrations.ContainsKey(new TaskRegistry.RegisteredTaskIdentity(unexpectedRegisteredTask, TaskHostParameters.Empty)),
                               String.Format("Unexpected task '{0}' registered!", unexpectedRegisteredTask));
             }
 
             foreach (string unexpectedRegisteredTask in unexpectedOverrideRegisteredTasks)
             {
-                Assert.False(taskoverrideRegistry.TaskRegistrations.ContainsKey(new TaskRegistry.RegisteredTaskIdentity(unexpectedRegisteredTask, TaskHostParameters.Empty)),
+                Assert.IsFalse(taskoverrideRegistry.TaskRegistrations.ContainsKey(new TaskRegistry.RegisteredTaskIdentity(unexpectedRegisteredTask, TaskHostParameters.Empty)),
                               String.Format("Unexpected task '{0}' registered!", unexpectedRegisteredTask));
             }
         }
@@ -85,7 +85,7 @@ namespace Microsoft.Build.UnitTests.Definition
 
 
             TaskRegistry taskoverrideRegistry = (TaskRegistry)t.GetOverrideTaskRegistry(loggingContext, e.ProjectRootElementCache);
-            Assert.NotNull(taskoverrideRegistry);
+            Assert.IsNotNull(taskoverrideRegistry);
             Assert.Empty(taskoverrideRegistry.TaskRegistrations);
             string rootedPathMessage = ResourceUtilities.FormatResourceStringStripCodeAndKeyword("OverrideTaskNotRootedPath", "msbuildoverridetasks");
             mockLogger.AssertLogContains(ResourceUtilities.FormatResourceStringStripCodeAndKeyword("OverrideTasksFileFailure", rootedPathMessage));
@@ -104,7 +104,7 @@ namespace Microsoft.Build.UnitTests.Definition
             LoggingContext loggingContext = new TestLoggingContext(service, new BuildEventContext(1, 2, BuildEventContext.InvalidProjectContextId, 4));
 
             TaskRegistry taskoverrideRegistry = (TaskRegistry)t.GetOverrideTaskRegistry(loggingContext, e.ProjectRootElementCache);
-            Assert.NotNull(taskoverrideRegistry);
+            Assert.IsNotNull(taskoverrideRegistry);
             Assert.Empty(taskoverrideRegistry.TaskRegistrations);
             mockLogger.AssertLogContains("MSB4194");
         }
@@ -123,7 +123,7 @@ namespace Microsoft.Build.UnitTests.Definition
             LoggingContext loggingContext = new TestLoggingContext(service, new BuildEventContext(1, 2, BuildEventContext.InvalidProjectContextId, 4));
 
             TaskRegistry taskoverrideRegistry = (TaskRegistry)t.GetOverrideTaskRegistry(loggingContext, e.ProjectRootElementCache);
-            Assert.NotNull(taskoverrideRegistry);
+            Assert.IsNotNull(taskoverrideRegistry);
             Assert.Empty(taskoverrideRegistry.TaskRegistrations);
             string rootedPathMessage = ResourceUtilities.FormatResourceStringStripCodeAndKeyword("OverrideTaskNotRootedPath", tooLong);
             mockLogger.AssertLogContains(ResourceUtilities.FormatResourceStringStripCodeAndKeyword("OverrideTasksFileFailure", rootedPathMessage));
@@ -143,7 +143,7 @@ namespace Microsoft.Build.UnitTests.Definition
             LoggingContext loggingContext = new TestLoggingContext(service, new BuildEventContext(1, 2, BuildEventContext.InvalidProjectContextId, 4));
 
             TaskRegistry taskoverrideRegistry = (TaskRegistry)t.GetOverrideTaskRegistry(loggingContext, e.ProjectRootElementCache);
-            Assert.NotNull(taskoverrideRegistry);
+            Assert.IsNotNull(taskoverrideRegistry);
             Assert.Empty(taskoverrideRegistry.TaskRegistrations);
             string rootedPathMessage = ResourceUtilities.FormatResourceStringStripCodeAndKeyword("OverrideTaskNotRootedPath", "k:\\Thecatinthehat");
             mockLogger.AssertLogContains(ResourceUtilities.FormatResourceStringStripCodeAndKeyword("OverrideTasksFileFailure", rootedPathMessage));
@@ -172,12 +172,12 @@ namespace Microsoft.Build.UnitTests.Definition
 
             foreach (string expectedRegisteredTask in expectedRegisteredTasks)
             {
-                Assert.True(taskRegistry.TaskRegistrations.ContainsKey(new TaskRegistry.RegisteredTaskIdentity(expectedRegisteredTask, TaskHostParameters.Empty)),
+                Assert.IsTrue(taskRegistry.TaskRegistrations.ContainsKey(new TaskRegistry.RegisteredTaskIdentity(expectedRegisteredTask, TaskHostParameters.Empty)),
                               String.Format("Expected task '{0}' registered!", expectedRegisteredTask));
             }
             foreach (string unexpectedRegisteredTask in unexpectedRegisteredTasks)
             {
-                Assert.False(taskRegistry.TaskRegistrations.ContainsKey(new TaskRegistry.RegisteredTaskIdentity(unexpectedRegisteredTask, TaskHostParameters.Empty)),
+                Assert.IsFalse(taskRegistry.TaskRegistrations.ContainsKey(new TaskRegistry.RegisteredTaskIdentity(unexpectedRegisteredTask, TaskHostParameters.Empty)),
                               String.Format("Unexpected task '{0}' registered!", unexpectedRegisteredTask));
             }
         }
@@ -199,10 +199,10 @@ namespace Microsoft.Build.UnitTests.Definition
 
             string[] unexpectedRegisteredTasks = { "a1", "a2", "a3", "a4", "b1", "c1", "d1", "e1", "f1", "g1", "g2", "g3", "11", "12", "13", "21" };
 
-            Assert.Equal(1, mockLogger.WarningCount); // "Expected 1 warning logged!"
+            Assert.AreEqual(1, mockLogger.WarningCount); // "Expected 1 warning logged!"
             foreach (string unexpectedRegisteredTask in unexpectedRegisteredTasks)
             {
-                Assert.False(taskRegistry.TaskRegistrations.ContainsKey(new TaskRegistry.RegisteredTaskIdentity(unexpectedRegisteredTask, TaskHostParameters.Empty)),
+                Assert.IsFalse(taskRegistry.TaskRegistrations.ContainsKey(new TaskRegistry.RegisteredTaskIdentity(unexpectedRegisteredTask, TaskHostParameters.Empty)),
                                String.Format("Unexpected task '{0}' registered!", unexpectedRegisteredTask));
             }
         }
@@ -221,7 +221,7 @@ namespace Microsoft.Build.UnitTests.Definition
             TaskRegistry taskRegistry = (TaskRegistry)t.GetTaskRegistry(loggingContext, ProjectCollection.GlobalProjectCollection.ProjectRootElementCache);
 
             Console.WriteLine(mockLogger.FullLog);
-            Assert.Equal(1, mockLogger.WarningCount); // "Expected a warning for invalid character in toolpath"
+            Assert.AreEqual(1, mockLogger.WarningCount); // "Expected a warning for invalid character in toolpath"
         }
 
         /// <summary>
@@ -273,16 +273,16 @@ namespace Microsoft.Build.UnitTests.Definition
             sortedTasksExpectedPaths.Sort(StringComparer.OrdinalIgnoreCase);
             sortedOverrideExpectedPaths.Sort(StringComparer.OrdinalIgnoreCase);
 
-            Assert.Equal(sortedTasksExpectedPaths.Count, foundFiles.Length);
+            Assert.AreEqual(sortedTasksExpectedPaths.Count, foundFiles.Length);
             for (int i = 0; i < foundFiles.Length; i++)
             {
-                Assert.Equal(foundFiles[i], sortedTasksExpectedPaths[i]);
+                Assert.AreEqual(foundFiles[i], sortedTasksExpectedPaths[i]);
             }
 
-            Assert.Equal(sortedOverrideExpectedPaths.Count, foundoverrideFiles.Length);
+            Assert.AreEqual(sortedOverrideExpectedPaths.Count, foundoverrideFiles.Length);
             for (int i = 0; i < foundoverrideFiles.Length; i++)
             {
-                Assert.Equal(foundoverrideFiles[i], sortedOverrideExpectedPaths[i]);
+                Assert.AreEqual(foundoverrideFiles[i], sortedOverrideExpectedPaths[i]);
             }
         }
 
@@ -312,7 +312,7 @@ namespace Microsoft.Build.UnitTests.Definition
                 Project project = projectFromString.Project;
                 success = project.Build(mockLogger);
 
-                Assert.True(success);
+                Assert.IsTrue(success);
 
                 mockLogger.AssertLogContains("ToolsVersion=\"98.6\"");
                 mockLogger.AssertLogContains(ObjectModelHelpers.CleanupFileContents("ToolsVersion=\"msbuilddefaulttoolsversion\""));
@@ -350,7 +350,7 @@ namespace Microsoft.Build.UnitTests.Definition
 
                 success = project.Build(mockLogger);
 
-                Assert.True(success);
+                Assert.IsTrue(success);
                 mockLogger.AssertLogContains("ToolsVersion=\"0.1\"");
                 mockLogger.AssertLogContains(ObjectModelHelpers.CleanupFileContents("ToolsVersion=\"msbuilddefaulttoolsversion\""));
             }
@@ -385,7 +385,7 @@ namespace Microsoft.Build.UnitTests.Definition
                 Project project = projectFromString.Project;
                 success = project.Build(mockLogger);
 
-                Assert.True(success);
+                Assert.IsTrue(success);
                 mockLogger.AssertLogContains("ToolsVersion=\"invalidToolsVersion\"");
                 mockLogger.AssertLogContains(ObjectModelHelpers.CleanupFileContents("ToolsVersion=\"msbuilddefaulttoolsversion\""));
             }
@@ -447,7 +447,7 @@ namespace Microsoft.Build.UnitTests.Definition
                 Project project = projectFromString.Project;
                 success = project.Build(mockLogger);
 
-                Assert.True(success);
+                Assert.IsTrue(success);
                 mockLogger.AssertLogContains("ToolsVersion=\"4.0\"");
                 mockLogger.AssertLogContains(ObjectModelHelpers.CleanupFileContents("ToolsVersion=\"msbuilddefaulttoolsversion\""));
             }
@@ -489,7 +489,7 @@ namespace Microsoft.Build.UnitTests.Definition
                 Project project = p.LoadProject(projectPath, "potato");
                 bool success = project.Build(mockLogger);
 
-                Assert.True(success);
+                Assert.IsTrue(success);
                 mockLogger.AssertLogContains("[potato]");
             }
             finally
@@ -517,10 +517,10 @@ namespace Microsoft.Build.UnitTests.Definition
             using ProjectFromString projectFromString = new(content, null /* no global properties */, null /* don't explicitly set the toolsversion */, p);
             Project project = projectFromString.Project;
 
-            Assert.Equal("4.0", project.ToolsVersion);
+            Assert.AreEqual("4.0", project.ToolsVersion);
             bool success = project.Build(mockLogger);
 
-            Assert.True(success);
+            Assert.IsTrue(success);
             mockLogger.AssertLogContains("\"4.0\"");
             mockLogger.AssertLogDoesntContain(ObjectModelHelpers.CleanupFileContents("\"msbuilddefaulttoolsversion\""));
         }
@@ -554,7 +554,7 @@ namespace Microsoft.Build.UnitTests.Definition
                 using ProjectFromString projectFromString = new(content, null /* no global properties */, null /* don't explicitly set the toolsversion */, p);
                 success = projectFromString.Project.Build(mockLogger);
 
-                Assert.True(success);
+                Assert.IsTrue(success);
                 mockLogger.AssertLogContains("ToolsVersion=\"4.0\"");
                 mockLogger.AssertLogContains("ToolsVersion=\"foo\"");
             }
@@ -592,7 +592,7 @@ namespace Microsoft.Build.UnitTests.Definition
                 using ProjectFromString projectFromString = new(content, null /* no global properties */, null /* don't explicitly set the toolsversion */, p);
                 success = projectFromString.Project.Build(mockLogger);
 
-                Assert.True(success);
+                Assert.IsTrue(success);
                 mockLogger.AssertLogContains("ToolsVersion=\"4.0\"");
                 // falls back to the current ToolsVersion
                 mockLogger.AssertLogContains(ObjectModelHelpers.CleanupFileContents("ToolsVersion=\"msbuilddefaulttoolsversion\""));
@@ -635,7 +635,7 @@ namespace Microsoft.Build.UnitTests.Definition
                 ProjectInstance pi = projectFromString.Project.CreateProjectInstance();
                 success = pi.Build(new ILogger[] { mockLogger });
 
-                Assert.True(success);
+                Assert.IsTrue(success);
                 mockLogger.AssertLogContains("ToolsVersion=\"4.0\"");
                 mockLogger.AssertLogContains(ObjectModelHelpers.CleanupFileContents("ToolsVersion=\"msbuilddefaulttoolsversion\""));
             }
@@ -667,10 +667,10 @@ namespace Microsoft.Build.UnitTests.Definition
             using ProjectFromString projectFromString = new(content, null /* no global properties */, null /* don't explicitly set the toolsversion */, p);
 
             ProjectInstance pi = projectFromString.Project.CreateProjectInstance();
-            Assert.Equal("4.0", pi.ToolsVersion);
+            Assert.AreEqual("4.0", pi.ToolsVersion);
             bool success = pi.Build(new ILogger[] { mockLogger });
 
-            Assert.True(success);
+            Assert.IsTrue(success);
             mockLogger.AssertLogContains("\"4.0\"");
             mockLogger.AssertLogDoesntContain(ObjectModelHelpers.CleanupFileContents("\"msbuilddefaulttoolsversion\""));
         }
@@ -706,7 +706,7 @@ namespace Microsoft.Build.UnitTests.Definition
                 ProjectInstance pi = projectFromString.Project.CreateProjectInstance();
                 success = pi.Build(new ILogger[] { mockLogger });
 
-                Assert.True(success);
+                Assert.IsTrue(success);
                 mockLogger.AssertLogContains("ToolsVersion=\"4.0\"");
                 mockLogger.AssertLogContains("ToolsVersion=\"foo\"");
             }
@@ -747,7 +747,7 @@ namespace Microsoft.Build.UnitTests.Definition
                 ProjectInstance pi = projectFromString.Project.CreateProjectInstance();
                 success = pi.Build(new ILogger[] { mockLogger });
 
-                Assert.True(success);
+                Assert.IsTrue(success);
                 mockLogger.AssertLogContains("ToolsVersion=\"4.0\"");
                 // falls back to the current ToolsVersion
                 mockLogger.AssertLogContains(ObjectModelHelpers.CleanupFileContents("ToolsVersion=\"msbuilddefaulttoolsversion\""));
@@ -791,7 +791,7 @@ namespace Microsoft.Build.UnitTests.Definition
                 ProjectInstance pi = new ProjectInstance(projectFromString.Project.Xml, null /* no global properties */, null /* don't explicitly set the toolsversion */, p);
                 success = pi.Build(new ILogger[] { mockLogger });
 
-                Assert.True(success);
+                Assert.IsTrue(success);
                 mockLogger.AssertLogContains("ToolsVersion=\"4.0\"");
                 mockLogger.AssertLogContains(ObjectModelHelpers.CleanupFileContents("ToolsVersion=\"msbuilddefaulttoolsversion\""));
             }
@@ -823,10 +823,10 @@ namespace Microsoft.Build.UnitTests.Definition
             using ProjectFromString projectFromString = new(content, null /* no global properties */, null /* don't explicitly set the toolsversion */, p);
 
             ProjectInstance pi = new ProjectInstance(projectFromString.Project.Xml, null /* no global properties */, null /* don't explicitly set the toolsversion */, p);
-            Assert.Equal("4.0", pi.ToolsVersion);
+            Assert.AreEqual("4.0", pi.ToolsVersion);
             bool success = pi.Build(new ILogger[] { mockLogger });
 
-            Assert.True(success);
+            Assert.IsTrue(success);
             mockLogger.AssertLogContains("\"4.0\"");
             mockLogger.AssertLogDoesntContain(ObjectModelHelpers.CleanupFileContents("\"msbuilddefaulttoolsversion\""));
         }
@@ -861,7 +861,7 @@ namespace Microsoft.Build.UnitTests.Definition
                 ProjectInstance pi = new ProjectInstance(projectFromString.Project.Xml, null /* no global properties */, null /* don't explicitly set the toolsversion */, p);
                 success = pi.Build(new ILogger[] { mockLogger });
 
-                Assert.True(success);
+                Assert.IsTrue(success);
                 mockLogger.AssertLogContains("ToolsVersion=\"4.0\"");
                 mockLogger.AssertLogContains("ToolsVersion=\"foo\"");
             }
@@ -901,7 +901,7 @@ namespace Microsoft.Build.UnitTests.Definition
                 ProjectInstance pi = new ProjectInstance(projectFromString.Project.Xml, null /* no global properties */, null /* don't explicitly set the toolsversion */, p);
                 success = pi.Build(new ILogger[] { mockLogger });
 
-                Assert.True(success);
+                Assert.IsTrue(success);
                 mockLogger.AssertLogContains("ToolsVersion=\"4.0\"");
                 // falls back to the current ToolsVersion
                 mockLogger.AssertLogContains(ObjectModelHelpers.CleanupFileContents("ToolsVersion=\"msbuilddefaulttoolsversion\""));

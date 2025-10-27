@@ -139,7 +139,7 @@ namespace Microsoft.Build.UnitTests
                 "sp ace",
             };
 
-            Assert.Equal(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
     }
 }

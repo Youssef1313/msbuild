@@ -32,7 +32,7 @@ namespace Microsoft.Build.UnitTests
             string xmlText = "<MyXmlElement>&lt;<!-- bar; baz; --><x/><!-- bar --></MyXmlElement>";
             string xmlContents = GetXmlContents(xmlText);
             // Should get XML; note space after x added
-            Assert.Equal("&lt;<!-- bar; baz; --><x /><!-- bar -->", xmlContents);
+            Assert.AreEqual("&lt;<!-- bar; baz; --><x /><!-- bar -->", xmlContents);
         }
 
         [Fact]
@@ -41,7 +41,7 @@ namespace Microsoft.Build.UnitTests
             string xmlText = "<MyXmlElement><x/><!-- bar; baz; --><!-- bar --></MyXmlElement>";
             string xmlContents = GetXmlContents(xmlText);
             // Should get XML; note space after x added
-            Assert.Equal("<x /><!-- bar; baz; --><!-- bar -->", xmlContents);
+            Assert.AreEqual("<x /><!-- bar; baz; --><!-- bar -->", xmlContents);
         }
 
         [Fact]
@@ -50,7 +50,7 @@ namespace Microsoft.Build.UnitTests
             string xmlText = "<MyXmlElement><!-- bar; baz; --><!-- bar --><x/></MyXmlElement>";
             string xmlContents = GetXmlContents(xmlText);
             // Should get XML; note space after x added
-            Assert.Equal("<!-- bar; baz; --><!-- bar --><x />", xmlContents);
+            Assert.AreEqual("<!-- bar; baz; --><!-- bar --><x />", xmlContents);
         }
     }
 
@@ -112,7 +112,7 @@ namespace Microsoft.Build.UnitTests
             string xmlText = "<MyXmlElement>&lt;<!-- bar; baz; --><x/><!-- bar --></MyXmlElement>";
             string xmlContents = GetXmlContents(xmlText);
             // Should get XML; note space after x added
-            Assert.Equal("&lt;<!----><x /><!---->", xmlContents);
+            Assert.AreEqual("&lt;<!----><x /><!---->", xmlContents);
         }
 
         [Fact]
@@ -121,7 +121,7 @@ namespace Microsoft.Build.UnitTests
             string xmlText = "<MyXmlElement><x/><!-- bar; baz; --><!-- bar --></MyXmlElement>";
             string xmlContents = GetXmlContents(xmlText);
             // Should get XML; note space after x added
-            Assert.Equal("<x /><!----><!---->", xmlContents);
+            Assert.AreEqual("<x /><!----><!---->", xmlContents);
         }
 
         [Fact]
@@ -130,7 +130,7 @@ namespace Microsoft.Build.UnitTests
             string xmlText = "<MyXmlElement><!-- bar; baz; --><!-- bar --><x/></MyXmlElement>";
             string xmlContents = GetXmlContents(xmlText);
             // Should get XML; note space after x added
-            Assert.Equal("<!----><!----><x />", xmlContents);
+            Assert.AreEqual("<!----><!----><x />", xmlContents);
         }
     }
 
@@ -180,7 +180,7 @@ namespace Microsoft.Build.UnitTests
         {
             string xmlText = "<MyXmlElement><![CDATA[<invalid<xml&&<]]></MyXmlElement>";
             string xmlContents = GetXmlContents(xmlText);
-            Assert.Equal("<invalid<xml&&<", xmlContents);
+            Assert.AreEqual("<invalid<xml&&<", xmlContents);
         }
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace Microsoft.Build.UnitTests
             string xmlContents = GetXmlContents(xmlText);
 
             // Notice the extra space after "CDATA" because it normalized the XML.
-            Assert.Equal("This is not a real <CDATA />, just trying to fool the reader.", xmlContents);
+            Assert.AreEqual("This is not a real <CDATA />, just trying to fool the reader.", xmlContents);
         }
 
         /// <summary>
@@ -204,7 +204,7 @@ namespace Microsoft.Build.UnitTests
         {
             string xmlText = "<MyXmlElement><![CDATA[whatever]]></MyXmlElement>";
             string xmlContents = GetXmlContents(xmlText);
-            Assert.Equal("whatever", xmlContents);
+            Assert.AreEqual("whatever", xmlContents);
         }
 
         /// <summary>
@@ -215,7 +215,7 @@ namespace Microsoft.Build.UnitTests
         {
             string xmlText = "<MyXmlElement>This is not a real CDATA, just trying to fool the reader.</MyXmlElement>";
             string xmlContents = GetXmlContents(xmlText);
-            Assert.Equal("This is not a real CDATA, just trying to fool the reader.", xmlContents);
+            Assert.AreEqual("This is not a real CDATA, just trying to fool the reader.", xmlContents);
         }
 
         /// <summary>
@@ -226,7 +226,7 @@ namespace Microsoft.Build.UnitTests
         {
             string xmlText = "<MyXmlElement><RootOfPropValue><![CDATA[foo]]></RootOfPropValue></MyXmlElement>";
             string xmlContents = GetXmlContents(xmlText);
-            Assert.Equal("<RootOfPropValue><![CDATA[foo]]></RootOfPropValue>", xmlContents);
+            Assert.AreEqual("<RootOfPropValue><![CDATA[foo]]></RootOfPropValue>", xmlContents);
         }
 
         /// <summary>
@@ -237,7 +237,7 @@ namespace Microsoft.Build.UnitTests
         {
             string xmlText = "<MyXmlElement>    <![CDATA[foo]]>    </MyXmlElement>";
             string xmlContents = GetXmlContents(xmlText);
-            Assert.Equal("foo", xmlContents);
+            Assert.AreEqual("foo", xmlContents);
         }
 
         /// <summary>
@@ -251,7 +251,7 @@ namespace Microsoft.Build.UnitTests
 
             // Notice the extra space in the xml node because it normalized the XML, and the
             // change from single quotes to double-quotes.
-            Assert.Equal("This is some text contain a node <xml a=\"&lt;\" />, &amp; an escaped character.", xmlContents);
+            Assert.AreEqual("This is some text contain a node <xml a=\"&lt;\" />, &amp; an escaped character.", xmlContents);
         }
 
         /// <summary>
@@ -262,7 +262,7 @@ namespace Microsoft.Build.UnitTests
         {
             string xmlText = "<MyXmlElement>This is some text &amp; an escaped character.</MyXmlElement>";
             string xmlContents = GetXmlContents(xmlText);
-            Assert.Equal("This is some text & an escaped character.", xmlContents);
+            Assert.AreEqual("This is some text & an escaped character.", xmlContents);
         }
 
         /// <summary>
@@ -274,7 +274,7 @@ namespace Microsoft.Build.UnitTests
         {
             string xmlText = "<MyXmlElement>foo; <!-- bar; baz; -->biz; &amp; boz</MyXmlElement>";
             string xmlContents = GetXmlContents(xmlText);
-            Assert.Equal("foo; biz; & boz", xmlContents);
+            Assert.AreEqual("foo; biz; & boz", xmlContents);
         }
 
         [Fact]
@@ -282,7 +282,7 @@ namespace Microsoft.Build.UnitTests
         {
             string xmlText = "<MyXmlElement><!-- bar; baz; -->xyz<!-- bar --></MyXmlElement>";
             string xmlContents = GetXmlContents(xmlText);
-            Assert.Equal("xyz", xmlContents);
+            Assert.AreEqual("xyz", xmlContents);
         }
 
         [Fact]
@@ -290,7 +290,7 @@ namespace Microsoft.Build.UnitTests
         {
             string xmlText = "<MyXmlElement><!----></MyXmlElement>";
             string xmlContents = GetXmlContents(xmlText);
-            Assert.Equal("", xmlContents);
+            Assert.AreEqual("", xmlContents);
         }
 
         [Fact]
@@ -298,7 +298,7 @@ namespace Microsoft.Build.UnitTests
         {
             string xmlText = "<MyXmlElement>--></MyXmlElement>";
             string xmlContents = GetXmlContents(xmlText);
-            Assert.Equal("-->", xmlContents);
+            Assert.AreEqual("-->", xmlContents);
         }
 
         /// <summary>
@@ -316,7 +316,7 @@ namespace Microsoft.Build.UnitTests
 
             string result = InternalUtilities.CreateToolsVersionListString(toolsets);
 
-            Assert.Equal("\"66\", \"44\"", result);
+            Assert.AreEqual("\"66\", \"44\"", result);
         }
 
         protected string GetXmlContents(string xmlText)

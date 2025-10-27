@@ -23,11 +23,11 @@ namespace Microsoft.Build.UnitTests.Logging
         public void PropertyTests()
         {
             BuildEventArgTransportSink sink = new BuildEventArgTransportSink(PacketProcessor);
-            Assert.Null(sink.Name);
+            Assert.IsNull(sink.Name);
 
             const string name = "Test Name";
             sink.Name = name;
-            Assert.Equal(0, string.Compare(sink.Name, name, StringComparison.OrdinalIgnoreCase));
+            Assert.AreEqual(0, string.Compare(sink.Name, name, StringComparison.OrdinalIgnoreCase));
         }
 
         /// <summary>
@@ -67,14 +67,14 @@ namespace Microsoft.Build.UnitTests.Logging
             {
                 wentInHandler = true;
                 LogMessagePacket loggingPacket = packet as LogMessagePacket;
-                Assert.NotNull(loggingPacket);
+                Assert.IsNotNull(loggingPacket);
                 BuildMessageEventArgs messageEventFromPacket = loggingPacket.NodeBuildEvent.Value.Value as BuildMessageEventArgs;
-                Assert.Equal(messageEventFromPacket, messageEvent);
+                Assert.AreEqual(messageEventFromPacket, messageEvent);
             }
 
             BuildEventArgTransportSink transportSink = new BuildEventArgTransportSink(TransportDelegate);
             transportSink.Consume(messageEvent, 0);
-            Assert.True(wentInHandler); // "Expected to go into transport delegate"
+            Assert.IsTrue(wentInHandler); // "Expected to go into transport delegate"
         }
 
         /// <summary>
@@ -93,9 +93,9 @@ namespace Microsoft.Build.UnitTests.Logging
 
             BuildEventArgTransportSink transportSink = new BuildEventArgTransportSink(TransportDelegate);
             transportSink.Consume(buildStarted, 0);
-            Assert.True(transportSink.HaveLoggedBuildStartedEvent);
-            Assert.False(transportSink.HaveLoggedBuildFinishedEvent);
-            Assert.False(wentInHandler); // "Expected not to go into transport delegate"
+            Assert.IsTrue(transportSink.HaveLoggedBuildStartedEvent);
+            Assert.IsFalse(transportSink.HaveLoggedBuildFinishedEvent);
+            Assert.IsFalse(wentInHandler); // "Expected not to go into transport delegate"
         }
 
         /// <summary>
@@ -114,9 +114,9 @@ namespace Microsoft.Build.UnitTests.Logging
 
             BuildEventArgTransportSink transportSink = new BuildEventArgTransportSink(TransportDelegate);
             transportSink.Consume(buildFinished, 0);
-            Assert.False(transportSink.HaveLoggedBuildStartedEvent);
-            Assert.True(transportSink.HaveLoggedBuildFinishedEvent);
-            Assert.False(wentInHandler); // "Expected not to go into transport delegate"
+            Assert.IsFalse(transportSink.HaveLoggedBuildStartedEvent);
+            Assert.IsTrue(transportSink.HaveLoggedBuildFinishedEvent);
+            Assert.IsFalse(wentInHandler); // "Expected not to go into transport delegate"
         }
 
         /// <summary>
@@ -131,14 +131,14 @@ namespace Microsoft.Build.UnitTests.Logging
 
             transportSink.ShutDown();
 
-            Assert.NotNull(weakTransportDelegateReference.Target);
+            Assert.IsNotNull(weakTransportDelegateReference.Target);
             transportDelegate = null;
             GC.Collect();
             GC.WaitForPendingFinalizers();
 
             // Expected shutdown to null out the sendData delegate, the two garbage collections
             // should have collected the sendDataDelegate causing the weak reference to die.
-            Assert.Null(weakTransportDelegateReference.Target);  // " Expected delegate to be dead"
+            Assert.IsNull(weakTransportDelegateReference.Target);  // " Expected delegate to be dead"
         }
 
         /// <summary>

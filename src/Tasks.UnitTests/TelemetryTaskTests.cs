@@ -23,7 +23,7 @@ namespace Microsoft.Build.Tasks.UnitTests
 
             bool retVal = telemetryTask.Execute();
 
-            Assert.True(retVal);
+            Assert.IsTrue(retVal);
 
             Assert.Contains(telemetryTask.EventName, engine.Log);
         }
@@ -45,7 +45,7 @@ namespace Microsoft.Build.Tasks.UnitTests
 
             bool retVal = telemetryTask.Execute();
 
-            Assert.True(retVal);
+            Assert.IsTrue(retVal);
 
             Assert.Contains(propertyName, engine.Log);
 
@@ -66,7 +66,7 @@ namespace Microsoft.Build.Tasks.UnitTests
 
             bool retVal = telemetryTask.Execute();
 
-            Assert.False(retVal);
+            Assert.IsFalse(retVal);
             Assert.Contains($"The property \"Property2\" in the telemetry event data property list \"{telemetryTask.EventData}\" is malformed.", engine.Log);
         }
 
@@ -87,7 +87,7 @@ namespace Microsoft.Build.Tasks.UnitTests
 
             bool retVal = telemetryTask.Execute();
 
-            Assert.True(retVal);
+            Assert.IsTrue(retVal);
 
             // Should not contain the first value
             //

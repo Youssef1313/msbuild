@@ -23,9 +23,9 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         {
             var output = GetSampleTaskOutputInstance();
 
-            Assert.Equal("p", output.TaskParameter);
-            Assert.Equal("c", output.Condition);
-            Assert.Equal("p1", output.PropertyName);
+            Assert.AreEqual("p", output.TaskParameter);
+            Assert.AreEqual("c", output.Condition);
+            Assert.AreEqual("p1", output.PropertyName);
         }
 
         /// <summary>

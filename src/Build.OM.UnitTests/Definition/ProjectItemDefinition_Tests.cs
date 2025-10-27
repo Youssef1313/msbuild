@@ -66,7 +66,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
 
             metadatum.UnevaluatedValue = "$(p)";
 
-            Assert.Equal("v", Helpers.GetFirst(project.GetItems("i")).GetMetadataValue("m"));
+            Assert.AreEqual("v", Helpers.GetFirst(project.GetItems("i")).GetMetadataValue("m"));
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
 
             Assert.Empty(metadataList);
 
-            Assert.Null(itemDefinition.GetMetadata("m"));
+            Assert.IsNull(itemDefinition.GetMetadata("m"));
         }
 
         /// <summary>
@@ -105,8 +105,8 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             List<ProjectMetadata> metadataList = Helpers.MakeList(metadataCollection);
 
             Assert.Single(metadataList);
-            Assert.Equal("m", metadataList[0].Name);
-            Assert.Equal("m0", metadataList[0].EvaluatedValue);
+            Assert.AreEqual("m", metadataList[0].Name);
+            Assert.AreEqual("m0", metadataList[0].EvaluatedValue);
         }
 
         /// <summary>
@@ -215,7 +215,7 @@ ObjectModelHelpers.CleanupFileContents(
 
             MockLogger logger = new MockLogger();
             List<ILogger> loggers = new List<ILogger>() { logger };
-            Assert.True(project.Build(loggers));
+            Assert.IsTrue(project.Build(loggers));
 
             logger.AssertLogContains("a.foo;a.bar/m1");
             logger.AssertNoErrors();
@@ -245,7 +245,7 @@ ObjectModelHelpers.CleanupFileContents(
             Project project = projectFromString.Project;
 
             ProjectItem item = project.GetItems("i").ElementAt(0);
-            Assert.Equal("b", item.GetMetadataValue("m"));
+            Assert.AreEqual("b", item.GetMetadataValue("m"));
         }
 
         /// <summary>
@@ -272,7 +272,7 @@ ObjectModelHelpers.CleanupFileContents(
             Project project = projectFromString.Project;
 
             ProjectItem item = project.GetItems("i").ElementAt(0);
-            Assert.Equal("b.ext", item.GetMetadataValue("m"));
+            Assert.AreEqual("b.ext", item.GetMetadataValue("m"));
         }
 
         /// <summary>
@@ -299,7 +299,7 @@ ObjectModelHelpers.CleanupFileContents(
             Project project = projectFromString.Project;
 
             ProjectItem item = project.GetItems("i").ElementAt(0);
-            Assert.Equal("b.l1", item.GetMetadataValue("m"));
+            Assert.AreEqual("b.l1", item.GetMetadataValue("m"));
         }
 
         /// <summary>
@@ -330,7 +330,7 @@ ObjectModelHelpers.CleanupFileContents(
             Project project = projectFromString.Project;
 
             ProjectItem item = project.GetItems("i").ElementAt(0);
-            Assert.Equal("b.n1", item.GetMetadataValue("m"));
+            Assert.AreEqual("b.n1", item.GetMetadataValue("m"));
         }
 
         /// <summary>
@@ -359,8 +359,8 @@ ObjectModelHelpers.CleanupFileContents(
 
             ProjectItem item = project.GetItems("i").ElementAt(0);
 
-            Assert.Equal("%25(filename)", Project.GetMetadataValueEscaped(item, "m"));
-            Assert.Equal("%(filename)", item.GetMetadataValue("m"));
+            Assert.AreEqual("%25(filename)", Project.GetMetadataValueEscaped(item, "m"));
+            Assert.AreEqual("%(filename)", item.GetMetadataValue("m"));
         }
 
         /// <summary>
@@ -388,7 +388,7 @@ ObjectModelHelpers.CleanupFileContents(
             Project project = projectFromString.Project;
 
             ProjectItem item = project.GetItems("i").ElementAt(0);
-            Assert.Equal(".bar", item.GetMetadataValue("m"));
+            Assert.AreEqual(".bar", item.GetMetadataValue("m"));
         }
 
         /// <summary>
@@ -416,7 +416,7 @@ ObjectModelHelpers.CleanupFileContents(
             Project project = projectFromString.Project;
 
             ProjectItem item = project.GetItems("i").ElementAt(0);
-            Assert.Equal(".foo", item.EvaluatedInclude);
+            Assert.AreEqual(".foo", item.EvaluatedInclude);
         }
 
         /// <summary>
@@ -456,10 +456,10 @@ ObjectModelHelpers.CleanupFileContents(
             instance.Build(loggers);
 
             ProjectItemInstance item1 = instance.GetItems("i").ElementAt(0);
-            Assert.Equal("n1", item1.GetMetadataValue("n"));
+            Assert.AreEqual("n1", item1.GetMetadataValue("n"));
 
             ProjectItemInstance item2 = instance.GetItems("i").ElementAt(1);
-            Assert.Equal("", item2.GetMetadataValue("n"));
+            Assert.AreEqual("", item2.GetMetadataValue("n"));
         }
 
         /// <summary>

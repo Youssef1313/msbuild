@@ -285,7 +285,7 @@ namespace Microsoft.Build.UnitTests
             //  and to force the embedded files to be read.
             reader2.Read().ShouldBeNull($"Binlogs ({firstPath} and {secondPath}) are not equal - second has more events >{i + 1}");
 
-            Assert.Equal(embedFiles1, embedFiles2);
+            Assert.AreEqual(embedFiles1, embedFiles2);
 
             void AddArchiveFile(Dictionary<string, string> files, ArchiveFileEventArgs arg)
             {
@@ -468,8 +468,8 @@ namespace Microsoft.Build.UnitTests
             string emptyFile = testFolder.CreateFile(emptyFileName).Path;
 
             string errorMessage = string.Empty;
-            Assert.True(NativeMethodsShared.MakeSymbolicLink(symlinkPath, testFile.Path, ref errorMessage), errorMessage);
-            Assert.True(NativeMethodsShared.MakeSymbolicLink(symlinkLvl2Path, symlinkPath, ref errorMessage), errorMessage);
+            Assert.IsTrue(NativeMethodsShared.MakeSymbolicLink(symlinkPath, testFile.Path, ref errorMessage), errorMessage);
+            Assert.IsTrue(NativeMethodsShared.MakeSymbolicLink(symlinkLvl2Path, symlinkPath, ref errorMessage), errorMessage);
 
             using var buildManager = new BuildManager();
             var binaryLogger = new BinaryLogger()

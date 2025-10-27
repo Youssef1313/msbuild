@@ -39,9 +39,9 @@ namespace Microsoft.Build.UnitTests.Construction
         public void ConstructorTest1()
         {
             IElementLocation location = ElementLocation.Create("file", 65536, 0);
-            Assert.Equal("file", location.File);
-            Assert.Equal(65536, location.Line);
-            Assert.Equal(0, location.Column);
+            Assert.AreEqual("file", location.File);
+            Assert.AreEqual(65536, location.Line);
+            Assert.AreEqual(0, location.Column);
             Assert.Contains("RegularElementLocation", location.GetType().FullName);
         }
 
@@ -52,9 +52,9 @@ namespace Microsoft.Build.UnitTests.Construction
         public void ConstructorTest2()
         {
             IElementLocation location = ElementLocation.Create("file", 0, 65536);
-            Assert.Equal("file", location.File);
-            Assert.Equal(0, location.Line);
-            Assert.Equal(65536, location.Column);
+            Assert.AreEqual("file", location.File);
+            Assert.AreEqual(0, location.Line);
+            Assert.AreEqual(65536, location.Column);
             Assert.Contains("RegularElementLocation", location.GetType().FullName);
         }
 
@@ -65,9 +65,9 @@ namespace Microsoft.Build.UnitTests.Construction
         public void ConstructorTest3()
         {
             IElementLocation location = ElementLocation.Create("file", 65536, 65537);
-            Assert.Equal("file", location.File);
-            Assert.Equal(65536, location.Line);
-            Assert.Equal(65537, location.Column);
+            Assert.AreEqual("file", location.File);
+            Assert.AreEqual(65536, location.Line);
+            Assert.AreEqual(65537, location.Column);
             Assert.Contains("RegularElementLocation", location.GetType().FullName);
         }
 
@@ -84,11 +84,11 @@ namespace Microsoft.Build.UnitTests.Construction
             IElementLocation location5 = ElementLocation.Create("file", 0, 1);
             IElementLocation location6 = ElementLocation.Create("file", 65536, 65537);
 
-            Assert.True(location1.Equals(location6));
-            Assert.True(location2.Equals(location5));
-            Assert.False(location3.Equals(location1));
-            Assert.False(location4.Equals(location2));
-            Assert.False(location4.Equals(location6));
+            Assert.IsTrue(location1.Equals(location6));
+            Assert.IsTrue(location2.Equals(location5));
+            Assert.IsFalse(location3.Equals(location1));
+            Assert.IsFalse(location4.Equals(location2));
+            Assert.IsFalse(location4.Equals(location6));
         }
 
         /// <summary>
@@ -110,8 +110,8 @@ namespace Microsoft.Build.UnitTests.Construction
             }
             catch (InvalidProjectFileException ex)
             {
-                Assert.Equal(70012, ex.ColumnNumber);
-                Assert.Equal(2, ex.LineNumber);
+                Assert.AreEqual(70012, ex.ColumnNumber);
+                Assert.AreEqual(2, ex.LineNumber);
             }
             finally
             {
@@ -145,8 +145,8 @@ namespace Microsoft.Build.UnitTests.Construction
             }
             catch (InvalidProjectFileException ex)
             {
-                Assert.Equal(70002, ex.LineNumber);
-                Assert.Equal(2, ex.ColumnNumber);
+                Assert.AreEqual(70002, ex.LineNumber);
+                Assert.AreEqual(2, ex.ColumnNumber);
             }
             finally
             {
@@ -166,9 +166,9 @@ namespace Microsoft.Build.UnitTests.Construction
             IElementLocation deserializedLocation = null;
             TranslationHelpers.GetReadTranslator().Translate(ref deserializedLocation, ElementLocation.FactoryForDeserialization);
 
-            Assert.Equal(location.File, deserializedLocation.File);
-            Assert.Equal(location.Line, deserializedLocation.Line);
-            Assert.Equal(location.Column, deserializedLocation.Column);
+            Assert.AreEqual(location.File, deserializedLocation.File);
+            Assert.AreEqual(location.Line, deserializedLocation.Line);
+            Assert.AreEqual(location.Column, deserializedLocation.Column);
             Assert.Contains("RegularElementLocation", location.GetType().FullName);
         }
 
@@ -184,9 +184,9 @@ namespace Microsoft.Build.UnitTests.Construction
             IElementLocation deserializedLocation = null;
             TranslationHelpers.GetReadTranslator().Translate(ref deserializedLocation, ElementLocation.FactoryForDeserialization);
 
-            Assert.Equal(location.File, deserializedLocation.File);
-            Assert.Equal(location.Line, deserializedLocation.Line);
-            Assert.Equal(location.Column, deserializedLocation.Column);
+            Assert.AreEqual(location.File, deserializedLocation.File);
+            Assert.AreEqual(location.Line, deserializedLocation.Line);
+            Assert.AreEqual(location.Column, deserializedLocation.Column);
             Assert.Contains("SmallElementLocation", deserializedLocation.GetType().FullName);
         }
 
@@ -197,9 +197,9 @@ namespace Microsoft.Build.UnitTests.Construction
         public void ConstructorWithIndicesTest_SmallElementLocation()
         {
             IElementLocation location = ElementLocation.Create("file", 65535, 65534);
-            Assert.Equal("file", location.File);
-            Assert.Equal(65535, location.Line);
-            Assert.Equal(65534, location.Column);
+            Assert.AreEqual("file", location.File);
+            Assert.AreEqual(65535, location.Line);
+            Assert.AreEqual(65534, location.Column);
             Assert.Contains("SmallElementLocation", location.GetType().FullName);
         }
 
@@ -232,7 +232,7 @@ namespace Microsoft.Build.UnitTests.Construction
         public void ConstructorTestNullFile()
         {
             IElementLocation location = ElementLocation.Create(null);
-            Assert.Equal(location.File, String.Empty);
+            Assert.AreEqual(location.File, String.Empty);
         }
 
         /// <summary>
@@ -242,9 +242,9 @@ namespace Microsoft.Build.UnitTests.Construction
         public void ConstructorTest1_SmallElementLocation()
         {
             IElementLocation location = ElementLocation.Create("file", 65535, 0);
-            Assert.Equal("file", location.File);
-            Assert.Equal(65535, location.Line);
-            Assert.Equal(0, location.Column);
+            Assert.AreEqual("file", location.File);
+            Assert.AreEqual(65535, location.Line);
+            Assert.AreEqual(0, location.Column);
             Assert.Contains("SmallElementLocation", location.GetType().FullName);
         }
 
@@ -255,9 +255,9 @@ namespace Microsoft.Build.UnitTests.Construction
         public void ConstructorTest2_SmallElementLocation()
         {
             IElementLocation location = ElementLocation.Create("file", 0, 65535);
-            Assert.Equal("file", location.File);
-            Assert.Equal(0, location.Line);
-            Assert.Equal(65535, location.Column);
+            Assert.AreEqual("file", location.File);
+            Assert.AreEqual(0, location.Line);
+            Assert.AreEqual(65535, location.Column);
             Assert.Contains("SmallElementLocation", location.GetType().FullName);
         }
 
@@ -268,9 +268,9 @@ namespace Microsoft.Build.UnitTests.Construction
         public void ConstructorTest3_SmallElementLocation()
         {
             IElementLocation location = ElementLocation.Create("file", 65535, 65534);
-            Assert.Equal("file", location.File);
-            Assert.Equal(65535, location.Line);
-            Assert.Equal(65534, location.Column);
+            Assert.AreEqual("file", location.File);
+            Assert.AreEqual(65535, location.Line);
+            Assert.AreEqual(65534, location.Column);
             Assert.Contains("SmallElementLocation", location.GetType().FullName);
         }
 
@@ -286,9 +286,9 @@ namespace Microsoft.Build.UnitTests.Construction
             IElementLocation deserializedLocation = null;
             TranslationHelpers.GetReadTranslator().Translate(ref deserializedLocation, ElementLocation.FactoryForDeserialization);
 
-            Assert.Equal(location.File, deserializedLocation.File);
-            Assert.Equal(location.Line, deserializedLocation.Line);
-            Assert.Equal(location.Column, deserializedLocation.Column);
+            Assert.AreEqual(location.File, deserializedLocation.File);
+            Assert.AreEqual(location.Line, deserializedLocation.Line);
+            Assert.AreEqual(location.Column, deserializedLocation.Column);
             Assert.Contains("SmallElementLocation", location.GetType().FullName);
         }
 
@@ -351,7 +351,7 @@ namespace Microsoft.Build.UnitTests.Construction
             {
                 var doc = new XmlDocumentWithLocation(loadAsReadOnly: true);
                 doc.Load(_pathToCommonTargets);
-                Assert.True(doc.IsReadOnly);
+                Assert.IsTrue(doc.IsReadOnly);
                 doc.Save(FileUtilities.GetTemporaryFile());
             });
         }
@@ -366,7 +366,7 @@ namespace Microsoft.Build.UnitTests.Construction
         {
             var doc = new XmlDocumentWithLocation(loadAsReadOnly: true);
             doc.Load(_pathToCommonTargets);
-            Assert.True(doc.IsReadOnly);
+            Assert.IsTrue(doc.IsReadOnly);
             Assert.Throws<InvalidOperationException>(() =>
             {
                 doc.Save(new MemoryStream());
@@ -383,7 +383,7 @@ namespace Microsoft.Build.UnitTests.Construction
         {
             var doc = new XmlDocumentWithLocation(loadAsReadOnly: true);
             doc.Load(_pathToCommonTargets);
-            Assert.True(doc.IsReadOnly);
+            Assert.IsTrue(doc.IsReadOnly);
             Assert.Throws<InvalidOperationException>(() =>
             {
                 doc.Save(new StringWriter());
@@ -400,7 +400,7 @@ namespace Microsoft.Build.UnitTests.Construction
         {
             var doc = new XmlDocumentWithLocation(loadAsReadOnly: true);
             doc.Load(_pathToCommonTargets);
-            Assert.True(doc.IsReadOnly);
+            Assert.IsTrue(doc.IsReadOnly);
             using (XmlWriter wr = XmlWriter.Create(new FileStream(FileUtilities.GetTemporaryFileName(), FileMode.Create)))
             {
                 Assert.Throws<InvalidOperationException>(() =>
@@ -423,7 +423,7 @@ namespace Microsoft.Build.UnitTests.Construction
                 File.WriteAllText(file, content);
                 var doc = new XmlDocumentWithLocation(loadAsReadOnly: readOnly);
                 doc.Load(file);
-                Assert.Equal(readOnly, doc.IsReadOnly);
+                Assert.AreEqual(readOnly, doc.IsReadOnly);
                 var allNodes = doc.SelectNodes("//*|//@*");
 
                 string locations = String.Empty;

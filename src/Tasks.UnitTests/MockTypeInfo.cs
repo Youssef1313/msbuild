@@ -247,7 +247,7 @@ namespace Microsoft.Build.UnitTests
 
         void IFixedTypeInfo.GetRefTypeOfImplType(int index, out System.IntPtr href)
         {
-            Assert.True(index >= 0 && index < _typeAttributes.cImplTypes);
+            Assert.IsTrue(index >= 0 && index < _typeAttributes.cImplTypes);
 
             _faultInjector.FailurePointThrow(MockTypeLibrariesFailurePoints.ITypeInfo_GetRefTypeOfImplType);
 
@@ -315,7 +315,7 @@ namespace Microsoft.Build.UnitTests
 
         public void GetRefTypeOfImplType(int index, out int href)
         {
-            Assert.True(index >= 0 && index < _typeAttributes.cImplTypes);
+            Assert.IsTrue(index >= 0 && index < _typeAttributes.cImplTypes);
 
             _faultInjector.FailurePointThrow(MockTypeLibrariesFailurePoints.ITypeInfo_GetRefTypeOfImplType);
 
@@ -418,7 +418,7 @@ namespace Microsoft.Build.UnitTests
 
         public void GetDocumentation(int index, out string strName, out string strDocString, out int dwHelpContext, out string strHelpFile)
         {
-            Assert.Equal(-1, index);
+            Assert.AreEqual(-1, index);
 
             _faultInjector.FailurePointThrow(MockTypeLibrariesFailurePoints.ITypeInfo_GetDocumentation);
 

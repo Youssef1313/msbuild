@@ -43,14 +43,14 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             properties.Set(p1);
             properties.Set(p4);
 
-            Assert.Equal(2, properties.Count);
-            Assert.Equal("v1", properties["p1"].EvaluatedValue);
-            Assert.Equal("v3", properties["p2"].EvaluatedValue);
+            Assert.AreEqual(2, properties.Count);
+            Assert.AreEqual("v1", properties["p1"].EvaluatedValue);
+            Assert.AreEqual("v3", properties["p2"].EvaluatedValue);
 
-            Assert.True(properties.Remove("p1"));
-            Assert.Null(properties["p1"]);
+            Assert.IsTrue(properties.Remove("p1"));
+            Assert.IsNull(properties["p1"]);
 
-            Assert.False(properties.Remove("x"));
+            Assert.IsFalse(properties.Remove("x"));
 
             properties.Clear();
 
@@ -80,7 +80,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             PropertyDictionary<ProjectPropertyInstance> deserializedProperties = null;
             TranslationHelpers.GetReadTranslator().TranslateDictionary<PropertyDictionary<ProjectPropertyInstance>, ProjectPropertyInstance>(ref deserializedProperties, ProjectPropertyInstance.FactoryForDeserialization);
 
-            Assert.Equal(properties, deserializedProperties);
+            Assert.AreEqual(properties, deserializedProperties);
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             PropertyDictionary<ProjectPropertyInstance> deserializedProperties = null;
             TranslationHelpers.GetReadTranslator().TranslateDictionary<PropertyDictionary<ProjectPropertyInstance>, ProjectPropertyInstance>(ref deserializedProperties, ProjectPropertyInstance.FactoryForDeserialization);
 
-            Assert.Equal(properties, deserializedProperties);
+            Assert.AreEqual(properties, deserializedProperties);
         }
 
         /// <summary>
@@ -141,12 +141,12 @@ namespace Microsoft.Build.UnitTests.OM.Collections
 
             // Add and remove some items
             ProjectItemInstance item1 = GetItemInstance("i", "i1");
-            Assert.False(items.Remove(item1));
+            Assert.IsFalse(items.Remove(item1));
             Assert.Empty(items["j"]);
 
             items.Add(item1);
             Assert.Single(items["i"]);
-            Assert.Equal(item1, items["i"].First());
+            Assert.AreEqual(item1, items["i"].First());
 
             ProjectItemInstance item2 = GetItemInstance("i", "i2");
             items.Add(item2);
@@ -161,20 +161,20 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             }
 
             list.Sort(ProjectItemInstanceComparer);
-            Assert.Equal(item1, list[0]);
-            Assert.Equal(item2, list[1]);
-            Assert.Equal(item3, list[2]);
+            Assert.AreEqual(item1, list[0]);
+            Assert.AreEqual(item2, list[1]);
+            Assert.AreEqual(item3, list[2]);
 
             // Direct operations on the enumerator
             using (IEnumerator<ProjectItemInstance> enumerator = items.GetEnumerator())
             {
-                Assert.Null(enumerator.Current);
-                Assert.True(enumerator.MoveNext());
-                Assert.NotNull(enumerator.Current);
+                Assert.IsNull(enumerator.Current);
+                Assert.IsTrue(enumerator.MoveNext());
+                Assert.IsNotNull(enumerator.Current);
                 enumerator.Reset();
-                Assert.Null(enumerator.Current);
-                Assert.True(enumerator.MoveNext());
-                Assert.NotNull(enumerator.Current);
+                Assert.IsNull(enumerator.Current);
+                Assert.IsTrue(enumerator.MoveNext());
+                Assert.IsNotNull(enumerator.Current);
             }
         }
 
@@ -211,8 +211,8 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             dictionary.Add("p2", "v2");
 
             Assert.Single(readOnlyDictionary);
-            Assert.True(readOnlyDictionary.ContainsKey("P"));
-            Assert.False(readOnlyDictionary.ContainsKey("p2"));
+            Assert.IsTrue(readOnlyDictionary.ContainsKey("P"));
+            Assert.IsFalse(readOnlyDictionary.ContainsKey("p2"));
         }
 
         /// <summary>
@@ -227,8 +227,8 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             var readOnlyDictionary = new ObjectModel.ReadOnlyDictionary<string, string>(dictionary);
             dictionary.Add("p2", "v2");
 
-            Assert.Equal(2, dictionary.Count);
-            Assert.True(dictionary.ContainsKey("p2"));
+            Assert.AreEqual(2, dictionary.Count);
+            Assert.IsTrue(dictionary.ContainsKey("p2"));
         }
 
         /// <summary>
@@ -276,12 +276,12 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             convertedValues["three"] = 3;
 
             ReadOnlyConvertingDictionary<string, string, int> convertingCollection = new ReadOnlyConvertingDictionary<string, string, int>(values, delegate (string x) { return Convert.ToInt32(x); });
-            Assert.Equal(3, convertingCollection.Count);
-            Assert.True(convertingCollection.IsReadOnly);
+            Assert.AreEqual(3, convertingCollection.Count);
+            Assert.IsTrue(convertingCollection.IsReadOnly);
 
             foreach (KeyValuePair<string, int> value in convertingCollection)
             {
-                Assert.Equal(convertedValues[value.Key], value.Value);
+                Assert.AreEqual(convertedValues[value.Key], value.Value);
             }
         }
 

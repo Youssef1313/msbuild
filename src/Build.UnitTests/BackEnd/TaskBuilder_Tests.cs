@@ -468,7 +468,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             loggers.Add(logger);
             bool result = project.Build("t", loggers);
 
-            Assert.False(result);
+            Assert.IsFalse(result);
             logger.AssertLogContains("MSB3031");
         }
 
@@ -492,7 +492,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             loggers.Add(logger);
             bool result = project.Build("t", loggers);
 
-            Assert.False(result);
+            Assert.IsFalse(result);
             logger.AssertLogContains("MSB3031");
         }
 
@@ -523,7 +523,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             loggers.Add(logger);
             bool result = project.Build("t", loggers);
 
-            Assert.True(result);
+            Assert.IsTrue(result);
             logger.AssertLogContains("[.ext]");
         }
 
@@ -554,7 +554,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             loggers.Add(logger);
             bool result = project.Build("t", loggers);
 
-            Assert.True(result);
+            Assert.IsTrue(result);
             logger.AssertLogContains("[||illegal||]");
         }
 
@@ -1042,7 +1042,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             if (throwException)
             {
                 logger.AssertLogContains("EXCEPTION");
-                Assert.Equal(BuildResultCode.Failure, result.OverallResult);
+                Assert.AreEqual(BuildResultCode.Failure, result.OverallResult);
                 return;
             }
             else
@@ -1053,7 +1053,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             if (failTask)
             {
                 logger.AssertLogContains("FAIL");
-                Assert.Equal(BuildResultCode.Failure, result.OverallResult);
+                Assert.AreEqual(BuildResultCode.Failure, result.OverallResult);
             }
             else
             {
@@ -1062,7 +1062,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             if (!throwException && !failTask)
             {
-                Assert.Equal(BuildResultCode.Success, result.OverallResult);
+                Assert.AreEqual(BuildResultCode.Success, result.OverallResult);
             }
         }
 

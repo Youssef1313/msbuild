@@ -206,7 +206,7 @@ namespace Microsoft.Build.UnitTests.XamlDataDrivenToolTask_Tests
         /// <returns>true if the two are the same, false if they are different</returns>
         private void CheckCommandLine(string expected, string actual)
         {
-            Assert.Equal(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
@@ -267,7 +267,7 @@ namespace Microsoft.Build.UnitTests.XamlDataDrivenToolTask_Tests
                 MockLogger logger = new MockLogger();
 
                 bool success = p.Build(logger);
-                Assert.False(success);
+                Assert.IsFalse(success);
                 logger.AssertLogContains("FINDSTR");
 
                 // Should not be logging ToolTask.ToolCommandFailed, should be logging Xaml.CommandFailed
@@ -315,7 +315,7 @@ namespace Microsoft.Build.UnitTests.XamlDataDrivenToolTask_Tests
 
             bool success = p.Build(logger);
 
-            Assert.False(success); // "Build should have failed"
+            Assert.IsFalse(success); // "Build should have failed"
 
             // Should not be logging ToolTask.ToolCommandFailed, should be logging Xaml.CommandFailed
             logger.AssertLogDoesntContain("MSB6006");
@@ -364,7 +364,7 @@ namespace Microsoft.Build.UnitTests.XamlDataDrivenToolTask_Tests
 
             bool success = p.Build(logger);
 
-            Assert.True(success); // "Build should have succeeded"
+            Assert.IsTrue(success); // "Build should have succeeded"
 
             logger.AssertLogContains("echo  1) value            end");
             logger.AssertLogContains("echo  2) [value           end");

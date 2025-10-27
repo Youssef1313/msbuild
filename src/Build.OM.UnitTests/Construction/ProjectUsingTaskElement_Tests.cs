@@ -189,10 +189,10 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         {
             ProjectUsingTaskElement usingTask = GetUsingTaskAssemblyFile();
 
-            Assert.Equal("t1", usingTask.TaskName);
-            Assert.Equal("af", usingTask.AssemblyFile);
-            Assert.Equal(String.Empty, usingTask.AssemblyName);
-            Assert.Equal(String.Empty, usingTask.Condition);
+            Assert.AreEqual("t1", usingTask.TaskName);
+            Assert.AreEqual("af", usingTask.AssemblyFile);
+            Assert.AreEqual(String.Empty, usingTask.AssemblyName);
+            Assert.AreEqual(String.Empty, usingTask.Condition);
         }
 
         /// <summary>
@@ -203,10 +203,10 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         {
             ProjectUsingTaskElement usingTask = GetUsingTaskAssemblyName();
 
-            Assert.Equal("t2", usingTask.TaskName);
-            Assert.Equal(String.Empty, usingTask.AssemblyFile);
-            Assert.Equal("an", usingTask.AssemblyName);
-            Assert.Equal("c", usingTask.Condition);
+            Assert.AreEqual("t2", usingTask.TaskName);
+            Assert.AreEqual(String.Empty, usingTask.AssemblyFile);
+            Assert.AreEqual("an", usingTask.AssemblyName);
+            Assert.AreEqual("c", usingTask.Condition);
         }
 
         /// <summary>
@@ -217,11 +217,11 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         {
             ProjectUsingTaskElement usingTask = GetUsingTaskFactoryRuntimeAndPlatform();
 
-            Assert.Equal("t2", usingTask.TaskName);
-            Assert.Equal(String.Empty, usingTask.AssemblyFile);
-            Assert.Equal("an", usingTask.AssemblyName);
-            Assert.Equal("c", usingTask.Condition);
-            Assert.Equal("AssemblyFactory", usingTask.TaskFactory);
+            Assert.AreEqual("t2", usingTask.TaskName);
+            Assert.AreEqual(String.Empty, usingTask.AssemblyFile);
+            Assert.AreEqual("an", usingTask.AssemblyName);
+            Assert.AreEqual("c", usingTask.Condition);
+            Assert.AreEqual("AssemblyFactory", usingTask.TaskFactory);
         }
 
         /// <summary>
@@ -250,8 +250,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(usingTask.ContainingProject);
 
             usingTask.AssemblyFile = "afb";
-            Assert.Equal("afb", usingTask.AssemblyFile);
-            Assert.True(usingTask.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual("afb", usingTask.AssemblyFile);
+            Assert.IsTrue(usingTask.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -264,8 +264,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(usingTask.ContainingProject);
 
             usingTask.AssemblyName = "anb";
-            Assert.Equal("anb", usingTask.AssemblyName);
-            Assert.True(usingTask.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual("anb", usingTask.AssemblyName);
+            Assert.IsTrue(usingTask.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -305,8 +305,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(usingTask.ContainingProject);
 
             usingTask.TaskName = "tt";
-            Assert.Equal("tt", usingTask.TaskName);
-            Assert.True(usingTask.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual("tt", usingTask.TaskName);
+            Assert.IsTrue(usingTask.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -320,8 +320,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(usingTask.ContainingProject);
 
             usingTask.Condition = "c";
-            Assert.Equal("c", usingTask.Condition);
-            Assert.True(usingTask.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual("c", usingTask.Condition);
+            Assert.IsTrue(usingTask.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -335,8 +335,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(usingTask.ContainingProject);
 
             usingTask.TaskFactory = "AssemblyFactory";
-            Assert.Equal("AssemblyFactory", usingTask.TaskFactory);
-            Assert.True(usingTask.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual("AssemblyFactory", usingTask.TaskFactory);
+            Assert.IsTrue(usingTask.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -420,8 +420,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             using ProjectRootElementFromString projectRootElementFromString = new(content);
             ProjectRootElement project = projectRootElementFromString.Project;
             ProjectUsingTaskElement usingTask = (ProjectUsingTaskElement)Helpers.GetFirst(project.Children);
-            Assert.NotNull(usingTask);
-            Assert.Equal(2, usingTask.Count);
+            Assert.IsNotNull(usingTask);
+            Assert.AreEqual(2, usingTask.Count);
         }
 
         /// <summary>

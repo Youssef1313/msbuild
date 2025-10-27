@@ -37,10 +37,10 @@ namespace Microsoft.Build.UnitTests.BackEnd
         {
             MemoryStream stream = new MemoryStream();
             using ITranslator readTranslator = BinaryTranslator.GetReadTranslator(stream, InterningBinaryReader.PoolingBuffer);
-            Assert.Equal(TranslationDirection.ReadFromStream, readTranslator.Mode);
+            Assert.AreEqual(TranslationDirection.ReadFromStream, readTranslator.Mode);
 
             using ITranslator writeTranslator = BinaryTranslator.GetWriteTranslator(stream);
-            Assert.Equal(TranslationDirection.WriteToStream, writeTranslator.Mode);
+            Assert.AreEqual(TranslationDirection.WriteToStream, writeTranslator.Mode);
         }
 
         /// <summary>
@@ -177,7 +177,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             TranslationDirection deserializedValue = TranslationDirection.WriteToStream;
             TranslationHelpers.GetReadTranslator().TranslateEnum(ref deserializedValue, (int)deserializedValue);
 
-            Assert.Equal(value, deserializedValue);
+            Assert.AreEqual(value, deserializedValue);
         }
 
         [Fact]
@@ -189,7 +189,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Exception deserializedValue = null;
             TranslationHelpers.GetReadTranslator().TranslateException(ref deserializedValue);
 
-            Assert.True(TranslationHelpers.CompareExceptions(value, deserializedValue, out string diffReason), diffReason);
+            Assert.IsTrue(TranslationHelpers.CompareExceptions(value, deserializedValue, out string diffReason), diffReason);
         }
 
         [Fact]
@@ -211,7 +211,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Exception deserializedValue = null;
             TranslationHelpers.GetReadTranslator().TranslateException(ref deserializedValue);
 
-            Assert.True(TranslationHelpers.CompareExceptions(value, deserializedValue, out string diffReason), diffReason);
+            Assert.IsTrue(TranslationHelpers.CompareExceptions(value, deserializedValue, out string diffReason), diffReason);
         }
 
         [Fact]
@@ -234,13 +234,13 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 }
             }
 
-            Assert.NotNull(value);
+            Assert.IsNotNull(value);
             TranslationHelpers.GetWriteTranslator().TranslateException(ref value);
 
             Exception deserializedValue = null;
             TranslationHelpers.GetReadTranslator().TranslateException(ref deserializedValue);
 
-            Assert.True(TranslationHelpers.CompareExceptions(value, deserializedValue, out string diffReason), diffReason);
+            Assert.IsTrue(TranslationHelpers.CompareExceptions(value, deserializedValue, out string diffReason), diffReason);
         }
 
         public static IEnumerable<object[]> GetBuildExceptionsAsTestData()
@@ -273,13 +273,13 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 remote = exception;
             }
 
-            Assert.NotNull(remote);
+            Assert.IsNotNull(remote);
             TranslationHelpers.GetWriteTranslator().TranslateException(ref remote);
 
             Exception deserializedValue = null;
             TranslationHelpers.GetReadTranslator().TranslateException(ref deserializedValue);
 
-            Assert.True(TranslationHelpers.CompareExceptions(remote, deserializedValue, out string diffReason, true), $"Exception type {exceptionType.FullName} not properly de/serialized: {diffReason}");
+            Assert.IsTrue(TranslationHelpers.CompareExceptions(remote, deserializedValue, out string diffReason, true), $"Exception type {exceptionType.FullName} not properly de/serialized: {diffReason}");
         }
 
         [Fact]
@@ -300,7 +300,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Exception deserializedValue = null;
             TranslationHelpers.GetReadTranslator().TranslateException(ref deserializedValue);
 
-            Assert.True(TranslationHelpers.CompareExceptions(value, deserializedValue, out string diffReason, true), diffReason);
+            Assert.IsTrue(TranslationHelpers.CompareExceptions(value, deserializedValue, out string diffReason, true), diffReason);
         }
 
         /// <summary>
@@ -315,8 +315,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
             DerivedClass deserializedValue = null;
             TranslationHelpers.GetReadTranslator().Translate(ref deserializedValue);
 
-            Assert.Equal(value.BaseValue, deserializedValue.BaseValue);
-            Assert.Equal(value.DerivedValue, deserializedValue.DerivedValue);
+            Assert.AreEqual(value.BaseValue, deserializedValue.BaseValue);
+            Assert.AreEqual(value.DerivedValue, deserializedValue.DerivedValue);
         }
 
         /// <summary>
@@ -331,7 +331,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             DerivedClass deserializedValue = null;
             TranslationHelpers.GetReadTranslator().Translate(ref deserializedValue);
 
-            Assert.Equal(value, deserializedValue);
+            Assert.AreEqual(value, deserializedValue);
         }
 
         /// <summary>
@@ -346,7 +346,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             BaseClass deserializedValue = null;
             TranslationHelpers.GetReadTranslator().Translate(ref deserializedValue, BaseClass.FactoryForDeserialization);
 
-            Assert.Equal(value.BaseValue, deserializedValue.BaseValue);
+            Assert.AreEqual(value.BaseValue, deserializedValue.BaseValue);
         }
 
         /// <summary>
@@ -361,7 +361,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             BaseClass deserializedValue = null;
             TranslationHelpers.GetReadTranslator().Translate(ref deserializedValue, BaseClass.FactoryForDeserialization);
 
-            Assert.Equal(value, deserializedValue);
+            Assert.AreEqual(value, deserializedValue);
         }
 
         /// <summary>
@@ -376,7 +376,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             DerivedClass[] deserializedValue = null;
             TranslationHelpers.GetReadTranslator().TranslateArray(ref deserializedValue);
 
-            Assert.True(TranslationHelpers.CompareCollections(value, deserializedValue, DerivedClass.Comparer));
+            Assert.IsTrue(TranslationHelpers.CompareCollections(value, deserializedValue, DerivedClass.Comparer));
         }
 
         /// <summary>
@@ -391,7 +391,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             DerivedClass[] deserializedValue = null;
             TranslationHelpers.GetReadTranslator().TranslateArray(ref deserializedValue);
 
-            Assert.True(TranslationHelpers.CompareCollections(value, deserializedValue, DerivedClass.Comparer));
+            Assert.IsTrue(TranslationHelpers.CompareCollections(value, deserializedValue, DerivedClass.Comparer));
         }
 
         /// <summary>
@@ -406,7 +406,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             BaseClass[] deserializedValue = null;
             TranslationHelpers.GetReadTranslator().TranslateArray(ref deserializedValue, BaseClass.FactoryForDeserialization);
 
-            Assert.True(TranslationHelpers.CompareCollections(value, deserializedValue, BaseClass.Comparer));
+            Assert.IsTrue(TranslationHelpers.CompareCollections(value, deserializedValue, BaseClass.Comparer));
         }
 
         /// <summary>
@@ -421,7 +421,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             BaseClass[] deserializedValue = null;
             TranslationHelpers.GetReadTranslator().TranslateArray(ref deserializedValue, BaseClass.FactoryForDeserialization);
 
-            Assert.True(TranslationHelpers.CompareCollections(value, deserializedValue, BaseClass.Comparer));
+            Assert.IsTrue(TranslationHelpers.CompareCollections(value, deserializedValue, BaseClass.Comparer));
         }
 
         /// <summary>
@@ -457,8 +457,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
             });
 
             // All occurrences should deserialize to the first encountered value.
-            Assert.Equal(value, deserializedValue);
-            Assert.Equal(value, deserializedValueUpperCase);
+            Assert.AreEqual(value, deserializedValue);
+            Assert.AreEqual(value, deserializedValueUpperCase);
         }
 
         /// <summary>
@@ -480,7 +480,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             TranslationHelpers.GetReadTranslator().Intern(ref deserializedValue, nullable);
 
             // If we haven't blown up so far, assume we've skipped interning.
-            Assert.Equal(value, deserializedValue);
+            Assert.AreEqual(value, deserializedValue);
         }
 
         /// <summary>
@@ -513,8 +513,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
             });
 
             // All occurrences should deserialize to the first encountered value.
-            Assert.Equal(value, deserializedValue);
-            Assert.Equal(value, deserializedValueUpperCase);
+            Assert.AreEqual(value, deserializedValue);
+            Assert.AreEqual(value, deserializedValueUpperCase);
         }
 
         /// <summary>
@@ -546,9 +546,9 @@ namespace Microsoft.Build.UnitTests.BackEnd
             });
 
             // The path components should be reconstructed using the first encountered value.
-            Assert.Equal(directory, deserializedDirectory);
-            Assert.Equal(fileName, deserializedFileName);
-            Assert.Equal(Path.Combine(directory, fileName), deserializedFullPath);
+            Assert.AreEqual(directory, deserializedDirectory);
+            Assert.AreEqual(fileName, deserializedFileName);
+            Assert.AreEqual(Path.Combine(directory, fileName), deserializedFullPath);
         }
 
         /// <summary>
@@ -580,8 +580,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
             });
 
             // The path components should be reconstructed using the first encountered value.
-            Assert.Equal(fullPath, deserializedFullPath);
-            Assert.Equal(fullPath, Path.Combine(deserializedDirectory, deserializedFileName));
+            Assert.AreEqual(fullPath, deserializedFullPath);
+            Assert.AreEqual(fullPath, Path.Combine(deserializedDirectory, deserializedFileName));
         }
 
         /// <summary>
@@ -610,8 +610,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             // All occurrences should deserialize to the first encountered value.
             string[] expectedValue = ["foo", "foo"];
-            Assert.True(TranslationHelpers.CompareCollections(expectedValue, deserializedValue1, StringComparer.Ordinal));
-            Assert.True(TranslationHelpers.CompareCollections(expectedValue, deserializedValue2, StringComparer.Ordinal));
+            Assert.IsTrue(TranslationHelpers.CompareCollections(expectedValue, deserializedValue1, StringComparer.Ordinal));
+            Assert.IsTrue(TranslationHelpers.CompareCollections(expectedValue, deserializedValue2, StringComparer.Ordinal));
         }
 
         /// <summary>
@@ -634,8 +634,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
             translator.Intern(ref deserializedValue1);
             translator.Intern(ref deserializedValue2);
 
-            Assert.True(TranslationHelpers.CompareCollections(value1, deserializedValue1, StringComparer.Ordinal));
-            Assert.True(TranslationHelpers.CompareCollections(value2, deserializedValue2, StringComparer.Ordinal));
+            Assert.IsTrue(TranslationHelpers.CompareCollections(value1, deserializedValue1, StringComparer.Ordinal));
+            Assert.IsTrue(TranslationHelpers.CompareCollections(value2, deserializedValue2, StringComparer.Ordinal));
         }
 
         /// <summary>
@@ -693,15 +693,15 @@ namespace Microsoft.Build.UnitTests.BackEnd
             translator.Translate(ref deserializedValue5);
 
             // All non-interned values should maintain their original casing.
-            Assert.Equal(value1, deserializedValue1);
-            Assert.Equal(value2, deserializedValue2);
-            Assert.Equal(value3, deserializedValue3);
-            Assert.Equal(value4, deserializedValue4);
-            Assert.Equal(value5, deserializedValue5);
+            Assert.AreEqual(value1, deserializedValue1);
+            Assert.AreEqual(value2, deserializedValue2);
+            Assert.AreEqual(value3, deserializedValue3);
+            Assert.AreEqual(value4, deserializedValue4);
+            Assert.AreEqual(value5, deserializedValue5);
 
             // All interned values should deserialize to the first encountered value.
-            Assert.Equal(valueToIntern, deserializedInternedValue);
-            Assert.Equal(valueToIntern, deserializedInternedValueUpperCase);
+            Assert.AreEqual(valueToIntern, deserializedInternedValue);
+            Assert.AreEqual(valueToIntern, deserializedInternedValueUpperCase);
         }
 
         /// <summary>
@@ -725,7 +725,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             TranslationHelpers.GetReadTranslator().InternPath(ref deserializedValue, nullable);
 
             // If we haven't blown up so far, assume we've skipped interning.
-            Assert.Equal(value, deserializedValue);
+            Assert.AreEqual(value, deserializedValue);
         }
 
         /// <summary>
@@ -775,8 +775,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
             });
 
             // Only the first casing should be interned.
-            Assert.Equal(mixedCaseValue, deserializedMixedCaseValue);
-            Assert.Equal(mixedCaseValue, deserializedLowerCaseValue);
+            Assert.AreEqual(mixedCaseValue, deserializedMixedCaseValue);
+            Assert.AreEqual(mixedCaseValue, deserializedLowerCaseValue);
 
             // Simulate translator reuse by resetting the underlying stream.
             serializationStream.Position = 0;
@@ -797,8 +797,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
             });
 
             // Both casings should be interned if the comparer was correctly reset.
-            Assert.Equal(mixedCaseValue, deserializedMixedCaseValue);
-            Assert.Equal(lowerCaseValue, deserializedLowerCaseValue);
+            Assert.AreEqual(mixedCaseValue, deserializedMixedCaseValue);
+            Assert.AreEqual(lowerCaseValue, deserializedLowerCaseValue);
         }
 
         /// <summary>
@@ -850,10 +850,10 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Dictionary<string, string> deserializedValue = null;
             TranslationHelpers.GetReadTranslator().TranslateDictionary(ref deserializedValue, StringComparer.OrdinalIgnoreCase);
 
-            Assert.Equal(value.Count, deserializedValue.Count);
-            Assert.Equal(value["foo"], deserializedValue["foo"]);
-            Assert.Equal(value["alpha"], deserializedValue["alpha"]);
-            Assert.Equal(value["FOO"], deserializedValue["FOO"]);
+            Assert.AreEqual(value.Count, deserializedValue.Count);
+            Assert.AreEqual(value["foo"], deserializedValue["foo"]);
+            Assert.AreEqual(value["alpha"], deserializedValue["alpha"]);
+            Assert.AreEqual(value["FOO"], deserializedValue["FOO"]);
         }
 
         /// <summary>
@@ -869,7 +869,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Dictionary<string, string> deserializedValue = null;
             TranslationHelpers.GetReadTranslator().TranslateDictionary(ref deserializedValue, StringComparer.OrdinalIgnoreCase);
 
-            Assert.Equal(value, deserializedValue);
+            Assert.AreEqual(value, deserializedValue);
         }
 
         /// <summary>
@@ -888,10 +888,10 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Dictionary<string, BaseClass> deserializedValue = null;
             TranslationHelpers.GetReadTranslator().TranslateDictionary(ref deserializedValue, StringComparer.OrdinalIgnoreCase, BaseClass.FactoryForDeserialization);
 
-            Assert.Equal(value.Count, deserializedValue.Count);
-            Assert.Equal(0, BaseClass.Comparer.Compare(value["foo"], deserializedValue["foo"]));
-            Assert.Equal(0, BaseClass.Comparer.Compare(value["alpha"], deserializedValue["alpha"]));
-            Assert.Equal(0, BaseClass.Comparer.Compare(value["FOO"], deserializedValue["FOO"]));
+            Assert.AreEqual(value.Count, deserializedValue.Count);
+            Assert.AreEqual(0, BaseClass.Comparer.Compare(value["foo"], deserializedValue["foo"]));
+            Assert.AreEqual(0, BaseClass.Comparer.Compare(value["alpha"], deserializedValue["alpha"]));
+            Assert.AreEqual(0, BaseClass.Comparer.Compare(value["FOO"], deserializedValue["FOO"]));
         }
 
         /// <summary>
@@ -908,7 +908,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Dictionary<string, BaseClass> deserializedValue = null;
             TranslationHelpers.GetReadTranslator().TranslateDictionary(ref deserializedValue, StringComparer.OrdinalIgnoreCase, BaseClass.FactoryForDeserialization);
 
-            Assert.Equal(value, deserializedValue);
+            Assert.AreEqual(value, deserializedValue);
         }
 
         /// <summary>
@@ -927,10 +927,10 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Dictionary<string, BaseClass> deserializedValue = null;
             TranslationHelpers.GetReadTranslator().TranslateDictionary<Dictionary<string, BaseClass>, BaseClass>(ref deserializedValue, BaseClass.FactoryForDeserialization);
 
-            Assert.Equal(value.Count, deserializedValue.Count);
-            Assert.Equal(0, BaseClass.Comparer.Compare(value["foo"], deserializedValue["foo"]));
-            Assert.Equal(0, BaseClass.Comparer.Compare(value["alpha"], deserializedValue["alpha"]));
-            Assert.False(deserializedValue.ContainsKey("FOO"));
+            Assert.AreEqual(value.Count, deserializedValue.Count);
+            Assert.AreEqual(0, BaseClass.Comparer.Compare(value["foo"], deserializedValue["foo"]));
+            Assert.AreEqual(0, BaseClass.Comparer.Compare(value["alpha"], deserializedValue["alpha"]));
+            Assert.IsFalse(deserializedValue.ContainsKey("FOO"));
         }
 
         /// <summary>
@@ -947,7 +947,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             Dictionary<string, BaseClass> deserializedValue = null;
             TranslationHelpers.GetReadTranslator().TranslateDictionary<Dictionary<string, BaseClass>, BaseClass>(ref deserializedValue, BaseClass.FactoryForDeserialization);
 
-            Assert.Equal(value, deserializedValue);
+            Assert.AreEqual(value, deserializedValue);
         }
 
         /// <summary>
@@ -981,16 +981,16 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 translator.InternDictionary(ref deserializedValueUpperCase, StringComparer.OrdinalIgnoreCase);
             });
 
-            Assert.Equal(value.Count, deserializedValue.Count);
-            Assert.Equal(value["foo"], deserializedValue["foo"]);
-            Assert.Equal(value["alpha"], deserializedValue["alpha"]);
+            Assert.AreEqual(value.Count, deserializedValue.Count);
+            Assert.AreEqual(value["foo"], deserializedValue["foo"]);
+            Assert.AreEqual(value["alpha"], deserializedValue["alpha"]);
 
             // All occurrences should deserialize to the first encountered value.
             // We don't test the keys since the dictionary already uses an ignore case comparer, and
             // we also want to test that the dictionary comparer matches on both sides.
-            Assert.Equal(valueUpperCase.Count, deserializedValueUpperCase.Count);
-            Assert.Equal(value["foo"], deserializedValueUpperCase["foo"]);
-            Assert.Equal(value["alpha"], deserializedValueUpperCase["alpha"]);
+            Assert.AreEqual(valueUpperCase.Count, deserializedValueUpperCase.Count);
+            Assert.AreEqual(value["foo"], deserializedValueUpperCase["foo"]);
+            Assert.AreEqual(value["alpha"], deserializedValueUpperCase["alpha"]);
         }
 
         /// <summary>
@@ -1025,13 +1025,13 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 translator.InternDictionary(ref deserializedValueUpperCase, StringComparer.OrdinalIgnoreCase, BaseClass.FactoryForDeserialization);
             });
 
-            Assert.Equal(value.Count, deserializedValue.Count);
-            Assert.Equal(0, BaseClass.Comparer.Compare(value["foo"], deserializedValue["foo"]));
-            Assert.Equal(0, BaseClass.Comparer.Compare(value["alpha"], deserializedValue["alpha"]));
+            Assert.AreEqual(value.Count, deserializedValue.Count);
+            Assert.AreEqual(0, BaseClass.Comparer.Compare(value["foo"], deserializedValue["foo"]));
+            Assert.AreEqual(0, BaseClass.Comparer.Compare(value["alpha"], deserializedValue["alpha"]));
 
             // All occurrences should deserialize to the first encountered key.
-            Assert.Equal(0, BaseClass.Comparer.Compare(valueUpperCase["FOO"], deserializedValueUpperCase["foo"]));
-            Assert.Equal(0, BaseClass.Comparer.Compare(valueUpperCase["ALPHA"], deserializedValueUpperCase["alpha"]));
+            Assert.AreEqual(0, BaseClass.Comparer.Compare(valueUpperCase["FOO"], deserializedValueUpperCase["foo"]));
+            Assert.AreEqual(0, BaseClass.Comparer.Compare(valueUpperCase["ALPHA"], deserializedValueUpperCase["alpha"]));
         }
 
         /// <summary>
@@ -1065,16 +1065,16 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 translator.InternDictionary(ref deserializedValueUpperCase, StringComparer.OrdinalIgnoreCase);
             });
 
-            Assert.Equal(value.Count, deserializedValue.Count);
-            Assert.Equal(value["foo"], deserializedValue["foo"]);
-            Assert.Equal(value["alpha"], deserializedValue["alpha"]);
+            Assert.AreEqual(value.Count, deserializedValue.Count);
+            Assert.AreEqual(value["foo"], deserializedValue["foo"]);
+            Assert.AreEqual(value["alpha"], deserializedValue["alpha"]);
 
             // All occurrences should deserialize to the first encountered value.
             // We don't test the keys since the dictionary already uses an ignore case comparer, and
             // we also want to test that the dictionary comparer matches on both sides.
-            Assert.Equal(valueUpperCase.Count, deserializedValueUpperCase.Count);
-            Assert.Equal(value["foo"], deserializedValueUpperCase["foo"]);
-            Assert.Equal(value["alpha"], deserializedValueUpperCase["alpha"]);
+            Assert.AreEqual(valueUpperCase.Count, deserializedValueUpperCase.Count);
+            Assert.AreEqual(value["foo"], deserializedValueUpperCase["foo"]);
+            Assert.AreEqual(value["alpha"], deserializedValueUpperCase["alpha"]);
         }
 
         /// <summary>
@@ -1112,13 +1112,13 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 translator.InternDictionary(ref deserializedValueUpperCase, StringComparer.OrdinalIgnoreCase, BaseClass.FactoryForDeserialization);
             });
 
-            Assert.Equal(value.Count, deserializedValue.Count);
-            Assert.Equal(0, BaseClass.Comparer.Compare(value[PathA], deserializedValue[PathA]));
-            Assert.Equal(0, BaseClass.Comparer.Compare(value[PathB], deserializedValue[PathB]));
+            Assert.AreEqual(value.Count, deserializedValue.Count);
+            Assert.AreEqual(0, BaseClass.Comparer.Compare(value[PathA], deserializedValue[PathA]));
+            Assert.AreEqual(0, BaseClass.Comparer.Compare(value[PathB], deserializedValue[PathB]));
 
             // All occurrences should deserialize to the first encountered key.
-            Assert.Equal(0, BaseClass.Comparer.Compare(valueUpperCase[PathA.ToUpperInvariant()], deserializedValueUpperCase[PathA]));
-            Assert.Equal(0, BaseClass.Comparer.Compare(valueUpperCase[PathB.ToUpperInvariant()], deserializedValueUpperCase[PathB]));
+            Assert.AreEqual(0, BaseClass.Comparer.Compare(valueUpperCase[PathA.ToUpperInvariant()], deserializedValueUpperCase[PathA]));
+            Assert.AreEqual(0, BaseClass.Comparer.Compare(valueUpperCase[PathB.ToUpperInvariant()], deserializedValueUpperCase[PathB]));
         }
 
 
@@ -1289,7 +1289,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             bool deserializedValue = deserializedInitialValue;
             TranslationHelpers.GetReadTranslator().Translate(ref deserializedValue);
 
-            Assert.Equal(value, deserializedValue);
+            Assert.AreEqual(value, deserializedValue);
         }
 
         /// <summary>
@@ -1303,7 +1303,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             long deserializedValue = deserializedInitialValue;
             TranslationHelpers.GetReadTranslator().Translate(ref deserializedValue);
 
-            Assert.Equal(value, deserializedValue);
+            Assert.AreEqual(value, deserializedValue);
         }
 
         /// <summary>
@@ -1317,7 +1317,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             double deserializedValue = deserializedInitialValue;
             TranslationHelpers.GetReadTranslator().Translate(ref deserializedValue);
 
-            Assert.Equal(value, deserializedValue);
+            Assert.AreEqual(value, deserializedValue);
         }
 
         /// <summary>
@@ -1331,7 +1331,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             TimeSpan deserializedValue = deserializedInitialValue;
             TranslationHelpers.GetReadTranslator().Translate(ref deserializedValue);
 
-            Assert.Equal(value, deserializedValue);
+            Assert.AreEqual(value, deserializedValue);
         }
 
         /// <summary>
@@ -1345,7 +1345,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             byte deserializedValue = deserializedInitialValue;
             TranslationHelpers.GetReadTranslator().Translate(ref deserializedValue);
 
-            Assert.Equal(value, deserializedValue);
+            Assert.AreEqual(value, deserializedValue);
         }
 
         /// <summary>
@@ -1359,7 +1359,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             short deserializedValue = deserializedInitialValue;
             TranslationHelpers.GetReadTranslator().Translate(ref deserializedValue);
 
-            Assert.Equal(value, deserializedValue);
+            Assert.AreEqual(value, deserializedValue);
         }
 
         /// <summary>
@@ -1373,7 +1373,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             int deserializedValue = deserializedInitialValue;
             TranslationHelpers.GetReadTranslator().Translate(ref deserializedValue);
 
-            Assert.Equal(value, deserializedValue);
+            Assert.AreEqual(value, deserializedValue);
         }
 
         /// <summary>
@@ -1387,7 +1387,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             string deserializedValue = deserializedInitialValue;
             TranslationHelpers.GetReadTranslator().Translate(ref deserializedValue);
 
-            Assert.Equal(value, deserializedValue);
+            Assert.AreEqual(value, deserializedValue);
         }
 
         /// <summary>
@@ -1401,7 +1401,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             DateTime deserializedValue = deserializedInitialValue;
             TranslationHelpers.GetReadTranslator().Translate(ref deserializedValue);
 
-            Assert.Equal(value, deserializedValue);
+            Assert.AreEqual(value, deserializedValue);
         }
 
         /// <summary>
@@ -1415,7 +1415,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             string[] deserializedValue = null;
             TranslationHelpers.GetReadTranslator().Translate(ref deserializedValue);
 
-            Assert.True(TranslationHelpers.CompareCollections(value, deserializedValue, comparer));
+            Assert.IsTrue(TranslationHelpers.CompareCollections(value, deserializedValue, comparer));
         }
 
         /// <summary>
@@ -1429,7 +1429,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             List<string> deserializedValue = null;
             TranslationHelpers.GetReadTranslator().Translate(ref deserializedValue);
 
-            Assert.True(TranslationHelpers.CompareCollections(value, deserializedValue, comparer));
+            Assert.IsTrue(TranslationHelpers.CompareCollections(value, deserializedValue, comparer));
         }
 
         /// <summary>

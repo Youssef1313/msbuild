@@ -52,14 +52,14 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
                 this.Local.Importing = true;
                 {
                     var targetView = this.Local.GetLoadedProjects(this.TargetBigPath).FirstOrDefault();
-                    Assert.NotNull(targetView);
+                    Assert.IsNotNull(targetView);
                     var targetPair = new ProjectPair(targetView, this.TargetBig);
                     this.TargetXmlPair = new ProjectXmlPair(targetPair);
                 }
 
                 {
                     var guestView = this.Local.GetLoadedProjects(this.GuestBigPath).FirstOrDefault();
-                    Assert.NotNull(guestView);
+                    Assert.IsNotNull(guestView);
                     var guestPair = new ProjectPair(guestView, this.GuestBig);
                     this.GuestXmlPair = new ProjectXmlPair(guestPair);
                 }
@@ -80,7 +80,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             var newReal = this.StdGroup.Target.LoadInMemoryWithSettings(content, ProjectLoadSettings.IgnoreMissingImports);
             newReal.Xml.FullPath = tempPath;
             var newView = this.StdGroup.Local.GetLoadedProjects(tempPath).FirstOrDefault();
-            Assert.NotNull(newView);
+            Assert.IsNotNull(newView);
 
             ViewValidation.Verify(newView, newReal);
 
@@ -94,9 +94,9 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             var projectPair = GetNewInMemoryProject("Clone", TestCollectionGroup.BigProjectFile);
             var xmlPair = new ProjectXmlPair(projectPair);
 
-            Assert.True(xmlPair.View.HasUnsavedChanges);
+            Assert.IsTrue(xmlPair.View.HasUnsavedChanges);
             xmlPair.View.Save();
-            Assert.False(xmlPair.View.HasUnsavedChanges);
+            Assert.IsFalse(xmlPair.View.HasUnsavedChanges);
 
             sourceProject ??= xmlPair.View;
 
@@ -108,7 +108,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
 
             var cloned = (ProjectItemGroupElement)existingItemGroup.Clone();
             Assert.NotSame(cloned, existingItemGroup);
-            Assert.False(sourceProject.HasUnsavedChanges);
+            Assert.IsFalse(sourceProject.HasUnsavedChanges);
 
             var sourceIsALink = ViewValidation.IsLinkedObject(sourceProject);
             ViewValidation.VerifyNotNull(cloned, sourceIsALink);
@@ -124,8 +124,8 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
                 xmlPair.QueryChildrenWithValidation<ProjectItemGroupElement>((ig) => ig == cloned || ig == clonedPair.Real, 0);
 
                 xmlPair.View.AppendChild(cloned);
-                Assert.True(xmlPair.View.HasUnsavedChanges);
-                Assert.True(xmlPair.Real.HasUnsavedChanges);
+                Assert.IsTrue(xmlPair.View.HasUnsavedChanges);
+                Assert.IsTrue(xmlPair.Real.HasUnsavedChanges);
 
                 clonedPair.VerifySame(xmlPair.QuerySingleChildrenWithValidation<ProjectItemGroupElement>((ig) => ig == clonedPair.View || ig == clonedPair.Real));
                 xmlPair.QueryChildrenWithValidation<ProjectItemGroupElement>((ig) => ig.Label == "Group1", 2);
@@ -133,7 +133,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
                 clonedPair.VerifySetter("Group2", (g) => g.Label, (g, v) => g.Label = v);
                 xmlPair.Verify();
 
-                Assert.Equal("Group1", existingItemGroup.Label);
+                Assert.AreEqual("Group1", existingItemGroup.Label);
             }
         }
 
@@ -148,16 +148,16 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             var projectPair = GetNewInMemoryProject("CopyFrom", TestCollectionGroup.BigProjectFile);
             var xmlPair = new ProjectXmlPair(projectPair);
 
-            Assert.True(xmlPair.View.HasUnsavedChanges);
+            Assert.IsTrue(xmlPair.View.HasUnsavedChanges);
             xmlPair.View.Save();
-            Assert.False(xmlPair.View.HasUnsavedChanges);
+            Assert.IsFalse(xmlPair.View.HasUnsavedChanges);
 
             sourceProject ??= xmlPair.View;
 
             var existingItemGroupList = sourceProject.AllChildren.OfType<ProjectItemGroupElement>().Where((ig) => ig.Label == "Group1").ToList();
             Assert.Single(existingItemGroupList);
             var existingItemGroup = existingItemGroupList[0];
-            Assert.NotNull(existingItemGroup);
+            Assert.IsNotNull(existingItemGroup);
             var realExistingItemGroup = ViewValidation.GetRealObject(existingItemGroup);
 
             var ourGroup1 = xmlPair.QuerySingleChildrenWithValidation<ProjectItemGroupElement>((ig) => ig.Label == "Group1");
@@ -172,13 +172,13 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             // children are not copied.
             Assert.Empty(newCopyFrom.View.Items);
             // but attributes are (even non standard)
-            // Assert.Equal("2", ProjectElementLink.GetAttributeValue(existingItemGroup, "FunnyAttribute", true));
-            // Assert.Equal("2", ProjectElementLink.GetAttributeValue(newCopyFrom.View, "FunnyAttribute", true));
+            // Assert.AreEqual("2", ProjectElementLink.GetAttributeValue(existingItemGroup, "FunnyAttribute", true));
+            // Assert.AreEqual("2", ProjectElementLink.GetAttributeValue(newCopyFrom.View, "FunnyAttribute", true));
             newCopyFrom.VerifyNotSame(ourGroup1);
 
 
-            Assert.True(xmlPair.View.HasUnsavedChanges);
-            Assert.False(externalSource && sourceProject.HasUnsavedChanges);
+            Assert.IsTrue(xmlPair.View.HasUnsavedChanges);
+            Assert.IsFalse(externalSource && sourceProject.HasUnsavedChanges);
 
             var newDeepCopy = xmlPair.AddNewLabeledChaildWithVerify<ProjectItemGroupElement>(ObjectType.View, "newGrop", (p, l) => p.AddItemGroup());
             newDeepCopy.View.DeepCopyFrom(existingItemGroup);
@@ -197,7 +197,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             ourGroup1.VerifySame(xmlPair.QuerySingleChildrenWithValidation<ProjectItemGroupElement>((ig) => ig.Label == "Group1"));
             newDeepCopy.VerifyNotSame(ourGroup1);
 
-            Assert.False(externalSource && sourceProject.HasUnsavedChanges);
+            Assert.IsFalse(externalSource && sourceProject.HasUnsavedChanges);
         }
 
         [Fact]

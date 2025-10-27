@@ -41,7 +41,7 @@ namespace Microsoft.Build.UnitTests
                     binaryStream: StreamHelpers.StringToStream("namespace MyStuff.Namespace { class Class {} }"),
                     log: null);
 
-            Assert.Equal("MyStuff.Namespace.Class", result);
+            Assert.AreEqual("MyStuff.Namespace.Class", result);
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Microsoft.Build.UnitTests
 #endif
             string className = r.ReadToEnd();
 
-            Assert.Equal(className, result);
+            Assert.AreEqual(className, result);
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace Microsoft.Build.UnitTests
                     binaryStream: sourcesStream,
                     log: null);
 
-            Assert.Equal("d\u00C4a.Class", result);
+            Assert.AreEqual("d\u00C4a.Class", result);
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace Microsoft.Build.UnitTests
                     binaryStream: StreamHelpers.StringToStream("namespace Namespace { class Class {} }"),
                     log: null);
 
-            Assert.Equal("Namespace.Class", result);
+            Assert.AreEqual("Namespace.Class", result);
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace Microsoft.Build.UnitTests
                     binaryStream: StreamHelpers.StringToStream("namespace MyStuff.Namespace { class Class {} }"),
                     log: null);
 
-            Assert.Equal("MyStuff.Namespace.Class", result);
+            Assert.AreEqual("MyStuff.Namespace.Class", result);
         }
 
         /// <summary>
@@ -183,7 +183,7 @@ namespace Microsoft.Build.UnitTests
                     binaryStream: StreamHelpers.StringToStream("namespace MyStuff.Namespace { class Class {} }"),
                     log: null);
 
-            Assert.Equal("MyStuff.Namespace.Class.en-GB", result);
+            Assert.AreEqual("MyStuff.Namespace.Class.en-GB", result);
         }
 
         /// <summary>
@@ -204,7 +204,7 @@ namespace Microsoft.Build.UnitTests
                     binaryStream: StreamHelpers.StringToStream("namespace MyStuff.Namespace { class Class {} }"),
                     log: null);
 
-            Assert.Equal("MyStuff.Namespace.Class.en-GB", result);
+            Assert.AreEqual("MyStuff.Namespace.Class.en-GB", result);
         }
 
         /// <summary>
@@ -224,7 +224,7 @@ namespace Microsoft.Build.UnitTests
                     binaryStream: StreamHelpers.StringToStream("namespace MyStuff.Namespace { class Class {} }"),
                     log: null);
 
-            Assert.Equal("MyStuff.Namespace.Class.fr-fr", result);
+            Assert.AreEqual("MyStuff.Namespace.Class.fr-fr", result);
         }
 
         /// <summary>
@@ -245,7 +245,7 @@ namespace Microsoft.Build.UnitTests
                     binaryStream: null,
                     log: null);
 
-            Assert.Equal("RootNamespace.SubFolder.MyForm.en-GB", result);
+            Assert.AreEqual("RootNamespace.SubFolder.MyForm.en-GB", result);
         }
 
         /// <summary>
@@ -286,7 +286,7 @@ namespace Microsoft.Build.UnitTests
                     binaryStream: null,
                     log: null);
 
-            Assert.Equal("RootNamespace.XmlEditor.rgs", result);
+            Assert.AreEqual("RootNamespace.XmlEditor.rgs", result);
         }
 
         /// <summary>
@@ -306,7 +306,7 @@ namespace Microsoft.Build.UnitTests
                     binaryStream: null,
                     log: null);
 
-            Assert.Equal("RootNamespace.SubFolder.SplashScreen.bmp", result);
+            Assert.AreEqual("RootNamespace.SubFolder.SplashScreen.bmp", result);
         }
 
         /// <summary>
@@ -326,7 +326,7 @@ namespace Microsoft.Build.UnitTests
                     binaryStream: null,
                     log: null);
 
-            Assert.Equal(FileUtilities.FixFilePath(@"fr\RootNamespace.SubFolder.SplashScreen.bmp"), result);
+            Assert.AreEqual(FileUtilities.FixFilePath(@"fr\RootNamespace.SubFolder.SplashScreen.bmp"), result);
         }
 
         /// <summary>
@@ -346,7 +346,7 @@ namespace Microsoft.Build.UnitTests
                     binaryStream: null,
                     log: null);
 
-            Assert.Equal(@"RootNamespace.SubFolder.SplashScreen.bmp", result);
+            Assert.AreEqual(@"RootNamespace.SubFolder.SplashScreen.bmp", result);
         }
 
         /// <summary>
@@ -367,12 +367,12 @@ namespace Microsoft.Build.UnitTests
             bool success = t.Execute(
                 new Microsoft.Build.Tasks.CreateFileStream(CreateFileStream));
 
-            Assert.True(success); // "Expected the task to succeed."
+            Assert.IsTrue(success); // "Expected the task to succeed."
 
             ITaskItem[] resourceNames = t.ManifestResourceNames;
 
             Assert.Single(resourceNames);
-            Assert.Equal(@"CustomToolTest.SR1", resourceNames[0].ItemSpec);
+            Assert.AreEqual(@"CustomToolTest.SR1", resourceNames[0].ItemSpec);
         }
 
         /// <summary>
@@ -622,7 +622,7 @@ namespace Microsoft.Build.UnitTests
             string result = CreateCSharpManifestResourceName.CreateManifestNameImpl(resourcePath, null, true, "Root", null, null, null, null);
             string expected = "Root." + expectedName;
 
-            Assert.Equal(result, expected);
+            Assert.AreEqual(result, expected);
         }
 
         /// <summary>
@@ -696,7 +696,7 @@ namespace Microsoft.Build.UnitTests
                     binaryStream: StreamHelpers.StringToStream("namespace ClassLibrary1 { class MyForm {} }"),
                     log: null);
 
-            Assert.Equal("ClassLibrary1.MyForm", result);
+            Assert.AreEqual("ClassLibrary1.MyForm", result);
         }
 
         /// <summary>
@@ -723,7 +723,7 @@ namespace Microsoft.Build.UnitTests
                     binaryStream: StreamHelpers.StringToStream(""),
                     log: null);
 
-            Assert.Equal("RootNamespace.MyForm.en-GB", result);
+            Assert.AreEqual("RootNamespace.MyForm.en-GB", result);
         }
 
         /// <summary>
@@ -800,13 +800,13 @@ namespace ClassLibrary3
             t.RootNamespace = "ResourceRoot";
             bool success = t.Execute();
 
-            Assert.True(success); // "Expected the task to succeed."
+            Assert.IsTrue(success); // "Expected the task to succeed."
 
             ITaskItem[] resourceFiles = t.ResourceFilesWithManifestResourceNames;
 
             Assert.Single(resourceFiles);
-            Assert.Equal(@"strings.resx", resourceFiles[0].ItemSpec);
-            Assert.Equal(@"ResourceRoot.strings", resourceFiles[0].GetMetadata("ManifestResourceName"));
+            Assert.AreEqual(@"strings.resx", resourceFiles[0].ItemSpec);
+            Assert.AreEqual(@"ResourceRoot.strings", resourceFiles[0].GetMetadata("ManifestResourceName"));
         }
 
         /// <summary>
@@ -826,13 +826,13 @@ namespace ClassLibrary3
             t.RootNamespace = "ResourceRoot";
             bool success = t.Execute();
 
-            Assert.True(success); // "Expected the task to succeed."
+            Assert.IsTrue(success); // "Expected the task to succeed."
 
             ITaskItem[] resourceFiles = t.ResourceFilesWithManifestResourceNames;
 
             Assert.Single(resourceFiles);
-            Assert.Equal(@"pic.bmp", resourceFiles[0].ItemSpec);
-            Assert.Equal(@"ResourceRoot.pic.bmp", resourceFiles[0].GetMetadata("LogicalName"));
+            Assert.AreEqual(@"pic.bmp", resourceFiles[0].ItemSpec);
+            Assert.AreEqual(@"ResourceRoot.pic.bmp", resourceFiles[0].GetMetadata("LogicalName"));
         }
 
         /// <summary>
@@ -852,13 +852,13 @@ namespace ClassLibrary3
             t.RootNamespace = "ResourceRoot";
             bool success = t.Execute();
 
-            Assert.True(success); // "Expected the task to succeed."
+            Assert.IsTrue(success); // "Expected the task to succeed."
 
             ITaskItem[] resourceFiles = t.ResourceFilesWithManifestResourceNames;
 
             Assert.Single(resourceFiles);
-            Assert.Equal(@"pic.bmp", resourceFiles[0].ItemSpec);
-            Assert.Equal(@"foo", resourceFiles[0].GetMetadata("LogicalName"));
+            Assert.AreEqual(@"pic.bmp", resourceFiles[0].ItemSpec);
+            Assert.AreEqual(@"foo", resourceFiles[0].GetMetadata("LogicalName"));
         }
 
         /// <summary>
@@ -877,13 +877,13 @@ namespace ClassLibrary3
             t.RootNamespace = "ResourceRoot";
             bool success = t.Execute();
 
-            Assert.True(success); // "Expected the task to succeed."
+            Assert.IsTrue(success); // "Expected the task to succeed."
 
             ITaskItem[] resourceFiles = t.ResourceFilesWithManifestResourceNames;
 
             Assert.Single(resourceFiles);
-            Assert.Equal(@"strings.resx", resourceFiles[0].ItemSpec);
-            Assert.Equal(String.Empty, resourceFiles[0].GetMetadata("LogicalName"));
+            Assert.AreEqual(@"strings.resx", resourceFiles[0].ItemSpec);
+            Assert.AreEqual(String.Empty, resourceFiles[0].GetMetadata("LogicalName"));
         }
 
         /// <summary>
@@ -903,7 +903,7 @@ namespace ClassLibrary3
                     binaryStream: null,
                     log: null);
 
-            Assert.Equal(@"RootNamespace.SubFolder.MyResource.fr.resources", result);
+            Assert.AreEqual(@"RootNamespace.SubFolder.MyResource.fr.resources", result);
         }
 
         /// <summary>
@@ -923,7 +923,7 @@ namespace ClassLibrary3
                     binaryStream: null,
                     log: null);
 
-            Assert.Equal(@"RootNamespace.MyResource.fr.resources", result);
+            Assert.AreEqual(@"RootNamespace.MyResource.fr.resources", result);
         }
 
         /// <summary>
@@ -943,7 +943,7 @@ namespace ClassLibrary3
                     binaryStream: null,
                     log: null);
 
-            Assert.Equal(@"RootNamespace.MyResource.resources", result);
+            Assert.AreEqual(@"RootNamespace.MyResource.resources", result);
         }
     }
 }

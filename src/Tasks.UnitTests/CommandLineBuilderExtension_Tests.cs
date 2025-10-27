@@ -43,7 +43,7 @@ namespace Microsoft.Build.UnitTests
                         new ITaskItem[] { i },
                         new string[] { "Name", "Private" },
                         new bool[] { false, true });
-                    Assert.Equal(@"/myswitch:MyResource.bmp,Kenny,Private", c.ToString());
+                    Assert.AreEqual(@"/myswitch:MyResource.bmp,Kenny,Private", c.ToString());
                 }
                 catch (ArgumentException e)
                 {
@@ -88,7 +88,7 @@ namespace Microsoft.Build.UnitTests
                 new string[] { "Name", "HintPath", "Access" },
                 null);
 
-            Assert.Equal(
+            Assert.AreEqual(
                @"/myswitch:MySoundEffect.wav,Kenny "
                + @"/myswitch:MySplashScreen.bmp,Cartman,c:\foo,Public",
                c.ToString());

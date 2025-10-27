@@ -4285,7 +4285,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
                         break;
                     }
                 }
-                Assert.True(hasErrorCode);
+                Assert.IsTrue(hasErrorCode);
             }
             finally
             {

@@ -74,7 +74,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
 
             bool succeeded = Execute(t);
 
-            Assert.True(succeeded);
+            Assert.IsTrue(succeeded);
             Assert.Single(t.ResolvedFiles);
             t.ResolvedFiles[0].GetMetadata("FusionName").ShouldBe("UnifyMe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, ProcessorArchitecture=MSIL", StringCompareShould.IgnoreCase);
 
@@ -126,7 +126,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
 
             bool succeeded = Execute(t);
 
-            Assert.True(succeeded);
+            Assert.IsTrue(succeeded);
             Assert.Single(t.ResolvedFiles);
             t.ResolvedFiles[0].GetMetadata("FusionName").ShouldBe("UnifyMe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, ProcessorArchitecture=MSIL", StringCompareShould.IgnoreCase);
 
@@ -179,7 +179,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
 
             bool succeeded = Execute(t);
 
-            Assert.True(succeeded);
+            Assert.IsTrue(succeeded);
             Assert.Single(t.ResolvedFiles);
             t.ResolvedFiles[0].GetMetadata("FusionName").ShouldBe("UnifyMe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, ProcessorArchitecture=MSIL", StringCompareShould.IgnoreCase);
 
@@ -231,7 +231,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
 
             bool succeeded = Execute(t);
 
-            Assert.True(succeeded);
+            Assert.IsTrue(succeeded);
             Assert.Single(t.ResolvedFiles);
             t.ResolvedFiles[0].GetMetadata("FusionName").ShouldBe("UnifyMe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, ProcessorArchitecture=MSIL", StringCompareShould.IgnoreCase);
 
@@ -283,7 +283,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
 
             bool succeeded = Execute(t);
 
-            Assert.True(succeeded);
+            Assert.IsTrue(succeeded);
             Assert.Single(t.ResolvedFiles);
             t.ResolvedFiles[0].GetMetadata("FusionName").ShouldBe("UnifyMe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, ProcessorArchitecture=MSIL", StringCompareShould.IgnoreCase);
 

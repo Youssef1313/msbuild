@@ -45,14 +45,14 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             ResolveAssemblyReference clientRar = new();
             response.SetTaskOutputs(clientRar);
 
-            Assert.True(response.Success);
-            Assert.Equal(nodeRar.ResolvedFiles.Length, clientRar.ResolvedFiles.Length);
+            Assert.IsTrue(response.Success);
+            Assert.AreEqual(nodeRar.ResolvedFiles.Length, clientRar.ResolvedFiles.Length);
             for (int i = 0; i < nodeRar.ResolvedFiles.Length; i++)
             {
-                Assert.Equal(nodeRar.ResolvedFiles[i].ItemSpec, clientRar.ResolvedFiles[i].ItemSpec);
+                Assert.AreEqual(nodeRar.ResolvedFiles[i].ItemSpec, clientRar.ResolvedFiles[i].ItemSpec);
             }
 
-            Assert.Equal(nodeRar.DependsOnNETStandard, clientRar.DependsOnNETStandard);
+            Assert.AreEqual(nodeRar.DependsOnNETStandard, clientRar.DependsOnNETStandard);
         }
 
         [Fact]
@@ -115,28 +115,28 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             ResolveAssemblyReference clientRar = new();
             response.SetTaskOutputs(clientRar);
 
-            Assert.Equal(nodeRar.CopyLocalFiles.Length, clientRar.CopyLocalFiles.Length);
+            Assert.AreEqual(nodeRar.CopyLocalFiles.Length, clientRar.CopyLocalFiles.Length);
             for (int i = 0; i < nodeRar.ResolvedFiles.Length; i++)
             {
-                Assert.Equal(nodeRar.CopyLocalFiles[i].ItemSpec, clientRar.CopyLocalFiles[i].ItemSpec);
+                Assert.AreEqual(nodeRar.CopyLocalFiles[i].ItemSpec, clientRar.CopyLocalFiles[i].ItemSpec);
             }
 
-            Assert.Equal(nodeRar.ResolvedFiles.Length, clientRar.ResolvedFiles.Length);
+            Assert.AreEqual(nodeRar.ResolvedFiles.Length, clientRar.ResolvedFiles.Length);
             for (int i = 0; i < nodeRar.ResolvedFiles.Length; i++)
             {
-                Assert.Equal(nodeRar.ResolvedFiles[i].ItemSpec, clientRar.ResolvedFiles[i].ItemSpec);
+                Assert.AreEqual(nodeRar.ResolvedFiles[i].ItemSpec, clientRar.ResolvedFiles[i].ItemSpec);
             }
 
-            Assert.Equal(nodeRar.ResolvedDependencyFiles.Length, clientRar.ResolvedDependencyFiles.Length);
+            Assert.AreEqual(nodeRar.ResolvedDependencyFiles.Length, clientRar.ResolvedDependencyFiles.Length);
             for (int i = 0; i < nodeRar.ResolvedDependencyFiles.Length; i++)
             {
-                Assert.Equal(nodeRar.ResolvedDependencyFiles[i].ItemSpec, clientRar.ResolvedDependencyFiles[i].ItemSpec);
+                Assert.AreEqual(nodeRar.ResolvedDependencyFiles[i].ItemSpec, clientRar.ResolvedDependencyFiles[i].ItemSpec);
             }
 
-            Assert.Equal(nodeRar.RelatedFiles.Length, clientRar.RelatedFiles.Length);
+            Assert.AreEqual(nodeRar.RelatedFiles.Length, clientRar.RelatedFiles.Length);
             for (int i = 0; i < nodeRar.RelatedFiles.Length; i++)
             {
-                Assert.Equal(nodeRar.RelatedFiles[i].ItemSpec, clientRar.RelatedFiles[i].ItemSpec);
+                Assert.AreEqual(nodeRar.RelatedFiles[i].ItemSpec, clientRar.RelatedFiles[i].ItemSpec);
             }
         }
     }

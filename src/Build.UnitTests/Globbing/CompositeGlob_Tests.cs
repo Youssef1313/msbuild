@@ -96,11 +96,11 @@ namespace Microsoft.Build.Engine.UnitTests.Globbing
         {
             if (shouldMatch)
             {
-                Assert.True(compositeGlob.IsMatch(stringToMatch));
+                Assert.IsTrue(compositeGlob.IsMatch(stringToMatch));
             }
             else
             {
-                Assert.False(compositeGlob.IsMatch(stringToMatch));
+                Assert.IsFalse(compositeGlob.IsMatch(stringToMatch));
             }
         }
 
@@ -130,7 +130,7 @@ namespace Microsoft.Build.Engine.UnitTests.Globbing
 
             var leafGlobs = composite.GetParsedGlobs().ToArray();
 
-            Assert.Equal(4, leafGlobs.Length);
+            Assert.AreEqual(4, leafGlobs.Length);
 
             foreach (var expectedGlob in expectedCollectedGlobs)
             {
@@ -143,7 +143,7 @@ namespace Microsoft.Build.Engine.UnitTests.Globbing
         {
             IMSBuildGlob composite = CompositeGlob.Create(Enumerable.Empty<IMSBuildGlob>());
 
-            Assert.False(composite.IsMatch(""));
+            Assert.IsFalse(composite.IsMatch(""));
         }
 
         [Fact]
@@ -153,7 +153,7 @@ namespace Microsoft.Build.Engine.UnitTests.Globbing
 
             IMSBuildGlob composite = CompositeGlob.Create(new[] { glob });
 
-            Assert.Same(glob, composite);
+            Assert.AreSame(glob, composite);
         }
 
         [Fact]
@@ -165,9 +165,9 @@ namespace Microsoft.Build.Engine.UnitTests.Globbing
             IMSBuildGlob result = CompositeGlob.Create(new[] { glob1, glob2 });
 
             var composite = Assert.IsType<CompositeGlob>(result);
-            Assert.Same(glob1, composite.Globs.First());
-            Assert.Same(glob2, composite.Globs.Skip(1).First());
-            Assert.Equal(2, composite.Globs.Count());
+            Assert.AreSame(glob1, composite.Globs.First());
+            Assert.AreSame(glob2, composite.Globs.Skip(1).First());
+            Assert.AreEqual(2, composite.Globs.Count());
         }
     }
 }

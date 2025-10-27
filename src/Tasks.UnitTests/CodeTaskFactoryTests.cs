@@ -1205,14 +1205,14 @@ namespace Microsoft.Build.UnitTests
             try
             {
                 // Ensure we're getting the right temp path (%TMP% == GetTempPath())
-                Assert.Equal(
+                Assert.AreEqual(
                     FileUtilities.EnsureTrailingSlash(Path.GetTempPath()),
                     FileUtilities.EnsureTrailingSlash(Path.GetFullPath(oldTempPath)));
-                Assert.False(Directory.Exists(newTempPath));
+                Assert.IsFalse(Directory.Exists(newTempPath));
 
                 Environment.SetEnvironmentVariable("TMP", newTempPath);
 
-                Assert.Equal(
+                Assert.AreEqual(
                     FileUtilities.EnsureTrailingSlash(newTempPath),
                     FileUtilities.EnsureTrailingSlash(Path.GetTempPath()));
 
@@ -1464,7 +1464,7 @@ namespace Microsoft.Build.UnitTests
 
             Helpers.BuildProjectWithNewOMAndBinaryLogger(projectFileContent, binaryLogger, out bool result, out string projectDirectory);
 
-            Assert.True(result);
+            Assert.IsTrue(result);
 
             string projectImportsZipPath = Path.ChangeExtension(binlog.Path, ".ProjectImports.zip");
             using var fileStream = new FileStream(projectImportsZipPath, FileMode.Open);
@@ -1625,8 +1625,8 @@ namespace Microsoft.Build.UnitTests
 
             BuildErrorEventArgs error = mockLogger.Errors.FirstOrDefault();
 
-            Assert.NotNull(error);
-            Assert.Equal("MSB4801", error.Code);
+            Assert.IsNotNull(error);
+            Assert.AreEqual("MSB4801", error.Code);
             Assert.Contains("CodeTaskFactory", error.Message);
         }
     }

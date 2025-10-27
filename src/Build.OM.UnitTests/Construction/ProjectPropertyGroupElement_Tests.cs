@@ -20,7 +20,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         public void ReadNoPropertyGroup()
         {
             ProjectRootElement project = ProjectRootElement.Create();
-            Assert.Equal(0, Helpers.Count(project.Children));
+            Assert.AreEqual(0, Helpers.Count(project.Children));
             Assert.Empty(project.PropertyGroups);
         }
 
@@ -40,7 +40,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectRootElement project = projectRootElementFromString.Project;
             ProjectPropertyGroupElement group = (ProjectPropertyGroupElement)Helpers.GetFirst(project.Children);
 
-            Assert.Equal(0, Helpers.Count(group.Properties));
+            Assert.AreEqual(0, Helpers.Count(group.Properties));
         }
 
         /// <summary>
@@ -63,9 +63,9 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectPropertyGroupElement group = (ProjectPropertyGroupElement)Helpers.GetFirst(project.Children);
 
             var properties = Helpers.MakeList(group.Properties);
-            Assert.Equal(2, properties.Count);
-            Assert.Equal("p1", properties[0].Name);
-            Assert.Equal("p2", properties[1].Name);
+            Assert.AreEqual(2, properties.Count);
+            Assert.AreEqual("p1", properties[0].Name);
+            Assert.AreEqual("p2", properties[1].Name);
         }
 
         /// <summary>
@@ -81,8 +81,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectPropertyGroupElement propertyGroup = Helpers.GetFirst(project.PropertyGroups);
             propertyGroup.Condition = "c";
 
-            Assert.Equal("c", propertyGroup.Condition);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual("c", propertyGroup.Condition);
+            Assert.IsTrue(project.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -98,8 +98,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectPropertyGroupElement propertyGroup = Helpers.GetFirst(project.PropertyGroups);
             propertyGroup.Label = "c";
 
-            Assert.Equal("c", propertyGroup.Label);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual("c", propertyGroup.Label);
+            Assert.IsTrue(project.HasUnsavedChanges);
         }
 
         /// <summary>

@@ -94,9 +94,9 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 _requestBuilder.BuildRequest(GetNodeLoggingContext(), entry);
 
                 WaitForEvent(_buildRequestCompletedEvent, "Build Request Completed");
-                Assert.Equal(BuildRequestEntryState.Complete, entry.State);
-                Assert.Equal(entry, _buildRequestCompleted_Entry);
-                Assert.Equal(BuildResultCode.Success, _buildRequestCompleted_Entry.Result.OverallResult);
+                Assert.AreEqual(BuildRequestEntryState.Complete, entry.State);
+                Assert.AreEqual(entry, _buildRequestCompleted_Entry);
+                Assert.AreEqual(BuildResultCode.Success, _buildRequestCompleted_Entry.Result.OverallResult);
             }
             finally
             {
@@ -127,9 +127,9 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 _requestBuilder.CancelRequest();
 
                 WaitForEvent(_buildRequestCompletedEvent, "Build Request Completed");
-                Assert.Equal(BuildRequestEntryState.Complete, entry.State);
-                Assert.Equal(entry, _buildRequestCompleted_Entry);
-                Assert.Equal(BuildResultCode.Failure, _buildRequestCompleted_Entry.Result.OverallResult);
+                Assert.AreEqual(BuildRequestEntryState.Complete, entry.State);
+                Assert.AreEqual(entry, _buildRequestCompleted_Entry);
+                Assert.AreEqual(BuildResultCode.Failure, _buildRequestCompleted_Entry.Result.OverallResult);
             }
             finally
             {
@@ -157,7 +157,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
                 _requestBuilder.BuildRequest(GetNodeLoggingContext(), entry);
                 WaitForEvent(_newBuildRequestsEvent, "New Build Requests");
-                Assert.Equal(_newBuildRequests_Entry, entry);
+                Assert.AreEqual(_newBuildRequests_Entry, entry);
                 ObjectModelHelpers.AssertArrayContentsMatch(_newBuildRequests_FQRequests, newRequest);
 
                 BuildResult newResult = new BuildResult(_newBuildRequests_BuildRequests[0]);
@@ -166,9 +166,9 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 _requestBuilder.ContinueRequest();
 
                 WaitForEvent(_buildRequestCompletedEvent, "Build Request Completed");
-                Assert.Equal(BuildRequestEntryState.Complete, entry.State);
-                Assert.Equal(entry, _buildRequestCompleted_Entry);
-                Assert.Equal(BuildResultCode.Success, _buildRequestCompleted_Entry.Result.OverallResult);
+                Assert.AreEqual(BuildRequestEntryState.Complete, entry.State);
+                Assert.AreEqual(entry, _buildRequestCompleted_Entry);
+                Assert.AreEqual(BuildResultCode.Success, _buildRequestCompleted_Entry.Result.OverallResult);
             }
             finally
             {
@@ -196,7 +196,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
                 _requestBuilder.BuildRequest(GetNodeLoggingContext(), entry);
                 WaitForEvent(_newBuildRequestsEvent, "New Build Requests");
-                Assert.Equal(_newBuildRequests_Entry, entry);
+                Assert.AreEqual(_newBuildRequests_Entry, entry);
                 ObjectModelHelpers.AssertArrayContentsMatch(_newBuildRequests_FQRequests, newRequest);
 
                 BuildResult newResult = new BuildResult(_newBuildRequests_BuildRequests[0]);
@@ -208,9 +208,9 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 _requestBuilder.CancelRequest();
 
                 WaitForEvent(_buildRequestCompletedEvent, "Build Request Completed");
-                Assert.Equal(BuildRequestEntryState.Complete, entry.State);
-                Assert.Equal(entry, _buildRequestCompleted_Entry);
-                Assert.Equal(BuildResultCode.Failure, _buildRequestCompleted_Entry.Result.OverallResult);
+                Assert.AreEqual(BuildRequestEntryState.Complete, entry.State);
+                Assert.AreEqual(entry, _buildRequestCompleted_Entry);
+                Assert.AreEqual(BuildResultCode.Failure, _buildRequestCompleted_Entry.Result.OverallResult);
             }
             finally
             {
@@ -230,10 +230,10 @@ namespace Microsoft.Build.UnitTests.BackEnd
             BuildRequestEntry entry = new BuildRequestEntry(request, configuration);
             _requestBuilder.BuildRequest(GetNodeLoggingContext(), entry);
             WaitForEvent(_buildRequestCompletedEvent, "Build Request Completed");
-            Assert.Equal(BuildRequestEntryState.Complete, entry.State);
-            Assert.Equal(entry, _buildRequestCompleted_Entry);
-            Assert.Equal(BuildResultCode.Failure, _buildRequestCompleted_Entry.Result.OverallResult);
-            Assert.Equal(typeof(InvalidProjectFileException), _buildRequestCompleted_Entry.Result.Exception.GetType());
+            Assert.AreEqual(BuildRequestEntryState.Complete, entry.State);
+            Assert.AreEqual(entry, _buildRequestCompleted_Entry);
+            Assert.AreEqual(BuildResultCode.Failure, _buildRequestCompleted_Entry.Result.OverallResult);
+            Assert.AreEqual(typeof(InvalidProjectFileException), _buildRequestCompleted_Entry.Result.Exception.GetType());
         }
 
         private BuildRequestConfiguration CreateTestProject(int configId)

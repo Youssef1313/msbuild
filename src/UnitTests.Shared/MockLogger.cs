@@ -512,7 +512,7 @@ namespace Microsoft.Build.UnitTests
                         PrintFullLog();
                     }
 
-                    Assert.True(
+                    Assert.IsTrue(
                         false,
                         $"Log was expected to contain '{contains[index]}', but did not. Full log:\n=======\n{FullLog}\n=======");
                 }
@@ -546,12 +546,12 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Assert that no errors were logged
         /// </summary>
-        public void AssertNoErrors() => Assert.Equal(0, ErrorCount);
+        public void AssertNoErrors() => Assert.AreEqual(0, ErrorCount);
 
         /// <summary>
         /// Assert that no warnings were logged
         /// </summary>
-        public void AssertNoWarnings() => Assert.Equal(0, WarningCount);
+        public void AssertNoWarnings() => Assert.AreEqual(0, WarningCount);
 
         public void AssertMessageCount(string message, int expectedCount, bool regexSearch = true)
         {

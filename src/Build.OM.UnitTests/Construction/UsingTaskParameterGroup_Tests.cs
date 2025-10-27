@@ -63,8 +63,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         public void ReadEmptyParameterGroup()
         {
             UsingTaskParameterGroupElement parameterGroup = GetParameterGroupXml(s_contentEmptyParameterGroup);
-            Assert.NotNull(parameterGroup);
-            Assert.Equal(0, parameterGroup.Count);
+            Assert.IsNotNull(parameterGroup);
+            Assert.AreEqual(0, parameterGroup.Count);
             Assert.Empty(parameterGroup.Parameters);
         }
 
@@ -75,9 +75,9 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         public void ReadMutipleParameters()
         {
             UsingTaskParameterGroupElement parameterGroup = GetParameterGroupXml(s_contentMultipleParameters);
-            Assert.NotNull(parameterGroup);
-            Assert.Equal(2, parameterGroup.Count);
-            Assert.NotNull(parameterGroup.Parameters);
+            Assert.IsNotNull(parameterGroup);
+            Assert.AreEqual(2, parameterGroup.Count);
+            Assert.IsNotNull(parameterGroup.Parameters);
 
             bool foundFirst = false;
             bool foundSecond = false;
@@ -94,8 +94,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
                 }
             }
 
-            Assert.True(foundFirst);
-            Assert.True(foundSecond);
+            Assert.IsTrue(foundFirst);
+            Assert.IsTrue(foundSecond);
         }
 
         /// <summary>

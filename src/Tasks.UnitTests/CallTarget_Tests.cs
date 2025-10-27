@@ -175,7 +175,7 @@ namespace Microsoft.Build.UnitTests
 
             ProjectInstance instance = project.CreateProjectInstance();
             bool success = instance.Build();
-            Assert.True(success); // "Build failed.  See test output (Attachments in Azure Pipelines) for details"
+            Assert.IsTrue(success); // "Build failed.  See test output (Attachments in Azure Pipelines) for details"
 
             IEnumerable<ProjectItemInstance> targetOutputs = instance.GetItems("myfancytargetoutputs");
 

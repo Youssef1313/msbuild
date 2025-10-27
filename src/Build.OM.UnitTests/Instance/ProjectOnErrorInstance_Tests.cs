@@ -23,8 +23,8 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         {
             var onError = GetSampleOnErrorInstance();
 
-            Assert.Equal("et", onError.ExecuteTargets);
-            Assert.Equal("c", onError.Condition);
+            Assert.AreEqual("et", onError.ExecuteTargets);
+            Assert.AreEqual("c", onError.Condition);
         }
 
         /// <summary>

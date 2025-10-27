@@ -77,7 +77,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
                 bool succeeded = Execute(t);
 
-                Assert.True(succeeded);
+                Assert.IsTrue(succeeded);
 
                 uniqueFileExists[s_dependsOnNuGet_NWinMdPath].ShouldBe(1);
                 uniqueFileExists[s_dependsOnNuGet_NDllPath].ShouldBe(1);
@@ -122,7 +122,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
                 bool succeeded = Execute(t);
 
-                Assert.True(succeeded);
+                Assert.IsTrue(succeeded);
 
                 uniqueFileExists.ShouldNotContainKey(@"C:\DependsOnNuget\N.winmd");
                 uniqueFileExists.ShouldNotContainKey(@"C:\DependsOnNuget\N.dll");

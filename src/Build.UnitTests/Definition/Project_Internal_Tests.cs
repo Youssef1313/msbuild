@@ -43,7 +43,7 @@ namespace Microsoft.Build.UnitTests.Definition
 
                 collection.DefaultToolsVersion = "x";
 
-                Assert.Equal("x", collection.DefaultToolsVersion);
+                Assert.AreEqual("x", collection.DefaultToolsVersion);
 
                 string content = @"
                     <Project>
@@ -54,7 +54,7 @@ namespace Microsoft.Build.UnitTests.Definition
                 using ProjectFromString projectFromString = new(content, null, null, collection);
                 Project project = projectFromString.Project;
 
-                Assert.Equal("x", project.ToolsVersion);
+                Assert.AreEqual("x", project.ToolsVersion);
             }
             finally
             {
@@ -94,7 +94,7 @@ namespace Microsoft.Build.UnitTests.Definition
 
                 Project project2 = ProjectCollection.GlobalProjectCollection.LoadProject("c:\\123.proj", null, null);
 
-                Assert.True(Object.ReferenceEquals(project, project2));
+                Assert.IsTrue(Object.ReferenceEquals(project, project2));
             }
             finally
             {
@@ -133,11 +133,11 @@ namespace Microsoft.Build.UnitTests.Definition
                 project.Xml.ToolsVersion = "2.0";
                 project.ReevaluateIfNecessary();
 
-                Assert.Equal("2.0", project.ToolsVersion);
+                Assert.AreEqual("2.0", project.ToolsVersion);
 
                 project.Xml.ToolsVersion = "4.0";
 
-                Assert.Equal("2.0", project.ToolsVersion);
+                Assert.AreEqual("2.0", project.ToolsVersion);
             }
             finally
             {
@@ -184,14 +184,14 @@ namespace Microsoft.Build.UnitTests.Definition
                 project.Xml.ToolsVersion = "2.0";
                 project.ReevaluateIfNecessary();
 
-                Assert.Equal("2.0", project.GetPropertyValue("msbuildtoolsversion"));
+                Assert.AreEqual("2.0", project.GetPropertyValue("msbuildtoolsversion"));
 
                 project.Xml.ToolsVersion = ObjectModelHelpers.MSBuildDefaultToolsVersion;
-                Assert.Equal("2.0", project.GetPropertyValue("msbuildtoolsversion"));
+                Assert.AreEqual("2.0", project.GetPropertyValue("msbuildtoolsversion"));
 
                 project.ReevaluateIfNecessary();
 
-                Assert.Equal(
+                Assert.AreEqual(
                     ObjectModelHelpers.MSBuildDefaultToolsVersion,
                     project.GetPropertyValue("msbuildtoolsversion"));
             }

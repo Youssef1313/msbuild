@@ -415,7 +415,7 @@ class c {}")]
             ExtractedClassName className = CSharpParserUtilities.GetFirstClassNameFullyQualified(
                 StreamHelpers.StringToStream(source));
 
-            Assert.Equal(expectedClassName, className.Name);
+            Assert.AreEqual(expectedClassName, className.Name);
         }
     }
 }

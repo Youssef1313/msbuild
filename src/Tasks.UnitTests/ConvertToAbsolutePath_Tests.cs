@@ -33,7 +33,7 @@ namespace Microsoft.Build.UnitTests
             {
                 Directory.SetCurrentDirectory(ObjectModelHelpers.TempProjectDir);
                 t.Paths = new ITaskItem[] { new TaskItem(@"file.temp") };
-                Assert.True(t.Execute()); // "success"
+                Assert.IsTrue(t.Execute()); // "success"
             }
             finally
             {
@@ -65,7 +65,7 @@ namespace Microsoft.Build.UnitTests
             {
                 Directory.SetCurrentDirectory(ObjectModelHelpers.TempProjectDir);
                 t.Paths = new ITaskItem[] { new TaskItem(@"file%253A.temp") };
-                Assert.True(t.Execute()); // "success"
+                Assert.IsTrue(t.Execute()); // "success"
             }
             finally
             {
@@ -95,7 +95,7 @@ namespace Microsoft.Build.UnitTests
             {
                 Directory.SetCurrentDirectory(ObjectModelHelpers.TempProjectDir);
                 t.Paths = new ITaskItem[] { new TaskItem(fileName) };
-                Assert.True(t.Execute()); // "success"
+                Assert.IsTrue(t.Execute()); // "success"
             }
             finally
             {
@@ -103,7 +103,7 @@ namespace Microsoft.Build.UnitTests
             }
 
             Assert.Single(t.AbsolutePaths);
-            Assert.Equal(testFile.FullName, t.AbsolutePaths[0].ItemSpec);
+            Assert.AreEqual(testFile.FullName, t.AbsolutePaths[0].ItemSpec);
 
             ObjectModelHelpers.DeleteTempProjectDirectory();
         }
@@ -119,7 +119,7 @@ namespace Microsoft.Build.UnitTests
 
             t.Paths = new ITaskItem[] { new TaskItem("RandomFileThatDoesntExist.txt") };
 
-            Assert.True(t.Execute()); // "success"
+            Assert.IsTrue(t.Execute()); // "success"
 
             Assert.Single(t.AbsolutePaths);
         }

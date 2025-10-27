@@ -35,9 +35,9 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         {
             ProjectMetadataElement metadatum = GetMetadataXml();
 
-            Assert.Equal("m", metadatum.Name);
-            Assert.Equal("m1", metadatum.Value);
-            Assert.Equal("c", metadatum.Condition);
+            Assert.AreEqual("m", metadatum.Name);
+            Assert.AreEqual("m1", metadatum.Value);
+            Assert.AreEqual("c", metadatum.Condition);
         }
 
         /// <summary>
@@ -208,7 +208,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectMetadataElement metadatum = GetMetadataXml();
 
             metadatum.Value = "m1b";
-            Assert.Equal("m1b", metadatum.Value);
+            Assert.AreEqual("m1b", metadatum.Value);
         }
 
         /// <summary>
@@ -220,8 +220,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectMetadataElement metadatum = GetMetadataXml();
 
             metadatum.Name = "m2";
-            Assert.Equal("m2", metadatum.Name);
-            Assert.True(metadatum.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual("m2", metadatum.Name);
+            Assert.IsTrue(metadatum.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -234,8 +234,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(metadatum.ContainingProject);
 
             metadatum.Name = "m";
-            Assert.Equal("m", metadatum.Name);
-            Assert.False(metadatum.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual("m", metadatum.Name);
+            Assert.IsFalse(metadatum.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -348,7 +348,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectMetadataElement metadatum = GetMetadataXml();
 
             metadatum.Value = String.Empty;
-            Assert.Equal(String.Empty, metadatum.Value);
+            Assert.AreEqual(String.Empty, metadatum.Value);
         }
 
         /// <summary>
@@ -434,9 +434,9 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Assert.Single(items[0].Metadata);
 
             var metadata = items[0].Metadata.First();
-            Assert.Equal("m1", metadata.Name);
-            Assert.Equal("v1", metadata.Value);
-            Assert.True(metadata.ExpressedAsAttribute);
+            Assert.AreEqual("m1", metadata.Name);
+            Assert.AreEqual("v1", metadata.Value);
+            Assert.IsTrue(metadata.ExpressedAsAttribute);
         }
 
         [Fact]
@@ -459,9 +459,9 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Assert.Single(itemDefinitions[0].Metadata);
 
             var metadata = itemDefinitions[0].Metadata.First();
-            Assert.Equal("m1", metadata.Name);
-            Assert.Equal("v1", metadata.Value);
-            Assert.True(metadata.ExpressedAsAttribute);
+            Assert.AreEqual("m1", metadata.Name);
+            Assert.AreEqual("v1", metadata.Value);
+            Assert.IsTrue(metadata.ExpressedAsAttribute);
         }
 
         [Theory]
@@ -493,9 +493,9 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Assert.Single(items[0].Metadata);
 
             var metadata = items[0].Metadata.First();
-            Assert.Equal("m1", metadata.Name);
-            Assert.Equal(@"<&>""", metadata.Value);
-            Assert.True(metadata.ExpressedAsAttribute);
+            Assert.AreEqual("m1", metadata.Name);
+            Assert.AreEqual(@"<&>""", metadata.Value);
+            Assert.IsTrue(metadata.ExpressedAsAttribute);
         }
 
         [Fact]
@@ -518,9 +518,9 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Assert.Single(itemDefinitions[0].Metadata);
 
             var metadata = itemDefinitions[0].Metadata.First();
-            Assert.Equal("m1", metadata.Name);
-            Assert.Equal(@"<&>""", metadata.Value);
-            Assert.True(metadata.ExpressedAsAttribute);
+            Assert.AreEqual("m1", metadata.Name);
+            Assert.AreEqual(@"<&>""", metadata.Value);
+            Assert.IsTrue(metadata.ExpressedAsAttribute);
         }
 
         [Theory]
@@ -570,14 +570,14 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Assert.Single(items[0].Metadata);
 
             var metadata = items[0].Metadata.First();
-            Assert.Equal("m1", metadata.Name);
-            Assert.Equal("v1", metadata.Value);
-            Assert.True(metadata.ExpressedAsAttribute);
+            Assert.AreEqual("m1", metadata.Name);
+            Assert.AreEqual("v1", metadata.Value);
+            Assert.IsTrue(metadata.ExpressedAsAttribute);
 
             metadata.Value = "v2";
 
-            Assert.True(project.IsDirty);
-            Assert.True(metadata.ExpressedAsAttribute);
+            Assert.IsTrue(project.IsDirty);
+            Assert.IsTrue(metadata.ExpressedAsAttribute);
 
             using StringWriter writer = new StringWriter();
             project.Save(writer);
@@ -613,14 +613,14 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Assert.Single(itemDefinitions[0].Metadata);
 
             var metadata = itemDefinitions[0].Metadata.First();
-            Assert.Equal("m1", metadata.Name);
-            Assert.Equal("v1", metadata.Value);
-            Assert.True(metadata.ExpressedAsAttribute);
+            Assert.AreEqual("m1", metadata.Name);
+            Assert.AreEqual("v1", metadata.Value);
+            Assert.IsTrue(metadata.ExpressedAsAttribute);
 
             metadata.Value = "v2";
 
-            Assert.True(project.IsDirty);
-            Assert.True(metadata.ExpressedAsAttribute);
+            Assert.IsTrue(project.IsDirty);
+            Assert.IsTrue(metadata.ExpressedAsAttribute);
 
             using StringWriter writer = new StringWriter();
             project.Save(writer);
@@ -687,14 +687,14 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Assert.Single(items[0].Metadata);
 
             var metadata = items[0].Metadata.First();
-            Assert.Equal("m1", metadata.Name);
-            Assert.Equal("v1", metadata.Value);
-            Assert.True(metadata.ExpressedAsAttribute);
+            Assert.AreEqual("m1", metadata.Name);
+            Assert.AreEqual("v1", metadata.Value);
+            Assert.IsTrue(metadata.ExpressedAsAttribute);
 
             metadata.Value = @"<&>""";
 
-            Assert.True(project.IsDirty);
-            Assert.True(metadata.ExpressedAsAttribute);
+            Assert.IsTrue(project.IsDirty);
+            Assert.IsTrue(metadata.ExpressedAsAttribute);
 
             using StringWriter writer = new StringWriter();
             project.Save(writer);
@@ -730,14 +730,14 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Assert.Single(itemDefinitions[0].Metadata);
 
             var metadata = itemDefinitions[0].Metadata.First();
-            Assert.Equal("m1", metadata.Name);
-            Assert.Equal("v1", metadata.Value);
-            Assert.True(metadata.ExpressedAsAttribute);
+            Assert.AreEqual("m1", metadata.Name);
+            Assert.AreEqual("v1", metadata.Value);
+            Assert.IsTrue(metadata.ExpressedAsAttribute);
 
             metadata.Value = @"<&>""";
 
-            Assert.True(project.IsDirty);
-            Assert.True(metadata.ExpressedAsAttribute);
+            Assert.IsTrue(project.IsDirty);
+            Assert.IsTrue(metadata.ExpressedAsAttribute);
 
             using StringWriter writer = new StringWriter();
             project.Save(writer);
@@ -816,14 +816,14 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Assert.Single(items[0].Metadata);
 
             var metadata = items[0].Metadata.First();
-            Assert.Equal("m1", metadata.Name);
-            Assert.Equal("v1", metadata.Value);
-            Assert.False(metadata.ExpressedAsAttribute);
+            Assert.AreEqual("m1", metadata.Name);
+            Assert.AreEqual("v1", metadata.Value);
+            Assert.IsFalse(metadata.ExpressedAsAttribute);
 
             metadata.ExpressedAsAttribute = true;
 
-            Assert.True(project.IsDirty);
-            Assert.True(metadata.ExpressedAsAttribute);
+            Assert.IsTrue(project.IsDirty);
+            Assert.IsTrue(metadata.ExpressedAsAttribute);
 
             using StringWriter writer = new StringWriter();
             project.Save(writer);
@@ -879,14 +879,14 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Assert.Single(itemDefinitions[0].Metadata);
 
             var metadata = itemDefinitions[0].Metadata.First();
-            Assert.Equal("m1", metadata.Name);
-            Assert.Equal("v1", metadata.Value);
-            Assert.False(metadata.ExpressedAsAttribute);
+            Assert.AreEqual("m1", metadata.Name);
+            Assert.AreEqual("v1", metadata.Value);
+            Assert.IsFalse(metadata.ExpressedAsAttribute);
 
             metadata.ExpressedAsAttribute = true;
 
-            Assert.True(project.IsDirty);
-            Assert.True(metadata.ExpressedAsAttribute);
+            Assert.IsTrue(project.IsDirty);
+            Assert.IsTrue(metadata.ExpressedAsAttribute);
 
             using StringWriter writer = new StringWriter();
             project.Save(writer);
@@ -948,14 +948,14 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Assert.Single(items[0].Metadata);
 
             var metadata = items[0].Metadata.First();
-            Assert.Equal("m1", metadata.Name);
-            Assert.Equal("v1", metadata.Value);
-            Assert.True(metadata.ExpressedAsAttribute);
+            Assert.AreEqual("m1", metadata.Name);
+            Assert.AreEqual("v1", metadata.Value);
+            Assert.IsTrue(metadata.ExpressedAsAttribute);
 
             metadata.ExpressedAsAttribute = false;
 
-            Assert.False(metadata.ExpressedAsAttribute);
-            Assert.True(project.IsDirty);
+            Assert.IsFalse(metadata.ExpressedAsAttribute);
+            Assert.IsTrue(project.IsDirty);
 
             using StringWriter writer = new StringWriter();
             project.Save(writer);
@@ -991,14 +991,14 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Assert.Single(itemDefinitions[0].Metadata);
 
             var metadata = itemDefinitions[0].Metadata.First();
-            Assert.Equal("m1", metadata.Name);
-            Assert.Equal("v1", metadata.Value);
-            Assert.True(metadata.ExpressedAsAttribute);
+            Assert.AreEqual("m1", metadata.Name);
+            Assert.AreEqual("v1", metadata.Value);
+            Assert.IsTrue(metadata.ExpressedAsAttribute);
 
             metadata.ExpressedAsAttribute = false;
 
-            Assert.False(metadata.ExpressedAsAttribute);
-            Assert.True(project.IsDirty);
+            Assert.IsFalse(metadata.ExpressedAsAttribute);
+            Assert.IsTrue(project.IsDirty);
 
             using StringWriter writer = new StringWriter();
             project.Save(writer);
@@ -1064,10 +1064,10 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             var metadata = items[0].AddMetadata("m1", "v1", true);
 
-            Assert.Equal("m1", metadata.Name);
-            Assert.Equal("v1", metadata.Value);
-            Assert.True(metadata.ExpressedAsAttribute);
-            Assert.True(project.IsDirty);
+            Assert.AreEqual("m1", metadata.Name);
+            Assert.AreEqual("v1", metadata.Value);
+            Assert.IsTrue(metadata.ExpressedAsAttribute);
+            Assert.IsTrue(project.IsDirty);
 
             using StringWriter writer = new StringWriter();
             project.Save(writer);
@@ -1104,10 +1104,10 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             var metadata = itemDefinitions[0].AddMetadata("m1", "v1", true);
 
-            Assert.Equal("m1", metadata.Name);
-            Assert.Equal("v1", metadata.Value);
-            Assert.True(metadata.ExpressedAsAttribute);
-            Assert.True(project.IsDirty);
+            Assert.AreEqual("m1", metadata.Name);
+            Assert.AreEqual("v1", metadata.Value);
+            Assert.IsTrue(metadata.ExpressedAsAttribute);
+            Assert.IsTrue(project.IsDirty);
 
             using StringWriter writer = new StringWriter();
             project.Save(writer);
@@ -1175,17 +1175,17 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             var metadata = items[0].AddMetadata("m1", "v1", true);
 
-            Assert.Equal("m1", metadata.Name);
-            Assert.Equal("v1", metadata.Value);
-            Assert.True(metadata.ExpressedAsAttribute);
-            Assert.True(project.IsDirty);
+            Assert.AreEqual("m1", metadata.Name);
+            Assert.AreEqual("v1", metadata.Value);
+            Assert.IsTrue(metadata.ExpressedAsAttribute);
+            Assert.IsTrue(project.IsDirty);
 
             metadata = items[0].AddMetadata("m2", "v2", false);
 
-            Assert.Equal("m2", metadata.Name);
-            Assert.Equal("v2", metadata.Value);
-            Assert.False(metadata.ExpressedAsAttribute);
-            Assert.True(project.IsDirty);
+            Assert.AreEqual("m2", metadata.Name);
+            Assert.AreEqual("v2", metadata.Value);
+            Assert.IsFalse(metadata.ExpressedAsAttribute);
+            Assert.IsTrue(project.IsDirty);
 
             using StringWriter writer = new StringWriter();
             project.Save(writer);
@@ -1222,17 +1222,17 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             var metadata = itemDefinitions[0].AddMetadata("m1", "v1", true);
 
-            Assert.Equal("m1", metadata.Name);
-            Assert.Equal("v1", metadata.Value);
-            Assert.True(metadata.ExpressedAsAttribute);
-            Assert.True(project.IsDirty);
+            Assert.AreEqual("m1", metadata.Name);
+            Assert.AreEqual("v1", metadata.Value);
+            Assert.IsTrue(metadata.ExpressedAsAttribute);
+            Assert.IsTrue(project.IsDirty);
 
             metadata = itemDefinitions[0].AddMetadata("m2", "v2", false);
 
-            Assert.Equal("m2", metadata.Name);
-            Assert.Equal("v2", metadata.Value);
-            Assert.False(metadata.ExpressedAsAttribute);
-            Assert.True(project.IsDirty);
+            Assert.AreEqual("m2", metadata.Name);
+            Assert.AreEqual("v2", metadata.Value);
+            Assert.IsFalse(metadata.ExpressedAsAttribute);
+            Assert.IsTrue(project.IsDirty);
 
             using StringWriter writer = new StringWriter();
             project.Save(writer);

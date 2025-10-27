@@ -32,7 +32,7 @@ namespace Microsoft.Build.UnitTests.Construction
                 ObjectModelHelpers.CreateFileInTempProjectDirectory(Guid.NewGuid().ToString("N"), contents, Encoding.UTF8) :
                 ObjectModelHelpers.CreateFileInTempProjectDirectory(Guid.NewGuid().ToString("N"), contents);
 
-            Assert.True(ProjectRootElement.IsEmptyXmlFile(path));
+            Assert.IsTrue(ProjectRootElement.IsEmptyXmlFile(path));
         }
 
         [Theory]
@@ -52,7 +52,7 @@ bar", false)]
                 ObjectModelHelpers.CreateFileInTempProjectDirectory(Guid.NewGuid().ToString("N"), contents, Encoding.UTF8) :
                 ObjectModelHelpers.CreateFileInTempProjectDirectory(Guid.NewGuid().ToString("N"), contents);
 
-            Assert.False(ProjectRootElement.IsEmptyXmlFile(path));
+            Assert.IsFalse(ProjectRootElement.IsEmptyXmlFile(path));
         }
 
         [Fact]
@@ -76,13 +76,13 @@ bar", false)]
                 var testFiles = env.CreateTestProjectWithFiles(projectContents, Array.Empty<string>());
                 ProjectRootElement xml = ProjectRootElement.Open(testFiles.ProjectFile);
 
-                Assert.False(xml.XmlDocument.IsReadOnly);
+                Assert.IsFalse(xml.XmlDocument.IsReadOnly);
                 var children = xml.XmlDocument.ChildNodes;
                 Assert.Single(children);
-                Assert.Equal("Project", children[0].Name);
-                Assert.Equal(2, children[0].ChildNodes.Count);
-                Assert.Equal("Initial Comment", children[0].ChildNodes[0].Value);
-                Assert.Equal("Ending Comment", children[0].ChildNodes[1].Value);
+                Assert.AreEqual("Project", children[0].Name);
+                Assert.AreEqual(2, children[0].ChildNodes.Count);
+                Assert.AreEqual("Initial Comment", children[0].ChildNodes[0].Value);
+                Assert.AreEqual("Ending Comment", children[0].ChildNodes[1].Value);
             }
         }
 
@@ -108,13 +108,13 @@ bar", false)]
                 var testFiles = env.CreateTestProjectWithFiles(projectContents, Array.Empty<string>());
                 ProjectRootElement xml = ProjectRootElement.Open(testFiles.ProjectFile);
 
-                Assert.True(xml.XmlDocument.IsReadOnly);
+                Assert.IsTrue(xml.XmlDocument.IsReadOnly);
                 var children = xml.XmlDocument.ChildNodes;
                 Assert.Single(children);
-                Assert.Equal("Project", children[0].Name);
-                Assert.Equal(2, children[0].ChildNodes.Count);
-                Assert.Equal(string.Empty, children[0].ChildNodes[0].Value);
-                Assert.Equal(string.Empty, children[0].ChildNodes[1].Value);
+                Assert.AreEqual("Project", children[0].Name);
+                Assert.AreEqual(2, children[0].ChildNodes.Count);
+                Assert.AreEqual(string.Empty, children[0].ChildNodes[0].Value);
+                Assert.AreEqual(string.Empty, children[0].ChildNodes[1].Value);
             }
         }
 
@@ -126,7 +126,7 @@ bar", false)]
 
             projectRootElement.MarkDirty("test", "test");
 
-            Assert.Equal(projectRootElement.Version, versionBeforeMarkDirty);
+            Assert.AreEqual(projectRootElement.Version, versionBeforeMarkDirty);
         }
     }
 }

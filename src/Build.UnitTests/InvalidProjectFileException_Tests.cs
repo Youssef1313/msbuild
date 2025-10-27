@@ -75,9 +75,9 @@ namespace Microsoft.Build.UnitTests
             }
             catch (InvalidProjectFileException e)
             {
-                Assert.Equal(3, e.LineNumber);
-                Assert.Equal(38, e.ColumnNumber);
-                Assert.Equal(file, e.ProjectFile); // https://github.com/dotnet/msbuild/issues/1286
+                Assert.AreEqual(3, e.LineNumber);
+                Assert.AreEqual(38, e.ColumnNumber);
+                Assert.AreEqual(file, e.ProjectFile); // https://github.com/dotnet/msbuild/issues/1286
             }
             finally
             {

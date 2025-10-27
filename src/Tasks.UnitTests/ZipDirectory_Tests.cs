@@ -69,7 +69,7 @@ namespace Microsoft.Build.Tasks.UnitTests
                 }
                 else
                 {
-                    Assert.Equal(CompressionSupportKind.Supported, compressionSupportKind);
+                    Assert.AreEqual(CompressionSupportKind.Supported, compressionSupportKind);
 
                     // Should not contain any warnings between MSB3941 - MSB3950
                     _mockEngine.Log.ShouldNotContain("MSB394", customMessage: _mockEngine.Log); // Prefix

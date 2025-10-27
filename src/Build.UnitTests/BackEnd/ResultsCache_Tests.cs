@@ -36,7 +36,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             BuildResult retrievedResult = cache.GetResultForRequest(request);
 
-            Assert.True(AreResultsIdentical(result, retrievedResult));
+            Assert.IsTrue(AreResultsIdentical(result, retrievedResult));
         }
 
         [Fact]
@@ -55,8 +55,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             BuildResult retrievedResult = cache.GetResultsForConfiguration(1);
 
-            Assert.True(retrievedResult.HasResultsForTarget("testTarget"));
-            Assert.True(retrievedResult.HasResultsForTarget("otherTarget"));
+            Assert.IsTrue(retrievedResult.HasResultsForTarget("testTarget"));
+            Assert.IsTrue(retrievedResult.HasResultsForTarget("otherTarget"));
         }
 
         [Fact]
@@ -81,9 +81,9 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             results.Length.ShouldBe(2);
 
-            Assert.True(results[0].HasResultsForTarget("result1target1"));
-            Assert.True(results[0].HasResultsForTarget("result1target2"));
-            Assert.True(results[1].HasResultsForTarget("result2target1"));
+            Assert.IsTrue(results[0].HasResultsForTarget("result1target1"));
+            Assert.IsTrue(results[0].HasResultsForTarget("result1target2"));
+            Assert.IsTrue(results[1].HasResultsForTarget("result2target1"));
         }
 
         [Fact]
@@ -93,7 +93,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             BuildRequest request = new BuildRequest(1 /* submissionId */, 0, 1, new string[1] { "testTarget" }, null, BuildEventContext.Invalid, null);
             BuildResult retrievedResult = cache.GetResultForRequest(request);
-            Assert.Null(retrievedResult);
+            Assert.IsNull(retrievedResult);
         }
 
         [Fact]
@@ -111,8 +111,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             BuildResult retrievedResult = cache.GetResultForRequest(request);
 
-            Assert.True(AreResultsIdenticalForTarget(result, retrievedResult, "testTarget"));
-            Assert.True(AreResultsIdenticalForTarget(result2, retrievedResult, "testTarget2"));
+            Assert.IsTrue(AreResultsIdenticalForTarget(result, retrievedResult, "testTarget"));
+            Assert.IsTrue(AreResultsIdenticalForTarget(result2, retrievedResult, "testTarget2"));
         }
 
         [Fact]
@@ -129,7 +129,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             BuildResult retrievedResult = cache.GetResultForRequest(request);
 
-            Assert.NotNull(retrievedResult.Exception);
+            Assert.IsNotNull(retrievedResult.Exception);
         }
 
         [Fact]
@@ -161,7 +161,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             BuildResult retrievedResult = cache.GetResultForRequest(request);
 
-            Assert.True(AreResultsIdenticalForTarget(result2, retrievedResult, "testTarget2"));
+            Assert.IsTrue(AreResultsIdenticalForTarget(result2, retrievedResult, "testTarget2"));
         }
 
         /// <summary>
@@ -182,11 +182,11 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             ResultsCacheResponse response = cache.SatisfyRequest(request, new List<string>(), new List<string>(new string[] { "testTarget2" }), skippedResultsDoNotCauseCacheMiss: false);
 
-            Assert.Equal(ResultsCacheResponseType.Satisfied, response.Type);
+            Assert.AreEqual(ResultsCacheResponseType.Satisfied, response.Type);
 
-            Assert.True(AreResultsIdenticalForTarget(result, response.Results, "testTarget2"));
-            Assert.False(response.Results.HasResultsForTarget("testTarget"));
-            Assert.Equal(BuildResultCode.Success, response.Results.OverallResult);
+            Assert.IsTrue(AreResultsIdenticalForTarget(result, response.Results, "testTarget2"));
+            Assert.IsFalse(response.Results.HasResultsForTarget("testTarget"));
+            Assert.AreEqual(BuildResultCode.Success, response.Results.OverallResult);
         }
 
         [Fact]
@@ -250,12 +250,12 @@ namespace Microsoft.Build.UnitTests.BackEnd
                new List<string>(new string[] { targetName }),
                skippedResultsDoNotCauseCacheMiss: false);
 
-            Assert.Equal(ResultsCacheResponseType.Satisfied, cacheResponseForRequestWithNoBuildDataFlags.Type);
+            Assert.AreEqual(ResultsCacheResponseType.Satisfied, cacheResponseForRequestWithNoBuildDataFlags.Type);
 
             // Because ProvideProjectStateAfterBuildFlag was provided as a part of BuildRequest
-            Assert.Equal(ResultsCacheResponseType.NotSatisfied, cachedResponseForProjectState.Type);
+            Assert.AreEqual(ResultsCacheResponseType.NotSatisfied, cachedResponseForProjectState.Type);
 
-            Assert.Equal(ResultsCacheResponseType.Satisfied, cacheResponseForNoBuildDataFlags2.Type);
+            Assert.AreEqual(ResultsCacheResponseType.Satisfied, cacheResponseForNoBuildDataFlags2.Type);
         }
 
         [Fact]
@@ -326,14 +326,14 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 skippedResultsDoNotCauseCacheMiss: false);
 
             // We used the same filter that was used for the ProjectInstance in the cache -> cache hit.
-            Assert.Equal(ResultsCacheResponseType.Satisfied, cachedResponseWithSubsetFlag1.Type);
-            Assert.Equal("Value1", cachedResponseWithSubsetFlag1.Results.ProjectStateAfterBuild.GetPropertyValue("property1"));
-            Assert.Equal("Value2", cachedResponseWithSubsetFlag1.Results.ProjectStateAfterBuild.GetPropertyValue("property2"));
+            Assert.AreEqual(ResultsCacheResponseType.Satisfied, cachedResponseWithSubsetFlag1.Type);
+            Assert.AreEqual("Value1", cachedResponseWithSubsetFlag1.Results.ProjectStateAfterBuild.GetPropertyValue("property1"));
+            Assert.AreEqual("Value2", cachedResponseWithSubsetFlag1.Results.ProjectStateAfterBuild.GetPropertyValue("property2"));
 
             // We used a filter that's a subset of the one used for the ProjectInstance in the cache -> cache hit.
-            Assert.Equal(ResultsCacheResponseType.Satisfied, cachedResponseWithSubsetFlag2.Type);
-            Assert.Equal("Value1", cachedResponseWithSubsetFlag2.Results.ProjectStateAfterBuild.GetPropertyValue("property1"));
-            Assert.Equal("", cachedResponseWithSubsetFlag2.Results.ProjectStateAfterBuild.GetPropertyValue("property2"));
+            Assert.AreEqual(ResultsCacheResponseType.Satisfied, cachedResponseWithSubsetFlag2.Type);
+            Assert.AreEqual("Value1", cachedResponseWithSubsetFlag2.Results.ProjectStateAfterBuild.GetPropertyValue("property1"));
+            Assert.AreEqual("", cachedResponseWithSubsetFlag2.Results.ProjectStateAfterBuild.GetPropertyValue("property2"));
         }
 
         [Fact]
@@ -349,7 +349,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             cache.ClearResults();
 
-            Assert.Null(cache.GetResultForRequest(request));
+            Assert.IsNull(cache.GetResultForRequest(request));
         }
 
         public static IEnumerable<object[]> CacheSerializationTestData

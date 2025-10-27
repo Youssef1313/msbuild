@@ -114,7 +114,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             IList<ProjectElement> children = project.GetLogicalProject().ToList();
 
             // <Sdk> style will have an extra ProjectElment.
-            Assert.Equal(expectImportInLogicalProject ? 7 : 6, children.Count);
+            Assert.AreEqual(expectImportInLogicalProject ? 7 : 6, children.Count);
         }
 
         [Theory]
@@ -135,17 +135,17 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             var project = new Project(projectRootElement);
 
             // The XML representation of the project should only indicate an import if they are not implicit.
-            Assert.Equal(expectImportInLogicalProject ? 2 : 0, projectRootElement.Imports.Count);
+            Assert.AreEqual(expectImportInLogicalProject ? 2 : 0, projectRootElement.Imports.Count);
 
             // The project representation should have imports
-            Assert.Equal(2, project.Imports.Count);
+            Assert.AreEqual(2, project.Imports.Count);
 
             ResolvedImport initialResolvedImport = project.Imports[0];
-            Assert.Equal(_sdkPropsPath, initialResolvedImport.ImportedProject.FullPath);
+            Assert.AreEqual(_sdkPropsPath, initialResolvedImport.ImportedProject.FullPath);
 
 
             ResolvedImport finalResolvedImport = project.Imports[1];
-            Assert.Equal(_sdkTargetsPath, finalResolvedImport.ImportedProject.FullPath);
+            Assert.AreEqual(_sdkTargetsPath, finalResolvedImport.ImportedProject.FullPath);
 
             VerifyPropertyFromImplicitImport(project, "InitialImportProperty", _sdkPropsPath, "Hello");
             VerifyPropertyFromImplicitImport(project, "FinalImportProperty", _sdkTargetsPath, "World");
@@ -202,10 +202,10 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Project project = new Project(projectRootElement);
 
             // The XML representation of the project should indicate there are no imports
-            Assert.Equal(expectImportInLogicalProject ? 6 : 0, projectRootElement.Imports.Count);
+            Assert.AreEqual(expectImportInLogicalProject ? 6 : 0, projectRootElement.Imports.Count);
 
             // The project representation should have twice as many imports as SDKs
-            Assert.Equal(sdkNames.Count * 2, project.Imports.Count);
+            Assert.AreEqual(sdkNames.Count * 2, project.Imports.Count);
 
             // Last imported SDK should set the value
             VerifyPropertyFromImplicitImport(project, "InitialImportProperty", Path.Combine(_testSdkRoot, sdkNames.Last(), "Sdk", "Sdk.props"), sdkNames.Last());
@@ -305,7 +305,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
                 Project project = new Project(ProjectRootElement.Create(XmlReader.Create(new StringReader(content))));
             });
 
-            Assert.Equal("MSB4229", exception.ErrorCode);
+            Assert.AreEqual("MSB4229", exception.ErrorCode);
         }
 
         /// <summary>
@@ -396,7 +396,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
                 Assert.Throws<InvalidProjectFileException>(() => new Project(
                     ProjectRootElement.Create(XmlReader.Create(new StringReader(content)))));
 
-            Assert.Equal("MSB4238", e.ErrorCode);
+            Assert.AreEqual("MSB4238", e.ErrorCode);
         }
 
         /// <summary>
@@ -421,7 +421,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
                 Project project = new Project(ProjectRootElement.Create(XmlReader.Create(new StringReader(content))));
             });
 
-            Assert.Equal("MSB4229", exception.ErrorCode);
+            Assert.AreEqual("MSB4229", exception.ErrorCode);
         }
 
         [Theory]
@@ -822,13 +822,13 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         {
             ProjectProperty property = project.GetProperty(propertyName);
 
-            Assert.NotNull(property?.Xml?.ContainingProject?.FullPath);
+            Assert.IsNotNull(property?.Xml?.ContainingProject?.FullPath);
 
-            Assert.Equal(expectedContainingProjectPath, property.Xml.ContainingProject.FullPath);
+            Assert.AreEqual(expectedContainingProjectPath, property.Xml.ContainingProject.FullPath);
 
-            Assert.True(property.IsImported);
+            Assert.IsTrue(property.IsImported);
 
-            Assert.Equal(expectedValue, property.EvaluatedValue);
+            Assert.AreEqual(expectedValue, property.EvaluatedValue);
         }
 
         private SdkReference GetParsedSdk(ProjectImportElement element)

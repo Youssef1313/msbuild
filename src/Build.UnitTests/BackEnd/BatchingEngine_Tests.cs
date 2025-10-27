@@ -59,7 +59,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 MockElementLocation.Instance,
                 new TestLoggingContext(null!, new BuildEventContext(1, 2, 3, 4)));
 
-            Assert.Equal(5, buckets.Count);
+            Assert.AreEqual(5, buckets.Count);
 
             foreach (ItemBucket bucket in buckets)
             {
@@ -67,7 +67,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 XmlAttribute tempXmlAttribute = (new XmlDocument()).CreateAttribute("attrib");
                 tempXmlAttribute.Value = "'$(Obj)'=='obj'";
 
-                Assert.True(ConditionEvaluator.EvaluateCondition(
+                Assert.IsTrue(ConditionEvaluator.EvaluateCondition(
                     tempXmlAttribute.Value,
                     ParserOptions.AllowAll,
                     bucket.Expander, ExpanderOptions.ExpandAll,
@@ -75,20 +75,20 @@ namespace Microsoft.Build.UnitTests.BackEnd
                     MockElementLocation.Instance,
                     FileSystems.Default,
                     new TestLoggingContext(null!, new BuildEventContext(1, 2, 3, 4))));
-                Assert.Equal("a.doc;b.doc;c.doc;d.doc;e.doc", bucket.Expander.ExpandIntoStringAndUnescape("@(doc)", ExpanderOptions.ExpandItems, MockElementLocation.Instance));
-                Assert.Equal("unittests.foo", bucket.Expander.ExpandIntoStringAndUnescape("$(bogus)$(UNITTESTS)", ExpanderOptions.ExpandPropertiesAndMetadata, MockElementLocation.Instance));
+                Assert.AreEqual("a.doc;b.doc;c.doc;d.doc;e.doc", bucket.Expander.ExpandIntoStringAndUnescape("@(doc)", ExpanderOptions.ExpandItems, MockElementLocation.Instance));
+                Assert.AreEqual("unittests.foo", bucket.Expander.ExpandIntoStringAndUnescape("$(bogus)$(UNITTESTS)", ExpanderOptions.ExpandPropertiesAndMetadata, MockElementLocation.Instance));
             }
 
-            Assert.Equal("a.foo", buckets[0].Expander.ExpandIntoStringAndUnescape("@(File)", ExpanderOptions.ExpandItems, MockElementLocation.Instance));
-            Assert.Equal(".foo", buckets[0].Expander.ExpandIntoStringAndUnescape("@(File->'%(Extension)')", ExpanderOptions.ExpandItems, MockElementLocation.Instance));
-            Assert.Equal("obj\\a.ext", buckets[0].Expander.ExpandIntoStringAndUnescape("$(obj)\\%(Filename).ext", ExpanderOptions.ExpandPropertiesAndMetadata, MockElementLocation.Instance));
+            Assert.AreEqual("a.foo", buckets[0].Expander.ExpandIntoStringAndUnescape("@(File)", ExpanderOptions.ExpandItems, MockElementLocation.Instance));
+            Assert.AreEqual(".foo", buckets[0].Expander.ExpandIntoStringAndUnescape("@(File->'%(Extension)')", ExpanderOptions.ExpandItems, MockElementLocation.Instance));
+            Assert.AreEqual("obj\\a.ext", buckets[0].Expander.ExpandIntoStringAndUnescape("$(obj)\\%(Filename).ext", ExpanderOptions.ExpandPropertiesAndMetadata, MockElementLocation.Instance));
 
             // we weren't batching on this attribute, so it has no value
-            Assert.Equal(String.Empty, buckets[0].Expander.ExpandIntoStringAndUnescape("%(Extension)", ExpanderOptions.ExpandAll, MockElementLocation.Instance));
+            Assert.AreEqual(String.Empty, buckets[0].Expander.ExpandIntoStringAndUnescape("%(Extension)", ExpanderOptions.ExpandAll, MockElementLocation.Instance));
 
             ProjectItemInstanceFactory factory = new ProjectItemInstanceFactory(project, "i");
             items = buckets[0].Expander.ExpandIntoItemsLeaveEscaped("@(file)", factory, ExpanderOptions.ExpandItems, MockElementLocation.Instance);
-            Assert.NotNull(items);
+            Assert.IsNotNull(items);
             Assert.Single(items);
 
             int invalidProjectFileExceptions = 0;
@@ -102,17 +102,17 @@ namespace Microsoft.Build.UnitTests.BackEnd
             catch (InvalidProjectFileException ex)
             {
                 // check we don't lose error codes from IPFE's during build
-                Assert.Equal("MSB4012", ex.ErrorCode);
+                Assert.AreEqual("MSB4012", ex.ErrorCode);
                 invalidProjectFileExceptions++;
             }
 
             // We do allow separators in item vectors, this results in an item group with a single flattened item
             items = buckets[0].Expander.ExpandIntoItemsLeaveEscaped("@(file, ',')", factory, ExpanderOptions.ExpandItems, MockElementLocation.Instance);
-            Assert.NotNull(items);
+            Assert.IsNotNull(items);
             Assert.Single(items);
-            Assert.Equal("a.foo", items[0].EvaluatedInclude);
+            Assert.AreEqual("a.foo", items[0].EvaluatedInclude);
 
-            Assert.Equal(1, invalidProjectFileExceptions);
+            Assert.AreEqual(1, invalidProjectFileExceptions);
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 CreateLookup(itemsByType, properties),
                 null,
                 new TestLoggingContext(null!, new BuildEventContext(1, 2, 3, 4)));
-            Assert.Equal(2, buckets.Count);
+            Assert.AreEqual(2, buckets.Count);
         }
 
         /// <summary>
@@ -417,8 +417,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             MockLogger log = Helpers.BuildProjectWithNewOMExpectSuccess(content);
 
-            Assert.Equal("high", log.Warnings[0].Code);
-            Assert.Null(log.Warnings[1].Code);
+            Assert.AreEqual("high", log.Warnings[0].Code);
+            Assert.IsNull(log.Warnings[1].Code);
         }
 
 

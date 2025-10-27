@@ -146,7 +146,7 @@ namespace Microsoft.Build.UnitTests
                             break;
                     }
 
-                    Assert.True(t.Execute()); // "The test should have passed at the both params correct test"
+                    Assert.IsTrue(t.Execute()); // "The test should have passed at the both params correct test"
                 }
             }
 
@@ -191,7 +191,7 @@ namespace Microsoft.Build.UnitTests
                         break;
                 }
 
-                Assert.False(t.Execute()); // "The test should fail when there is  missing Xsl params"
+                Assert.IsFalse(t.Execute()); // "The test should fail when there is  missing Xsl params"
                 Console.WriteLine(engine.Log);
                 Assert.Contains("MSB3701", engine.Log); // "The output should contain MSB3701 error message at missing Xsl params test"
             }
@@ -240,7 +240,7 @@ namespace Microsoft.Build.UnitTests
                         break;
                 }
 
-                Assert.False(t.Execute()); // "The test should fail when there is missing Xml params"
+                Assert.IsFalse(t.Execute()); // "The test should fail when there is missing Xml params"
                 Console.WriteLine(engine.Log);
                 Assert.Contains("MSB3701", engine.Log); // "The output should contain MSB3701 error message at missing Xml params test"
                 engine.Log = "";
@@ -271,7 +271,7 @@ namespace Microsoft.Build.UnitTests
                 t.BuildEngine = engine;
                 t.OutputPaths = outputPaths;
 
-                Assert.False(t.Execute()); // "The test should fail when there is no params"
+                Assert.IsFalse(t.Execute()); // "The test should fail when there is no params"
                 Console.WriteLine(engine.Log);
                 Assert.Contains("MSB3701", engine.Log); // "The output should contain MSB3701 error message"
             }
@@ -303,9 +303,9 @@ namespace Microsoft.Build.UnitTests
                 t.XmlContent = _xmlDocument;
                 t.XmlInputPaths = xmlPaths;
                 t.XslContent = _xslDocument;
-                Assert.Equal(_xmlDocument, t.XmlContent);
-                Assert.Equal(xmlPaths, t.XmlInputPaths);
-                Assert.False(t.Execute()); // "The test should fail when there are too many files"
+                Assert.AreEqual(_xmlDocument, t.XmlContent);
+                Assert.AreEqual(xmlPaths, t.XmlInputPaths);
+                Assert.IsFalse(t.Execute()); // "The test should fail when there are too many files"
                 Console.WriteLine(engine.Log);
                 Assert.Contains("MSB3701", engine.Log);
             }
@@ -337,9 +337,9 @@ namespace Microsoft.Build.UnitTests
                 t.XmlContent = _xmlDocument;
                 t.XslContent = _xslDocument;
                 t.XslInputPath = xslPath;
-                Assert.Equal(_xslDocument, t.XslContent);
-                Assert.Equal(xslPath, t.XslInputPath);
-                Assert.False(t.Execute()); // "The test should fail when there are too many files"
+                Assert.AreEqual(_xslDocument, t.XslContent);
+                Assert.AreEqual(xslPath, t.XslInputPath);
+                Assert.IsFalse(t.Execute()); // "The test should fail when there are too many files"
                 Console.WriteLine(engine.Log);
                 Assert.Contains("MSB3701", engine.Log); // "The output should contain MSB3701 error message at no params test"
             }
@@ -370,14 +370,14 @@ namespace Microsoft.Build.UnitTests
                 t.XmlContent = _xmlDocument;
                 t.XslContent = _xslDocument;
                 t.OutputPaths = outputPaths;
-                Assert.True(t.Execute()); // "Test out should have given true when executed"
-                Assert.Equal(String.Empty, engine.Log); // "The log should be empty"
+                Assert.IsTrue(t.Execute()); // "Test out should have given true when executed"
+                Assert.AreEqual(String.Empty, engine.Log); // "The log should be empty"
                 Console.WriteLine(engine.Log);
                 using (StreamReader sr = new StreamReader(t.OutputPaths[0].ItemSpec))
                 {
                     string fileContents = sr.ReadToEnd();
                     MatchCollection mc = _surroundMatch.Matches(fileContents);
-                    Assert.Equal(8, mc.Count); // "The file test doesn't match"
+                    Assert.AreEqual(8, mc.Count); // "The file test doesn't match"
                 }
             }
 
@@ -456,17 +456,17 @@ namespace Microsoft.Build.UnitTests
                     t.XmlContent = _xmlDocument;
                     t.XslContent = _xslParameterDocument;
                     t.Parameters = "<Parameter " + res + "/>";
-                    Assert.Equal("<Parameter " + res + "/>", t.Parameters);
+                    Assert.AreEqual("<Parameter " + res + "/>", t.Parameters);
                     bool result = t.Execute();
                     Console.WriteLine(engine.Log);
 
                     if (i == 5 || i == 7)
                     {
-                        Assert.True(result); // "Only 5th and 7th values should pass."
+                        Assert.IsTrue(result); // "Only 5th and 7th values should pass."
                     }
                     else
                     {
-                        Assert.False(result); // "Only 5th and 7th values should pass."
+                        Assert.IsFalse(result); // "Only 5th and 7th values should pass."
                     }
                 }
             }
@@ -498,7 +498,7 @@ namespace Microsoft.Build.UnitTests
                 t.XmlInputPaths = xmlPaths;
                 t.XslInputPath = xslPath;
                 t.Parameters = "   ";
-                Assert.True(t.Execute()); // "This test should've passed (empty parameters)."
+                Assert.IsTrue(t.Execute()); // "This test should've passed (empty parameters)."
                 Console.WriteLine(engine.Log);
             }
 
@@ -528,8 +528,8 @@ namespace Microsoft.Build.UnitTests
                 t.XmlContent = _xmlDocument;
                 xslCompiledPath.ItemSpec += ";xslt";
                 t.XslCompiledDllPath = xslCompiledPath;
-                Assert.Equal(xslCompiledPath.ItemSpec, t.XslCompiledDllPath.ItemSpec);
-                Assert.True(t.Execute()); // "XsltComiledDll1 execution should've passed"
+                Assert.AreEqual(xslCompiledPath.ItemSpec, t.XslCompiledDllPath.ItemSpec);
+                Assert.IsTrue(t.Execute()); // "XsltComiledDll1 execution should've passed"
                 Console.WriteLine(engine.Log);
                 Assert.DoesNotContain("MSB", engine.Log); // "The log should not contain any errors. (XsltComiledDll1)"
             }
@@ -556,9 +556,9 @@ namespace Microsoft.Build.UnitTests
                 t.OutputPaths = outputPaths;
                 t.XmlContent = _xmlDocument;
                 t.XslCompiledDllPath = xslCompiledPath;
-                Assert.True(t.Execute(), "XsltComiledDll2 execution should've passed" + engine.Log);
+                Assert.IsTrue(t.Execute(), "XsltComiledDll2 execution should've passed" + engine.Log);
                 Console.WriteLine(engine.Log);
-                Assert.False(engine.MockLogger.ErrorCount > 0); // "The log should not contain any errors. (XsltComiledDll2)"
+                Assert.IsFalse(engine.MockLogger.ErrorCount > 0); // "The log should not contain any errors. (XsltComiledDll2)"
             }
 
             CleanUp(dir);
@@ -621,7 +621,7 @@ namespace Microsoft.Build.UnitTests
                     t.BuildEngine = engine;
                     t.XmlInputPaths = xmlPaths;
                     t.XslInputPath = xslPath;
-                    Assert.False(t.Execute()); // "This test should've failed (no output)."
+                    Assert.IsFalse(t.Execute()); // "This test should've failed (no output)."
                     Console.WriteLine(engine.Log);
                 }
 
@@ -650,7 +650,7 @@ namespace Microsoft.Build.UnitTests
                 t.XmlInputPaths = xmlPaths;
                 t.XslInputPath = xslPath;
                 Console.WriteLine(engine.Log);
-                Assert.False(t.Execute()); // "This test should've failed (bad xml)."
+                Assert.IsFalse(t.Execute()); // "This test should've failed (bad xml)."
                 Assert.Contains("MSB3703", engine.Log);
             }
 
@@ -678,7 +678,7 @@ namespace Microsoft.Build.UnitTests
                 t.XmlInputPaths = xmlPaths;
                 xslPath.ItemSpec += "bad";
                 t.XslInputPath = xslPath;
-                Assert.False(t.Execute()); // "This test should've failed (bad xslt)."
+                Assert.IsFalse(t.Execute()); // "This test should've failed (bad xslt)."
                 Console.WriteLine(engine.Log);
                 Assert.Contains("MSB3704", engine.Log);
             }
@@ -707,7 +707,7 @@ namespace Microsoft.Build.UnitTests
                 t.XmlContent = _xmlDocument;
                 xslCompiledPath.ItemSpec += "bad;xslt";
                 t.XslCompiledDllPath = xslCompiledPath;
-                Assert.False(t.Execute()); // "XsltComiledDllBad execution should've failed"
+                Assert.IsFalse(t.Execute()); // "XsltComiledDllBad execution should've failed"
                 Console.WriteLine(engine.Log);
                 Assert.Contains("MSB3704", engine.Log);
             }
@@ -736,7 +736,7 @@ namespace Microsoft.Build.UnitTests
                 t.Parameters = "<<>>";
                 try
                 {
-                    Assert.False(t.Execute()); // "This test should've failed (bad params1)."
+                    Assert.IsFalse(t.Execute()); // "This test should've failed (bad params1)."
                     Console.WriteLine(engine.Log);
                 }
                 catch (Exception e)
@@ -769,7 +769,7 @@ namespace Microsoft.Build.UnitTests
                 t.OutputPaths = new TaskItem[] { new TaskItem("k:\\folder\\file.xml") };
                 try
                 {
-                    Assert.False(t.Execute()); // "This test should've failed (bad output)."
+                    Assert.IsFalse(t.Execute()); // "This test should've failed (bad output)."
                     Console.WriteLine(engine.Log);
                 }
                 catch (Exception e)
@@ -834,7 +834,7 @@ namespace Microsoft.Build.UnitTests
                 t.XslContent = _errorXslDocument2;
                 try
                 {
-                    Assert.False(t.Execute()); // "This test should've failed (xsl with error)."
+                    Assert.IsFalse(t.Execute()); // "This test should've failed (xsl with error)."
                     Console.WriteLine(engine.Log);
                 }
                 catch (Exception e)
@@ -888,7 +888,7 @@ namespace Microsoft.Build.UnitTests
                 using (StreamReader sr = new StreamReader(t.OutputPaths[0].ItemSpec))
                 {
                     string fileContents = sr.ReadToEnd();
-                    Assert.Equal(expectedOutput, fileContents);
+                    Assert.AreEqual(expectedOutput, fileContents);
                 }
             }
 
@@ -965,17 +965,17 @@ namespace Microsoft.Build.UnitTests
                 t.XslInputPath = xslPath;
                 t.XmlInputPaths = xmlMultiPaths;
                 t.OutputPaths = outputMultiPaths;
-                Assert.True(t.Execute(), "CompiledDllWithTwoTypes execution should've passed" + engine.Log);
+                Assert.IsTrue(t.Execute(), "CompiledDllWithTwoTypes execution should've passed" + engine.Log);
                 Console.WriteLine(engine.Log);
                 foreach (TaskItem tsk in t.OutputPaths)
                 {
-                    Assert.True(File.Exists(tsk.ItemSpec), tsk.ItemSpec + " should exist on output dir");
+                    Assert.IsTrue(File.Exists(tsk.ItemSpec), tsk.ItemSpec + " should exist on output dir");
                 }
 
                 // The first and second input XML files are not equivalent, so their output files
                 // should be different
-                Assert.NotEqual(new FileInfo(xmlMultiPaths[0].ItemSpec).Length, new FileInfo(xmlMultiPaths[1].ItemSpec).Length);
-                Assert.NotEqual(new FileInfo(outputMultiPaths[0].ItemSpec).Length, new FileInfo(outputMultiPaths[1].ItemSpec).Length);
+                Assert.AreNotEqual(new FileInfo(xmlMultiPaths[0].ItemSpec).Length, new FileInfo(xmlMultiPaths[1].ItemSpec).Length);
+                Assert.AreNotEqual(new FileInfo(outputMultiPaths[0].ItemSpec).Length, new FileInfo(outputMultiPaths[1].ItemSpec).Length);
 
                 System.Diagnostics.Debug.WriteLine(engine.Log);
             }
@@ -1016,7 +1016,7 @@ namespace Microsoft.Build.UnitTests
                 t.XslInputPath = xslPath;
                 t.XmlInputPaths = xmlMultiPaths;
                 t.OutputPaths = outputMultiPathsShort;
-                Assert.False(t.Execute(), "CompiledDllWithTwoTypes execution should've failed" + engine.Log);
+                Assert.IsFalse(t.Execute(), "CompiledDllWithTwoTypes execution should've failed" + engine.Log);
 
                 System.Diagnostics.Debug.WriteLine(engine.Log);
             }
@@ -1028,7 +1028,7 @@ namespace Microsoft.Build.UnitTests
                 t.XslInputPath = xslPath;
                 t.XmlInputPaths = xmlMultiPaths;
                 t.OutputPaths = outputMultiPathsLong;
-                Assert.False(t.Execute(), "CompiledDllWithTwoTypes execution should've failed" + engine.Log);
+                Assert.IsFalse(t.Execute(), "CompiledDllWithTwoTypes execution should've failed" + engine.Log);
                 Console.WriteLine(engine.Log);
 
                 System.Diagnostics.Debug.WriteLine(engine.Log);
@@ -1076,7 +1076,7 @@ namespace Microsoft.Build.UnitTests
             t.XslInputPath = otherXslPath;
             t.UseTrustedSettings = true;
 
-            Assert.True(t.Execute()); // "Test should have passed and allowed the use of the document() function within the xslt file"
+            Assert.IsTrue(t.Execute()); // "Test should have passed and allowed the use of the document() function within the xslt file"
 
             // Validate that execution fails when UseTrustedSettings is false
             t = new XslTransformation();
@@ -1086,7 +1086,7 @@ namespace Microsoft.Build.UnitTests
             t.XslInputPath = otherXslPath;
             t.UseTrustedSettings = false;
 
-            Assert.False(t.Execute()); // "Test should have failed and not allowed the use of the document() function within the xslt file"
+            Assert.IsFalse(t.Execute()); // "Test should have failed and not allowed the use of the document() function within the xslt file"
             engine.Log.ShouldContain("MSB3703"); // "The log should contain MSB3703 error message at XslDocumentFunctionWorks test"
 
             CleanUp(dir);

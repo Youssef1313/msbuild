@@ -404,9 +404,9 @@ namespace Microsoft.Build.UnitTests
             tokenKey = tokenKey.Replace("Token", "");
             Console.WriteLine(tokenKey);
 
-            Assert.Equal(expectedSource, results);
-            Assert.Equal(expectedTokenKey, tokenKey);
-            Assert.Equal(expectedLastLineNumber, lastLine);
+            Assert.AreEqual(expectedSource, results);
+            Assert.AreEqual(expectedTokenKey, tokenKey);
+            Assert.AreEqual(expectedLastLineNumber, lastLine);
         }
     }
 }

@@ -28,11 +28,11 @@ namespace Microsoft.Build.UnitTests
 
             bool success = t.Execute();
 
-            Assert.True(success);
+            Assert.IsTrue(success);
             Assert.Single(t.InPath);
             Assert.Single(t.OutOfPath);
-            Assert.Equal(FileUtilities.FixFilePath(@"C:\MyProject\File1.txt"), t.InPath[0].ItemSpec);
-            Assert.Equal(FileUtilities.FixFilePath(@"C:\SomeoneElsesProject\File2.txt"), t.OutOfPath[0].ItemSpec);
+            Assert.AreEqual(FileUtilities.FixFilePath(@"C:\MyProject\File1.txt"), t.InPath[0].ItemSpec);
+            Assert.AreEqual(FileUtilities.FixFilePath(@"C:\SomeoneElsesProject\File2.txt"), t.OutOfPath[0].ItemSpec);
         }
 
         [WindowsFullFrameworkOnlyFact(additionalMessage: ".NET Core 2.1+ no longer validates paths: https://github.com/dotnet/corefx/issues/27779#issuecomment-371253486. On Unix there is no invalid file name characters.")]
@@ -46,7 +46,7 @@ namespace Microsoft.Build.UnitTests
 
             bool success = t.Execute();
 
-            Assert.False(success);
+            Assert.IsFalse(success);
 
             // Don't crash
         }
@@ -62,7 +62,7 @@ namespace Microsoft.Build.UnitTests
 
             bool success = t.Execute();
 
-            Assert.False(success);
+            Assert.IsFalse(success);
 
             // Don't crash
         }
@@ -104,11 +104,11 @@ namespace Microsoft.Build.UnitTests
             bool success;
             RunTask(t, out testFile, out success);
 
-            Assert.True(success);
+            Assert.IsTrue(success);
             Assert.Single(t.InPath);
             Assert.Single(t.OutOfPath);
-            Assert.Equal(testFile.FullName, t.InPath[0].ItemSpec);
-            Assert.Equal(NativeMethodsShared.IsWindows ? @"C:\SomeoneElsesProject\File2.txt" : "/SomeoneElsesProject/File2.txt",
+            Assert.AreEqual(testFile.FullName, t.InPath[0].ItemSpec);
+            Assert.AreEqual(NativeMethodsShared.IsWindows ? @"C:\SomeoneElsesProject\File2.txt" : "/SomeoneElsesProject/File2.txt",
                 t.OutOfPath[0].ItemSpec);
         }
 
@@ -126,11 +126,11 @@ namespace Microsoft.Build.UnitTests
             bool success;
             RunTask(t, out testFile, out success);
 
-            Assert.True(success);
+            Assert.IsTrue(success);
             Assert.Single(t.InPath);
             Assert.Single(t.OutOfPath);
-            Assert.Equal(testFile.Name, t.InPath[0].ItemSpec);
-            Assert.Equal(NativeMethodsShared.IsWindows ? @"C:\SomeoneElsesProject\File2.txt" : "/SomeoneElsesProject/File2.txt",
+            Assert.AreEqual(testFile.Name, t.InPath[0].ItemSpec);
+            Assert.AreEqual(NativeMethodsShared.IsWindows ? @"C:\SomeoneElsesProject\File2.txt" : "/SomeoneElsesProject/File2.txt",
                 t.OutOfPath[0].ItemSpec);
         }
     }

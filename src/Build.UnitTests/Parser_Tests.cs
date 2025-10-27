@@ -146,7 +146,7 @@ namespace Microsoft.Build.UnitTests
                 Console.WriteLine(e.BaseMessage);
                 fExceptionCaught = true;
             }
-            Assert.True(fExceptionCaught);
+            Assert.IsTrue(fExceptionCaught);
 
             fExceptionCaught = false;
             try
@@ -158,7 +158,7 @@ namespace Microsoft.Build.UnitTests
                 Console.WriteLine(e.BaseMessage);
                 fExceptionCaught = true;
             }
-            Assert.True(fExceptionCaught);
+            Assert.IsTrue(fExceptionCaught);
 
             fExceptionCaught = false;
             try
@@ -170,7 +170,7 @@ namespace Microsoft.Build.UnitTests
                 Console.WriteLine(e.BaseMessage);
                 fExceptionCaught = true;
             }
-            Assert.True(fExceptionCaught);
+            Assert.IsTrue(fExceptionCaught);
 
             fExceptionCaught = false;
             try
@@ -182,7 +182,7 @@ namespace Microsoft.Build.UnitTests
                 Console.WriteLine(e.BaseMessage);
                 fExceptionCaught = true;
             }
-            Assert.True(fExceptionCaught);
+            Assert.IsTrue(fExceptionCaught);
 
             fExceptionCaught = false;
             try
@@ -194,7 +194,7 @@ namespace Microsoft.Build.UnitTests
                 Console.WriteLine(e.BaseMessage);
                 fExceptionCaught = true;
             }
-            Assert.True(fExceptionCaught);
+            Assert.IsTrue(fExceptionCaught);
 
             fExceptionCaught = false;
             try
@@ -206,7 +206,7 @@ namespace Microsoft.Build.UnitTests
                 Console.WriteLine(e.BaseMessage);
                 fExceptionCaught = true;
             }
-            Assert.True(fExceptionCaught);
+            Assert.IsTrue(fExceptionCaught);
         }
 
         [Fact]
@@ -218,7 +218,7 @@ namespace Microsoft.Build.UnitTests
             GenericExpressionNode tree = p.Parse("@(item->foo('ab'))",
                 ParserOptions.AllowProperties | ParserOptions.AllowItemLists, _elementLocation);
             Assert.IsType<StringExpressionNode>(tree);
-            Assert.Equal("@(item->foo('ab'))", tree.GetUnexpandedValue(null));
+            Assert.AreEqual("@(item->foo('ab'))", tree.GetUnexpandedValue(null));
 
             tree = p.Parse("!@(item->foo())",
                 ParserOptions.AllowProperties | ParserOptions.AllowItemLists, _elementLocation);
@@ -245,7 +245,7 @@ namespace Microsoft.Build.UnitTests
                 Console.WriteLine(e.BaseMessage);
                 fExceptionCaught = true;
             }
-            Assert.True(fExceptionCaught);
+            Assert.IsTrue(fExceptionCaught);
 
             fExceptionCaught = false;
             try
@@ -257,7 +257,7 @@ namespace Microsoft.Build.UnitTests
                 Console.WriteLine(e.BaseMessage);
                 fExceptionCaught = true;
             }
-            Assert.True(fExceptionCaught);
+            Assert.IsTrue(fExceptionCaught);
 
             fExceptionCaught = false;
             try
@@ -269,7 +269,7 @@ namespace Microsoft.Build.UnitTests
                 Console.WriteLine(e.BaseMessage);
                 fExceptionCaught = true;
             }
-            Assert.True(fExceptionCaught);
+            Assert.IsTrue(fExceptionCaught);
 
             fExceptionCaught = false;
             try
@@ -281,7 +281,7 @@ namespace Microsoft.Build.UnitTests
                 Console.WriteLine(e.BaseMessage);
                 fExceptionCaught = true;
             }
-            Assert.True(fExceptionCaught);
+            Assert.IsTrue(fExceptionCaught);
 
             fExceptionCaught = false;
             try
@@ -293,7 +293,7 @@ namespace Microsoft.Build.UnitTests
                 Console.WriteLine(e.BaseMessage);
                 fExceptionCaught = true;
             }
-            Assert.True(fExceptionCaught);
+            Assert.IsTrue(fExceptionCaught);
 
             fExceptionCaught = false;
             try
@@ -305,7 +305,7 @@ namespace Microsoft.Build.UnitTests
                 Console.WriteLine(e.BaseMessage);
                 fExceptionCaught = true;
             }
-            Assert.True(fExceptionCaught);
+            Assert.IsTrue(fExceptionCaught);
         }
 
         /// <summary>
@@ -329,7 +329,7 @@ namespace Microsoft.Build.UnitTests
                 Console.WriteLine(e.BaseMessage);
                 fExceptionCaught = true;
             }
-            Assert.True(fExceptionCaught);
+            Assert.IsTrue(fExceptionCaught);
 
             try
             {
@@ -342,7 +342,7 @@ namespace Microsoft.Build.UnitTests
                 Console.WriteLine(e.BaseMessage);
                 fExceptionCaught = true;
             }
-            Assert.True(fExceptionCaught);
+            Assert.IsTrue(fExceptionCaught);
             try
             {
                 fExceptionCaught = false;
@@ -354,7 +354,7 @@ namespace Microsoft.Build.UnitTests
                 Console.WriteLine(e.BaseMessage);
                 fExceptionCaught = true;
             }
-            Assert.True(fExceptionCaught);
+            Assert.IsTrue(fExceptionCaught);
 
             try
             {
@@ -367,7 +367,7 @@ namespace Microsoft.Build.UnitTests
                 Console.WriteLine(e.BaseMessage);
                 fExceptionCaught = true;
             }
-            Assert.True(fExceptionCaught);
+            Assert.IsTrue(fExceptionCaught);
 
             try
             {
@@ -380,7 +380,7 @@ namespace Microsoft.Build.UnitTests
                 Console.WriteLine(e.BaseMessage);
                 fExceptionCaught = true;
             }
-            Assert.True(fExceptionCaught);
+            Assert.IsTrue(fExceptionCaught);
 
             try
             {
@@ -393,7 +393,7 @@ namespace Microsoft.Build.UnitTests
                 Console.WriteLine(e.BaseMessage);
                 fExceptionCaught = true;
             }
-            Assert.True(fExceptionCaught);
+            Assert.IsTrue(fExceptionCaught);
             try
             {
                 fExceptionCaught = false;
@@ -405,7 +405,7 @@ namespace Microsoft.Build.UnitTests
                 Console.WriteLine(e.BaseMessage);
                 fExceptionCaught = true;
             }
-            Assert.True(fExceptionCaught);
+            Assert.IsTrue(fExceptionCaught);
 
             try
             {
@@ -418,7 +418,7 @@ namespace Microsoft.Build.UnitTests
                 Console.WriteLine(e.BaseMessage);
                 fExceptionCaught = true;
             }
-            Assert.True(fExceptionCaught);
+            Assert.IsTrue(fExceptionCaught);
             try
             {
                 fExceptionCaught = false;
@@ -430,7 +430,7 @@ namespace Microsoft.Build.UnitTests
                 Console.WriteLine(e.BaseMessage);
                 fExceptionCaught = true;
             }
-            Assert.True(fExceptionCaught);
+            Assert.IsTrue(fExceptionCaught);
         }
 
         /// <summary>
@@ -577,23 +577,23 @@ namespace Microsoft.Build.UnitTests
             var project = ObjectModelHelpers.CreateInMemoryProject(projectContent);
 
             var projectItem = project.GetItems("A").FirstOrDefault();
-            Assert.Equal("bar", projectItem.EvaluatedInclude);
+            Assert.AreEqual("bar", projectItem.EvaluatedInclude);
 
             var metadatam = projectItem.GetMetadata("m");
             if (context)
             {
                 // Go to when
-                Assert.Equal("m1", metadatam.EvaluatedValue);
+                Assert.AreEqual("m1", metadatam.EvaluatedValue);
             }
             else
             {
                 // Go to Otherwise
-                Assert.Equal("m2", metadatam.EvaluatedValue);
+                Assert.AreEqual("m2", metadatam.EvaluatedValue);
             }
 
             var metadatan = projectItem.GetMetadata("n");
-            Assert.Equal("n1", metadatan.EvaluatedValue);
-            Assert.Equal("n2", metadatan.Predecessor.EvaluatedValue);
+            Assert.AreEqual("n1", metadatan.EvaluatedValue);
+            Assert.AreEqual("n2", metadatan.Predecessor.EvaluatedValue);
         }
     }
 }

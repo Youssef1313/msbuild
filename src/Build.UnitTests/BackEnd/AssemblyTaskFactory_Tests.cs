@@ -133,7 +133,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         [Fact]
         public void CreatableByTaskFactoryGoodName()
         {
-            Assert.True(_taskFactory.TaskNameCreatableByFactory("TaskToTestFactories", TaskHostParameters.Empty, String.Empty, null, ElementLocation.Create(".", 1, 1)));
+            Assert.IsTrue(_taskFactory.TaskNameCreatableByFactory("TaskToTestFactories", TaskHostParameters.Empty, String.Empty, null, ElementLocation.Create(".", 1, 1)));
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         [Fact]
         public void CreatableByTaskFactoryNotInAssembly()
         {
-            Assert.False(_taskFactory.TaskNameCreatableByFactory("NotInAssembly", TaskHostParameters.Empty, String.Empty, null, ElementLocation.Create(".", 1, 1)));
+            Assert.IsFalse(_taskFactory.TaskNameCreatableByFactory("NotInAssembly", TaskHostParameters.Empty, String.Empty, null, ElementLocation.Create(".", 1, 1)));
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         {
             Assert.Throws<InvalidProjectFileException>(() =>
             {
-                Assert.False(_taskFactory.TaskNameCreatableByFactory(String.Empty, TaskHostParameters.Empty, String.Empty, null, ElementLocation.Create(".", 1, 1)));
+                Assert.IsFalse(_taskFactory.TaskNameCreatableByFactory(String.Empty, TaskHostParameters.Empty, String.Empty, null, ElementLocation.Create(".", 1, 1)));
             });
         }
         /// <summary>
@@ -164,7 +164,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         {
             Assert.Throws<InvalidProjectFileException>(() =>
             {
-                Assert.False(_taskFactory.TaskNameCreatableByFactory(null, TaskHostParameters.Empty, String.Empty, null, ElementLocation.Create(".", 1, 1)));
+                Assert.IsFalse(_taskFactory.TaskNameCreatableByFactory(null, TaskHostParameters.Empty, String.Empty, null, ElementLocation.Create(".", 1, 1)));
             });
         }
         /// <summary>
@@ -179,7 +179,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             TaskHostParameters taskIdentityParameters = new(XMakeAttributes.GetCurrentMSBuildRuntime(), XMakeAttributes.GetCurrentMSBuildArchitecture());
 
-            Assert.True(_taskFactory.TaskNameCreatableByFactory("TaskToTestFactories", taskIdentityParameters, String.Empty, null, ElementLocation.Create(".", 1, 1)));
+            Assert.IsTrue(_taskFactory.TaskNameCreatableByFactory("TaskToTestFactories", taskIdentityParameters, String.Empty, null, ElementLocation.Create(".", 1, 1)));
         }
 
         /// <summary>
@@ -195,7 +195,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             TaskHostParameters taskIdentityParameters = new(XMakeAttributes.MSBuildRuntimeValues.clr4, XMakeAttributes.MSBuildArchitectureValues.currentArchitecture);
 
-            Assert.False(_taskFactory.TaskNameCreatableByFactory("TaskToTestFactories", taskIdentityParameters, String.Empty, null, ElementLocation.Create(".", 1, 1)));
+            Assert.IsFalse(_taskFactory.TaskNameCreatableByFactory("TaskToTestFactories", taskIdentityParameters, String.Empty, null, ElementLocation.Create(".", 1, 1)));
         }
 
         /// <summary>
@@ -207,7 +207,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             TaskPropertyInfo[] propertyInfos = _taskFactory.GetTaskParameters();
             LoadedType comparisonType = new LoadedType(typeof(TaskToTestFactories), _loadInfo, typeof(TaskToTestFactories).GetTypeInfo().Assembly, typeof(ITaskItem));
             PropertyInfo[] comparisonInfo = comparisonType.Type.GetProperties(BindingFlags.Instance | BindingFlags.Public);
-            Assert.Equal(comparisonInfo.Length, propertyInfos.Length);
+            Assert.AreEqual(comparisonInfo.Length, propertyInfos.Length);
 
             bool foundExpectedParameter = false;
             bool foundNotExpectedParameter = false;
@@ -225,8 +225,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 }
             }
 
-            Assert.True(foundExpectedParameter);
-            Assert.False(foundNotExpectedParameter);
+            Assert.IsTrue(foundExpectedParameter);
+            Assert.IsFalse(foundNotExpectedParameter);
         }
 
         /// <summary>
@@ -276,8 +276,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
                     false,
                     scheduledNodeId: 1,
                     (string propName) => ProjectPropertyInstance.Create("test", "test"));
-                Assert.NotNull(createdTask);
-                Assert.False(createdTask is TaskHostTask);
+                Assert.IsNotNull(createdTask);
+                Assert.IsFalse(createdTask is TaskHostTask);
             }
             finally
             {
@@ -307,8 +307,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
                     false,
                     scheduledNodeId: 1,
                     (string propName) => ProjectPropertyInstance.Create("test", "test"));
-                Assert.NotNull(createdTask);
-                Assert.False(createdTask is TaskHostTask);
+                Assert.IsNotNull(createdTask);
+                Assert.IsFalse(createdTask is TaskHostTask);
             }
             finally
             {
@@ -340,8 +340,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
                     false,
                     scheduledNodeId: 1,
                     (string propName) => ProjectPropertyInstance.Create("test", "test"));
-                Assert.NotNull(createdTask);
-                Assert.False(createdTask is TaskHostTask);
+                Assert.IsNotNull(createdTask);
+                Assert.IsFalse(createdTask is TaskHostTask);
             }
             finally
             {
@@ -373,8 +373,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
                     false,
                     scheduledNodeId: 1,
                     (string propName) => ProjectPropertyInstance.Create("test", "test"));
-                Assert.NotNull(createdTask);
-                Assert.False(createdTask is TaskHostTask);
+                Assert.IsNotNull(createdTask);
+                Assert.IsFalse(createdTask is TaskHostTask);
             }
             finally
             {
@@ -408,8 +408,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
                     false,
                     scheduledNodeId: 1,
                     (string propName) => ProjectPropertyInstance.Create("test", "test"));
-                Assert.NotNull(createdTask);
-                Assert.False(createdTask is TaskHostTask);
+                Assert.IsNotNull(createdTask);
+                Assert.IsFalse(createdTask is TaskHostTask);
             }
             finally
             {
@@ -441,7 +441,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                     false,
                     scheduledNodeId: 1,
                     (string propName) => ProjectPropertyInstance.Create("test", "test"));
-                Assert.NotNull(createdTask);
+                Assert.IsNotNull(createdTask);
                 Assert.IsType<TaskHostTask>(createdTask);
             }
             finally
@@ -472,7 +472,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                     false,
                     scheduledNodeId: 1,
                     (string propName) => ProjectPropertyInstance.Create("test", "test"));
-                Assert.NotNull(createdTask);
+                Assert.IsNotNull(createdTask);
                 Assert.IsType<TaskHostTask>(createdTask);
             }
             finally
@@ -507,7 +507,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                     false,
                     scheduledNodeId: 1,
                     (string propName) => ProjectPropertyInstance.Create("test", "test"));
-                Assert.NotNull(createdTask);
+                Assert.IsNotNull(createdTask);
                 Assert.IsType<TaskHostTask>(createdTask);
             }
             finally
@@ -538,7 +538,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                     false,
                     scheduledNodeId: 1,
                     (string propName) => ProjectPropertyInstance.Create("test", "test"));
-                Assert.NotNull(createdTask);
+                Assert.IsNotNull(createdTask);
                 Assert.IsType<TaskHostTask>(createdTask);
             }
             finally
@@ -571,7 +571,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                     false,
                     scheduledNodeId: 1,
                     (string propName) => ProjectPropertyInstance.Create("test", "test"));
-                Assert.NotNull(createdTask);
+                Assert.IsNotNull(createdTask);
                 Assert.IsType<TaskHostTask>(createdTask);
             }
             finally
@@ -604,7 +604,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                     false,
                     scheduledNodeId: 1,
                     (string propName) => ProjectPropertyInstance.Create("test", "test"));
-                Assert.NotNull(createdTask);
+                Assert.IsNotNull(createdTask);
                 Assert.IsType<TaskHostTask>(createdTask);
             }
             finally
@@ -638,7 +638,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                     false,
                     scheduledNodeId: 1,
                     (string propName) => ProjectPropertyInstance.Create("test", "test"));
-                Assert.NotNull(createdTask);
+                Assert.IsNotNull(createdTask);
                 Assert.IsNotType<TaskHostTask>(createdTask);
             }
             finally
@@ -661,7 +661,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                     false,
                     scheduledNodeId: 1,
                     (string propName) => ProjectPropertyInstance.Create("test", "test"));
-                Assert.NotNull(createdTask);
+                Assert.IsNotNull(createdTask);
                 Assert.IsType<TaskHostTask>(createdTask);
             }
             finally
@@ -692,7 +692,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 factoryParameters = factoryParameters.WithTaskHostFactoryExplicitlyRequested(true);
             }
             _loadedType = _taskFactory.InitializeFactory(_loadInfo, "TaskToTestFactories", new Dictionary<string, TaskPropertyInfo>(), string.Empty, factoryParameters, explicitlyLaunchTaskHost, null, ElementLocation.Create("NONE"), String.Empty);
-            Assert.True(_loadedType.Assembly.Equals(_loadInfo)); // "Expected the AssemblyLoadInfo to be equal"
+            Assert.IsTrue(_loadedType.Assembly.Equals(_loadInfo)); // "Expected the AssemblyLoadInfo to be equal"
         }
 
         #endregion

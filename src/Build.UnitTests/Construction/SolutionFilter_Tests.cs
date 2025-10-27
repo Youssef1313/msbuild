@@ -207,7 +207,7 @@ namespace Microsoft.Build.Engine.UnitTests.Construction
             """, "MSBuild.SolutionFilterMissingSolutionError")]
         public void InvalidSolutionFilters([StringSyntax(StringSyntaxAttribute.Json)] string slnfValue, string exceptionReason)
         {
-            Assert.False(File.Exists("C:\\notAPath2\\MSBuild.Dev.sln"));
+            Assert.IsFalse(File.Exists("C:\\notAPath2\\MSBuild.Dev.sln"));
             using (TestEnvironment testEnvironment = TestEnvironment.Create())
             {
                 TransientTestFolder folder = testEnvironment.CreateFolder(createFolder: true);
@@ -331,7 +331,7 @@ EndGlobal
             SolutionFile sp = SolutionFile.Parse(slnf.Path);
 
             // just assert that no error is thrown
-            Assert.True(sp.ProjectShouldBuild("SolutionTest.csproj"));
+            Assert.IsTrue(sp.ProjectShouldBuild("SolutionTest.csproj"));
         }
 
         /// <summary>

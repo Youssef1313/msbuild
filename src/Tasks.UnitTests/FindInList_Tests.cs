@@ -21,8 +21,8 @@ namespace Microsoft.Build.UnitTests
             f.BuildEngine = new MockEngine();
             f.ItemSpecToFind = "a.cs";
             f.List = new ITaskItem[] { new TaskItem("A.CS"), new TaskItem("b.cs") };
-            Assert.True(f.Execute());
-            Assert.Equal("A.CS", f.ItemFound.ItemSpec);
+            Assert.IsTrue(f.Execute());
+            Assert.AreEqual("A.CS", f.ItemFound.ItemSpec);
         }
 
         [Fact]
@@ -33,8 +33,8 @@ namespace Microsoft.Build.UnitTests
             f.ItemSpecToFind = "a.cs";
             f.CaseSensitive = true;
             f.List = new ITaskItem[] { new TaskItem("A.CS"), new TaskItem("a.cs") };
-            Assert.True(f.Execute());
-            Assert.Equal("a.cs", f.ItemFound.ItemSpec);
+            Assert.IsTrue(f.Execute());
+            Assert.AreEqual("a.cs", f.ItemFound.ItemSpec);
         }
 
         [Fact]
@@ -45,8 +45,8 @@ namespace Microsoft.Build.UnitTests
             f.ItemSpecToFind = "a.cs";
             f.CaseSensitive = true;
             f.List = new ITaskItem[] { new TaskItem("A.CS"), new TaskItem("b.cs") };
-            Assert.True(f.Execute());
-            Assert.Null(f.ItemFound);
+            Assert.IsTrue(f.Execute());
+            Assert.IsNull(f.ItemFound);
         }
 
         [Fact]
@@ -60,9 +60,9 @@ namespace Microsoft.Build.UnitTests
             ITaskItem item2 = new TaskItem("a.cs");
             item2.SetMetadata("id", "2");
             f.List = new ITaskItem[] { item1, item2 };
-            Assert.True(f.Execute());
-            Assert.Equal("a.cs", f.ItemFound.ItemSpec);
-            Assert.Equal(item1.GetMetadata("id"), f.ItemFound.GetMetadata("id"));
+            Assert.IsTrue(f.Execute());
+            Assert.AreEqual("a.cs", f.ItemFound.ItemSpec);
+            Assert.AreEqual(item1.GetMetadata("id"), f.ItemFound.GetMetadata("id"));
         }
 
         /// <summary>
@@ -80,9 +80,9 @@ namespace Microsoft.Build.UnitTests
             ITaskItem item2 = new TaskItem("a.cs");
             item2.SetMetadata("id", "2");
             f.List = new ITaskItem[] { item1, item2 };
-            Assert.True(f.Execute()); // "Expect success"
-            Assert.Equal("a.cs", f.ItemFound.ItemSpec);
-            Assert.Equal(item2.GetMetadata("id"), f.ItemFound.GetMetadata("id"));
+            Assert.IsTrue(f.Execute()); // "Expect success"
+            Assert.AreEqual("a.cs", f.ItemFound.ItemSpec);
+            Assert.AreEqual(item2.GetMetadata("id"), f.ItemFound.GetMetadata("id"));
         }
 
         [Fact]
@@ -93,8 +93,8 @@ namespace Microsoft.Build.UnitTests
             f.ItemSpecToFind = "a.cs";
             f.FindLastMatch = true;
             f.List = Array.Empty<ITaskItem>();
-            Assert.True(f.Execute());
-            Assert.Null(f.ItemFound);
+            Assert.IsTrue(f.Execute());
+            Assert.IsNull(f.ItemFound);
         }
 
         [Fact]
@@ -104,8 +104,8 @@ namespace Microsoft.Build.UnitTests
             f.BuildEngine = new MockEngine();
             f.ItemSpecToFind = "a.cs";
             f.List = new ITaskItem[] { new TaskItem("foo\a.cs"), new TaskItem("b.cs") };
-            Assert.True(f.Execute());
-            Assert.Null(f.ItemFound);
+            Assert.IsTrue(f.Execute());
+            Assert.IsNull(f.ItemFound);
         }
 
         [Fact]
@@ -116,8 +116,8 @@ namespace Microsoft.Build.UnitTests
             f.ItemSpecToFind = "a.cs";
             f.MatchFileNameOnly = true;
             f.List = new ITaskItem[] { new TaskItem(@"c:\foo\a.cs"), new TaskItem("b.cs") };
-            Assert.True(f.Execute());
-            Assert.Equal(FileUtilities.FixFilePath(@"c:\foo\a.cs"), f.ItemFound.ItemSpec);
+            Assert.IsTrue(f.Execute());
+            Assert.AreEqual(FileUtilities.FixFilePath(@"c:\foo\a.cs"), f.ItemFound.ItemSpec);
         }
 
         [Fact]
@@ -129,10 +129,10 @@ namespace Microsoft.Build.UnitTests
             f.ItemSpecToFind = "a.cs";
             f.MatchFileNameOnly = true;
             f.List = new ITaskItem[] { new TaskItem(@"!@#$@$%|"), new TaskItem(@"foo\a.cs"), new TaskItem("b.cs") };
-            Assert.True(f.Execute());
+            Assert.IsTrue(f.Execute());
             Console.WriteLine(e.Log);
             // Should ignore the invalid paths
-            Assert.Equal(FileUtilities.FixFilePath(@"foo\a.cs"), f.ItemFound.ItemSpec);
+            Assert.AreEqual(FileUtilities.FixFilePath(@"foo\a.cs"), f.ItemFound.ItemSpec);
         }
     }
 }

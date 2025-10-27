@@ -17,8 +17,8 @@ public sealed class UsedUninitializedProperties_Tests
     {
         PropertiesUseTracker props = new(TestLoggingContext.CreateTestContext(new BuildEventContext(1, 2, 3, 4)));
 
-        Assert.False(props.TryGetPropertyElementLocation("Hello", out IElementLocation? elementLocation));
-        Assert.Null(elementLocation);
+        Assert.IsFalse(props.TryGetPropertyElementLocation("Hello", out IElementLocation? elementLocation));
+        Assert.IsNull(elementLocation);
 
         props.RemoveProperty("Hello");
 
@@ -28,16 +28,16 @@ public sealed class UsedUninitializedProperties_Tests
         props.TryAdd("Hello", location1);
         props.TryAdd("Hello", location2);
 
-        Assert.True(props.TryGetPropertyElementLocation("Hello", out elementLocation));
-        Assert.Same(location1, elementLocation);
+        Assert.IsTrue(props.TryGetPropertyElementLocation("Hello", out elementLocation));
+        Assert.AreSame(location1, elementLocation);
 
-        Assert.True(props.TryGetPropertyElementLocation("Hello", out elementLocation));
-        Assert.Same(location1, elementLocation);
+        Assert.IsTrue(props.TryGetPropertyElementLocation("Hello", out elementLocation));
+        Assert.AreSame(location1, elementLocation);
 
         props.RemoveProperty("Hello");
 
-        Assert.False(props.TryGetPropertyElementLocation("Hello", out elementLocation));
-        Assert.Null(elementLocation);
+        Assert.IsFalse(props.TryGetPropertyElementLocation("Hello", out elementLocation));
+        Assert.IsNull(elementLocation);
 
         props.RemoveProperty("Hello");
     }

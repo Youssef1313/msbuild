@@ -100,10 +100,10 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             List<ProjectImportElement> imports = Helpers.MakeList(project.Imports);
 
-            Assert.Equal(2, imports.Count);
-            Assert.Equal("i1.proj", imports[0].Project);
-            Assert.Equal("i2.proj", imports[1].Project);
-            Assert.Equal("c", imports[1].Condition);
+            Assert.AreEqual(2, imports.Count);
+            Assert.AreEqual("i1.proj", imports[0].Project);
+            Assert.AreEqual("i2.proj", imports[1].Project);
+            Assert.AreEqual("c", imports[1].Condition);
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectImportElement import = (ProjectImportElement)Helpers.GetFirst(project.Children);
 
             import.Project = "i1b.proj";
-            Assert.Equal("i1b.proj", import.Project);
+            Assert.AreEqual("i1b.proj", import.Project);
         }
 
         /// <summary>
@@ -180,11 +180,11 @@ namespace Microsoft.Build.UnitTests.OM.Construction
                 ProjectImportElement import = Helpers.GetFirst(project.Xml.Imports);
                 import.Project = file2;
 
-                Assert.Equal("v1", project.GetPropertyValue("p"));
+                Assert.AreEqual("v1", project.GetPropertyValue("p"));
 
                 project.ReevaluateIfNecessary();
 
-                Assert.Equal("v2", project.GetPropertyValue("p"));
+                Assert.AreEqual("v2", project.GetPropertyValue("p"));
             }
             finally
             {
@@ -219,11 +219,11 @@ namespace Microsoft.Build.UnitTests.OM.Construction
                 ProjectImportElement import = Helpers.GetFirst(project.Xml.Imports);
                 import.Condition = "false";
 
-                Assert.Equal("v1", project.GetPropertyValue("p"));
+                Assert.AreEqual("v1", project.GetPropertyValue("p"));
 
                 project.ReevaluateIfNecessary();
 
-                Assert.Equal(String.Empty, project.GetPropertyValue("p"));
+                Assert.AreEqual(String.Empty, project.GetPropertyValue("p"));
             }
             finally
             {

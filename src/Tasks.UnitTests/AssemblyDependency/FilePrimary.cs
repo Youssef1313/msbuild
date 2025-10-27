@@ -69,7 +69,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
 
             bool succeeded = Execute(t);
 
-            Assert.True(succeeded);
+            Assert.IsTrue(succeeded);
             Assert.Single(t.ResolvedFiles);
             t.ResolvedFiles[0].GetMetadata("FusionName").ShouldBe("UnifyMe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, ProcessorArchitecture=MSIL", StringCompareShould.IgnoreCase);
 
@@ -116,7 +116,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
 
                 bool succeeded = Execute(t);
 
-                Assert.False(succeeded);
+                Assert.IsFalse(succeeded);
                 engine.AssertLogContains("MSB3249");
             }
             finally
@@ -167,7 +167,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
 
                 bool succeeded = Execute(t);
 
-                Assert.False(succeeded);
+                Assert.IsFalse(succeeded);
                 engine.AssertLogContains("MSB3249");
             }
             finally
@@ -243,7 +243,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
 
                 bool succeeded = Execute(t);
 
-                Assert.True(succeeded);
+                Assert.IsTrue(succeeded);
                 Assert.Empty(t.ResolvedDependencyFiles);
                 engine.AssertLogDoesntContain(
                         String.Format(AssemblyResources.GetString("ResolveAssemblyReference.UnificationByAppConfig"), "1.0.0.0", appConfigFile, Path.Combine(s_myApp_V10Path, "DependsOnUnified.dll")));
@@ -299,7 +299,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
 
             bool succeeded = Execute(t);
 
-            Assert.True(succeeded);
+            Assert.IsTrue(succeeded);
             Assert.Single(t.ResolvedFiles);
             t.ResolvedFiles[0].GetMetadata("FusionName").ShouldBe("UnifyMe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, ProcessorArchitecture=MSIL", StringCompareShould.IgnoreCase);
 
@@ -350,7 +350,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
 
             bool succeeded = Execute(t);
 
-            Assert.True(succeeded);
+            Assert.IsTrue(succeeded);
             Assert.Single(t.ResolvedFiles);
             t.ResolvedFiles[0].GetMetadata("FusionName").ShouldBe("UnifyMe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, ProcessorArchitecture=MSIL", StringCompareShould.IgnoreCase);
 
@@ -401,7 +401,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
 
             bool succeeded = Execute(t);
 
-            Assert.True(succeeded);
+            Assert.IsTrue(succeeded);
             Assert.Single(t.ResolvedFiles);
             t.ResolvedFiles[0].GetMetadata("FusionName").ShouldBe("UnifyMe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, ProcessorArchitecture=MSIL", StringCompareShould.IgnoreCase);
 
@@ -450,9 +450,9 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
 
             bool succeeded = Execute(t);
 
-            Assert.True(succeeded);
+            Assert.IsTrue(succeeded);
             Assert.Single(t.ResolvedFiles);
-            Assert.Equal(t.ResolvedFiles[0].ItemSpec, assemblyFiles[0].ItemSpec);
+            Assert.AreEqual(t.ResolvedFiles[0].ItemSpec, assemblyFiles[0].ItemSpec);
 
 
             // Cleanup.

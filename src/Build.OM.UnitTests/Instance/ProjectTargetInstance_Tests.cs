@@ -25,20 +25,20 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         {
             ProjectTargetInstance target = GetSampleTargetInstance();
 
-            Assert.Equal("t", target.Name);
-            Assert.Equal("c", target.Condition);
-            Assert.Equal("i", target.Inputs);
-            Assert.Equal("o", target.Outputs);
-            Assert.Equal("d", target.DependsOnTargets);
-            Assert.Equal("b", target.BeforeTargets);
-            Assert.Equal("a", target.AfterTargets);
-            Assert.Equal("k", target.KeepDuplicateOutputs);
-            Assert.Equal("r", target.Returns);
-            Assert.Equal("t1", ((ProjectTaskInstance)target.Children[0]).Name);
+            Assert.AreEqual("t", target.Name);
+            Assert.AreEqual("c", target.Condition);
+            Assert.AreEqual("i", target.Inputs);
+            Assert.AreEqual("o", target.Outputs);
+            Assert.AreEqual("d", target.DependsOnTargets);
+            Assert.AreEqual("b", target.BeforeTargets);
+            Assert.AreEqual("a", target.AfterTargets);
+            Assert.AreEqual("k", target.KeepDuplicateOutputs);
+            Assert.AreEqual("r", target.Returns);
+            Assert.AreEqual("t1", ((ProjectTaskInstance)target.Children[0]).Name);
 
             IList<ProjectTaskInstance> tasks = Helpers.MakeList(target.Tasks);
             Assert.Single(tasks);
-            Assert.Equal("t1", tasks[0].Name);
+            Assert.AreEqual("t1", tasks[0].Name);
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
 
             ProjectTargetInstance target = instance.Targets["t"];
 
-            Assert.Equal("i2", target.Inputs);
+            Assert.AreEqual("i2", target.Inputs);
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
 
             ProjectTargetInstance target = instance.Targets["t;"];
 
-            Assert.Equal("i2", target.Inputs);
+            Assert.AreEqual("i2", target.Inputs);
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
 
             ProjectTargetInstance target = instance.Targets["t;"];
 
-            Assert.Equal("i2", target.Inputs);
+            Assert.AreEqual("i2", target.Inputs);
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
                 Project project = new Project(projectXml);
                 ProjectTargetInstance target = project.Targets["t"];
 
-                Assert.Equal(project.FullPath, target.FullPath);
+                Assert.AreEqual(project.FullPath, target.FullPath);
             }
             finally
             {

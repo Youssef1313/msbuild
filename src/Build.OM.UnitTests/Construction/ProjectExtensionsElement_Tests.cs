@@ -35,7 +35,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectRootElement project = projectRootElementFromString.Project;
             ProjectExtensionsElement extensions = (ProjectExtensionsElement)Helpers.GetFirst(project.Children);
 
-            Assert.Equal(@"<a />", extensions.Content);
+            Assert.AreEqual(@"<a />", extensions.Content);
         }
 
         /// <summary>
@@ -85,8 +85,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             extensions.Content = "a<b/>c";
 
-            Assert.Equal(@"a<b />c", extensions.Content);
-            Assert.True(extensions.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual(@"a<b />c", extensions.Content);
+            Assert.IsTrue(extensions.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -122,10 +122,10 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectExtensionsElement extensions = (ProjectExtensionsElement)Helpers.GetFirst(project.Children);
             extensions["a"] = String.Empty;
             content = extensions["a"];
-            Assert.Equal(String.Empty, content);
+            Assert.AreEqual(String.Empty, content);
             extensions["a"] = String.Empty; // make sure it doesn't die or something
 
-            Assert.Equal("y", extensions["b"]);
+            Assert.AreEqual("y", extensions["b"]);
         }
 
         /// <summary>
@@ -148,10 +148,10 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectExtensionsElement extensions = (ProjectExtensionsElement)Helpers.GetFirst(project.Children);
 
             content = extensions["b"];
-            Assert.Equal("y", content);
+            Assert.AreEqual("y", content);
 
             content = extensions["nonexistent"];
-            Assert.Equal(String.Empty, content);
+            Assert.AreEqual(String.Empty, content);
         }
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectExtensionsElement extensions = (ProjectExtensionsElement)Helpers.GetFirst(project.Children);
 
             extensions["c"] = "z";
-            Assert.Equal("z", extensions["c"]);
+            Assert.AreEqual("z", extensions["c"]);
         }
 
         /// <summary>
@@ -197,7 +197,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectExtensionsElement extensions = (ProjectExtensionsElement)Helpers.GetFirst(project.Children);
 
             extensions["b"] = "y2";
-            Assert.Equal("y2", extensions["b"]);
+            Assert.AreEqual("y2", extensions["b"]);
         }
 
         /// <summary>

@@ -60,7 +60,7 @@ namespace Microsoft.Build.Tasks.UnitTests
 
             Helpers.BuildProjectWithNewOMAndBinaryLogger(projectFileContents, binaryLogger, out bool result, out string projectDirectoryPath);
 
-            Assert.Equal(buildShouldSucceed, result);
+            Assert.AreEqual(buildShouldSucceed, result);
 
             string projectImportsZipPath = Path.ChangeExtension(binlog.Path, ".ProjectImports.zip");
             using var fileStream = new FileStream(projectImportsZipPath, FileMode.Open);
@@ -112,7 +112,7 @@ namespace Microsoft.Build.Tasks.UnitTests
 
             Helpers.BuildProjectWithNewOMAndBinaryLogger(projectFileContents, binaryLogger, out bool result, out string projectDirectory);
 
-            Assert.Equal(buildShouldSucceed, result);
+            Assert.AreEqual(buildShouldSucceed, result);
 
             string projectImportsZipPath = Path.ChangeExtension(binlog.Path, ".ProjectImports.zip");
             using var fileStream = new FileStream(projectImportsZipPath, FileMode.Open);

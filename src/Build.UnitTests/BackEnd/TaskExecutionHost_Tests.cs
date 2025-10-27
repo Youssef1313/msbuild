@@ -143,9 +143,9 @@ namespace Microsoft.Build.UnitTests.BackEnd
             var parameters = new Dictionary<string, (string, ElementLocation)>(StringComparer.OrdinalIgnoreCase);
             parameters["ExecuteReturnParam"] = ("true", ElementLocation.Create("foo.proj"));
 
-            Assert.True(_host.SetTaskParameters(parameters));
+            Assert.IsTrue(_host.SetTaskParameters(parameters));
             Assert.Single(_parametersSetOnTask);
-            Assert.True(_parametersSetOnTask.ContainsKey("ExecuteReturnParam"));
+            Assert.IsTrue(_parametersSetOnTask.ContainsKey("ExecuteReturnParam"));
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         {
             var parameters = new Dictionary<string, (string, ElementLocation)>(StringComparer.OrdinalIgnoreCase);
             parameters["NonExistentParam"] = ("foo", ElementLocation.Create("foo.proj"));
-            Assert.False(_host.SetTaskParameters(parameters));
+            Assert.IsFalse(_host.SetTaskParameters(parameters));
         }
 
         #region Bool Params
@@ -337,10 +337,10 @@ namespace Microsoft.Build.UnitTests.BackEnd
         {
             SetTaskParameter("IntArrayParam", "1;0");
 
-            Assert.True(_parametersSetOnTask.ContainsKey("IntArrayParam"));
+            Assert.IsTrue(_parametersSetOnTask.ContainsKey("IntArrayParam"));
 
-            Assert.Equal(1, ((int[])_parametersSetOnTask["IntArrayParam"])[0]);
-            Assert.Equal(0, ((int[])_parametersSetOnTask["IntArrayParam"])[1]);
+            Assert.AreEqual(1, ((int[])_parametersSetOnTask["IntArrayParam"])[0]);
+            Assert.AreEqual(0, ((int[])_parametersSetOnTask["IntArrayParam"])[1]);
         }
 
         /// <summary>
@@ -608,11 +608,11 @@ namespace Microsoft.Build.UnitTests.BackEnd
             var parameters = new Dictionary<string, (string, ElementLocation)>(StringComparer.OrdinalIgnoreCase);
             parameters["ExecuteReturnParam"] = ("true", ElementLocation.Create("foo.proj"));
 
-            Assert.True(_host.SetTaskParameters(parameters));
+            Assert.IsTrue(_host.SetTaskParameters(parameters));
 
             bool executeValue = _host.Execute();
 
-            Assert.True(executeValue);
+            Assert.IsTrue(executeValue);
         }
 
         /// <summary>
@@ -624,11 +624,11 @@ namespace Microsoft.Build.UnitTests.BackEnd
             var parameters = new Dictionary<string, (string, ElementLocation)>(StringComparer.OrdinalIgnoreCase);
             parameters["ExecuteReturnParam"] = ("false", ElementLocation.Create("foo.proj"));
 
-            Assert.True(_host.SetTaskParameters(parameters));
+            Assert.IsTrue(_host.SetTaskParameters(parameters));
 
             bool executeValue = _host.Execute();
 
-            Assert.False(executeValue);
+            Assert.IsFalse(executeValue);
         }
 
         /// <summary>
@@ -645,7 +645,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 Dispose();
                 InitializeHost(true);
 
-                Assert.True(_host.SetTaskParameters(parameters));
+                Assert.IsTrue(_host.SetTaskParameters(parameters));
 
                 _host.Execute();
             });
@@ -940,7 +940,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         {
             Assert.Throws<InvalidProjectFileException>(() =>
             {
-                Assert.False(_host.GatherTaskOutputs("NonExistentOutput", ElementLocation.Create(".", 1, 1), true, "output"));
+                Assert.IsFalse(_host.GatherTaskOutputs("NonExistentOutput", ElementLocation.Create(".", 1, 1), true, "output"));
             });
         }
         /// <summary>
@@ -965,9 +965,9 @@ namespace Microsoft.Build.UnitTests.BackEnd
         public void TestCleanupForTask()
         {
             _host.CleanupForBatch();
-            Assert.NotNull((_host as TaskExecutionHost)._UNITTESTONLY_TaskFactoryWrapper);
+            Assert.IsNotNull((_host as TaskExecutionHost)._UNITTESTONLY_TaskFactoryWrapper);
             _host.CleanupForTask();
-            Assert.Null((_host as TaskExecutionHost)._UNITTESTONLY_TaskFactoryWrapper);
+            Assert.IsNull((_host as TaskExecutionHost)._UNITTESTONLY_TaskFactoryWrapper);
         }
 
         /// <summary>
@@ -1300,11 +1300,11 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// </summary>
         private void ValidateOutputItem(string outputName, string value)
         {
-            Assert.True(_host.GatherTaskOutputs(outputName, ElementLocation.Create(".", 1, 1), true, "output"));
-            Assert.True(_outputsReadFromTask.ContainsKey(outputName));
+            Assert.IsTrue(_host.GatherTaskOutputs(outputName, ElementLocation.Create(".", 1, 1), true, "output"));
+            Assert.IsTrue(_outputsReadFromTask.ContainsKey(outputName));
 
             Assert.Single(_bucket.Lookup.GetItems("output"));
-            Assert.Equal(value, _bucket.Lookup.GetItems("output").First().EvaluatedInclude);
+            Assert.AreEqual(value, _bucket.Lookup.GetItems("output").First().EvaluatedInclude);
         }
 
         /// <summary>
@@ -1312,13 +1312,13 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// </summary>
         private void ValidateOutputItems(string outputName, string[] values)
         {
-            Assert.True(_host.GatherTaskOutputs(outputName, ElementLocation.Create(".", 1, 1), true, "output"));
-            Assert.True(_outputsReadFromTask.ContainsKey(outputName));
+            Assert.IsTrue(_host.GatherTaskOutputs(outputName, ElementLocation.Create(".", 1, 1), true, "output"));
+            Assert.IsTrue(_outputsReadFromTask.ContainsKey(outputName));
 
-            Assert.Equal(values.Length, _bucket.Lookup.GetItems("output").Count);
+            Assert.AreEqual(values.Length, _bucket.Lookup.GetItems("output").Count);
             for (int i = 0; i < values.Length; i++)
             {
-                Assert.Equal(values[i], _bucket.Lookup.GetItems("output").ElementAt(i).EvaluatedInclude);
+                Assert.AreEqual(values[i], _bucket.Lookup.GetItems("output").ElementAt(i).EvaluatedInclude);
             }
         }
 
@@ -1327,13 +1327,13 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// </summary>
         private void ValidateOutputItems(string outputName, ITaskItem[] values)
         {
-            Assert.True(_host.GatherTaskOutputs(outputName, ElementLocation.Create(".", 1, 1), true, "output"));
-            Assert.True(_outputsReadFromTask.ContainsKey(outputName));
+            Assert.IsTrue(_host.GatherTaskOutputs(outputName, ElementLocation.Create(".", 1, 1), true, "output"));
+            Assert.IsTrue(_outputsReadFromTask.ContainsKey(outputName));
 
-            Assert.Equal(values.Length, _bucket.Lookup.GetItems("output").Count);
+            Assert.AreEqual(values.Length, _bucket.Lookup.GetItems("output").Count);
             for (int i = 0; i < values.Length; i++)
             {
-                Assert.Equal(0, TaskItemComparer.Instance.Compare(values[i], new TaskItem(_bucket.Lookup.GetItems("output").ElementAt(i))));
+                Assert.AreEqual(0, TaskItemComparer.Instance.Compare(values[i], new TaskItem(_bucket.Lookup.GetItems("output").ElementAt(i))));
             }
         }
 
@@ -1342,11 +1342,11 @@ namespace Microsoft.Build.UnitTests.BackEnd
         /// </summary>
         private void ValidateOutputProperty(string outputName, string value)
         {
-            Assert.True(_host.GatherTaskOutputs(outputName, ElementLocation.Create(".", 1, 1), false, "output"));
-            Assert.True(_outputsReadFromTask.ContainsKey(outputName));
+            Assert.IsTrue(_host.GatherTaskOutputs(outputName, ElementLocation.Create(".", 1, 1), false, "output"));
+            Assert.IsTrue(_outputsReadFromTask.ContainsKey(outputName));
 
-            Assert.NotNull(_bucket.Lookup.GetProperty("output"));
-            Assert.Equal(value, _bucket.Lookup.GetProperty("output").EvaluatedValue);
+            Assert.IsNotNull(_bucket.Lookup.GetProperty("output"));
+            Assert.AreEqual(value, _bucket.Lookup.GetProperty("output").EvaluatedValue);
         }
 
         /// <summary>
@@ -1356,8 +1356,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
         {
             SetTaskParameter(parameterName, value);
 
-            Assert.True(_parametersSetOnTask.ContainsKey(parameterName));
-            Assert.Equal(expectedValue, _parametersSetOnTask[parameterName]);
+            Assert.IsTrue(_parametersSetOnTask.ContainsKey(parameterName));
+            Assert.AreEqual(expectedValue, _parametersSetOnTask[parameterName]);
         }
 
         /// <summary>
@@ -1367,11 +1367,11 @@ namespace Microsoft.Build.UnitTests.BackEnd
         {
             SetTaskParameter(parameterName, value);
 
-            Assert.True(_parametersSetOnTask.ContainsKey(parameterName));
+            Assert.IsTrue(_parametersSetOnTask.ContainsKey(parameterName));
 
             ITaskItem actualItem = _parametersSetOnTask[parameterName] as ITaskItem;
-            Assert.Equal(value, actualItem.ItemSpec);
-            Assert.Equal(BuiltInMetadata.MetadataCount, actualItem.MetadataCount);
+            Assert.AreEqual(value, actualItem.ItemSpec);
+            Assert.AreEqual(BuiltInMetadata.MetadataCount, actualItem.MetadataCount);
         }
 
         /// <summary>
@@ -1381,10 +1381,10 @@ namespace Microsoft.Build.UnitTests.BackEnd
         {
             SetTaskParameter(parameterName, value);
 
-            Assert.True(_parametersSetOnTask.ContainsKey(parameterName));
+            Assert.IsTrue(_parametersSetOnTask.ContainsKey(parameterName));
 
             ITaskItem actualItem = _parametersSetOnTask[parameterName] as ITaskItem;
-            Assert.Equal(0, TaskItemComparer.Instance.Compare(expectedItem, actualItem));
+            Assert.AreEqual(0, TaskItemComparer.Instance.Compare(expectedItem, actualItem));
         }
 
         /// <summary>
@@ -1394,11 +1394,11 @@ namespace Microsoft.Build.UnitTests.BackEnd
         {
             SetTaskParameter(parameterName, value);
 
-            Assert.True(_parametersSetOnTask.ContainsKey(parameterName));
+            Assert.IsTrue(_parametersSetOnTask.ContainsKey(parameterName));
 
             ITaskItem[] actualItems = _parametersSetOnTask[parameterName] as ITaskItem[];
             Assert.Single(actualItems);
-            Assert.Equal(value, actualItems[0].ItemSpec);
+            Assert.AreEqual(value, actualItems[0].ItemSpec);
         }
 
         /// <summary>
@@ -1408,14 +1408,14 @@ namespace Microsoft.Build.UnitTests.BackEnd
         {
             SetTaskParameter(parameterName, value);
 
-            Assert.True(_parametersSetOnTask.ContainsKey(parameterName));
+            Assert.IsTrue(_parametersSetOnTask.ContainsKey(parameterName));
 
             ITaskItem[] actualItems = _parametersSetOnTask[parameterName] as ITaskItem[];
-            Assert.Equal(expectedItems.Length, actualItems.Length);
+            Assert.AreEqual(expectedItems.Length, actualItems.Length);
 
             for (int i = 0; i < expectedItems.Length; i++)
             {
-                Assert.Equal(0, TaskItemComparer.Instance.Compare(expectedItems[i], actualItems[i]));
+                Assert.AreEqual(0, TaskItemComparer.Instance.Compare(expectedItems[i], actualItems[i]));
             }
         }
 
@@ -1426,14 +1426,14 @@ namespace Microsoft.Build.UnitTests.BackEnd
         {
             SetTaskParameter(parameterName, value);
 
-            Assert.True(_parametersSetOnTask.ContainsKey(parameterName));
+            Assert.IsTrue(_parametersSetOnTask.ContainsKey(parameterName));
 
             ITaskItem[] actualItems = _parametersSetOnTask[parameterName] as ITaskItem[];
-            Assert.Equal(expectedItems.Length, actualItems.Length);
+            Assert.AreEqual(expectedItems.Length, actualItems.Length);
 
             for (int i = 0; i < expectedItems.Length; i++)
             {
-                Assert.Equal(expectedItems[i], actualItems[i].ItemSpec);
+                Assert.AreEqual(expectedItems[i], actualItems[i].ItemSpec);
             }
         }
 
@@ -1444,15 +1444,15 @@ namespace Microsoft.Build.UnitTests.BackEnd
         {
             SetTaskParameter(parameterName, value);
 
-            Assert.True(_parametersSetOnTask.ContainsKey(parameterName));
+            Assert.IsTrue(_parametersSetOnTask.ContainsKey(parameterName));
 
             Array expectedArray = expectedValue as Array;
             Array actualArray = _parametersSetOnTask[parameterName] as Array;
 
-            Assert.Equal(expectedArray.Length, actualArray.Length);
+            Assert.AreEqual(expectedArray.Length, actualArray.Length);
             for (int i = 0; i < expectedArray.Length; i++)
             {
-                Assert.Equal(expectedArray.GetValue(i), actualArray.GetValue(i));
+                Assert.AreEqual(expectedArray.GetValue(i), actualArray.GetValue(i));
             }
         }
 
@@ -1462,7 +1462,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         private void ValidateTaskParameterNotSet(string parameterName, string value)
         {
             SetTaskParameter(parameterName, value);
-            Assert.False(_parametersSetOnTask.ContainsKey(parameterName));
+            Assert.IsFalse(_parametersSetOnTask.ContainsKey(parameterName));
         }
 
         #endregion
@@ -1475,7 +1475,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             var parameters = GetStandardParametersDictionary(true);
             parameters[parameterName] = (value, ElementLocation.Create("foo.proj"));
             bool success = _host.SetTaskParameters(parameters);
-            Assert.True(success);
+            Assert.IsTrue(success);
         }
 
         /// <summary>

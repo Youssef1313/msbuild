@@ -108,7 +108,7 @@ namespace Microsoft.Build.UnitTests
             ExtractedClassName className = VisualBasicParserUtilities.GetFirstClassNameFullyQualified(
                 StreamHelpers.StringToStream(source));
 
-            Assert.Equal(expectedClassName, className.Name);
+            Assert.AreEqual(expectedClassName, className.Name);
         }
     }
 }

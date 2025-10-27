@@ -559,7 +559,7 @@ namespace Microsoft.Build.UnitTests
 
             if (NativeMethodsShared.IsWindows)
             {
-                Assert.Equal(
+                Assert.AreEqual(
                         Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles),
                         startInfo.Environment["programfiles"],
                         true);
@@ -639,7 +639,7 @@ namespace Microsoft.Build.UnitTests
 
             result.ShouldBe(true);
             task.ExecuteCalled.ShouldBe(true);
-            Assert.True(task.StartInfo.Environment["PATH"].Length > 0);
+            Assert.IsTrue(task.StartInfo.Environment["PATH"].Length > 0);
         }
 
         /// <summary>
@@ -670,7 +670,7 @@ namespace Microsoft.Build.UnitTests
                     };
                     bool result = task.Execute();
 
-                    Assert.NotEqual(directoryNamedSameAsTool, task.PathToToolUsed);
+                    Assert.AreNotEqual(directoryNamedSameAsTool, task.PathToToolUsed);
 
                     result.ShouldBeTrue();
                 }

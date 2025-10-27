@@ -32,8 +32,8 @@ namespace Microsoft.Build.UnitTests.Construction
             target.Outputs = "o";
             project.AppendChild(target);
 
-            Assert.Equal(project.FullPath, target.Location.File);
-            Assert.Equal(project.FullPath, target.OutputsLocation.File);
+            Assert.AreEqual(project.FullPath, target.Location.File);
+            Assert.AreEqual(project.FullPath, target.OutputsLocation.File);
         }
 
         /// <summary>
@@ -49,13 +49,13 @@ namespace Microsoft.Build.UnitTests.Construction
             target.Outputs = "o";
             project.AppendChild(target);
 
-            Assert.Equal(project.FullPath, target.Location.File);
-            Assert.Equal(project.FullPath, target.OutputsLocation.File);
+            Assert.AreEqual(project.FullPath, target.Location.File);
+            Assert.AreEqual(project.FullPath, target.OutputsLocation.File);
 
             project.FullPath = "c:\\y";
 
-            Assert.Equal(project.FullPath, target.Location.File);
-            Assert.Equal(project.FullPath, target.OutputsLocation.File);
+            Assert.AreEqual(project.FullPath, target.Location.File);
+            Assert.AreEqual(project.FullPath, target.OutputsLocation.File);
         }
 
         /// <summary>
@@ -73,8 +73,8 @@ namespace Microsoft.Build.UnitTests.Construction
             ElementLocation e1 = target.Location;
             ElementLocation e2 = target.OutputsLocation;
 
-            Assert.True(Object.ReferenceEquals(e1, target.Location));
-            Assert.True(Object.ReferenceEquals(e2, target.OutputsLocation));
+            Assert.IsTrue(Object.ReferenceEquals(e1, target.Location));
+            Assert.IsTrue(Object.ReferenceEquals(e2, target.OutputsLocation));
         }
 
         /// <summary>

@@ -26,9 +26,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.AlgorithmId); // "Default value"
+            Assert.IsNull(t.AlgorithmId); // "Default value"
             t.AlgorithmId = "whatisthis";
-            Assert.Equal("whatisthis", t.AlgorithmId); // "New value"
+            Assert.AreEqual("whatisthis", t.AlgorithmId); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"/algid:whatisthis");
@@ -42,9 +42,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.BaseAddress); // "Default value"
+            Assert.IsNull(t.BaseAddress); // "Default value"
             t.BaseAddress = "12345678";
-            Assert.Equal("12345678", t.BaseAddress); // "New value"
+            Assert.AreEqual("12345678", t.BaseAddress); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"/baseaddress:12345678");
@@ -58,9 +58,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.CompanyName); // "Default value"
+            Assert.IsNull(t.CompanyName); // "Default value"
             t.CompanyName = "Google";
-            Assert.Equal("Google", t.CompanyName); // "New value"
+            Assert.AreEqual("Google", t.CompanyName); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"/company:Google");
@@ -74,9 +74,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.Configuration); // "Default value"
+            Assert.IsNull(t.Configuration); // "Default value"
             t.Configuration = "debug";
-            Assert.Equal("debug", t.Configuration); // "New value"
+            Assert.AreEqual("debug", t.Configuration); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"/configuration:debug");
@@ -90,9 +90,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.Copyright); // "Default value"
+            Assert.IsNull(t.Copyright); // "Default value"
             t.Copyright = "(C) 2005";
-            Assert.Equal("(C) 2005", t.Copyright); // "New value"
+            Assert.AreEqual("(C) 2005", t.Copyright); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"/copyright:(C) 2005");
@@ -106,9 +106,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.Culture); // "Default value"
+            Assert.IsNull(t.Culture); // "Default value"
             t.Culture = "aussie";
-            Assert.Equal("aussie", t.Culture); // "New value"
+            Assert.AreEqual("aussie", t.Culture); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"/culture:aussie");
@@ -122,9 +122,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.False(t.DelaySign); // "Default value"
+            Assert.IsFalse(t.DelaySign); // "Default value"
             t.DelaySign = true;
-            Assert.True(t.DelaySign); // "New value"
+            Assert.IsTrue(t.DelaySign); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, "/delaysign+");
@@ -138,9 +138,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.Description); // "Default value"
+            Assert.IsNull(t.Description); // "Default value"
             t.Description = "whatever";
-            Assert.Equal("whatever", t.Description); // "New value"
+            Assert.AreEqual("whatever", t.Description); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"/description:whatever");
@@ -154,7 +154,7 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.EmbedResources); // "Default value"
+            Assert.IsNull(t.EmbedResources); // "Default value"
 
             // Construct the task item.
             TaskItem i = new TaskItem();
@@ -179,9 +179,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.EvidenceFile); // "Default value"
+            Assert.IsNull(t.EvidenceFile); // "Default value"
             t.EvidenceFile = "MyEvidenceFile";
-            Assert.Equal("MyEvidenceFile", t.EvidenceFile); // "New value"
+            Assert.AreEqual("MyEvidenceFile", t.EvidenceFile); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"/evidence:MyEvidenceFile");
@@ -195,9 +195,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.FileVersion); // "Default value"
+            Assert.IsNull(t.FileVersion); // "Default value"
             t.FileVersion = "1.2.3.4";
-            Assert.Equal("1.2.3.4", t.FileVersion); // "New value"
+            Assert.AreEqual("1.2.3.4", t.FileVersion); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"/fileversion:1.2.3.4");
@@ -211,9 +211,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.Flags); // "Default value"
+            Assert.IsNull(t.Flags); // "Default value"
             t.Flags = "0x8421";
-            Assert.Equal("0x8421", t.Flags); // "New value"
+            Assert.AreEqual("0x8421", t.Flags); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"/flags:0x8421");
@@ -227,9 +227,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.False(t.GenerateFullPaths); // "Default value"
+            Assert.IsFalse(t.GenerateFullPaths); // "Default value"
             t.GenerateFullPaths = true;
-            Assert.True(t.GenerateFullPaths); // "New value"
+            Assert.IsTrue(t.GenerateFullPaths); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, "/fullpaths");
@@ -243,9 +243,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.KeyFile); // "Default value"
+            Assert.IsNull(t.KeyFile); // "Default value"
             t.KeyFile = "mykey.snk";
-            Assert.Equal("mykey.snk", t.KeyFile); // "New value"
+            Assert.AreEqual("mykey.snk", t.KeyFile); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"/keyfile:mykey.snk");
@@ -259,9 +259,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.KeyContainer); // "Default value"
+            Assert.IsNull(t.KeyContainer); // "Default value"
             t.KeyContainer = "MyKeyContainer";
-            Assert.Equal("MyKeyContainer", t.KeyContainer); // "New value"
+            Assert.AreEqual("MyKeyContainer", t.KeyContainer); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"/keyname:MyKeyContainer");
@@ -275,7 +275,7 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.LinkResources); // "Default value"
+            Assert.IsNull(t.LinkResources); // "Default value"
 
             // Construct the task item.
             TaskItem i = new TaskItem();
@@ -301,7 +301,7 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.LinkResources); // "Default value"
+            Assert.IsNull(t.LinkResources); // "Default value"
 
             // Construct the task item.
             TaskItem i1 = new TaskItem();
@@ -315,7 +315,7 @@ namespace Microsoft.Build.UnitTests
             i2.SetMetadata("TargetFile", @"working\MyResource2.bmp");
             t.LinkResources = new ITaskItem[] { i1, i2 };
 
-            Assert.Equal(2, t.LinkResources.Length); // "New value"
+            Assert.AreEqual(2, t.LinkResources.Length); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(
@@ -334,9 +334,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.MainEntryPoint); // "Default value"
+            Assert.IsNull(t.MainEntryPoint); // "Default value"
             t.MainEntryPoint = "Class1.Main";
-            Assert.Equal("Class1.Main", t.MainEntryPoint); // "New value"
+            Assert.AreEqual("Class1.Main", t.MainEntryPoint); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"/main:Class1.Main");
@@ -350,9 +350,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.OutputAssembly); // "Default value"
+            Assert.IsNull(t.OutputAssembly); // "Default value"
             t.OutputAssembly = new TaskItem("foo.dll");
-            Assert.Equal("foo.dll", t.OutputAssembly.ItemSpec); // "New value"
+            Assert.AreEqual("foo.dll", t.OutputAssembly.ItemSpec); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"/out:foo.dll");
@@ -366,9 +366,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.Platform); // "Default value"
+            Assert.IsNull(t.Platform); // "Default value"
             t.Platform = "x86";
-            Assert.Equal("x86", t.Platform); // "New value"
+            Assert.AreEqual("x86", t.Platform); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"/platform:x86");
@@ -428,9 +428,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.ProductName); // "Default value"
+            Assert.IsNull(t.ProductName); // "Default value"
             t.ProductName = "VisualStudio";
-            Assert.Equal("VisualStudio", t.ProductName); // "New value"
+            Assert.AreEqual("VisualStudio", t.ProductName); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"/product:VisualStudio");
@@ -444,9 +444,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.ProductVersion); // "Default value"
+            Assert.IsNull(t.ProductVersion); // "Default value"
             t.ProductVersion = "8.0";
-            Assert.Equal("8.0", t.ProductVersion); // "New value"
+            Assert.AreEqual("8.0", t.ProductVersion); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"/productversion:8.0");
@@ -460,9 +460,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.ResponseFiles); // "Default value"
+            Assert.IsNull(t.ResponseFiles); // "Default value"
             t.ResponseFiles = new string[2] { "one.rsp", "two.rsp" };
-            Assert.Equal(2, t.ResponseFiles.Length); // "New value"
+            Assert.AreEqual(2, t.ResponseFiles.Length); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"@one.rsp");
@@ -477,7 +477,7 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.SourceModules); // "Default value"
+            Assert.IsNull(t.SourceModules); // "Default value"
 
             // Construct the task items.
             TaskItem i1 = new TaskItem();
@@ -487,7 +487,7 @@ namespace Microsoft.Build.UnitTests
             i2.ItemSpec = "Dialogs.resources";
             t.SourceModules = new ITaskItem[] { i1, i2 };
 
-            Assert.Equal(2, t.SourceModules.Length); // "New value"
+            Assert.AreEqual(2, t.SourceModules.Length); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"Strings.resources,working\MyResource.bmp");
@@ -502,9 +502,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.TargetType); // "Default value"
+            Assert.IsNull(t.TargetType); // "Default value"
             t.TargetType = "winexe";
-            Assert.Equal("winexe", t.TargetType); // "New value"
+            Assert.AreEqual("winexe", t.TargetType); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"/target:winexe");
@@ -518,9 +518,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.TemplateFile); // "Default value"
+            Assert.IsNull(t.TemplateFile); // "Default value"
             t.TemplateFile = "mymainassembly.dll";
-            Assert.Equal("mymainassembly.dll", t.TemplateFile); // "New value"
+            Assert.AreEqual("mymainassembly.dll", t.TemplateFile); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(
@@ -536,9 +536,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.Title); // "Default value"
+            Assert.IsNull(t.Title); // "Default value"
             t.Title = "WarAndPeace";
-            Assert.Equal("WarAndPeace", t.Title); // "New value"
+            Assert.AreEqual("WarAndPeace", t.Title); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"/title:WarAndPeace");
@@ -552,9 +552,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.Trademark); // "Default value"
+            Assert.IsNull(t.Trademark); // "Default value"
             t.Trademark = "MyTrademark";
-            Assert.Equal("MyTrademark", t.Trademark); // "New value"
+            Assert.AreEqual("MyTrademark", t.Trademark); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"/trademark:MyTrademark");
@@ -568,9 +568,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.Version); // "Default value"
+            Assert.IsNull(t.Version); // "Default value"
             t.Version = "WowHowManyKindsOfVersionsAreThere";
-            Assert.Equal("WowHowManyKindsOfVersionsAreThere", t.Version); // "New value"
+            Assert.AreEqual("WowHowManyKindsOfVersionsAreThere", t.Version); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(
@@ -586,9 +586,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.Win32Icon); // "Default value"
+            Assert.IsNull(t.Win32Icon); // "Default value"
             t.Win32Icon = "foo.ico";
-            Assert.Equal("foo.ico", t.Win32Icon); // "New value"
+            Assert.AreEqual("foo.ico", t.Win32Icon); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"/win32icon:foo.ico");
@@ -602,9 +602,9 @@ namespace Microsoft.Build.UnitTests
         {
             AL t = new AL();
 
-            Assert.Null(t.Win32Resource); // "Default value"
+            Assert.IsNull(t.Win32Resource); // "Default value"
             t.Win32Resource = "foo.res";
-            Assert.Equal("foo.res", t.Win32Resource); // "New value"
+            Assert.AreEqual("foo.res", t.Win32Resource); // "New value"
 
             // Check the parameters.
             CommandLine.ValidateHasParameter(t, @"/win32res:foo.res");

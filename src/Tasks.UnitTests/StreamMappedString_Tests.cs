@@ -42,7 +42,7 @@ namespace Microsoft.Build.UnitTests
             s.GetAt(StreamMappedString.DefaultPageSize * 4);
 
             // ...now get the first character.
-            Assert.Equal('A', s.GetAt(0));
+            Assert.AreEqual('A', s.GetAt(0));
         }
 
         [Fact]
@@ -55,7 +55,7 @@ namespace Microsoft.Build.UnitTests
             s.GetAt(StreamMappedString.DefaultPageSize);
 
             // ...now get the first character (which should be saved on lastPage).
-            Assert.Equal('A', s.GetAt(0));
+            Assert.AreEqual('A', s.GetAt(0));
         }
 
         [Fact]
@@ -65,7 +65,7 @@ namespace Microsoft.Build.UnitTests
             StreamMappedString s = new StreamMappedString(stream, false);
 
             // Get the last character (which should be the appended newLine).
-            Assert.Equal('\xd', s.GetAt(1));
+            Assert.AreEqual('\xd', s.GetAt(1));
         }
 
         [Fact]
@@ -75,7 +75,7 @@ namespace Microsoft.Build.UnitTests
             StreamMappedString s = new StreamMappedString(stream, false);
 
             // Get the last character (which should be 'y' and not 0x1A).
-            Assert.Equal('y', s.GetAt(1));
+            Assert.AreEqual('y', s.GetAt(1));
         }
 
         [Fact]
@@ -85,7 +85,7 @@ namespace Microsoft.Build.UnitTests
             StreamMappedString s = new StreamMappedString(stream, false);
 
             // Get the last character (which should be 'x' and not 0x1A).
-            Assert.Equal('x', s.GetAt(0));
+            Assert.AreEqual('x', s.GetAt(0));
         }
 
         [Fact]
@@ -95,7 +95,7 @@ namespace Microsoft.Build.UnitTests
             StreamMappedString s = new StreamMappedString(stream, false);
 
             // Get the last character (which should be '\xd').
-            Assert.Equal('\xd', s.GetAt(StreamMappedString.DefaultPageSize));
+            Assert.AreEqual('\xd', s.GetAt(StreamMappedString.DefaultPageSize));
         }
 
         [Fact]
@@ -104,7 +104,7 @@ namespace Microsoft.Build.UnitTests
             Stream stream = StreamHelpers.StringToStream("abcdefg");
             StreamMappedString s = new StreamMappedString(stream, false);
 
-            Assert.Equal("bcd", s.Substring(1, 3));
+            Assert.AreEqual("bcd", s.Substring(1, 3));
         }
 
         [Fact]
@@ -113,7 +113,7 @@ namespace Microsoft.Build.UnitTests
             Stream stream = StreamHelpers.StringToStream("abcdefg");
             StreamMappedString s = new StreamMappedString(stream, false, /* pageSize */ 1);
 
-            Assert.Equal("bcd", s.Substring(1, 3));
+            Assert.AreEqual("bcd", s.Substring(1, 3));
         }
 
         [Fact]
@@ -126,7 +126,7 @@ namespace Microsoft.Build.UnitTests
             s.GetAt(7);
 
             // And then extract a string from the beginning page.
-            Assert.Equal("abcxdef", s.Substring(0, 7));
+            Assert.AreEqual("abcxdef", s.Substring(0, 7));
         }
 
         [Fact]
@@ -137,7 +137,7 @@ namespace Microsoft.Build.UnitTests
                 Stream stream = StreamHelpers.StringToStream("abcdefg");
                 StreamMappedString s = new StreamMappedString(stream, false);
 
-                Assert.Equal(String.Empty, s.Substring(1, 30));
+                Assert.AreEqual(String.Empty, s.Substring(1, 30));
             });
         }
         [Fact]
@@ -150,7 +150,7 @@ namespace Microsoft.Build.UnitTests
             s.GetAt(StreamMappedString.DefaultPageSize);
 
             // Get a string from the firstPage
-            Assert.Equal("abc", s.Substring(0, 3));
+            Assert.AreEqual("abc", s.Substring(0, 3));
         }
 
         [Fact]
@@ -160,7 +160,7 @@ namespace Microsoft.Build.UnitTests
             StreamMappedString s = new StreamMappedString(stream, false);
 
             // This won't read correctly with ANSI encoding.
-            Assert.Equal('\u00C3', s.GetAt(0));
+            Assert.AreEqual('\u00C3', s.GetAt(0));
         }
 
         [Fact]
@@ -177,7 +177,7 @@ namespace Microsoft.Build.UnitTests
             s.GetAt(4);
 
             // There should be exactly one reset for this.
-            Assert.Equal(0, stream.ResetCount);
+            Assert.AreEqual(0, stream.ResetCount);
         }
 
         [Fact]
@@ -187,7 +187,7 @@ namespace Microsoft.Build.UnitTests
             StreamMappedString s = new StreamMappedString(stream, false);
 
             // There's only one character, so IsPastEnd(2) should be true.
-            Assert.True(s.IsPastEnd(2)); // <-- 2 required because of extra \xd added.
+            Assert.IsTrue(s.IsPastEnd(2)); // <-- 2 required because of extra \xd added.
         }
 
         [Fact]
@@ -202,7 +202,7 @@ namespace Microsoft.Build.UnitTests
             s.GetAt(StreamMappedString.DefaultPageSize * 2);
 
             // Even though three pages were read, only two allocations should have occurred.
-            Assert.Equal(2, s.PagesAllocated);
+            Assert.AreEqual(2, s.PagesAllocated);
         }
 
         [Fact]
@@ -212,7 +212,7 @@ namespace Microsoft.Build.UnitTests
             StreamMappedString s = new StreamMappedString(stream, false);
 
             // There's only one \x1d so IsPastEnd(1) should be true.
-            Assert.True(s.IsPastEnd(1));
+            Assert.IsTrue(s.IsPastEnd(1));
         }
 
         [Fact]

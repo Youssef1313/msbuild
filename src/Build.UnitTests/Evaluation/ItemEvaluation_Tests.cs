@@ -542,7 +542,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             IList<ProjectItem> items = ObjectModelHelpers.GetItemsFromFragment(content.ToString());
 
-            Assert.Equal(INCLUDE_COUNT, items.Count);
+            Assert.AreEqual(INCLUDE_COUNT, items.Count);
         }
 
         // see https://github.com/dotnet/msbuild/issues/2069
@@ -554,7 +554,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
             IList<ProjectItem> items = ObjectModelHelpers.GetItemsFromFragment(content);
 
-            Assert.Equal("0;6;7;8;9", String.Join(";", items.Select(i => i.EvaluatedInclude)));
+            Assert.AreEqual("0;6;7;8;9", String.Join(";", items.Select(i => i.EvaluatedInclude)));
         }
 
         [Fact]
@@ -597,9 +597,9 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
                 var project = new Project(projectFiles.ProjectFile);
 
-                Assert.Equal("true", project.GetPropertyValue("FromImport"));
-                Assert.Equal("**/foo/**/*.cs", project.GetConcatenatedItemsOfType("i"));
-                Assert.Equal("**/yyy/**/*.cs", project.GetConcatenatedItemsOfType("i3"));
+                Assert.AreEqual("true", project.GetPropertyValue("FromImport"));
+                Assert.AreEqual("**/foo/**/*.cs", project.GetConcatenatedItemsOfType("i"));
+                Assert.AreEqual("**/yyy/**/*.cs", project.GetConcatenatedItemsOfType("i3"));
 
                 var expectedItems = "bar\\c.cs;bar\\d.cs";
 
@@ -608,7 +608,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                     expectedItems = expectedItems.ToSlash();
                 }
 
-                Assert.Equal(expectedItems, project.GetConcatenatedItemsOfType("i2"));
+                Assert.AreEqual(expectedItems, project.GetConcatenatedItemsOfType("i2"));
 
                 var fullPathItems = project.GetConcatenatedItemsOfType("FullPath");
                 Assert.Contains("a.cs", fullPathItems);
@@ -619,10 +619,10 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 Assert.Contains("b.cs", identityItems);
 
                 // direct item references do not expand the lazy wildcard
-                Assert.Equal("**/foo/**/*.cs", project.GetConcatenatedItemsOfType("ItemReference"));
+                Assert.AreEqual("**/foo/**/*.cs", project.GetConcatenatedItemsOfType("ItemReference"));
 
                 // recursive dir does not work with lazy wildcards
-                Assert.Equal(string.Empty, project.GetConcatenatedItemsOfType("RecursiveDir"));
+                Assert.AreEqual(string.Empty, project.GetConcatenatedItemsOfType("RecursiveDir"));
             }
         }
 

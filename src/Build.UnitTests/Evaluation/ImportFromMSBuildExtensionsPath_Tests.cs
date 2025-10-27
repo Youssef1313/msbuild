@@ -36,7 +36,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
         [Fact]
         public void ImportFromExtensionsPathFound()
         {
-            CreateAndBuildProjectForImportFromExtensionsPath("MSBuildExtensionsPath", (p, l) => Assert.True(p.Build()));
+            CreateAndBuildProjectForImportFromExtensionsPath("MSBuildExtensionsPath", (p, l) => Assert.IsTrue(p.Build()));
         }
 
         [Fact]
@@ -96,7 +96,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                                                             null,
                                                             (p, l) =>
                                                             {
-                                                                Assert.True(p.Build());
+                                                                Assert.IsTrue(p.Build());
 
                                                                 l.AssertLogContains("Running FromExtn");
                                                                 l.AssertLogContains("PropertyFromExtn1: FooBar");
@@ -166,7 +166,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 {
                     Console.WriteLine(logger.FullLog);
                     Console.WriteLine("checking FromExtn");
-                    Assert.True(project.Build("FromExtn"));
+                    Assert.IsTrue(project.Build("FromExtn"));
                     Console.WriteLine("checking logcontains");
                     logger.AssertLogDoesntContain("MSB4057"); // Should not contain TargetDoesNotExist
                 });
@@ -207,9 +207,9 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 {
                     Console.WriteLine(logger.FullLog);
                     Console.WriteLine("checking FromExtn1");
-                    Assert.True(project.Build("FromExtn1"));
+                    Assert.IsTrue(project.Build("FromExtn1"));
                     Console.WriteLine("checking FromExtn2");
-                    Assert.True(project.Build("FromExtn2"));
+                    Assert.IsTrue(project.Build("FromExtn2"));
                     Console.WriteLine("checking logcontains");
                     logger.AssertLogDoesntContain("MSB4057"); // Should not contain TargetDoesNotExist
                 });
@@ -261,9 +261,9 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 (project, logger) =>
                 {
                     Console.WriteLine(logger.FullLog);
-                    Assert.True(project.Build("FromExtn1"));
-                    Assert.True(project.Build("FromExtn2"));
-                    Assert.True(project.Build("FromExtn3"));
+                    Assert.IsTrue(project.Build("FromExtn1"));
+                    Assert.IsTrue(project.Build("FromExtn2"));
+                    Assert.IsTrue(project.Build("FromExtn3"));
                     logger.AssertLogContains("MSB4210");
                 });
         }
@@ -284,7 +284,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
             string mainProjectPath = ObjectModelHelpers.CreateFileInTempProjectDirectory("main.proj", GetMainTargetFileContent());
 
             CreateAndBuildProjectForImportFromExtensionsPath(mainProjectPath, "MSBuildExtensionsPath", new string[] { Path.Combine("tmp", "nonexistent"), extnDir1 },
-                                                    null, (p, l) => Assert.True(p.Build()));
+                                                    null, (p, l) => Assert.IsTrue(p.Build()));
         }
 
         [Fact]
@@ -360,7 +360,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                                                             null,
                                                             (p, l) =>
                                                             {
-                                                                Assert.True(p.Build());
+                                                                Assert.IsTrue(p.Build());
 
                                                                 l.AssertLogContains("Running FromExtn");
                                                                 l.AssertLogContains("PropertyFromExtn1: FromSecondFile");
@@ -411,7 +411,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
 
                 project.SetProperty("MSBuildExtensionsPath", extnDir2);
                 project.ReevaluateIfNecessary();
-                Assert.True(project.Build());
+                Assert.IsTrue(project.Build());
 
                 logger.AssertLogContains("Running FromExtn");
                 logger.AssertLogContains("PropertyFromExtn1: FromSecondFile");
@@ -436,13 +436,13 @@ namespace Microsoft.Build.UnitTests.Evaluation
         [Fact]
         public void ImportOrderFromExtensionsPath32()
         {
-            CreateAndBuildProjectForImportFromExtensionsPath("MSBuildExtensionsPath32", (p, l) => Assert.True(p.Build()));
+            CreateAndBuildProjectForImportFromExtensionsPath("MSBuildExtensionsPath32", (p, l) => Assert.IsTrue(p.Build()));
         }
 
         [Fact]
         public void ImportOrderFromExtensionsPath64()
         {
-            CreateAndBuildProjectForImportFromExtensionsPath("MSBuildExtensionsPath64", (p, l) => Assert.True(p.Build()));
+            CreateAndBuildProjectForImportFromExtensionsPath("MSBuildExtensionsPath64", (p, l) => Assert.IsTrue(p.Build()));
         }
 
         // Use MSBuildExtensionsPath, MSBuildExtensionsPath32 and MSBuildExtensionsPath64 in the build
@@ -502,7 +502,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 projColln.RegisterLogger(logger);
 
                 var project = projColln.LoadProject(mainProjectPath);
-                Assert.True(project.Build("Main"));
+                Assert.IsTrue(project.Build("Main"));
                 logger.AssertLogContains("Running FromExtn3");
                 logger.AssertLogContains("Running FromExtn2");
                 logger.AssertLogContains("Running FromExtn");
@@ -579,7 +579,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 projectCollection.RegisterLogger(logger);
 
                 var project = projectCollection.LoadProject(mainProjectPath);
-                Assert.True(project.Build("Main"));
+                Assert.IsTrue(project.Build("Main"));
                 logger.AssertLogContains("Running FromExtn");
             }
             finally
@@ -710,7 +710,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 projectCollection.RegisterLogger(logger);
 
                 var project = projectCollection.LoadProject(mainProjectPath);
-                Assert.True(project.Build("Main"));
+                Assert.IsTrue(project.Build("Main"));
                 logger.AssertLogContains("Running FromExtn");
             }
             finally
@@ -775,7 +775,7 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 projectCollection.RegisterLogger(logger);
 
                 var project = projectCollection.LoadProject(mainProjectPath);
-                Assert.True(project.Build("Main"));
+                Assert.IsTrue(project.Build("Main"));
                 logger.AssertLogContains("Running FromExtn");
             }
             finally

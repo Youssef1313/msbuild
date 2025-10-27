@@ -134,9 +134,9 @@ namespace Microsoft.Build.UnitTests.Construction
 
             SolutionFile solution = ParseSolutionHelper(solutionFileContents);
 
-            Assert.Equal("Project name", solution.ProjectsInOrder[0].ProjectName);
-            Assert.Equal("Relative path to project file", solution.ProjectsInOrder[0].RelativePath);
-            Assert.Equal("{0ABED153-9451-483C-8140-9E8D7306B216}", solution.ProjectsInOrder[0].ProjectGuid);
+            Assert.AreEqual("Project name", solution.ProjectsInOrder[0].ProjectName);
+            Assert.AreEqual("Relative path to project file", solution.ProjectsInOrder[0].RelativePath);
+            Assert.AreEqual("{0ABED153-9451-483C-8140-9E8D7306B216}", solution.ProjectsInOrder[0].ProjectGuid);
         }
 
         /// <summary>
@@ -756,9 +756,9 @@ namespace Microsoft.Build.UnitTests.Construction
 
             SolutionFile solution = ParseSolutionHelper(solutionFileContents);
 
-            Assert.Equal("MyProject,(=IsGreat)", solution.ProjectsInOrder[0].ProjectName);
-            Assert.Equal("Relative path to project file", solution.ProjectsInOrder[0].RelativePath);
-            Assert.Equal("{0ABED153-9451-483C-8140-9E8D7306B216}", solution.ProjectsInOrder[0].ProjectGuid);
+            Assert.AreEqual("MyProject,(=IsGreat)", solution.ProjectsInOrder[0].ProjectName);
+            Assert.AreEqual("Relative path to project file", solution.ProjectsInOrder[0].RelativePath);
+            Assert.AreEqual("{0ABED153-9451-483C-8140-9E8D7306B216}", solution.ProjectsInOrder[0].ProjectGuid);
         }
 
         /// <summary>

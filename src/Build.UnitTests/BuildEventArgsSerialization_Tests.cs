@@ -46,9 +46,9 @@ namespace Microsoft.Build.UnitTests
 
             outputStream.Position = 0;
             using BinaryReader binaryReader = new BinaryReader(outputStream);
-            Assert.Equal(BinaryLogRecordKind.ProjectImportArchive, (BinaryLogRecordKind)binaryReader.Read7BitEncodedInt());
-            Assert.Equal(bytes.Length, binaryReader.Read7BitEncodedInt());
-            Assert.Equal(bytes, binaryReader.ReadBytes(bytes.Length));
+            Assert.AreEqual(BinaryLogRecordKind.ProjectImportArchive, (BinaryLogRecordKind)binaryReader.Read7BitEncodedInt());
+            Assert.AreEqual(bytes.Length, binaryReader.Read7BitEncodedInt());
+            Assert.AreEqual(bytes, binaryReader.ReadBytes(bytes.Length));
         }
 
         [Theory]
@@ -1240,16 +1240,16 @@ namespace Microsoft.Build.UnitTests
             using var buildEventArgsReader = new BuildEventArgsReader(binaryReader, BinaryLogger.FileFormatVersion);
             var deserializedArgs = (T)buildEventArgsReader.Read();
 
-            Assert.Equal(length, memoryStream.Position);
+            Assert.AreEqual(length, memoryStream.Position);
 
-            Assert.NotNull(deserializedArgs);
-            Assert.Equal(typeof(T), deserializedArgs.GetType());
+            Assert.IsNotNull(deserializedArgs);
+            Assert.AreEqual(typeof(T), deserializedArgs.GetType());
 
             foreach (var field in fieldsToCompare)
             {
                 var expected = field(args);
                 var actual = field(deserializedArgs);
-                Assert.Equal(expected, actual);
+                Assert.AreEqual(expected, actual);
             }
         }
     }

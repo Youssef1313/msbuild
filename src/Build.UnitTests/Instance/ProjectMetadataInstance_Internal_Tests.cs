@@ -27,9 +27,9 @@ namespace Microsoft.Build.UnitTests.OM.Instance
 
             ProjectMetadataInstance clone = metadata.DeepClone();
 
-            Assert.False(Object.ReferenceEquals(metadata, clone));
-            Assert.Equal("m", clone.Name);
-            Assert.Equal("m1", clone.EvaluatedValue);
+            Assert.IsFalse(Object.ReferenceEquals(metadata, clone));
+            Assert.AreEqual("m", clone.Name);
+            Assert.AreEqual("m1", clone.EvaluatedValue);
         }
 
         /// <summary>
@@ -44,8 +44,8 @@ namespace Microsoft.Build.UnitTests.OM.Instance
             ProjectMetadataInstance deserializedMetadata = null;
             TranslationHelpers.GetReadTranslator().Translate(ref deserializedMetadata, ProjectMetadataInstance.FactoryForDeserialization);
 
-            Assert.Equal(metadata.Name, deserializedMetadata.Name);
-            Assert.Equal(metadata.EvaluatedValue, deserializedMetadata.EvaluatedValue);
+            Assert.AreEqual(metadata.Name, deserializedMetadata.Name);
+            Assert.AreEqual(metadata.EvaluatedValue, deserializedMetadata.EvaluatedValue);
         }
 
         /// <summary>

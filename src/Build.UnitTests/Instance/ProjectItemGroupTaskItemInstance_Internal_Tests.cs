@@ -45,7 +45,7 @@ namespace Microsoft.Build.Engine.UnitTests.Instance
             ((ITranslatable)original).Translate(TranslationHelpers.GetWriteTranslator());
             var clone = ProjectItemGroupTaskItemInstance.FactoryForDeserialization(TranslationHelpers.GetReadTranslator());
 
-            Assert.Equal(original, clone, new TargetItemComparer());
+            Assert.AreEqual(original, clone, new TargetItemComparer());
         }
     }
 }

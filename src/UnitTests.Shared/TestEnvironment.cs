@@ -304,7 +304,7 @@ namespace Microsoft.Build.UnitTests
         {
             var folder = WithTransientTestState(new TransientTestFolder(folderPath, createFolder, subfolder));
 
-            Assert.True(!(createFolder ^ FileSystems.Default.DirectoryExists(folder.Path)));
+            Assert.IsTrue(!(createFolder ^ FileSystems.Default.DirectoryExists(folder.Path)));
 
             return folder;
         }
@@ -449,9 +449,9 @@ namespace Microsoft.Build.UnitTests
 
             // Something like the following might be preferrable, but the assertion method truncates the values leaving us without
             //  useful information.  So use Assert.True instead
-            //  Assert.Equal($"{_name}: {_originalValue}", $"{_name}: {_accessorFunc()}");
+            //  Assert.AreEqual($"{_name}: {_originalValue}", $"{_name}: {_accessorFunc()}");
 
-            Assert.True(currentValue == _originalValue, $"Expected {_name} to be '{_originalValue}', but it was '{currentValue}'");
+            Assert.IsTrue(currentValue == _originalValue, $"Expected {_name} to be '{_originalValue}', but it was '{currentValue}'");
         }
     }
 
@@ -563,7 +563,7 @@ namespace Microsoft.Build.UnitTests
             }
 
             // Assert file count is equal minus any files that were OK
-            Assert.Equal(_originalFiles.Length, newFilesCount);
+            Assert.AreEqual(_originalFiles.Length, newFilesCount);
         }
     }
 
@@ -748,7 +748,7 @@ namespace Microsoft.Build.UnitTests
             {
                 if (_expectedAsOutput)
                 {
-                    Assert.True(FileSystems.Default.FileExists(Path), $"A file expected as an output does not exist: {Path}");
+                    Assert.IsTrue(FileSystems.Default.FileExists(Path), $"A file expected as an output does not exist: {Path}");
                 }
             }
             finally

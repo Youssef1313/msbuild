@@ -72,12 +72,12 @@ namespace Microsoft.Build.UnitTests
             p.Query = "//s:variable/@Name";
             p.Namespaces = "<Namespace Prefix=\"s\" Uri=\"http://nsurl\" />";
 
-            Assert.True(p.Execute()); // "Test should've passed"
-            Assert.Equal(3, p.Result.Length); // "result Length should be 3"
+            Assert.IsTrue(p.Execute()); // "Test should've passed"
+            Assert.AreEqual(3, p.Result.Length); // "result Length should be 3"
             string[] results = new string[] { "a", "b", "c" };
             for (int i = 0; i < p.Result.Length; i++)
             {
-                Assert.Equal(p.Result[i].ItemSpec, results[i]);
+                Assert.AreEqual(p.Result[i].ItemSpec, results[i]);
             }
         }
 
@@ -95,8 +95,8 @@ namespace Microsoft.Build.UnitTests
             p.Query = "//s:variable/.";
             p.Namespaces = "<Namespace Prefix=\"s\" Uri=\"http://nsurl\" />";
 
-            Assert.True(p.Execute()); // "Test should've passed"
-            Assert.Equal(3, p.Result.Length); // "result Length should be 3"
+            Assert.IsTrue(p.Execute()); // "Test should've passed"
+            Assert.AreEqual(3, p.Result.Length); // "result Length should be 3"
 
             string[] results = new string[] {
                 "<s:variable Type=\"String\" Name=\"a\" xmlns:s=\"http://nsurl\"></s:variable>",
@@ -106,7 +106,7 @@ namespace Microsoft.Build.UnitTests
 
             for (int i = 0; i < p.Result.Length; i++)
             {
-                Assert.Equal(p.Result[i].ItemSpec, results[i]);
+                Assert.AreEqual(p.Result[i].ItemSpec, results[i]);
             }
         }
 
@@ -123,9 +123,9 @@ namespace Microsoft.Build.UnitTests
             p.XmlInputPath = new TaskItem(xmlInputPath);
             p.Query = "//s:variable/text()";
             p.Namespaces = "<Namespace Prefix=\"s\" Uri=\"http://nsurl\" />";
-            Assert.Equal("<Namespace Prefix=\"s\" Uri=\"http://nsurl\" />", p.Namespaces);
-            Assert.True(p.Execute()); // "Test should've passed"
-            Assert.Equal(3, p.Result.Length); // "result Length should be 3"
+            Assert.AreEqual("<Namespace Prefix=\"s\" Uri=\"http://nsurl\" />", p.Namespaces);
+            Assert.IsTrue(p.Execute()); // "Test should've passed"
+            Assert.AreEqual(3, p.Result.Length); // "result Length should be 3"
 
             string[] results = new string[] {
                 "This",
@@ -135,7 +135,7 @@ namespace Microsoft.Build.UnitTests
 
             for (int i = 0; i < p.Result.Length; i++)
             {
-                Assert.Equal(p.Result[i].ItemSpec, results[i]);
+                Assert.AreEqual(p.Result[i].ItemSpec, results[i]);
             }
         }
 
@@ -152,12 +152,12 @@ namespace Microsoft.Build.UnitTests
             p.XmlInputPath = new TaskItem(xmlInputPath);
             p.Query = "//variable/@Name";
 
-            Assert.True(p.Execute()); // "Test should've passed"
-            Assert.Equal(3, p.Result.Length); // "result Length should be 3"
+            Assert.IsTrue(p.Execute()); // "Test should've passed"
+            Assert.AreEqual(3, p.Result.Length); // "result Length should be 3"
             string[] results = new string[] { "a", "b", "c" };
             for (int i = 0; i < p.Result.Length; i++)
             {
-                Assert.Equal(p.Result[i].ItemSpec, results[i]);
+                Assert.AreEqual(p.Result[i].ItemSpec, results[i]);
             }
         }
 
@@ -172,12 +172,12 @@ namespace Microsoft.Build.UnitTests
             p.XmlContent = _xmlFileNoNsNoDtd;
             p.Query = "//variable/@Name";
 
-            Assert.True(p.Execute()); // "Test should've passed"
-            Assert.Equal(3, p.Result.Length); // "result Length should be 3"
+            Assert.IsTrue(p.Execute()); // "Test should've passed"
+            Assert.AreEqual(3, p.Result.Length); // "result Length should be 3"
             string[] results = new string[] { "a", "b", "c" };
             for (int i = 0; i < p.Result.Length; i++)
             {
-                Assert.Equal(p.Result[i].ItemSpec, results[i]);
+                Assert.AreEqual(p.Result[i].ItemSpec, results[i]);
             }
         }
 
@@ -194,13 +194,13 @@ namespace Microsoft.Build.UnitTests
 
             p.XmlInputPath = new TaskItem(xmlInputPath);
             p.XmlContent = _xmlFileNoNsNoDtd;
-            Assert.Equal(xmlInputPath, p.XmlInputPath.ItemSpec);
-            Assert.Equal(_xmlFileNoNsNoDtd, p.XmlContent);
+            Assert.AreEqual(xmlInputPath, p.XmlInputPath.ItemSpec);
+            Assert.AreEqual(_xmlFileNoNsNoDtd, p.XmlContent);
 
             p.Query = "//variable/@Name";
-            Assert.Equal("//variable/@Name", p.Query);
+            Assert.AreEqual("//variable/@Name", p.Query);
 
-            Assert.False(p.Execute()); // "Test should've failed"
+            Assert.IsFalse(p.Execute()); // "Test should've failed"
             Assert.Contains("MSB3741", engine.Log); // "Error message MSB3741 should fire"
         }
 
@@ -217,7 +217,7 @@ namespace Microsoft.Build.UnitTests
 
             p.Query = "//variable/@Name";
 
-            Assert.False(p.Execute()); // "Test should've failed"
+            Assert.IsFalse(p.Execute()); // "Test should've failed"
             Assert.Contains("MSB3741", engine.Log); // "Error message MSB3741 should fire"
         }
 
@@ -234,7 +234,7 @@ namespace Microsoft.Build.UnitTests
             p.XmlInputPath = new TaskItem(xmlInputPath);
             p.Query = "//s:variable/@Name";
 
-            Assert.False(p.Execute()); // "Test should've failed"
+            Assert.IsFalse(p.Execute()); // "Test should've failed"
             Assert.Contains("MSB3743", engine.Log); // "Engine log should contain error code MSB3743"
         }
 
@@ -252,7 +252,7 @@ namespace Microsoft.Build.UnitTests
             p.XmlInputPath = new TaskItem(xmlInputPath);
             p.Query = "//s:variable/@Name";
 
-            Assert.False(p.Execute()); // "Test should've failed"
+            Assert.IsFalse(p.Execute()); // "Test should've failed"
             Assert.Contains("MSB3733", engine.Log); // "Engine log should contain error code MSB3733"
         }
 
@@ -270,8 +270,8 @@ namespace Microsoft.Build.UnitTests
             p.Namespaces = "<!THIS IS ERROR Namespace Prefix=\"s\" Uri=\"http://nsurl\" />";
 
             bool executeResult = p.Execute();
-            Assert.True(engine.Log.Contains("MSB3742"), "Engine Log: " + engine.Log);
-            Assert.False(executeResult); // "Execution should've failed"
+            Assert.IsTrue(engine.Log.Contains("MSB3742"), "Engine Log: " + engine.Log);
+            Assert.IsFalse(executeResult); // "Execution should've failed"
         }
 
         [Fact]
@@ -303,11 +303,11 @@ namespace Microsoft.Build.UnitTests
 
                 if (i == 3)
                 {
-                    Assert.True(result); // "Only 3rd value should pass."
+                    Assert.IsTrue(result); // "Only 3rd value should pass."
                 }
                 else
                 {
-                    Assert.False(result); // "Only 3rd value should pass."
+                    Assert.IsFalse(result); // "Only 3rd value should pass."
                 }
             }
         }
@@ -353,9 +353,9 @@ namespace Microsoft.Build.UnitTests
             p.XmlInputPath = new TaskItem(xmlInputPath);
             p.Query = "//Key/text()";
 
-            Assert.True(p.Execute());
-            Assert.Equal(["abcdefg", "a$(d)fg", "a$(d.f)"], p.Result.Select(x => x.ItemSpec));
-            Assert.Equal(["abcdefg", "a%24%28d%29fg", "a%24%28d.f%29"], p.Result.Cast<TaskItem>().Select(x => x.ToString()));
+            Assert.IsTrue(p.Execute());
+            Assert.AreEqual(["abcdefg", "a$(d)fg", "a$(d.f)"], p.Result.Select(x => x.ItemSpec));
+            Assert.AreEqual(["abcdefg", "a%24%28d%29fg", "a%24%28d.f%29"], p.Result.Cast<TaskItem>().Select(x => x.ToString()));
         }
 
         private void Prepare(string xmlFile, out string xmlInputPath)

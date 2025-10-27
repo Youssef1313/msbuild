@@ -56,7 +56,7 @@ namespace Microsoft.Build.UnitTests
 
             bool success = t.Execute();
 
-            Assert.True(success);
+            Assert.IsTrue(success);
             Assert.Empty(t.Include);
         }
 
@@ -74,9 +74,9 @@ namespace Microsoft.Build.UnitTests
 
             bool success = t.Execute();
 
-            Assert.True(success);
+            Assert.IsTrue(success);
             Assert.Single(t.Include);
-            Assert.Equal("MyFile.txt", t.Include[0].ItemSpec);
+            Assert.AreEqual("MyFile.txt", t.Include[0].ItemSpec);
         }
 
         /// <summary>
@@ -92,9 +92,9 @@ namespace Microsoft.Build.UnitTests
 
             bool success = t.Execute();
 
-            Assert.True(success);
+            Assert.IsTrue(success);
             Assert.Single(t.Include);
-            Assert.Equal(t.Include[0].ItemSpec, t.Include[0].ItemSpec);
+            Assert.AreEqual(t.Include[0].ItemSpec, t.Include[0].ItemSpec);
         }
 
 
@@ -111,7 +111,7 @@ namespace Microsoft.Build.UnitTests
 
             bool success = t.Execute();
 
-            Assert.True(success);
+            Assert.IsTrue(success);
             Assert.Empty(t.Include);
         }
 
@@ -126,7 +126,7 @@ namespace Microsoft.Build.UnitTests
 
             bool success = t.Execute();
 
-            Assert.True(success);
+            Assert.IsTrue(success);
             Assert.Empty(t.Include);
         }
 
@@ -145,7 +145,7 @@ namespace Microsoft.Build.UnitTests
 
             bool success = t.Execute();
 
-            Assert.True(success);
+            Assert.IsTrue(success);
             Assert.Empty(t.Include);
         }
 
@@ -228,8 +228,8 @@ namespace Microsoft.Build.UnitTests
 
             bool success = t.Execute();
 
-            Assert.True(success);
-            Assert.Equal("SomeValue", t.Include[0].GetMetadata("MyMetaData"));
+            Assert.IsTrue(success);
+            Assert.AreEqual("SomeValue", t.Include[0].GetMetadata("MyMetaData"));
         }
 
         /// <summary>
@@ -251,8 +251,8 @@ namespace Microsoft.Build.UnitTests
 
             bool success = t.Execute();
 
-            Assert.True(success);
-            Assert.Equal("SomePreserveMeValue", t.Include[0].GetMetadata("MyMetaData"));
+            Assert.IsTrue(success);
+            Assert.AreEqual("SomePreserveMeValue", t.Include[0].GetMetadata("MyMetaData"));
         }
 
         /// <summary>
@@ -276,8 +276,8 @@ namespace Microsoft.Build.UnitTests
 
             bool success = t.Execute();
 
-            Assert.True(success);
-            Assert.Equal("SomeOverwriteValue", t.Include[0].GetMetadata("MyMetaData"));
+            Assert.IsTrue(success);
+            Assert.AreEqual("SomeOverwriteValue", t.Include[0].GetMetadata("MyMetaData"));
         }
 
         /// <summary>

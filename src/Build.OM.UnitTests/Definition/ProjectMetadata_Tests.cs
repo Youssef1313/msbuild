@@ -29,7 +29,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ProjectItem item = project.AddItem("i", "i1")[0];
             ProjectMetadata metadatum = item.SetMetadataValue("m", "m1");
 
-            Assert.True(Object.ReferenceEquals(project, metadatum.Project));
+            Assert.IsTrue(Object.ReferenceEquals(project, metadatum.Project));
         }
 
         /// <summary>
@@ -54,12 +54,12 @@ namespace Microsoft.Build.UnitTests.OM.Definition
 
             Project project = new Project(projectXml);
 
-            Assert.False(project.IsDirty);
+            Assert.IsFalse(project.IsDirty);
 
             Helpers.GetFirst(project.GetItems("i")).SetMetadataValue("m1", "v2");
             Helpers.GetFirst(project.GetItems("i")).SetMetadataValue("m2", "v%214");
 
-            Assert.True(project.IsDirty);
+            Assert.IsTrue(project.IsDirty);
 
             using StringWriter writer = new EncodingStringWriter();
             projectXml.Save(writer);
@@ -76,7 +76,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
                 ");
 
             Helpers.CompareProjectXml(expected, writer.ToString());
-            Assert.Equal("v!4", Helpers.GetFirst(project.GetItems("i")).GetMetadataValue("m2"));
+            Assert.AreEqual("v!4", Helpers.GetFirst(project.GetItems("i")).GetMetadataValue("m2"));
         }
 
         /// <summary>
@@ -92,11 +92,11 @@ namespace Microsoft.Build.UnitTests.OM.Definition
 
             item.SetMetadataValue("m", "m1");
 
-            Assert.False(project.IsDirty);
+            Assert.IsFalse(project.IsDirty);
 
             item.GetMetadata("m").UnevaluatedValue = "m1";
 
-            Assert.False(project.IsDirty);
+            Assert.IsFalse(project.IsDirty);
         }
 
         /// <summary>
@@ -113,8 +113,8 @@ namespace Microsoft.Build.UnitTests.OM.Definition
 
             metadatum.UnevaluatedValue = "$(p)";
 
-            Assert.Equal("$(p)", metadatum.UnevaluatedValue);
-            Assert.Equal("p0", metadatum.EvaluatedValue);
+            Assert.AreEqual("$(p)", metadatum.UnevaluatedValue);
+            Assert.AreEqual("p0", metadatum.EvaluatedValue);
         }
 
         /// <summary>
@@ -131,8 +131,8 @@ namespace Microsoft.Build.UnitTests.OM.Definition
 
             metadatum.UnevaluatedValue = "@(i)";
 
-            Assert.Equal("@(i)", metadatum.UnevaluatedValue);
-            Assert.Equal("i1", metadatum.EvaluatedValue);
+            Assert.AreEqual("@(i)", metadatum.UnevaluatedValue);
+            Assert.AreEqual("i1", metadatum.EvaluatedValue);
         }
 
         /// <summary>
@@ -161,8 +161,8 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ProjectMetadata metadatum = Helpers.GetFirst(project.GetItems("j")).GetMetadata("m1");
             metadatum.UnevaluatedValue = "%(i.m1)";
 
-            Assert.Equal("%(i.m1)", metadatum.UnevaluatedValue);
-            Assert.Equal(String.Empty, metadatum.EvaluatedValue);
+            Assert.AreEqual("%(i.m1)", metadatum.UnevaluatedValue);
+            Assert.AreEqual(String.Empty, metadatum.EvaluatedValue);
         }
 
         /// <summary>
@@ -188,8 +188,8 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ProjectMetadata metadatum = Helpers.GetFirst(project.GetItems("i")).GetMetadata("m1");
             metadatum.UnevaluatedValue = "%(i.m0)";
 
-            Assert.Equal("%(i.m0)", metadatum.UnevaluatedValue);
-            Assert.Equal("v0", metadatum.EvaluatedValue);
+            Assert.AreEqual("%(i.m0)", metadatum.UnevaluatedValue);
+            Assert.AreEqual("v0", metadatum.EvaluatedValue);
         }
 
         /// <summary>
@@ -214,8 +214,8 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ProjectMetadata metadatum = Helpers.GetFirst(project.GetItems("i")).GetMetadata("m1");
             metadatum.UnevaluatedValue = "%(i.m1)";
 
-            Assert.Equal("%(i.m1)", metadatum.UnevaluatedValue);
-            Assert.Equal(String.Empty, metadatum.EvaluatedValue);
+            Assert.AreEqual("%(i.m1)", metadatum.UnevaluatedValue);
+            Assert.AreEqual(String.Empty, metadatum.EvaluatedValue);
         }
 
         /// <summary>
@@ -241,8 +241,8 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ProjectMetadata metadatum = Helpers.GetFirst(project.GetItems("i")).GetMetadata("m1");
             metadatum.UnevaluatedValue = "%(m0)";
 
-            Assert.Equal("%(m0)", metadatum.UnevaluatedValue);
-            Assert.Equal("v0", metadatum.EvaluatedValue);
+            Assert.AreEqual("%(m0)", metadatum.UnevaluatedValue);
+            Assert.AreEqual("v0", metadatum.EvaluatedValue);
         }
 
         /// <summary>
@@ -273,8 +273,8 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ProjectMetadata metadatum = Helpers.GetFirst(project.GetItems("i")).GetMetadata("m1");
             metadatum.UnevaluatedValue = "%(m0)";
 
-            Assert.Equal("%(m0)", metadatum.UnevaluatedValue);
-            Assert.Equal("v0", metadatum.EvaluatedValue);
+            Assert.AreEqual("%(m0)", metadatum.UnevaluatedValue);
+            Assert.AreEqual("v0", metadatum.EvaluatedValue);
         }
 
         /// <summary>
@@ -305,8 +305,8 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ProjectMetadata metadatum = Helpers.GetFirst(project.GetItems("i")).GetMetadata("m1");
             metadatum.UnevaluatedValue = "%(i.m0)";
 
-            Assert.Equal("%(i.m0)", metadatum.UnevaluatedValue);
-            Assert.Equal("v0", metadatum.EvaluatedValue);
+            Assert.AreEqual("%(i.m0)", metadatum.UnevaluatedValue);
+            Assert.AreEqual("v0", metadatum.EvaluatedValue);
         }
 
         /// <summary>
@@ -337,8 +337,8 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ProjectMetadata metadatum = Helpers.GetFirst(project.GetItems("i")).GetMetadata("m1");
             metadatum.UnevaluatedValue = "%(j.m0)";
 
-            Assert.Equal("%(j.m0)", metadatum.UnevaluatedValue);
-            Assert.Equal(String.Empty, metadatum.EvaluatedValue);
+            Assert.AreEqual("%(j.m0)", metadatum.UnevaluatedValue);
+            Assert.AreEqual(String.Empty, metadatum.EvaluatedValue);
         }
 
         /// <summary>
@@ -370,8 +370,8 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ProjectMetadata metadatum = itemDefinition.GetMetadata("m1");
             metadatum.UnevaluatedValue = "%(m0)";
 
-            Assert.Equal("%(m0)", metadatum.UnevaluatedValue);
-            Assert.Equal("v0", metadatum.EvaluatedValue);
+            Assert.AreEqual("%(m0)", metadatum.UnevaluatedValue);
+            Assert.AreEqual("v0", metadatum.EvaluatedValue);
         }
 
         /// <summary>
@@ -399,8 +399,8 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ProjectMetadata metadatum = itemDefinition.GetMetadata("m1");
             metadatum.UnevaluatedValue = "%(i.m0)";
 
-            Assert.Equal("%(i.m0)", metadatum.UnevaluatedValue);
-            Assert.Equal("v0", metadatum.EvaluatedValue);
+            Assert.AreEqual("%(i.m0)", metadatum.UnevaluatedValue);
+            Assert.AreEqual("v0", metadatum.EvaluatedValue);
         }
 
         /// <summary>
@@ -433,8 +433,8 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ProjectMetadata metadatum = itemDefinition.GetMetadata("m1");
             metadatum.UnevaluatedValue = "%(j.m0)";
 
-            Assert.Equal("%(j.m0)", metadatum.UnevaluatedValue);
-            Assert.Equal(String.Empty, metadatum.EvaluatedValue);
+            Assert.AreEqual("%(j.m0)", metadatum.UnevaluatedValue);
+            Assert.AreEqual(String.Empty, metadatum.EvaluatedValue);
         }
 
         /// <summary>
@@ -446,7 +446,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             Project project = new Project();
             ProjectMetadata metadata = project.AddItem("i", "i1")[0].SetMetadataValue("m", "m1");
 
-            Assert.False(metadata.IsImported);
+            Assert.IsFalse(metadata.IsImported);
         }
 
         /// <summary>
@@ -469,7 +469,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
 
                 ProjectMetadata metadata = item.GetMetadata("m");
 
-                Assert.True(metadata.IsImported);
+                Assert.IsTrue(metadata.IsImported);
 
                 metadata.UnevaluatedValue = "m1";
             });
@@ -522,13 +522,13 @@ namespace Microsoft.Build.UnitTests.OM.Definition
         /// </summary>
         private void SpecialCharactersInMetadataValueTests(Microsoft.Build.Evaluation.ProjectItem item)
         {
-            Assert.Equal("%3B", item.GetMetadata("EscapedSemicolon").UnevaluatedValue);
-            Assert.Equal(";", item.GetMetadata("EscapedSemicolon").EvaluatedValue);
-            Assert.Equal(";", item.GetMetadataValue("EscapedSemicolon"));
+            Assert.AreEqual("%3B", item.GetMetadata("EscapedSemicolon").UnevaluatedValue);
+            Assert.AreEqual(";", item.GetMetadata("EscapedSemicolon").EvaluatedValue);
+            Assert.AreEqual(";", item.GetMetadataValue("EscapedSemicolon"));
 
-            Assert.Equal("%24", item.GetMetadata("EscapedDollarSign").UnevaluatedValue);
-            Assert.Equal("$", item.GetMetadata("EscapedDollarSign").EvaluatedValue);
-            Assert.Equal("$", item.GetMetadataValue("EscapedDollarSign"));
+            Assert.AreEqual("%24", item.GetMetadata("EscapedDollarSign").UnevaluatedValue);
+            Assert.AreEqual("$", item.GetMetadata("EscapedDollarSign").EvaluatedValue);
+            Assert.AreEqual("$", item.GetMetadataValue("EscapedDollarSign"));
         }
     }
 }

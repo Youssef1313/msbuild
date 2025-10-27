@@ -53,7 +53,7 @@ namespace Microsoft.Build.UnitTests
 
             Project project = ObjectModelHelpers.LoadProjectFileInTempProjectDirectory(projectRelativePath);
 
-            Assert.Equal("true", project.GetPropertyValue("NuGetPropsIsImported"), StringComparer.OrdinalIgnoreCase);
+            Assert.AreEqual("true", project.GetPropertyValue("NuGetPropsIsImported"), StringComparer.OrdinalIgnoreCase);
         }
 
         /// <summary>

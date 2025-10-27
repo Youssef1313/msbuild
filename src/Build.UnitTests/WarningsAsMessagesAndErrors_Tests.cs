@@ -222,10 +222,10 @@ namespace Microsoft.Build.Engine.UnitTests
         {
             BuildErrorEventArgs actualEvent = logger.Errors.FirstOrDefault();
 
-            Assert.NotNull(actualEvent);
+            Assert.IsNotNull(actualEvent);
 
-            Assert.Equal(ExpectedEventMessage, actualEvent.Message);
-            Assert.Equal(ExpectedEventCode, actualEvent.Code);
+            Assert.AreEqual(ExpectedEventMessage, actualEvent.Message);
+            Assert.AreEqual(ExpectedEventCode, actualEvent.Code);
 
             logger.AssertNoWarnings();
         }
@@ -234,10 +234,10 @@ namespace Microsoft.Build.Engine.UnitTests
         {
             BuildWarningEventArgs actualEvent = logger.Warnings.FirstOrDefault();
 
-            Assert.NotNull(actualEvent);
+            Assert.IsNotNull(actualEvent);
 
-            Assert.Equal(ExpectedEventMessage, actualEvent.Message);
-            Assert.Equal(ExpectedEventCode, actualEvent.Code);
+            Assert.AreEqual(ExpectedEventMessage, actualEvent.Message);
+            Assert.AreEqual(ExpectedEventCode, actualEvent.Code);
 
             logger.AssertNoErrors();
         }
@@ -246,9 +246,9 @@ namespace Microsoft.Build.Engine.UnitTests
         {
             BuildMessageEventArgs actualEvent = logger.BuildMessageEvents.FirstOrDefault(i => i.Message.Equals(ExpectedEventMessage));
 
-            Assert.NotNull(actualEvent);
+            Assert.IsNotNull(actualEvent);
 
-            Assert.Equal(ExpectedEventCode, actualEvent.Code);
+            Assert.AreEqual(ExpectedEventCode, actualEvent.Code);
 
             logger.AssertNoErrors();
             logger.AssertNoWarnings();

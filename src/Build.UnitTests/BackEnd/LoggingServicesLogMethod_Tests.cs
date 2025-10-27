@@ -81,7 +81,7 @@ namespace Microsoft.Build.UnitTests.Logging
             // Verify when OnlyLogCriticalEvents is true
             loggingService.OnlyLogCriticalEvents = true;
             loggingService.LogBuildEvent(messageEvent);
-            Assert.Null(loggingService.ProcessedBuildEvent); // "Expected ProcessedBuildEvent to be null"
+            Assert.IsNull(loggingService.ProcessedBuildEvent); // "Expected ProcessedBuildEvent to be null"
             LogandVerifyBuildEvent(warning, loggingService);
             LogandVerifyBuildEvent(error, loggingService);
             LogandVerifyBuildEvent(externalStartedEvent, loggingService);
@@ -181,16 +181,16 @@ namespace Microsoft.Build.UnitTests.Logging
             InvalidProjectFileException exception = new InvalidProjectFileException("ProjectFile", 1, 2, 3, 4, "Message", "errorSubCategory", "ErrorCode", "HelpKeyword");
 
             // Log the exception for the first time
-            Assert.False(exception.HasBeenLogged);
+            Assert.IsFalse(exception.HasBeenLogged);
             service.LogInvalidProjectFileError(s_buildEventContext, exception);
-            Assert.True(exception.HasBeenLogged);
+            Assert.IsTrue(exception.HasBeenLogged);
             BuildEventFileInfo fileInfo = new BuildEventFileInfo(exception.ProjectFile, exception.LineNumber, exception.ColumnNumber, exception.EndLineNumber, exception.EndColumnNumber);
             VerifyBuildErrorEventArgs(fileInfo, exception.ErrorCode, exception.HelpKeyword, exception.BaseMessage, service, exception.ErrorSubcategory);
 
             // Verify when the exception is logged again that it does not actually get logged due to it already being logged
             service.ResetProcessedBuildEvent();
             service.LogInvalidProjectFileError(s_buildEventContext, exception);
-            Assert.Null(service.ProcessedBuildEvent);
+            Assert.IsNull(service.ProcessedBuildEvent);
 
             // Reset the HasLogged field and verify OnlyLogCriticalEvents does not effect the logging of the message
             service.ResetProcessedBuildEvent();
@@ -473,8 +473,8 @@ namespace Microsoft.Build.UnitTests.Logging
                 List<BuildErrorEventArgs> errors = mockLogger.Errors;
                 Assert.Single(errors);
                 BuildErrorEventArgs error = errors[0];
-                Assert.Equal(targetsFile, error.File);
-                Assert.Equal(projectFile, error.ProjectFile);
+                Assert.AreEqual(targetsFile, error.File);
+                Assert.AreEqual(projectFile, error.ProjectFile);
             }
             finally
             {
@@ -713,7 +713,7 @@ namespace Microsoft.Build.UnitTests.Logging
             service.ResetProcessedBuildEvent();
             service.OnlyLogCriticalEvents = true;
             service.LogComment(s_buildEventContext, MessageImportance.Normal, "BuildFinishedSuccess");
-            Assert.Null(service.ProcessedBuildEvent);
+            Assert.IsNull(service.ProcessedBuildEvent);
         }
 
         #endregion
@@ -772,7 +772,7 @@ namespace Microsoft.Build.UnitTests.Logging
             service.ResetProcessedBuildEvent();
             service.OnlyLogCriticalEvents = true;
             service.LogCommentFromText(s_buildEventContext, MessageImportance.Normal, ResourceUtilities.GetResourceString("BuildFinishedSuccess"));
-            Assert.Null(service.ProcessedBuildEvent);
+            Assert.IsNull(service.ProcessedBuildEvent);
         }
         #endregion
 
@@ -1019,7 +1019,7 @@ namespace Microsoft.Build.UnitTests.Logging
                     service.ProcessedBuildEvent.Timestamp);
 
             Assert.IsType<BuildStartedEventArgs>(service.ProcessedBuildEvent);
-            Assert.Equal(buildEvent, (BuildStartedEventArgs)service.ProcessedBuildEvent,
+            Assert.AreEqual(buildEvent, (BuildStartedEventArgs)service.ProcessedBuildEvent,
                 new EventArgsEqualityComparer<BuildStartedEventArgs>());
         }
 
@@ -1033,18 +1033,18 @@ namespace Microsoft.Build.UnitTests.Logging
             ProcessBuildEventHelper service = (ProcessBuildEventHelper)ProcessBuildEventHelper.CreateLoggingService(LoggerMode.Synchronous, 1);
             service.LogBuildFinished(true);
             BuildFinishedEventArgs buildEvent = new BuildFinishedEventArgs(ResourceUtilities.GetResourceString("BuildFinishedSuccess"), null /* no help keyword */, true, service.ProcessedBuildEvent.Timestamp);
-            Assert.True(((BuildFinishedEventArgs)service.ProcessedBuildEvent).IsEquivalent(buildEvent));
+            Assert.IsTrue(((BuildFinishedEventArgs)service.ProcessedBuildEvent).IsEquivalent(buildEvent));
 
             service.ResetProcessedBuildEvent();
             service.LogBuildFinished(false);
             buildEvent = new BuildFinishedEventArgs(ResourceUtilities.GetResourceString("BuildFinishedFailure"), null /* no help keyword */, false, service.ProcessedBuildEvent.Timestamp);
-            Assert.True(((BuildFinishedEventArgs)service.ProcessedBuildEvent).IsEquivalent(buildEvent));
+            Assert.IsTrue(((BuildFinishedEventArgs)service.ProcessedBuildEvent).IsEquivalent(buildEvent));
 
             service.ResetProcessedBuildEvent();
             service.OnlyLogCriticalEvents = true;
             service.LogBuildFinished(true);
             buildEvent = new BuildFinishedEventArgs(string.Empty, null /* no help keyword */, true, service.ProcessedBuildEvent.Timestamp);
-            Assert.True(((BuildFinishedEventArgs)service.ProcessedBuildEvent).IsEquivalent(buildEvent));
+            Assert.IsTrue(((BuildFinishedEventArgs)service.ProcessedBuildEvent).IsEquivalent(buildEvent));
         }
 
         [Fact]
@@ -1061,7 +1061,7 @@ namespace Microsoft.Build.UnitTests.Logging
                     service.ProcessedBuildEvent.Timestamp);
 
             Assert.IsType<BuildCanceledEventArgs>(service.ProcessedBuildEvent);
-            Assert.Equal(buildEvent, (BuildCanceledEventArgs)service.ProcessedBuildEvent,
+            Assert.AreEqual(buildEvent, (BuildCanceledEventArgs)service.ProcessedBuildEvent,
                 new EventArgsEqualityComparer<BuildCanceledEventArgs>());
         }
 
@@ -1295,14 +1295,14 @@ namespace Microsoft.Build.UnitTests.Logging
 
             TelemetryEventArgs actualEventArgs = (TelemetryEventArgs)service.ProcessedBuildEvent;
 
-            Assert.Equal(expectedEventArgs.EventName, actualEventArgs.EventName);
-            Assert.Equal(expectedEventArgs.Properties.OrderBy(kvp => kvp.Key, StringComparer.Ordinal), actualEventArgs.Properties.OrderBy(kvp => kvp.Key, StringComparer.OrdinalIgnoreCase));
-            Assert.Equal(expectedEventArgs.BuildEventContext, actualEventArgs.BuildEventContext);
+            Assert.AreEqual(expectedEventArgs.EventName, actualEventArgs.EventName);
+            Assert.AreEqual(expectedEventArgs.Properties.OrderBy(kvp => kvp.Key, StringComparer.Ordinal), actualEventArgs.Properties.OrderBy(kvp => kvp.Key, StringComparer.OrdinalIgnoreCase));
+            Assert.AreEqual(expectedEventArgs.BuildEventContext, actualEventArgs.BuildEventContext);
 
             if (properties != null)
             {
                 // Ensure the properties were cloned into a new dictionary
-                Assert.False(Object.ReferenceEquals(actualEventArgs.Properties, properties));
+                Assert.IsFalse(Object.ReferenceEquals(actualEventArgs.Properties, properties));
             }
         }
 
@@ -1456,7 +1456,7 @@ namespace Microsoft.Build.UnitTests.Logging
             service.ResetProcessedBuildEvent();
             service.OnlyLogCriticalEvents = true;
             service.LogTaskStarted(s_buildEventContext, taskName, projectFile, projectFileOfTask, taskAssemblyLocation);
-            Assert.Null(service.ProcessedBuildEvent);
+            Assert.IsNull(service.ProcessedBuildEvent);
         }
 
         /// <summary>
@@ -1476,7 +1476,7 @@ namespace Microsoft.Build.UnitTests.Logging
             service.ResetProcessedBuildEvent();
             service.OnlyLogCriticalEvents = true;
             service.LogTaskFinished(s_buildEventContext, taskName, projectFile, projectFileOfTask, succeeded);
-            Assert.Null(service.ProcessedBuildEvent);
+            Assert.IsNull(service.ProcessedBuildEvent);
         }
 
         /// <summary>
@@ -1499,7 +1499,7 @@ namespace Microsoft.Build.UnitTests.Logging
             service.ResetProcessedBuildEvent();
             service.OnlyLogCriticalEvents = true;
             service.LogTargetFinished(s_targetBuildEventContext, targetName, projectFile, projectFileOfTarget, succeeded, outputs);
-            Assert.Null(service.ProcessedBuildEvent);
+            Assert.IsNull(service.ProcessedBuildEvent);
         }
 
         /// <summary>
@@ -1528,7 +1528,7 @@ namespace Microsoft.Build.UnitTests.Logging
             service.ResetProcessedBuildEvent();
             service.OnlyLogCriticalEvents = true;
             service.LogTargetStarted(s_targetBuildEventContext, targetName, projectFile, projectFileOfTarget, null, TargetBuiltReason.None);
-            Assert.Null(service.ProcessedBuildEvent);
+            Assert.IsNull(service.ProcessedBuildEvent);
         }
 
         /// <summary>
@@ -1555,7 +1555,7 @@ namespace Microsoft.Build.UnitTests.Logging
             service.ResetProcessedBuildEvent();
             service.OnlyLogCriticalEvents = true;
             service.LogTargetStarted(s_targetBuildEventContext, targetName, projectFile, projectFileOfTarget, parentTargetName, TargetBuiltReason.BeforeTargets);
-            Assert.Null(service.ProcessedBuildEvent);
+            Assert.IsNull(service.ProcessedBuildEvent);
         }
 
         /// <summary>
@@ -1579,7 +1579,7 @@ namespace Microsoft.Build.UnitTests.Logging
                   service.ProcessedBuildEvent.Timestamp,
                   targetOutputs);
             targetEvent.BuildEventContext = s_targetBuildEventContext;
-            Assert.True(((TargetFinishedEventArgs)service.ProcessedBuildEvent).IsEquivalent(targetEvent));
+            Assert.IsTrue(((TargetFinishedEventArgs)service.ProcessedBuildEvent).IsEquivalent(targetEvent));
         }
 
         /// <summary>
@@ -1602,7 +1602,7 @@ namespace Microsoft.Build.UnitTests.Logging
                            TargetBuiltReason.None,
                            service.ProcessedBuildEvent.Timestamp);
             buildEvent.BuildEventContext = s_targetBuildEventContext;
-            Assert.True(((TargetStartedEventArgs)service.ProcessedBuildEvent).IsEquivalent(buildEvent));
+            Assert.IsTrue(((TargetStartedEventArgs)service.ProcessedBuildEvent).IsEquivalent(buildEvent));
         }
 
         /// <summary>
@@ -1625,7 +1625,7 @@ namespace Microsoft.Build.UnitTests.Logging
                   succeeded,
                   service.ProcessedBuildEvent.Timestamp);
             taskEvent.BuildEventContext = s_buildEventContext;
-            Assert.True(((TaskFinishedEventArgs)service.ProcessedBuildEvent).IsEquivalent(taskEvent));
+            Assert.IsTrue(((TaskFinishedEventArgs)service.ProcessedBuildEvent).IsEquivalent(taskEvent));
         }
 
         /// <summary>
@@ -1647,7 +1647,7 @@ namespace Microsoft.Build.UnitTests.Logging
                   service.ProcessedBuildEvent.Timestamp,
                   taskAssemblyLocation);
             taskEvent.BuildEventContext = s_buildEventContext;
-            Assert.True(((TaskStartedEventArgs)service.ProcessedBuildEvent).IsEquivalent(taskEvent));
+            Assert.IsTrue(((TaskStartedEventArgs)service.ProcessedBuildEvent).IsEquivalent(taskEvent));
         }
 
         /// <summary>
@@ -1667,7 +1667,7 @@ namespace Microsoft.Build.UnitTests.Logging
                   success,
                   service.ProcessedBuildEvent.Timestamp);
             projectEvent.BuildEventContext = projectContext;
-            Assert.True(((ProjectFinishedEventArgs)service.ProcessedBuildEvent).IsEquivalent(projectEvent));
+            Assert.IsTrue(((ProjectFinishedEventArgs)service.ProcessedBuildEvent).IsEquivalent(projectEvent));
         }
 
         /// <summary>
@@ -1692,7 +1692,7 @@ namespace Microsoft.Build.UnitTests.Logging
                       parentBuildEventContext,
                         service.ProcessedBuildEvent.Timestamp);
             buildEvent.BuildEventContext = generatedContext;
-            Assert.True(((ProjectStartedEventArgs)service.ProcessedBuildEvent).IsEquivalent(buildEvent));
+            Assert.IsTrue(((ProjectStartedEventArgs)service.ProcessedBuildEvent).IsEquivalent(buildEvent));
         }
 
         /// <summary>
@@ -1711,7 +1711,7 @@ namespace Microsoft.Build.UnitTests.Logging
                   service.ProcessedBuildEvent.Timestamp);
 
             buildMessageEvent.BuildEventContext = s_buildEventContext;
-            Assert.True(((BuildMessageEventArgs)service.ProcessedBuildEvent).IsEquivalent(buildMessageEvent));
+            Assert.IsTrue(((BuildMessageEventArgs)service.ProcessedBuildEvent).IsEquivalent(buildMessageEvent));
         }
 
         /// <summary>
@@ -1738,7 +1738,7 @@ namespace Microsoft.Build.UnitTests.Logging
                     "MSBuild",
                     service.ProcessedBuildEvent.Timestamp);
             buildEvent.BuildEventContext = s_buildEventContext;
-            Assert.True(buildEvent.IsEquivalent((BuildWarningEventArgs)service.ProcessedBuildEvent));
+            Assert.IsTrue(buildEvent.IsEquivalent((BuildWarningEventArgs)service.ProcessedBuildEvent));
         }
 
         /// <summary>
@@ -1765,7 +1765,7 @@ namespace Microsoft.Build.UnitTests.Logging
                     "MSBuild",
                     service.ProcessedBuildEvent.Timestamp);
             buildEvent.BuildEventContext = s_buildEventContext;
-            Assert.True(buildEvent.IsEquivalent((BuildErrorEventArgs)service.ProcessedBuildEvent));
+            Assert.IsTrue(buildEvent.IsEquivalent((BuildErrorEventArgs)service.ProcessedBuildEvent));
         }
 
         /// <summary>
@@ -1776,7 +1776,7 @@ namespace Microsoft.Build.UnitTests.Logging
         private void LogandVerifyBuildEvent(BuildEventArgs expectedBuildEvent, ProcessBuildEventHelper loggingService)
         {
             loggingService.LogBuildEvent(expectedBuildEvent);
-            Assert.True(loggingService.ProcessedBuildEvent.IsEquivalent(expectedBuildEvent)); // "Expected ProcessedBuildEvent to equal expected build event"
+            Assert.IsTrue(loggingService.ProcessedBuildEvent.IsEquivalent(expectedBuildEvent)); // "Expected ProcessedBuildEvent to equal expected build event"
             loggingService.ResetProcessedBuildEvent();
         }
         #endregion

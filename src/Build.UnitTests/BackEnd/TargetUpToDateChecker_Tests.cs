@@ -60,7 +60,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             bool success = p.Build(new string[] { "Build" }, new ILogger[] { ml });
 
-            Assert.True(success);
+            Assert.IsTrue(success);
 
             // It should have actually skipped the "Build" target since there were no inputs.
             ml.AssertLogDoesntContain("Running Build target");
@@ -121,7 +121,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             bool success = p.Build("Build", new ILogger[] { ml });
 
-            Assert.True(success);
+            Assert.IsTrue(success);
 
             // It should not have skipped the "Build" target since some output metadata was missing
             ml.AssertLogContains("Running Build target");
@@ -146,7 +146,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             success = p.Build("Build", new ILogger[] { ml });
 
-            Assert.True(success);
+            Assert.IsTrue(success);
 
             // It should have actually skipped the "Build" target since some output metadata was missing
             ml.AssertLogDoesntContain("Running Build target");
@@ -187,7 +187,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             DependencyAnalysisResult result = PerformDependencyAnalysisTestHelper(filesToAnalyze, itemsByName, inputs, outputs);
 
-            Assert.Equal(DependencyAnalysisResult.IncrementalBuild, result); // "Should only build partially."
+            Assert.AreEqual(DependencyAnalysisResult.IncrementalBuild, result); // "Should only build partially."
         }
 
         /// <summary>
@@ -230,7 +230,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             DependencyAnalysisResult result = PerformDependencyAnalysisTestHelper(filesToAnalyze, itemsByName, inputs, outputs);
 
-            Assert.Equal(DependencyAnalysisResult.IncrementalBuild, result); // "Should only build partially."
+            Assert.AreEqual(DependencyAnalysisResult.IncrementalBuild, result); // "Should only build partially."
         }
 
         /// <summary>
@@ -287,11 +287,11 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 Console.WriteLine("Changed: {0}:{1}", itemInstance.ItemType, itemInstance.EvaluatedInclude);
             }
 
-            Assert.Equal(DependencyAnalysisResult.IncrementalBuild, result); // "Should only build partially."
+            Assert.AreEqual(DependencyAnalysisResult.IncrementalBuild, result); // "Should only build partially."
 
             // Even though they were all up to date, we still expect to see an empty marker
             // so that lookups can correctly *not* find items of that type
-            Assert.True(changedTargetInputs.ItemTypes.Contains("MoreItems"));
+            Assert.IsTrue(changedTargetInputs.ItemTypes.Contains("MoreItems"));
             Assert.Empty(changedTargetInputs["MoreItems"]);
         }
 
@@ -319,7 +319,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             using ProjectFromString projectFromString = new(projectText.Replace("`", "\""));
             Project p = projectFromString.Project;
 
-            Assert.True(p.Build(new string[] { "Build" }, new ILogger[] { logger }));
+            Assert.IsTrue(p.Build(new string[] { "Build" }, new ILogger[] { logger }));
 
             logger.AssertLogContains("SomeMetaThing");
         }
@@ -348,7 +348,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             using ProjectFromString projectFromString = new(projectText.Replace("`", "\""));
             Project p = projectFromString.Project;
 
-            Assert.True(p.Build(new string[] { "Build" }, new ILogger[] { logger }));
+            Assert.IsTrue(p.Build(new string[] { "Build" }, new ILogger[] { logger }));
 
             logger.AssertLogContains("SomeMetaThing");
         }
@@ -377,7 +377,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             using ProjectFromString projectFromString = new(projectText.Replace("`", "\""));
             Project p = projectFromString.Project;
 
-            Assert.True(p.Build(new string[] { "Build" }, new ILogger[] { logger }));
+            Assert.IsTrue(p.Build(new string[] { "Build" }, new ILogger[] { logger }));
 
             logger.AssertLogContains("1;2;3;4;5;6;7;8;9");
             logger.AssertLogContains("a;b;c;d;e;f;g");
@@ -407,7 +407,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             using ProjectFromString projectFromString = new(projectText.Replace("`", "\""));
             Project p = projectFromString.Project;
 
-            Assert.True(p.Build(new string[] { "Build" }, new ILogger[] { logger }));
+            Assert.IsTrue(p.Build(new string[] { "Build" }, new ILogger[] { logger }));
 
             logger.AssertLogContains("1;2;3;4;5;6;7;8;9");
             logger.AssertLogContains("a;b;c;d;e;f;g");
@@ -442,7 +442,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             using ProjectFromString projectFromString = new(projectText.Replace("`", "\""));
             Project p = projectFromString.Project;
 
-            Assert.True(p.Build(new string[] { "Build" }, new ILogger[] { logger }));
+            Assert.IsTrue(p.Build(new string[] { "Build" }, new ILogger[] { logger }));
 
             logger.AssertLogContains("foo.goo");
             logger.AssertLogContains("foo1.goo");
@@ -929,7 +929,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 }
 
                 DependencyAnalysisLogDetail detail;
-                Assert.Equal(expectedAnyOutOfDate, TargetUpToDateChecker.IsAnyOutOfDate(out detail, Directory.GetCurrentDirectory(), inputs, outputs));
+                Assert.AreEqual(expectedAnyOutOfDate, TargetUpToDateChecker.IsAnyOutOfDate(out detail, Directory.GetCurrentDirectory(), inputs, outputs));
             }
             finally
             {
@@ -1071,7 +1071,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
 
                 DependencyAnalysisLogDetail detail;
-                Assert.Equal(expectedOutOfDate,
+                Assert.AreEqual(expectedOutOfDate,
                     TargetUpToDateChecker.IsAnyOutOfDate(out detail, Directory.GetCurrentDirectory(), inputs, outputs));
             }
             finally

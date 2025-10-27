@@ -201,8 +201,8 @@ namespace Microsoft.Build.Engine.UnitTests.BackEnd
             string message1 = await res1;
             string message2 = await res2;
 
-            Assert.Equal("", message1);
-            Assert.Equal("", message2);
+            Assert.AreEqual("", message1);
+            Assert.AreEqual("", message2);
         }
 #endif
 

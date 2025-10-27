@@ -507,7 +507,7 @@ namespace Microsoft.Build.UnitTests
                 t.Execute(m.CopyFile, !isUseSingleThreadedCopy);
 
                 // Expect for there to have been no copies.
-                Assert.Equal(0, m.copyCount);
+                Assert.AreEqual(0, m.copyCount);
 
                 ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries
             }
@@ -552,12 +552,12 @@ namespace Microsoft.Build.UnitTests
                     FailIfNotIncremental = true,
                 };
 
-                Assert.False(t.Execute(m.CopyFile, !isUseSingleThreadedCopy));
+                Assert.IsFalse(t.Execute(m.CopyFile, !isUseSingleThreadedCopy));
 
                 // Expect for there to have been no copies.
-                Assert.Equal(0, m.copyCount);
+                Assert.AreEqual(0, m.copyCount);
 
-                Assert.False(FileUtilities.FileExistsNoThrow(destination));
+                Assert.IsFalse(FileUtilities.FileExistsNoThrow(destination));
             }
             finally
             {
@@ -612,10 +612,10 @@ namespace Microsoft.Build.UnitTests
                     SkipUnchangedFiles = true,
                     FailIfNotIncremental = true,
                 };
-                Assert.True(t.Execute(m.CopyFile, !isUseSingleThreadedCopy));
+                Assert.IsTrue(t.Execute(m.CopyFile, !isUseSingleThreadedCopy));
 
                 // Expect for there to have been no copies.
-                Assert.Equal(0, m.copyCount);
+                Assert.AreEqual(0, m.copyCount);
 
                 ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries
             }
@@ -665,10 +665,10 @@ namespace Microsoft.Build.UnitTests
                     FailIfNotIncremental = true,
                 };
 
-                Assert.False(t.Execute(m.CopyFile, !isUseSingleThreadedCopy));
+                Assert.IsFalse(t.Execute(m.CopyFile, !isUseSingleThreadedCopy));
 
                 // Expect for there to have been no copies.
-                Assert.Equal(0, m.copyCount);
+                Assert.AreEqual(0, m.copyCount);
 
                 ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries
             }
@@ -722,13 +722,13 @@ namespace Microsoft.Build.UnitTests
                 };
 
                 // Should fail: target is readonly
-                Assert.False(t.Execute());
+                Assert.IsFalse(t.Execute());
 
                 // Expect for there to have been no copies.
                 Assert.Empty(t.CopiedFiles);
 
                 string destinationContent = File.ReadAllText(destination);
-                Assert.Equal("This is a destination file.", destinationContent);
+                Assert.AreEqual("This is a destination file.", destinationContent);
 
                 ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // did not do retries as it was r/o
             }
@@ -789,13 +789,13 @@ namespace Microsoft.Build.UnitTests
                 };
 
                 // Should not fail although target is readonly
-                Assert.True(t.Execute());
+                Assert.IsTrue(t.Execute());
 
                 // Should have copied file anyway
                 Assert.Single(t.CopiedFiles);
 
                 string destinationContent = File.ReadAllText(destination);
-                Assert.Equal("This is a source file.", destinationContent);
+                Assert.AreEqual("This is a source file.", destinationContent);
 
                 ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries
             }
@@ -857,16 +857,16 @@ namespace Microsoft.Build.UnitTests
                 };
 
                 // The file is read-only, so the retries will all fail.
-                Assert.False(t.Execute());
+                Assert.IsFalse(t.Execute());
 
                 // 3 warnings per retry, except the last one which has only two.
                 ((MockEngine)t.BuildEngine).AssertLogContains("MSB3026");
-                Assert.Equal(((t.Retries + 1) * 3) - 1, ((MockEngine)t.BuildEngine).Warnings);
+                Assert.AreEqual(((t.Retries + 1) * 3) - 1, ((MockEngine)t.BuildEngine).Warnings);
 
                 // One error for "retrying failed", one error for "copy failed"
                 ((MockEngine)t.BuildEngine).AssertLogContains("MSB3027");
                 ((MockEngine)t.BuildEngine).AssertLogContains("MSB3021");
-                Assert.Equal(2, ((MockEngine)t.BuildEngine).Errors);
+                Assert.AreEqual(2, ((MockEngine)t.BuildEngine).Errors);
             }
             finally
             {
@@ -923,13 +923,13 @@ namespace Microsoft.Build.UnitTests
                 };
 
                 // Should not fail although target is readonly
-                Assert.True(t.Execute());
+                Assert.IsTrue(t.Execute());
 
                 // Should have copied file anyway
                 Assert.Single(t.CopiedFiles);
 
                 string destinationContent = File.ReadAllText(destination);
-                Assert.Equal("This is a source file.", destinationContent);
+                Assert.AreEqual("This is a source file.", destinationContent);
 
                 ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries
             }
@@ -995,18 +995,18 @@ namespace Microsoft.Build.UnitTests
                 };
 
                 // Should not fail although one target is readonly
-                Assert.True(t.Execute());
+                Assert.IsTrue(t.Execute());
 
                 // Should have copied files anyway
-                Assert.Equal(2, t.CopiedFiles.Length);
+                Assert.AreEqual(2, t.CopiedFiles.Length);
 
                 string destinationContent1 = File.ReadAllText(destination1);
-                Assert.Equal("This is a source file1.", destinationContent1);
+                Assert.AreEqual("This is a source file1.", destinationContent1);
                 string destinationContent2 = File.ReadAllText(destination2);
-                Assert.Equal("This is a source file2.", destinationContent2);
+                Assert.AreEqual("This is a source file2.", destinationContent2);
 
-                Assert.NotEqual(FileAttributes.ReadOnly, File.GetAttributes(destination1) & FileAttributes.ReadOnly);
-                Assert.NotEqual(FileAttributes.ReadOnly, File.GetAttributes(destination2) & FileAttributes.ReadOnly);
+                Assert.AreNotEqual(FileAttributes.ReadOnly, File.GetAttributes(destination1) & FileAttributes.ReadOnly);
+                Assert.AreNotEqual(FileAttributes.ReadOnly, File.GetAttributes(destination2) & FileAttributes.ReadOnly);
 
                 ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries
             }
@@ -1068,7 +1068,7 @@ namespace Microsoft.Build.UnitTests
                     destinationFileContents = sr.ReadToEnd();
                 }
 
-                Assert.Equal("This is a source temp file.", destinationFileContents); // "Expected the destination file to contain the contents of source file."
+                Assert.AreEqual("This is a source temp file.", destinationFileContents); // "Expected the destination file to contain the contents of source file."
 
                 ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries
             }
@@ -1117,7 +1117,7 @@ namespace Microsoft.Build.UnitTests
                     };
 
                     var success = t.Execute();
-                    Assert.True(success);
+                    Assert.IsTrue(success);
 
                     var shouldNotCopy = skipUnchangedFiles &&
                                         i == 1 &&
@@ -1148,7 +1148,7 @@ namespace Microsoft.Build.UnitTests
                     }
 
                     // "Expected the destination file to contain the contents of source file."
-                    Assert.Equal("This is a source temp file.", File.ReadAllText(destinationFile));
+                    Assert.AreEqual("This is a source temp file.", File.ReadAllText(destinationFile));
                     engine.AssertLogDoesntContain("MSB3026"); // Didn't do retries
                 }
             }
@@ -1197,7 +1197,7 @@ namespace Microsoft.Build.UnitTests
 
                 t.Execute();
 
-                Assert.True(File.Exists(destinationFile)); // "Expected the destination file to exist."
+                Assert.IsTrue(File.Exists(destinationFile)); // "Expected the destination file to exist."
                 ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries
             }
             finally
@@ -1235,9 +1235,9 @@ namespace Microsoft.Build.UnitTests
                 };
 
                 bool result = t.Execute();
-                Assert.False(result);
-                Assert.Equal(1, engine.Errors);
-                Assert.Equal(0, engine.Warnings);
+                Assert.IsFalse(result);
+                Assert.AreEqual(1, engine.Errors);
+                Assert.AreEqual(0, engine.Warnings);
                 engine.AssertLogContains("MSB3021");
                 ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries
             }
@@ -1282,9 +1282,9 @@ namespace Microsoft.Build.UnitTests
                 };
 
                 bool result = t.Execute();
-                Assert.False(result);
-                Assert.Equal(1, engine.Errors);
-                Assert.Equal(0, engine.Warnings);
+                Assert.IsFalse(result);
+                Assert.AreEqual(1, engine.Errors);
+                Assert.AreEqual(0, engine.Warnings);
                 engine.AssertLogContains("MSB3030");
                 ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries
             }
@@ -1329,9 +1329,9 @@ namespace Microsoft.Build.UnitTests
                 };
 
                 bool result = t.Execute();
-                Assert.False(result);
-                Assert.Equal(1, engine.Errors);
-                Assert.Equal(0, engine.Warnings);
+                Assert.IsFalse(result);
+                Assert.AreEqual(1, engine.Errors);
+                Assert.AreEqual(0, engine.Warnings);
                 engine.AssertLogContains("MSB3025");
                 engine.AssertLogDoesntContain("MSB3026"); // Didn't do retries
             }
@@ -1371,7 +1371,7 @@ namespace Microsoft.Build.UnitTests
                     };
 
                     bool result = t.Execute();
-                    Assert.False(result);
+                    Assert.IsFalse(result);
 
                     engine.AssertLogContains("MSB3021"); // copy failed
                     engine.AssertLogContains("MSB3026"); // DID retry
@@ -1381,8 +1381,8 @@ namespace Microsoft.Build.UnitTests
                         engine.AssertLogContains(Process.GetCurrentProcess().Id.ToString()); // the file is locked by the current process
                     }
 
-                    Assert.Equal(2, engine.Errors); // retries failed and the actual failure
-                    Assert.Equal(10, engine.Warnings);
+                    Assert.AreEqual(2, engine.Errors); // retries failed and the actual failure
+                    Assert.AreEqual(10, engine.Warnings);
                 }
             }
             finally
@@ -1442,13 +1442,13 @@ namespace Microsoft.Build.UnitTests
                 };
 
                 bool result = t.Execute();
-                Assert.False(result);
+                Assert.IsFalse(result);
 
                 engine.AssertLogContains("MSB3021"); // copy failed
                 engine.AssertLogDoesntContain("MSB3026"); // Didn't retry
 
-                Assert.Equal(1, engine.Errors);
-                Assert.Equal(0, engine.Warnings);
+                Assert.AreEqual(1, engine.Errors);
+                Assert.AreEqual(0, engine.Warnings);
             }
             finally
             {
@@ -1498,13 +1498,13 @@ namespace Microsoft.Build.UnitTests
                 };
 
                 bool result = t.Execute();
-                Assert.False(result);
+                Assert.IsFalse(result);
 
                 engine.AssertLogContains("MSB3021"); // copy failed
                 engine.AssertLogDoesntContain("MSB3026"); // Didn't retry
 
-                Assert.Equal(1, engine.Errors);
-                Assert.Equal(0, engine.Warnings);
+                Assert.AreEqual(1, engine.Errors);
+                Assert.AreEqual(0, engine.Warnings);
             }
             finally
             {
@@ -1545,9 +1545,9 @@ namespace Microsoft.Build.UnitTests
                 };
 
                 bool result = t.Execute();
-                Assert.False(result);
-                Assert.Equal(1, engine.Errors);
-                Assert.Equal(0, engine.Warnings);
+                Assert.IsFalse(result);
+                Assert.AreEqual(1, engine.Errors);
+                Assert.AreEqual(0, engine.Warnings);
                 engine.AssertLogContains("MSB3024");
                 engine.AssertLogDoesntContain("MSB3026");
             }
@@ -1608,32 +1608,32 @@ namespace Microsoft.Build.UnitTests
 
                 bool success = t.Execute();
 
-                Assert.False(success);
+                Assert.IsFalse(success);
                 Assert.Single(t.CopiedFiles);
-                Assert.Equal(validOutFile, t.CopiedFiles[0].ItemSpec);
-                Assert.Equal(2, t.DestinationFiles.Length);
-                Assert.Equal("fr", t.DestinationFiles[1].GetMetadata("Locale"));
+                Assert.AreEqual(validOutFile, t.CopiedFiles[0].ItemSpec);
+                Assert.AreEqual(2, t.DestinationFiles.Length);
+                Assert.AreEqual("fr", t.DestinationFiles[1].GetMetadata("Locale"));
 
                 // Output ItemSpec should not be overwritten.
-                Assert.Equal(invalidFile, t.DestinationFiles[0].ItemSpec);
-                Assert.Equal(validOutFile, t.DestinationFiles[1].ItemSpec);
-                Assert.Equal(validOutFile, t.CopiedFiles[0].ItemSpec);
+                Assert.AreEqual(invalidFile, t.DestinationFiles[0].ItemSpec);
+                Assert.AreEqual(validOutFile, t.DestinationFiles[1].ItemSpec);
+                Assert.AreEqual(validOutFile, t.CopiedFiles[0].ItemSpec);
 
                 // Sources attributes should be left untouched.
-                Assert.Equal("en-GB", t.SourceFiles[1].GetMetadata("Locale"));
-                Assert.Equal("taupe", t.SourceFiles[1].GetMetadata("Color"));
+                Assert.AreEqual("en-GB", t.SourceFiles[1].GetMetadata("Locale"));
+                Assert.AreEqual("taupe", t.SourceFiles[1].GetMetadata("Color"));
 
                 // Attributes not on Sources should be left untouched.
-                Assert.Equal("Pumpkin", t.DestinationFiles[1].GetMetadata("Flavor"));
-                Assert.Equal("Pumpkin", t.CopiedFiles[0].GetMetadata("Flavor"));
+                Assert.AreEqual("Pumpkin", t.DestinationFiles[1].GetMetadata("Flavor"));
+                Assert.AreEqual("Pumpkin", t.CopiedFiles[0].GetMetadata("Flavor"));
 
                 // Attribute should have been forwarded
-                Assert.Equal("taupe", t.DestinationFiles[1].GetMetadata("Color"));
-                Assert.Equal("taupe", t.CopiedFiles[0].GetMetadata("Color"));
+                Assert.AreEqual("taupe", t.DestinationFiles[1].GetMetadata("Color"));
+                Assert.AreEqual("taupe", t.CopiedFiles[0].GetMetadata("Color"));
 
                 // Attribute should not have been updated if it already existed on destination
-                Assert.Equal("fr", t.DestinationFiles[1].GetMetadata("Locale"));
-                Assert.Equal("fr", t.CopiedFiles[0].GetMetadata("Locale"));
+                Assert.AreEqual("fr", t.DestinationFiles[1].GetMetadata("Locale"));
+                Assert.AreEqual("fr", t.CopiedFiles[0].GetMetadata("Locale"));
 
                 ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries
             }
@@ -1683,9 +1683,9 @@ namespace Microsoft.Build.UnitTests
 
                 bool success = t.Execute();
 
-                Assert.True(success);
+                Assert.IsTrue(success);
                 Assert.Single(t.DestinationFiles);
-                Assert.Equal(file, t.DestinationFiles[0].ItemSpec);
+                Assert.AreEqual(file, t.DestinationFiles[0].ItemSpec);
 
                 ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries, nothing to do
 
@@ -1702,9 +1702,9 @@ namespace Microsoft.Build.UnitTests
 
                 success = t.Execute();
 
-                Assert.True(success);
+                Assert.IsTrue(success);
                 Assert.Single(t.DestinationFiles);
-                Assert.Equal(file, t.DestinationFiles[0].ItemSpec);
+                Assert.AreEqual(file, t.DestinationFiles[0].ItemSpec);
                 Assert.Single(t.CopiedFiles);
 
                 ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries, nothing to do
@@ -1754,9 +1754,9 @@ namespace Microsoft.Build.UnitTests
 
                 bool success = t.Execute();
 
-                Assert.True(success);
+                Assert.IsTrue(success);
                 Assert.Single(t.DestinationFiles);
-                Assert.Equal(filename.ToLowerInvariant(), t.DestinationFiles[0].ItemSpec);
+                Assert.AreEqual(filename.ToLowerInvariant(), t.DestinationFiles[0].ItemSpec);
 
                 ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries, nothing to do
             }
@@ -1809,15 +1809,15 @@ namespace Microsoft.Build.UnitTests
                 bool success = t.Execute();
 
                 // Since on Unix there are no invalid file names, the copy will succeed
-                Assert.False(NativeMethodsShared.IsUnixLike ? !success : success);
-                Assert.Equal(2, t.DestinationFiles.Length);
-                Assert.Equal(file, t.DestinationFiles[0].ItemSpec);
-                Assert.Equal(dest2, t.DestinationFiles[1].ItemSpec);
-                Assert.Equal(file, t.CopiedFiles[0].ItemSpec);
+                Assert.IsFalse(NativeMethodsShared.IsUnixLike ? !success : success);
+                Assert.AreEqual(2, t.DestinationFiles.Length);
+                Assert.AreEqual(file, t.DestinationFiles[0].ItemSpec);
+                Assert.AreEqual(dest2, t.DestinationFiles[1].ItemSpec);
+                Assert.AreEqual(file, t.CopiedFiles[0].ItemSpec);
 
                 if (NativeMethodsShared.IsUnixLike)
                 {
-                    Assert.Equal(2, t.CopiedFiles.Length);
+                    Assert.AreEqual(2, t.CopiedFiles.Length);
                 }
                 else
                 {
@@ -1869,8 +1869,8 @@ namespace Microsoft.Build.UnitTests
 
                 bool success = t.Execute();
 
-                Assert.True(success); // "success"
-                Assert.True(File.Exists(destFile)); // "destination exists"
+                Assert.IsTrue(success); // "success"
+                Assert.IsTrue(File.Exists(destFile)); // "destination exists"
 
                 string destinationFileContents;
                 using (StreamReader sr = FileUtilities.OpenRead(destFile))
@@ -1889,12 +1889,12 @@ namespace Microsoft.Build.UnitTests
                     me.AssertLogContainsMessageFromResource(resourceDelegate, "Copy.HardLinkComment", sourceFile, destFile);
                 }
 
-                Assert.Equal("This is a source temp file.", destinationFileContents); // "Expected the destination file to contain the contents of source file."
+                Assert.AreEqual("This is a source temp file.", destinationFileContents); // "Expected the destination file to contain the contents of source file."
 
                 Assert.Single(t.DestinationFiles);
                 Assert.Single(t.CopiedFiles);
-                Assert.Equal(destFile, t.DestinationFiles[0].ItemSpec);
-                Assert.Equal(destFile, t.CopiedFiles[0].ItemSpec);
+                Assert.AreEqual(destFile, t.DestinationFiles[0].ItemSpec);
+                Assert.AreEqual(destFile, t.CopiedFiles[0].ItemSpec);
 
                 ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries
             }
@@ -1941,8 +1941,8 @@ namespace Microsoft.Build.UnitTests
 
                 bool success = t.Execute();
 
-                Assert.True(success); // "success"
-                Assert.True(File.Exists(destFile)); // "destination exists"
+                Assert.IsTrue(success); // "success"
+                Assert.IsTrue(File.Exists(destFile)); // "destination exists"
 
                 string destinationFileContents;
                 using (StreamReader sr = FileUtilities.OpenRead(destFile))
@@ -1950,12 +1950,12 @@ namespace Microsoft.Build.UnitTests
                     destinationFileContents = sr.ReadToEnd();
                 }
 
-                Assert.Equal("This is a source temp file.", destinationFileContents); // "Expected the destination file to contain the contents of source file."
+                Assert.AreEqual("This is a source temp file.", destinationFileContents); // "Expected the destination file to contain the contents of source file."
 
                 Assert.Single(t.DestinationFiles);
                 Assert.Single(t.CopiedFiles);
-                Assert.Equal(destFile, t.DestinationFiles[0].ItemSpec);
-                Assert.Equal(destFile, t.CopiedFiles[0].ItemSpec);
+                Assert.AreEqual(destFile, t.DestinationFiles[0].ItemSpec);
+                Assert.AreEqual(destFile, t.CopiedFiles[0].ItemSpec);
 
                 ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries
             }
@@ -2012,9 +2012,9 @@ namespace Microsoft.Build.UnitTests
                 return true;
             }, !isUseSingleThreadedCopy);
 
-            Assert.True(success);
-            Assert.Equal(2, filesActuallyCopied.Count);
-            Assert.Equal(4, t.CopiedFiles.Length);
+            Assert.IsTrue(success);
+            Assert.AreEqual(2, filesActuallyCopied.Count);
+            Assert.AreEqual(4, t.CopiedFiles.Length);
 
             // Copy calls to different destinations can come in any order when running in parallel.
             filesActuallyCopied.Select(f => Path.GetFileName(f.Key.Name)).ShouldBe(new[] { "a.cs", "b.cs" }, ignoreOrder: true);
@@ -2079,22 +2079,22 @@ namespace Microsoft.Build.UnitTests
                 return true;
             }, !isUseSingleThreadedCopy);
 
-            Assert.True(success);
-            Assert.Equal(4, filesActuallyCopied.Count);
-            Assert.Equal(5, t.CopiedFiles.Length);
+            Assert.IsTrue(success);
+            Assert.AreEqual(4, filesActuallyCopied.Count);
+            Assert.AreEqual(5, t.CopiedFiles.Length);
 
             // Copy calls to different destinations can come in any order when running in parallel.
             string xaPath = Path.Combine(tempPath, "xa.cs");
             var xaCopies = filesActuallyCopied.Where(f => f.Value.Name == xaPath).ToList();
-            Assert.Equal(3, xaCopies.Count);
-            Assert.Equal(Path.Combine(tempPath, "a.cs"), xaCopies[0].Key.Name);
-            Assert.Equal(Path.Combine(tempPath, "b.cs"), xaCopies[1].Key.Name);
-            Assert.Equal(Path.Combine(tempPath, "a.cs"), xaCopies[2].Key.Name);
+            Assert.AreEqual(3, xaCopies.Count);
+            Assert.AreEqual(Path.Combine(tempPath, "a.cs"), xaCopies[0].Key.Name);
+            Assert.AreEqual(Path.Combine(tempPath, "b.cs"), xaCopies[1].Key.Name);
+            Assert.AreEqual(Path.Combine(tempPath, "a.cs"), xaCopies[2].Key.Name);
 
             string xbPath = Path.Combine(tempPath, "xb.cs");
             var xbCopies = filesActuallyCopied.Where(f => f.Value.Name == xbPath).ToList();
             Assert.Single(xbCopies);
-            Assert.Equal(Path.Combine(tempPath, "a.cs"), xbCopies[0].Key.Name);
+            Assert.AreEqual(Path.Combine(tempPath, "a.cs"), xbCopies[0].Key.Name);
 
             ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries
         }
@@ -2141,10 +2141,10 @@ namespace Microsoft.Build.UnitTests
 
                 bool success = t.Execute();
 
-                Assert.False(success);
+                Assert.IsFalse(success);
                 Assert.Single(t.DestinationFiles);
-                Assert.Null(t.CopiedFiles);
-                Assert.False(File.Exists(outFile1));
+                Assert.IsNull(t.CopiedFiles);
+                Assert.IsFalse(File.Exists(outFile1));
 
                 ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries
             }
@@ -2190,7 +2190,7 @@ namespace Microsoft.Build.UnitTests
                 bool result = t.Execute();
 
                 // Expect for there to have been no copies.
-                Assert.False(result);
+                Assert.IsFalse(result);
 
                 ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries
             }
@@ -2228,8 +2228,8 @@ namespace Microsoft.Build.UnitTests
             bool result = t.Execute();
 
             // Expect for there to have been no copies.
-            Assert.False(result);
-            Assert.False(File.Exists(destinationFile));
+            Assert.IsFalse(result);
+            Assert.IsFalse(File.Exists(destinationFile));
 
             ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries
         }
@@ -2254,7 +2254,7 @@ namespace Microsoft.Build.UnitTests
             bool result = t.Execute();
 
             // Expect for there to have been no copies.
-            Assert.False(result);
+            Assert.IsFalse(result);
             ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries
         }
 
@@ -2278,7 +2278,7 @@ namespace Microsoft.Build.UnitTests
             bool result = t.Execute();
 
             // Expect for there to have been no copies.
-            Assert.False(result);
+            Assert.IsFalse(result);
             ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries
         }
 
@@ -2300,7 +2300,7 @@ namespace Microsoft.Build.UnitTests
 
             bool result = t.Execute();
 
-            Assert.False(result);
+            Assert.IsFalse(result);
             engine.AssertLogContains("MSB3028");
         }
 
@@ -2322,7 +2322,7 @@ namespace Microsoft.Build.UnitTests
 
             bool result = t.Execute();
 
-            Assert.False(result);
+            Assert.IsFalse(result);
             engine.AssertLogContains("MSB3029");
         }
 
@@ -2349,7 +2349,7 @@ namespace Microsoft.Build.UnitTests
             var copyFunctor = new CopyFunctor(2, false /* do not throw on failure */);
             bool result = t.Execute(copyFunctor.Copy, !isUseSingleThreadedCopy);
 
-            Assert.False(result);
+            Assert.IsFalse(result);
             engine.AssertLogDoesntContain("MSB3026");
             engine.AssertLogDoesntContain("MSB3027");
         }
@@ -2365,7 +2365,7 @@ namespace Microsoft.Build.UnitTests
                 RetryDelayMilliseconds = 1,  // speed up tests!
             };
 
-            Assert.Equal(10, t.Retries);
+            Assert.AreEqual(10, t.Retries);
         }
 
         /// <summary>
@@ -2376,7 +2376,7 @@ namespace Microsoft.Build.UnitTests
         {
             var t = new Copy();
 
-            Assert.Equal(1000, t.RetryDelayMilliseconds);
+            Assert.AreEqual(1000, t.RetryDelayMilliseconds);
         }
 
         /// <summary>
@@ -2390,7 +2390,7 @@ namespace Microsoft.Build.UnitTests
                 RetryDelayMilliseconds = 1,  // speed up tests!
             };
 
-            Assert.False(t.UseHardlinksIfPossible);
+            Assert.IsFalse(t.UseHardlinksIfPossible);
         }
 
         /// <summary>
@@ -2416,7 +2416,7 @@ namespace Microsoft.Build.UnitTests
             var copyFunctor = new CopyFunctor(2, false /* do not throw on failure */);
             bool result = t.Execute(copyFunctor.Copy, !isUseSingleThreadedCopy);
 
-            Assert.True(result);
+            Assert.IsTrue(result);
             engine.AssertLogContains("MSB3026");
             engine.AssertLogDoesntContain("MSB3027");
         }
@@ -2443,7 +2443,7 @@ namespace Microsoft.Build.UnitTests
             var copyFunctor = new CopyFunctor(2, false /* do not throw on failure */);
             bool result = t.Execute(copyFunctor.Copy, !isUseSingleThreadedCopy);
 
-            Assert.True(result);
+            Assert.IsTrue(result);
             engine.AssertLogContains("MSB3026");
             engine.AssertLogDoesntContain("MSB3027");
 
@@ -2475,7 +2475,7 @@ namespace Microsoft.Build.UnitTests
             var copyFunctor = new CopyFunctor(4, false /* do not throw */);
             bool result = t.Execute(copyFunctor.Copy, !isUseSingleThreadedCopy);
 
-            Assert.False(result);
+            Assert.IsFalse(result);
             engine.AssertLogContains("MSB3026");
             engine.AssertLogContains("MSB3027");
         }
@@ -2504,7 +2504,7 @@ namespace Microsoft.Build.UnitTests
             var copyFunctor = new CopyFunctor(3, true /* throw */);
             bool result = t.Execute(copyFunctor.Copy, !isUseSingleThreadedCopy);
 
-            Assert.False(result);
+            Assert.IsFalse(result);
             engine.AssertLogContains("MSB3026");
             engine.AssertLogContains("MSB3027");
         }
@@ -2569,19 +2569,19 @@ namespace Microsoft.Build.UnitTests
 
                 bool success = t.Execute();
 
-                Assert.True(success); // "success"
-                Assert.True(File.Exists(destFile)); // "destination exists"
+                Assert.IsTrue(success); // "success"
+                Assert.IsTrue(File.Exists(destFile)); // "destination exists"
                 MockEngine.GetStringDelegate resourceDelegate = AssemblyResources.GetString;
 
                 me.AssertLogContainsMessageFromResource(resourceDelegate, "Copy.HardLinkComment", sourceFile, destFile);
 
                 string destinationFileContents = File.ReadAllText(destFile);
-                Assert.Equal("This is a source temp file.", destinationFileContents);
+                Assert.AreEqual("This is a source temp file.", destinationFileContents);
 
                 Assert.Single(t.DestinationFiles);
                 Assert.Single(t.CopiedFiles);
-                Assert.Equal(destFile, t.DestinationFiles[0].ItemSpec);
-                Assert.Equal(destFile, t.CopiedFiles[0].ItemSpec);
+                Assert.AreEqual(destFile, t.DestinationFiles[0].ItemSpec);
+                Assert.AreEqual(destFile, t.CopiedFiles[0].ItemSpec);
 
                 // Now we will write new content to the source file
                 // we'll then check that the destination file automatically
@@ -2590,7 +2590,7 @@ namespace Microsoft.Build.UnitTests
 
                 // Read the destination file (it should have the same modified content as the source)
                 destinationFileContents = File.ReadAllText(destFile);
-                Assert.Equal("This is another source temp file.", destinationFileContents); // "Expected the destination hard linked file to contain the contents of source file. Even after modification of the source"
+                Assert.AreEqual("This is another source temp file.", destinationFileContents); // "Expected the destination hard linked file to contain the contents of source file. Even after modification of the source"
 
                 ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries
             }
@@ -2659,9 +2659,9 @@ namespace Microsoft.Build.UnitTests
 
                 bool success = t.Execute();
 
-                Assert.True(success); // "success"
-                Assert.True(File.Exists(destFile1)); // "destination exists"
-                Assert.True(File.Exists(destFile2)); // "destination exists"
+                Assert.IsTrue(success); // "success"
+                Assert.IsTrue(File.Exists(destFile1)); // "destination exists"
+                Assert.IsTrue(File.Exists(destFile2)); // "destination exists"
                 MockEngine.GetStringDelegate resourceDelegate = AssemblyResources.GetString;
 
                 me.AssertLogContainsMessageFromResource(resourceDelegate, "Copy.HardLinkComment", sourceFile1, destFile1);
@@ -2673,16 +2673,16 @@ namespace Microsoft.Build.UnitTests
                 me.AssertLogContains("0x80070011");
 
                 string destinationFileContents = File.ReadAllText(destFile1);
-                Assert.Equal("This is source temp file 1.", destinationFileContents); // "Expected the destination file to contain the contents of source file."
+                Assert.AreEqual("This is source temp file 1.", destinationFileContents); // "Expected the destination file to contain the contents of source file."
                 destinationFileContents = File.ReadAllText(destFile2);
-                Assert.Equal("This is source temp file 2.", destinationFileContents); // "Expected the destination file to contain the contents of source file."
+                Assert.AreEqual("This is source temp file 2.", destinationFileContents); // "Expected the destination file to contain the contents of source file."
 
-                Assert.Equal(2, t.DestinationFiles.Length);
-                Assert.Equal(2, t.CopiedFiles.Length);
-                Assert.Equal(destFile1, t.DestinationFiles[0].ItemSpec);
-                Assert.Equal(destFile2, t.DestinationFiles[1].ItemSpec);
-                Assert.Equal(destFile1, t.CopiedFiles[0].ItemSpec);
-                Assert.Equal(destFile2, t.CopiedFiles[1].ItemSpec);
+                Assert.AreEqual(2, t.DestinationFiles.Length);
+                Assert.AreEqual(2, t.CopiedFiles.Length);
+                Assert.AreEqual(destFile1, t.DestinationFiles[0].ItemSpec);
+                Assert.AreEqual(destFile2, t.DestinationFiles[1].ItemSpec);
+                Assert.AreEqual(destFile1, t.CopiedFiles[0].ItemSpec);
+                Assert.AreEqual(destFile2, t.CopiedFiles[1].ItemSpec);
 
                 // Now we will write new content to a source file
                 // we'll then check that the destination file automatically
@@ -2691,7 +2691,7 @@ namespace Microsoft.Build.UnitTests
 
                 // Read the destination file (it should have the same modified content as the source)
                 destinationFileContents = File.ReadAllText(destFile1);
-                Assert.Equal("This is source temp file 1.", destinationFileContents); // "Expected the destination copied file to contain the contents of original source file only."
+                Assert.AreEqual("This is source temp file 1.", destinationFileContents); // "Expected the destination copied file to contain the contents of original source file only."
 
                 ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries
             }
@@ -2755,8 +2755,8 @@ namespace Microsoft.Build.UnitTests
 
                 bool success = t.Execute();
 
-                Assert.True(success); // "success"
-                Assert.True(File.Exists(destFile)); // "destination exists"
+                Assert.IsTrue(success); // "success"
+                Assert.IsTrue(File.Exists(destFile)); // "destination exists"
                 MockEngine.GetStringDelegate resourceDelegate = AssemblyResources.GetString;
 
                 me.AssertLogContainsMessageFromResource(resourceDelegate, "Copy.HardLinkComment", sourceFile, destFile);
@@ -2768,12 +2768,12 @@ namespace Microsoft.Build.UnitTests
                 me.AssertLogContains("0x80070476");
 
                 string destinationFileContents = File.ReadAllText(destFile);
-                Assert.Equal("This is a source temp file.", destinationFileContents); // "Expected the destination file to contain the contents of source file."
+                Assert.AreEqual("This is a source temp file.", destinationFileContents); // "Expected the destination file to contain the contents of source file."
 
                 Assert.Single(t.DestinationFiles);
                 Assert.Single(t.CopiedFiles);
-                Assert.Equal(destFile, t.DestinationFiles[0].ItemSpec);
-                Assert.Equal(destFile, t.CopiedFiles[0].ItemSpec);
+                Assert.AreEqual(destFile, t.DestinationFiles[0].ItemSpec);
+                Assert.AreEqual(destFile, t.CopiedFiles[0].ItemSpec);
 
                 // Now we will write new content to the source file
                 // we'll then check that the destination file automatically
@@ -2782,7 +2782,7 @@ namespace Microsoft.Build.UnitTests
 
                 // Read the destination file (it should have the same modified content as the source)
                 destinationFileContents = File.ReadAllText(destFile);
-                Assert.Equal("This is a source temp file.", destinationFileContents); // "Expected the destination copied file to contain the contents of original source file only."
+                Assert.AreEqual("This is a source temp file.", destinationFileContents); // "Expected the destination copied file to contain the contents of original source file only."
 
                 ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3026"); // Didn't do retries
             }
@@ -2825,21 +2825,21 @@ namespace Microsoft.Build.UnitTests
 
                 bool success = t.Execute();
 
-                Assert.True(success); // "success"
-                Assert.True(File.Exists(destFile)); // "destination exists"
-                Assert.True((File.GetAttributes(destFile) & FileAttributes.ReparsePoint) != 0, "File was copied but is not a symlink");
+                Assert.IsTrue(success); // "success"
+                Assert.IsTrue(File.Exists(destFile)); // "destination exists"
+                Assert.IsTrue((File.GetAttributes(destFile) & FileAttributes.ReparsePoint) != 0, "File was copied but is not a symlink");
 
                 MockEngine.GetStringDelegate resourceDelegate = AssemblyResources.GetString;
 
                 me.AssertLogContainsMessageFromResource(resourceDelegate, "Copy.SymbolicLinkComment", sourceFile, destFile);
 
                 string destinationFileContents = File.ReadAllText(destFile);
-                Assert.Equal("This is a source temp file.", destinationFileContents); // "Expected the destination symbolic linked file to contain the contents of source file."
+                Assert.AreEqual("This is a source temp file.", destinationFileContents); // "Expected the destination symbolic linked file to contain the contents of source file."
 
                 Assert.Single(t.DestinationFiles);
                 Assert.Single(t.CopiedFiles);
-                Assert.Equal(destFile, t.DestinationFiles[0].ItemSpec);
-                Assert.Equal(destFile, t.CopiedFiles[0].ItemSpec);
+                Assert.AreEqual(destFile, t.DestinationFiles[0].ItemSpec);
+                Assert.AreEqual(destFile, t.CopiedFiles[0].ItemSpec);
 
                 // Now we will write new content to the source file
                 // we'll then check that the destination file automatically
@@ -2849,7 +2849,7 @@ namespace Microsoft.Build.UnitTests
 
                 // Read the destination file (it should have the same modified content as the source)
                 destinationFileContents = File.ReadAllText(destFile);
-                Assert.Equal("This is another source temp file.", destinationFileContents); // "Expected the destination hard linked file to contain the contents of source file. Even after modification of the source"
+                Assert.AreEqual("This is another source temp file.", destinationFileContents); // "Expected the destination hard linked file to contain the contents of source file. Even after modification of the source"
 
                 ((MockEngine)t.BuildEngine).AssertLogDoesntContain("MSB3891"); // Didn't do retries
             }
@@ -2890,7 +2890,7 @@ namespace Microsoft.Build.UnitTests
 
                 bool success = t.Execute();
 
-                Assert.True(success);
+                Assert.IsTrue(success);
                 MockEngine.GetStringDelegate resourceDelegate = AssemblyResources.GetString;
                 me.AssertLogContainsMessageFromResource(resourceDelegate, "Copy.HardLinkComment", sourceFile, destFile);
             }
@@ -2920,7 +2920,7 @@ namespace Microsoft.Build.UnitTests
 
             bool result = t.Execute();
 
-            Assert.False(result);
+            Assert.IsFalse(result);
             engine.AssertLogContains("MSB3892");
         }
 
@@ -3146,12 +3146,12 @@ namespace Microsoft.Build.UnitTests
                     Console.WriteLine("Copy failed with log: " + log);
                 }
 
-                Assert.True(result, "Copy should succeed on Unix when destination file name differs in case from existing directory");
-                Assert.True(File.Exists(destFile1), "Destination file CS should be created");
-                Assert.True(File.Exists(destFile2), "Destination file app.dll should be created");
+                Assert.IsTrue(result, "Copy should succeed on Unix when destination file name differs in case from existing directory");
+                Assert.IsTrue(File.Exists(destFile1), "Destination file CS should be created");
+                Assert.IsTrue(File.Exists(destFile2), "Destination file app.dll should be created");
                 
                 // Ensure the directory still exists and wasn't corrupted
-                Assert.True(Directory.Exists(lowercaseDir), "The cs directory should still exist");
+                Assert.IsTrue(Directory.Exists(lowercaseDir), "The cs directory should still exist");
             }
             finally
             {

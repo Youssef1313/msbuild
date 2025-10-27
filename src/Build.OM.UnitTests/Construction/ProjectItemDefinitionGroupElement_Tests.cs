@@ -23,7 +23,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         public void ReadNone()
         {
             ProjectRootElement project = ProjectRootElement.Create();
-            Assert.Equal(0, Helpers.Count(project.Children));
+            Assert.AreEqual(0, Helpers.Count(project.Children));
             Assert.Empty(project.ItemDefinitionGroups);
         }
 
@@ -60,7 +60,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectRootElement project = projectRootElementFromString.Project;
             ProjectItemDefinitionGroupElement itemDefinitionGroup = (ProjectItemDefinitionGroupElement)Helpers.GetFirst(project.Children);
 
-            Assert.Equal(0, Helpers.Count(itemDefinitionGroup.ItemDefinitions));
+            Assert.AreEqual(0, Helpers.Count(itemDefinitionGroup.ItemDefinitions));
         }
 
         /// <summary>
@@ -85,11 +85,11 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectRootElement project = projectRootElementFromString.Project;
 
             var itemDefinitionGroups = Helpers.MakeList(project.ItemDefinitionGroups);
-            Assert.Equal(2, itemDefinitionGroups.Count);
+            Assert.AreEqual(2, itemDefinitionGroups.Count);
 
-            Assert.Equal(1, Helpers.Count(itemDefinitionGroups[0].ItemDefinitions));
-            Assert.Equal(2, Helpers.Count(itemDefinitionGroups[1].ItemDefinitions));
-            Assert.Equal("c", itemDefinitionGroups[0].Condition);
+            Assert.AreEqual(1, Helpers.Count(itemDefinitionGroups[0].ItemDefinitions));
+            Assert.AreEqual(2, Helpers.Count(itemDefinitionGroups[1].ItemDefinitions));
+            Assert.AreEqual("c", itemDefinitionGroups[0].Condition);
         }
 
         /// <summary>
@@ -105,8 +105,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectItemDefinitionGroupElement itemDefinitionGroup = Helpers.GetFirst(project.ItemDefinitionGroups);
             itemDefinitionGroup.Condition = "c";
 
-            Assert.Equal("c", itemDefinitionGroup.Condition);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual("c", itemDefinitionGroup.Condition);
+            Assert.IsTrue(project.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -122,8 +122,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectItemDefinitionGroupElement itemDefinitionGroup = Helpers.GetFirst(project.ItemDefinitionGroups);
             itemDefinitionGroup.Label = "c";
 
-            Assert.Equal("c", itemDefinitionGroup.Label);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual("c", itemDefinitionGroup.Label);
+            Assert.IsTrue(project.HasUnsavedChanges);
         }
     }
 }

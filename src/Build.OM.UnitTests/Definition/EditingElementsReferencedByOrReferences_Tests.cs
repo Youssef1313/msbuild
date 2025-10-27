@@ -47,7 +47,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             IEnumerable<ProjectItem> items = project.GetItems("I");
 
             Assert.Single(items); // "Wrong number of items after changing type"
-            Assert.Equal("Y", items.First().EvaluatedInclude); // "Wrong evaluated include after changing type"
+            Assert.AreEqual("Y", items.First().EvaluatedInclude); // "Wrong evaluated include after changing type"
         }
 
         /// <summary>
@@ -133,10 +133,10 @@ namespace Microsoft.Build.UnitTests.OM.Definition
 </Project>");
 
             ProjectItem item1 = project.GetItems("I").Where(i => i.EvaluatedInclude == "X").First();
-            Assert.Equal("A;B;C", item1.GetMetadataValue("M")); // "Invalid metadata at start"
+            Assert.AreEqual("A;B;C", item1.GetMetadataValue("M")); // "Invalid metadata at start"
 
             ProjectItem item2 = project.GetItems("I").Where(i => i.EvaluatedInclude == "Y").First();
-            Assert.Equal("A;D", item2.GetMetadataValue("M")); // "Invalid metadata at start"
+            Assert.AreEqual("A;D", item2.GetMetadataValue("M")); // "Invalid metadata at start"
 
             item1.RemoveMetadata("M");
 
@@ -206,9 +206,9 @@ namespace Microsoft.Build.UnitTests.OM.Definition
 
             project.ReevaluateIfNecessary();
             item1 = project.GetItems("I").Where(i => i.EvaluatedInclude == "X").First();
-            Assert.Equal("A;B", item1.GetMetadataValue("M")); // "Invalid metadata after first removal"
+            Assert.AreEqual("A;B", item1.GetMetadataValue("M")); // "Invalid metadata after first removal"
             ProjectItem item2 = project.GetItems("I").Where(i => i.EvaluatedInclude == "Y").First();
-            Assert.Equal("A;D", item2.GetMetadataValue("M")); // "Invalid metadata after first removal"
+            Assert.AreEqual("A;D", item2.GetMetadataValue("M")); // "Invalid metadata after first removal"
         }
 
         /// <summary>
@@ -260,9 +260,9 @@ namespace Microsoft.Build.UnitTests.OM.Definition
 
             project.ReevaluateIfNecessary();
             item1 = project.GetItems("I").Where(i => i.EvaluatedInclude == "X").First();
-            Assert.Equal("A;B", item1.GetMetadataValue("M")); // "Invalid metadata after second removal"
+            Assert.AreEqual("A;B", item1.GetMetadataValue("M")); // "Invalid metadata after second removal"
             item2 = project.GetItems("I").Where(i => i.EvaluatedInclude == "Y").First();
-            Assert.Equal("A", item2.GetMetadataValue("M")); // "Invalid metadata after second removal"
+            Assert.AreEqual("A", item2.GetMetadataValue("M")); // "Invalid metadata after second removal"
         }
 
         /// <summary>
@@ -282,7 +282,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
 </Project>");
 
             ProjectItem item = project.GetItems("I").First();
-            Assert.Equal("m", item.GetMetadataValue("N")); // "Wrong metadata value at startup"
+            Assert.AreEqual("m", item.GetMetadataValue("N")); // "Wrong metadata value at startup"
 
             item.RemoveMetadata("M");
 
@@ -300,8 +300,8 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             item = project.GetItems("I").First();
             ProjectMetadata metadata = item.GetMetadata("N");
 
-            Assert.Equal("%(I.M)", metadata.UnevaluatedValue); // "Unevaluated value is wrong"
-            Assert.Equal(String.Empty, metadata.EvaluatedValue); // "Evaluated value is wrong"
+            Assert.AreEqual("%(I.M)", metadata.UnevaluatedValue); // "Unevaluated value is wrong"
+            Assert.AreEqual(String.Empty, metadata.EvaluatedValue); // "Evaluated value is wrong"
         }
 
         /// <summary>

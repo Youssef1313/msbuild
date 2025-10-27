@@ -81,7 +81,7 @@ namespace Microsoft.Build.UnitTests.Definition
             {
                 using var collection = new ProjectCollection();
                 t = new Toolset("x", pathValue, collection, null);
-                Assert.Equal(expectedPath, t.ToolsPath);
+                Assert.AreEqual(expectedPath, t.ToolsPath);
             }
         }
 
@@ -112,18 +112,18 @@ namespace Microsoft.Build.UnitTests.Definition
             ((ITranslatable)t).Translate(TranslationHelpers.GetWriteTranslator());
             Toolset t2 = Toolset.FactoryForDeserialization(TranslationHelpers.GetReadTranslator());
 
-            Assert.Equal(t.ToolsVersion, t2.ToolsVersion);
-            Assert.Equal(t.ToolsPath, t2.ToolsPath);
-            Assert.Equal(t.OverrideTasksPath, t2.OverrideTasksPath);
-            Assert.Equal(t.Properties.Count, t2.Properties.Count);
+            Assert.AreEqual(t.ToolsVersion, t2.ToolsVersion);
+            Assert.AreEqual(t.ToolsPath, t2.ToolsPath);
+            Assert.AreEqual(t.OverrideTasksPath, t2.OverrideTasksPath);
+            Assert.AreEqual(t.Properties.Count, t2.Properties.Count);
 
             foreach (string key in t.Properties.Values.Select(p => p.Name))
             {
-                Assert.Equal(t.Properties[key].Name, t2.Properties[key].Name);
-                Assert.Equal(t.Properties[key].EvaluatedValue, t2.Properties[key].EvaluatedValue);
+                Assert.AreEqual(t.Properties[key].Name, t2.Properties[key].Name);
+                Assert.AreEqual(t.Properties[key].EvaluatedValue, t2.Properties[key].EvaluatedValue);
             }
 
-            Assert.Equal(t.SubToolsets.Count, t2.SubToolsets.Count);
+            Assert.AreEqual(t.SubToolsets.Count, t2.SubToolsets.Count);
 
             foreach (string key in t.SubToolsets.Keys)
             {
@@ -132,13 +132,13 @@ namespace Microsoft.Build.UnitTests.Definition
 
                 if (t2.SubToolsets.TryGetValue(key, out subToolset2))
                 {
-                    Assert.Equal(subToolset1.SubToolsetVersion, subToolset2.SubToolsetVersion);
-                    Assert.Equal(subToolset1.Properties.Count, subToolset2.Properties.Count);
+                    Assert.AreEqual(subToolset1.SubToolsetVersion, subToolset2.SubToolsetVersion);
+                    Assert.AreEqual(subToolset1.Properties.Count, subToolset2.Properties.Count);
 
                     foreach (string subToolsetPropertyKey in subToolset1.Properties.Values.Select(p => p.Name))
                     {
-                        Assert.Equal(subToolset1.Properties[subToolsetPropertyKey].Name, subToolset2.Properties[subToolsetPropertyKey].Name);
-                        Assert.Equal(subToolset1.Properties[subToolsetPropertyKey].EvaluatedValue, subToolset2.Properties[subToolsetPropertyKey].EvaluatedValue);
+                        Assert.AreEqual(subToolset1.Properties[subToolsetPropertyKey].Name, subToolset2.Properties[subToolsetPropertyKey].Name);
+                        Assert.AreEqual(subToolset1.Properties[subToolsetPropertyKey].EvaluatedValue, subToolset2.Properties[subToolsetPropertyKey].EvaluatedValue);
                     }
                 }
                 else
@@ -147,11 +147,11 @@ namespace Microsoft.Build.UnitTests.Definition
                 }
             }
 
-            Assert.Equal(t.DefaultOverrideToolsVersion, t2.DefaultOverrideToolsVersion);
+            Assert.AreEqual(t.DefaultOverrideToolsVersion, t2.DefaultOverrideToolsVersion);
 
-            Assert.NotNull(t2.ImportPropertySearchPathsTable);
+            Assert.IsNotNull(t2.ImportPropertySearchPathsTable);
             Assert.Single(t2.ImportPropertySearchPathsTable);
-            Assert.Equal(@"c:\foo", t2.ImportPropertySearchPathsTable["MSBuildExtensionsPath"].SearchPaths[0]);
+            Assert.AreEqual(@"c:\foo", t2.ImportPropertySearchPathsTable["MSBuildExtensionsPath"].SearchPaths[0]);
         }
 
         [Fact]
@@ -160,7 +160,7 @@ namespace Microsoft.Build.UnitTests.Definition
             Toolset t = GetFakeToolset(null /* no global properties */);
 
             // The highest one numerically -- in this case, v13.
-            Assert.Equal("v13.0", t.DefaultSubToolsetVersion);
+            Assert.AreEqual("v13.0", t.DefaultSubToolsetVersion);
         }
 
         [WindowsOnlyFact(Skip = "https://github.com/dotnet/msbuild/issues/4363")]
@@ -175,7 +175,7 @@ namespace Microsoft.Build.UnitTests.Definition
                 // We can't predict the exact value without knowing what subtoolsets are available on this machine
                 // so we'll just verify it's either null or a version string
                 string defaultSubToolset = t.DefaultSubToolsetVersion;
-                Assert.True(defaultSubToolset == null || Version.TryParse(defaultSubToolset, out _), 
+                Assert.IsTrue(defaultSubToolset == null || Version.TryParse(defaultSubToolset, out _), 
                     $"Expected null or valid version string, got: {defaultSubToolset}");
             }
         }
@@ -195,7 +195,7 @@ namespace Microsoft.Build.UnitTests.Definition
                 Toolset t = new Toolset("Fake", parentToolset.ToolsPath, null, projectCollection, null, parentToolset.OverrideTasksPath);
 
                 // After removing dev10 detection, when there are no subtoolsets, we always get null
-                Assert.Null(t.DefaultSubToolsetVersion);
+                Assert.IsNull(t.DefaultSubToolsetVersion);
             }
             finally
             {
@@ -225,7 +225,7 @@ namespace Microsoft.Build.UnitTests.Definition
                 string subToolsetVersion = t.GenerateSubToolsetVersion();
 
                 // After removing dev10 detection, when there are no subtoolsets, we always get null
-                Assert.Null(subToolsetVersion);
+                Assert.IsNull(subToolsetVersion);
             }
             finally
             {
@@ -250,7 +250,7 @@ namespace Microsoft.Build.UnitTests.Definition
 
                 Toolset t = new Toolset("Fake", parentToolset.ToolsPath, null, projectCollection, null, parentToolset.OverrideTasksPath);
 
-                Assert.Equal("99.0", t.GenerateSubToolsetVersion());
+                Assert.AreEqual("99.0", t.GenerateSubToolsetVersion());
             }
             finally
             {
@@ -272,7 +272,7 @@ namespace Microsoft.Build.UnitTests.Definition
 
                 Toolset t = new Toolset("Fake", parentToolset.ToolsPath, null, projectCollection, null, parentToolset.OverrideTasksPath);
 
-                Assert.Equal("foo", t.GenerateSubToolsetVersion());
+                Assert.AreEqual("foo", t.GenerateSubToolsetVersion());
             }
             finally
             {
@@ -297,7 +297,7 @@ namespace Microsoft.Build.UnitTests.Definition
                 IDictionary<string, string> globalProperties = new Dictionary<string, string>();
                 globalProperties.Add("VisualStudioVersion", "v14.0");
 
-                Assert.Equal("v14.0", t.GenerateSubToolsetVersion(globalProperties, 0));
+                Assert.AreEqual("v14.0", t.GenerateSubToolsetVersion(globalProperties, 0));
             }
             finally
             {
@@ -325,7 +325,7 @@ namespace Microsoft.Build.UnitTests.Definition
                 IDictionary<string, string> explicitGlobalProperties = new Dictionary<string, string>();
                 explicitGlobalProperties.Add("VisualStudioVersion", "baz");
 
-                Assert.Equal("baz", t.GenerateSubToolsetVersion(explicitGlobalProperties, 0));
+                Assert.AreEqual("baz", t.GenerateSubToolsetVersion(explicitGlobalProperties, 0));
             }
             finally
             {
@@ -347,7 +347,7 @@ namespace Microsoft.Build.UnitTests.Definition
 
                 Toolset t = GetFakeToolset(globalProperties);
 
-                Assert.Equal(ObjectModelHelpers.CurrentVisualStudioVersion, t.GenerateSubToolsetVersion());
+                Assert.AreEqual(ObjectModelHelpers.CurrentVisualStudioVersion, t.GenerateSubToolsetVersion());
             }
             finally
             {
@@ -366,7 +366,7 @@ namespace Microsoft.Build.UnitTests.Definition
 
                 Toolset t = GetFakeToolset(null);
 
-                Assert.Equal("FakeSubToolset", t.GenerateSubToolsetVersion());
+                Assert.AreEqual("FakeSubToolset", t.GenerateSubToolsetVersion());
             }
             finally
             {
@@ -388,7 +388,7 @@ namespace Microsoft.Build.UnitTests.Definition
                 IDictionary<string, string> globalProperties = new Dictionary<string, string>();
                 globalProperties.Add("VisualStudioVersion", "v13.0");
 
-                Assert.Equal("v13.0", t.GenerateSubToolsetVersion(globalProperties, 0));
+                Assert.AreEqual("v13.0", t.GenerateSubToolsetVersion(globalProperties, 0));
             }
             finally
             {
@@ -408,12 +408,12 @@ namespace Microsoft.Build.UnitTests.Definition
                 Toolset t = GetFakeToolset(null);
 
                 // VisualStudioVersion = SolutionVersion - 1
-                Assert.Equal("12.0", t.GenerateSubToolsetVersion(null, 13));
-                Assert.Equal("v13.0", t.GenerateSubToolsetVersion(null, 14));
+                Assert.AreEqual("12.0", t.GenerateSubToolsetVersion(null, 13));
+                Assert.AreEqual("v13.0", t.GenerateSubToolsetVersion(null, 14));
 
                 // however, if there is no matching solution version, we just fall back to the
                 // default sub-toolset.
-                Assert.Equal(t.DefaultSubToolsetVersion, t.GenerateSubToolsetVersion(null, 55));
+                Assert.AreEqual(t.DefaultSubToolsetVersion, t.GenerateSubToolsetVersion(null, 55));
             }
             finally
             {
@@ -441,7 +441,7 @@ namespace Microsoft.Build.UnitTests.Definition
                 IDictionary<string, string> explicitGlobalProperties = new Dictionary<string, string>();
                 explicitGlobalProperties.Add("VisualStudioVersion", "FakeSubToolset");
 
-                Assert.Equal("FakeSubToolset", t.GenerateSubToolsetVersion(explicitGlobalProperties, 0));
+                Assert.AreEqual("FakeSubToolset", t.GenerateSubToolsetVersion(explicitGlobalProperties, 0));
             }
             finally
             {
@@ -454,10 +454,10 @@ namespace Microsoft.Build.UnitTests.Definition
         {
             Toolset t = GetFakeToolset(null);
 
-            Assert.Equal("a1", t.GetProperty("a", "v11.0").EvaluatedValue); // property in base toolset
-            Assert.Equal("c2", t.GetProperty("c", "v11.0").EvaluatedValue); // property in sub-toolset
-            Assert.Equal("b2", t.GetProperty("b", "v11.0").EvaluatedValue); // property in sub-toolset that overrides base toolset
-            Assert.Null(t.GetProperty("d", "v11.0")); // property in a different sub-toolset
+            Assert.AreEqual("a1", t.GetProperty("a", "v11.0").EvaluatedValue); // property in base toolset
+            Assert.AreEqual("c2", t.GetProperty("c", "v11.0").EvaluatedValue); // property in sub-toolset
+            Assert.AreEqual("b2", t.GetProperty("b", "v11.0").EvaluatedValue); // property in sub-toolset that overrides base toolset
+            Assert.IsNull(t.GetProperty("d", "v11.0")); // property in a different sub-toolset
         }
 
         /// <summary>

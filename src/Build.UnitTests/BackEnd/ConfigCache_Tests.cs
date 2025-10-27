@@ -104,7 +104,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             var initialConfigurations = initial.ToArray();
             var copiedConfigurations = copy.ToArray();
 
-            Assert.Equal(copiedConfigurations, initialConfigurations, EqualityComparer<BuildRequestConfiguration>.Default);
+            Assert.AreEqual(copiedConfigurations, initialConfigurations, EqualityComparer<BuildRequestConfiguration>.Default);
 
             // test _configurationIdsByMetadata
             copiedConfigurations.ShouldAllBe(config => initial.GetMatchingConfiguration(new ConfigurationMetadata(config)).Equals(config));
@@ -129,7 +129,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         [MemberData(nameof(CacheSerializationTestDataMultipleConfigs))]
         public void HappyGetSmallestConfigId(object obj)
         {
-            Assert.Equal(1, ((ConfigCache)obj).GetSmallestConfigId());
+            Assert.AreEqual(1, ((ConfigCache)obj).GetSmallestConfigId());
         }
     }
 }

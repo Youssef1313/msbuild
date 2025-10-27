@@ -79,7 +79,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         {
             ProjectItemElement item = GetItemFromContent(project);
 
-            Assert.Equal(0, Helpers.Count(item.Metadata));
+            Assert.AreEqual(0, Helpers.Count(item.Metadata));
         }
 
         [Fact]
@@ -96,14 +96,14 @@ namespace Microsoft.Build.UnitTests.OM.Construction
                 """;
 
             ProjectItemElement item = GetItemFromContent(project);
-            Assert.Equal(2, item.Metadata.Count);
+            Assert.AreEqual(2, item.Metadata.Count);
             ProjectMetadataElement metadatum1 = item.Metadata.First();
             ProjectMetadataElement metadatum2 = item.Metadata.Skip(1).First();
 
-            Assert.Equal(4, metadatum1.Location.Line);
-            Assert.Equal(4, metadatum2.Location.Line);
-            Assert.Equal(27, metadatum1.Location.Column);
-            Assert.Equal(43, metadatum2.Location.Column);
+            Assert.AreEqual(4, metadatum1.Location.Line);
+            Assert.AreEqual(4, metadatum2.Location.Line);
+            Assert.AreEqual(27, metadatum1.Location.Column);
+            Assert.AreEqual(43, metadatum2.Location.Column);
         }
 
         /// <summary>
@@ -360,21 +360,21 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             var items = Helpers.MakeList(itemGroup.Items);
 
-            Assert.Equal("i1", items[0].ItemType);
-            Assert.Equal("i", items[0].Include);
+            Assert.AreEqual("i1", items[0].ItemType);
+            Assert.AreEqual("i", items[0].Include);
 
             var metadata1 = Helpers.MakeList(items[0].Metadata);
             Assert.Single(metadata1);
-            Assert.Equal("m1", metadata1[0].Name);
-            Assert.Equal("v1", metadata1[0].Value);
+            Assert.AreEqual("m1", metadata1[0].Name);
+            Assert.AreEqual("v1", metadata1[0].Value);
 
             var metadata2 = Helpers.MakeList(items[1].Metadata);
-            Assert.Equal("i2", items[1].ItemType);
-            Assert.Equal("i", items[1].Include);
-            Assert.Equal("j", items[1].Exclude);
+            Assert.AreEqual("i2", items[1].ItemType);
+            Assert.AreEqual("i", items[1].Include);
+            Assert.AreEqual("j", items[1].Exclude);
             Assert.Single(metadata2);
-            Assert.Equal("m2", metadata2[0].Name);
-            Assert.Equal("v2", metadata2[0].Value);
+            Assert.AreEqual("m2", metadata2[0].Name);
+            Assert.AreEqual("v2", metadata2[0].Value);
         }
 
         /// <summary>
@@ -413,14 +413,14 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectItemElement item = Helpers.GetFirst(itemGroup.Items);
 
             var metadata = Helpers.MakeList(item.Metadata);
-            Assert.Equal(3, metadata.Count);
-            Assert.Equal("m1", metadata[0].Name);
-            Assert.Equal("v1", metadata[0].Value);
-            Assert.Equal("m2", metadata[1].Name);
-            Assert.Equal("v2", metadata[1].Value);
-            Assert.Equal("c", metadata[1].Condition);
-            Assert.Equal("m1", metadata[2].Name);
-            Assert.Equal("v3", metadata[2].Value);
+            Assert.AreEqual(3, metadata.Count);
+            Assert.AreEqual("m1", metadata[0].Name);
+            Assert.AreEqual("v1", metadata[0].Value);
+            Assert.AreEqual("m2", metadata[1].Name);
+            Assert.AreEqual("v2", metadata[1].Value);
+            Assert.AreEqual("c", metadata[1].Condition);
+            Assert.AreEqual("m1", metadata[2].Name);
+            Assert.AreEqual("v3", metadata[2].Value);
         }
 
         [Theory]
@@ -596,7 +596,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         {
             var item = GetItemFromContent(project);
 
-            Assert.Equal("i", item.Remove);
+            Assert.AreEqual("i", item.Remove);
         }
 
         /// <summary>
@@ -609,7 +609,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         {
             var item = GetItemFromContent(project);
 
-            Assert.Equal("i", item.Update);
+            Assert.AreEqual("i", item.Update);
         }
 
         /// <summary>
@@ -636,8 +636,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         {
             var item = GetItemFromContent(project);
 
-            Assert.Equal("i1", item.Include);
-            Assert.Equal("i2", item.Exclude);
+            Assert.AreEqual("i1", item.Include);
+            Assert.AreEqual("i2", item.Exclude);
         }
 
         /// <summary>
@@ -652,7 +652,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             item.Include = "ib";
 
-            Assert.Equal("ib", item.Include);
+            Assert.AreEqual("ib", item.Include);
         }
 
         /// <summary>
@@ -667,7 +667,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             item.Include = String.Empty;
 
-            Assert.Equal(String.Empty, item.Include);
+            Assert.AreEqual(String.Empty, item.Include);
         }
 
         /// <summary>
@@ -682,7 +682,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             item.Include = null;
 
-            Assert.Equal(String.Empty, item.Include);
+            Assert.AreEqual(String.Empty, item.Include);
         }
 
         /// <summary>
@@ -697,7 +697,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             item.Exclude = "ib";
 
-            Assert.Equal("ib", item.Exclude);
+            Assert.AreEqual("ib", item.Exclude);
         }
 
         /// <summary>
@@ -712,7 +712,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             item.Exclude = String.Empty;
 
-            Assert.Equal(String.Empty, item.Exclude);
+            Assert.AreEqual(String.Empty, item.Exclude);
         }
 
         /// <summary>
@@ -727,7 +727,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             item.Exclude = null;
 
-            Assert.Equal(String.Empty, item.Exclude);
+            Assert.AreEqual(String.Empty, item.Exclude);
         }
 
         /// <summary>
@@ -774,7 +774,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             item.Remove = "ib";
 
-            Assert.Equal("ib", item.Remove);
+            Assert.AreEqual("ib", item.Remove);
         }
 
         /// <summary>
@@ -789,7 +789,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             item.Remove = String.Empty;
 
-            Assert.Equal(String.Empty, item.Remove);
+            Assert.AreEqual(String.Empty, item.Remove);
         }
 
         /// <summary>
@@ -804,7 +804,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             item.Remove = null;
 
-            Assert.Equal(String.Empty, item.Remove);
+            Assert.AreEqual(String.Empty, item.Remove);
         }
 
         /// <summary>
@@ -868,7 +868,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             item.Update = "ib";
 
-            Assert.Equal("ib", item.Update);
+            Assert.AreEqual("ib", item.Update);
         }
 
         /// <summary>
@@ -883,7 +883,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             item.Update = String.Empty;
 
-            Assert.Equal(String.Empty, item.Update);
+            Assert.AreEqual(String.Empty, item.Update);
         }
 
         /// <summary>
@@ -898,7 +898,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             item.Update = null;
 
-            Assert.Equal(String.Empty, item.Update);
+            Assert.AreEqual(String.Empty, item.Update);
         }
 
         /// <summary>
@@ -945,7 +945,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             item.Condition = "c";
 
-            Assert.Equal("c", item.Condition);
+            Assert.AreEqual("c", item.Condition);
         }
 
         /// <summary>
@@ -977,7 +977,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             item.Xml.Include = "i2";
             project.ReevaluateIfNecessary();
 
-            Assert.Equal("i2", Helpers.GetFirst(project.Items).EvaluatedInclude);
+            Assert.AreEqual("i2", Helpers.GetFirst(project.Items).EvaluatedInclude);
         }
 
         /// <summary>
@@ -1008,12 +1008,12 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             item.Include = null;
             Helpers.ClearDirtyFlag(project);
 
-            Assert.False(project.HasUnsavedChanges);
+            Assert.IsFalse(project.HasUnsavedChanges);
 
             item.Remove = "i2";
 
-            Assert.Equal("i2", item.Remove);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual("i2", item.Remove);
+            Assert.IsTrue(project.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -1028,12 +1028,12 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             item.Include = null;
             Helpers.ClearDirtyFlag(project);
 
-            Assert.False(project.HasUnsavedChanges);
+            Assert.IsFalse(project.HasUnsavedChanges);
 
             item.Update = "i2";
 
-            Assert.Equal("i2", item.Update);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual("i2", item.Update);
+            Assert.IsTrue(project.HasUnsavedChanges);
         }
 
         private static ProjectItemElement GetItemFromContent(string content)

@@ -52,7 +52,7 @@ namespace Microsoft.Build.Tasks.UnitTests.AssemblyDependency
                 Execute(t);
 
                 Assert.Single(t.ResolvedFiles);
-                Assert.Equal(Path.Combine(s_rootPathPrefix, "assemblyfromconfig", "folder2", "assemblyfromconfig2.dll"), t.ResolvedFiles[0].ItemSpec);
+                Assert.AreEqual(Path.Combine(s_rootPathPrefix, "assemblyfromconfig", "folder2", "assemblyfromconfig2.dll"), t.ResolvedFiles[0].ItemSpec);
                 t.ResolvedFiles[0].GetMetadata("ResolvedFrom").ShouldBe(moniker, StringCompareShould.IgnoreCase);
             }
             finally
@@ -82,7 +82,7 @@ namespace Microsoft.Build.Tasks.UnitTests.AssemblyDependency
                 Execute(t);
 
                 Assert.Single(t.ResolvedFiles);
-                Assert.Equal(Path.Combine(s_rootPathPrefix, "assemblyfromconfig", "folder_x86", "assemblyfromconfig_common.dll"), t.ResolvedFiles[0].ItemSpec);
+                Assert.AreEqual(Path.Combine(s_rootPathPrefix, "assemblyfromconfig", "folder_x86", "assemblyfromconfig_common.dll"), t.ResolvedFiles[0].ItemSpec);
                 t.ResolvedFiles[0].GetMetadata("ResolvedFrom").ShouldBe(moniker, StringCompareShould.IgnoreCase);
             }
             finally
@@ -112,7 +112,7 @@ namespace Microsoft.Build.Tasks.UnitTests.AssemblyDependency
                 Execute(t);
 
                 Assert.Single(t.ResolvedFiles);
-                Assert.Equal(Path.Combine(s_rootPathPrefix, "assemblyfromconfig", "folder501000x86", "v5assembly.dll"), t.ResolvedFiles[0].ItemSpec);
+                Assert.AreEqual(Path.Combine(s_rootPathPrefix, "assemblyfromconfig", "folder501000x86", "v5assembly.dll"), t.ResolvedFiles[0].ItemSpec);
                 t.ResolvedFiles[0].GetMetadata("ResolvedFrom").ShouldBe(moniker, StringCompareShould.IgnoreCase);
 
                 // Try again changing only the processor architecture
@@ -127,7 +127,7 @@ namespace Microsoft.Build.Tasks.UnitTests.AssemblyDependency
                 Execute(t);
 
                 Assert.Single(t.ResolvedFiles);
-                Assert.Equal(Path.Combine(s_rootPathPrefix, "assemblyfromconfig", "folder5010x64", "v5assembly.dll"), t.ResolvedFiles[0].ItemSpec);
+                Assert.AreEqual(Path.Combine(s_rootPathPrefix, "assemblyfromconfig", "folder5010x64", "v5assembly.dll"), t.ResolvedFiles[0].ItemSpec);
                 t.ResolvedFiles[0].GetMetadata("ResolvedFrom").ShouldBe(moniker, StringCompareShould.IgnoreCase);
             }
             finally
@@ -182,7 +182,7 @@ namespace Microsoft.Build.Tasks.UnitTests.AssemblyDependency
 
                 var success = Execute(t);
 
-                Assert.False(success);
+                Assert.IsFalse(success);
                 Assert.Empty(t.ResolvedFiles);
                 engine.AssertLogContains(") specified in Microsoft.Common.CurrentVersion.targets was invalid. The error was: ");
             }

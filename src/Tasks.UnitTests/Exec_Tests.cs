@@ -89,7 +89,7 @@ namespace Microsoft.Build.UnitTests
 
                 Exec exec = PrepareExec("echo LANG=$LANG; echo LC_ALL=$LC_ALL;");
                 bool result = exec.Execute();
-                Assert.True(result);
+                Assert.IsTrue(result);
 
                 MockEngine engine = (MockEngine)exec.BuildEngine;
                 if (enableChangeWave)
@@ -134,7 +134,7 @@ namespace Microsoft.Build.UnitTests
                 tempFiles = Directory.GetFiles(tempPath);
 
                 // Ensure that Exec succeeded.
-                Assert.True(result);
+                Assert.IsTrue(result);
 
                 // Ensure that no files linger in TEMP.
                 Assert.Empty(tempFiles);
@@ -147,8 +147,8 @@ namespace Microsoft.Build.UnitTests
             Exec exec = PrepareExec(NativeMethodsShared.IsWindows ? "xcopy thisisanonexistentfile" : "cp thisisanonexistentfile thatisanonexistentfile");
             bool result = exec.Execute();
 
-            Assert.False(result);
-            Assert.Equal(NativeMethodsShared.IsWindows ? 4 : 1, exec.ExitCode);
+            Assert.IsFalse(result);
+            Assert.AreEqual(NativeMethodsShared.IsWindows ? 4 : 1, exec.ExitCode);
             ((MockEngine)exec.BuildEngine).AssertLogContains("MSB3073");
             if (!NativeMethodsShared.IsWindows)
             {
@@ -166,8 +166,8 @@ namespace Microsoft.Build.UnitTests
             exec.Timeout = 5;
             bool result = exec.Execute();
 
-            Assert.False(result);
-            Assert.Equal(expectedExitCode, exec.ExitCode);
+            Assert.IsFalse(result);
+            Assert.AreEqual(expectedExitCode, exec.ExitCode);
             ((MockEngine)exec.BuildEngine).AssertLogContains("MSB5002");
             int warningsCount = ((MockEngine)exec.BuildEngine).Warnings;
             if (warningsCount == 1)
@@ -186,7 +186,7 @@ namespace Microsoft.Build.UnitTests
             }
 
             // ToolTask does not log an error on timeout.
-            Assert.Equal(0, ((MockEngine)exec.BuildEngine).Errors);
+            Assert.AreEqual(0, ((MockEngine)exec.BuildEngine).Errors);
         }
 
         [Fact]
@@ -215,10 +215,10 @@ namespace Microsoft.Build.UnitTests
             var exec = PrepareExec("echo hello\r\n\r\n");
             bool result = exec.Execute();
 
-            Assert.True(result);
-            Assert.Equal(0, exec.ExitCode);
-            Assert.Equal(0, ((MockEngine)exec.BuildEngine).Warnings);
-            Assert.Equal(0, ((MockEngine)exec.BuildEngine).Errors);
+            Assert.IsTrue(result);
+            Assert.AreEqual(0, exec.ExitCode);
+            Assert.AreEqual(0, ((MockEngine)exec.BuildEngine).Warnings);
+            Assert.AreEqual(0, ((MockEngine)exec.BuildEngine).Errors);
         }
 
         [Fact]
@@ -229,7 +229,7 @@ namespace Microsoft.Build.UnitTests
             Exec exec = PrepareExec("exit 120");
             exec.Execute();
 
-            Assert.Equal(120, exec.ExitCode);
+            Assert.AreEqual(120, exec.ExitCode);
         }
 
         [Fact]
@@ -243,9 +243,9 @@ namespace Microsoft.Build.UnitTests
             Exec exec = PrepareExec(cmdLine);
             bool result = exec.Execute();
 
-            Assert.False(result);
+            Assert.IsFalse(result);
             // Exitcode is set to -1
-            Assert.Equal(-1, exec.ExitCode);
+            Assert.AreEqual(-1, exec.ExitCode);
             ((MockEngine)exec.BuildEngine).AssertLogContains("MSB3073");
         }
 
@@ -260,7 +260,7 @@ namespace Microsoft.Build.UnitTests
             exec.IgnoreExitCode = true;
             bool result = exec.Execute();
 
-            Assert.True(result);
+            Assert.IsTrue(result);
         }
 
         [Fact]
@@ -270,7 +270,7 @@ namespace Microsoft.Build.UnitTests
             exec.IgnoreExitCode = true;
             bool result = exec.Execute();
 
-            Assert.True(result);
+            Assert.IsTrue(result);
         }
 
         [Fact]
@@ -282,7 +282,7 @@ namespace Microsoft.Build.UnitTests
             exec.WorkingDirectory = working;
             bool result = exec.Execute();
 
-            Assert.True(result);
+            Assert.IsTrue(result);
             ((MockEngine)exec.BuildEngine).AssertLogContains("[" + working + "]");
         }
 
@@ -294,12 +294,12 @@ namespace Microsoft.Build.UnitTests
             exec.WorkingDirectory = working;
             bool result = exec.ValidateParametersAccessor();
 
-            Assert.True(result);
-            Assert.True(exec.workingDirectoryIsUNC);
-            Assert.Equal(working, exec.WorkingDirectory);
+            Assert.IsTrue(result);
+            Assert.IsTrue(exec.workingDirectoryIsUNC);
+            Assert.AreEqual(working, exec.WorkingDirectory);
             // Should give ToolTask the system folder as the working directory, when it's a UNC
             string system = Environment.GetFolderPath(Environment.SpecialFolder.System);
-            Assert.Equal(system, exec.GetWorkingDirectoryAccessor());
+            Assert.AreEqual(system, exec.GetWorkingDirectoryAccessor());
         }
 
         [Fact]
@@ -316,7 +316,7 @@ namespace Microsoft.Build.UnitTests
                 bool result = exec.Execute();
 
                 string expected = Directory.GetCurrentDirectory();
-                Assert.True(result);
+                Assert.IsTrue(result);
                 ((MockEngine)exec.BuildEngine).AssertLogContains("[" + expected + "]");
             }
             finally
@@ -349,7 +349,7 @@ namespace Microsoft.Build.UnitTests
                 Environment.SetEnvironmentVariable("TMP", newTmp);
                 Exec exec = PrepareExec("echo [hello]");
 
-                Assert.True(exec.Execute()); // "Task should have succeeded"
+                Assert.IsTrue(exec.Execute()); // "Task should have succeeded"
                 ((MockEngine)exec.BuildEngine).AssertLogContains("[hello]");
             }
             finally
@@ -387,7 +387,7 @@ namespace Microsoft.Build.UnitTests
                 Exec exec = PrepareExec("echo [hello]");
 
                 bool taskSucceeded = exec.Execute();
-                Assert.True(taskSucceeded); // "Task should have succeeded"
+                Assert.IsTrue(taskSucceeded); // "Task should have succeeded"
                 ((MockEngine)exec.BuildEngine).AssertLogContains("[hello]");
             }
             finally
@@ -424,7 +424,7 @@ namespace Microsoft.Build.UnitTests
                 Environment.SetEnvironmentVariable("TMP", newTmp);
                 Exec exec = PrepareExec("echo [hello]");
 
-                Assert.True(exec.Execute()); // "Task should have succeeded"
+                Assert.IsTrue(exec.Execute()); // "Task should have succeeded"
                 ((MockEngine)exec.BuildEngine).AssertLogContains("[hello]");
             }
             finally
@@ -461,7 +461,7 @@ namespace Microsoft.Build.UnitTests
                 Environment.SetEnvironmentVariable("TMP", newTmp);
                 Exec exec = PrepareExec("echo [hello]");
 
-                Assert.True(exec.Execute()); // "Task should have succeeded"
+                Assert.IsTrue(exec.Execute()); // "Task should have succeeded"
                 ((MockEngine)exec.BuildEngine).AssertLogContains("[hello]");
             }
             finally
@@ -598,15 +598,15 @@ namespace Microsoft.Build.UnitTests
                     exec.UseUtf8Encoding = useUtf8;
                 }
 
-                Assert.Equal(expectSuccess, exec.Execute());
+                Assert.AreEqual(expectSuccess, exec.Execute());
 
                 if (expectSuccess)
                 {
                     ((MockEngine)exec.BuildEngine).AssertLogContains("[hello]");
                 }
 
-                Assert.Equal(expectedEncoding, exec.StdOutEncoding);
-                Assert.Equal(expectedEncoding, exec.StdErrEncoding);
+                Assert.AreEqual(expectedEncoding, exec.StdOutEncoding);
+                Assert.AreEqual(expectedEncoding, exec.StdErrEncoding);
             }
             finally
             {
@@ -626,7 +626,7 @@ namespace Microsoft.Build.UnitTests
             exec.WorkingDirectory = @"\\thiscomputerdoesnotexistxyz\thiscomputerdoesnotexistxyz";
             bool result = exec.Execute();
 
-            Assert.False(result);
+            Assert.IsFalse(result);
             ((MockEngine)exec.BuildEngine).AssertLogContains("MSB6003");
         }
 
@@ -639,7 +639,7 @@ namespace Microsoft.Build.UnitTests
             exec.WorkingDirectory = @"||invalid||";
             bool result = exec.Execute();
 
-            Assert.False(result);
+            Assert.IsFalse(result);
             ((MockEngine)exec.BuildEngine).AssertLogContains("MSB6003");
         }
 
@@ -662,7 +662,7 @@ namespace Microsoft.Build.UnitTests
 
             MockEngine e = (MockEngine)exec.BuildEngine;
             Console.WriteLine(e.Log);
-            Assert.Equal(3, e.Errors);
+            Assert.AreEqual(3, e.Errors);
             e.AssertLogContains("MSB3076");
         }
 
@@ -684,7 +684,7 @@ namespace Microsoft.Build.UnitTests
 
             MockEngine e = (MockEngine)exec.BuildEngine;
             Console.WriteLine(e.Log);
-            Assert.Equal(0, e.Errors);
+            Assert.AreEqual(0, e.Errors);
             e.AssertLogContains("ALERT:This is an error");
 
             exec = PrepareExec(cmdLine);
@@ -693,7 +693,7 @@ namespace Microsoft.Build.UnitTests
 
             e = (MockEngine)exec.BuildEngine;
             Console.WriteLine(e.Log);
-            Assert.Equal(2, e.Errors);
+            Assert.AreEqual(2, e.Errors);
             e.AssertLogContains("ALERT:This is an error");
         }
 
@@ -715,8 +715,8 @@ namespace Microsoft.Build.UnitTests
 
             MockEngine e = (MockEngine)exec.BuildEngine;
             Console.WriteLine(e.Log);
-            Assert.Equal(0, e.Errors);
-            Assert.Equal(0, e.Warnings);
+            Assert.AreEqual(0, e.Errors);
+            Assert.AreEqual(0, e.Warnings);
             e.AssertLogContains("YOOHOO:This is a warning");
 
             exec = PrepareExec(cmdLine);
@@ -725,8 +725,8 @@ namespace Microsoft.Build.UnitTests
 
             e = (MockEngine)exec.BuildEngine;
             Console.WriteLine(e.Log);
-            Assert.Equal(0, e.Errors);
-            Assert.Equal(1, e.Warnings);
+            Assert.AreEqual(0, e.Errors);
+            Assert.AreEqual(1, e.Warnings);
             e.AssertLogContains("YOOHOO:This is a warning");
         }
 
@@ -741,9 +741,9 @@ namespace Microsoft.Build.UnitTests
             exec.IgnoreStandardErrorWarningFormat = true;
             bool result = exec.Execute();
 
-            Assert.True(result);
-            Assert.Equal(0, ((MockEngine)exec.BuildEngine).Errors);
-            Assert.Equal(0, ((MockEngine)exec.BuildEngine).Warnings);
+            Assert.IsTrue(result);
+            Assert.AreEqual(0, ((MockEngine)exec.BuildEngine).Errors);
+            Assert.AreEqual(0, ((MockEngine)exec.BuildEngine).Warnings);
         }
 
         [Fact]
@@ -758,9 +758,9 @@ namespace Microsoft.Build.UnitTests
             exec.CustomErrorRegularExpression = ".*YOGI.*";
             bool result = exec.Execute();
 
-            Assert.False(result);
-            Assert.Equal(3, ((MockEngine)exec.BuildEngine).Errors);
-            Assert.Equal(2, ((MockEngine)exec.BuildEngine).Warnings);
+            Assert.IsFalse(result);
+            Assert.AreEqual(3, ((MockEngine)exec.BuildEngine).Errors);
+            Assert.AreEqual(2, ((MockEngine)exec.BuildEngine).Warnings);
         }
 
         /// <summary>
@@ -773,10 +773,10 @@ namespace Microsoft.Build.UnitTests
             Exec exec = PrepareExec("echo unmatched curly {");
             bool result = exec.Execute();
 
-            Assert.True(result);
+            Assert.IsTrue(result);
             ((MockEngine)exec.BuildEngine).AssertLogContains("unmatched curly {");
-            Assert.Equal(0, ((MockEngine)exec.BuildEngine).Errors);
-            Assert.Equal(0, ((MockEngine)exec.BuildEngine).Warnings);
+            Assert.AreEqual(0, ((MockEngine)exec.BuildEngine).Errors);
+            Assert.AreEqual(0, ((MockEngine)exec.BuildEngine).Warnings);
         }
 
         /// <summary>
@@ -790,10 +790,10 @@ namespace Microsoft.Build.UnitTests
             exec.IgnoreStandardErrorWarningFormat = true;
             bool result = exec.Execute();
 
-            Assert.True(result);
+            Assert.IsTrue(result);
             ((MockEngine)exec.BuildEngine).AssertLogContains("unmatched curly {");
-            Assert.Equal(0, ((MockEngine)exec.BuildEngine).Errors);
-            Assert.Equal(0, ((MockEngine)exec.BuildEngine).Warnings);
+            Assert.AreEqual(0, ((MockEngine)exec.BuildEngine).Errors);
+            Assert.AreEqual(0, ((MockEngine)exec.BuildEngine).Warnings);
         }
 
         [Fact]
@@ -808,9 +808,9 @@ namespace Microsoft.Build.UnitTests
             exec.CustomWarningRegularExpression = ".*canonicalw.*";
             bool result = exec.Execute();
 
-            Assert.False(result);
-            Assert.Equal(2, ((MockEngine)exec.BuildEngine).Errors);
-            Assert.Equal(1, ((MockEngine)exec.BuildEngine).Warnings);
+            Assert.IsFalse(result);
+            Assert.AreEqual(2, ((MockEngine)exec.BuildEngine).Errors);
+            Assert.AreEqual(1, ((MockEngine)exec.BuildEngine).Warnings);
         }
 
         [Fact]
@@ -821,9 +821,9 @@ namespace Microsoft.Build.UnitTests
             exec.CustomWarningRegularExpression = ".*BEAR.*";
             bool result = exec.Execute();
 
-            Assert.False(result);
-            Assert.Equal(2, ((MockEngine)exec.BuildEngine).Errors);
-            Assert.Equal(0, ((MockEngine)exec.BuildEngine).Warnings);
+            Assert.IsFalse(result);
+            Assert.AreEqual(2, ((MockEngine)exec.BuildEngine).Errors);
+            Assert.AreEqual(0, ((MockEngine)exec.BuildEngine).Warnings);
         }
 
         [Fact]
@@ -831,15 +831,15 @@ namespace Microsoft.Build.UnitTests
         {
             Exec exec = PrepareExec("echo [%cd%]");
             exec.WorkingDirectory = "foo";
-            Assert.Equal("foo", exec.WorkingDirectory);
+            Assert.AreEqual("foo", exec.WorkingDirectory);
             exec.IgnoreExitCode = true;
-            Assert.True(exec.IgnoreExitCode);
+            Assert.IsTrue(exec.IgnoreExitCode);
             exec.Outputs = null;
             Assert.Empty(exec.Outputs);
 
             ITaskItem[] items = { new TaskItem("hi"), new TaskItem("ho") };
             exec.Outputs = items;
-            Assert.Equal(items, exec.Outputs);
+            Assert.AreEqual(items, exec.Outputs);
         }
 
         [Fact]
@@ -867,7 +867,7 @@ namespace Microsoft.Build.UnitTests
                 Environment.SetEnvironmentVariable("errorlevel", "1");
                 bool result = exec.Execute();
 
-                Assert.True(result);
+                Assert.IsTrue(result);
             }
             finally
             {
@@ -882,7 +882,7 @@ namespace Microsoft.Build.UnitTests
 
             bool result = exec.Execute();
 
-            Assert.False(result);
+            Assert.IsFalse(result);
             ((MockEngine)exec.BuildEngine).AssertLogContains("MSB3072");
         }
 
@@ -913,10 +913,10 @@ namespace Microsoft.Build.UnitTests
             Exec exec = PrepareExec("set foo=blah");
             // Test Set and Get of ConsoleToMSBuild
             exec.ConsoleToMSBuild = true;
-            Assert.True(exec.ConsoleToMSBuild);
+            Assert.IsTrue(exec.ConsoleToMSBuild);
 
             bool result = exec.Execute();
-            Assert.True(result);
+            Assert.IsTrue(result);
 
             // Nothing to run, so the list should be empty
             Assert.Empty(exec.ConsoleOutput);
@@ -928,13 +928,13 @@ namespace Microsoft.Build.UnitTests
 
             // Test Set and Get of ConsoleToMSBuild
             exec.ConsoleToMSBuild = true;
-            Assert.True(exec.ConsoleToMSBuild);
+            Assert.IsTrue(exec.ConsoleToMSBuild);
 
             result = exec.Execute();
-            Assert.True(result);
+            Assert.IsTrue(result);
 
             // Both two lines should had gone to stdout
-            Assert.Equal(2, exec.ConsoleOutput.Length);
+            Assert.AreEqual(2, exec.ConsoleOutput.Length);
         }
 
         [Fact]

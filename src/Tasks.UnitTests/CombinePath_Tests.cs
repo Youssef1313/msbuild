@@ -29,7 +29,7 @@ namespace Microsoft.Build.UnitTests
             string path2 = Path.Combine("jkl", "mno.txt");
             string fullPath2 = Path.Combine(t.BasePath, path2);
             t.Paths = new ITaskItem[] { new TaskItem(path1), new TaskItem(path2) };
-            Assert.True(t.Execute()); // "success"
+            Assert.IsTrue(t.Execute()); // "success"
 
             ObjectModelHelpers.AssertItemsMatch(string.Format("{0}\r\n{1}", fullPath1, fullPath2), t.CombinedPaths, true);
         }
@@ -59,7 +59,7 @@ namespace Microsoft.Build.UnitTests
             t.Paths = NativeMethodsShared.IsWindows
                           ? new ITaskItem[] { new TaskItem(path1), new TaskItem(path2), new TaskItem(path3) }
                           : new ITaskItem[] { new TaskItem(path1), new TaskItem(path2) };
-            Assert.True(t.Execute()); // "success"
+            Assert.IsTrue(t.Execute()); // "success"
 
             ObjectModelHelpers.AssertItemsMatch(pathsToMatch, t.CombinedPaths, true);
         }
@@ -79,7 +79,7 @@ namespace Microsoft.Build.UnitTests
             string fullPath2 = Path.Combine(t.BasePath, path2);
 
             t.Paths = new ITaskItem[] { new TaskItem(path1), new TaskItem(path2) };
-            Assert.True(t.Execute()); // "success"
+            Assert.IsTrue(t.Execute()); // "success"
 
             ObjectModelHelpers.AssertItemsMatch(string.Format("{0}\r\n{1}", path1, fullPath2), t.CombinedPaths, true);
         }
@@ -108,7 +108,7 @@ namespace Microsoft.Build.UnitTests
             t.Paths = NativeMethodsShared.IsWindows
                           ? new ITaskItem[] { new TaskItem(path1), new TaskItem(path2), new TaskItem(path3) }
                           : new ITaskItem[] { new TaskItem(path1), new TaskItem(path2) };
-            Assert.True(t.Execute()); // "success"
+            Assert.IsTrue(t.Execute()); // "success"
 
             ObjectModelHelpers.AssertItemsMatch(pathsToMatch, t.CombinedPaths, true);
         }
@@ -140,7 +140,7 @@ namespace Microsoft.Build.UnitTests
                 ";
             }
             t.Paths[0].SetMetadata("Culture", "english");
-            Assert.True(t.Execute()); // "success"
+            Assert.IsTrue(t.Execute()); // "success"
 
             ObjectModelHelpers.AssertItemsMatch(expected, t.CombinedPaths, true);
         }
@@ -156,7 +156,7 @@ namespace Microsoft.Build.UnitTests
             t.BuildEngine = new MockEngine();
 
             t.Paths = new ITaskItem[] { new TaskItem(@"jkl\mno.txt"), new TaskItem(@"c:\abc\def\ghi.txt") };
-            Assert.True(t.Execute()); // "success"
+            Assert.IsTrue(t.Execute()); // "success"
 
             ObjectModelHelpers.AssertItemsMatch(@"
                 jkl\mno.txt
@@ -175,7 +175,7 @@ namespace Microsoft.Build.UnitTests
 
             t.BasePath = @"c:\abc\def";
             t.Paths = System.Array.Empty<ITaskItem>();
-            Assert.True(t.Execute()); // "success"
+            Assert.IsTrue(t.Execute()); // "success"
 
             ObjectModelHelpers.AssertItemsMatch(@"
                 ", t.CombinedPaths, true);
@@ -192,7 +192,7 @@ namespace Microsoft.Build.UnitTests
 
             t.BasePath = @"c:\abc\def";
             t.Paths = new ITaskItem[] { new TaskItem("") };
-            Assert.True(t.Execute()); // "success"
+            Assert.IsTrue(t.Execute()); // "success"
 
             ObjectModelHelpers.AssertItemsMatch(@"
                 c:\abc\def
@@ -210,7 +210,7 @@ namespace Microsoft.Build.UnitTests
 
             t.BasePath = @"c:\abc\def";
             t.Paths = new ITaskItem[] { new TaskItem("ghi.txt"), new TaskItem("|.txt"), new TaskItem("jkl.txt") };
-            Assert.False(t.Execute()); // "should have failed"
+            Assert.IsFalse(t.Execute()); // "should have failed"
             ((MockEngine)t.BuildEngine).AssertLogContains("MSB3095");
 
             ObjectModelHelpers.AssertItemsMatch(@"

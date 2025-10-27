@@ -121,8 +121,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             TaskHostTaskComplete deserializedComplete = packet as TaskHostTaskComplete;
 
-            Assert.Equal(complete.TaskResult, deserializedComplete.TaskResult);
-            Assert.NotNull(deserializedComplete.TaskOutputParameters);
+            Assert.AreEqual(complete.TaskResult, deserializedComplete.TaskResult);
+            Assert.IsNotNull(deserializedComplete.TaskOutputParameters);
             Assert.Empty(deserializedComplete.TaskOutputParameters);
         }
 
@@ -144,9 +144,9 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             TaskHostTaskComplete deserializedComplete = packet as TaskHostTaskComplete;
 
-            Assert.Equal(complete.TaskResult, deserializedComplete.TaskResult);
-            Assert.NotNull(deserializedComplete.TaskOutputParameters);
-            Assert.Equal(complete.TaskOutputParameters.Count, deserializedComplete.TaskOutputParameters.Count);
+            Assert.AreEqual(complete.TaskResult, deserializedComplete.TaskResult);
+            Assert.IsNotNull(deserializedComplete.TaskOutputParameters);
+            Assert.AreEqual(complete.TaskOutputParameters.Count, deserializedComplete.TaskOutputParameters.Count);
         }
 
         /// <summary>
@@ -170,11 +170,11 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             TaskHostTaskComplete deserializedComplete = packet as TaskHostTaskComplete;
 
-            Assert.Equal(complete.TaskResult, deserializedComplete.TaskResult);
-            Assert.NotNull(deserializedComplete.TaskOutputParameters);
-            Assert.Equal(complete.TaskOutputParameters.Count, deserializedComplete.TaskOutputParameters.Count);
-            Assert.Equal(complete.TaskOutputParameters["Text"].WrappedParameter, deserializedComplete.TaskOutputParameters["Text"].WrappedParameter);
-            Assert.Equal(complete.TaskOutputParameters["BoolValue"].WrappedParameter, deserializedComplete.TaskOutputParameters["BoolValue"].WrappedParameter);
+            Assert.AreEqual(complete.TaskResult, deserializedComplete.TaskResult);
+            Assert.IsNotNull(deserializedComplete.TaskOutputParameters);
+            Assert.AreEqual(complete.TaskOutputParameters.Count, deserializedComplete.TaskOutputParameters.Count);
+            Assert.AreEqual(complete.TaskOutputParameters["Text"].WrappedParameter, deserializedComplete.TaskOutputParameters["Text"].WrappedParameter);
+            Assert.AreEqual(complete.TaskOutputParameters["BoolValue"].WrappedParameter, deserializedComplete.TaskOutputParameters["BoolValue"].WrappedParameter);
         }
 
         /// <summary>
@@ -197,9 +197,9 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             TaskHostTaskComplete deserializedComplete = packet as TaskHostTaskComplete;
 
-            Assert.Equal(complete.TaskResult, deserializedComplete.TaskResult);
-            Assert.NotNull(deserializedComplete.TaskOutputParameters);
-            Assert.Equal(complete.TaskOutputParameters.Count, deserializedComplete.TaskOutputParameters.Count);
+            Assert.AreEqual(complete.TaskResult, deserializedComplete.TaskResult);
+            Assert.IsNotNull(deserializedComplete.TaskOutputParameters);
+            Assert.AreEqual(complete.TaskOutputParameters.Count, deserializedComplete.TaskOutputParameters.Count);
             TaskHostPacketHelpers.AreEqual((ITaskItem)complete.TaskOutputParameters["TaskItemValue"].WrappedParameter, (ITaskItem)deserializedComplete.TaskOutputParameters["TaskItemValue"].WrappedParameter);
         }
 
@@ -223,9 +223,9 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             TaskHostTaskComplete deserializedComplete = packet as TaskHostTaskComplete;
 
-            Assert.Equal(complete.TaskResult, deserializedComplete.TaskResult);
-            Assert.NotNull(deserializedComplete.TaskOutputParameters);
-            Assert.Equal(complete.TaskOutputParameters.Count, deserializedComplete.TaskOutputParameters.Count);
+            Assert.AreEqual(complete.TaskResult, deserializedComplete.TaskResult);
+            Assert.IsNotNull(deserializedComplete.TaskOutputParameters);
+            Assert.AreEqual(complete.TaskOutputParameters.Count, deserializedComplete.TaskOutputParameters.Count);
 
             ITaskItem[] itemArray = (ITaskItem[])complete.TaskOutputParameters["TaskItemArrayValue"].WrappedParameter;
             ITaskItem[] deserializedItemArray = (ITaskItem[])deserializedComplete.TaskOutputParameters["TaskItemArrayValue"].WrappedParameter;
@@ -255,7 +255,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 Assert.IsAssignableFrom(expectedExceptionType, e); // "Wrong exception was thrown!"
             }
 
-            Assert.True(exceptionCaught); // "No exception was caught when one was expected!"
+            Assert.IsTrue(exceptionCaught); // "No exception was caught when one was expected!"
         }
     }
 }

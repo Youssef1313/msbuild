@@ -358,7 +358,7 @@ namespace Microsoft.Build.UnitTests
                 Namespaces = useNamespace ? $"<Namespace Prefix=\"s\" Uri=\"{XmlNamespaceUsedByTests}\" />" : null,
                 Value = value == null ? null : new TaskItem(value)
             };
-            Assert.True(p.Execute(), engine.Log);
+            Assert.IsTrue(p.Execute(), engine.Log);
 
             string result = File.ReadAllText(xmlInputPath);
 

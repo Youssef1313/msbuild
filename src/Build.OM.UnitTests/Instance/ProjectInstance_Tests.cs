@@ -39,7 +39,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
             Project p = new Project();
             ProjectInstance i = p.CreateProjectInstance();
 
-            Assert.True(i.GetPropertyValue("username") != null);
+            Assert.IsTrue(i.GetPropertyValue("username") != null);
         }
 
         /// <summary>
@@ -50,8 +50,8 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         {
             ProjectInstance p = GetSampleProjectInstance();
 
-            Assert.Equal("v1", p.GetPropertyValue("p1"));
-            Assert.Equal("v2X", p.GetPropertyValue("p2"));
+            Assert.AreEqual("v1", p.GetPropertyValue("p1"));
+            Assert.AreEqual("v2X", p.GetPropertyValue("p2"));
         }
 
         /// <summary>
@@ -63,15 +63,15 @@ namespace Microsoft.Build.UnitTests.OM.Instance
             ProjectInstance p = GetSampleProjectInstance();
 
             IList<ProjectItemInstance> items = Helpers.MakeList(p.GetItems("i"));
-            Assert.Equal(3, items.Count);
-            Assert.Equal("i", items[0].ItemType);
-            Assert.Equal("i0", items[0].EvaluatedInclude);
-            Assert.Equal(String.Empty, items[0].GetMetadataValue("m"));
-            Assert.Null(items[0].GetMetadata("m"));
-            Assert.Equal("i1", items[1].EvaluatedInclude);
-            Assert.Equal("m1", items[1].GetMetadataValue("m"));
-            Assert.Equal("m1", items[1].GetMetadata("m").EvaluatedValue);
-            Assert.Equal("v1", items[2].EvaluatedInclude);
+            Assert.AreEqual(3, items.Count);
+            Assert.AreEqual("i", items[0].ItemType);
+            Assert.AreEqual("i0", items[0].EvaluatedInclude);
+            Assert.AreEqual(String.Empty, items[0].GetMetadataValue("m"));
+            Assert.IsNull(items[0].GetMetadata("m"));
+            Assert.AreEqual("i1", items[1].EvaluatedInclude);
+            Assert.AreEqual("m1", items[1].GetMetadataValue("m"));
+            Assert.AreEqual("m1", items[1].GetMetadata("m").EvaluatedValue);
+            Assert.AreEqual("v1", items[2].EvaluatedInclude);
         }
 
         /// <summary>
@@ -84,14 +84,14 @@ namespace Microsoft.Build.UnitTests.OM.Instance
 
             ProjectItemInstance returned = p.AddItem("i", "i1");
 
-            Assert.Equal("i", returned.ItemType);
-            Assert.Equal("i1", returned.EvaluatedInclude);
-            Assert.False(returned.Metadata.GetEnumerator().MoveNext());
+            Assert.AreEqual("i", returned.ItemType);
+            Assert.AreEqual("i1", returned.EvaluatedInclude);
+            Assert.IsFalse(returned.Metadata.GetEnumerator().MoveNext());
 
             foreach (ProjectItemInstance item in p.Items)
             {
-                Assert.Equal("i1", item.EvaluatedInclude);
-                Assert.False(item.Metadata.GetEnumerator().MoveNext());
+                Assert.AreEqual("i1", item.EvaluatedInclude);
+                Assert.IsFalse(item.Metadata.GetEnumerator().MoveNext());
             }
         }
 
@@ -105,14 +105,14 @@ namespace Microsoft.Build.UnitTests.OM.Instance
 
             ProjectItemInstance returned = p.AddItem("i", "i%3b1");
 
-            Assert.Equal("i", returned.ItemType);
-            Assert.Equal("i;1", returned.EvaluatedInclude);
-            Assert.False(returned.Metadata.GetEnumerator().MoveNext());
+            Assert.AreEqual("i", returned.ItemType);
+            Assert.AreEqual("i;1", returned.EvaluatedInclude);
+            Assert.IsFalse(returned.Metadata.GetEnumerator().MoveNext());
 
             foreach (ProjectItemInstance item in p.Items)
             {
-                Assert.Equal("i;1", item.EvaluatedInclude);
-                Assert.False(item.Metadata.GetEnumerator().MoveNext());
+                Assert.AreEqual("i;1", item.EvaluatedInclude);
+                Assert.IsFalse(item.Metadata.GetEnumerator().MoveNext());
             }
         }
 
@@ -131,17 +131,17 @@ namespace Microsoft.Build.UnitTests.OM.Instance
 
             ProjectItemInstance returned = p.AddItem("i", "i1", metadata);
 
-            Assert.True(object.ReferenceEquals(returned, Helpers.MakeList(p.GetItems("i"))[0]));
+            Assert.IsTrue(object.ReferenceEquals(returned, Helpers.MakeList(p.GetItems("i"))[0]));
 
             foreach (ProjectItemInstance item in p.Items)
             {
-                Assert.Same(returned, item);
-                Assert.Equal("i1", item.EvaluatedInclude);
+                Assert.AreSame(returned, item);
+                Assert.AreEqual("i1", item.EvaluatedInclude);
                 var metadataOut = Helpers.MakeList(item.Metadata);
-                Assert.Equal(3, metadataOut.Count);
-                Assert.Equal("m1", item.GetMetadataValue("m"));
-                Assert.Equal("n1", item.GetMetadataValue("n"));
-                Assert.Equal("o@", item.GetMetadataValue("o"));
+                Assert.AreEqual(3, metadataOut.Count);
+                Assert.AreEqual("m1", item.GetMetadataValue("m"));
+                Assert.AreEqual("n1", item.GetMetadataValue("n"));
+                Assert.AreEqual("o@", item.GetMetadataValue("o"));
             }
         }
 
@@ -190,7 +190,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
             ProjectInstance p = GetEmptyProjectInstance();
             ProjectItemInstance item = p.AddItem("i", "i1", null);
 
-            Assert.False(item.Metadata.GetEnumerator().MoveNext());
+            Assert.IsFalse(item.Metadata.GetEnumerator().MoveNext());
         }
 
         /// <summary>
@@ -205,12 +205,12 @@ namespace Microsoft.Build.UnitTests.OM.Instance
 
             instance.SetProperty("p", "p2");
 
-            Assert.Equal("p2", instance.GetPropertyValue("p"));
+            Assert.AreEqual("p2", instance.GetPropertyValue("p"));
 
             // And clearing it should not expose the original global property value
             instance.SetProperty("p", "");
 
-            Assert.Equal("", instance.GetPropertyValue("p"));
+            Assert.AreEqual("", instance.GetPropertyValue("p"));
         }
 
         /// <summary>
@@ -222,7 +222,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
             ProjectInstance first = GetSampleProjectInstance();
             ProjectInstance second = first.DeepCopy();
 
-            Assert.False(Object.ReferenceEquals(first, second));
+            Assert.IsFalse(Object.ReferenceEquals(first, second));
         }
 
         /// <summary>
@@ -234,12 +234,12 @@ namespace Microsoft.Build.UnitTests.OM.Instance
             ProjectInstance first = GetSampleProjectInstance();
             ProjectInstance second = first.DeepCopy();
 
-            Assert.False(Object.ReferenceEquals(first.GetProperty("p1"), second.GetProperty("p1")));
+            Assert.IsFalse(Object.ReferenceEquals(first.GetProperty("p1"), second.GetProperty("p1")));
 
             ProjectPropertyInstance newProperty = first.SetProperty("p1", "v1b");
-            Assert.True(Object.ReferenceEquals(newProperty, first.GetProperty("p1")));
-            Assert.Equal("v1b", first.GetPropertyValue("p1"));
-            Assert.Equal("v1", second.GetPropertyValue("p1"));
+            Assert.IsTrue(Object.ReferenceEquals(newProperty, first.GetProperty("p1")));
+            Assert.AreEqual("v1b", first.GetPropertyValue("p1"));
+            Assert.AreEqual("v1", second.GetPropertyValue("p1"));
         }
 
         /// <summary>
@@ -262,9 +262,9 @@ namespace Microsoft.Build.UnitTests.OM.Instance
             ProjectInstance project = GetProjectInstance(content);
 
             Assert.Single(Helpers.MakeList(project.GetItems("j")));
-            Assert.Equal("i1", Helpers.MakeList(project.GetItems("j"))[0].EvaluatedInclude);
-            Assert.Equal("m1", Helpers.MakeList(project.GetItems("j"))[0].GetMetadataValue("m"));
-            Assert.Equal("n;;", Helpers.MakeList(project.GetItems("j"))[0].GetMetadataValue("n"));
+            Assert.AreEqual("i1", Helpers.MakeList(project.GetItems("j"))[0].EvaluatedInclude);
+            Assert.AreEqual("m1", Helpers.MakeList(project.GetItems("j"))[0].GetMetadataValue("m"));
+            Assert.AreEqual("n;;", Helpers.MakeList(project.GetItems("j"))[0].GetMetadataValue("n"));
         }
 
         /// <summary>
@@ -305,9 +305,9 @@ namespace Microsoft.Build.UnitTests.OM.Instance
                 ProjectInstance projectInstance = GetProjectInstance(content);
                 projectInstance.Build();
 
-                Assert.Equal(2, Helpers.MakeList(projectInstance.GetItems("i")).Count);
-                Assert.Equal(file1, Helpers.MakeList(projectInstance.GetItems("i"))[0].EvaluatedInclude);
-                Assert.Equal(file2, Helpers.MakeList(projectInstance.GetItems("i"))[1].EvaluatedInclude);
+                Assert.AreEqual(2, Helpers.MakeList(projectInstance.GetItems("i")).Count);
+                Assert.AreEqual(file1, Helpers.MakeList(projectInstance.GetItems("i"))[0].EvaluatedInclude);
+                Assert.AreEqual(file2, Helpers.MakeList(projectInstance.GetItems("i"))[1].EvaluatedInclude);
             }
             finally
             {
@@ -327,11 +327,11 @@ namespace Microsoft.Build.UnitTests.OM.Instance
             ProjectInstance first = GetSampleProjectInstance();
             ProjectInstance second = first.DeepCopy();
 
-            Assert.False(Object.ReferenceEquals(Helpers.MakeList(first.GetItems("i"))[0], Helpers.MakeList(second.GetItems("i"))[0]));
+            Assert.IsFalse(Object.ReferenceEquals(Helpers.MakeList(first.GetItems("i"))[0], Helpers.MakeList(second.GetItems("i"))[0]));
 
             first.AddItem("i", "i3");
-            Assert.Equal(4, Helpers.MakeList(first.GetItems("i")).Count);
-            Assert.Equal(3, Helpers.MakeList(second.GetItems("i")).Count);
+            Assert.AreEqual(4, Helpers.MakeList(first.GetItems("i")).Count);
+            Assert.AreEqual(3, Helpers.MakeList(second.GetItems("i")).Count);
         }
 
         /// <summary>
@@ -427,20 +427,20 @@ namespace Microsoft.Build.UnitTests.OM.Instance
             var projBInstance = projBEval.CreateProjectInstance();
             var projBInstanceItem = projBInstance.GetItemsByItemTypeAndEvaluatedInclude("Compile", "bItem.cs").Single();
             var projAInstanceItem = projBInstance.GetItemsByItemTypeAndEvaluatedInclude("Compile", "aItem.cs").Single();
-            Assert.Equal(projB.FullPath, projBInstanceItem.GetMetadataValue(CapturedMetadataName));
-            Assert.Equal(projA.FullPath, projAInstanceItem.GetMetadataValue(CapturedMetadataName));
+            Assert.AreEqual(projB.FullPath, projBInstanceItem.GetMetadataValue(CapturedMetadataName));
+            Assert.AreEqual(projA.FullPath, projAInstanceItem.GetMetadataValue(CapturedMetadataName));
 
             // Although GetMetadataValue returns non-null, GetMetadata returns null...
-            Assert.Null(projAInstanceItem.GetMetadata(CapturedMetadataName));
+            Assert.IsNull(projAInstanceItem.GetMetadata(CapturedMetadataName));
 
             // .. Just like built-in metadata does: (this segment just demonstrates similar functionality -- it's not meant to test built-in metadata)
-            Assert.NotNull(projAInstanceItem.GetMetadataValue("Identity"));
-            Assert.Null(projAInstanceItem.GetMetadata("Identity"));
+            Assert.IsNotNull(projAInstanceItem.GetMetadataValue("Identity"));
+            Assert.IsNull(projAInstanceItem.GetMetadata("Identity"));
 
-            Assert.True(projAInstanceItem.HasMetadata(CapturedMetadataName));
-            Assert.False(projAInstanceItem.Metadata.Any());
+            Assert.IsTrue(projAInstanceItem.HasMetadata(CapturedMetadataName));
+            Assert.IsFalse(projAInstanceItem.Metadata.Any());
             Assert.Contains(CapturedMetadataName, projAInstanceItem.MetadataNames);
-            Assert.Equal(projAInstanceItem.MetadataCount, projAInstanceItem.MetadataNames.Count);
+            Assert.AreEqual(projAInstanceItem.MetadataCount, projAInstanceItem.MetadataNames.Count);
         }
 
         /// <summary>
@@ -469,20 +469,20 @@ namespace Microsoft.Build.UnitTests.OM.Instance
             var projBInstance = new ProjectInstance(projBEval, ProjectInstanceSettings.ImmutableWithFastItemLookup);
             var projBInstanceItem = projBInstance.GetItemsByItemTypeAndEvaluatedInclude("Compile", "bItem.cs").Single();
             var projAInstanceItem = projBInstance.GetItemsByItemTypeAndEvaluatedInclude("Compile", "aItem.cs").Single();
-            Assert.Equal(projB.FullPath, projBInstanceItem.GetMetadataValue(CapturedMetadataName));
-            Assert.Equal(projA.FullPath, projAInstanceItem.GetMetadataValue(CapturedMetadataName));
+            Assert.AreEqual(projB.FullPath, projBInstanceItem.GetMetadataValue(CapturedMetadataName));
+            Assert.AreEqual(projA.FullPath, projAInstanceItem.GetMetadataValue(CapturedMetadataName));
 
             // Although GetMetadataValue returns non-null, GetMetadata returns null...
-            Assert.Null(projAInstanceItem.GetMetadata(CapturedMetadataName));
+            Assert.IsNull(projAInstanceItem.GetMetadata(CapturedMetadataName));
 
             // .. Just like built-in metadata does: (this segment just demonstrates similar functionality -- it's not meant to test built-in metadata)
-            Assert.NotNull(projAInstanceItem.GetMetadataValue("Identity"));
-            Assert.Null(projAInstanceItem.GetMetadata("Identity"));
+            Assert.IsNotNull(projAInstanceItem.GetMetadataValue("Identity"));
+            Assert.IsNull(projAInstanceItem.GetMetadata("Identity"));
 
-            Assert.True(projAInstanceItem.HasMetadata(CapturedMetadataName));
-            Assert.False(projAInstanceItem.Metadata.Any());
+            Assert.IsTrue(projAInstanceItem.HasMetadata(CapturedMetadataName));
+            Assert.IsFalse(projAInstanceItem.Metadata.Any());
             Assert.Contains(CapturedMetadataName, projAInstanceItem.MetadataNames);
-            Assert.Equal(projAInstanceItem.MetadataCount, projAInstanceItem.MetadataNames.Count);
+            Assert.AreEqual(projAInstanceItem.MetadataCount, projAInstanceItem.MetadataNames.Count);
         }
 
         /// <summary>
@@ -511,13 +511,13 @@ namespace Microsoft.Build.UnitTests.OM.Instance
             var projBInstance = projBEval.CreateProjectInstance();
             var projAInstanceItem = projBInstance.GetItemsByItemTypeAndEvaluatedInclude("Compile", "aItem.cs").Single();
             var projBInstanceItem = projBInstance.GetItemsByItemTypeAndEvaluatedInclude("CompileB", "aItem.cs").Single();
-            Assert.Equal(projA.FullPath, projAInstanceItem.GetMetadataValue(CapturedMetadataName));
-            Assert.Equal(projB.FullPath, projBInstanceItem.GetMetadataValue(CapturedMetadataName));
+            Assert.AreEqual(projA.FullPath, projAInstanceItem.GetMetadataValue(CapturedMetadataName));
+            Assert.AreEqual(projB.FullPath, projBInstanceItem.GetMetadataValue(CapturedMetadataName));
 
-            Assert.True(projAInstanceItem.HasMetadata(CapturedMetadataName));
-            Assert.False(projAInstanceItem.Metadata.Any());
+            Assert.IsTrue(projAInstanceItem.HasMetadata(CapturedMetadataName));
+            Assert.IsFalse(projAInstanceItem.Metadata.Any());
             Assert.Contains(CapturedMetadataName, projAInstanceItem.MetadataNames);
-            Assert.Equal(projAInstanceItem.MetadataCount, projAInstanceItem.MetadataNames.Count);
+            Assert.AreEqual(projAInstanceItem.MetadataCount, projAInstanceItem.MetadataNames.Count);
         }
 
         /// <summary>
@@ -910,7 +910,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
             var instance = protoInstance.DeepCopy(/* inherit */);
 
             // Should not have bothered cloning
-            Assert.True(Object.ReferenceEquals(protoInstance, instance));
+            Assert.IsTrue(Object.ReferenceEquals(protoInstance, instance));
 
             Helpers.VerifyAssertThrowsInvalidOperation(delegate () { instance.GetProperty("g").EvaluatedValue = "v2"; });
             Helpers.VerifyAssertThrowsInvalidOperation(

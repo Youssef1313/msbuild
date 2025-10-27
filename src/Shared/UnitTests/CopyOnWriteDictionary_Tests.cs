@@ -31,8 +31,8 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             // Now look for the same key we inserted
             object v2 = dictionary[k1];
 
-            Assert.True(Object.ReferenceEquals(v1, v2));
-            Assert.True(dictionary.ContainsKey(k1));
+            Assert.IsTrue(Object.ReferenceEquals(v1, v2));
+            Assert.IsTrue(dictionary.ContainsKey(k1));
         }
 
         /// <summary>
@@ -63,8 +63,8 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             object v2;
             bool result = dictionary.TryGetValue(k1, out v2);
 
-            Assert.True(result);
-            Assert.True(Object.ReferenceEquals(v1, v2));
+            Assert.IsTrue(result);
+            Assert.IsTrue(Object.ReferenceEquals(v1, v2));
         }
 
         /// <summary>
@@ -78,9 +78,9 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             object v;
             bool result = dictionary.TryGetValue(string.Empty, out v);
 
-            Assert.False(result);
-            Assert.Null(v);
-            Assert.False(dictionary.ContainsKey(string.Empty));
+            Assert.IsFalse(result);
+            Assert.IsNull(v);
+            Assert.IsFalse(dictionary.ContainsKey(string.Empty));
         }
 
         /// <summary>
@@ -99,11 +99,11 @@ namespace Microsoft.Build.UnitTests.OM.Collections
             // Don't create it with a literal or the compiler will intern it!
             string k2 = String.Concat("k", "ey");
 
-            Assert.False(Object.ReferenceEquals(k1, k2));
+            Assert.IsFalse(Object.ReferenceEquals(k1, k2));
 
             object v2 = dictionary[k2];
 
-            Assert.True(Object.ReferenceEquals(v1, v2));
+            Assert.IsTrue(Object.ReferenceEquals(v1, v2));
         }
 
         /// <summary>
@@ -114,12 +114,12 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         {
             var dictionary = new CopyOnWriteDictionary<string>();
             dictionary["test"] = "1";
-            Assert.Equal("1", dictionary["test"]);
+            Assert.AreEqual("1", dictionary["test"]);
 
             var clone = dictionary.Clone();
 
-            Assert.Equal("1", clone["test"]);
-            Assert.Equal(clone.Count, dictionary.Count);
+            Assert.AreEqual("1", clone["test"]);
+            Assert.AreEqual(clone.Count, dictionary.Count);
         }
 
         /// <summary>
@@ -130,11 +130,11 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         {
             var dictionary = new CopyOnWriteDictionary<string>(StringComparer.OrdinalIgnoreCase);
             dictionary["test"] = "1";
-            Assert.Equal("1", dictionary["test"]);
+            Assert.AreEqual("1", dictionary["test"]);
 
             var clone = dictionary.Clone();
 
-            Assert.Equal("1", clone["TEST"]);
+            Assert.AreEqual("1", clone["TEST"]);
         }
 
         /// <summary>
@@ -171,24 +171,24 @@ namespace Microsoft.Build.UnitTests.OM.Collections
         {
             var dictionary = new CopyOnWriteDictionary<string>();
             dictionary["test"] = "1";
-            Assert.Equal("1", dictionary["test"]);
+            Assert.AreEqual("1", dictionary["test"]);
 
             var clone = dictionary.Clone();
             var clone2 = dictionary.Clone();
 
-            Assert.True(dictionary.HasSameBacking(clone));
-            Assert.True(dictionary.HasSameBacking(clone2));
+            Assert.IsTrue(dictionary.HasSameBacking(clone));
+            Assert.IsTrue(dictionary.HasSameBacking(clone2));
 
             clone["test"] = "2";
-            Assert.False(dictionary.HasSameBacking(clone));
-            Assert.False(clone2.HasSameBacking(clone));
-            Assert.True(dictionary.HasSameBacking(clone2));
+            Assert.IsFalse(dictionary.HasSameBacking(clone));
+            Assert.IsFalse(clone2.HasSameBacking(clone));
+            Assert.IsTrue(dictionary.HasSameBacking(clone2));
 
             clone2["test"] = "3";
-            Assert.False(dictionary.HasSameBacking(clone2));
+            Assert.IsFalse(dictionary.HasSameBacking(clone2));
 
-            Assert.Equal("1", dictionary["test"]);
-            Assert.Equal("2", clone["test"]);
+            Assert.AreEqual("1", dictionary["test"]);
+            Assert.AreEqual("2", clone["test"]);
         }
     }
 }

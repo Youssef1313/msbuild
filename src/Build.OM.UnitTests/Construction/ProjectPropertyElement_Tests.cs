@@ -25,9 +25,9 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         {
             ProjectPropertyElement property = GetPropertyXml();
 
-            Assert.Equal("p", property.Name);
-            Assert.Equal("v", property.Value);
-            Assert.Equal("c", property.Condition);
+            Assert.AreEqual("p", property.Name);
+            Assert.AreEqual("v", property.Value);
+            Assert.AreEqual("c", property.Condition);
         }
 
         /// <summary>
@@ -49,8 +49,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectPropertyGroupElement propertyGroup = (ProjectPropertyGroupElement)Helpers.GetFirst(project.Children);
             ProjectPropertyElement property = Helpers.GetFirst(propertyGroup.Properties);
 
-            Assert.Equal("p", property.Name);
-            Assert.Equal(@"A<B>C<D /></B>E", property.Value);
+            Assert.AreEqual("p", property.Name);
+            Assert.AreEqual(@"A<B>C<D /></B>E", property.Value);
         }
 
         /// <summary>
@@ -160,8 +160,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(property.ContainingProject);
 
             property.Value = "vb";
-            Assert.Equal("vb", property.Value);
-            Assert.True(property.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual("vb", property.Value);
+            Assert.IsTrue(property.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -176,8 +176,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(property.ContainingProject);
 
             property.Value = "v1";
-            Assert.Equal("v1", property.Value);
-            Assert.False(property.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual("v1", property.Value);
+            Assert.IsFalse(property.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -189,8 +189,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectPropertyElement property = GetPropertyXml();
 
             property.Name = "p2";
-            Assert.Equal("p2", property.Name);
-            Assert.True(property.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual("p2", property.Name);
+            Assert.IsTrue(property.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -203,8 +203,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(property.ContainingProject);
 
             property.Name = "p";
-            Assert.Equal("p", property.Name);
-            Assert.False(property.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual("p", property.Name);
+            Assert.IsFalse(property.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -230,8 +230,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(property.ContainingProject);
 
             property.Value = String.Empty;
-            Assert.Equal(String.Empty, property.Value);
-            Assert.True(property.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual(String.Empty, property.Value);
+            Assert.IsTrue(property.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -258,8 +258,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(property.ContainingProject);
 
             property.Condition = "c";
-            Assert.Equal("c", property.Condition);
-            Assert.True(property.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual("c", property.Condition);
+            Assert.IsTrue(property.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>

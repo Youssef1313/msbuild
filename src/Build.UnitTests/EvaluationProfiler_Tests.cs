@@ -160,16 +160,16 @@ namespace Microsoft.Build.Engine.UnitTests
 
             // Item groups (pass 3 and 3.1)
             Assert.Single(profiledElements, location => location.ElementName == "ItemGroup");
-            Assert.Equal(2, profiledElements.Count(location => location.ElementName == "CSFile" & location.EvaluationPass == EvaluationPass.Items));
+            Assert.AreEqual(2, profiledElements.Count(location => location.ElementName == "CSFile" & location.EvaluationPass == EvaluationPass.Items));
             Assert.Single(profiledElements, location => location.ElementName == "Condition" & location.EvaluationPass == EvaluationPass.Items);
-            Assert.Equal(2, profiledElements.Count(location => location.ElementName == "CSFile" & location.EvaluationPass == EvaluationPass.LazyItems));
+            Assert.AreEqual(2, profiledElements.Count(location => location.ElementName == "CSFile" & location.EvaluationPass == EvaluationPass.LazyItems));
 
             // Using tasks (pass 4)
             // The using element itself is evaluated as part of pass 0, so just checking the overall pass is triggered by the corresponding element
             Assert.Single(profiledElements, location => location.EvaluationPass == EvaluationPass.UsingTasks);
 
             // Targets (pass 5)
-            Assert.Equal(2, profiledElements.Count(location => location.ElementName == "Message"));
+            Assert.AreEqual(2, profiledElements.Count(location => location.ElementName == "Message"));
             Assert.Single(profiledElements, location => location.ElementName == "Target");
         }
 
@@ -191,8 +191,8 @@ namespace Microsoft.Build.Engine.UnitTests
             var profiledElements = result.ProfiledLocations.Keys.ToList();
 
             // Item groups (pass 3 and 3.1)
-            Assert.Equal(2, profiledElements.Count(location => location.ElementName == "TestGlob" & location.EvaluationPass == EvaluationPass.Items));
-            Assert.Equal(2, profiledElements.Count(location => location.ElementName == "TestGlob" & location.EvaluationPass == EvaluationPass.LazyItems));
+            Assert.AreEqual(2, profiledElements.Count(location => location.ElementName == "TestGlob" & location.EvaluationPass == EvaluationPass.Items));
+            Assert.AreEqual(2, profiledElements.Count(location => location.ElementName == "TestGlob" & location.EvaluationPass == EvaluationPass.LazyItems));
 
             // There should be one aggregated entry representing the total glob time
             Assert.Single(profiledElements, location => location.EvaluationPass == EvaluationPass.TotalGlobbing);
@@ -200,7 +200,7 @@ namespace Microsoft.Build.Engine.UnitTests
                 evaluationLocation.EvaluationPass == EvaluationPass.TotalGlobbing);
             // And it should aggregate the result of the 2 glob locations
             var totalGlobLocation = result.ProfiledLocations[totalGlob];
-            Assert.Equal(2, totalGlobLocation.NumberOfHits);
+            Assert.AreEqual(2, totalGlobLocation.NumberOfHits);
         }
 
         [Fact]
@@ -220,27 +220,27 @@ namespace Microsoft.Build.Engine.UnitTests
 
             // The total evaluation should be the parent of all other passes (but total globbing, which is an aggregate item)
             var totalEvaluation = profiledElements.Find(e => e.IsEvaluationPass && e.EvaluationPass == EvaluationPass.TotalEvaluation);
-            Assert.True(profiledElements.Where(e => e.IsEvaluationPass && e.EvaluationPass != EvaluationPass.TotalGlobbing && !e.Equals(totalEvaluation))
+            Assert.IsTrue(profiledElements.Where(e => e.IsEvaluationPass && e.EvaluationPass != EvaluationPass.TotalGlobbing && !e.Equals(totalEvaluation))
                 .All(e => e.ParentId == totalEvaluation.Id));
 
             // Check the test item has the right parent
             var itemPass = profiledElements.Find(e => e.IsEvaluationPass && e.EvaluationPass == EvaluationPass.Items);
             var itemGroup = profiledElements.Find(e => e.ElementName == "ItemGroup");
             var testItem = profiledElements.Find(e => e.ElementName == "Test" && e.EvaluationPass == EvaluationPass.Items);
-            Assert.Equal(itemPass.Id, itemGroup.ParentId);
-            Assert.Equal(itemGroup.Id, testItem.ParentId);
+            Assert.AreEqual(itemPass.Id, itemGroup.ParentId);
+            Assert.AreEqual(itemGroup.Id, testItem.ParentId);
 
             // Check the lazy test item has the right parent
             var lazyItemPass = profiledElements.Find(e => e.IsEvaluationPass && e.EvaluationPass == EvaluationPass.LazyItems);
             var lazyTestItem = profiledElements.Find(e => e.ElementName == "Test" && e.EvaluationPass == EvaluationPass.LazyItems);
-            Assert.Equal(lazyItemPass.Id, lazyTestItem.ParentId);
+            Assert.AreEqual(lazyItemPass.Id, lazyTestItem.ParentId);
 
             // Check the target item has the right parent
             var targetPass = profiledElements.Find(e => e.IsEvaluationPass && e.EvaluationPass == EvaluationPass.Targets);
             var target = profiledElements.Find(e => e.ElementName == "Target");
             var messageTarget = profiledElements.Find(e => e.ElementName == "Message");
-            Assert.Equal(targetPass.Id, target.ParentId);
-            Assert.Equal(target.Id, messageTarget.ParentId);
+            Assert.AreEqual(targetPass.Id, target.ParentId);
+            Assert.AreEqual(target.Id, messageTarget.ParentId);
         }
 
         [Fact]
@@ -252,10 +252,10 @@ namespace Microsoft.Build.Engine.UnitTests
             // All ids must be unique
             var allIds = profiledElements.Select(e => e.Id).ToList();
             var allUniqueIds = allIds.ToImmutableHashSet();
-            Assert.Equal(allIds.Count, allUniqueIds.Count);
+            Assert.AreEqual(allIds.Count, allUniqueIds.Count);
 
             // Every element with a parent id must point to a valid item
-            Assert.True(profiledElements.All(e => e.ParentId == null || allUniqueIds.Contains(e.ParentId.Value)));
+            Assert.IsTrue(profiledElements.All(e => e.ParentId == null || allUniqueIds.Contains(e.ParentId.Value)));
         }
 
         /// <summary>
@@ -289,7 +289,7 @@ namespace Microsoft.Build.Engine.UnitTests
 
                 File.Delete(project.FullPath);
 
-                Assert.Equal(BuildResultCode.Success, result.OverallResult);
+                Assert.AreEqual(BuildResultCode.Success, result.OverallResult);
             }
 
             return profilerLogger.GetAggregatedResult(pruneSmallItems: false);

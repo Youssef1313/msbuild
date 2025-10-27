@@ -29,11 +29,11 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
                 this.BigFile = this.ImmutableDisk.WriteProjectFile($"Big.proj", TestCollectionGroup.BigProjectFile);
                 var projReal = this.Remote[0].LoadProjectIgnoreMissingImports(this.BigFile);
                 this.Local.Importing = true;
-                Assert.NotNull(projReal);
+                Assert.IsNotNull(projReal);
                 this.RealXml = projReal.Xml;
-                Assert.NotNull(this.RealXml);
+                Assert.IsNotNull(this.RealXml);
                 var projView = this.Local.GetLoadedProjects(this.BigFile).FirstOrDefault();
-                Assert.NotNull(projView);
+                Assert.IsNotNull(projView);
                 this.ViewXml = projView.Xml;
 
                 ViewValidation.VerifyNotLinkedNotNull(this.RealXml);
@@ -45,7 +45,7 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
                 this.Group.ClearAllRemotes();
 
                 var projView = this.Local.GetLoadedProjects(this.BigFile).FirstOrDefault();
-                Assert.NotNull(projView);
+                Assert.IsNotNull(projView);
                 Assert.NotSame(projView, this.ViewXml);
                 this.ViewXml = projView.Xml;
 
@@ -99,10 +99,10 @@ namespace Microsoft.Build.UnitTests.OM.ObjectModelRemoting
             var realXml = realExtensionsList.FirstOrDefault();
             var viewXml = viewExtensionsList.FirstOrDefault();
 
-            Assert.Equal(realXml["a"], viewXml["a"]);
-            Assert.Equal(realXml["b"], viewXml["b"]);
-            Assert.Equal("x", viewXml["a"]);
-            Assert.Equal("y", viewXml["b"]);
+            Assert.AreEqual(realXml["a"], viewXml["a"]);
+            Assert.AreEqual(realXml["b"], viewXml["b"]);
+            Assert.AreEqual("x", viewXml["a"]);
+            Assert.AreEqual("y", viewXml["b"]);
         }
 
         [Fact]

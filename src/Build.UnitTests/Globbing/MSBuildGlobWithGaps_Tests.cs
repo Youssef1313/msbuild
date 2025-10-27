@@ -17,7 +17,7 @@ namespace Microsoft.Build.Engine.UnitTests.Globbing
         {
             var glob = new MSBuildGlobWithGaps(MSBuildGlob.Parse("a*"), Enumerable.Empty<IMSBuildGlob>());
 
-            Assert.True(glob.IsMatch("ab"));
+            Assert.IsTrue(glob.IsMatch("ab"));
         }
 
         [Fact]
@@ -25,7 +25,7 @@ namespace Microsoft.Build.Engine.UnitTests.Globbing
         {
             var glob = new MSBuildGlobWithGaps(MSBuildGlob.Parse("a*"), MSBuildGlob.Parse("b*"));
 
-            Assert.True(glob.IsMatch("ab"));
+            Assert.IsTrue(glob.IsMatch("ab"));
         }
 
         [Fact]
@@ -33,7 +33,7 @@ namespace Microsoft.Build.Engine.UnitTests.Globbing
         {
             var glob = new MSBuildGlobWithGaps(MSBuildGlob.Parse("a*"), MSBuildGlob.Parse("*b"));
 
-            Assert.False(glob.IsMatch("ab"));
+            Assert.IsFalse(glob.IsMatch("ab"));
         }
     }
 }

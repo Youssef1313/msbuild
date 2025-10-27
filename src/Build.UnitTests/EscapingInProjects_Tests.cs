@@ -365,9 +365,9 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
                 IEnumerable<ProjectItem> newItems = EscapingInProjectsHelper.ModifyItemOfTypeInProject(project, "MyWildcard", "b.weirdo", "foo%253Bbar.weirdo");
 
                 Assert.Single(newItems);
-                Assert.Equal("*.weirdo", newItems.First().UnevaluatedInclude);
-                Assert.Equal("foo%3Bbar.weirdo", newItems.First().EvaluatedInclude);
-                Assert.Equal("foo%253Bbar.weirdo", Project.GetEvaluatedItemIncludeEscaped(newItems.First()));
+                Assert.AreEqual("*.weirdo", newItems.First().UnevaluatedInclude);
+                Assert.AreEqual("foo%3Bbar.weirdo", newItems.First().EvaluatedInclude);
+                Assert.AreEqual("foo%253Bbar.weirdo", Project.GetEvaluatedItemIncludeEscaped(newItems.First()));
 
                 Helpers.CompareProjectXml(projectNewExpectedContents, project.Xml.RawXml);
             }
@@ -475,10 +475,10 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
             Helpers.CompareProjectXml(projectNewExpectedContents, project.Xml.RawXml);
 
             Assert.Single(newItems);
-            Assert.Equal("MyWildCard", newItems.First().ItemType); // "Newly added item should have correct ItemType"
-            Assert.Equal("*.weirdo", newItems.First().UnevaluatedInclude); // "Newly added item should have correct UnevaluatedInclude"
-            Assert.Equal("foo%253bbar.weirdo", Project.GetEvaluatedItemIncludeEscaped(newItems.First())); // "Newly added item should have correct EvaluatedIncludeEscaped"
-            Assert.Equal("foo%3bbar.weirdo", newItems.First().EvaluatedInclude); // "Newly added item should have correct EvaluatedInclude"
+            Assert.AreEqual("MyWildCard", newItems.First().ItemType); // "Newly added item should have correct ItemType"
+            Assert.AreEqual("*.weirdo", newItems.First().UnevaluatedInclude); // "Newly added item should have correct UnevaluatedInclude"
+            Assert.AreEqual("foo%253bbar.weirdo", Project.GetEvaluatedItemIncludeEscaped(newItems.First())); // "Newly added item should have correct EvaluatedIncludeEscaped"
+            Assert.AreEqual("foo%3bbar.weirdo", newItems.First().EvaluatedInclude); // "Newly added item should have correct EvaluatedInclude"
         }
 
         /// <summary>
@@ -517,10 +517,10 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
             Helpers.CompareProjectXml(projectNewExpectedContents, project.Xml.RawXml);
 
             Assert.Single(newItems);
-            Assert.Equal("MyWildCard", newItems.First().ItemType); // "Newly added item should have correct ItemType"
-            Assert.Equal("*.AAA%253bBBB", newItems.First().UnevaluatedInclude); // "Newly added item should have correct UnevaluatedInclude"
-            Assert.Equal("foo.AAA%253bBBB", Project.GetEvaluatedItemIncludeEscaped(newItems.First())); // "Newly added item should have correct EvaluatedIncludeEscaped"
-            Assert.Equal("foo.AAA%3bBBB", newItems.First().EvaluatedInclude); // "Newly added item should have correct EvaluatedInclude"
+            Assert.AreEqual("MyWildCard", newItems.First().ItemType); // "Newly added item should have correct ItemType"
+            Assert.AreEqual("*.AAA%253bBBB", newItems.First().UnevaluatedInclude); // "Newly added item should have correct UnevaluatedInclude"
+            Assert.AreEqual("foo.AAA%253bBBB", Project.GetEvaluatedItemIncludeEscaped(newItems.First())); // "Newly added item should have correct EvaluatedIncludeEscaped"
+            Assert.AreEqual("foo.AAA%3bBBB", newItems.First().EvaluatedInclude); // "Newly added item should have correct EvaluatedInclude"
         }
 
         /// <summary>
@@ -651,7 +651,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
                 ProjectInstance projectInstance = project.CreateProjectInstance();
 
                 IEnumerable<ProjectItemInstance> items = projectInstance.GetItems("ProjectFile");
-                Assert.Equal(projectAbsolutePath, items.First().GetMetadataValue("FullPath"));
+                Assert.AreEqual(projectAbsolutePath, items.First().GetMetadataValue("FullPath"));
             }
             finally
             {
@@ -687,7 +687,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
             project.SetGlobalProperty("MyGlobalProperty", "foo%253bbar");
 
             bool success = project.Build(logger);
-            Assert.True(success); // "Build failed.  See test output (Attachments in Azure Pipelines) for details"
+            Assert.IsTrue(success); // "Build failed.  See test output (Attachments in Azure Pipelines) for details"
 
             logger.AssertLogContains("MyGlobalProperty = 'foo%3bbar'");
         }
@@ -717,7 +717,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
                 ");
 
                 bool success = project.Build(logger);
-                Assert.True(success); // "Build failed.  See test output (Attachments in Azure Pipelines) for details"
+                Assert.IsTrue(success); // "Build failed.  See test output (Attachments in Azure Pipelines) for details"
                 logger.AssertLogContains("[*]");
             }
             finally
@@ -782,11 +782,11 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
             catch (InvalidProjectFileException ex)
             {
                 string expectedErrorMessage = ResourceUtilities.FormatResourceStringStripCodeAndKeyword("NameInvalid", "$", "$");
-                Assert.Equal(expectedErrorMessage, ex.Message); // "Wrong error message"
+                Assert.AreEqual(expectedErrorMessage, ex.Message); // "Wrong error message"
                 exceptionCaught = true;
             }
 
-            Assert.True(exceptionCaught); // "Expected an InvalidProjectFileException"
+            Assert.IsTrue(exceptionCaught); // "Expected an InvalidProjectFileException"
         }
 
         /// <summary>
@@ -810,7 +810,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
             MockLogger logger = new MockLogger();
 
             bool success = project.Build(logger);
-            Assert.True(success); // "Build failed.  See test output (Attachments in Azure Pipelines) for details"
+            Assert.IsTrue(success); // "Build failed.  See test output (Attachments in Azure Pipelines) for details"
             logger.AssertLogContains("[OVERRIDE]");
         }
 
@@ -879,10 +879,10 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
             Project project = new Project(reader);
             IEnumerable<ProjectItem> items = project.GetItems("DifferentList");
 
-            Assert.Equal(3, items.Count());
-            Assert.Equal("a", items.ElementAt(0).EvaluatedInclude);
-            Assert.Equal("b;c", items.ElementAt(1).EvaluatedInclude);
-            Assert.Equal("foo;bar", items.ElementAt(2).EvaluatedInclude);
+            Assert.AreEqual(3, items.Count());
+            Assert.AreEqual("a", items.ElementAt(0).EvaluatedInclude);
+            Assert.AreEqual("b;c", items.ElementAt(1).EvaluatedInclude);
+            Assert.AreEqual("foo;bar", items.ElementAt(2).EvaluatedInclude);
         }
 
         /// <summary>
@@ -911,11 +911,11 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
             Project project = new Project(reader);
             IEnumerable<ProjectItem> items = project.GetItems("DifferentList");
 
-            Assert.Equal(4, items.Count());
-            Assert.Equal("a", items.ElementAt(0).EvaluatedInclude);
-            Assert.Equal("b;c", items.ElementAt(1).EvaluatedInclude);
-            Assert.Equal("foo", items.ElementAt(2).EvaluatedInclude);
-            Assert.Equal("bar", items.ElementAt(3).EvaluatedInclude);
+            Assert.AreEqual(4, items.Count());
+            Assert.AreEqual("a", items.ElementAt(0).EvaluatedInclude);
+            Assert.AreEqual("b;c", items.ElementAt(1).EvaluatedInclude);
+            Assert.AreEqual("foo", items.ElementAt(2).EvaluatedInclude);
+            Assert.AreEqual("bar", items.ElementAt(3).EvaluatedInclude);
         }
     }
 
@@ -1007,7 +1007,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
             // Build the default targets using the Configuration "a;b'c".
             project.SetGlobalProperty("Configuration", EscapingUtilities.Escape("a;b'c"));
             bool success = project.Build(logger);
-            Assert.True(success); // "Build failed.  See test output (Attachments in Azure Pipelines) for details"
+            Assert.IsTrue(success); // "Build failed.  See test output (Attachments in Azure Pipelines) for details"
 
             ObjectModelHelpers.AssertFileExistsInTempProjectDirectory(@"obj\a;b'c\ClassLibrary16.dll");
             ObjectModelHelpers.AssertFileExistsInTempProjectDirectory(@"bin\a;b'c\ClassLibrary16.dll");
@@ -1072,7 +1072,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
                 // Build the default targets using the Configuration "a;b'c".
                 project.SetGlobalProperty("Configuration", EscapingUtilities.Escape("a;b'c"));
                 bool success = project.Build(logger);
-                Assert.True(success); // "Build failed.  See test output (Attachments in Azure Pipelines) for details"
+                Assert.IsTrue(success); // "Build failed.  See test output (Attachments in Azure Pipelines) for details"
 
                 ObjectModelHelpers.AssertFileExistsInTempProjectDirectory(@"obj\a;b'c\ClassLibrary16.dll");
                 ObjectModelHelpers.AssertFileExistsInTempProjectDirectory(@"bin\a;b'c\ClassLibrary16.dll");
@@ -1608,7 +1608,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
             MockLogger log = new MockLogger(_testOutput);
             ObjectModelHelpers.BuildTempProjectFileWithTargetsExpectSuccess(@"SLN;!@(foo)'^1\Console;!@(foo)'^(Application1.sln", new string[] { targetForFirstProject }, null, log);
 
-            Assert.True(File.Exists(Path.Combine(ObjectModelHelpers.TempProjectDir, @"SLN;!@(foo)'^1\Console;!@(foo)'^(Application1\bin\debug\Console;!@(foo)'^(Application1.exe"))); // @"Did not find expected file Console;!@(foo)'^(Application1.exe"
+            Assert.IsTrue(File.Exists(Path.Combine(ObjectModelHelpers.TempProjectDir, @"SLN;!@(foo)'^1\Console;!@(foo)'^(Application1\bin\debug\Console;!@(foo)'^(Application1.exe"))); // @"Did not find expected file Console;!@(foo)'^(Application1.exe"
         }
 
         /// <summary>
@@ -1779,7 +1779,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
                 MockLogger log = new MockLogger(_testOutput);
                 ObjectModelHelpers.BuildTempProjectFileWithTargetsExpectSuccess(@"SLN;!@(foo)'^1\Console;!@(foo)'^(Application1.sln", new string[] { targetForFirstProject }, null, log);
 
-                Assert.True(File.Exists(Path.Combine(ObjectModelHelpers.TempProjectDir, @"SLN;!@(foo)'^1\Console;!@(foo)'^(Application1\bin\debug\Console;!@(foo)'^(Application1.exe"))); // @"Did not find expected file Console;!@(foo)'^(Application1.exe"
+                Assert.IsTrue(File.Exists(Path.Combine(ObjectModelHelpers.TempProjectDir, @"SLN;!@(foo)'^1\Console;!@(foo)'^(Application1\bin\debug\Console;!@(foo)'^(Application1.exe"))); // @"Did not find expected file Console;!@(foo)'^(Application1.exe"
             }
             finally
             {
@@ -1841,17 +1841,17 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
         /// </summary>
         internal static void SpecialCharactersInMetadataValueTests(ProjectItem item)
         {
-            Assert.Equal("%3B", item.GetMetadata("EscapedSemicolon").UnevaluatedValue);
-            Assert.Equal("%3B", item.GetMetadata("EscapedSemicolon").EvaluatedValueEscaped);
-            Assert.Equal(";", item.GetMetadata("EscapedSemicolon").EvaluatedValue);
-            Assert.Equal("%3B", Project.GetMetadataValueEscaped(item, "EscapedSemicolon"));
-            Assert.Equal(";", item.GetMetadataValue("EscapedSemicolon"));
+            Assert.AreEqual("%3B", item.GetMetadata("EscapedSemicolon").UnevaluatedValue);
+            Assert.AreEqual("%3B", item.GetMetadata("EscapedSemicolon").EvaluatedValueEscaped);
+            Assert.AreEqual(";", item.GetMetadata("EscapedSemicolon").EvaluatedValue);
+            Assert.AreEqual("%3B", Project.GetMetadataValueEscaped(item, "EscapedSemicolon"));
+            Assert.AreEqual(";", item.GetMetadataValue("EscapedSemicolon"));
 
-            Assert.Equal("%24", item.GetMetadata("EscapedDollarSign").UnevaluatedValue);
-            Assert.Equal("%24", item.GetMetadata("EscapedDollarSign").EvaluatedValueEscaped);
-            Assert.Equal("$", item.GetMetadata("EscapedDollarSign").EvaluatedValue);
-            Assert.Equal("%24", Project.GetMetadataValueEscaped(item, "EscapedDollarSign"));
-            Assert.Equal("$", item.GetMetadataValue("EscapedDollarSign"));
+            Assert.AreEqual("%24", item.GetMetadata("EscapedDollarSign").UnevaluatedValue);
+            Assert.AreEqual("%24", item.GetMetadata("EscapedDollarSign").EvaluatedValueEscaped);
+            Assert.AreEqual("$", item.GetMetadata("EscapedDollarSign").EvaluatedValue);
+            Assert.AreEqual("%24", Project.GetMetadataValueEscaped(item, "EscapedDollarSign"));
+            Assert.AreEqual("$", item.GetMetadataValue("EscapedDollarSign"));
         }
     }
 }

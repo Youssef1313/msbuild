@@ -99,7 +99,7 @@ namespace Microsoft.Build.UnitTests
                 {
                     Toolset currentToolset = ProjectCollection.GlobalProjectCollection.GetToolset(ObjectModelHelpers.MSBuildDefaultToolsVersion);
 
-                    Assert.NotNull(currentToolset); // String.Format("For some reason, we couldn't get the current ({0}) toolset!", ObjectModelHelpers.MSBuildDefaultToolsVersion)
+                    Assert.IsNotNull(currentToolset); // String.Format("For some reason, we couldn't get the current ({0}) toolset!", ObjectModelHelpers.MSBuildDefaultToolsVersion)
                     s_pathToMSBuildBinaries = currentToolset.ToolsPath;
                 }
 

@@ -195,7 +195,7 @@ namespace Microsoft.Build.UnitTests
 
             bool success = Execute(t);
 
-            Assert.True(success);
+            Assert.IsTrue(success);
 
             Assert.Single(t.TouchedFiles);
 
@@ -219,7 +219,7 @@ namespace Microsoft.Build.UnitTests
             bool success = Execute(t);
 
             // Not success because the file doesn't exist
-            Assert.False(success);
+            Assert.IsFalse(success);
 
             Assert.Contains(
                 String.Format(AssemblyResources.GetString("Touch.FileDoesNotExist"), mynonexisting_txt),
@@ -242,7 +242,7 @@ namespace Microsoft.Build.UnitTests
             bool success = Execute(t);
 
             // Success because the file was created.
-            Assert.True(success);
+            Assert.IsTrue(success);
 
             Assert.Contains(
                 String.Format(AssemblyResources.GetString("Touch.CreatingFile"), mynonexisting_txt, "AlwaysCreate"),
@@ -267,7 +267,7 @@ namespace Microsoft.Build.UnitTests
             bool success = Execute(t);
 
             // Failed because of badly formed time string.
-            Assert.False(success);
+            Assert.IsFalse(success);
 
             Assert.Contains("MSB3376", engine.Log);
         }
@@ -288,7 +288,7 @@ namespace Microsoft.Build.UnitTests
             bool success = Execute(t);
 
             // Failed because file is readonly.
-            Assert.False(success);
+            Assert.IsFalse(success);
 
             Assert.Contains("MSB3374", engine.Log);
             Assert.Contains(myreadonly_txt, engine.Log);
@@ -327,7 +327,7 @@ namespace Microsoft.Build.UnitTests
             bool success = Execute(t);
 
             // Failed because the target directory didn't exist.
-            Assert.False(success);
+            Assert.IsFalse(success);
 
             Assert.Contains("MSB3371", engine.Log);
             Assert.Contains(nonexisting_txt, engine.Log);
@@ -352,7 +352,7 @@ namespace Microsoft.Build.UnitTests
             bool success = Execute(t);
 
             // Not success because the file doesn't exist
-            Assert.False(success);
+            Assert.IsFalse(success);
 
             Assert.Contains(
                 String.Format(AssemblyResources.GetString("Touch.FileDoesNotExist"), mynonexisting_txt),
@@ -377,7 +377,7 @@ namespace Microsoft.Build.UnitTests
 
             bool success = Execute(t);
 
-            Assert.True(success);
+            Assert.IsTrue(success);
 
             Assert.Contains(
                 String.Format(AssemblyResources.GetString("Touch.CreatingFile"), mynonexisting_txt, "AlwaysCreate"),
@@ -401,7 +401,7 @@ namespace Microsoft.Build.UnitTests
 
             bool success = Execute(t);
 
-            Assert.True(success);
+            Assert.IsTrue(success);
 
             Assert.Contains(
                 String.Format(AssemblyResources.GetString("Touch.Touching"), myexisting_txt),

@@ -47,7 +47,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         public void TestNodeConfigurationId()
         {
             BuildRequestConfigurationResponse response = new BuildRequestConfigurationResponse(1, 0, 0);
-            Assert.Equal(1, response.NodeConfigurationId);
+            Assert.AreEqual(1, response.NodeConfigurationId);
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         public void TestGlobalConfigurationId()
         {
             BuildRequestConfigurationResponse response = new BuildRequestConfigurationResponse(0, 1, 0);
-            Assert.Equal(1, response.GlobalConfigurationId);
+            Assert.AreEqual(1, response.GlobalConfigurationId);
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
         public void TestResultsNodeId()
         {
             BuildRequestConfigurationResponse response = new BuildRequestConfigurationResponse(0, 1, 2);
-            Assert.Equal(2, response.ResultsNodeId);
+            Assert.AreEqual(2, response.ResultsNodeId);
         }
 
         /// <summary>
@@ -77,15 +77,15 @@ namespace Microsoft.Build.UnitTests.BackEnd
         public void TestTranslation()
         {
             BuildRequestConfigurationResponse response = new BuildRequestConfigurationResponse(1, 2, 3);
-            Assert.Equal(NodePacketType.BuildRequestConfigurationResponse, response.Type);
+            Assert.AreEqual(NodePacketType.BuildRequestConfigurationResponse, response.Type);
 
             ((ITranslatable)response).Translate(TranslationHelpers.GetWriteTranslator());
 
             INodePacket deserializedPacket = BuildRequestConfigurationResponse.FactoryForDeserialization(TranslationHelpers.GetReadTranslator());
             BuildRequestConfigurationResponse deserializedResponse = deserializedPacket as BuildRequestConfigurationResponse;
-            Assert.Equal(response.NodeConfigurationId, deserializedResponse.NodeConfigurationId);
-            Assert.Equal(response.GlobalConfigurationId, deserializedResponse.GlobalConfigurationId);
-            Assert.Equal(response.ResultsNodeId, deserializedResponse.ResultsNodeId);
+            Assert.AreEqual(response.NodeConfigurationId, deserializedResponse.NodeConfigurationId);
+            Assert.AreEqual(response.GlobalConfigurationId, deserializedResponse.GlobalConfigurationId);
+            Assert.AreEqual(response.ResultsNodeId, deserializedResponse.ResultsNodeId);
         }
     }
 }

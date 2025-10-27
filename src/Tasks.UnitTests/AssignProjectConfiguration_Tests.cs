@@ -48,19 +48,19 @@ namespace Microsoft.Build.UnitTests
                 itemSpec, projectGuid, package, name, xmlString, expectedResult, result, expectedFullConfiguration,
                 (resolvedProjectWithConfiguration == null) ? string.Empty : resolvedProjectWithConfiguration.GetMetadata("FullConfiguration"));
 
-            Assert.Equal(expectedResult, result);
+            Assert.AreEqual(expectedResult, result);
             if (result)
             {
-                Assert.Equal(expectedFullConfiguration, resolvedProjectWithConfiguration.GetMetadata("FullConfiguration"));
-                Assert.Equal(expectedConfiguration, resolvedProjectWithConfiguration.GetMetadata("Configuration"));
-                Assert.Equal(expectedPlatform, resolvedProjectWithConfiguration.GetMetadata("Platform"));
-                Assert.Equal("Configuration=" + expectedConfiguration, resolvedProjectWithConfiguration.GetMetadata("SetConfiguration"));
-                Assert.Equal("Platform=" + expectedPlatform, resolvedProjectWithConfiguration.GetMetadata("SetPlatform"));
-                Assert.Equal(reference.ItemSpec, resolvedProjectWithConfiguration.ItemSpec);
+                Assert.AreEqual(expectedFullConfiguration, resolvedProjectWithConfiguration.GetMetadata("FullConfiguration"));
+                Assert.AreEqual(expectedConfiguration, resolvedProjectWithConfiguration.GetMetadata("Configuration"));
+                Assert.AreEqual(expectedPlatform, resolvedProjectWithConfiguration.GetMetadata("Platform"));
+                Assert.AreEqual("Configuration=" + expectedConfiguration, resolvedProjectWithConfiguration.GetMetadata("SetConfiguration"));
+                Assert.AreEqual("Platform=" + expectedPlatform, resolvedProjectWithConfiguration.GetMetadata("SetPlatform"));
+                Assert.AreEqual(reference.ItemSpec, resolvedProjectWithConfiguration.ItemSpec);
             }
             else
             {
-                Assert.Null(resolvedProjectWithConfiguration);
+                Assert.IsNull(resolvedProjectWithConfiguration);
             }
         }
 
@@ -209,8 +209,8 @@ namespace Microsoft.Build.UnitTests
             XmlElement element = doc.CreateElement("TestElement");
             element.SetAttribute("BuildProjectInSolution", "false");
             AssignProjectConfiguration.SetBuildInProjectAndReferenceOutputAssemblyMetadata(true, referenceItem, element);
-            Assert.Equal("false", referenceItem.GetMetadata("BuildReference"));
-            Assert.Equal("false", referenceItem.GetMetadata("ReferenceOutputAssembly"));
+            Assert.AreEqual("false", referenceItem.GetMetadata("BuildReference"));
+            Assert.AreEqual("false", referenceItem.GetMetadata("ReferenceOutputAssembly"));
         }
 
 
@@ -233,8 +233,8 @@ namespace Microsoft.Build.UnitTests
             XmlElement element = doc.CreateElement("TestElement");
             element.SetAttribute("BuildProjectInSolution", "false");
             AssignProjectConfiguration.SetBuildInProjectAndReferenceOutputAssemblyMetadata(true, referenceItem, element);
-            Assert.Equal("true", referenceItem.GetMetadata("BuildReference"));
-            Assert.Equal("true", referenceItem.GetMetadata("ReferenceOutputAssembly"));
+            Assert.AreEqual("true", referenceItem.GetMetadata("BuildReference"));
+            Assert.AreEqual("true", referenceItem.GetMetadata("ReferenceOutputAssembly"));
 
             // Test the case where only ReferenceOutputAssembly is not set
             referenceItem = new TaskItem("TestItem");
@@ -243,8 +243,8 @@ namespace Microsoft.Build.UnitTests
             element = doc.CreateElement("TestElement");
             element.SetAttribute("BuildProjectInSolution", "false");
             AssignProjectConfiguration.SetBuildInProjectAndReferenceOutputAssemblyMetadata(true, referenceItem, element);
-            Assert.Equal("true", referenceItem.GetMetadata("BuildReference"));
-            Assert.Equal("false", referenceItem.GetMetadata("ReferenceOutputAssembly"));
+            Assert.AreEqual("true", referenceItem.GetMetadata("BuildReference"));
+            Assert.AreEqual("false", referenceItem.GetMetadata("ReferenceOutputAssembly"));
 
             // Test the case where only BuildReference is not set
             referenceItem = new TaskItem("TestItem");
@@ -253,8 +253,8 @@ namespace Microsoft.Build.UnitTests
             element = doc.CreateElement("TestElement");
             element.SetAttribute("BuildProjectInSolution", "false");
             AssignProjectConfiguration.SetBuildInProjectAndReferenceOutputAssemblyMetadata(true, referenceItem, element);
-            Assert.Equal("false", referenceItem.GetMetadata("BuildReference"));
-            Assert.Equal("true", referenceItem.GetMetadata("ReferenceOutputAssembly"));
+            Assert.AreEqual("false", referenceItem.GetMetadata("BuildReference"));
+            Assert.AreEqual("true", referenceItem.GetMetadata("ReferenceOutputAssembly"));
         }
 
 
@@ -309,9 +309,9 @@ namespace Microsoft.Build.UnitTests
             TestUnresolvedReferencesHelper(projectRefs, projectConfigurations, out unresolvedProjects, out resolvedProjects);
 
             Assert.Empty(resolvedProjects); // "No resolved refs expected for case 1"
-            Assert.Equal(2, unresolvedProjects.Count); // "Two unresolved refs expected for case 1"
-            Assert.Equal(unresolvedProjects["MCDep1.vcproj"], projectRefs[0]);
-            Assert.Equal(unresolvedProjects["MCDep2.vcproj"], projectRefs[1]);
+            Assert.AreEqual(2, unresolvedProjects.Count); // "Two unresolved refs expected for case 1"
+            Assert.AreEqual(unresolvedProjects["MCDep1.vcproj"], projectRefs[0]);
+            Assert.AreEqual(unresolvedProjects["MCDep2.vcproj"], projectRefs[1]);
 
             // 2. multiple projects, one resolvable
             projectConfigurations = new Hashtable();
@@ -323,9 +323,9 @@ namespace Microsoft.Build.UnitTests
             TestUnresolvedReferencesHelper(projectRefs, projectConfigurations, out unresolvedProjects, out resolvedProjects);
 
             Assert.Single(resolvedProjects); // "One resolved ref expected for case 2"
-            Assert.True(resolvedProjects.ContainsKey(@"CorrectProjectConfig|Platform"));
+            Assert.IsTrue(resolvedProjects.ContainsKey(@"CorrectProjectConfig|Platform"));
             Assert.Single(unresolvedProjects); // "One unresolved ref expected for case 2"
-            Assert.Equal(unresolvedProjects["MCDep1.vcproj"], projectRefs[0]);
+            Assert.AreEqual(unresolvedProjects["MCDep1.vcproj"], projectRefs[0]);
 
             // 3. multiple projects, all resolvable
             projectConfigurations = new Hashtable();
@@ -337,9 +337,9 @@ namespace Microsoft.Build.UnitTests
 
             TestUnresolvedReferencesHelper(projectRefs, projectConfigurations, out unresolvedProjects, out resolvedProjects);
 
-            Assert.Equal(2, resolvedProjects.Count); // "Two resolved refs expected for case 3"
-            Assert.True(resolvedProjects.ContainsKey(@"CorrectProjectConfig|Platform"));
-            Assert.True(resolvedProjects.ContainsKey(@"CorrectProjectConfig2|Platform"));
+            Assert.AreEqual(2, resolvedProjects.Count); // "Two resolved refs expected for case 3"
+            Assert.IsTrue(resolvedProjects.ContainsKey(@"CorrectProjectConfig|Platform"));
+            Assert.IsTrue(resolvedProjects.ContainsKey(@"CorrectProjectConfig2|Platform"));
             Assert.Empty(unresolvedProjects); // "No unresolved refs expected for case 3"
         }
 
@@ -356,15 +356,15 @@ namespace Microsoft.Build.UnitTests
 
             // Test defaults with nothing set
             string actualDefaultToVcxPlatformMapping = assignProjectConfiguration.DefaultToVcxPlatformMapping;
-            Assert.Equal(actualDefaultToVcxPlatformMapping, expectedDefaultToVcxPlatformMapping);
+            Assert.AreEqual(actualDefaultToVcxPlatformMapping, expectedDefaultToVcxPlatformMapping);
 
             assignProjectConfiguration.DefaultToVcxPlatformMapping = String.Empty;
             actualDefaultToVcxPlatformMapping = assignProjectConfiguration.DefaultToVcxPlatformMapping;
-            Assert.Equal(actualDefaultToVcxPlatformMapping, expectedDefaultToVcxPlatformMapping);
+            Assert.AreEqual(actualDefaultToVcxPlatformMapping, expectedDefaultToVcxPlatformMapping);
 
             assignProjectConfiguration.DefaultToVcxPlatformMapping = null;
             actualDefaultToVcxPlatformMapping = assignProjectConfiguration.DefaultToVcxPlatformMapping;
-            Assert.Equal(actualDefaultToVcxPlatformMapping, expectedDefaultToVcxPlatformMapping);
+            Assert.AreEqual(actualDefaultToVcxPlatformMapping, expectedDefaultToVcxPlatformMapping);
         }
 
         /// <summary>
@@ -378,15 +378,15 @@ namespace Microsoft.Build.UnitTests
 
             // Test the case for VcxToDefaultPlatformMapping when the outputType is not library
             string actualVcxToDefaultPlatformMappingNoOutput = assignProjectConfiguration.VcxToDefaultPlatformMapping;
-            Assert.Equal(actualVcxToDefaultPlatformMappingNoOutput, expectedVcxToDefaultPlatformMappingNoOutput);
+            Assert.AreEqual(actualVcxToDefaultPlatformMappingNoOutput, expectedVcxToDefaultPlatformMappingNoOutput);
 
             assignProjectConfiguration.VcxToDefaultPlatformMapping = String.Empty;
             actualVcxToDefaultPlatformMappingNoOutput = assignProjectConfiguration.VcxToDefaultPlatformMapping;
-            Assert.Equal(actualVcxToDefaultPlatformMappingNoOutput, expectedVcxToDefaultPlatformMappingNoOutput);
+            Assert.AreEqual(actualVcxToDefaultPlatformMappingNoOutput, expectedVcxToDefaultPlatformMappingNoOutput);
 
             assignProjectConfiguration.VcxToDefaultPlatformMapping = null;
             actualVcxToDefaultPlatformMappingNoOutput = assignProjectConfiguration.VcxToDefaultPlatformMapping;
-            Assert.Equal(actualVcxToDefaultPlatformMappingNoOutput, expectedVcxToDefaultPlatformMappingNoOutput);
+            Assert.AreEqual(actualVcxToDefaultPlatformMappingNoOutput, expectedVcxToDefaultPlatformMappingNoOutput);
         }
 
         /// <summary>
@@ -401,15 +401,15 @@ namespace Microsoft.Build.UnitTests
             // Test the case for VcxToDefaultPlatformMapping when the outputType is library
             assignProjectConfiguration.OutputType = "Library";
             string actualVcxToDefaultPlatformMappingNoOutput = assignProjectConfiguration.VcxToDefaultPlatformMapping;
-            Assert.Equal(actualVcxToDefaultPlatformMappingNoOutput, expectedVcxToDefaultPlatformMappingLibraryOutput);
+            Assert.AreEqual(actualVcxToDefaultPlatformMappingNoOutput, expectedVcxToDefaultPlatformMappingLibraryOutput);
 
             assignProjectConfiguration.VcxToDefaultPlatformMapping = String.Empty;
             actualVcxToDefaultPlatformMappingNoOutput = assignProjectConfiguration.VcxToDefaultPlatformMapping;
-            Assert.Equal(actualVcxToDefaultPlatformMappingNoOutput, expectedVcxToDefaultPlatformMappingLibraryOutput);
+            Assert.AreEqual(actualVcxToDefaultPlatformMappingNoOutput, expectedVcxToDefaultPlatformMappingLibraryOutput);
 
             assignProjectConfiguration.VcxToDefaultPlatformMapping = null;
             actualVcxToDefaultPlatformMappingNoOutput = assignProjectConfiguration.VcxToDefaultPlatformMapping;
-            Assert.Equal(actualVcxToDefaultPlatformMappingNoOutput, expectedVcxToDefaultPlatformMappingLibraryOutput);
+            Assert.AreEqual(actualVcxToDefaultPlatformMappingNoOutput, expectedVcxToDefaultPlatformMappingLibraryOutput);
         }
         #endregion
     }

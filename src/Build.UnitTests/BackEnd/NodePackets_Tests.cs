@@ -207,7 +207,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             result.ColumnNumber = 50;
 
             // normalize line endings as we can't rely on the line endings of NodePackets_Tests.cs
-            Assert.Equal(@"Task Parameter:
+            Assert.AreEqual(@"Task Parameter:
     ItemName=
         ItemSpec1
         ItemSpec1
@@ -359,9 +359,9 @@ namespace Microsoft.Build.UnitTests.BackEnd
         private static void VerifyLoggingPacket(BuildEventArgs buildEvent, LoggingEventType logEventType)
         {
             LogMessagePacket packet = new LogMessagePacket(new KeyValuePair<int, BuildEventArgs>(0, buildEvent));
-            Assert.Equal(logEventType, packet.EventType);
-            Assert.Equal(NodePacketType.LogMessage, packet.Type);
-            Assert.True(Object.ReferenceEquals(buildEvent, packet.NodeBuildEvent.Value.Value)); // "Expected buildEvent to have the same object reference as packet.BuildEvent"
+            Assert.AreEqual(logEventType, packet.EventType);
+            Assert.AreEqual(NodePacketType.LogMessage, packet.Type);
+            Assert.IsTrue(Object.ReferenceEquals(buildEvent, packet.NodeBuildEvent.Value.Value)); // "Expected buildEvent to have the same object reference as packet.BuildEvent"
         }
 
         #endregion

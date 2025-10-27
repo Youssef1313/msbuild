@@ -687,7 +687,7 @@ namespace Microsoft.Build.Engine.OM.UnitTests.Construction
             try
             {
                 File.WriteAllText(file, content, new UTF8Encoding(encoderShouldEmitUTF8Identifier: byteOrderMark));
-                Assert.Equal(byteOrderMark, EncodingUtilities.FileStartsWithPreamble(file));
+                Assert.AreEqual(byteOrderMark, EncodingUtilities.FileStartsWithPreamble(file));
 
                 // Load and manipulate/save the project
                 var project = new Project(ProjectRootElement.Open(file, ProjectCollection.GlobalProjectCollection));
@@ -705,7 +705,7 @@ namespace Microsoft.Build.Engine.OM.UnitTests.Construction
                 {
                     Assert.DoesNotContain(declaration, actualContents);
                 }
-                Assert.Equal(byteOrderMark, EncodingUtilities.FileStartsWithPreamble(file));
+                Assert.AreEqual(byteOrderMark, EncodingUtilities.FileStartsWithPreamble(file));
             }
             finally
             {

@@ -277,7 +277,7 @@ namespace Microsoft.VisualStudio.Build.UnitTest
 
             mockLogger1.AssertLogContains("Foo");
             mockLogger1.AssertLogContains("Error");
-            Assert.Equal(1, mockLogger1.ErrorCount);
+            Assert.AreEqual(1, mockLogger1.ErrorCount);
             mockLogger1.AssertNoWarnings();
 
             mockLogger2.AssertLogContains("Foo");

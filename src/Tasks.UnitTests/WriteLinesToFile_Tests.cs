@@ -38,9 +38,9 @@ namespace Microsoft.Build.Tasks.UnitTests
                 Lines = new TaskItem[] { new TaskItem("x") }
             };
 
-            Assert.False(a.Execute());
+            Assert.IsFalse(a.Execute());
             ((MockEngine)a.BuildEngine).AssertLogContains("MSB3098");
-            Assert.False(File.Exists(a.File.ItemSpec));
+            Assert.IsFalse(File.Exists(a.File.ItemSpec));
         }
 
         /// <summary>
@@ -59,15 +59,15 @@ namespace Microsoft.Build.Tasks.UnitTests
                     File = new TaskItem(file),
                     Lines = new ITaskItem[] { new TaskItem("\uBDEA") }
                 };
-                Assert.True(a.Execute());
+                Assert.IsTrue(a.Execute());
 
                 var r = new ReadLinesFromFile
                 {
                     File = new TaskItem(file)
                 };
-                Assert.True(r.Execute());
+                Assert.IsTrue(r.Execute());
 
-                Assert.Equal("\uBDEA", r.Lines[0].ItemSpec);
+                Assert.AreEqual("\uBDEA", r.Lines[0].ItemSpec);
 
                 File.Delete(file);
 
@@ -79,16 +79,16 @@ namespace Microsoft.Build.Tasks.UnitTests
                     Lines = new ITaskItem[] { new TaskItem("\uBDEA") },
                     Encoding = "ASCII"
                 };
-                Assert.True(a.Execute());
+                Assert.IsTrue(a.Execute());
 
                 // Read the line from the file.
                 r = new ReadLinesFromFile
                 {
                     File = new TaskItem(file)
                 };
-                Assert.True(r.Execute());
+                Assert.IsTrue(r.Execute());
 
-                Assert.NotEqual("\uBDEA", r.Lines[0].ItemSpec);
+                Assert.AreNotEqual("\uBDEA", r.Lines[0].ItemSpec);
             }
             finally
             {

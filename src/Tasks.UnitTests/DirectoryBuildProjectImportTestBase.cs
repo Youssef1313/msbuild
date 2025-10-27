@@ -82,10 +82,10 @@ namespace Microsoft.Build.UnitTests
                 </Project>
             "));
 
-            Assert.Equal("true", project.GetPropertyValue(ImportDirectoryBuildProjectPropertyName), StringComparer.OrdinalIgnoreCase);
-            Assert.Equal(String.Empty, project.GetPropertyValue(DirectoryBuildProjectBasePathPropertyName), StringComparer.OrdinalIgnoreCase);
-            Assert.Equal(DirectoryBuildProjectFile, project.GetPropertyValue(DirectoryBuildProjectFilePropertyName), StringComparer.OrdinalIgnoreCase);
-            Assert.Equal(String.Empty, project.GetPropertyValue(DirectoryBuildProjectPathPropertyName));
+            Assert.AreEqual("true", project.GetPropertyValue(ImportDirectoryBuildProjectPropertyName), StringComparer.OrdinalIgnoreCase);
+            Assert.AreEqual(String.Empty, project.GetPropertyValue(DirectoryBuildProjectBasePathPropertyName), StringComparer.OrdinalIgnoreCase);
+            Assert.AreEqual(DirectoryBuildProjectFile, project.GetPropertyValue(DirectoryBuildProjectFilePropertyName), StringComparer.OrdinalIgnoreCase);
+            Assert.AreEqual(String.Empty, project.GetPropertyValue(DirectoryBuildProjectPathPropertyName));
         }
 
         /// <summary>
@@ -115,11 +115,11 @@ namespace Microsoft.Build.UnitTests
                 </Project>
             "));
 
-            Assert.Equal("false", project.GetPropertyValue(ImportDirectoryBuildProjectPropertyName), StringComparer.OrdinalIgnoreCase);
-            Assert.Equal(String.Empty, project.GetPropertyValue("WasDirectoryBuildProjectImported"), StringComparer.OrdinalIgnoreCase);
-            Assert.Equal(String.Empty, project.GetPropertyValue(DirectoryBuildProjectBasePathPropertyName), StringComparer.OrdinalIgnoreCase);
-            Assert.Equal(String.Empty, project.GetPropertyValue(DirectoryBuildProjectFilePropertyName), StringComparer.OrdinalIgnoreCase);
-            Assert.Equal(String.Empty, project.GetPropertyValue(DirectoryBuildProjectPathPropertyName));
+            Assert.AreEqual("false", project.GetPropertyValue(ImportDirectoryBuildProjectPropertyName), StringComparer.OrdinalIgnoreCase);
+            Assert.AreEqual(String.Empty, project.GetPropertyValue("WasDirectoryBuildProjectImported"), StringComparer.OrdinalIgnoreCase);
+            Assert.AreEqual(String.Empty, project.GetPropertyValue(DirectoryBuildProjectBasePathPropertyName), StringComparer.OrdinalIgnoreCase);
+            Assert.AreEqual(String.Empty, project.GetPropertyValue(DirectoryBuildProjectFilePropertyName), StringComparer.OrdinalIgnoreCase);
+            Assert.AreEqual(String.Empty, project.GetPropertyValue(DirectoryBuildProjectPathPropertyName));
         }
 
         /// <summary>
@@ -145,9 +145,9 @@ namespace Microsoft.Build.UnitTests
                 </Project>
             "));
 
-            Assert.Equal("true", project.GetPropertyValue(ImportDirectoryBuildProjectPropertyName), StringComparer.OrdinalIgnoreCase);
-            Assert.Equal("true", project.GetPropertyValue("WasDirectoryBuildProjectImported"), StringComparer.OrdinalIgnoreCase);
-            Assert.Equal(customFilePath, project.GetPropertyValue(DirectoryBuildProjectPathPropertyName));
+            Assert.AreEqual("true", project.GetPropertyValue(ImportDirectoryBuildProjectPropertyName), StringComparer.OrdinalIgnoreCase);
+            Assert.AreEqual("true", project.GetPropertyValue("WasDirectoryBuildProjectImported"), StringComparer.OrdinalIgnoreCase);
+            Assert.AreEqual(customFilePath, project.GetPropertyValue(DirectoryBuildProjectPathPropertyName));
         }
 
         /// <summary>
@@ -170,11 +170,11 @@ namespace Microsoft.Build.UnitTests
                 </Project>
             "));
 
-            Assert.Equal("true", project.GetPropertyValue(ImportDirectoryBuildProjectPropertyName), StringComparer.OrdinalIgnoreCase);
-            Assert.Equal("true", project.GetPropertyValue("WasDirectoryBuildProjectImported"), StringComparer.OrdinalIgnoreCase);
-            Assert.Equal(ObjectModelHelpers.TempProjectDir, project.GetPropertyValue(DirectoryBuildProjectBasePathPropertyName), StringComparer.OrdinalIgnoreCase);
-            Assert.Equal(DirectoryBuildProjectFile, project.GetPropertyValue(DirectoryBuildProjectFilePropertyName), StringComparer.OrdinalIgnoreCase);
-            Assert.Equal(Path.Combine(ObjectModelHelpers.TempProjectDir, DirectoryBuildProjectFile), project.GetPropertyValue(DirectoryBuildProjectPathPropertyName));
+            Assert.AreEqual("true", project.GetPropertyValue(ImportDirectoryBuildProjectPropertyName), StringComparer.OrdinalIgnoreCase);
+            Assert.AreEqual("true", project.GetPropertyValue("WasDirectoryBuildProjectImported"), StringComparer.OrdinalIgnoreCase);
+            Assert.AreEqual(ObjectModelHelpers.TempProjectDir, project.GetPropertyValue(DirectoryBuildProjectBasePathPropertyName), StringComparer.OrdinalIgnoreCase);
+            Assert.AreEqual(DirectoryBuildProjectFile, project.GetPropertyValue(DirectoryBuildProjectFilePropertyName), StringComparer.OrdinalIgnoreCase);
+            Assert.AreEqual(Path.Combine(ObjectModelHelpers.TempProjectDir, DirectoryBuildProjectFile), project.GetPropertyValue(DirectoryBuildProjectPathPropertyName));
         }
     }
 }

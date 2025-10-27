@@ -37,7 +37,7 @@ namespace Microsoft.Build.UnitTests
                 }
             }
 
-            Assert.Equal(contains, dependencyExists);
+            Assert.AreEqual(contains, dependencyExists);
         }
 
         [Fact]
@@ -47,7 +47,7 @@ namespace Microsoft.Build.UnitTests
 
             ComDependencyWalker walker = new ComDependencyWalker(new MarshalReleaseComObject(MockReleaseComObject));
             walker.AnalyzeTypeLibrary(typeLib);
-            Assert.Equal(0, walker.GetDependencies().GetLength(0));
+            Assert.AreEqual(0, walker.GetDependencies().GetLength(0));
 
             typeLib.AssertAllHandlesReleased();
         }
@@ -255,7 +255,7 @@ namespace Microsoft.Build.UnitTests
                 walker.AnalyzeTypeLibrary(mainTypeLib);
 
                 Assert.Single(walker.EncounteredProblems); // "Test failed for failure point " + failurePoint.ToString()
-                Assert.Equal(failureException, walker.EncounteredProblems[0]); // "Test failed for failure point " + failurePoint.ToString()
+                Assert.AreEqual(failureException, walker.EncounteredProblems[0]); // "Test failed for failure point " + failurePoint.ToString()
 
                 mainTypeLib.AssertAllHandlesReleased();
                 dependencyTypeLib.AssertAllHandlesReleased();
@@ -287,7 +287,7 @@ namespace Microsoft.Build.UnitTests
             AssertDependenciesContainTypeLib(dependencies, dependencyTypeLib1, true);
             AssertDependenciesContainTypeLib(dependencies, dependencyTypeLib2, false);
             AssertDependenciesContainTypeLib(dependencies, dependencyTypeLib3, false);
-            Assert.Equal(2, analyzedTypes.Count);
+            Assert.AreEqual(2, analyzedTypes.Count);
 
             walker.ClearDependencyList();
             walker.AnalyzeTypeLibrary(mainTypeLib2);
@@ -297,7 +297,7 @@ namespace Microsoft.Build.UnitTests
             AssertDependenciesContainTypeLib(dependencies, dependencyTypeLib1, true);
             AssertDependenciesContainTypeLib(dependencies, dependencyTypeLib2, true);
             AssertDependenciesContainTypeLib(dependencies, dependencyTypeLib3, false);
-            Assert.Equal(4, analyzedTypes.Count);
+            Assert.AreEqual(4, analyzedTypes.Count);
 
             walker.ClearDependencyList();
             walker.AnalyzeTypeLibrary(mainTypeLib3);
@@ -307,7 +307,7 @@ namespace Microsoft.Build.UnitTests
             AssertDependenciesContainTypeLib(dependencies, dependencyTypeLib1, true);
             AssertDependenciesContainTypeLib(dependencies, dependencyTypeLib2, false);
             AssertDependenciesContainTypeLib(dependencies, dependencyTypeLib3, true);
-            Assert.Equal(6, analyzedTypes.Count);
+            Assert.AreEqual(6, analyzedTypes.Count);
         }
     }
 }

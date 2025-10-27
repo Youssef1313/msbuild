@@ -366,13 +366,13 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             TaskHostConfiguration deserializedConfig = packet as TaskHostConfiguration;
 
-            Assert.Equal(config.TaskName, deserializedConfig.TaskName);
+            Assert.AreEqual(config.TaskName, deserializedConfig.TaskName);
 #if !FEATURE_ASSEMBLYLOADCONTEXT
-            Assert.Equal(config.TaskLocation, deserializedConfig.TaskLocation);
+            Assert.AreEqual(config.TaskLocation, deserializedConfig.TaskLocation);
 #endif
-            Assert.Null(deserializedConfig.TaskParameters);
+            Assert.IsNull(deserializedConfig.TaskParameters);
 
-            Assert.Equal(expectedGlobalProperties, deserializedConfig.GlobalProperties);
+            Assert.AreEqual(expectedGlobalProperties, deserializedConfig.GlobalProperties);
         }
 
 #if FEATURE_APPDOMAIN
@@ -463,15 +463,15 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             TaskHostConfiguration deserializedConfig = packet as TaskHostConfiguration;
 
-            Assert.Equal(config.TaskName, deserializedConfig.TaskName);
+            Assert.AreEqual(config.TaskName, deserializedConfig.TaskName);
 #if !FEATURE_ASSEMBLYLOADCONTEXT
-            Assert.Equal(config.TaskLocation, deserializedConfig.TaskLocation);
+            Assert.AreEqual(config.TaskLocation, deserializedConfig.TaskLocation);
 #endif
-            Assert.NotNull(deserializedConfig.TaskParameters);
-            Assert.Equal(config.TaskParameters.Count, deserializedConfig.TaskParameters.Count);
+            Assert.IsNotNull(deserializedConfig.TaskParameters);
+            Assert.AreEqual(config.TaskParameters.Count, deserializedConfig.TaskParameters.Count);
 
-            Assert.NotNull(deserializedConfig.GlobalProperties);
-            Assert.Equal(config.GlobalProperties.Count, deserializedConfig.GlobalProperties.Count);
+            Assert.IsNotNull(deserializedConfig.GlobalProperties);
+            Assert.AreEqual(config.GlobalProperties.Count, deserializedConfig.GlobalProperties.Count);
         }
 
         /// <summary>
@@ -514,14 +514,14 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             TaskHostConfiguration deserializedConfig = packet as TaskHostConfiguration;
 
-            Assert.Equal(config.TaskName, deserializedConfig.TaskName);
+            Assert.AreEqual(config.TaskName, deserializedConfig.TaskName);
 #if !FEATURE_ASSEMBLYLOADCONTEXT
-            Assert.Equal(config.TaskLocation, deserializedConfig.TaskLocation);
+            Assert.AreEqual(config.TaskLocation, deserializedConfig.TaskLocation);
 #endif
-            Assert.NotNull(deserializedConfig.TaskParameters);
-            Assert.Equal(config.TaskParameters.Count, deserializedConfig.TaskParameters.Count);
-            Assert.Equal(config.TaskParameters["Text"].WrappedParameter, deserializedConfig.TaskParameters["Text"].WrappedParameter);
-            Assert.Equal(config.TaskParameters["BoolValue"].WrappedParameter, deserializedConfig.TaskParameters["BoolValue"].WrappedParameter);
+            Assert.IsNotNull(deserializedConfig.TaskParameters);
+            Assert.AreEqual(config.TaskParameters.Count, deserializedConfig.TaskParameters.Count);
+            Assert.AreEqual(config.TaskParameters["Text"].WrappedParameter, deserializedConfig.TaskParameters["Text"].WrappedParameter);
+            Assert.AreEqual(config.TaskParameters["BoolValue"].WrappedParameter, deserializedConfig.TaskParameters["BoolValue"].WrappedParameter);
         }
 
         /// <summary>
@@ -563,12 +563,12 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             TaskHostConfiguration deserializedConfig = packet as TaskHostConfiguration;
 
-            Assert.Equal(config.TaskName, deserializedConfig.TaskName);
+            Assert.AreEqual(config.TaskName, deserializedConfig.TaskName);
 #if !FEATURE_ASSEMBLYLOADCONTEXT
-            Assert.Equal(config.TaskLocation, deserializedConfig.TaskLocation);
+            Assert.AreEqual(config.TaskLocation, deserializedConfig.TaskLocation);
 #endif
-            Assert.NotNull(deserializedConfig.TaskParameters);
-            Assert.Equal(config.TaskParameters.Count, deserializedConfig.TaskParameters.Count);
+            Assert.IsNotNull(deserializedConfig.TaskParameters);
+            Assert.AreEqual(config.TaskParameters.Count, deserializedConfig.TaskParameters.Count);
             TaskHostPacketHelpers.AreEqual((ITaskItem)config.TaskParameters["TaskItemValue"].WrappedParameter, (ITaskItem)deserializedConfig.TaskParameters["TaskItemValue"].WrappedParameter);
         }
 
@@ -611,12 +611,12 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             TaskHostConfiguration deserializedConfig = packet as TaskHostConfiguration;
 
-            Assert.Equal(config.TaskName, deserializedConfig.TaskName);
+            Assert.AreEqual(config.TaskName, deserializedConfig.TaskName);
 #if !FEATURE_ASSEMBLYLOADCONTEXT
-            Assert.Equal(config.TaskLocation, deserializedConfig.TaskLocation);
+            Assert.AreEqual(config.TaskLocation, deserializedConfig.TaskLocation);
 #endif
-            Assert.NotNull(deserializedConfig.TaskParameters);
-            Assert.Equal(config.TaskParameters.Count, deserializedConfig.TaskParameters.Count);
+            Assert.IsNotNull(deserializedConfig.TaskParameters);
+            Assert.AreEqual(config.TaskParameters.Count, deserializedConfig.TaskParameters.Count);
 
             ITaskItem[] itemArray = (ITaskItem[])config.TaskParameters["TaskItemArrayValue"].WrappedParameter;
             ITaskItem[] deserializedItemArray = (ITaskItem[])deserializedConfig.TaskParameters["TaskItemArrayValue"].WrappedParameter;
@@ -666,11 +666,11 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             TaskHostConfiguration deserializedConfig = packet as TaskHostConfiguration;
 
-            Assert.Equal(config.TaskName, deserializedConfig.TaskName);
+            Assert.AreEqual(config.TaskName, deserializedConfig.TaskName);
 #if !FEATURE_ASSEMBLYLOADCONTEXT
-            Assert.Equal(config.TaskLocation, deserializedConfig.TaskLocation);
+            Assert.AreEqual(config.TaskLocation, deserializedConfig.TaskLocation);
 #endif
-            Assert.NotNull(deserializedConfig.WarningsAsErrors);
+            Assert.IsNotNull(deserializedConfig.WarningsAsErrors);
             config.WarningsAsErrors.SequenceEqual(deserializedConfig.WarningsAsErrors, StringComparer.Ordinal).ShouldBeTrue();
         }
 
@@ -716,7 +716,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
 
             TaskHostConfiguration deserializedConfig = packet as TaskHostConfiguration;
 
-            Assert.NotNull(deserializedConfig.WarningsAsMessages);
+            Assert.IsNotNull(deserializedConfig.WarningsAsMessages);
             config.WarningsAsMessages.SequenceEqual(deserializedConfig.WarningsAsMessages, StringComparer.Ordinal).ShouldBeTrue();
         }
 
@@ -766,12 +766,12 @@ namespace Microsoft.Build.UnitTests.BackEnd
                     Assert.Fail("The two items are not equal -- one of them is null");
                 }
 
-                Assert.Equal(x.ItemSpec, y.ItemSpec);
+                Assert.AreEqual(x.ItemSpec, y.ItemSpec);
 
                 IDictionary metadataFromX = x.CloneCustomMetadata();
                 IDictionary metadataFromY = y.CloneCustomMetadata();
 
-                Assert.Equal(metadataFromX.Count, metadataFromY.Count);
+                Assert.AreEqual(metadataFromX.Count, metadataFromY.Count);
 
                 foreach (object metadataName in metadataFromX.Keys)
                 {
@@ -781,7 +781,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                     }
                     else
                     {
-                        Assert.Equal(metadataFromX[metadataName], metadataFromY[metadataName]);
+                        Assert.AreEqual(metadataFromX[metadataName], metadataFromY[metadataName]);
                     }
                 }
             }

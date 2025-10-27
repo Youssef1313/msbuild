@@ -96,16 +96,16 @@ namespace Microsoft.Build.UnitTests.BackEnd
             try
             {
                 cacheFile = FileUtilities.GetTemporaryFile("MSBuildResultsCache");
-                Assert.Null(CacheSerialization.SerializeCaches(
+                Assert.IsNull(CacheSerialization.SerializeCaches(
                     (ConfigCache)configCache,
                     (ResultsCache)resultsCache,
                     cacheFile,
                     ProjectIsolationMode.True));
 
                 var result = CacheSerialization.DeserializeCaches(cacheFile);
-                Assert.True(result.ConfigCache.HasConfiguration(1));
-                Assert.False(result.ConfigCache.HasConfiguration(2));
-                Assert.False(result.ConfigCache.HasConfiguration(3));
+                Assert.IsTrue(result.ConfigCache.HasConfiguration(1));
+                Assert.IsFalse(result.ConfigCache.HasConfiguration(2));
+                Assert.IsFalse(result.ConfigCache.HasConfiguration(3));
             }
             finally
             {
@@ -128,18 +128,18 @@ namespace Microsoft.Build.UnitTests.BackEnd
             try
             {
                 cacheFile = FileUtilities.GetTemporaryFile("MSBuildResultsCache");
-                Assert.Null(CacheSerialization.SerializeCaches(
+                Assert.IsNull(CacheSerialization.SerializeCaches(
                     (ConfigCache)configCache,
                     (ResultsCache)resultsCache,
                     cacheFile,
                     ProjectIsolationMode.MessageUponIsolationViolation));
 
                 var result = CacheSerialization.DeserializeCaches(cacheFile);
-                Assert.True(result.ConfigCache.HasConfiguration(1));
+                Assert.IsTrue(result.ConfigCache.HasConfiguration(1));
                 BuildResult buildResult = result.ResultsCache.GetResultsForConfiguration(1);
-                Assert.True(buildResult.HasResultsForTarget("target1"));
-                Assert.True(buildResult.HasResultsForTarget("target2"));
-                Assert.False(buildResult.HasResultsForTarget("target3"));
+                Assert.IsTrue(buildResult.HasResultsForTarget("target1"));
+                Assert.IsTrue(buildResult.HasResultsForTarget("target2"));
+                Assert.IsFalse(buildResult.HasResultsForTarget("target3"));
             }
             finally
             {

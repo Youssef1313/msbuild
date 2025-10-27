@@ -58,7 +58,7 @@ namespace Microsoft.Build.UnitTests
                 actual = ex.Message;
             }
 
-            Assert.Equal(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
     }
 }

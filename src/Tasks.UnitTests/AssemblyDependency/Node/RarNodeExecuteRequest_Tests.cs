@@ -35,26 +35,26 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             ResolveAssemblyReference nodeRar = new();
             request.SetTaskInputs(nodeRar, CreateBuildEngine());
 
-            Assert.Equal(clientRar.Assemblies.Length, nodeRar.Assemblies.Length);
+            Assert.AreEqual(clientRar.Assemblies.Length, nodeRar.Assemblies.Length);
             for (int i = 0; i < clientRar.Assemblies.Length; i++)
             {
-                Assert.Equal(clientRar.Assemblies[i].ItemSpec, nodeRar.Assemblies[i].ItemSpec);
+                Assert.AreEqual(clientRar.Assemblies[i].ItemSpec, nodeRar.Assemblies[i].ItemSpec);
             }
 
-            Assert.Equal(clientRar.AssemblyFiles.Length, nodeRar.AssemblyFiles.Length);
-            Assert.Equal(clientRar.AllowedAssemblyExtensions, nodeRar.AllowedAssemblyExtensions, StringComparer.Ordinal);
-            Assert.Equal(clientRar.SearchPaths, nodeRar.SearchPaths, StringComparer.Ordinal);
-            Assert.Equal(clientRar.AutoUnify, nodeRar.AutoUnify);
-            Assert.Equal(clientRar.FindDependencies, nodeRar.FindDependencies);
-            Assert.Equal(clientRar.Silent, nodeRar.Silent);
-            Assert.Equal(clientRar.TargetProcessorArchitecture, nodeRar.TargetProcessorArchitecture, StringComparer.Ordinal);
+            Assert.AreEqual(clientRar.AssemblyFiles.Length, nodeRar.AssemblyFiles.Length);
+            Assert.AreEqual(clientRar.AllowedAssemblyExtensions, nodeRar.AllowedAssemblyExtensions, StringComparer.Ordinal);
+            Assert.AreEqual(clientRar.SearchPaths, nodeRar.SearchPaths, StringComparer.Ordinal);
+            Assert.AreEqual(clientRar.AutoUnify, nodeRar.AutoUnify);
+            Assert.AreEqual(clientRar.FindDependencies, nodeRar.FindDependencies);
+            Assert.AreEqual(clientRar.Silent, nodeRar.Silent);
+            Assert.AreEqual(clientRar.TargetProcessorArchitecture, nodeRar.TargetProcessorArchitecture, StringComparer.Ordinal);
 
             // Pick some unused inputs to ensure they remained at their defaults.
-            Assert.Equal(clientRar.AllowedRelatedFileExtensions, nodeRar.AllowedRelatedFileExtensions);
-            Assert.Equal(clientRar.AppConfigFile, nodeRar.AppConfigFile);
-            Assert.Equal(clientRar.IgnoreDefaultInstalledAssemblySubsetTables, nodeRar.IgnoreDefaultInstalledAssemblySubsetTables);
-            Assert.Equal(clientRar.FindSatellites, nodeRar.FindSatellites);
-            Assert.Equal(clientRar.StateFile, nodeRar.StateFile);
+            Assert.AreEqual(clientRar.AllowedRelatedFileExtensions, nodeRar.AllowedRelatedFileExtensions);
+            Assert.AreEqual(clientRar.AppConfigFile, nodeRar.AppConfigFile);
+            Assert.AreEqual(clientRar.IgnoreDefaultInstalledAssemblySubsetTables, nodeRar.IgnoreDefaultInstalledAssemblySubsetTables);
+            Assert.AreEqual(clientRar.FindSatellites, nodeRar.FindSatellites);
+            Assert.AreEqual(clientRar.StateFile, nodeRar.StateFile);
         }
 
         [Fact]
@@ -73,8 +73,8 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             ResolveAssemblyReference nodeRar = new();
             request.SetTaskInputs(nodeRar, CreateBuildEngine());
 
-            Assert.Equal(Path.GetFullPath(AppConfigFileName), nodeRar.AppConfigFile);
-            Assert.Equal(Path.GetFullPath(StateFileName), nodeRar.StateFile);
+            Assert.AreEqual(Path.GetFullPath(AppConfigFileName), nodeRar.AppConfigFile);
+            Assert.AreEqual(Path.GetFullPath(StateFileName), nodeRar.StateFile);
         }
 
         [Fact]
@@ -91,15 +91,15 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             ResolveAssemblyReference nodeRar = new();
             request.SetTaskInputs(nodeRar, CreateBuildEngine());
 
-            Assert.Equal(mockEngine.LineNumberOfTaskNode, nodeRar.BuildEngine.LineNumberOfTaskNode);
-            Assert.Equal(mockEngine.ColumnNumberOfTaskNode, nodeRar.BuildEngine.ColumnNumberOfTaskNode);
-            Assert.Equal(mockEngine.ProjectFileOfTaskNode, nodeRar.BuildEngine.ProjectFileOfTaskNode);
+            Assert.AreEqual(mockEngine.LineNumberOfTaskNode, nodeRar.BuildEngine.LineNumberOfTaskNode);
+            Assert.AreEqual(mockEngine.ColumnNumberOfTaskNode, nodeRar.BuildEngine.ColumnNumberOfTaskNode);
+            Assert.AreEqual(mockEngine.ProjectFileOfTaskNode, nodeRar.BuildEngine.ProjectFileOfTaskNode);
             IBuildEngine10 buildEngine10 = Assert.IsAssignableFrom<IBuildEngine10>(nodeRar.BuildEngine);
             EngineServices engineServices = buildEngine10.EngineServices;
-            Assert.Equal(mockEngine.LogsMessagesOfImportance(MessageImportance.Low), engineServices.LogsMessagesOfImportance(MessageImportance.Low));
-            Assert.Equal(mockEngine.LogsMessagesOfImportance(MessageImportance.Normal), engineServices.LogsMessagesOfImportance(MessageImportance.Normal));
-            Assert.Equal(mockEngine.LogsMessagesOfImportance(MessageImportance.High), engineServices.LogsMessagesOfImportance(MessageImportance.High));
-            Assert.Equal(mockEngine.IsTaskInputLoggingEnabled, engineServices.IsTaskInputLoggingEnabled);
+            Assert.AreEqual(mockEngine.LogsMessagesOfImportance(MessageImportance.Low), engineServices.LogsMessagesOfImportance(MessageImportance.Low));
+            Assert.AreEqual(mockEngine.LogsMessagesOfImportance(MessageImportance.Normal), engineServices.LogsMessagesOfImportance(MessageImportance.Normal));
+            Assert.AreEqual(mockEngine.LogsMessagesOfImportance(MessageImportance.High), engineServices.LogsMessagesOfImportance(MessageImportance.High));
+            Assert.AreEqual(mockEngine.IsTaskInputLoggingEnabled, engineServices.IsTaskInputLoggingEnabled);
         }
 
         [Fact]
@@ -121,8 +121,8 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
 
             IBuildEngine10 buildEngine10 = Assert.IsAssignableFrom<IBuildEngine10>(nodeRar.BuildEngine);
             EngineServices engineServices = buildEngine10.EngineServices;
-            Assert.False(nodeRar.AllowOutOfProcNode);
-            Assert.False(engineServices.IsOutOfProcRarNodeEnabled);
+            Assert.IsFalse(nodeRar.AllowOutOfProcNode);
+            Assert.IsFalse(engineServices.IsOutOfProcRarNodeEnabled);
         }
 
         private RarNodeBuildEngine CreateBuildEngine()

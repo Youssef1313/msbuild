@@ -25,7 +25,7 @@ namespace Microsoft.Build.UnitTests
             // Testing the method in Shared.EventArgsFormatting directly
             string s = EventArgsFormatting.FormatEventMessage("error", "CS",
                       "Missing ;", "312", "source.cs", 0, 0, 0, 0, 0);
-            Assert.Equal(
+            Assert.AreEqual(
                       "source.cs : CS error 312: Missing ;", s);
         }
 
@@ -36,7 +36,7 @@ namespace Microsoft.Build.UnitTests
         {
             string s = EventArgsFormatting.FormatEventMessage("error", "CS",
                       "Missing ;", "312", "source.cs", 1, 2, 0, 0, 0);
-            Assert.Equal(
+            Assert.AreEqual(
                       "source.cs(1-2): CS error 312: Missing ;", s);
         }
 
@@ -45,7 +45,7 @@ namespace Microsoft.Build.UnitTests
         {
             string s = EventArgsFormatting.FormatEventMessage("error", "CS",
                       "Missing ;", "312", "source.cs", 0, 0, 1, 2, 0);
-            Assert.Equal(
+            Assert.AreEqual(
                       "source.cs : CS error 312: Missing ;", s);
         }
 
@@ -54,7 +54,7 @@ namespace Microsoft.Build.UnitTests
         {
             string s = EventArgsFormatting.FormatEventMessage("error", "CS",
                       "Missing ;", "312", "source.cs", 1, 2, 3, 4, 0);
-            Assert.Equal(
+            Assert.AreEqual(
                       "source.cs(1,3,2,4): CS error 312: Missing ;", s);
         }
 
@@ -63,7 +63,7 @@ namespace Microsoft.Build.UnitTests
         {
             string s = EventArgsFormatting.FormatEventMessage("error", "CS",
                       "Missing ;", "312", "source.cs", 1, 0, 3, 4, 0);
-            Assert.Equal(
+            Assert.AreEqual(
                       "source.cs(1,3-4): CS error 312: Missing ;", s);
         }
 
@@ -72,7 +72,7 @@ namespace Microsoft.Build.UnitTests
         {
             string s = EventArgsFormatting.FormatEventMessage("error", "CS",
                       "Missing ;", "312", "source.cs", 1, 2, 3, 0, 0);
-            Assert.Equal(
+            Assert.AreEqual(
                       "source.cs(1-2,3): CS error 312: Missing ;", s);
         }
 
@@ -81,7 +81,7 @@ namespace Microsoft.Build.UnitTests
         {
             string s = EventArgsFormatting.FormatEventMessage("error", "CS",
                       "Missing ;", "312", "source.cs", 1, 2, 0, 3, 0);
-            Assert.Equal(
+            Assert.AreEqual(
                       "source.cs(1-2): CS error 312: Missing ;", s);
         }
 
@@ -90,7 +90,7 @@ namespace Microsoft.Build.UnitTests
         {
             string s = EventArgsFormatting.FormatEventMessage("error", "CS",
                       "Missing ;", "312", "source.cs", 1, 0, 2, 0, 0);
-            Assert.Equal(
+            Assert.AreEqual(
                       "source.cs(1,2): CS error 312: Missing ;", s);
         }
 
@@ -100,7 +100,7 @@ namespace Microsoft.Build.UnitTests
             // Testing the method in Shared.EventArgsFormatting directly
             string s = EventArgsFormatting.FormatEventMessage("error", "CS",
                       "Missing ;", "312", "source.cs", 42, 0, 0, 0, 0);
-            Assert.Equal(
+            Assert.AreEqual(
                       "source.cs(42): CS error 312: Missing ;", s);
         }
 
@@ -114,8 +114,8 @@ namespace Microsoft.Build.UnitTests
             string errorString = EventArgsFormatting.FormatEventMessage(error, true);
             string warningString = EventArgsFormatting.FormatEventMessage(warning, true);
 
-            Assert.Equal("source.cs(42): CS error 312: message\r Hello", errorString);
-            Assert.Equal("source.cs(42): CS warning 312: message\r Hello", warningString);
+            Assert.AreEqual("source.cs(42): CS error 312: message\r Hello", errorString);
+            Assert.AreEqual("source.cs(42): CS warning 312: message\r Hello", warningString);
         }
 
         [Fact]
@@ -124,7 +124,7 @@ namespace Microsoft.Build.UnitTests
             // Testing the method in Shared.EventArgsFormatting directly
             string s = EventArgsFormatting.FormatEventMessage("error", "CS",
                       "Missing ;", "312", "source.cs", 233, 236, 4, 8, 0);
-            Assert.Equal(
+            Assert.AreEqual(
                     "source.cs(233,4,236,8): CS error 312: Missing ;", s);
         }
 

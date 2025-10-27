@@ -30,7 +30,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             ITaskItem taskItem = new TaskItem("TestReference");
             taskItem.SetMetadata("SpecificVersion", "true");
             reference.MakePrimaryAssemblyReference(taskItem, true, ".dll");
-            Assert.True(reference.CheckForSpecificVersionMetadataOnParentsReference(false));
+            Assert.IsTrue(reference.CheckForSpecificVersionMetadataOnParentsReference(false));
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             dependentReference.MakeDependentAssemblyReference(primaryReference1);
             dependentReference.MakeDependentAssemblyReference(primaryReference2);
 
-            Assert.True(dependentReference.CheckForSpecificVersionMetadataOnParentsReference(false));
+            Assert.IsTrue(dependentReference.CheckForSpecificVersionMetadataOnParentsReference(false));
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             dependentReference.MakeDependentAssemblyReference(primaryReference1);
             dependentReference.MakeDependentAssemblyReference(primaryReference2);
 
-            Assert.False(dependentReference.CheckForSpecificVersionMetadataOnParentsReference(false)); // "Expected check to return false but it returned true."
+            Assert.IsFalse(dependentReference.CheckForSpecificVersionMetadataOnParentsReference(false)); // "Expected check to return false but it returned true."
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             dependentReference.MakeDependentAssemblyReference(primaryReference1);
             dependentReference.MakeDependentAssemblyReference(primaryReference2);
 
-            Assert.False(dependentReference.CheckForSpecificVersionMetadataOnParentsReference(false)); // "Expected check to return false but it returned true."
+            Assert.IsFalse(dependentReference.CheckForSpecificVersionMetadataOnParentsReference(false)); // "Expected check to return false but it returned true."
         }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests
             dependentReference.MakeDependentAssemblyReference(primaryReference1);
             dependentReference.MakeDependentAssemblyReference(primaryReference2);
 
-            Assert.True(dependentReference.CheckForSpecificVersionMetadataOnParentsReference(true)); // "Expected check to return false but it returned true."
+            Assert.IsTrue(dependentReference.CheckForSpecificVersionMetadataOnParentsReference(true)); // "Expected check to return false but it returned true."
         }
     }
 }

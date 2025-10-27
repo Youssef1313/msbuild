@@ -48,10 +48,10 @@ namespace Microsoft.Build.UnitTests.BackEnd
             BuildRequestData data = new BuildRequestData("foo", new Dictionary<string, string>(), "tools", Array.Empty<string>(), null);
             BuildRequestConfiguration config = new BuildRequestConfiguration(data, "2.0");
             FullyQualifiedBuildRequest request = new FullyQualifiedBuildRequest(config, new string[1] { "foo" }, true);
-            Assert.Equal(request.Config, config);
+            Assert.AreEqual(request.Config, config);
             Assert.Single(request.Targets);
-            Assert.Equal("foo", request.Targets[0]);
-            Assert.True(request.ResultsNeeded);
+            Assert.AreEqual("foo", request.Targets[0]);
+            Assert.IsTrue(request.ResultsNeeded);
         }
     }
 }

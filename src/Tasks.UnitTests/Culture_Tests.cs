@@ -19,8 +19,8 @@ namespace Microsoft.Build.UnitTests
         public void Basic()
         {
             Culture.ItemCultureInfo info = Culture.GetItemCultureInfo("MyResource.fr.resx", null);
-            Assert.Equal("fr", info.culture);
-            Assert.Equal("MyResource.resx", info.cultureNeutralFilename);
+            Assert.AreEqual("fr", info.culture);
+            Assert.AreEqual("MyResource.resx", info.cultureNeutralFilename);
         }
 
         /*
@@ -32,8 +32,8 @@ namespace Microsoft.Build.UnitTests
         public void NonCultureFile()
         {
             Culture.ItemCultureInfo info = Culture.GetItemCultureInfo("MyResource.resx", null);
-            Assert.Null(info.culture);
-            Assert.Equal("MyResource.resx", info.cultureNeutralFilename);
+            Assert.IsNull(info.culture);
+            Assert.AreEqual("MyResource.resx", info.cultureNeutralFilename);
         }
 
 
@@ -48,8 +48,8 @@ namespace Microsoft.Build.UnitTests
         public void BogusEmbeddedCulture()
         {
             Culture.ItemCultureInfo info = Culture.GetItemCultureInfo("MyResource.notalocale.resx", null);
-            Assert.Null(info.culture);
-            Assert.Equal("MyResource.notalocale.resx", info.cultureNeutralFilename);
+            Assert.IsNull(info.culture);
+            Assert.AreEqual("MyResource.notalocale.resx", info.cultureNeutralFilename);
         }
     }
 }

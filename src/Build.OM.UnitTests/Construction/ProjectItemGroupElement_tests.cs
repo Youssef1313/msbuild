@@ -22,7 +22,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         public void ReadNoItemGroup()
         {
             ProjectRootElement project = ProjectRootElement.Create();
-            Assert.Equal(0, Helpers.Count(project.Children));
+            Assert.AreEqual(0, Helpers.Count(project.Children));
             Assert.Empty(project.ItemGroups);
         }
 
@@ -42,7 +42,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectRootElement project = projectRootElementFromString.Project;
             ProjectItemGroupElement group = (ProjectItemGroupElement)Helpers.GetFirst(project.Children);
 
-            Assert.Equal(0, Helpers.Count(group.Items));
+            Assert.AreEqual(0, Helpers.Count(group.Items));
         }
 
         /// <summary>
@@ -66,9 +66,9 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             var items = Helpers.MakeList(group.Items);
 
-            Assert.Equal(2, items.Count);
-            Assert.Equal("i1", items[0].Include);
-            Assert.Equal("i2", items[1].Include);
+            Assert.AreEqual(2, items.Count);
+            Assert.AreEqual("i1", items[0].Include);
+            Assert.AreEqual("i2", items[1].Include);
         }
 
         /// <summary>
@@ -84,8 +84,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectItemGroupElement itemGroup = Helpers.GetFirst(project.ItemGroups);
             itemGroup.Condition = "c";
 
-            Assert.Equal("c", itemGroup.Condition);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual("c", itemGroup.Condition);
+            Assert.IsTrue(project.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -101,8 +101,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectItemGroupElement itemGroup = Helpers.GetFirst(project.ItemGroups);
             itemGroup.Label = "c";
 
-            Assert.Equal("c", itemGroup.Label);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual("c", itemGroup.Label);
+            Assert.IsTrue(project.HasUnsavedChanges);
         }
 
         [Theory]

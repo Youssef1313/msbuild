@@ -25,7 +25,7 @@ namespace Microsoft.Build.UnitTests
             using var xmlReader = new XmlTextReader(xml, XmlNodeType.Document, null);
             dependentAssembly.Read(xmlReader);
 
-            Assert.NotNull(dependentAssembly.PartialAssemblyName);
+            Assert.IsNotNull(dependentAssembly.PartialAssemblyName);
         }
     }
 }

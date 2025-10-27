@@ -23,10 +23,10 @@ namespace Microsoft.Build.UnitTests
             t.Inputs = new[] { new TaskItem("MyFile.txt") };
 
             bool success = t.Execute();
-            Assert.True(success);
+            Assert.IsTrue(success);
             Assert.Single(t.Filtered);
-            Assert.Equal("MyFile.txt", t.Filtered[0].ItemSpec);
-            Assert.False(t.HadAnyDuplicates);
+            Assert.AreEqual("MyFile.txt", t.Filtered[0].ItemSpec);
+            Assert.IsFalse(t.HadAnyDuplicates);
         }
 
         /// <summary>
@@ -41,10 +41,10 @@ namespace Microsoft.Build.UnitTests
             t.Inputs = new[] { new TaskItem("MyFile.txt"), new TaskItem("MyFile.txt") };
 
             bool success = t.Execute();
-            Assert.True(success);
+            Assert.IsTrue(success);
             Assert.Single(t.Filtered);
-            Assert.Equal("MyFile.txt", t.Filtered[0].ItemSpec);
-            Assert.True(t.HadAnyDuplicates);
+            Assert.AreEqual("MyFile.txt", t.Filtered[0].ItemSpec);
+            Assert.IsTrue(t.HadAnyDuplicates);
         }
 
         /// <summary>
@@ -66,11 +66,11 @@ namespace Microsoft.Build.UnitTests
             };
 
             bool success = t.Execute();
-            Assert.True(success);
-            Assert.Equal(3, t.Filtered.Length);
-            Assert.Equal("MyFile2.txt", t.Filtered[0].ItemSpec);
-            Assert.Equal("MyFile1.txt", t.Filtered[1].ItemSpec);
-            Assert.Equal("MyFile3.txt", t.Filtered[2].ItemSpec);
+            Assert.IsTrue(success);
+            Assert.AreEqual(3, t.Filtered.Length);
+            Assert.AreEqual("MyFile2.txt", t.Filtered[0].ItemSpec);
+            Assert.AreEqual("MyFile1.txt", t.Filtered[1].ItemSpec);
+            Assert.AreEqual("MyFile3.txt", t.Filtered[2].ItemSpec);
         }
 
         /// <summary>
@@ -92,11 +92,11 @@ namespace Microsoft.Build.UnitTests
             };
 
             bool success = t.Execute();
-            Assert.True(success);
-            Assert.Equal(3, t.Filtered.Length);
-            Assert.Equal("MyFile2.txt", t.Filtered[0].ItemSpec);
-            Assert.Equal("MyFile1.txt", t.Filtered[1].ItemSpec);
-            Assert.Equal("MyFile3.txt", t.Filtered[2].ItemSpec);
+            Assert.IsTrue(success);
+            Assert.AreEqual(3, t.Filtered.Length);
+            Assert.AreEqual("MyFile2.txt", t.Filtered[0].ItemSpec);
+            Assert.AreEqual("MyFile1.txt", t.Filtered[1].ItemSpec);
+            Assert.AreEqual("MyFile3.txt", t.Filtered[2].ItemSpec);
         }
 
         /// <summary>
@@ -111,11 +111,11 @@ namespace Microsoft.Build.UnitTests
             t.Inputs = new[] { new TaskItem("MyFile1.txt"), new TaskItem("MyFile2.txt") };
 
             bool success = t.Execute();
-            Assert.True(success);
-            Assert.Equal(2, t.Filtered.Length);
-            Assert.Equal("MyFile1.txt", t.Filtered[0].ItemSpec);
-            Assert.Equal("MyFile2.txt", t.Filtered[1].ItemSpec);
-            Assert.False(t.HadAnyDuplicates);
+            Assert.IsTrue(success);
+            Assert.AreEqual(2, t.Filtered.Length);
+            Assert.AreEqual("MyFile1.txt", t.Filtered[0].ItemSpec);
+            Assert.AreEqual("MyFile2.txt", t.Filtered[1].ItemSpec);
+            Assert.IsFalse(t.HadAnyDuplicates);
         }
 
         /// <summary>
@@ -130,10 +130,10 @@ namespace Microsoft.Build.UnitTests
             t.Inputs = new[] { new TaskItem("MyFile.txt"), new TaskItem("MyFIle.tXt") };
 
             bool success = t.Execute();
-            Assert.True(success);
+            Assert.IsTrue(success);
             Assert.Single(t.Filtered);
-            Assert.Equal("MyFile.txt", t.Filtered[0].ItemSpec);
-            Assert.True(t.HadAnyDuplicates);
+            Assert.AreEqual("MyFile.txt", t.Filtered[0].ItemSpec);
+            Assert.IsTrue(t.HadAnyDuplicates);
         }
 
         /// <summary>
@@ -146,9 +146,9 @@ namespace Microsoft.Build.UnitTests
             t.BuildEngine = new MockEngine();
             bool success = t.Execute();
 
-            Assert.True(success);
+            Assert.IsTrue(success);
             Assert.Empty(t.Filtered);
-            Assert.False(t.HadAnyDuplicates);
+            Assert.IsFalse(t.HadAnyDuplicates);
         }
     }
 }

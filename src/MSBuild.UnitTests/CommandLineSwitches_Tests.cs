@@ -260,20 +260,20 @@ namespace Microsoft.Build.UnitTests
             bool unquoteParameters;
             bool emptyParametersAllowed;
 
-            Assert.True(CommandLineSwitches.IsParameterizedSwitch(null, out parameterizedSwitch, out duplicateSwitchErrorMessage, out multipleParametersAllowed, out missingParametersErrorMessage, out unquoteParameters, out emptyParametersAllowed));
-            Assert.Equal(CommandLineSwitches.ParameterizedSwitch.Project, parameterizedSwitch);
-            Assert.NotNull(duplicateSwitchErrorMessage);
-            Assert.False(multipleParametersAllowed);
-            Assert.Null(missingParametersErrorMessage);
-            Assert.True(unquoteParameters);
+            Assert.IsTrue(CommandLineSwitches.IsParameterizedSwitch(null, out parameterizedSwitch, out duplicateSwitchErrorMessage, out multipleParametersAllowed, out missingParametersErrorMessage, out unquoteParameters, out emptyParametersAllowed));
+            Assert.AreEqual(CommandLineSwitches.ParameterizedSwitch.Project, parameterizedSwitch);
+            Assert.IsNotNull(duplicateSwitchErrorMessage);
+            Assert.IsFalse(multipleParametersAllowed);
+            Assert.IsNull(missingParametersErrorMessage);
+            Assert.IsTrue(unquoteParameters);
 
             // for the virtual project switch, we match on null, not empty string
-            Assert.False(CommandLineSwitches.IsParameterizedSwitch(String.Empty, out parameterizedSwitch, out duplicateSwitchErrorMessage, out multipleParametersAllowed, out missingParametersErrorMessage, out unquoteParameters, out emptyParametersAllowed));
-            Assert.Equal(CommandLineSwitches.ParameterizedSwitch.Invalid, parameterizedSwitch);
-            Assert.Null(duplicateSwitchErrorMessage);
-            Assert.False(multipleParametersAllowed);
-            Assert.Null(missingParametersErrorMessage);
-            Assert.False(unquoteParameters);
+            Assert.IsFalse(CommandLineSwitches.IsParameterizedSwitch(String.Empty, out parameterizedSwitch, out duplicateSwitchErrorMessage, out multipleParametersAllowed, out missingParametersErrorMessage, out unquoteParameters, out emptyParametersAllowed));
+            Assert.AreEqual(CommandLineSwitches.ParameterizedSwitch.Invalid, parameterizedSwitch);
+            Assert.IsNull(duplicateSwitchErrorMessage);
+            Assert.IsFalse(multipleParametersAllowed);
+            Assert.IsNull(missingParametersErrorMessage);
+            Assert.IsFalse(unquoteParameters);
         }
 
         [Theory]
@@ -770,21 +770,21 @@ namespace Microsoft.Build.UnitTests
 
             switches.SetParameterlessSwitch(CommandLineSwitches.ParameterlessSwitch.NoLogo, "/nologo");
 
-            Assert.Equal("/nologo", switches.GetParameterlessSwitchCommandLineArg(CommandLineSwitches.ParameterlessSwitch.NoLogo));
-            Assert.True(switches.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.NoLogo));
-            Assert.True(switches[CommandLineSwitches.ParameterlessSwitch.NoLogo]);
+            Assert.AreEqual("/nologo", switches.GetParameterlessSwitchCommandLineArg(CommandLineSwitches.ParameterlessSwitch.NoLogo));
+            Assert.IsTrue(switches.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.NoLogo));
+            Assert.IsTrue(switches[CommandLineSwitches.ParameterlessSwitch.NoLogo]);
 
             // set it again
             switches.SetParameterlessSwitch(CommandLineSwitches.ParameterlessSwitch.NoLogo, "-NOLOGO");
 
-            Assert.Equal("-NOLOGO", switches.GetParameterlessSwitchCommandLineArg(CommandLineSwitches.ParameterlessSwitch.NoLogo));
-            Assert.True(switches.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.NoLogo));
-            Assert.True(switches[CommandLineSwitches.ParameterlessSwitch.NoLogo]);
+            Assert.AreEqual("-NOLOGO", switches.GetParameterlessSwitchCommandLineArg(CommandLineSwitches.ParameterlessSwitch.NoLogo));
+            Assert.IsTrue(switches.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.NoLogo));
+            Assert.IsTrue(switches[CommandLineSwitches.ParameterlessSwitch.NoLogo]);
 
             // we didn't set this switch
-            Assert.Null(switches.GetParameterlessSwitchCommandLineArg(CommandLineSwitches.ParameterlessSwitch.Version));
-            Assert.False(switches.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.Version));
-            Assert.False(switches[CommandLineSwitches.ParameterlessSwitch.Version]);
+            Assert.IsNull(switches.GetParameterlessSwitchCommandLineArg(CommandLineSwitches.ParameterlessSwitch.Version));
+            Assert.IsFalse(switches.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.Version));
+            Assert.IsFalse(switches[CommandLineSwitches.ParameterlessSwitch.Version]);
         }
 
         [Fact]
@@ -792,31 +792,31 @@ namespace Microsoft.Build.UnitTests
         {
             CommandLineSwitches switches = new CommandLineSwitches();
 
-            Assert.True(switches.SetParameterizedSwitch(CommandLineSwitches.ParameterizedSwitch.Verbosity, "/v:q", "q", false, true, false));
+            Assert.IsTrue(switches.SetParameterizedSwitch(CommandLineSwitches.ParameterizedSwitch.Verbosity, "/v:q", "q", false, true, false));
 
-            Assert.Equal("/v:q", switches.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Verbosity));
-            Assert.True(switches.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Verbosity));
+            Assert.AreEqual("/v:q", switches.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Verbosity));
+            Assert.IsTrue(switches.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Verbosity));
 
             string[] parameters = switches[CommandLineSwitches.ParameterizedSwitch.Verbosity];
 
-            Assert.NotNull(parameters);
+            Assert.IsNotNull(parameters);
             Assert.Single(parameters);
-            Assert.Equal("q", parameters[0]);
+            Assert.AreEqual("q", parameters[0]);
 
             // set it again -- this is bogus, because the /verbosity switch doesn't allow multiple parameters, but for the
             // purposes of testing the SetParameterizedSwitch() method, it doesn't matter
-            Assert.True(switches.SetParameterizedSwitch(CommandLineSwitches.ParameterizedSwitch.Verbosity, "/verbosity:\"diag\";minimal", "\"diag\";minimal", true, true, false));
+            Assert.IsTrue(switches.SetParameterizedSwitch(CommandLineSwitches.ParameterizedSwitch.Verbosity, "/verbosity:\"diag\";minimal", "\"diag\";minimal", true, true, false));
 
-            Assert.Equal("/v:q /verbosity:\"diag\";minimal", switches.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Verbosity));
-            Assert.True(switches.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Verbosity));
+            Assert.AreEqual("/v:q /verbosity:\"diag\";minimal", switches.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Verbosity));
+            Assert.IsTrue(switches.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Verbosity));
 
             parameters = switches[CommandLineSwitches.ParameterizedSwitch.Verbosity];
 
-            Assert.NotNull(parameters);
-            Assert.Equal(3, parameters.Length);
-            Assert.Equal("q", parameters[0]);
-            Assert.Equal("diag", parameters[1]);
-            Assert.Equal("minimal", parameters[2]);
+            Assert.IsNotNull(parameters);
+            Assert.AreEqual(3, parameters.Length);
+            Assert.AreEqual("q", parameters[0]);
+            Assert.AreEqual("diag", parameters[1]);
+            Assert.AreEqual("minimal", parameters[2]);
         }
 
         [Fact]
@@ -825,41 +825,41 @@ namespace Microsoft.Build.UnitTests
             CommandLineSwitches switches = new CommandLineSwitches();
 
             // we haven't set this switch yet
-            Assert.Null(switches.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Target));
-            Assert.False(switches.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Target));
+            Assert.IsNull(switches.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Target));
+            Assert.IsFalse(switches.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Target));
 
             string[] parameters = switches[CommandLineSwitches.ParameterizedSwitch.Target];
 
-            Assert.NotNull(parameters);
+            Assert.IsNotNull(parameters);
             Assert.Empty(parameters);
 
             // fake/missing parameters -- this is bogus because the /target switch allows multiple parameters but we're turning
             // that off here just for testing purposes
-            Assert.False(switches.SetParameterizedSwitch(CommandLineSwitches.ParameterizedSwitch.Target, "/t:\"", "\"", false, true, false));
+            Assert.IsFalse(switches.SetParameterizedSwitch(CommandLineSwitches.ParameterizedSwitch.Target, "/t:\"", "\"", false, true, false));
 
             // switch has been set
-            Assert.Equal("/t:\"", switches.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Target));
-            Assert.True(switches.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Target));
+            Assert.AreEqual("/t:\"", switches.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Target));
+            Assert.IsTrue(switches.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Target));
 
             parameters = switches[CommandLineSwitches.ParameterizedSwitch.Target];
 
             // but no parameters
-            Assert.NotNull(parameters);
+            Assert.IsNotNull(parameters);
             Assert.Empty(parameters);
 
             // more fake/missing parameters
-            Assert.False(switches.SetParameterizedSwitch(CommandLineSwitches.ParameterizedSwitch.Target, "/t:A,\"\";B", "A,\"\";B", true, true, false));
+            Assert.IsFalse(switches.SetParameterizedSwitch(CommandLineSwitches.ParameterizedSwitch.Target, "/t:A,\"\";B", "A,\"\";B", true, true, false));
 
-            Assert.Equal("/t:\" /t:A,\"\";B", switches.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Target));
-            Assert.True(switches.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Target));
+            Assert.AreEqual("/t:\" /t:A,\"\";B", switches.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Target));
+            Assert.IsTrue(switches.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Target));
 
             parameters = switches[CommandLineSwitches.ParameterizedSwitch.Target];
 
             // now we have some parameters
-            Assert.NotNull(parameters);
-            Assert.Equal(2, parameters.Length);
-            Assert.Equal("A", parameters[0]);
-            Assert.Equal("B", parameters[1]);
+            Assert.IsNotNull(parameters);
+            Assert.AreEqual(2, parameters.Length);
+            Assert.AreEqual("A", parameters[0]);
+            Assert.AreEqual("B", parameters[1]);
         }
 
         [Fact]
@@ -868,41 +868,41 @@ namespace Microsoft.Build.UnitTests
             CommandLineSwitches switches = new CommandLineSwitches();
 
             // we haven't set this switch yet
-            Assert.Null(switches.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Logger));
-            Assert.False(switches.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Logger));
+            Assert.IsNull(switches.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Logger));
+            Assert.IsFalse(switches.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Logger));
 
             string[] parameters = switches[CommandLineSwitches.ParameterizedSwitch.Logger];
 
-            Assert.NotNull(parameters);
+            Assert.IsNotNull(parameters);
             Assert.Empty(parameters);
 
             // don't unquote fake/missing parameters
-            Assert.True(switches.SetParameterizedSwitch(CommandLineSwitches.ParameterizedSwitch.Logger, "/l:\"", "\"", false, false, false));
+            Assert.IsTrue(switches.SetParameterizedSwitch(CommandLineSwitches.ParameterizedSwitch.Logger, "/l:\"", "\"", false, false, false));
 
-            Assert.Equal("/l:\"", switches.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Logger));
-            Assert.True(switches.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Logger));
+            Assert.AreEqual("/l:\"", switches.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Logger));
+            Assert.IsTrue(switches.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Logger));
 
             parameters = switches[CommandLineSwitches.ParameterizedSwitch.Logger];
 
-            Assert.NotNull(parameters);
+            Assert.IsNotNull(parameters);
             Assert.Single(parameters);
-            Assert.Equal("\"", parameters[0]);
+            Assert.AreEqual("\"", parameters[0]);
 
             // don't unquote multiple fake/missing parameters -- this is bogus because the /logger switch does not take multiple
             // parameters, but for testing purposes this is fine
-            Assert.True(switches.SetParameterizedSwitch(CommandLineSwitches.ParameterizedSwitch.Logger, "/LOGGER:\"\",asm;\"p,a;r\"", "\"\",asm;\"p,a;r\"", true, false, false));
+            Assert.IsTrue(switches.SetParameterizedSwitch(CommandLineSwitches.ParameterizedSwitch.Logger, "/LOGGER:\"\",asm;\"p,a;r\"", "\"\",asm;\"p,a;r\"", true, false, false));
 
-            Assert.Equal("/l:\" /LOGGER:\"\",asm;\"p,a;r\"", switches.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Logger));
-            Assert.True(switches.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Logger));
+            Assert.AreEqual("/l:\" /LOGGER:\"\",asm;\"p,a;r\"", switches.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Logger));
+            Assert.IsTrue(switches.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Logger));
 
             parameters = switches[CommandLineSwitches.ParameterizedSwitch.Logger];
 
-            Assert.NotNull(parameters);
-            Assert.Equal(4, parameters.Length);
-            Assert.Equal("\"", parameters[0]);
-            Assert.Equal("\"\"", parameters[1]);
-            Assert.Equal("asm", parameters[2]);
-            Assert.Equal("\"p,a;r\"", parameters[3]);
+            Assert.IsNotNull(parameters);
+            Assert.AreEqual(4, parameters.Length);
+            Assert.AreEqual("\"", parameters[0]);
+            Assert.AreEqual("\"\"", parameters[1]);
+            Assert.AreEqual("asm", parameters[2]);
+            Assert.AreEqual("\"p,a;r\"", parameters[3]);
         }
 
         [Fact]
@@ -910,17 +910,17 @@ namespace Microsoft.Build.UnitTests
         {
             CommandLineSwitches switches = new CommandLineSwitches();
 
-            Assert.True(switches.SetParameterizedSwitch(CommandLineSwitches.ParameterizedSwitch.WarningsAsErrors, "/warnaserror", "", multipleParametersAllowed: true, unquoteParameters: false, emptyParametersAllowed: true));
+            Assert.IsTrue(switches.SetParameterizedSwitch(CommandLineSwitches.ParameterizedSwitch.WarningsAsErrors, "/warnaserror", "", multipleParametersAllowed: true, unquoteParameters: false, emptyParametersAllowed: true));
 
-            Assert.True(switches.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.WarningsAsErrors));
+            Assert.IsTrue(switches.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.WarningsAsErrors));
 
             string[] parameters = switches[CommandLineSwitches.ParameterizedSwitch.WarningsAsErrors];
 
-            Assert.NotNull(parameters);
+            Assert.IsNotNull(parameters);
 
-            Assert.True(parameters.Length > 0);
+            Assert.IsTrue(parameters.Length > 0);
 
-            Assert.Null(parameters.Last());
+            Assert.IsNull(parameters.Last());
         }
 
         [Fact]
@@ -929,30 +929,30 @@ namespace Microsoft.Build.UnitTests
             CommandLineSwitches switchesLeft = new CommandLineSwitches();
             CommandLineSwitches switchesRight = new CommandLineSwitches();
 
-            Assert.False(switchesLeft.HaveErrors());
-            Assert.False(switchesRight.HaveErrors());
+            Assert.IsFalse(switchesLeft.HaveErrors());
+            Assert.IsFalse(switchesRight.HaveErrors());
 
             switchesLeft.Append(switchesRight);
 
-            Assert.False(switchesLeft.HaveErrors());
-            Assert.False(switchesRight.HaveErrors());
+            Assert.IsFalse(switchesLeft.HaveErrors());
+            Assert.IsFalse(switchesRight.HaveErrors());
 
             switchesLeft.SetUnknownSwitchError("/bogus");
 
-            Assert.True(switchesLeft.HaveErrors());
-            Assert.False(switchesRight.HaveErrors());
+            Assert.IsTrue(switchesLeft.HaveErrors());
+            Assert.IsFalse(switchesRight.HaveErrors());
 
             switchesLeft.Append(switchesRight);
 
-            Assert.True(switchesLeft.HaveErrors());
-            Assert.False(switchesRight.HaveErrors());
+            Assert.IsTrue(switchesLeft.HaveErrors());
+            Assert.IsFalse(switchesRight.HaveErrors());
 
             VerifySwitchError(switchesLeft, "/bogus");
 
             switchesRight.Append(switchesLeft);
 
-            Assert.True(switchesLeft.HaveErrors());
-            Assert.True(switchesRight.HaveErrors());
+            Assert.IsTrue(switchesLeft.HaveErrors());
+            Assert.IsTrue(switchesRight.HaveErrors());
 
             VerifySwitchError(switchesLeft, "/bogus");
             VerifySwitchError(switchesRight, "/bogus");
@@ -964,14 +964,14 @@ namespace Microsoft.Build.UnitTests
             CommandLineSwitches switchesLeft = new CommandLineSwitches();
             CommandLineSwitches switchesRight = new CommandLineSwitches();
 
-            Assert.False(switchesLeft.HaveErrors());
-            Assert.False(switchesRight.HaveErrors());
+            Assert.IsFalse(switchesLeft.HaveErrors());
+            Assert.IsFalse(switchesRight.HaveErrors());
 
             switchesLeft.SetUnknownSwitchError("/bogus");
             switchesRight.SetUnexpectedParametersError("/nologo:foo");
 
-            Assert.True(switchesLeft.HaveErrors());
-            Assert.True(switchesRight.HaveErrors());
+            Assert.IsTrue(switchesLeft.HaveErrors());
+            Assert.IsTrue(switchesRight.HaveErrors());
 
             VerifySwitchError(switchesLeft, "/bogus");
             VerifySwitchError(switchesRight, "/nologo:foo");
@@ -989,45 +989,45 @@ namespace Microsoft.Build.UnitTests
 
             switchesLeft.SetParameterlessSwitch(CommandLineSwitches.ParameterlessSwitch.Help, "/?");
 
-            Assert.True(switchesLeft.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.Help));
-            Assert.False(switchesLeft.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.NoConsoleLogger));
+            Assert.IsTrue(switchesLeft.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.Help));
+            Assert.IsFalse(switchesLeft.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.NoConsoleLogger));
 
             CommandLineSwitches switchesRight1 = new CommandLineSwitches();
 
             switchesRight1.SetParameterlessSwitch(CommandLineSwitches.ParameterlessSwitch.NoConsoleLogger, "/noconlog");
 
-            Assert.False(switchesRight1.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.Help));
-            Assert.True(switchesRight1.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.NoConsoleLogger));
+            Assert.IsFalse(switchesRight1.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.Help));
+            Assert.IsTrue(switchesRight1.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.NoConsoleLogger));
 
             switchesLeft.Append(switchesRight1);
 
-            Assert.Equal("/noconlog", switchesLeft.GetParameterlessSwitchCommandLineArg(CommandLineSwitches.ParameterlessSwitch.NoConsoleLogger));
-            Assert.True(switchesLeft.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.NoConsoleLogger));
-            Assert.True(switchesLeft[CommandLineSwitches.ParameterlessSwitch.NoConsoleLogger]);
+            Assert.AreEqual("/noconlog", switchesLeft.GetParameterlessSwitchCommandLineArg(CommandLineSwitches.ParameterlessSwitch.NoConsoleLogger));
+            Assert.IsTrue(switchesLeft.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.NoConsoleLogger));
+            Assert.IsTrue(switchesLeft[CommandLineSwitches.ParameterlessSwitch.NoConsoleLogger]);
 
             // this switch is not affected
-            Assert.Equal("/?", switchesLeft.GetParameterlessSwitchCommandLineArg(CommandLineSwitches.ParameterlessSwitch.Help));
-            Assert.True(switchesLeft.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.Help));
-            Assert.True(switchesLeft[CommandLineSwitches.ParameterlessSwitch.Help]);
+            Assert.AreEqual("/?", switchesLeft.GetParameterlessSwitchCommandLineArg(CommandLineSwitches.ParameterlessSwitch.Help));
+            Assert.IsTrue(switchesLeft.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.Help));
+            Assert.IsTrue(switchesLeft[CommandLineSwitches.ParameterlessSwitch.Help]);
 
             CommandLineSwitches switchesRight2 = new CommandLineSwitches();
 
             switchesRight2.SetParameterlessSwitch(CommandLineSwitches.ParameterlessSwitch.NoConsoleLogger, "/NOCONSOLELOGGER");
 
-            Assert.False(switchesRight2.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.Help));
-            Assert.True(switchesRight2.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.NoConsoleLogger));
+            Assert.IsFalse(switchesRight2.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.Help));
+            Assert.IsTrue(switchesRight2.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.NoConsoleLogger));
 
             switchesLeft.Append(switchesRight2);
 
-            Assert.Equal("/NOCONSOLELOGGER", switchesLeft.GetParameterlessSwitchCommandLineArg(CommandLineSwitches.ParameterlessSwitch.NoConsoleLogger));
-            Assert.True(switchesLeft.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.NoConsoleLogger));
-            Assert.True(switchesLeft[CommandLineSwitches.ParameterlessSwitch.NoConsoleLogger]);
+            Assert.AreEqual("/NOCONSOLELOGGER", switchesLeft.GetParameterlessSwitchCommandLineArg(CommandLineSwitches.ParameterlessSwitch.NoConsoleLogger));
+            Assert.IsTrue(switchesLeft.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.NoConsoleLogger));
+            Assert.IsTrue(switchesLeft[CommandLineSwitches.ParameterlessSwitch.NoConsoleLogger]);
 
-            Assert.Equal("/?", switchesLeft.GetParameterlessSwitchCommandLineArg(CommandLineSwitches.ParameterlessSwitch.Help));
-            Assert.True(switchesLeft.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.Help));
-            Assert.True(switchesLeft[CommandLineSwitches.ParameterlessSwitch.Help]);
+            Assert.AreEqual("/?", switchesLeft.GetParameterlessSwitchCommandLineArg(CommandLineSwitches.ParameterlessSwitch.Help));
+            Assert.IsTrue(switchesLeft.IsParameterlessSwitchSet(CommandLineSwitches.ParameterlessSwitch.Help));
+            Assert.IsTrue(switchesLeft[CommandLineSwitches.ParameterlessSwitch.Help]);
 
-            Assert.False(switchesLeft.HaveErrors());
+            Assert.IsFalse(switchesLeft.HaveErrors());
         }
 
         [Fact]
@@ -1037,35 +1037,35 @@ namespace Microsoft.Build.UnitTests
 
             switchesLeft.SetParameterizedSwitch(CommandLineSwitches.ParameterizedSwitch.Project, "tempproject.proj", "tempproject.proj", false, true, false);
 
-            Assert.True(switchesLeft.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Project));
-            Assert.False(switchesLeft.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Target));
+            Assert.IsTrue(switchesLeft.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Project));
+            Assert.IsFalse(switchesLeft.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Target));
 
             CommandLineSwitches switchesRight = new CommandLineSwitches();
 
             switchesRight.SetParameterizedSwitch(CommandLineSwitches.ParameterizedSwitch.Target, "/t:build", "build", true, true, false);
 
-            Assert.False(switchesRight.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Project));
-            Assert.True(switchesRight.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Target));
+            Assert.IsFalse(switchesRight.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Project));
+            Assert.IsTrue(switchesRight.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Target));
 
             switchesLeft.Append(switchesRight);
 
-            Assert.Equal("tempproject.proj", switchesLeft.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Project));
-            Assert.True(switchesLeft.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Project));
+            Assert.AreEqual("tempproject.proj", switchesLeft.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Project));
+            Assert.IsTrue(switchesLeft.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Project));
 
             string[] parameters = switchesLeft[CommandLineSwitches.ParameterizedSwitch.Project];
 
-            Assert.NotNull(parameters);
+            Assert.IsNotNull(parameters);
             Assert.Single(parameters);
-            Assert.Equal("tempproject.proj", parameters[0]);
+            Assert.AreEqual("tempproject.proj", parameters[0]);
 
-            Assert.Equal("/t:build", switchesLeft.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Target));
-            Assert.True(switchesLeft.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Target));
+            Assert.AreEqual("/t:build", switchesLeft.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Target));
+            Assert.IsTrue(switchesLeft.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Target));
 
             parameters = switchesLeft[CommandLineSwitches.ParameterizedSwitch.Target];
 
-            Assert.NotNull(parameters);
+            Assert.IsNotNull(parameters);
             Assert.Single(parameters);
-            Assert.Equal("build", parameters[0]);
+            Assert.AreEqual("build", parameters[0]);
         }
 
         [Fact]
@@ -1075,26 +1075,26 @@ namespace Microsoft.Build.UnitTests
 
             switchesLeft.SetParameterizedSwitch(CommandLineSwitches.ParameterizedSwitch.Target, "/target:Clean", "Clean", true, true, false);
 
-            Assert.True(switchesLeft.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Target));
+            Assert.IsTrue(switchesLeft.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Target));
 
             CommandLineSwitches switchesRight = new CommandLineSwitches();
 
             switchesRight.SetParameterizedSwitch(CommandLineSwitches.ParameterizedSwitch.Target, "/t:\"RESOURCES\";build", "\"RESOURCES\";build", true, true, false);
 
-            Assert.True(switchesRight.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Target));
+            Assert.IsTrue(switchesRight.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Target));
 
             switchesLeft.Append(switchesRight);
 
-            Assert.Equal("/t:\"RESOURCES\";build", switchesLeft.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Target));
-            Assert.True(switchesLeft.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Target));
+            Assert.AreEqual("/t:\"RESOURCES\";build", switchesLeft.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Target));
+            Assert.IsTrue(switchesLeft.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Target));
 
             string[] parameters = switchesLeft[CommandLineSwitches.ParameterizedSwitch.Target];
 
-            Assert.NotNull(parameters);
-            Assert.Equal(3, parameters.Length);
-            Assert.Equal("Clean", parameters[0]);
-            Assert.Equal("RESOURCES", parameters[1]);
-            Assert.Equal("build", parameters[2]);
+            Assert.IsNotNull(parameters);
+            Assert.AreEqual(3, parameters.Length);
+            Assert.AreEqual("Clean", parameters[0]);
+            Assert.AreEqual("RESOURCES", parameters[1]);
+            Assert.AreEqual("build", parameters[2]);
         }
 
         /// <summary>
@@ -1142,26 +1142,26 @@ namespace Microsoft.Build.UnitTests
 
             switchesLeft.SetParameterizedSwitch(CommandLineSwitches.ParameterizedSwitch.Project, "tempproject.proj", "tempproject.proj", false, true, false);
 
-            Assert.True(switchesLeft.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Project));
+            Assert.IsTrue(switchesLeft.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Project));
 
             CommandLineSwitches switchesRight = new CommandLineSwitches();
 
             switchesRight.SetParameterizedSwitch(CommandLineSwitches.ParameterizedSwitch.Project, "Rhubarb.proj", "Rhubarb.proj", false, true, false);
 
-            Assert.True(switchesRight.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Project));
+            Assert.IsTrue(switchesRight.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Project));
 
             switchesLeft.Append(switchesRight);
 
-            Assert.Equal("tempproject.proj", switchesLeft.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Project));
-            Assert.True(switchesLeft.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Project));
+            Assert.AreEqual("tempproject.proj", switchesLeft.GetParameterizedSwitchCommandLineArg(CommandLineSwitches.ParameterizedSwitch.Project));
+            Assert.IsTrue(switchesLeft.IsParameterizedSwitchSet(CommandLineSwitches.ParameterizedSwitch.Project));
 
             string[] parameters = switchesLeft[CommandLineSwitches.ParameterizedSwitch.Project];
 
-            Assert.NotNull(parameters);
+            Assert.IsNotNull(parameters);
             Assert.Single(parameters);
-            Assert.Equal("tempproject.proj", parameters[0]);
+            Assert.AreEqual("tempproject.proj", parameters[0]);
 
-            Assert.True(switchesLeft.HaveErrors());
+            Assert.IsTrue(switchesLeft.HaveErrors());
 
             VerifySwitchError(switchesLeft, "Rhubarb.proj");
         }
@@ -1233,15 +1233,15 @@ namespace Microsoft.Build.UnitTests
         {
             // Check if method works with parameterized switch
             CommandLineSwitches switches = new CommandLineSwitches();
-            Assert.False(switches.HaveAnySwitchesBeenSet());
+            Assert.IsFalse(switches.HaveAnySwitchesBeenSet());
             switches.SetParameterizedSwitch(CommandLineSwitches.ParameterizedSwitch.Verbosity, "/v:q", "q", false, true, false);
-            Assert.True(switches.HaveAnySwitchesBeenSet());
+            Assert.IsTrue(switches.HaveAnySwitchesBeenSet());
 
             // Check if method works with parameterless switches
             switches = new CommandLineSwitches();
-            Assert.False(switches.HaveAnySwitchesBeenSet());
+            Assert.IsFalse(switches.HaveAnySwitchesBeenSet());
             switches.SetParameterlessSwitch(CommandLineSwitches.ParameterlessSwitch.Help, "/?");
-            Assert.True(switches.HaveAnySwitchesBeenSet());
+            Assert.IsTrue(switches.HaveAnySwitchesBeenSet());
         }
 
 #if FEATURE_NODE_REUSE
@@ -1253,7 +1253,7 @@ namespace Microsoft.Build.UnitTests
         {
             bool nodeReuse = MSBuildApp.ProcessNodeReuseSwitch(new string[] { "false", "true" });
 
-            Assert.True(nodeReuse);
+            Assert.IsTrue(nodeReuse);
         }
 
         /// <summary>
@@ -1264,7 +1264,7 @@ namespace Microsoft.Build.UnitTests
         {
             bool nodeReuse = MSBuildApp.ProcessNodeReuseSwitch(new string[] { "true", "false" });
 
-            Assert.False(nodeReuse);
+            Assert.IsFalse(nodeReuse);
         }
 #endif
 
@@ -1278,7 +1278,7 @@ namespace Microsoft.Build.UnitTests
         {
             string result = MSBuildApp.ExtractAnyLoggerParameter("v=diag;v=q", new string[] { "v", "verbosity" });
 
-            Assert.Equal("v=q", result);
+            Assert.AreEqual("v=q", result);
         }
 
         /// <summary>
@@ -1291,7 +1291,7 @@ namespace Microsoft.Build.UnitTests
 
             MSBuildApp.GatherCommandLineSwitches(new List<string>(new[] { "" }), commandLineSwitches);
 
-            Assert.Null(MSBuildApp.ProcessWarnAsErrorSwitch(commandLineSwitches));
+            Assert.IsNull(MSBuildApp.ProcessWarnAsErrorSwitch(commandLineSwitches));
         }
 
         /// <summary>
@@ -1316,9 +1316,9 @@ namespace Microsoft.Build.UnitTests
 
             ISet<string> actualWarningsAsErrors = MSBuildApp.ProcessWarnAsErrorSwitch(commandLineSwitches);
 
-            Assert.NotNull(actualWarningsAsErrors);
+            Assert.IsNotNull(actualWarningsAsErrors);
 
-            Assert.Equal(expectedWarningsAsErrors, actualWarningsAsErrors, StringComparer.OrdinalIgnoreCase);
+            Assert.AreEqual(expectedWarningsAsErrors, actualWarningsAsErrors, StringComparer.OrdinalIgnoreCase);
         }
 
         /// <summary>
@@ -1337,7 +1337,7 @@ namespace Microsoft.Build.UnitTests
 
             ISet<string> actualWarningsAsErrors = MSBuildApp.ProcessWarnAsErrorSwitch(commandLineSwitches);
 
-            Assert.NotNull(actualWarningsAsErrors);
+            Assert.IsNotNull(actualWarningsAsErrors);
 
             Assert.Empty(actualWarningsAsErrors);
         }
@@ -1361,9 +1361,9 @@ namespace Microsoft.Build.UnitTests
 
             ISet<string> actualWarningsAsErrors = MSBuildApp.ProcessWarnAsErrorSwitch(commandLineSwitches);
 
-            Assert.NotNull(actualWarningsAsErrors);
+            Assert.IsNotNull(actualWarningsAsErrors);
 
-            Assert.Equal(expectedWarningsAsErors, actualWarningsAsErrors, StringComparer.OrdinalIgnoreCase);
+            Assert.AreEqual(expectedWarningsAsErors, actualWarningsAsErrors, StringComparer.OrdinalIgnoreCase);
         }
 
         /// <summary>
@@ -1378,7 +1378,7 @@ namespace Microsoft.Build.UnitTests
 
             ISet<string> actualWarningsAsErrors = MSBuildApp.ProcessWarnAsErrorSwitch(commandLineSwitches);
 
-            Assert.NotNull(actualWarningsAsErrors);
+            Assert.IsNotNull(actualWarningsAsErrors);
 
             Assert.Empty(actualWarningsAsErrors);
         }
@@ -1443,9 +1443,9 @@ namespace Microsoft.Build.UnitTests
 
             ISet<string> actualWarningsAsMessages = MSBuildApp.ProcessWarnAsMessageSwitch(commandLineSwitches);
 
-            Assert.NotNull(actualWarningsAsMessages);
+            Assert.IsNotNull(actualWarningsAsMessages);
 
-            Assert.Equal(expectedWarningsAsMessages, actualWarningsAsMessages, StringComparer.OrdinalIgnoreCase);
+            Assert.AreEqual(expectedWarningsAsMessages, actualWarningsAsMessages, StringComparer.OrdinalIgnoreCase);
         }
 
         /// <summary>
@@ -1576,7 +1576,7 @@ namespace Microsoft.Build.UnitTests
                 for (int i = 0; i < helpMessageLines.Length; i++)
                 {
                     // All lines should be 80 characters or less
-                    Assert.True(helpMessageLines[i].Length <= 80, $"Line {i + 1} of '{item.Key}' should be no longer than 80 characters.");
+                    Assert.IsTrue(helpMessageLines[i].Length <= 80, $"Line {i + 1} of '{item.Key}' should be no longer than 80 characters.");
 
                     string trimmedLine = helpMessageLines[i].Trim();
 
@@ -1590,7 +1590,7 @@ namespace Microsoft.Build.UnitTests
                         else
                         {
                             // Otherwise it should have no leading spaces because it's a section
-                            Assert.False(helpMessageLines[i].StartsWith(" "));
+                            Assert.IsFalse(helpMessageLines[i].StartsWith(" "));
                         }
                     }
                     else
@@ -1632,7 +1632,7 @@ namespace Microsoft.Build.UnitTests
             }
             catch (CommandLineSwitchException e)
             {
-                Assert.Equal(badCommandLineArg, e.CommandLineArg);
+                Assert.AreEqual(badCommandLineArg, e.CommandLineArg);
 
                 caughtError = true;
 
@@ -1646,7 +1646,7 @@ namespace Microsoft.Build.UnitTests
             }
             finally
             {
-                Assert.True(caughtError);
+                Assert.IsTrue(caughtError);
             }
         }
     }

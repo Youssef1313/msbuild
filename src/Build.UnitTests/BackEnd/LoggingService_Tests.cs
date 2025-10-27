@@ -63,22 +63,22 @@ namespace Microsoft.Build.UnitTests.Logging
             IBuildComponent logServiceComponent = (IBuildComponent)LoggingService.CreateLoggingService(LoggerMode.Synchronous, 1);
 
             // Create a synchronous logging service and do some quick checks
-            Assert.NotNull(logServiceComponent);
+            Assert.IsNotNull(logServiceComponent);
             LoggingService logService = (LoggingService)logServiceComponent;
-            Assert.Equal(LoggerMode.Synchronous, logService.LoggingMode);
-            Assert.Equal(LoggingServiceState.Instantiated, logService.ServiceState);
+            Assert.AreEqual(LoggerMode.Synchronous, logService.LoggingMode);
+            Assert.AreEqual(LoggingServiceState.Instantiated, logService.ServiceState);
 
             // Create an asynchronous logging service
             logServiceComponent = (IBuildComponent)LoggingService.CreateLoggingService(LoggerMode.Asynchronous, 1);
-            Assert.NotNull(logServiceComponent);
+            Assert.IsNotNull(logServiceComponent);
             logService = (LoggingService)logServiceComponent;
-            Assert.Equal(LoggerMode.Asynchronous, logService.LoggingMode);
-            Assert.Equal(LoggingServiceState.Instantiated, logService.ServiceState);
+            Assert.AreEqual(LoggerMode.Asynchronous, logService.LoggingMode);
+            Assert.AreEqual(LoggingServiceState.Instantiated, logService.ServiceState);
 
             // Shutdown logging thread
             logServiceComponent.InitializeComponent(new MockHost());
             logServiceComponent.ShutdownComponent();
-            Assert.Equal(LoggingServiceState.Shutdown, logService.ServiceState);
+            Assert.AreEqual(LoggingServiceState.Shutdown, logService.ServiceState);
         }
 
         /// <summary>
@@ -96,15 +96,15 @@ namespace Microsoft.Build.UnitTests.Logging
             IBuildComponentHost loggingHost = new MockHost(parameters);
 
             // Make sure we are in the Instantiated state before initializing
-            Assert.Equal(LoggingServiceState.Instantiated, ((LoggingService)logServiceComponent).ServiceState);
+            Assert.AreEqual(LoggingServiceState.Instantiated, ((LoggingService)logServiceComponent).ServiceState);
 
             logServiceComponent.InitializeComponent(loggingHost);
 
             // Make sure that the parameters in the host are set in the logging service
             LoggingService service = (LoggingService)logServiceComponent;
-            Assert.Equal(LoggingServiceState.Initialized, service.ServiceState);
-            Assert.Equal(4, service.MaxCPUCount);
-            Assert.True(service.OnlyLogCriticalEvents);
+            Assert.AreEqual(LoggingServiceState.Initialized, service.ServiceState);
+            Assert.AreEqual(4, service.MaxCPUCount);
+            Assert.IsTrue(service.OnlyLogCriticalEvents);
         }
 
         /// <summary>
@@ -142,13 +142,13 @@ namespace Microsoft.Build.UnitTests.Logging
             string className = "Microsoft.Build.UnitTests.Logging.LoggingService_Tests+ShutdownLoggerExceptionFL";
             Type exceptionType = typeof(LoggerException);
             VerifyShutdownExceptions(null, className, exceptionType);
-            Assert.Equal(LoggingServiceState.Shutdown, _initializedService.ServiceState);
+            Assert.AreEqual(LoggingServiceState.Shutdown, _initializedService.ServiceState);
 
             // Cause a general exception which should result in an InternalLoggerException
             className = "Microsoft.Build.UnitTests.Logging.LoggingService_Tests+ShutdownGeneralExceptionFL";
             exceptionType = typeof(InternalLoggerException);
             VerifyShutdownExceptions(null, className, exceptionType);
-            Assert.Equal(LoggingServiceState.Shutdown, _initializedService.ServiceState);
+            Assert.AreEqual(LoggingServiceState.Shutdown, _initializedService.ServiceState);
 
             // Cause a StackOverflow exception in the shutdown of the logger
             // this kind of exception should not be caught
@@ -156,7 +156,7 @@ namespace Microsoft.Build.UnitTests.Logging
             exceptionType = typeof(StackOverflowException);
             VerifyShutdownExceptions(null, className, exceptionType);
 
-            Assert.Equal(LoggingServiceState.Shutdown, _initializedService.ServiceState);
+            Assert.AreEqual(LoggingServiceState.Shutdown, _initializedService.ServiceState);
         }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace Microsoft.Build.UnitTests.Logging
             logger = new LoggerThrowException(true, false, new StackOverflowException());
             VerifyShutdownExceptions(logger, null, typeof(StackOverflowException));
 
-            Assert.Equal(LoggingServiceState.Shutdown, _initializedService.ServiceState);
+            Assert.AreEqual(LoggingServiceState.Shutdown, _initializedService.ServiceState);
         }
 
         /// <summary>
@@ -267,18 +267,18 @@ namespace Microsoft.Build.UnitTests.Logging
         {
             ConsoleLogger consoleLogger = new ConsoleLogger();
             RegularILogger regularILogger = new RegularILogger();
-            Assert.True(_initializedService.RegisterLogger(consoleLogger));
-            Assert.True(_initializedService.RegisterLogger(regularILogger));
-            Assert.NotNull(_initializedService.RegisteredLoggerTypeNames);
+            Assert.IsTrue(_initializedService.RegisterLogger(consoleLogger));
+            Assert.IsTrue(_initializedService.RegisterLogger(regularILogger));
+            Assert.IsNotNull(_initializedService.RegisteredLoggerTypeNames);
 
             // Should have 2 central loggers and 1 forwarding logger
-            Assert.Equal(3, _initializedService.RegisteredLoggerTypeNames.Count);
+            Assert.AreEqual(3, _initializedService.RegisteredLoggerTypeNames.Count);
             Assert.Contains("Microsoft.Build.BackEnd.Logging.CentralForwardingLogger", _initializedService.RegisteredLoggerTypeNames);
             Assert.Contains("Microsoft.Build.UnitTests.Logging.LoggingService_Tests+RegularILogger", _initializedService.RegisteredLoggerTypeNames);
             Assert.Contains("Microsoft.Build.Logging.ConsoleLogger", _initializedService.RegisteredLoggerTypeNames);
 
             // Should have 1 event sink
-            Assert.NotNull(_initializedService.RegisteredSinkNames);
+            Assert.IsNotNull(_initializedService.RegisteredSinkNames);
             Assert.Single(_initializedService.RegisteredSinkNames);
         }
 
@@ -290,19 +290,19 @@ namespace Microsoft.Build.UnitTests.Logging
         {
             ConsoleLogger consoleLogger = new ConsoleLogger();
             RegularILogger regularILogger = new RegularILogger();
-            Assert.True(_initializedService.RegisterLogger(consoleLogger));
-            Assert.False(_initializedService.RegisterLogger(consoleLogger));
-            Assert.True(_initializedService.RegisterLogger(regularILogger));
-            Assert.False(_initializedService.RegisterLogger(regularILogger));
-            Assert.NotNull(_initializedService.RegisteredLoggerTypeNames);
+            Assert.IsTrue(_initializedService.RegisterLogger(consoleLogger));
+            Assert.IsFalse(_initializedService.RegisterLogger(consoleLogger));
+            Assert.IsTrue(_initializedService.RegisterLogger(regularILogger));
+            Assert.IsFalse(_initializedService.RegisterLogger(regularILogger));
+            Assert.IsNotNull(_initializedService.RegisteredLoggerTypeNames);
 
-            Assert.Equal(3, _initializedService.RegisteredLoggerTypeNames.Count);
+            Assert.AreEqual(3, _initializedService.RegisteredLoggerTypeNames.Count);
             Assert.Contains("Microsoft.Build.BackEnd.Logging.CentralForwardingLogger", _initializedService.RegisteredLoggerTypeNames);
             Assert.Contains("Microsoft.Build.UnitTests.Logging.LoggingService_Tests+RegularILogger", _initializedService.RegisteredLoggerTypeNames);
             Assert.Contains("Microsoft.Build.Logging.ConsoleLogger", _initializedService.RegisteredLoggerTypeNames);
 
             // Should have 1 event sink
-            Assert.NotNull(_initializedService.RegisteredSinkNames);
+            Assert.IsNotNull(_initializedService.RegisteredSinkNames);
             Assert.Single(_initializedService.RegisteredSinkNames);
         }
 
@@ -357,21 +357,21 @@ namespace Microsoft.Build.UnitTests.Logging
 
             DistributedFileLogger fileLogger = new DistributedFileLogger();
             RegularILogger regularILogger = new RegularILogger();
-            Assert.True(_initializedService.RegisterDistributedLogger(regularILogger, configurableDescription));
-            Assert.True(_initializedService.RegisterDistributedLogger(null, distributedDescription));
-            Assert.NotNull(_initializedService.RegisteredLoggerTypeNames);
+            Assert.IsTrue(_initializedService.RegisterDistributedLogger(regularILogger, configurableDescription));
+            Assert.IsTrue(_initializedService.RegisterDistributedLogger(null, distributedDescription));
+            Assert.IsNotNull(_initializedService.RegisteredLoggerTypeNames);
 
             // Should have 2 central loggers and 2 forwarding logger
-            Assert.Equal(4, _initializedService.RegisteredLoggerTypeNames.Count);
+            Assert.AreEqual(4, _initializedService.RegisteredLoggerTypeNames.Count);
             Assert.Contains("Microsoft.Build.Logging.ConfigurableForwardingLogger", _initializedService.RegisteredLoggerTypeNames);
             Assert.Contains("Microsoft.Build.UnitTests.Logging.LoggingService_Tests+RegularILogger", _initializedService.RegisteredLoggerTypeNames);
             Assert.Contains("Microsoft.Build.Logging.DistributedFileLogger", _initializedService.RegisteredLoggerTypeNames);
             Assert.Contains("Microsoft.Build.BackEnd.Logging.NullCentralLogger", _initializedService.RegisteredLoggerTypeNames);
 
             // Should have 2 event sink
-            Assert.NotNull(_initializedService.RegisteredSinkNames);
-            Assert.Equal(2, _initializedService.RegisteredSinkNames.Count);
-            Assert.Equal(2, _initializedService.LoggerDescriptions.Count);
+            Assert.IsNotNull(_initializedService.RegisteredSinkNames);
+            Assert.AreEqual(2, _initializedService.RegisteredSinkNames.Count);
+            Assert.AreEqual(2, _initializedService.LoggerDescriptions.Count);
         }
 
         /// <summary>
@@ -395,32 +395,32 @@ namespace Microsoft.Build.UnitTests.Logging
             RegularILogger regularILoggerA = new RegularILogger();
             RegularILogger regularILoggerB = new RegularILogger();
             RegularILogger regularILoggerC = new RegularILogger();
-            Assert.True(_initializedService.RegisterDistributedLogger(regularILoggerA, configurableDescriptionA));
-            Assert.True(_initializedService.RegisterDistributedLogger(regularILoggerB, configurableDescriptionB));
-            Assert.True(_initializedService.RegisterLogger(regularILoggerC));
-            Assert.NotNull(_initializedService.RegisteredLoggerTypeNames);
+            Assert.IsTrue(_initializedService.RegisterDistributedLogger(regularILoggerA, configurableDescriptionA));
+            Assert.IsTrue(_initializedService.RegisterDistributedLogger(regularILoggerB, configurableDescriptionB));
+            Assert.IsTrue(_initializedService.RegisterLogger(regularILoggerC));
+            Assert.IsNotNull(_initializedService.RegisteredLoggerTypeNames);
 
             _initializedService.LogBuildStarted();
-            Assert.Equal(1, regularILoggerA.BuildStartedCount);
-            Assert.Equal(1, regularILoggerB.BuildStartedCount);
-            Assert.Equal(1, regularILoggerC.BuildStartedCount);
+            Assert.AreEqual(1, regularILoggerA.BuildStartedCount);
+            Assert.AreEqual(1, regularILoggerB.BuildStartedCount);
+            Assert.AreEqual(1, regularILoggerC.BuildStartedCount);
 
             _initializedService.LogBuildFinished(true);
-            Assert.Equal(1, regularILoggerA.BuildFinishedCount);
-            Assert.Equal(1, regularILoggerB.BuildFinishedCount);
-            Assert.Equal(1, regularILoggerC.BuildFinishedCount);
+            Assert.AreEqual(1, regularILoggerA.BuildFinishedCount);
+            Assert.AreEqual(1, regularILoggerB.BuildFinishedCount);
+            Assert.AreEqual(1, regularILoggerC.BuildFinishedCount);
 
             // Make sure if we call build started again we only get one other build started event.
             _initializedService.LogBuildStarted();
-            Assert.Equal(2, regularILoggerA.BuildStartedCount);
-            Assert.Equal(2, regularILoggerB.BuildStartedCount);
-            Assert.Equal(2, regularILoggerC.BuildStartedCount);
+            Assert.AreEqual(2, regularILoggerA.BuildStartedCount);
+            Assert.AreEqual(2, regularILoggerB.BuildStartedCount);
+            Assert.AreEqual(2, regularILoggerC.BuildStartedCount);
 
             // Make sure if we call build finished again we only get one other build finished event.
             _initializedService.LogBuildFinished(true);
-            Assert.Equal(2, regularILoggerA.BuildFinishedCount);
-            Assert.Equal(2, regularILoggerB.BuildFinishedCount);
-            Assert.Equal(2, regularILoggerC.BuildFinishedCount);
+            Assert.AreEqual(2, regularILoggerA.BuildFinishedCount);
+            Assert.AreEqual(2, regularILoggerB.BuildFinishedCount);
+            Assert.AreEqual(2, regularILoggerC.BuildFinishedCount);
         }
 
         /// <summary>
@@ -437,16 +437,16 @@ namespace Microsoft.Build.UnitTests.Logging
 #endif
 
             RegularILogger regularILogger = new RegularILogger();
-            Assert.True(_initializedService.RegisterDistributedLogger(regularILogger, description));
-            Assert.False(_initializedService.RegisterDistributedLogger(regularILogger, description));
+            Assert.IsTrue(_initializedService.RegisterDistributedLogger(regularILogger, description));
+            Assert.IsFalse(_initializedService.RegisterDistributedLogger(regularILogger, description));
 
             // Should have 2 central loggers and 1 forwarding logger
-            Assert.Equal(2, _initializedService.RegisteredLoggerTypeNames.Count);
+            Assert.AreEqual(2, _initializedService.RegisteredLoggerTypeNames.Count);
             Assert.Contains("Microsoft.Build.Logging.ConfigurableForwardingLogger", _initializedService.RegisteredLoggerTypeNames);
             Assert.Contains("Microsoft.Build.UnitTests.Logging.LoggingService_Tests+RegularILogger", _initializedService.RegisteredLoggerTypeNames);
 
             // Should have 1 sink
-            Assert.NotNull(_initializedService.RegisteredSinkNames);
+            Assert.IsNotNull(_initializedService.RegisteredSinkNames);
             Assert.Single(_initializedService.RegisteredSinkNames);
             Assert.Single(_initializedService.LoggerDescriptions);
         }
@@ -465,9 +465,9 @@ namespace Microsoft.Build.UnitTests.Logging
 #endif
 
             RegularILogger regularILogger = new RegularILogger();
-            Assert.True(_initializedService.RegisterDistributedLogger(regularILogger, description));
-            Assert.True(_initializedService.RegisterDistributedLogger(null, description));
-            Assert.Equal(4, _initializedService.RegisteredLoggerTypeNames.Count);
+            Assert.IsTrue(_initializedService.RegisterDistributedLogger(regularILogger, description));
+            Assert.IsTrue(_initializedService.RegisterDistributedLogger(null, description));
+            Assert.AreEqual(4, _initializedService.RegisteredLoggerTypeNames.Count);
 
             // Verify there are two versions in the type names, one for each description
             int countForwardingLogger = 0;
@@ -479,14 +479,14 @@ namespace Microsoft.Build.UnitTests.Logging
                 }
             }
 
-            Assert.Equal(2, countForwardingLogger);
+            Assert.AreEqual(2, countForwardingLogger);
             Assert.Contains("Microsoft.Build.BackEnd.Logging.NullCentralLogger", _initializedService.RegisteredLoggerTypeNames);
             Assert.Contains("Microsoft.Build.UnitTests.Logging.LoggingService_Tests+RegularILogger", _initializedService.RegisteredLoggerTypeNames);
 
             // Should have 2 sink
-            Assert.NotNull(_initializedService.RegisteredSinkNames);
-            Assert.Equal(2, _initializedService.RegisteredSinkNames.Count);
-            Assert.Equal(2, _initializedService.LoggerDescriptions.Count);
+            Assert.IsNotNull(_initializedService.RegisteredSinkNames);
+            Assert.AreEqual(2, _initializedService.RegisteredSinkNames.Count);
+            Assert.AreEqual(2, _initializedService.LoggerDescriptions.Count);
         }
 
         #endregion
@@ -562,10 +562,10 @@ namespace Microsoft.Build.UnitTests.Logging
             // Register the descriptions again with the same sink so we can verify that another sink was not created
             _initializedService.InitializeNodeLoggers(loggerDescriptions, sink, 1);
 
-            Assert.NotNull(_initializedService.RegisteredLoggerTypeNames);
+            Assert.IsNotNull(_initializedService.RegisteredLoggerTypeNames);
 
             // Should have 6 forwarding logger. three of each type
-            Assert.Equal(6, _initializedService.RegisteredLoggerTypeNames.Count);
+            Assert.AreEqual(6, _initializedService.RegisteredLoggerTypeNames.Count);
             Assert.Contains("Microsoft.Build.Logging.ConfigurableForwardingLogger", _initializedService.RegisteredLoggerTypeNames);
             Assert.Contains("Microsoft.Build.BackEnd.Logging.CentralForwardingLogger", _initializedService.RegisteredLoggerTypeNames);
 
@@ -579,7 +579,7 @@ namespace Microsoft.Build.UnitTests.Logging
             }
 
             // Should be 3, one for each call to RegisterLoggerDescriptions
-            Assert.Equal(3, countForwardingLogger);
+            Assert.AreEqual(3, countForwardingLogger);
 
             countForwardingLogger = 0;
             foreach (string loggerName in _initializedService.RegisteredLoggerTypeNames)
@@ -591,11 +591,11 @@ namespace Microsoft.Build.UnitTests.Logging
             }
 
             // Should be 3, one for each call to RegisterLoggerDescriptions
-            Assert.Equal(3, countForwardingLogger);
+            Assert.AreEqual(3, countForwardingLogger);
 
             // Should have 2 event sink
-            Assert.NotNull(_initializedService.RegisteredSinkNames);
-            Assert.Equal(2, _initializedService.RegisteredSinkNames.Count);
+            Assert.IsNotNull(_initializedService.RegisteredSinkNames);
+            Assert.AreEqual(2, _initializedService.RegisteredSinkNames.Count);
 
             // There should not be any (this method is to be called on a child node)
             Assert.Empty(_initializedService.LoggerDescriptions);
@@ -615,16 +615,16 @@ namespace Microsoft.Build.UnitTests.Logging
 #endif
 
             RegularILogger regularILogger = new RegularILogger();
-            Assert.True(_initializedService.RegisterDistributedLogger(regularILogger, description));
-            Assert.False(_initializedService.RegisterDistributedLogger(regularILogger, description));
+            Assert.IsTrue(_initializedService.RegisterDistributedLogger(regularILogger, description));
+            Assert.IsFalse(_initializedService.RegisterDistributedLogger(regularILogger, description));
 
             // Should have 2 central loggers and 1 forwarding logger
-            Assert.Equal(2, _initializedService.RegisteredLoggerTypeNames.Count);
+            Assert.AreEqual(2, _initializedService.RegisteredLoggerTypeNames.Count);
             Assert.Contains("Microsoft.Build.Logging.ConfigurableForwardingLogger", _initializedService.RegisteredLoggerTypeNames);
             Assert.Contains("Microsoft.Build.UnitTests.Logging.LoggingService_Tests+RegularILogger", _initializedService.RegisteredLoggerTypeNames);
 
             // Should have 1 sink
-            Assert.NotNull(_initializedService.RegisteredSinkNames);
+            Assert.IsNotNull(_initializedService.RegisteredSinkNames);
             Assert.Single(_initializedService.RegisteredSinkNames);
             Assert.Single(_initializedService.LoggerDescriptions);
         }
@@ -639,25 +639,25 @@ namespace Microsoft.Build.UnitTests.Logging
         {
             // Test OnlyLogCriticalEvents
             LoggingService loggingService = (LoggingService)LoggingService.CreateLoggingService(LoggerMode.Synchronous, 1);
-            Assert.False(loggingService.OnlyLogCriticalEvents); // "Expected only log critical events to be false"
+            Assert.IsFalse(loggingService.OnlyLogCriticalEvents); // "Expected only log critical events to be false"
             loggingService.OnlyLogCriticalEvents = true;
-            Assert.True(loggingService.OnlyLogCriticalEvents); // "Expected only log critical events to be true"
+            Assert.IsTrue(loggingService.OnlyLogCriticalEvents); // "Expected only log critical events to be true"
 
             // Test LoggingMode
-            Assert.Equal(LoggerMode.Synchronous, loggingService.LoggingMode); // "Expected Logging mode to be Synchronous"
+            Assert.AreEqual(LoggerMode.Synchronous, loggingService.LoggingMode); // "Expected Logging mode to be Synchronous"
 
             // Test LoggerDescriptions
             Assert.Empty(loggingService.LoggerDescriptions); // "Expected LoggerDescriptions to be empty"
 
             // Test Number of InitialNodes
-            Assert.Equal(1, loggingService.MaxCPUCount);
+            Assert.AreEqual(1, loggingService.MaxCPUCount);
             loggingService.MaxCPUCount = 5;
-            Assert.Equal(5, loggingService.MaxCPUCount);
+            Assert.AreEqual(5, loggingService.MaxCPUCount);
 
             // Test MinimumRequiredMessageImportance
-            Assert.Equal(MessageImportance.Low, loggingService.MinimumRequiredMessageImportance);
+            Assert.AreEqual(MessageImportance.Low, loggingService.MinimumRequiredMessageImportance);
             loggingService.RegisterLogger(new ConsoleLogger(LoggerVerbosity.Normal));
-            Assert.Equal(MessageImportance.Normal, loggingService.MinimumRequiredMessageImportance);
+            Assert.AreEqual(MessageImportance.Normal, loggingService.MinimumRequiredMessageImportance);
         }
 
         #endregion
@@ -703,8 +703,8 @@ namespace Microsoft.Build.UnitTests.Logging
             loggingService.PacketReceived(1, packet);
 
             BuildMessageEventArgs messageEventFromPacket = loggingService.ProcessedBuildEvent as BuildMessageEventArgs;
-            Assert.NotNull(messageEventFromPacket);
-            Assert.Equal(messageEventFromPacket, messageEvent); // "Expected messages to match"
+            Assert.IsNotNull(messageEventFromPacket);
+            Assert.AreEqual(messageEventFromPacket, messageEvent); // "Expected messages to match"
         }
 
         #endregion
@@ -734,19 +734,19 @@ namespace Microsoft.Build.UnitTests.Logging
 
             BuildErrorEventArgs actualBuildEvent = logger.Errors.ShouldHaveSingleItem();
 
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.Code, actualBuildEvent.Code);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.File, actualBuildEvent.File);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.ProjectFile, actualBuildEvent.ProjectFile);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.Subcategory, actualBuildEvent.Subcategory);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.HelpKeyword, actualBuildEvent.HelpKeyword);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.Message, actualBuildEvent.Message);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.SenderName, actualBuildEvent.SenderName);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.ColumnNumber, actualBuildEvent.ColumnNumber);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.EndColumnNumber, actualBuildEvent.EndColumnNumber);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.EndLineNumber, actualBuildEvent.EndLineNumber);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.LineNumber, actualBuildEvent.LineNumber);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.BuildEventContext, actualBuildEvent.BuildEventContext);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.Timestamp, actualBuildEvent.Timestamp);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.Code, actualBuildEvent.Code);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.File, actualBuildEvent.File);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.ProjectFile, actualBuildEvent.ProjectFile);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.Subcategory, actualBuildEvent.Subcategory);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.HelpKeyword, actualBuildEvent.HelpKeyword);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.Message, actualBuildEvent.Message);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.SenderName, actualBuildEvent.SenderName);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.ColumnNumber, actualBuildEvent.ColumnNumber);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.EndColumnNumber, actualBuildEvent.EndColumnNumber);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.EndLineNumber, actualBuildEvent.EndLineNumber);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.LineNumber, actualBuildEvent.LineNumber);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.BuildEventContext, actualBuildEvent.BuildEventContext);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.Timestamp, actualBuildEvent.Timestamp);
         }
 
         /// <summary>
@@ -818,20 +818,20 @@ namespace Microsoft.Build.UnitTests.Logging
 
             BuildMessageEventArgs actualBuildEvent = logger.BuildMessageEvents.ShouldHaveSingleItem();
 
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.BuildEventContext, actualBuildEvent.BuildEventContext);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.Code, actualBuildEvent.Code);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.ColumnNumber, actualBuildEvent.ColumnNumber);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.EndColumnNumber, actualBuildEvent.EndColumnNumber);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.EndLineNumber, actualBuildEvent.EndLineNumber);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.File, actualBuildEvent.File);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.HelpKeyword, actualBuildEvent.HelpKeyword);
-            Assert.Equal(MessageImportance.Low, actualBuildEvent.Importance);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.LineNumber, actualBuildEvent.LineNumber);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.Message, actualBuildEvent.Message);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.ProjectFile, actualBuildEvent.ProjectFile);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.SenderName, actualBuildEvent.SenderName);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.Subcategory, actualBuildEvent.Subcategory);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.Timestamp, actualBuildEvent.Timestamp);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.BuildEventContext, actualBuildEvent.BuildEventContext);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.Code, actualBuildEvent.Code);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.ColumnNumber, actualBuildEvent.ColumnNumber);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.EndColumnNumber, actualBuildEvent.EndColumnNumber);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.EndLineNumber, actualBuildEvent.EndLineNumber);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.File, actualBuildEvent.File);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.HelpKeyword, actualBuildEvent.HelpKeyword);
+            Assert.AreEqual(MessageImportance.Low, actualBuildEvent.Importance);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.LineNumber, actualBuildEvent.LineNumber);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.Message, actualBuildEvent.Message);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.ProjectFile, actualBuildEvent.ProjectFile);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.SenderName, actualBuildEvent.SenderName);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.Subcategory, actualBuildEvent.Subcategory);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.Timestamp, actualBuildEvent.Timestamp);
         }
 
         /// <summary>
@@ -872,19 +872,19 @@ namespace Microsoft.Build.UnitTests.Logging
 
             BuildErrorEventArgs actualBuildEvent = logger.Errors.ShouldHaveSingleItem();
 
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.Code, actualBuildEvent.Code);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.File, actualBuildEvent.File);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.ProjectFile, actualBuildEvent.ProjectFile);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.Subcategory, actualBuildEvent.Subcategory);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.HelpKeyword, actualBuildEvent.HelpKeyword);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.Message, actualBuildEvent.Message);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.SenderName, actualBuildEvent.SenderName);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.ColumnNumber, actualBuildEvent.ColumnNumber);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.EndColumnNumber, actualBuildEvent.EndColumnNumber);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.EndLineNumber, actualBuildEvent.EndLineNumber);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.LineNumber, actualBuildEvent.LineNumber);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.BuildEventContext, actualBuildEvent.BuildEventContext);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.Timestamp, actualBuildEvent.Timestamp);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.Code, actualBuildEvent.Code);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.File, actualBuildEvent.File);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.ProjectFile, actualBuildEvent.ProjectFile);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.Subcategory, actualBuildEvent.Subcategory);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.HelpKeyword, actualBuildEvent.HelpKeyword);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.Message, actualBuildEvent.Message);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.SenderName, actualBuildEvent.SenderName);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.ColumnNumber, actualBuildEvent.ColumnNumber);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.EndColumnNumber, actualBuildEvent.EndColumnNumber);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.EndLineNumber, actualBuildEvent.EndLineNumber);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.LineNumber, actualBuildEvent.LineNumber);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.BuildEventContext, actualBuildEvent.BuildEventContext);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.Timestamp, actualBuildEvent.Timestamp);
         }
 
         /// <summary>
@@ -925,20 +925,20 @@ namespace Microsoft.Build.UnitTests.Logging
 
             BuildMessageEventArgs actualBuildEvent = logger.BuildMessageEvents.ShouldHaveSingleItem();
 
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.BuildEventContext, actualBuildEvent.BuildEventContext);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.Code, actualBuildEvent.Code);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.ColumnNumber, actualBuildEvent.ColumnNumber);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.EndColumnNumber, actualBuildEvent.EndColumnNumber);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.EndLineNumber, actualBuildEvent.EndLineNumber);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.File, actualBuildEvent.File);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.HelpKeyword, actualBuildEvent.HelpKeyword);
-            Assert.Equal(MessageImportance.Low, actualBuildEvent.Importance);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.LineNumber, actualBuildEvent.LineNumber);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.Message, actualBuildEvent.Message);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.ProjectFile, actualBuildEvent.ProjectFile);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.SenderName, actualBuildEvent.SenderName);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.Subcategory, actualBuildEvent.Subcategory);
-            Assert.Equal(BuildWarningEventForTreatAsErrorOrMessageTests.Timestamp, actualBuildEvent.Timestamp);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.BuildEventContext, actualBuildEvent.BuildEventContext);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.Code, actualBuildEvent.Code);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.ColumnNumber, actualBuildEvent.ColumnNumber);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.EndColumnNumber, actualBuildEvent.EndColumnNumber);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.EndLineNumber, actualBuildEvent.EndLineNumber);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.File, actualBuildEvent.File);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.HelpKeyword, actualBuildEvent.HelpKeyword);
+            Assert.AreEqual(MessageImportance.Low, actualBuildEvent.Importance);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.LineNumber, actualBuildEvent.LineNumber);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.Message, actualBuildEvent.Message);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.ProjectFile, actualBuildEvent.ProjectFile);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.SenderName, actualBuildEvent.SenderName);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.Subcategory, actualBuildEvent.Subcategory);
+            Assert.AreEqual(BuildWarningEventForTreatAsErrorOrMessageTests.Timestamp, actualBuildEvent.Timestamp);
         }
 
         private MockLogger GetLoggedEventsWithWarningsAsErrorsOrMessages(

@@ -75,7 +75,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
 
             bool succeeded = Execute(t);
 
-            Assert.True(succeeded);
+            Assert.IsTrue(succeeded);
             Assert.Single(t.ResolvedDependencyFiles);
             t.ResolvedDependencyFiles[0].GetMetadata("FusionName").ShouldBe("UnifyMe, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089", StringCompareShould.IgnoreCase);
             engine.AssertLogContains(
@@ -148,7 +148,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
 
                 bool succeeded = Execute(t, false);
 
-                Assert.True(succeeded);
+                Assert.IsTrue(succeeded);
                 Assert.Empty(t.ResolvedDependencyFiles);
                 engine.AssertLogDoesntContain(
                         String.Format(AssemblyResources.GetString("ResolveAssemblyReference.UnificationByAppConfig"), "1.0.0.0", appConfigFile, Path.Combine(s_myApp_V10Path, "DependsOnUnified.dll")));
@@ -205,7 +205,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
 
             bool succeeded = Execute(t);
 
-            Assert.True(succeeded);
+            Assert.IsTrue(succeeded);
             Assert.Single(t.ResolvedDependencyFiles);
             t.ResolvedDependencyFiles[0].GetMetadata("FusionName").ShouldBe("UnifyMe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089", StringCompareShould.IgnoreCase);
 
@@ -255,7 +255,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
 
             bool succeeded = Execute(t);
 
-            Assert.True(succeeded);
+            Assert.IsTrue(succeeded);
             Assert.Single(t.ResolvedDependencyFiles);
             t.ResolvedDependencyFiles[0].GetMetadata("FusionName").ShouldBe("UnifyMe, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089", StringCompareShould.IgnoreCase);
             engine.AssertLogContains(
@@ -307,7 +307,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
 
             bool succeeded = Execute(t);
 
-            Assert.True(succeeded);
+            Assert.IsTrue(succeeded);
             Assert.Empty(t.ResolvedDependencyFiles);
             string shouldContain;
 
@@ -373,7 +373,7 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
 
             bool succeeded = Execute(t);
 
-            Assert.True(succeeded);
+            Assert.IsTrue(succeeded);
             Assert.Single(t.ResolvedDependencyFiles);
             t.ResolvedDependencyFiles[0].GetMetadata("FusionName").ShouldBe("UnifyMe, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089", StringCompareShould.IgnoreCase);
             engine.AssertLogContains(
@@ -418,8 +418,8 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
             t.AppConfigFile = appConfigFile;
 
             bool succeeded = Execute(t);
-            Assert.False(succeeded);
-            Assert.Equal(1, engine.Errors);
+            Assert.IsFalse(succeeded);
+            Assert.AreEqual(1, engine.Errors);
 
             // Cleanup.
             File.Delete(appConfigFile);
@@ -460,8 +460,8 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
             t.AppConfigFile = appConfigFile;
 
             bool succeeded = Execute(t);
-            Assert.False(succeeded);
-            Assert.Equal(1, engine.Errors);
+            Assert.IsFalse(succeeded);
+            Assert.AreEqual(1, engine.Errors);
             engine.AssertLogContains(
                     String.Format(AssemblyResources.GetString("AppConfig.BindingRedirectMissingOldVersion")));
 
@@ -504,8 +504,8 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
             t.AppConfigFile = appConfigFile;
 
             bool succeeded = Execute(t);
-            Assert.False(succeeded);
-            Assert.Equal(1, engine.Errors);
+            Assert.IsFalse(succeeded);
+            Assert.AreEqual(1, engine.Errors);
             engine.AssertLogContains(
                     String.Format(AssemblyResources.GetString("AppConfig.BindingRedirectMissingNewVersion")));
 
@@ -549,8 +549,8 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
             t.AppConfigFile = appConfigFile;
 
             bool succeeded = Execute(t);
-            Assert.False(succeeded);
-            Assert.Equal(1, engine.Errors);
+            Assert.IsFalse(succeeded);
+            Assert.AreEqual(1, engine.Errors);
 
             // Cleanup.
             File.Delete(appConfigFile);
@@ -596,8 +596,8 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
             bool succeeded = Execute(t);
 
             // With the introduction of GenerateBindingRedirects task, RAR now accepts AutoUnify and App.Config at the same time.
-            Assert.True(succeeded);
-            Assert.Equal(0, engine.Errors);
+            Assert.IsTrue(succeeded);
+            Assert.AreEqual(0, engine.Errors);
 
             // Cleanup.
             File.Delete(appConfigFile);
@@ -631,8 +631,8 @@ namespace Microsoft.Build.UnitTests.ResolveAssemblyReference_Tests.VersioningAnd
             t.AppConfigFile = @"C:\MyNonexistentFolder\MyNonExistentApp.config";
 
             bool succeeded = Execute(t);
-            Assert.False(succeeded);
-            Assert.Equal(1, engine.Errors);
+            Assert.IsFalse(succeeded);
+            Assert.AreEqual(1, engine.Errors);
         }
     }
 }

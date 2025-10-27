@@ -45,7 +45,7 @@ namespace Microsoft.Build.Tasks.UnitTests
 
             bool result = project.Build(new MockLogger(_output));
 
-            Assert.True(result);
+            Assert.IsTrue(result);
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Microsoft.Build.Tasks.UnitTests
 ");
             var logger = new MockLogger(_output);
             bool result = project.Build(logger);
-            Assert.True(result, "Output:" + Environment.NewLine + logger.FullLog);
+            Assert.IsTrue(result, "Output:" + Environment.NewLine + logger.FullLog);
         }
 
         /// <summary>

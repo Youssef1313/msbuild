@@ -31,11 +31,11 @@ namespace Microsoft.Build.UnitTests.OM.Evaluation
 
             var itemSpecGlob = itemSpec.ToMSBuildGlob();
 
-            Assert.True(itemSpecGlob.IsMatch("a"));
-            Assert.True(itemSpecGlob.IsMatch("bar"));
-            Assert.True(itemSpecGlob.IsMatch("car"));
-            Assert.True(itemSpecGlob.IsMatch("d"));
-            Assert.True(itemSpecGlob.IsMatch("e"));
+            Assert.IsTrue(itemSpecGlob.IsMatch("a"));
+            Assert.IsTrue(itemSpecGlob.IsMatch("bar"));
+            Assert.IsTrue(itemSpecGlob.IsMatch("car"));
+            Assert.IsTrue(itemSpecGlob.IsMatch("d"));
+            Assert.IsTrue(itemSpecGlob.IsMatch("e"));
         }
 
         [Fact]
@@ -67,15 +67,15 @@ namespace Microsoft.Build.UnitTests.OM.Evaluation
             // cause partial Lazy state to initialize in the ItemExpressionFragment
             itemSpec.FragmentsMatchingItem("e", out matches);
 
-            Assert.Equal(1, matches);
+            Assert.AreEqual(1, matches);
 
             var itemSpecGlob = itemSpec.ToMSBuildGlob();
 
-            Assert.True(itemSpecGlob.IsMatch("a"));
-            Assert.True(itemSpecGlob.IsMatch("bar"));
-            Assert.True(itemSpecGlob.IsMatch("car"));
-            Assert.True(itemSpecGlob.IsMatch("d"));
-            Assert.True(itemSpecGlob.IsMatch("e"));
+            Assert.IsTrue(itemSpecGlob.IsMatch("a"));
+            Assert.IsTrue(itemSpecGlob.IsMatch("bar"));
+            Assert.IsTrue(itemSpecGlob.IsMatch("car"));
+            Assert.IsTrue(itemSpecGlob.IsMatch("d"));
+            Assert.IsTrue(itemSpecGlob.IsMatch("e"));
         }
 
         private ProjectInstanceItemSpec CreateItemSpecFrom(string itemSpec, ProjectInstanceExpander expander, IElementLocation location = null)

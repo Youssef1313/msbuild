@@ -23,8 +23,8 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         {
             ProjectPropertyInstance property = GetPropertyInstance();
 
-            Assert.Equal("p", property.Name);
-            Assert.Equal("v1", property.EvaluatedValue);
+            Assert.AreEqual("p", property.Name);
+            Assert.AreEqual("v1", property.EvaluatedValue);
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         {
             ProjectPropertyInstance property = GetPropertyInstance();
             property.EvaluatedValue = "v2";
-            Assert.Equal("v2", property.EvaluatedValue);
+            Assert.AreEqual("v2", property.EvaluatedValue);
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         {
             ProjectPropertyInstance property = GetPropertyInstance();
             property.EvaluatedValue = "v!2";
-            Assert.Equal("v!2", property.EvaluatedValue);
+            Assert.AreEqual("v!2", property.EvaluatedValue);
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         {
             ProjectPropertyInstance property = GetPropertyInstance();
             property.EvaluatedValue = String.Empty;
-            Assert.Equal(String.Empty, property.EvaluatedValue);
+            Assert.AreEqual(String.Empty, property.EvaluatedValue);
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         public void ImmutableGetterFalse()
         {
             ProjectPropertyInstance property = GetPropertyInstance();
-            Assert.False(property.IsImmutable);
+            Assert.IsFalse(property.IsImmutable);
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Microsoft.Build.UnitTests.OM.Instance
             project.SetProperty("p", "v1");
             var snapshot = project.CreateProjectInstance(ProjectInstanceSettings.Immutable);
             var property = snapshot.GetProperty("p");
-            Assert.True(property.IsImmutable);
+            Assert.IsTrue(property.IsImmutable);
         }
 
         /// <summary>

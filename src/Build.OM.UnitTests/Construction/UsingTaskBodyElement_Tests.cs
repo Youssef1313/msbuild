@@ -25,8 +25,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         {
             ProjectUsingTaskBodyElement body = GetBodyXml();
 
-            Assert.Equal(body.Evaluate, bool.FalseString, true);
-            Assert.Equal("Contents", body.TaskBody);
+            Assert.AreEqual(body.Evaluate, bool.FalseString, true);
+            Assert.AreEqual("Contents", body.TaskBody);
         }
 
         /// <summary>
@@ -78,8 +78,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(body.ContainingProject);
 
             body.TaskBody = "MoreContents";
-            Assert.Equal("MoreContents", body.TaskBody);
-            Assert.True(body.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual("MoreContents", body.TaskBody);
+            Assert.IsTrue(body.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -92,8 +92,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Helpers.ClearDirtyFlag(body.ContainingProject);
 
             body.TaskBody = String.Empty;
-            Assert.Equal(String.Empty, body.TaskBody);
-            Assert.True(body.ContainingProject.HasUnsavedChanges);
+            Assert.AreEqual(String.Empty, body.TaskBody);
+            Assert.IsTrue(body.ContainingProject.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             Assert.Contains("Evaluate", body.ContainingProject.RawXml);
             body.Evaluate = null;
             Assert.DoesNotContain("Evaluate", body.ContainingProject.RawXml);
-            Assert.Equal(bool.TrueString, body.Evaluate);
+            Assert.AreEqual(bool.TrueString, body.Evaluate);
         }
 
         /// <summary>

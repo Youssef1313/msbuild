@@ -23,14 +23,14 @@ namespace Microsoft.Build.UnitTests.OM.Instance
         {
             var task = GetSampleTaskInstance();
 
-            Assert.Equal("t1", task.Name);
-            Assert.Equal("c", task.Condition);
-            Assert.Equal("coe", task.ContinueOnError);
+            Assert.AreEqual("t1", task.Name);
+            Assert.AreEqual("c", task.Condition);
+            Assert.AreEqual("coe", task.ContinueOnError);
 
             var parameters = task.Parameters;
-            Assert.Equal(2, parameters.Count);
-            Assert.Equal("a1", parameters["a"]);
-            Assert.Equal("b1", parameters["b"]);
+            Assert.AreEqual(2, parameters.Count);
+            Assert.AreEqual("a1", parameters["a"]);
+            Assert.AreEqual("b1", parameters["b"]);
         }
 
         /// <summary>

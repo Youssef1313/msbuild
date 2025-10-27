@@ -119,7 +119,7 @@ namespace Microsoft.Build.UnitTests
                                     FileSystems.Default);
 
             value = tree.Evaluate(state);
-            Assert.True(value);
+            Assert.IsTrue(value);
 
             if (File.Exists(fileThatMustAlwaysExist))
             {
@@ -351,12 +351,12 @@ namespace Microsoft.Build.UnitTests
             AssertParseEvaluate(p, "'$(foo)' != 'bar'", expander, true, state);
             Assert.Single(conditionedProperties);
             properties = conditionedProperties["foo"];
-            Assert.Equal(2, properties.Count);
+            Assert.AreEqual(2, properties.Count);
 
             AssertParseEvaluate(p, "'$(branch)|$(build)|$(platform)' == 'lab22dev|debug|x86'", expander, false, state);
-            Assert.Equal(4, conditionedProperties.Count);
+            Assert.AreEqual(4, conditionedProperties.Count);
             properties = conditionedProperties["foo"];
-            Assert.Equal(2, properties.Count);
+            Assert.AreEqual(2, properties.Count);
             properties = conditionedProperties["branch"];
             Assert.Single(properties);
             properties = conditionedProperties["build"];
@@ -365,26 +365,26 @@ namespace Microsoft.Build.UnitTests
             Assert.Single(properties);
 
             AssertParseEvaluate(p, "'$(branch)|$(build)|$(platform)' == 'lab21|debug|x86'", expander, false, state);
-            Assert.Equal(4, conditionedProperties.Count);
+            Assert.AreEqual(4, conditionedProperties.Count);
             properties = conditionedProperties["foo"];
-            Assert.Equal(2, properties.Count);
+            Assert.AreEqual(2, properties.Count);
             properties = conditionedProperties["branch"];
-            Assert.Equal(2, properties.Count);
+            Assert.AreEqual(2, properties.Count);
             properties = conditionedProperties["build"];
             Assert.Single(properties);
             properties = conditionedProperties["platform"];
             Assert.Single(properties);
 
             AssertParseEvaluate(p, "'$(branch)|$(build)|$(platform)' == 'lab23|retail|ia64'", expander, false, state);
-            Assert.Equal(4, conditionedProperties.Count);
+            Assert.AreEqual(4, conditionedProperties.Count);
             properties = conditionedProperties["foo"];
-            Assert.Equal(2, properties.Count);
+            Assert.AreEqual(2, properties.Count);
             properties = conditionedProperties["branch"];
-            Assert.Equal(3, properties.Count);
+            Assert.AreEqual(3, properties.Count);
             properties = conditionedProperties["build"];
-            Assert.Equal(2, properties.Count);
+            Assert.AreEqual(2, properties.Count);
             properties = conditionedProperties["platform"];
-            Assert.Equal(2, properties.Count);
+            Assert.AreEqual(2, properties.Count);
             DumpDictionary(conditionedProperties);
         }
 
@@ -452,7 +452,7 @@ namespace Microsoft.Build.UnitTests
             }
 
             bool result = tree.Evaluate(state);
-            Assert.Equal(expected, result);
+            Assert.AreEqual(expected, result);
         }
 
 
@@ -494,7 +494,7 @@ namespace Microsoft.Build.UnitTests
                 fExceptionCaught = true;
             }
 
-            Assert.True(fExceptionCaught);
+            Assert.IsTrue(fExceptionCaught);
         }
 
         /// <summary>

@@ -34,28 +34,28 @@ namespace Microsoft.Build.UnitTests
         [Fact]
         public void Basic()
         {
-            Assert.True(TypeLoader.IsPartialTypeNameMatch("Csc", "csc")); // ==> exact match
-            Assert.True(TypeLoader.IsPartialTypeNameMatch("Microsoft.Build.Tasks.Csc", "Microsoft.Build.Tasks.Csc")); // ==> exact match
-            Assert.True(TypeLoader.IsPartialTypeNameMatch("Microsoft.Build.Tasks.Csc", "Csc")); // ==> partial match
-            Assert.True(TypeLoader.IsPartialTypeNameMatch("Microsoft.Build.Tasks.Csc", "Tasks.Csc")); // ==> partial match
-            Assert.True(TypeLoader.IsPartialTypeNameMatch("MyTasks.ATask+NestedTask", "NestedTask")); // ==> partial match
-            Assert.True(TypeLoader.IsPartialTypeNameMatch("MyTasks.ATask\\\\+NestedTask", "NestedTask")); // ==> partial match
-            Assert.False(TypeLoader.IsPartialTypeNameMatch("MyTasks.CscTask", "Csc")); // ==> no match
-            Assert.False(TypeLoader.IsPartialTypeNameMatch("MyTasks.MyCsc", "Csc")); // ==> no match
-            Assert.False(TypeLoader.IsPartialTypeNameMatch("MyTasks.ATask\\.Csc", "Csc")); // ==> no match
-            Assert.False(TypeLoader.IsPartialTypeNameMatch("MyTasks.ATask\\\\\\.Csc", "Csc")); // ==> no match
+            Assert.IsTrue(TypeLoader.IsPartialTypeNameMatch("Csc", "csc")); // ==> exact match
+            Assert.IsTrue(TypeLoader.IsPartialTypeNameMatch("Microsoft.Build.Tasks.Csc", "Microsoft.Build.Tasks.Csc")); // ==> exact match
+            Assert.IsTrue(TypeLoader.IsPartialTypeNameMatch("Microsoft.Build.Tasks.Csc", "Csc")); // ==> partial match
+            Assert.IsTrue(TypeLoader.IsPartialTypeNameMatch("Microsoft.Build.Tasks.Csc", "Tasks.Csc")); // ==> partial match
+            Assert.IsTrue(TypeLoader.IsPartialTypeNameMatch("MyTasks.ATask+NestedTask", "NestedTask")); // ==> partial match
+            Assert.IsTrue(TypeLoader.IsPartialTypeNameMatch("MyTasks.ATask\\\\+NestedTask", "NestedTask")); // ==> partial match
+            Assert.IsFalse(TypeLoader.IsPartialTypeNameMatch("MyTasks.CscTask", "Csc")); // ==> no match
+            Assert.IsFalse(TypeLoader.IsPartialTypeNameMatch("MyTasks.MyCsc", "Csc")); // ==> no match
+            Assert.IsFalse(TypeLoader.IsPartialTypeNameMatch("MyTasks.ATask\\.Csc", "Csc")); // ==> no match
+            Assert.IsFalse(TypeLoader.IsPartialTypeNameMatch("MyTasks.ATask\\\\\\.Csc", "Csc")); // ==> no match
         }
 
         [Fact]
         public void Regress_Mutation_TrailingPartMustMatch()
         {
-            Assert.False(TypeLoader.IsPartialTypeNameMatch("Microsoft.Build.Tasks.Csc", "Vbc"));
+            Assert.IsFalse(TypeLoader.IsPartialTypeNameMatch("Microsoft.Build.Tasks.Csc", "Vbc"));
         }
 
         [Fact]
         public void Regress_Mutation_ParameterOrderDoesntMatter()
         {
-            Assert.True(TypeLoader.IsPartialTypeNameMatch("Csc", "Microsoft.Build.Tasks.Csc"));
+            Assert.IsTrue(TypeLoader.IsPartialTypeNameMatch("Csc", "Microsoft.Build.Tasks.Csc"));
         }
 
 
@@ -85,7 +85,7 @@ namespace Microsoft.Build.UnitTests
 
                 bool successfulExit;
                 string output = RunnerUtilities.ExecMSBuild(projectFilePath + " /v:diag", out successfulExit, _output);
-                Assert.True(successfulExit);
+                Assert.IsTrue(successfulExit);
 
                 string dllPath = Path.Combine(dir.Path, DLLFileName);
 
@@ -129,7 +129,7 @@ namespace Microsoft.Build.UnitTests
                 {
                     bool successfulExit;
                     string output = RunnerUtilities.ExecMSBuild(projectFilePath + " /v:diag /p:AssemblyPath=" + movedDLLPath, out successfulExit, _output);
-                    Assert.True(successfulExit);
+                    Assert.IsTrue(successfulExit);
 
                     CheckIfCorrectAssemblyLoaded(output, movedDLLPath);
                 }
@@ -153,7 +153,7 @@ namespace Microsoft.Build.UnitTests
                 {
                     bool successfulExit;
                     string output = RunnerUtilities.ExecMSBuild(projectFilePath + " /v:diag /p:AssemblyPath=" + copiedDllPath, out successfulExit, _output);
-                    Assert.True(successfulExit);
+                    Assert.IsTrue(successfulExit);
 
                     CheckIfCorrectAssemblyLoaded(output, originalDLLPath);
                 }
@@ -173,20 +173,20 @@ namespace Microsoft.Build.UnitTests
             var temporaryDirectory = FileUtilities.GetTemporaryDirectory();
             var newDllPath = Path.Combine(temporaryDirectory, DLLFileName);
 
-            Assert.True(File.Exists(originalDllPath));
+            Assert.IsTrue(File.Exists(originalDllPath));
 
             if (copy)
             {
                 File.Copy(originalDllPath, newDllPath);
 
-                Assert.True(File.Exists(newDllPath));
+                Assert.IsTrue(File.Exists(newDllPath));
             }
             else
             {
                 File.Move(originalDllPath, newDllPath);
 
-                Assert.True(File.Exists(newDllPath));
-                Assert.False(File.Exists(originalDllPath));
+                Assert.IsTrue(File.Exists(newDllPath));
+                Assert.IsFalse(File.Exists(originalDllPath));
             }
             return newDllPath;
         }
@@ -202,11 +202,11 @@ namespace Microsoft.Build.UnitTests
 
             File.Delete(newDllPath);
 
-            Assert.False(File.Exists(newDllPath));
+            Assert.IsFalse(File.Exists(newDllPath));
             Assert.Empty(Directory.EnumerateFiles(tempDirectoryPath));
 
             Directory.Delete(tempDirectoryPath);
-            Assert.False(Directory.Exists(tempDirectoryPath));
+            Assert.IsFalse(Directory.Exists(tempDirectoryPath));
         }
 
         private void CheckIfCorrectAssemblyLoaded(string scriptOutput, string expectedAssemblyPath, bool expectedSuccess = true)
@@ -234,14 +234,14 @@ namespace Microsoft.Build.UnitTests
             string forwardingLoggerLocation = typeof(Microsoft.Build.Logging.ConfigurableForwardingLogger).Assembly.Location;
             TypeLoader loader = new TypeLoader(IsForwardingLoggerClass);
             LoadedType loadedType = loader.Load("ConfigurableForwardingLogger", AssemblyLoadInfo.Create(null, forwardingLoggerLocation));
-            Assert.NotNull(loadedType);
-            Assert.Equal(forwardingLoggerLocation, loadedType.Assembly.AssemblyLocation);
+            Assert.IsNotNull(loadedType);
+            Assert.AreEqual(forwardingLoggerLocation, loadedType.Assembly.AssemblyLocation);
 
             string fileLoggerLocation = typeof(Microsoft.Build.Logging.FileLogger).Assembly.Location;
             loader = new TypeLoader(IsLoggerClass);
             loadedType = loader.Load("FileLogger", AssemblyLoadInfo.Create(null, fileLoggerLocation));
-            Assert.NotNull(loadedType);
-            Assert.Equal(fileLoggerLocation, loadedType.Assembly.AssemblyLocation);
+            Assert.IsNotNull(loadedType);
+            Assert.AreEqual(fileLoggerLocation, loadedType.Assembly.AssemblyLocation);
         }
 
         /// <summary>
@@ -255,15 +255,15 @@ namespace Microsoft.Build.UnitTests
             string forwardingLoggerLocation = forwardingLoggerType.Assembly.Location;
             TypeLoader loader = new TypeLoader(IsForwardingLoggerClass);
             LoadedType loadedType = loader.Load(forwardingLoggerType.FullName, AssemblyLoadInfo.Create(null, forwardingLoggerLocation));
-            Assert.NotNull(loadedType);
-            Assert.Equal(forwardingLoggerLocation, loadedType.Assembly.AssemblyLocation);
+            Assert.IsNotNull(loadedType);
+            Assert.AreEqual(forwardingLoggerLocation, loadedType.Assembly.AssemblyLocation);
 
             Type fileLoggerType = typeof(Microsoft.Build.Logging.FileLogger);
             string fileLoggerLocation = fileLoggerType.Assembly.Location;
             loader = new TypeLoader(IsLoggerClass);
             loadedType = loader.Load(fileLoggerType.FullName, AssemblyLoadInfo.Create(null, fileLoggerLocation));
-            Assert.NotNull(loadedType);
-            Assert.Equal(fileLoggerLocation, loadedType.Assembly.AssemblyLocation);
+            Assert.IsNotNull(loadedType);
+            Assert.AreEqual(fileLoggerLocation, loadedType.Assembly.AssemblyLocation);
         }
 
 
@@ -282,9 +282,9 @@ namespace Microsoft.Build.UnitTests
 
             TypeLoader loader = new TypeLoader(forwardingLoggerfilter);
             LoadedType loadedType = loader.Load(String.Empty, AssemblyLoadInfo.Create(null, forwardingLoggerAssemblyLocation));
-            Assert.NotNull(loadedType);
-            Assert.Equal(forwardingLoggerAssemblyLocation, loadedType.Assembly.AssemblyLocation);
-            Assert.Equal(firstPublicType, loadedType.Type);
+            Assert.IsNotNull(loadedType);
+            Assert.AreEqual(forwardingLoggerAssemblyLocation, loadedType.Assembly.AssemblyLocation);
+            Assert.AreEqual(firstPublicType, loadedType.Type);
 
 
             Type fileLoggerType = typeof(Microsoft.Build.Logging.FileLogger);
@@ -294,9 +294,9 @@ namespace Microsoft.Build.UnitTests
 
             loader = new TypeLoader(fileLoggerfilter);
             loadedType = loader.Load(String.Empty, AssemblyLoadInfo.Create(null, fileLoggerAssemblyLocation));
-            Assert.NotNull(loadedType);
-            Assert.Equal(fileLoggerAssemblyLocation, loadedType.Assembly.AssemblyLocation);
-            Assert.Equal(firstPublicType, loadedType.Type);
+            Assert.IsNotNull(loadedType);
+            Assert.AreEqual(fileLoggerAssemblyLocation, loadedType.Assembly.AssemblyLocation);
+            Assert.AreEqual(firstPublicType, loadedType.Type);
         }
 
 

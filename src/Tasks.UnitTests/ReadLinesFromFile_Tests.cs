@@ -34,28 +34,28 @@ namespace Microsoft.Build.UnitTests
                     File = new TaskItem(file),
                     Lines = new ITaskItem[] { new TaskItem("Line1") }
                 };
-                Assert.True(a.Execute());
+                Assert.IsTrue(a.Execute());
 
                 // Read the line from the file.
                 var r = new ReadLinesFromFile
                 {
                     File = new TaskItem(file)
                 };
-                Assert.True(r.Execute());
+                Assert.IsTrue(r.Execute());
 
                 Assert.Single(r.Lines);
-                Assert.Equal("Line1", r.Lines[0].ItemSpec);
+                Assert.AreEqual("Line1", r.Lines[0].ItemSpec);
 
                 // Write two more lines to the file.
                 a.Lines = new ITaskItem[] { new TaskItem("Line2"), new TaskItem("Line3") };
-                Assert.True(a.Execute());
+                Assert.IsTrue(a.Execute());
 
                 // Read all of the lines and verify them.
-                Assert.True(r.Execute());
-                Assert.Equal(3, r.Lines.Length);
-                Assert.Equal("Line1", r.Lines[0].ItemSpec);
-                Assert.Equal("Line2", r.Lines[1].ItemSpec);
-                Assert.Equal("Line3", r.Lines[2].ItemSpec);
+                Assert.IsTrue(r.Execute());
+                Assert.AreEqual(3, r.Lines.Length);
+                Assert.AreEqual("Line1", r.Lines[0].ItemSpec);
+                Assert.AreEqual("Line2", r.Lines[1].ItemSpec);
+                Assert.AreEqual("Line3", r.Lines[2].ItemSpec);
             }
             finally
             {
@@ -81,28 +81,28 @@ namespace Microsoft.Build.UnitTests
                     File = new TaskItem(file),
                     Lines = new ITaskItem[] { new TaskItem("Line1_%253b_") }
                 };
-                Assert.True(a.Execute());
+                Assert.IsTrue(a.Execute());
 
                 // Read the line from the file.
                 var r = new ReadLinesFromFile
                 {
                     File = new TaskItem(file)
                 };
-                Assert.True(r.Execute());
+                Assert.IsTrue(r.Execute());
 
                 Assert.Single(r.Lines);
-                Assert.Equal("Line1_%3b_", r.Lines[0].ItemSpec);
+                Assert.AreEqual("Line1_%3b_", r.Lines[0].ItemSpec);
 
                 // Write two more lines to the file.
                 a.Lines = new ITaskItem[] { new TaskItem("Line2"), new TaskItem("Line3") };
-                Assert.True(a.Execute());
+                Assert.IsTrue(a.Execute());
 
                 // Read all of the lines and verify them.
-                Assert.True(r.Execute());
-                Assert.Equal(3, r.Lines.Length);
-                Assert.Equal("Line1_%3b_", r.Lines[0].ItemSpec);
-                Assert.Equal("Line2", r.Lines[1].ItemSpec);
-                Assert.Equal("Line3", r.Lines[2].ItemSpec);
+                Assert.IsTrue(r.Execute());
+                Assert.AreEqual(3, r.Lines.Length);
+                Assert.AreEqual("Line1_%3b_", r.Lines[0].ItemSpec);
+                Assert.AreEqual("Line2", r.Lines[1].ItemSpec);
+                Assert.AreEqual("Line3", r.Lines[2].ItemSpec);
             }
             finally
             {
@@ -126,17 +126,17 @@ namespace Microsoft.Build.UnitTests
                     File = new TaskItem(file),
                     Lines = new ITaskItem[] { new TaskItem("My special character is \u00C3") }
                 };
-                Assert.True(a.Execute());
+                Assert.IsTrue(a.Execute());
 
                 // Read the line from the file.
                 var r = new ReadLinesFromFile
                 {
                     File = new TaskItem(file)
                 };
-                Assert.True(r.Execute());
+                Assert.IsTrue(r.Execute());
 
                 Assert.Single(r.Lines);
-                Assert.Equal("My special character is \u00C3", r.Lines[0].ItemSpec);
+                Assert.AreEqual("My special character is \u00C3", r.Lines[0].ItemSpec);
             }
             finally
             {
@@ -157,7 +157,7 @@ namespace Microsoft.Build.UnitTests
             {
                 File = new TaskItem(file)
             };
-            Assert.True(r.Execute());
+            Assert.IsTrue(r.Execute());
 
             Assert.Empty(r.Lines);
         }
@@ -186,19 +186,19 @@ namespace Microsoft.Build.UnitTests
                     new TaskItem("\0\0\0\0\0\0\0\0\0")
                 }
                 };
-                Assert.True(a.Execute());
+                Assert.IsTrue(a.Execute());
 
                 // Read the line from the file.
                 var r = new ReadLinesFromFile
                 {
                     File = new TaskItem(file)
                 };
-                Assert.True(r.Execute());
+                Assert.IsTrue(r.Execute());
 
-                Assert.Equal(3, r.Lines.Length);
-                Assert.Equal("Line1", r.Lines[0].ItemSpec);
-                Assert.Equal("Line2", r.Lines[1].ItemSpec);
-                Assert.Equal("Line3", r.Lines[2].ItemSpec);
+                Assert.AreEqual(3, r.Lines.Length);
+                Assert.AreEqual("Line1", r.Lines[0].ItemSpec);
+                Assert.AreEqual("Line2", r.Lines[1].ItemSpec);
+                Assert.AreEqual("Line3", r.Lines[2].ItemSpec);
             }
             finally
             {
@@ -228,7 +228,7 @@ namespace Microsoft.Build.UnitTests
                     File = new TaskItem(file),
                     Lines = new ITaskItem[] { new TaskItem("This is a new line") }
                 };
-                Assert.True(a.Execute());
+                Assert.IsTrue(a.Execute());
 
                 // Remove all File access to the file to current user
                 var fSecurity = File.GetAccessControl(file);
@@ -241,7 +241,7 @@ namespace Microsoft.Build.UnitTests
                 var mEngine = new MockEngine();
                 r.BuildEngine = mEngine;
                 r.File = new TaskItem(file);
-                Assert.False(r.Execute());
+                Assert.IsFalse(r.Execute());
             }
             finally
             {

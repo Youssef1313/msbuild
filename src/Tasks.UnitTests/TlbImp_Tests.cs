@@ -19,10 +19,10 @@ namespace Microsoft.Build.UnitTests.AxTlbImp_Tests
         public void Machine()
         {
             var t = new ResolveComReference.TlbImp();
-            Assert.Null(t.Machine); // "Machine should be null by default"
+            Assert.IsNull(t.Machine); // "Machine should be null by default"
 
             t.Machine = "Agnostic";
-            Assert.Equal("Agnostic", t.Machine); // "New TypeLibName value should be set");
+            Assert.AreEqual("Agnostic", t.Machine); // "New TypeLibName value should be set");
             CommandLine.ValidateHasParameter(
                 t,
                 "/machine:Agnostic",
@@ -36,7 +36,7 @@ namespace Microsoft.Build.UnitTests.AxTlbImp_Tests
         public void ReferenceFiles()
         {
             var t = new ResolveComReference.TlbImp();
-            Assert.Null(t.ReferenceFiles); // "ReferenceFiles should be null by default"
+            Assert.IsNull(t.ReferenceFiles); // "ReferenceFiles should be null by default"
 
             t.ReferenceFiles = new string[] { "File1.dll", "File2.dll" };
             CommandLine.ValidateHasParameter(
@@ -57,10 +57,10 @@ namespace Microsoft.Build.UnitTests.AxTlbImp_Tests
             var t = new ResolveComReference.TlbImp();
             string testParameterValue = "Interop.Foo.dll";
 
-            Assert.Null(t.TypeLibName); // "TypeLibName should be null by default"
+            Assert.IsNull(t.TypeLibName); // "TypeLibName should be null by default"
 
             t.TypeLibName = testParameterValue;
-            Assert.Equal(testParameterValue, t.TypeLibName); // "New TypeLibName value should be set"
+            Assert.AreEqual(testParameterValue, t.TypeLibName); // "New TypeLibName value should be set"
             CommandLine.ValidateHasParameter(t, testParameterValue, false /* no response file */);
         }
 
@@ -73,10 +73,10 @@ namespace Microsoft.Build.UnitTests.AxTlbImp_Tests
             var t = new ResolveComReference.TlbImp();
             string testParameterValue = @"c:\Program Files\Interop.Foo.dll";
 
-            Assert.Null(t.TypeLibName); // "TypeLibName should be null by default"
+            Assert.IsNull(t.TypeLibName); // "TypeLibName should be null by default"
 
             t.TypeLibName = testParameterValue;
-            Assert.Equal(testParameterValue, t.TypeLibName); // "New TypeLibName value should be set"
+            Assert.AreEqual(testParameterValue, t.TypeLibName); // "New TypeLibName value should be set"
             CommandLine.ValidateHasParameter(t, testParameterValue, false /* no response file */);
         }
 
@@ -89,14 +89,14 @@ namespace Microsoft.Build.UnitTests.AxTlbImp_Tests
             var t = new ResolveComReference.TlbImp();
             string testParameterValue = "Microsoft.Build.Foo";
 
-            Assert.Null(t.AssemblyNamespace); // "AssemblyNamespace should be null by default"
+            Assert.IsNull(t.AssemblyNamespace); // "AssemblyNamespace should be null by default"
             CommandLine.ValidateNoParameterStartsWith(
                 t,
                 @"/namespace:",
                 false /* no response file */);
 
             t.AssemblyNamespace = testParameterValue;
-            Assert.Equal(testParameterValue, t.AssemblyNamespace); // "New AssemblyNamespace value should be set"
+            Assert.AreEqual(testParameterValue, t.AssemblyNamespace); // "New AssemblyNamespace value should be set"
             CommandLine.ValidateHasParameter(
                 t,
                 @"/namespace:" + testParameterValue,
@@ -112,14 +112,14 @@ namespace Microsoft.Build.UnitTests.AxTlbImp_Tests
             var t = new ResolveComReference.TlbImp();
             Version testParameterValue = new Version(2, 12);
 
-            Assert.Null(t.AssemblyVersion); // "AssemblyVersion should be null by default"
+            Assert.IsNull(t.AssemblyVersion); // "AssemblyVersion should be null by default"
             CommandLine.ValidateNoParameterStartsWith(
                 t,
                 @"/asmversion:",
                 false /* no response file */);
 
             t.AssemblyVersion = testParameterValue;
-            Assert.Equal(testParameterValue, t.AssemblyVersion); // "New AssemblyNamespace value should be set"
+            Assert.AreEqual(testParameterValue, t.AssemblyVersion); // "New AssemblyNamespace value should be set"
             CommandLine.ValidateHasParameter(
                 t,
                 @"/asmversion:" + testParameterValue.ToString(),
@@ -134,14 +134,14 @@ namespace Microsoft.Build.UnitTests.AxTlbImp_Tests
         {
             var t = new ResolveComReference.TlbImp();
 
-            Assert.False(t.NoLogo); // "NoLogo should be false by default"
+            Assert.IsFalse(t.NoLogo); // "NoLogo should be false by default"
             CommandLine.ValidateNoParameterStartsWith(
                 t,
                 @"/nologo",
                 false /* no response file */);
 
             t.NoLogo = true;
-            Assert.True(t.NoLogo); // "NoLogo should be true"
+            Assert.IsTrue(t.NoLogo); // "NoLogo should be true"
             CommandLine.ValidateHasParameter(
                 t,
                 @"/nologo",
@@ -157,14 +157,14 @@ namespace Microsoft.Build.UnitTests.AxTlbImp_Tests
             var t = new ResolveComReference.TlbImp();
             string testParameterValue = "AxInterop.Foo.dll";
 
-            Assert.Null(t.OutputAssembly); // "OutputAssembly should be null by default"
+            Assert.IsNull(t.OutputAssembly); // "OutputAssembly should be null by default"
             CommandLine.ValidateNoParameterStartsWith(
                 t,
                 @"/out:",
                 false /* no response file */);
 
             t.OutputAssembly = testParameterValue;
-            Assert.Equal(testParameterValue, t.OutputAssembly); // "New OutputAssembly value should be set"
+            Assert.AreEqual(testParameterValue, t.OutputAssembly); // "New OutputAssembly value should be set"
             CommandLine.ValidateHasParameter(
                 t,
                 @"/out:" + testParameterValue,
@@ -180,14 +180,14 @@ namespace Microsoft.Build.UnitTests.AxTlbImp_Tests
             var t = new ResolveComReference.TlbImp();
             string testParameterValue = @"c:\Program Files\AxInterop.Foo.dll";
 
-            Assert.Null(t.OutputAssembly); // "OutputAssembly should be null by default"
+            Assert.IsNull(t.OutputAssembly); // "OutputAssembly should be null by default"
             CommandLine.ValidateNoParameterStartsWith(
                 t,
                 @"/out:",
                 false /* no response file */);
 
             t.OutputAssembly = testParameterValue;
-            Assert.Equal(testParameterValue, t.OutputAssembly); // "New OutputAssembly value should be set"
+            Assert.AreEqual(testParameterValue, t.OutputAssembly); // "New OutputAssembly value should be set"
             CommandLine.ValidateHasParameter(
                 t,
                 @"/out:" + testParameterValue,
@@ -202,14 +202,14 @@ namespace Microsoft.Build.UnitTests.AxTlbImp_Tests
         {
             var t = new ResolveComReference.TlbImp();
 
-            Assert.False(t.PreventClassMembers); // "PreventClassMembers should be false by default"
+            Assert.IsFalse(t.PreventClassMembers); // "PreventClassMembers should be false by default"
             CommandLine.ValidateNoParameterStartsWith(
                 t,
                 @"/noclassmembers",
                 false /* no response file */);
 
             t.PreventClassMembers = true;
-            Assert.True(t.PreventClassMembers); // "PreventClassMembers should be true"
+            Assert.IsTrue(t.PreventClassMembers); // "PreventClassMembers should be true"
             CommandLine.ValidateHasParameter(
                 t,
                 @"/noclassmembers",
@@ -224,14 +224,14 @@ namespace Microsoft.Build.UnitTests.AxTlbImp_Tests
         {
             var t = new ResolveComReference.TlbImp();
 
-            Assert.False(t.SafeArrayAsSystemArray); // "SafeArrayAsSystemArray should be false by default"
+            Assert.IsFalse(t.SafeArrayAsSystemArray); // "SafeArrayAsSystemArray should be false by default"
             CommandLine.ValidateNoParameterStartsWith(
                 t,
                 @"/sysarray",
                 false /* no response file */);
 
             t.SafeArrayAsSystemArray = true;
-            Assert.True(t.SafeArrayAsSystemArray); // "SafeArrayAsSystemArray should be true"
+            Assert.IsTrue(t.SafeArrayAsSystemArray); // "SafeArrayAsSystemArray should be true"
             CommandLine.ValidateHasParameter(
                 t,
                 @"/sysarray",
@@ -246,14 +246,14 @@ namespace Microsoft.Build.UnitTests.AxTlbImp_Tests
         {
             var t = new ResolveComReference.TlbImp();
 
-            Assert.False(t.Silent); // "Silent should be false by default"
+            Assert.IsFalse(t.Silent); // "Silent should be false by default"
             CommandLine.ValidateNoParameterStartsWith(
                 t,
                 @"/silent",
                 false /* no response file */);
 
             t.Silent = true;
-            Assert.True(t.Silent); // "Silent should be true"
+            Assert.IsTrue(t.Silent); // "Silent should be true"
             CommandLine.ValidateHasParameter(
                 t,
                 @"/silent",
@@ -275,14 +275,14 @@ namespace Microsoft.Build.UnitTests.AxTlbImp_Tests
             t.TypeLibName = "SomeRandomControl.tlb";
             t.ToolPath = Path.GetTempPath();
 
-            Assert.Equal(ResolveComReference.TlbImpTransformFlags.None, t.Transform); // "Transform should be TlbImpTransformFlags.None by default"
+            Assert.AreEqual(ResolveComReference.TlbImpTransformFlags.None, t.Transform); // "Transform should be TlbImpTransformFlags.None by default"
             CommandLine.ValidateNoParameterStartsWith(
                 t,
                 @"/transform:",
                 false /* no response file */);
 
             t.Transform = dispRet;
-            Assert.Equal(dispRet, t.Transform); // "New Transform value should be set"
+            Assert.AreEqual(dispRet, t.Transform); // "New Transform value should be set"
             CommandLine.ValidateHasParameter(
                 t,
                 @"/transform:DispRet",
@@ -290,7 +290,7 @@ namespace Microsoft.Build.UnitTests.AxTlbImp_Tests
 
 
             t.Transform = serialize;
-            Assert.Equal(serialize, t.Transform); // "New Transform value should be set"
+            Assert.AreEqual(serialize, t.Transform); // "New Transform value should be set"
             CommandLine.ValidateHasParameter(
                 t,
                 @"/transform:SerializableValueClasses",
@@ -308,7 +308,7 @@ namespace Microsoft.Build.UnitTests.AxTlbImp_Tests
         {
             var t = new ResolveComReference.TlbImp();
 
-            Assert.False(t.Verbose); // "Verbose should be false by default"
+            Assert.IsFalse(t.Verbose); // "Verbose should be false by default"
             CommandLine.ValidateNoParameterStartsWith(
                 t,
                 @"/verbose",
@@ -316,7 +316,7 @@ namespace Microsoft.Build.UnitTests.AxTlbImp_Tests
 
 
             t.Verbose = true;
-            Assert.True(t.Verbose); // "Verbose should be true"
+            Assert.IsTrue(t.Verbose); // "Verbose should be true"
             CommandLine.ValidateHasParameter(
                 t,
                 @"/verbose",

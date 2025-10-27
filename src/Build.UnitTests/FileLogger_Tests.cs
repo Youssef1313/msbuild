@@ -145,7 +145,7 @@ namespace Microsoft.Build.UnitTests
                 EventSourceSink es = new EventSourceSink();
                 fl.Initialize(es);
                 fl.Shutdown();
-                Assert.Equal(fl.Verbosity, verbosityEnumerations[i]);
+                Assert.AreEqual(fl.Verbosity, verbosityEnumerations[i]);
             }
 
             // Do the same using the v shorthand
@@ -156,7 +156,7 @@ namespace Microsoft.Build.UnitTests
                 EventSourceSink es = new EventSourceSink();
                 fl.Initialize(es);
                 fl.Shutdown();
-                Assert.Equal(fl.Verbosity, verbosityEnumerations[i]);
+                Assert.AreEqual(fl.Verbosity, verbosityEnumerations[i]);
             }
         }
 
@@ -217,8 +217,8 @@ namespace Microsoft.Build.UnitTests
                 byte[] content = ReadRawBytes(log);
 
                 // FF FE is the BOM for UTF16
-                Assert.Equal((byte)255, content[0]);
-                Assert.Equal((byte)254, content[1]);
+                Assert.AreEqual((byte)255, content[0]);
+                Assert.AreEqual((byte)254, content[1]);
             }
             finally
             {
@@ -244,9 +244,9 @@ namespace Microsoft.Build.UnitTests
                 byte[] content = ReadRawBytes(log);
 
                 // EF BB BF is the BOM for UTF8
-                Assert.Equal((byte)239, content[0]);
-                Assert.Equal((byte)187, content[1]);
-                Assert.Equal((byte)191, content[2]);
+                Assert.AreEqual((byte)239, content[0]);
+                Assert.AreEqual((byte)187, content[1]);
+                Assert.AreEqual((byte)191, content[2]);
             }
             finally
             {
@@ -334,8 +334,8 @@ namespace Microsoft.Build.UnitTests
         {
             string directory = Path.Combine(ObjectModelHelpers.TempProjectDir, Guid.NewGuid().ToString("N"));
             string log = Path.Combine(directory, "build.log");
-            Assert.False(Directory.Exists(directory));
-            Assert.False(File.Exists(log));
+            Assert.IsFalse(Directory.Exists(directory));
+            Assert.IsFalse(File.Exists(log));
 
             try
             {
@@ -374,8 +374,8 @@ namespace Microsoft.Build.UnitTests
 
                 // File should exist and be 0 length (no summary information, etc.)
                 var result = new FileInfo(logFile);
-                Assert.True(result.Exists);
-                Assert.Equal(0, new FileInfo(logFile).Length);
+                Assert.IsTrue(result.Exists);
+                Assert.AreEqual(0, new FileInfo(logFile).Length);
             }
         }
 
@@ -467,7 +467,7 @@ namespace Microsoft.Build.UnitTests
             string[] actualLines = actualContent.Split(MSBuildConstants.NewlineChar, StringSplitOptions.RemoveEmptyEntries);
             string[] expectedLines = expectedContent.Split(MSBuildConstants.NewlineChar, StringSplitOptions.RemoveEmptyEntries);
 
-            Assert.Equal(expectedLines.Length, actualLines.Length);
+            Assert.AreEqual(expectedLines.Length, actualLines.Length);
 
             for (int i = 0; i < expectedLines.Length; i++)
             {
@@ -487,26 +487,26 @@ namespace Microsoft.Build.UnitTests
             {
                 fileLogger.NodeId = 0;
                 fileLogger.Initialize(new EventSourceSink());
-                Assert.Equal(0, string.Compare(fileLogger.InternalFilelogger.Parameters, "ForceNoAlign;ShowEventId;ShowCommandLine;logfile=msbuild0.log;", StringComparison.OrdinalIgnoreCase));
+                Assert.AreEqual(0, string.Compare(fileLogger.InternalFilelogger.Parameters, "ForceNoAlign;ShowEventId;ShowCommandLine;logfile=msbuild0.log;", StringComparison.OrdinalIgnoreCase));
                 fileLogger.Shutdown();
 
                 fileLogger.NodeId = 3;
                 fileLogger.Parameters = "logfile=" + Path.Combine(Directory.GetCurrentDirectory(), "mylogfile.log");
                 fileLogger.Initialize(new EventSourceSink());
-                Assert.Equal(0, string.Compare(fileLogger.InternalFilelogger.Parameters, "ForceNoAlign;ShowEventId;ShowCommandLine;logfile=" + Path.Combine(Directory.GetCurrentDirectory(), "mylogfile3.log") + ";", StringComparison.OrdinalIgnoreCase));
+                Assert.AreEqual(0, string.Compare(fileLogger.InternalFilelogger.Parameters, "ForceNoAlign;ShowEventId;ShowCommandLine;logfile=" + Path.Combine(Directory.GetCurrentDirectory(), "mylogfile3.log") + ";", StringComparison.OrdinalIgnoreCase));
                 fileLogger.Shutdown();
 
                 fileLogger.NodeId = 4;
                 fileLogger.Parameters = "logfile=" + Path.Combine(Directory.GetCurrentDirectory(), "mylogfile.log");
                 fileLogger.Initialize(new EventSourceSink());
-                Assert.Equal(0, string.Compare(fileLogger.InternalFilelogger.Parameters, "ForceNoAlign;ShowEventId;ShowCommandLine;logfile=" + Path.Combine(Directory.GetCurrentDirectory(), "mylogfile4.log") + ";", StringComparison.OrdinalIgnoreCase));
+                Assert.AreEqual(0, string.Compare(fileLogger.InternalFilelogger.Parameters, "ForceNoAlign;ShowEventId;ShowCommandLine;logfile=" + Path.Combine(Directory.GetCurrentDirectory(), "mylogfile4.log") + ";", StringComparison.OrdinalIgnoreCase));
                 fileLogger.Shutdown();
 
                 Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "tempura"));
                 fileLogger.NodeId = 1;
                 fileLogger.Parameters = "logfile=" + Path.Combine(Directory.GetCurrentDirectory(), "tempura", "mylogfile.log");
                 fileLogger.Initialize(new EventSourceSink());
-                Assert.Equal(0, string.Compare(fileLogger.InternalFilelogger.Parameters, "ForceNoAlign;ShowEventId;ShowCommandLine;logfile=" + Path.Combine(Directory.GetCurrentDirectory(), "tempura", "mylogfile1.log") + ";", StringComparison.OrdinalIgnoreCase));
+                Assert.AreEqual(0, string.Compare(fileLogger.InternalFilelogger.Parameters, "ForceNoAlign;ShowEventId;ShowCommandLine;logfile=" + Path.Combine(Directory.GetCurrentDirectory(), "tempura", "mylogfile1.log") + ";", StringComparison.OrdinalIgnoreCase));
                 fileLogger.Shutdown();
             }
             finally

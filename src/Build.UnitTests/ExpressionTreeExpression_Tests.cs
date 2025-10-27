@@ -444,7 +444,7 @@ namespace Microsoft.Build.UnitTests
                     ElementLocation.EmptyLocation,
                     FileSystems.Default);
 
-            Assert.True(tree.Evaluate(state), "expected true from '" + expression + "'");
+            Assert.IsTrue(tree.Evaluate(state), "expected true from '" + expression + "'");
         }
 
         /// <summary>
@@ -468,7 +468,7 @@ namespace Microsoft.Build.UnitTests
                     ElementLocation.EmptyLocation,
                     FileSystems.Default);
 
-            Assert.False(tree.Evaluate(state), "expected false from '" + expression + "' and got true");
+            Assert.IsFalse(tree.Evaluate(state), "expected false from '" + expression + "' and got true");
         }
 
         /// <summary>
@@ -507,7 +507,7 @@ namespace Microsoft.Build.UnitTests
                 output.WriteLine(expression + " caused '" + ex.Message + "'");
                 caughtException = true;
             }
-            Assert.True(caughtException,
+            Assert.IsTrue(caughtException,
                 "expected '" + expression + "' to not parse or not be evaluated");
         }
     }

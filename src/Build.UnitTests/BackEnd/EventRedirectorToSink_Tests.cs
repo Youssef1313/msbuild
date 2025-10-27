@@ -46,7 +46,7 @@ namespace Microsoft.Build.UnitTests.Logging
         {
             EventSourceSink testSink = new EventSourceSink();
             EventRedirectorToSink eventRedirector = new EventRedirectorToSink(5, testSink);
-            Assert.NotNull(eventRedirector); // "eventRedirector was not supposed to be null"
+            Assert.IsNotNull(eventRedirector); // "eventRedirector was not supposed to be null"
         }
 
         /// <summary>
@@ -65,11 +65,11 @@ namespace Microsoft.Build.UnitTests.Logging
                   {
                       wentInHandler = true;
                       BuildMessageEventArgs messageEventFromPacket = buildEvent as BuildMessageEventArgs;
-                      Assert.Equal(messageEvent, messageEventFromPacket); // "Expected messageEvent to be forwarded to match actually forwarded event"
+                      Assert.AreEqual(messageEvent, messageEventFromPacket); // "Expected messageEvent to be forwarded to match actually forwarded event"
                   });
 
             ((IEventRedirector)eventRedirector).ForwardEvent(messageEvent);
-            Assert.True(wentInHandler); // "Expected to go into event handler"
+            Assert.IsTrue(wentInHandler); // "Expected to go into event handler"
         }
 
         /// <summary>

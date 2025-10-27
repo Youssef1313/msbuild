@@ -27,7 +27,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             Project project = new Project();
             ProjectProperty property = project.SetProperty("p", "v");
 
-            Assert.True(Object.ReferenceEquals(project, property.Project));
+            Assert.IsTrue(Object.ReferenceEquals(project, property.Project));
         }
 
         /// <summary>
@@ -46,10 +46,10 @@ namespace Microsoft.Build.UnitTests.OM.Definition
 
             ProjectProperty property = GetFirstProperty(content);
 
-            Assert.NotNull(property.Xml);
-            Assert.Equal("p", property.Name);
-            Assert.Equal("v1", property.EvaluatedValue);
-            Assert.Equal("v1", property.UnevaluatedValue);
+            Assert.IsNotNull(property.Xml);
+            Assert.AreEqual("p", property.Name);
+            Assert.AreEqual("v1", property.EvaluatedValue);
+            Assert.AreEqual("v1", property.UnevaluatedValue);
         }
 
         /// <summary>
@@ -69,10 +69,10 @@ namespace Microsoft.Build.UnitTests.OM.Definition
 
             ProjectProperty property = GetFirstProperty(content);
 
-            Assert.NotNull(property.Xml);
-            Assert.Equal("p", property.Name);
-            Assert.Equal("v1", property.EvaluatedValue);
-            Assert.Equal("$(o)", property.UnevaluatedValue);
+            Assert.IsNotNull(property.Xml);
+            Assert.AreEqual("p", property.Name);
+            Assert.AreEqual("v1", property.EvaluatedValue);
+            Assert.AreEqual("$(o)", property.UnevaluatedValue);
         }
 
         /// <summary>
@@ -87,9 +87,9 @@ namespace Microsoft.Build.UnitTests.OM.Definition
 
             property.UnevaluatedValue = "v2";
 
-            Assert.Equal("v2", property.EvaluatedValue);
-            Assert.Equal("v2", property.UnevaluatedValue);
-            Assert.True(project.IsDirty);
+            Assert.AreEqual("v2", property.EvaluatedValue);
+            Assert.AreEqual("v2", property.UnevaluatedValue);
+            Assert.IsTrue(project.IsDirty);
         }
 
         /// <summary>
@@ -104,9 +104,9 @@ namespace Microsoft.Build.UnitTests.OM.Definition
 
             property.UnevaluatedValue = "v%282%29";
 
-            Assert.Equal("v(2)", property.EvaluatedValue);
-            Assert.Equal("v%282%29", property.UnevaluatedValue);
-            Assert.True(project.IsDirty);
+            Assert.AreEqual("v(2)", property.EvaluatedValue);
+            Assert.AreEqual("v%282%29", property.UnevaluatedValue);
+            Assert.IsTrue(project.IsDirty);
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace Microsoft.Build.UnitTests.OM.Definition
 
             property.UnevaluatedValue = "v1";
 
-            Assert.False(project.IsDirty);
+            Assert.IsFalse(project.IsDirty);
         }
 
         /// <summary>
@@ -155,13 +155,13 @@ namespace Microsoft.Build.UnitTests.OM.Definition
 
             property.UnevaluatedValue = "v";
 
-            Assert.Equal("v", property.EvaluatedValue);
-            Assert.Equal("v", property.UnevaluatedValue);
+            Assert.AreEqual("v", property.EvaluatedValue);
+            Assert.AreEqual("v", property.UnevaluatedValue);
 
             project.ReevaluateIfNecessary();
 
             property = project.GetProperty(varName);
-            Assert.Equal("v", property.UnevaluatedValue);
+            Assert.AreEqual("v", property.UnevaluatedValue);
         }
 
         /// <summary>
@@ -175,10 +175,10 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             Project project = new Project();
             string varName = NativeMethodsShared.IsWindows ? "username" : "USER";
 
-            Assert.True(project.GetProperty(varName).IsEnvironmentProperty);
-            Assert.False(project.GetProperty(varName).IsGlobalProperty);
-            Assert.False(project.GetProperty(varName).IsReservedProperty);
-            Assert.False(project.GetProperty(varName).IsImported);
+            Assert.IsTrue(project.GetProperty(varName).IsEnvironmentProperty);
+            Assert.IsFalse(project.GetProperty(varName).IsGlobalProperty);
+            Assert.IsFalse(project.GetProperty(varName).IsReservedProperty);
+            Assert.IsFalse(project.GetProperty(varName).IsImported);
         }
 
         /// <summary>
@@ -191,10 +191,10 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             globalProperties["g"] = String.Empty;
             Project project = new Project(globalProperties, null, ProjectCollection.GlobalProjectCollection);
 
-            Assert.False(project.GetProperty("g").IsEnvironmentProperty);
-            Assert.True(project.GetProperty("g").IsGlobalProperty);
-            Assert.False(project.GetProperty("g").IsReservedProperty);
-            Assert.False(project.GetProperty("g").IsImported);
+            Assert.IsFalse(project.GetProperty("g").IsEnvironmentProperty);
+            Assert.IsTrue(project.GetProperty("g").IsGlobalProperty);
+            Assert.IsFalse(project.GetProperty("g").IsReservedProperty);
+            Assert.IsFalse(project.GetProperty("g").IsImported);
         }
 
         /// <summary>
@@ -207,10 +207,10 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             project.FullPath = @"c:\x";
             project.ReevaluateIfNecessary();
 
-            Assert.False(project.GetProperty("MSBuildProjectFile").IsEnvironmentProperty);
-            Assert.False(project.GetProperty("MSBuildProjectFile").IsGlobalProperty);
-            Assert.True(project.GetProperty("MSBuildProjectFile").IsReservedProperty);
-            Assert.False(project.GetProperty("MSBuildProjectFile").IsImported);
+            Assert.IsFalse(project.GetProperty("MSBuildProjectFile").IsEnvironmentProperty);
+            Assert.IsFalse(project.GetProperty("MSBuildProjectFile").IsGlobalProperty);
+            Assert.IsTrue(project.GetProperty("MSBuildProjectFile").IsReservedProperty);
+            Assert.IsFalse(project.GetProperty("MSBuildProjectFile").IsImported);
         }
 
         /// <summary>
@@ -224,9 +224,9 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ProjectProperty property = project.SetProperty("p1", "v1");
             property.UnevaluatedValue = "$(p0)";
 
-            Assert.Equal("v0", project.GetPropertyValue("p1"));
-            Assert.Equal("v0", property.EvaluatedValue);
-            Assert.Equal("$(p0)", property.UnevaluatedValue);
+            Assert.AreEqual("v0", project.GetPropertyValue("p1"));
+            Assert.AreEqual("v0", property.EvaluatedValue);
+            Assert.AreEqual("$(p0)", property.UnevaluatedValue);
         }
 
         /// <summary>
@@ -243,9 +243,9 @@ namespace Microsoft.Build.UnitTests.OM.Definition
             ProjectProperty property = project.SetProperty("p1", "v1");
             property.UnevaluatedValue = "@(i)-%(m)";
 
-            Assert.Equal("@(i)-%(m)", project.GetPropertyValue("p1"));
-            Assert.Equal("@(i)-%(m)", property.EvaluatedValue);
-            Assert.Equal("@(i)-%(m)", property.UnevaluatedValue);
+            Assert.AreEqual("@(i)-%(m)", project.GetPropertyValue("p1"));
+            Assert.AreEqual("@(i)-%(m)", property.EvaluatedValue);
+            Assert.AreEqual("@(i)-%(m)", property.UnevaluatedValue);
         }
 
         /// <summary>

@@ -32,10 +32,10 @@ namespace Microsoft.Build.UnitTests
 
             t.Execute();
 
-            Assert.Equal("en-GB", t.DeletedFiles[0].GetMetadata("Locale"));
+            Assert.AreEqual("en-GB", t.DeletedFiles[0].GetMetadata("Locale"));
 
             // Output ItemSpec should not be overwritten.
-            Assert.Equal("MyFiles.nonexistent", t.DeletedFiles[0].ItemSpec);
+            Assert.AreEqual("MyFiles.nonexistent", t.DeletedFiles[0].ItemSpec);
         }
 
         /// <summary>

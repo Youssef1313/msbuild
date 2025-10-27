@@ -24,8 +24,8 @@ namespace Microsoft.Build.UnitTests.BackEnd
             BuildRequestConfiguration config = new BuildRequestConfiguration(1, data, "2.0");
             BuildRequestEntry entry = new BuildRequestEntry(request, config);
 
-            Assert.Equal(BuildRequestEntryState.Ready, entry.State);
-            Assert.Equal(entry.Request, request);
+            Assert.AreEqual(BuildRequestEntryState.Ready, entry.State);
+            Assert.AreEqual(entry.Request, request);
         }
 
         [Fact]
@@ -43,46 +43,46 @@ namespace Microsoft.Build.UnitTests.BackEnd
             BuildRequest request = CreateNewBuildRequest(1, new string[1] { "foo" });
             BuildRequestConfiguration config = new BuildRequestConfiguration(1, new BuildRequestData("foo", new Dictionary<string, string?>(), "foo", Array.Empty<string>(), null), "2.0");
             BuildRequestEntry entry = new BuildRequestEntry(request, config);
-            Assert.Equal(BuildRequestEntryState.Ready, entry.State);
-            Assert.Equal(entry.Request, request);
-            Assert.Null(entry.Result);
+            Assert.AreEqual(BuildRequestEntryState.Ready, entry.State);
+            Assert.AreEqual(entry.Request, request);
+            Assert.IsNull(entry.Result);
 
             // Move to active.  Should not be any results yet.
             IDictionary<int, BuildResult> results = entry.Continue();
-            Assert.Equal(BuildRequestEntryState.Active, entry.State);
-            Assert.Null(entry.Result);
-            Assert.Null(results);
+            Assert.AreEqual(BuildRequestEntryState.Active, entry.State);
+            Assert.IsNull(entry.Result);
+            Assert.IsNull(results);
 
             // Wait for results, move to waiting.
             BuildRequest waitingRequest = CreateNewBuildRequest(2, new string[1] { "bar" });
             entry.WaitForResult(waitingRequest);
-            Assert.Equal(BuildRequestEntryState.Waiting, entry.State);
-            Assert.Equal(entry.Request, request);
-            Assert.Null(entry.Result);
+            Assert.AreEqual(BuildRequestEntryState.Waiting, entry.State);
+            Assert.AreEqual(entry.Request, request);
+            Assert.IsNull(entry.Result);
 
             // Provide the results, move to ready.
             BuildResult requiredResult = new BuildResult(waitingRequest);
             requiredResult.AddResultsForTarget("bar", BuildResultUtilities.GetEmptySucceedingTargetResult());
             entry.ReportResult(requiredResult);
-            Assert.Equal(BuildRequestEntryState.Ready, entry.State);
-            Assert.Equal(entry.Request, request);
-            Assert.Null(entry.Result);
+            Assert.AreEqual(BuildRequestEntryState.Ready, entry.State);
+            Assert.AreEqual(entry.Request, request);
+            Assert.IsNull(entry.Result);
 
             // Continue the build, move to active.
             results = entry.Continue();
-            Assert.Equal(BuildRequestEntryState.Active, entry.State);
-            Assert.Null(entry.Result);
+            Assert.AreEqual(BuildRequestEntryState.Active, entry.State);
+            Assert.IsNull(entry.Result);
             Assert.Single(results);
-            Assert.True(results.ContainsKey(requiredResult.NodeRequestId));
-            Assert.Equal(results[requiredResult.NodeRequestId], requiredResult);
+            Assert.IsTrue(results.ContainsKey(requiredResult.NodeRequestId));
+            Assert.AreEqual(results[requiredResult.NodeRequestId], requiredResult);
 
             // Complete the build, move to completed.
             BuildResult result = new BuildResult(request);
             result.AddResultsForTarget("foo", BuildResultUtilities.GetEmptySucceedingTargetResult());
             entry.Complete(result);
-            Assert.Equal(BuildRequestEntryState.Complete, entry.State);
-            Assert.NotNull(entry.Result);
-            Assert.Equal(entry.Result, result);
+            Assert.AreEqual(BuildRequestEntryState.Complete, entry.State);
+            Assert.IsNotNull(entry.Result);
+            Assert.AreEqual(entry.Result, result);
         }
 
         [Fact]
@@ -94,7 +94,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             BuildRequestEntry entry = new BuildRequestEntry(request, config);
 
             entry.Continue();
-            Assert.Equal(BuildRequestEntryState.Active, entry.State);
+            Assert.AreEqual(BuildRequestEntryState.Active, entry.State);
 
             BuildRequest waitingRequest = CreateNewBuildRequest(-1, new string[1] { "bar" });
             entry.WaitForResult(waitingRequest);
@@ -104,7 +104,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
             BuildResult requiredResult = new BuildResult(waitingRequest);
             requiredResult.AddResultsForTarget("bar", BuildResultUtilities.GetEmptySucceedingTargetResult());
             entry.ReportResult(requiredResult);
-            Assert.Equal(BuildRequestEntryState.Ready, entry.State);
+            Assert.AreEqual(BuildRequestEntryState.Ready, entry.State);
         }
 
         [Fact]
@@ -116,25 +116,25 @@ namespace Microsoft.Build.UnitTests.BackEnd
             BuildRequestEntry entry = new BuildRequestEntry(request, config);
 
             entry.Continue();
-            Assert.Equal(BuildRequestEntryState.Active, entry.State);
+            Assert.AreEqual(BuildRequestEntryState.Active, entry.State);
 
             BuildRequest waitingRequest1 = CreateNewBuildRequest(2, new string[1] { "bar" });
             entry.WaitForResult(waitingRequest1);
-            Assert.Equal(BuildRequestEntryState.Waiting, entry.State);
+            Assert.AreEqual(BuildRequestEntryState.Waiting, entry.State);
 
             BuildRequest waitingRequest2 = CreateNewBuildRequest(2, new string[1] { "xor" });
             entry.WaitForResult(waitingRequest2);
-            Assert.Equal(BuildRequestEntryState.Waiting, entry.State);
+            Assert.AreEqual(BuildRequestEntryState.Waiting, entry.State);
 
             BuildResult requiredResult1 = new BuildResult(waitingRequest1);
             requiredResult1.AddResultsForTarget("bar", BuildResultUtilities.GetEmptySucceedingTargetResult());
             entry.ReportResult(requiredResult1);
-            Assert.Equal(BuildRequestEntryState.Waiting, entry.State);
+            Assert.AreEqual(BuildRequestEntryState.Waiting, entry.State);
 
             BuildResult requiredResult2 = new BuildResult(waitingRequest2);
             requiredResult2.AddResultsForTarget("xor", BuildResultUtilities.GetEmptySucceedingTargetResult());
             entry.ReportResult(requiredResult2);
-            Assert.Equal(BuildRequestEntryState.Ready, entry.State);
+            Assert.AreEqual(BuildRequestEntryState.Ready, entry.State);
         }
 
         [Fact]
@@ -143,33 +143,33 @@ namespace Microsoft.Build.UnitTests.BackEnd
             BuildRequest request = CreateNewBuildRequest(1, new string[1] { "foo" });
             BuildRequestConfiguration config = new BuildRequestConfiguration(1, new BuildRequestData("foo", new Dictionary<string, string?>(), "foo", Array.Empty<string>(), null), "2.0");
             BuildRequestEntry entry = new BuildRequestEntry(request, config);
-            Assert.Equal(BuildRequestEntryState.Ready, entry.State);
+            Assert.AreEqual(BuildRequestEntryState.Ready, entry.State);
 
             entry.Continue();
-            Assert.Equal(BuildRequestEntryState.Active, entry.State);
+            Assert.AreEqual(BuildRequestEntryState.Active, entry.State);
 
             BuildRequest waitingRequest1 = CreateNewBuildRequest(2, new string[1] { "bar" });
             entry.WaitForResult(waitingRequest1);
-            Assert.Equal(BuildRequestEntryState.Waiting, entry.State);
+            Assert.AreEqual(BuildRequestEntryState.Waiting, entry.State);
 
             BuildRequest waitingRequest2 = CreateNewBuildRequest(-1, new string[1] { "xor" });
             entry.WaitForResult(waitingRequest2);
-            Assert.Equal(BuildRequestEntryState.Waiting, entry.State);
+            Assert.AreEqual(BuildRequestEntryState.Waiting, entry.State);
 
-            Assert.Null(entry.GetRequestsToIssueIfReady()); // "Entry should not be ready to issue because there are unresolved configurations"
+            Assert.IsNull(entry.GetRequestsToIssueIfReady()); // "Entry should not be ready to issue because there are unresolved configurations"
 
             entry.ResolveConfigurationRequest(-1, 3);
-            Assert.Equal(BuildRequestEntryState.Waiting, entry.State);
+            Assert.AreEqual(BuildRequestEntryState.Waiting, entry.State);
 
             BuildResult requiredResult1 = new BuildResult(waitingRequest1);
             requiredResult1.AddResultsForTarget("bar", BuildResultUtilities.GetEmptySucceedingTargetResult());
             entry.ReportResult(requiredResult1);
-            Assert.Equal(BuildRequestEntryState.Waiting, entry.State);
+            Assert.AreEqual(BuildRequestEntryState.Waiting, entry.State);
 
             BuildResult requiredResult2 = new BuildResult(waitingRequest2);
             requiredResult2.AddResultsForTarget("xor", BuildResultUtilities.GetEmptySucceedingTargetResult());
             entry.ReportResult(requiredResult2);
-            Assert.Equal(BuildRequestEntryState.Ready, entry.State);
+            Assert.AreEqual(BuildRequestEntryState.Ready, entry.State);
         }
 
         [Fact]
@@ -181,7 +181,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 BuildRequestData data1 = new BuildRequestData("foo", new Dictionary<string, string?>(), "foo", Array.Empty<string>(), null);
                 BuildRequestConfiguration config = new BuildRequestConfiguration(1, data1, "2.0");
                 BuildRequestEntry entry = new BuildRequestEntry(request, config);
-                Assert.Equal(BuildRequestEntryState.Ready, entry.State);
+                Assert.AreEqual(BuildRequestEntryState.Ready, entry.State);
 
                 BuildRequest waitingRequest1 = CreateNewBuildRequest(2, new string[1] { "bar" });
                 entry.WaitForResult(waitingRequest1);
@@ -197,7 +197,7 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 BuildRequestData data1 = new BuildRequestData("foo", new Dictionary<string, string?>(), "foo", Array.Empty<string>(), null);
                 BuildRequestConfiguration config = new BuildRequestConfiguration(1, data1, "2.0");
                 BuildRequestEntry entry = new BuildRequestEntry(request, config);
-                Assert.Equal(BuildRequestEntryState.Ready, entry.State);
+                Assert.AreEqual(BuildRequestEntryState.Ready, entry.State);
 
                 BuildResult requiredResult = new BuildResult(request);
                 requiredResult.AddResultsForTarget("foo", BuildResultUtilities.GetEmptySucceedingTargetResult());
@@ -214,14 +214,14 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 BuildRequestData data1 = new BuildRequestData("foo", new Dictionary<string, string?>(), "foo", Array.Empty<string>(), null);
                 BuildRequestConfiguration config = new BuildRequestConfiguration(1, data1, "2.0");
                 BuildRequestEntry entry = new BuildRequestEntry(request, config);
-                Assert.Equal(BuildRequestEntryState.Ready, entry.State);
+                Assert.AreEqual(BuildRequestEntryState.Ready, entry.State);
 
                 entry.Continue();
-                Assert.Equal(BuildRequestEntryState.Active, entry.State);
+                Assert.AreEqual(BuildRequestEntryState.Active, entry.State);
 
                 BuildRequest waitingRequest1 = CreateNewBuildRequest(2, new string[1] { "bar" });
                 entry.WaitForResult(waitingRequest1);
-                Assert.Equal(BuildRequestEntryState.Waiting, entry.State);
+                Assert.AreEqual(BuildRequestEntryState.Waiting, entry.State);
 
                 BuildResult requiredResult = new BuildResult(request);
                 requiredResult.AddResultsForTarget("foo", BuildResultUtilities.GetEmptySucceedingTargetResult());
@@ -237,15 +237,15 @@ namespace Microsoft.Build.UnitTests.BackEnd
                 BuildRequest request = CreateNewBuildRequest(1, new string[1] { "foo" });
                 BuildRequestConfiguration config = new BuildRequestConfiguration(1, new BuildRequestData("foo", new Dictionary<string, string?>(), "foo", Array.Empty<string>(), null), "2.0");
                 BuildRequestEntry entry = new BuildRequestEntry(request, config);
-                Assert.Equal(BuildRequestEntryState.Ready, entry.State);
+                Assert.AreEqual(BuildRequestEntryState.Ready, entry.State);
 
                 entry.Continue();
-                Assert.Equal(BuildRequestEntryState.Active, entry.State);
+                Assert.AreEqual(BuildRequestEntryState.Active, entry.State);
 
                 BuildResult requiredResult = new BuildResult(request);
                 requiredResult.AddResultsForTarget("foo", BuildResultUtilities.GetEmptySucceedingTargetResult());
                 entry.Complete(requiredResult);
-                Assert.Equal(BuildRequestEntryState.Complete, entry.State);
+                Assert.AreEqual(BuildRequestEntryState.Complete, entry.State);
 
                 BuildRequest waitingRequest1 = CreateNewBuildRequest(2, new string[1] { "bar" });
                 entry.WaitForResult(waitingRequest1);
@@ -257,20 +257,20 @@ namespace Microsoft.Build.UnitTests.BackEnd
             BuildRequest request = CreateNewBuildRequest(1, new string[1] { "foo" });
             BuildRequestConfiguration config = new BuildRequestConfiguration(1, new BuildRequestData("foo", new Dictionary<string, string?>(), "foo", Array.Empty<string>(), null), "2.0");
             BuildRequestEntry entry = new BuildRequestEntry(request, config);
-            Assert.Equal(BuildRequestEntryState.Ready, entry.State);
+            Assert.AreEqual(BuildRequestEntryState.Ready, entry.State);
 
             entry.Continue();
-            Assert.Equal(BuildRequestEntryState.Active, entry.State);
+            Assert.AreEqual(BuildRequestEntryState.Active, entry.State);
 
             BuildRequest waitingRequest1 = CreateNewBuildRequest(2, new string[1] { "bar" });
             entry.WaitForResult(waitingRequest1);
-            Assert.Equal(BuildRequestEntryState.Waiting, entry.State);
+            Assert.AreEqual(BuildRequestEntryState.Waiting, entry.State);
 
             BuildRequest randomRequest = CreateNewBuildRequest(3, Array.Empty<string>());
             BuildResult requiredResult = new BuildResult(randomRequest);
             requiredResult.AddResultsForTarget("bar", BuildResultUtilities.GetEmptySucceedingTargetResult());
             entry.ReportResult(requiredResult);
-            Assert.Equal(BuildRequestEntryState.Waiting, entry.State);
+            Assert.AreEqual(BuildRequestEntryState.Waiting, entry.State);
         }
 
         private BuildRequest CreateNewBuildRequest(int configurationId, string[] targets)

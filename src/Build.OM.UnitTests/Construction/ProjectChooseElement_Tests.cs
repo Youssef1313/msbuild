@@ -177,7 +177,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
                 ProjectRootElement project = ProjectRootElement.Create(XmlReader.Create(new StringReader(content)));
                 ProjectChooseElement choose = (ProjectChooseElement)Helpers.GetFirst(project.Children);
 
-                Assert.Null(Helpers.GetFirst(choose.Children));
+                Assert.IsNull(Helpers.GetFirst(choose.Children));
             });
         }
         /// <summary>
@@ -197,8 +197,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectRootElement project = projectRootElementFromString.Project;
             ProjectChooseElement choose = (ProjectChooseElement)Helpers.GetFirst(project.Children);
 
-            Assert.Equal(1, Helpers.Count(choose.WhenElements));
-            Assert.Null(choose.OtherwiseElement);
+            Assert.AreEqual(1, Helpers.Count(choose.WhenElements));
+            Assert.IsNull(choose.OtherwiseElement);
         }
 
         /// <summary>
@@ -222,10 +222,10 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectChooseElement choose = (ProjectChooseElement)Helpers.GetFirst(project.Children);
 
             List<ProjectWhenElement> whens = Helpers.MakeList(choose.WhenElements);
-            Assert.Equal(2, whens.Count);
-            Assert.Equal("c1", whens[0].Condition);
-            Assert.Equal("c2", whens[1].Condition);
-            Assert.NotNull(choose.OtherwiseElement);
+            Assert.AreEqual(2, whens.Count);
+            Assert.AreEqual("c1", whens[0].Condition);
+            Assert.AreEqual("c2", whens[1].Condition);
+            Assert.IsNotNull(choose.OtherwiseElement);
         }
 
         /// <summary>
@@ -277,11 +277,11 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectWhenElement when = Helpers.GetFirst(choose.WhenElements);
             when.Condition = "false";
 
-            Assert.Equal("v1", project.GetPropertyValue("p"));
+            Assert.AreEqual("v1", project.GetPropertyValue("p"));
 
             project.ReevaluateIfNecessary();
 
-            Assert.Equal(String.Empty, project.GetPropertyValue("p"));
+            Assert.AreEqual(String.Empty, project.GetPropertyValue("p"));
         }
     }
 }

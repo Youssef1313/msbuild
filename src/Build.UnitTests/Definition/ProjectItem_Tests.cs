@@ -32,11 +32,11 @@ namespace Microsoft.Build.UnitTests.Definition
             item1.SetMetadataValue("n", "n1");
 
             Assert.Single(Helpers.MakeList(item2.Metadata));
-            Assert.Equal(String.Empty, item2.GetMetadataValue("n"));
-            Assert.Equal(1 + 15 /* built-in metadata */, item2.MetadataCount);
+            Assert.AreEqual(String.Empty, item2.GetMetadataValue("n"));
+            Assert.AreEqual(1 + 15 /* built-in metadata */, item2.MetadataCount);
 
             // Should still point at the same XML items
-            Assert.True(Object.ReferenceEquals(item1.DirectMetadata.First().Xml, item2.DirectMetadata.First().Xml));
+            Assert.IsTrue(Object.ReferenceEquals(item1.DirectMetadata.First().Xml, item2.DirectMetadata.First().Xml));
         }
 
         /// <summary>

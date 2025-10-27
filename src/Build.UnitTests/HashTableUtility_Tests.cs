@@ -31,8 +31,8 @@ namespace Microsoft.Build.UnitTests
             h2["a"] = "x";                    // <---------- Must be the same in both hashtables.
             h2["b"] = "y";
 
-            Assert.True(HashTableUtility.Compare(h1, h2) < 0);
-            Assert.True(HashTableUtility.Compare(h2, h1) > 0);
+            Assert.IsTrue(HashTableUtility.Compare(h1, h2) < 0);
+            Assert.IsTrue(HashTableUtility.Compare(h2, h1) > 0);
         }
 
         [Fact]
@@ -40,31 +40,31 @@ namespace Microsoft.Build.UnitTests
         {
             Dictionary<string, string> h1 = new Dictionary<string, string>();
             Dictionary<string, string> h2 = new Dictionary<string, string>();
-            Assert.Equal(0, HashTableUtility.Compare(h1, h2));
+            Assert.AreEqual(0, HashTableUtility.Compare(h1, h2));
 
             h1["a"] = "x";
             h2["a"] = "x";
-            Assert.Equal(0, HashTableUtility.Compare(h1, h2));
+            Assert.AreEqual(0, HashTableUtility.Compare(h1, h2));
 
             h1["b"] = "y";
             h1["c"] = "z";
             h2["b"] = "y";
             h2["c"] = "z";
-            Assert.Equal(0, HashTableUtility.Compare(h1, h2));
+            Assert.AreEqual(0, HashTableUtility.Compare(h1, h2));
 
             h1["b"] = "j";
-            Assert.True(HashTableUtility.Compare(h1, h2) < 0);
+            Assert.IsTrue(HashTableUtility.Compare(h1, h2) < 0);
 
             h2["b"] = "j";
             h2["c"] = "k";
-            Assert.True(HashTableUtility.Compare(h1, h2) > 0);
+            Assert.IsTrue(HashTableUtility.Compare(h1, h2) > 0);
 
             h1["a"] = null;
             h1["c"] = "k";
-            Assert.True(HashTableUtility.Compare(h1, h2) < 0);
+            Assert.IsTrue(HashTableUtility.Compare(h1, h2) < 0);
 
             h2["a"] = null;
-            Assert.Equal(0, HashTableUtility.Compare(h1, h2));
+            Assert.AreEqual(0, HashTableUtility.Compare(h1, h2));
         }
     }
 }

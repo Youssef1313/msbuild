@@ -25,8 +25,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
         {
             ProjectOnErrorElement onError = GetOnError();
 
-            Assert.Equal("t", onError.ExecuteTargetsAttribute);
-            Assert.Equal("c", onError.Condition);
+            Assert.AreEqual("t", onError.ExecuteTargetsAttribute);
+            Assert.AreEqual("c", onError.Condition);
         }
 
         /// <summary>
@@ -54,8 +54,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
             ProjectOnErrorElement onError1 = onErrors[0];
             ProjectOnErrorElement onError2 = onErrors[1];
 
-            Assert.Equal("1", onError1.ExecuteTargetsAttribute);
-            Assert.Equal("2", onError2.ExecuteTargetsAttribute);
+            Assert.AreEqual("1", onError1.ExecuteTargetsAttribute);
+            Assert.AreEqual("2", onError2.ExecuteTargetsAttribute);
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
                 ProjectTargetElement target = (ProjectTargetElement)Helpers.GetFirst(project.Children);
                 ProjectOnErrorElement onError = (ProjectOnErrorElement)Helpers.GetFirst(target.Children);
 
-                Assert.Equal(String.Empty, onError.ExecuteTargetsAttribute);
+                Assert.AreEqual(String.Empty, onError.ExecuteTargetsAttribute);
             });
         }
         /// <summary>
@@ -107,7 +107,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
                 ProjectTargetElement target = (ProjectTargetElement)Helpers.GetFirst(project.Children);
                 ProjectOnErrorElement onError = (ProjectOnErrorElement)Helpers.GetFirst(target.Children);
 
-                Assert.Equal(String.Empty, onError.ExecuteTargetsAttribute);
+                Assert.AreEqual(String.Empty, onError.ExecuteTargetsAttribute);
             });
         }
         /// <summary>
@@ -220,7 +220,7 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             onError.ExecuteTargetsAttribute = "t2";
 
-            Assert.Equal("t2", onError.ExecuteTargetsAttribute);
+            Assert.AreEqual("t2", onError.ExecuteTargetsAttribute);
         }
 
         /// <summary>
@@ -263,8 +263,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             onError.Condition = "c";
 
-            Assert.Equal("c", onError.Condition);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual("c", onError.Condition);
+            Assert.IsTrue(project.HasUnsavedChanges);
         }
 
         /// <summary>
@@ -281,8 +281,8 @@ namespace Microsoft.Build.UnitTests.OM.Construction
 
             onError.ExecuteTargetsAttribute = "et2";
 
-            Assert.Equal("et2", onError.ExecuteTargetsAttribute);
-            Assert.True(project.HasUnsavedChanges);
+            Assert.AreEqual("et2", onError.ExecuteTargetsAttribute);
+            Assert.IsTrue(project.HasUnsavedChanges);
         }
 
         /// <summary>

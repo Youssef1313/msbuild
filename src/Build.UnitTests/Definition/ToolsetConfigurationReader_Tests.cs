@@ -45,10 +45,10 @@ namespace Microsoft.Build.UnitTests.Definition
             Configuration config = ToolsetConfigurationReaderTestHelper.ReadApplicationConfigurationTest();
             ToolsetConfigurationSection msbuildToolsetSection = config.GetSection(s_msbuildToolsets) as ToolsetConfigurationSection;
 
-            Assert.Null(msbuildToolsetSection.MSBuildOverrideTasksPath);
-            Assert.NotNull(msbuildToolsetSection);
-            Assert.Null(msbuildToolsetSection.Default);
-            Assert.NotNull(msbuildToolsetSection.Toolsets);
+            Assert.IsNull(msbuildToolsetSection.MSBuildOverrideTasksPath);
+            Assert.IsNotNull(msbuildToolsetSection);
+            Assert.IsNull(msbuildToolsetSection.Default);
+            Assert.IsNotNull(msbuildToolsetSection.Toolsets);
             Assert.Empty(msbuildToolsetSection.Toolsets);
         }
 
@@ -74,13 +74,13 @@ namespace Microsoft.Build.UnitTests.Definition
             ConfigurationSection section = config.GetSection(s_msbuildToolsets);
             ToolsetConfigurationSection msbuildToolsetSection = section as ToolsetConfigurationSection;
 
-            Assert.Null(msbuildToolsetSection.MSBuildOverrideTasksPath);
-            Assert.Equal("2.0", msbuildToolsetSection.Default);
+            Assert.IsNull(msbuildToolsetSection.MSBuildOverrideTasksPath);
+            Assert.AreEqual("2.0", msbuildToolsetSection.Default);
             Assert.Single(msbuildToolsetSection.Toolsets);
 
-            Assert.Equal("2.0", msbuildToolsetSection.Toolsets.GetElement(0).toolsVersion);
+            Assert.AreEqual("2.0", msbuildToolsetSection.Toolsets.GetElement(0).toolsVersion);
             Assert.Single(msbuildToolsetSection.Toolsets.GetElement("2.0").PropertyElements);
-            Assert.Equal(
+            Assert.AreEqual(
               @"D:\windows\Microsoft.NET\Framework\v2.0.x86ret\",
               msbuildToolsetSection.Toolsets.GetElement("2.0").PropertyElements.GetElement("MSBuildBinPath").Value);
 
@@ -110,7 +110,7 @@ namespace Microsoft.Build.UnitTests.Definition
             ConfigurationSection section = config.GetSection(s_msbuildToolsets);
             ToolsetConfigurationSection msbuildToolsetSection = section as ToolsetConfigurationSection;
 
-            Assert.Equal("c:\\foo", msbuildToolsetSection.MSBuildOverrideTasksPath);
+            Assert.AreEqual("c:\\foo", msbuildToolsetSection.MSBuildOverrideTasksPath);
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace Microsoft.Build.UnitTests.Definition
             ConfigurationSection section = config.GetSection(s_msbuildToolsets);
             ToolsetConfigurationSection msbuildToolsetSection = section as ToolsetConfigurationSection;
 
-            Assert.Null(msbuildToolsetSection.MSBuildOverrideTasksPath);
+            Assert.IsNull(msbuildToolsetSection.MSBuildOverrideTasksPath);
         }
 
         /// <summary>
@@ -175,12 +175,12 @@ namespace Microsoft.Build.UnitTests.Definition
             Configuration config = ToolsetConfigurationReaderTestHelper.ReadApplicationConfigurationTest();
             ToolsetConfigurationSection msbuildToolsetSection = config.GetSection(s_msbuildToolsets) as ToolsetConfigurationSection;
 
-            Assert.Equal("2.0", msbuildToolsetSection.Default);
+            Assert.AreEqual("2.0", msbuildToolsetSection.Default);
             Assert.Single(msbuildToolsetSection.Toolsets);
 
-            Assert.Equal("2.0", msbuildToolsetSection.Toolsets.GetElement(0).toolsVersion);
+            Assert.AreEqual("2.0", msbuildToolsetSection.Toolsets.GetElement(0).toolsVersion);
             Assert.Single(msbuildToolsetSection.Toolsets.GetElement("2.0").PropertyElements);
-            Assert.Equal(
+            Assert.AreEqual(
               @"D:\windows\Microsoft.NET\Framework\v2.0.x86ret\",
               msbuildToolsetSection.Toolsets.GetElement("2.0").PropertyElements.GetElement("MSBuildBinPath").Value);
 
@@ -300,11 +300,11 @@ namespace Microsoft.Build.UnitTests.Definition
 
             ToolsetConfigurationSection msbuildToolsetSection = config.GetSection(s_msbuildToolsets) as ToolsetConfigurationSection;
 
-            Assert.Equal("4.0", msbuildToolsetSection.Default);
+            Assert.AreEqual("4.0", msbuildToolsetSection.Default);
             Assert.Single(msbuildToolsetSection.Toolsets);
-            Assert.Equal("4.0", msbuildToolsetSection.Toolsets.GetElement(0).toolsVersion);
+            Assert.AreEqual("4.0", msbuildToolsetSection.Toolsets.GetElement(0).toolsVersion);
             Assert.Single(msbuildToolsetSection.Toolsets.GetElement("4.0").PropertyElements);
-            Assert.Equal(
+            Assert.AreEqual(
               @"D:\windows\Microsoft.NET\Framework\v3.5.x86ret\",
               msbuildToolsetSection.Toolsets.GetElement("4.0").PropertyElements.GetElement("MSBuildBinPath").Value);
         }
@@ -444,14 +444,14 @@ namespace Microsoft.Build.UnitTests.Definition
 
             ToolsetConfigurationSection msbuildToolsetSection = config.GetSection(s_msbuildToolsets) as ToolsetConfigurationSection;
 
-            Assert.Equal("2.0", msbuildToolsetSection.Default);
+            Assert.AreEqual("2.0", msbuildToolsetSection.Default);
             Assert.Single(msbuildToolsetSection.Toolsets);
-            Assert.Equal(2, msbuildToolsetSection.Toolsets.GetElement("2.0").PropertyElements.Count);
+            Assert.AreEqual(2, msbuildToolsetSection.Toolsets.GetElement("2.0").PropertyElements.Count);
 
-            Assert.Equal(
+            Assert.AreEqual(
               @"D:\windows\Microsoft.NET\Framework\v2.0.x86ret\",
               msbuildToolsetSection.Toolsets.GetElement("2.0").PropertyElements.GetElement("MSBuildBinPath").Value);
-            Assert.Equal(
+            Assert.AreEqual(
               @"SomeOtherPropertyValue",
               msbuildToolsetSection.Toolsets.GetElement("2.0").PropertyElements.GetElement("SomeOtherPropertyName").Value);
         }
@@ -480,12 +480,12 @@ namespace Microsoft.Build.UnitTests.Definition
             ToolsetConfigurationSection msbuildToolsetSection = config.GetSection(s_msbuildToolsets) as ToolsetConfigurationSection;
 
             // Verifications
-            Assert.Equal("2.0", msbuildToolsetSection.Default);
+            Assert.AreEqual("2.0", msbuildToolsetSection.Default);
             Assert.Single(msbuildToolsetSection.Toolsets);
-            Assert.Equal(2, msbuildToolsetSection.Toolsets.GetElement("2.0").PropertyElements.Count);
-            Assert.Equal(@"D:\windows\Microsoft.NET\Framework\v2.0.x86ret\",
+            Assert.AreEqual(2, msbuildToolsetSection.Toolsets.GetElement("2.0").PropertyElements.Count);
+            Assert.AreEqual(@"D:\windows\Microsoft.NET\Framework\v2.0.x86ret\",
                                    msbuildToolsetSection.Toolsets.GetElement("2.0").PropertyElements.GetElement("MSBuildBinPath").Value);
-            Assert.Equal(@"SomeOtherPropertyValue",
+            Assert.AreEqual(@"SomeOtherPropertyValue",
                                    msbuildToolsetSection.Toolsets.GetElement("2.0").PropertyElements.GetElement("SomeOtherPropertyName").Value);
         }
 
@@ -531,30 +531,30 @@ namespace Microsoft.Build.UnitTests.Definition
             Configuration config = ToolsetConfigurationReaderTestHelper.ReadApplicationConfigurationTest();
             ToolsetConfigurationSection msbuildToolsetSection = config.GetSection(s_msbuildToolsets) as ToolsetConfigurationSection;
 
-            Assert.Equal("2.0", msbuildToolsetSection.Default);
+            Assert.AreEqual("2.0", msbuildToolsetSection.Default);
             Assert.Single(msbuildToolsetSection.Toolsets);
 
-            Assert.Equal("2.0", msbuildToolsetSection.Toolsets.GetElement(0).toolsVersion);
-            Assert.Equal(2, msbuildToolsetSection.Toolsets.GetElement("2.0").PropertyElements.Count);
-            Assert.Equal(
+            Assert.AreEqual("2.0", msbuildToolsetSection.Toolsets.GetElement(0).toolsVersion);
+            Assert.AreEqual(2, msbuildToolsetSection.Toolsets.GetElement("2.0").PropertyElements.Count);
+            Assert.AreEqual(
               @"D:\windows\Microsoft.NET\Framework\v2.0.x86ret\",
               msbuildToolsetSection.Toolsets.GetElement("2.0").PropertyElements.GetElement("MSBuildBinPath").Value);
 
-            Assert.Equal(3, msbuildToolsetSection.Toolsets.GetElement(0).AllProjectImportSearchPaths.Count);
+            Assert.AreEqual(3, msbuildToolsetSection.Toolsets.GetElement(0).AllProjectImportSearchPaths.Count);
             var allPaths = msbuildToolsetSection.Toolsets.GetElement(0).AllProjectImportSearchPaths;
-            Assert.Equal("windows", allPaths.GetElement(0).OS);
-            Assert.Equal(2, allPaths.GetElement(0).PropertyElements.Count);
-            Assert.Equal(@"c:\foo", allPaths.GetElement(0).PropertyElements.GetElement("MSBuildExtensionsPath").Value);
-            Assert.Equal(@"c:\foo64;c:\bar64", allPaths.GetElement(0).PropertyElements.GetElement("MSBuildExtensionsPath64").Value);
+            Assert.AreEqual("windows", allPaths.GetElement(0).OS);
+            Assert.AreEqual(2, allPaths.GetElement(0).PropertyElements.Count);
+            Assert.AreEqual(@"c:\foo", allPaths.GetElement(0).PropertyElements.GetElement("MSBuildExtensionsPath").Value);
+            Assert.AreEqual(@"c:\foo64;c:\bar64", allPaths.GetElement(0).PropertyElements.GetElement("MSBuildExtensionsPath64").Value);
 
-            Assert.Equal("osx", allPaths.GetElement(1).OS);
-            Assert.Equal(2, allPaths.GetElement(1).PropertyElements.Count);
-            Assert.Equal(@"/tmp/foo", allPaths.GetElement(1).PropertyElements.GetElement("MSBuildExtensionsPath").Value);
-            Assert.Equal(@"/tmp/foo32;/tmp/bar32", allPaths.GetElement(1).PropertyElements.GetElement("MSBuildExtensionsPath32").Value);
+            Assert.AreEqual("osx", allPaths.GetElement(1).OS);
+            Assert.AreEqual(2, allPaths.GetElement(1).PropertyElements.Count);
+            Assert.AreEqual(@"/tmp/foo", allPaths.GetElement(1).PropertyElements.GetElement("MSBuildExtensionsPath").Value);
+            Assert.AreEqual(@"/tmp/foo32;/tmp/bar32", allPaths.GetElement(1).PropertyElements.GetElement("MSBuildExtensionsPath32").Value);
 
-            Assert.Equal("unix", allPaths.GetElement(2).OS);
+            Assert.AreEqual("unix", allPaths.GetElement(2).OS);
             Assert.Single(allPaths.GetElement(2).PropertyElements);
-            Assert.Equal(@"/tmp/bar", allPaths.GetElement(2).PropertyElements.GetElement("MSBuildExtensionsPath").Value);
+            Assert.AreEqual(@"/tmp/bar", allPaths.GetElement(2).PropertyElements.GetElement("MSBuildExtensionsPath").Value);
 
             var reader = GetStandardConfigurationReader();
             Dictionary<string, Toolset> toolsets = new Dictionary<string, Toolset>(StringComparer.OrdinalIgnoreCase);
@@ -581,13 +581,13 @@ namespace Microsoft.Build.UnitTests.Definition
 
         private void CheckPathsTable(Dictionary<string, ProjectImportPathMatch> pathsTable, string kind, string[] expectedPaths)
         {
-            Assert.True(pathsTable.ContainsKey(kind));
+            Assert.IsTrue(pathsTable.ContainsKey(kind));
             var paths = pathsTable[kind];
-            Assert.Equal(paths.SearchPaths.Count, expectedPaths.Length);
+            Assert.AreEqual(paths.SearchPaths.Count, expectedPaths.Length);
 
             for (int i = 0; i < paths.SearchPaths.Count; i++)
             {
-                Assert.Equal(paths.SearchPaths[i], expectedPaths[i]);
+                Assert.AreEqual(paths.SearchPaths[i], expectedPaths[i]);
             }
         }
 

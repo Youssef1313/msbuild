@@ -48,14 +48,14 @@ namespace Microsoft.Build.UnitTests
                 }
 
                 // Make sure the pointer passed back for the method is not null
-                Assert.NotEqual(processHandle, NativeMethodsShared.NullIntPtr);
+                Assert.AreNotEqual(processHandle, NativeMethodsShared.NullIntPtr);
 
                 // Actually call the method
                 GetProcessIdDelegate processIdDelegate = Marshal.GetDelegateForFunctionPointer<GetProcessIdDelegate>(processHandle);
                 uint processId = processIdDelegate();
 
                 // Make sure the return value is the same as retrieved from the .net methods to make sure everything works
-                Assert.Equal((uint)Process.GetCurrentProcess().Id, processId); // "Expected the .net processId to match the one from GetCurrentProcessId"
+                Assert.AreEqual((uint)Process.GetCurrentProcess().Id, processId); // "Expected the .net processId to match the one from GetCurrentProcessId"
             }
             finally
             {
@@ -76,7 +76,7 @@ namespace Microsoft.Build.UnitTests
             string nonexistentFile = FileUtilities.GetTemporaryFileName();
 
             DateTime nonexistentFileTime = NativeMethodsShared.GetLastWriteFileUtcTime(nonexistentFile);
-            Assert.Equal(DateTime.MinValue, nonexistentFileTime);
+            Assert.AreEqual(DateTime.MinValue, nonexistentFileTime);
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Microsoft.Build.UnitTests
             string directory = FileUtilities.GetTemporaryDirectory(createDirectory: true);
 
             DateTime directoryTime = NativeMethodsShared.GetLastWriteFileUtcTime(directory);
-            Assert.Equal(DateTime.MinValue, directoryTime);
+            Assert.AreEqual(DateTime.MinValue, directoryTime);
         }
 
         /// <summary>
@@ -102,8 +102,8 @@ namespace Microsoft.Build.UnitTests
             string file = FileUtilities.GetTemporaryFile();
 
             DateTime directoryTime;
-            Assert.False(NativeMethodsShared.GetLastWriteDirectoryUtcTime(file, out directoryTime));
-            Assert.Equal(DateTime.MinValue, directoryTime);
+            Assert.IsFalse(NativeMethodsShared.GetLastWriteDirectoryUtcTime(file, out directoryTime));
+            Assert.AreEqual(DateTime.MinValue, directoryTime);
         }
 
 
@@ -131,7 +131,7 @@ namespace Microsoft.Build.UnitTests
                 }
             }
 
-            Assert.False(Directory.Exists(nonexistentDirectory),
+            Assert.IsFalse(Directory.Exists(nonexistentDirectory),
                 "Tried 10 times to get a nonexistent directory name and failed -- please try again");
 
             bool exceptionCaught = false;
@@ -147,8 +147,8 @@ namespace Microsoft.Build.UnitTests
             finally
             {
                 // verify that the current directory did not change
-                Assert.False(exceptionCaught); // "SetCurrentDirectory should not throw!"
-                Assert.Equal(currentDirectory, Directory.GetCurrentDirectory());
+                Assert.IsFalse(exceptionCaught); // "SetCurrentDirectory should not throw!"
+                Assert.AreEqual(currentDirectory, Directory.GetCurrentDirectory());
             }
         }
 

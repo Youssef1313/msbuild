@@ -25,7 +25,7 @@ namespace Microsoft.Build.UnitTests
             t.BuildEngine = new MockEngine();
 
             // It's invalid to have zero parameters, so we expect a "false" return value from ValidateParameters.
-            Assert.False(CommandLine.CallValidateParameters(t));
+            Assert.IsFalse(CommandLine.CallValidateParameters(t));
         }
 
         [Fact]
@@ -37,7 +37,7 @@ namespace Microsoft.Build.UnitTests
             t.MetabasePath = @"/LM/W3SVC/1/Root/MyApp";
 
             // This should be valid.
-            Assert.True(CommandLine.CallValidateParameters(t));
+            Assert.IsTrue(CommandLine.CallValidateParameters(t));
 
             CommandLine.ValidateEquals(t, @"-m /LM/W3SVC/1/Root/MyApp", false);
         }
@@ -51,7 +51,7 @@ namespace Microsoft.Build.UnitTests
             t.VirtualPath = @"/MyApp";
 
             // This should be valid.
-            Assert.True(CommandLine.CallValidateParameters(t));
+            Assert.IsTrue(CommandLine.CallValidateParameters(t));
 
             CommandLine.ValidateEquals(t, @"-v /MyApp", false);
         }
@@ -66,7 +66,7 @@ namespace Microsoft.Build.UnitTests
             t.PhysicalPath = @"c:\MyApp";
 
             // This is not valid.  Either MetabasePath or VirtualPath must be specified.
-            Assert.False(CommandLine.CallValidateParameters(t));
+            Assert.IsFalse(CommandLine.CallValidateParameters(t));
         }
 
         [Fact]
@@ -78,7 +78,7 @@ namespace Microsoft.Build.UnitTests
             t.TargetPath = @"c:\MyTarget";
 
             // This is not valid.  Either MetabasePath or VirtualPath must be specified.
-            Assert.False(CommandLine.CallValidateParameters(t));
+            Assert.IsFalse(CommandLine.CallValidateParameters(t));
         }
 
         [Fact]
@@ -91,7 +91,7 @@ namespace Microsoft.Build.UnitTests
             t.VirtualPath = @"/MyApp";
 
             // This is not valid.  Can't specify both MetabasePath and (VirtualPath or PhysicalPath).
-            Assert.False(CommandLine.CallValidateParameters(t));
+            Assert.IsFalse(CommandLine.CallValidateParameters(t));
         }
 
         [Fact]
@@ -104,7 +104,7 @@ namespace Microsoft.Build.UnitTests
             t.PhysicalPath = @"c:\MyApp";
 
             // This is not valid.  Can't specify both MetabasePath and (VirtualPath or PhysicalPath).
-            Assert.False(CommandLine.CallValidateParameters(t));
+            Assert.IsFalse(CommandLine.CallValidateParameters(t));
         }
 
         [Fact]
@@ -117,7 +117,7 @@ namespace Microsoft.Build.UnitTests
             t.TargetPath = @"c:\MyTarget";
 
             // This is valid.
-            Assert.True(CommandLine.CallValidateParameters(t));
+            Assert.IsTrue(CommandLine.CallValidateParameters(t));
 
             CommandLine.ValidateEquals(t, @"-m /LM/W3SVC/1/Root/MyApp c:\MyTarget", false);
         }
@@ -132,7 +132,7 @@ namespace Microsoft.Build.UnitTests
             t.PhysicalPath = @"c:\MyApp";
 
             // This is valid.
-            Assert.True(CommandLine.CallValidateParameters(t));
+            Assert.IsTrue(CommandLine.CallValidateParameters(t));
 
             CommandLine.ValidateEquals(t, @"-v /MyApp -p c:\MyApp", false);
         }
@@ -147,7 +147,7 @@ namespace Microsoft.Build.UnitTests
             t.TargetPath = @"c:\MyTarget";
 
             // This is valid.
-            Assert.True(CommandLine.CallValidateParameters(t));
+            Assert.IsTrue(CommandLine.CallValidateParameters(t));
 
             CommandLine.ValidateEquals(t, @"-v /MyApp c:\MyTarget", false);
         }
@@ -162,7 +162,7 @@ namespace Microsoft.Build.UnitTests
             t.TargetPath = @"c:\MyTarget";
 
             // This is not valid.  Either MetabasePath or VirtualPath must be specified.
-            Assert.False(CommandLine.CallValidateParameters(t));
+            Assert.IsFalse(CommandLine.CallValidateParameters(t));
         }
 
         [Fact]
@@ -176,7 +176,7 @@ namespace Microsoft.Build.UnitTests
             t.TargetPath = @"c:\MyTarget";
 
             // This is valid.
-            Assert.True(CommandLine.CallValidateParameters(t));
+            Assert.IsTrue(CommandLine.CallValidateParameters(t));
 
             CommandLine.ValidateEquals(t, @"-v /MyApp -p c:\MyApp c:\MyTarget", false);
         }
@@ -192,7 +192,7 @@ namespace Microsoft.Build.UnitTests
             t.TargetPath = @"c:\MyTarget";
 
             // This is not valid.  Can't specify both MetabasePath and (VirtualPath or PhysicalPath).
-            Assert.False(CommandLine.CallValidateParameters(t));
+            Assert.IsFalse(CommandLine.CallValidateParameters(t));
         }
 
         [Fact]
@@ -206,7 +206,7 @@ namespace Microsoft.Build.UnitTests
             t.TargetPath = @"c:\MyTarget";
 
             // This is not valid.  Can't specify both MetabasePath and (VirtualPath or PhysicalPath).
-            Assert.False(CommandLine.CallValidateParameters(t));
+            Assert.IsFalse(CommandLine.CallValidateParameters(t));
         }
 
         [Fact]
@@ -220,7 +220,7 @@ namespace Microsoft.Build.UnitTests
             t.PhysicalPath = @"c:\MyApp";
 
             // This is not valid.  Can't specify both MetabasePath and (VirtualPath or PhysicalPath).
-            Assert.False(CommandLine.CallValidateParameters(t));
+            Assert.IsFalse(CommandLine.CallValidateParameters(t));
         }
 
         [Fact]
@@ -235,7 +235,7 @@ namespace Microsoft.Build.UnitTests
             t.TargetPath = @"c:\MyTarget";
 
             // This is not valid.  Can't specify both MetabasePath and (VirtualPath or PhysicalPath).
-            Assert.False(CommandLine.CallValidateParameters(t));
+            Assert.IsFalse(CommandLine.CallValidateParameters(t));
         }
 
         /// <summary>
@@ -266,26 +266,26 @@ namespace Microsoft.Build.UnitTests
 
             MockLogger logger = new MockLogger();
             Project proj = ObjectModelHelpers.CreateInMemoryProject(fullProjectFile, logger);
-            Assert.False(proj.Build(logger));
+            Assert.IsFalse(proj.Build(logger));
 
-            Assert.Equal(3, logger.ExternalProjectStartedEvents.Count);
-            Assert.Equal(3, logger.ExternalProjectFinishedEvents.Count);
+            Assert.AreEqual(3, logger.ExternalProjectStartedEvents.Count);
+            Assert.AreEqual(3, logger.ExternalProjectFinishedEvents.Count);
 
-            Assert.Equal(@"..\..\solutions\WebSite1\", logger.ExternalProjectStartedEvents[0].ProjectFile);
-            Assert.Equal("/WebSite2", logger.ExternalProjectStartedEvents[1].ProjectFile);
-            Assert.Equal("/LM/W3SVC/1/Root/MyApp", logger.ExternalProjectStartedEvents[2].ProjectFile);
+            Assert.AreEqual(@"..\..\solutions\WebSite1\", logger.ExternalProjectStartedEvents[0].ProjectFile);
+            Assert.AreEqual("/WebSite2", logger.ExternalProjectStartedEvents[1].ProjectFile);
+            Assert.AreEqual("/LM/W3SVC/1/Root/MyApp", logger.ExternalProjectStartedEvents[2].ProjectFile);
 
-            Assert.Equal(@"..\..\solutions\WebSite1\", logger.ExternalProjectFinishedEvents[0].ProjectFile);
-            Assert.Equal("/WebSite2", logger.ExternalProjectFinishedEvents[1].ProjectFile);
-            Assert.Equal("/LM/W3SVC/1/Root/MyApp", logger.ExternalProjectFinishedEvents[2].ProjectFile);
+            Assert.AreEqual(@"..\..\solutions\WebSite1\", logger.ExternalProjectFinishedEvents[0].ProjectFile);
+            Assert.AreEqual("/WebSite2", logger.ExternalProjectFinishedEvents[1].ProjectFile);
+            Assert.AreEqual("/LM/W3SVC/1/Root/MyApp", logger.ExternalProjectFinishedEvents[2].ProjectFile);
 
-            Assert.Null(logger.ExternalProjectStartedEvents[0].TargetNames);
-            Assert.Equal("Clean", logger.ExternalProjectStartedEvents[1].TargetNames);
-            Assert.Null(logger.ExternalProjectStartedEvents[2].TargetNames);
+            Assert.IsNull(logger.ExternalProjectStartedEvents[0].TargetNames);
+            Assert.AreEqual("Clean", logger.ExternalProjectStartedEvents[1].TargetNames);
+            Assert.IsNull(logger.ExternalProjectStartedEvents[2].TargetNames);
 
-            Assert.False(logger.ExternalProjectFinishedEvents[0].Succeeded);
-            Assert.False(logger.ExternalProjectFinishedEvents[1].Succeeded);
-            Assert.False(logger.ExternalProjectFinishedEvents[2].Succeeded);
+            Assert.IsFalse(logger.ExternalProjectFinishedEvents[0].Succeeded);
+            Assert.IsFalse(logger.ExternalProjectFinishedEvents[1].Succeeded);
+            Assert.IsFalse(logger.ExternalProjectFinishedEvents[2].Succeeded);
         }
     }
 }
